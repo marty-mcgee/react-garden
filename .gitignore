@@ -1,14 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# [MM] HEY HEY HEY
-*
-!src
-!tests
-!package.json
-!README.md
-!tsconfig.json
-!next.config.js
-
 # dependencies
 /node_modules
 /.pnp
@@ -28,7 +19,12 @@
 .env.test.local
 .env.production.local
 *.pem
+*.crt
+.npmrc
+
+# assets
 public/objects
+public/demo
 public/demo/objects
 
 # logs
@@ -48,7 +44,7 @@ pnpm-lock.yaml
 .next
 /.next/
 /out/
-# next-env.d.ts
+next-env.d.ts
 
 # typescript
 *.tsbuildinfo
