@@ -1,9 +1,9 @@
-# [🌱 React Garden TS Material UI App](https://github.com/marty-mcgee/threed-garden)
+# [🌱 React Garden TypeScript Material UI App](https://github.com/marty-mcgee/react-garden)
 
 **HELPFUL LINKS**
 
-- View [Github Repository](https://github.com/marty-mcgee)
-- Check [FAQ Page](https://github.com/marty-mcgee/threed-garden/issues)
+- View [Github Repository](https://github.com/marty-mcgee/react-garden)
+- Check [FAQ + Issues Page](https://github.com/marty-mcgee/react-garden/issues)
 
 #### Special Thanks
 
