@@ -1,4 +1,4 @@
-# [React Garden TS Material UI App](https://github.com/marty-mcgee/threed-garden)
+# [🌱 React Garden TS Material UI App](https://github.com/marty-mcgee/threed-garden)
 
 **HELPFUL LINKS**
 
@@ -22,3 +22,5 @@ During the development of this app, we have used many existing resources from aw
 - [ChromaJS](https://gka.github.io/chroma.js/) - A small-ish zero-dependency JavaScript library for all kinds of color conversions and color scales.
 - [UUID](https://github.com/uuidjs/uuid) - JavaScript library for generating random id numbers.
 - [HTML React Parser](https://github.com/remarkablemark/html-react-parser) - A utility for converting HTML strings into React components.
+
+> a part of the 🌱 threed.ai code family
