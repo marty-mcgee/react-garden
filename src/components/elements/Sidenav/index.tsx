@@ -42,7 +42,7 @@ import {
   setWhiteSidenav,
 } from "~/context"
 
-import { StaticImageData } from "next/image"
+import { StaticImageData } from "next/future/image"
 // type StaticImageData = {
 //   src: string
 //   height: number

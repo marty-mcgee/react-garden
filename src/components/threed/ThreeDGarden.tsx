@@ -84,7 +84,7 @@ import {
 } from '~/components/threed/stores'
 
 // ** Next Imports
-import Image from "next/image"
+import Image from "next/future/image"
 
 // ** MUI Imports
 import { styled, useTheme } from '@mui/material/styles'
@@ -129,7 +129,7 @@ import TWEEN from "@tweenjs/tween.js"
 import { Canvas, useFrame } from "@react-three/fiber"
 
 // css
-import "~/assets/demo/css/Demo.module.css"
+// import "~/assets/demo/css/Demo.module.css"
 
 // no no no, never again
 // import * as $ from "jquery"

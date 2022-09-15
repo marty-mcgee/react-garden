@@ -45,16 +45,16 @@ import ReactHotToast from '~/@core/styles/libs/react-hot-toast'
 import { createEmotionCache } from '~/@core/utils/create-emotion-cache'
 
 // ** Prismjs Styles
-import 'prismjs'
-import 'prismjs/themes/prism-tomorrow.css'
-import 'prismjs/components/prism-jsx'
-import 'prismjs/components/prism-tsx'
+// import 'prismjs'
+// import 'prismjs/themes/prism-tomorrow.css'
+// import 'prismjs/components/prism-jsx'
+// import 'prismjs/components/prism-tsx'
 
 // ** React Perfect Scrollbar Style
-import 'react-perfect-scrollbar/dist/css/styles.css'
+// import 'react-perfect-scrollbar/dist/css/styles.css'
 
 // ** Global css styles
-import '~/styles/globals.css'
+// import '~/styles/globals.css'
 // css
 // @fullcalendar styles
 // import '~/styles/@fullcalendar/common/main.css'
@@ -85,7 +85,7 @@ if (themeConfig.routingLoader) {
   })
 }
 
-const Guard = ({ children, authGuard, guestGuard }) => {
+const Guard = ({ children, authGuard, guestGuard }: any) => {
   if (guestGuard) {
     return <GuestGuard fallback={<Spinner />}>{children}</GuestGuard>
   } else if (!guestGuard && !authGuard) {

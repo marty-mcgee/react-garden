@@ -378,9 +378,9 @@ export const usePlanStore = create((set, get) => ({
 
     console.debug("%cAddPlan", ccm1, get().plan)
   },
-  savePlan: ({ set, get }: { set: any, get: any }) => {
+  savePlan: () => {
     // saveToDisk
-    get().saveToDisk()
+    this.get().saveToDisk()
   },
   saveToDisk: ({ set, get }: { set: any, get: any }) => {
     try {

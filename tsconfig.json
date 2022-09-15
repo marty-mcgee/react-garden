@@ -27,7 +27,7 @@
     "paths": {
       "~/*": ["src/*"], // preferable (nuxt + npm)
       "@/*": ["src/*"],
-      "-||-*": ["public/*"] // threed
+      "-||-*": ["assets/*"] // threed
       // "~/components/*": ["components/*"] // example
     }
   },
