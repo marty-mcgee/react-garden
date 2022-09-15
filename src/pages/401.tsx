@@ -1,5 +1,6 @@
 // ** Next Import
 import Link from 'next/link'
+import { NextPage } from 'next'
 
 // ** MUI Components
 import Button from '@mui/material/Button'
@@ -34,7 +35,8 @@ const Img = styled('img')(({ theme }) => ({
   }
 }))
 
-const Error401 = () => {
+// const Error401: NextPage = () => {
+const Error401: any = () => {
   return (
     <Box className='content-center'>
       <Box sx={{ p: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
@@ -56,6 +58,6 @@ const Error401 = () => {
     </Box>
   )
 }
-Error401.getLayout = page => <BlankLayout>{page}</BlankLayout>
+Error401.getLayout = (page: NextPage) => <BlankLayout>{page}</BlankLayout>
 
 export default Error401

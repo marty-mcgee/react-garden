@@ -1,5 +1,6 @@
 // ** Next Import
 import Link from 'next/link'
+import { NextPage } from 'next'
 
 // ** MUI Components
 import Button from '@mui/material/Button'
@@ -43,7 +44,8 @@ const TreeIllustration = styled('img')(({ theme }) => ({
   }
 }))
 
-const Error404 = () => {
+// const Error404: NextPage = () => {
+  const Error404: any = () => {
   return (
     <Box className='content-center'>
       <Box sx={{ p: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
@@ -65,7 +67,7 @@ const Error404 = () => {
     </Box>
   )
 }
-Error404.getLayout = page => <BlankLayout>{page}</BlankLayout>
+Error404.getLayout = (page: NextPage) => <BlankLayout>{page}</BlankLayout>
 
 export default Error404
 

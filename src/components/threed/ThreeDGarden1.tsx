@@ -1,3 +1,9 @@
+// @ts-nocheck
+/** OR */
+/** @ ts-ignore */
+/** OR */
+/** @ ts-expect-error */
+
 import { useRef, useEffect, useState } from "react"
 
 import * as THREE from "three"

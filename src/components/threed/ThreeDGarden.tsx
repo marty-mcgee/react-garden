@@ -1,3 +1,9 @@
+// @ts-nocheck
+/** OR */
+/** @ ts-ignore */
+/** OR */
+/** @ ts-expect-error */
+
 // ==============================================================
 /* FUNCTIONAL NOUNS  (JS OBJECTS, SIMILAR TO CLASSES, BUT BETTER)
 // ================
@@ -17,7 +23,7 @@
 // * Character        | as JS Object            | interface ICharacter      | wp characters
 // * Bear             | extends Character       | interface IBear           | wp bear
 // * Gardener         | extends Character       | interface IGardener       | wp gardener
-// * Chicken          | extends Character       | interface IChicken        | wp checken
+// * Chicken          | extends Character       | interface IChicken        | wp chicken
 // * Scene            | extends THREE.Scene     | interface IScene          | wp scene
 // * Plane            | extends THREE.Object3D  | interface IPlane          | wp plane
 // * Structure        | extends THREE.Object3D  | interface IStructure      | wp structure

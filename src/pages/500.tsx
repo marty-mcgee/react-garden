@@ -1,5 +1,6 @@
 // ** Next Import
 import Link from 'next/link'
+import { NextPage } from 'next'
 
 // ** MUI Components
 import Button from '@mui/material/Button'
@@ -43,7 +44,7 @@ const TreeIllustration = styled('img')(({ theme }) => ({
   }
 }))
 
-const Error500 = () => {
+const Error500: any = () => {
   return (
     <Box className='content-center'>
       <Box sx={{ p: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
@@ -52,7 +53,7 @@ const Error500 = () => {
           <Typography variant='h5' sx={{ mb: 1, fontSize: '1.5rem !important' }}>
             Internal server error 👨🏻‍💻
           </Typography>
-          <Typography variant='body2'>Oops, something went wrong!</Typography>
+          <Typography variant='body2'>Oops, something went wrong! (server no likey)</Typography>
         </BoxWrapper>
         <Img height='487' alt='error-illustration' src='/images/pages/500.png' />
         <Link passHref href='/'>
@@ -65,6 +66,6 @@ const Error500 = () => {
     </Box>
   )
 }
-Error500.getLayout = page => <BlankLayout>{page}</BlankLayout>
+Error500.getLayout = (page: NextPage) => <BlankLayout>{page}</BlankLayout>
 
 export default Error500
