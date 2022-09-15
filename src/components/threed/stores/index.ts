@@ -380,7 +380,7 @@ export const usePlanStore = create((set, get) => ({
   },
   savePlan: () => {
     // saveToDisk
-    this.get().saveToDisk()
+    get().saveToDisk()
   },
   saveToDisk: ({ set, get }: { set: any, get: any }) => {
     try {
