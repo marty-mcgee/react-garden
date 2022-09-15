@@ -159,7 +159,7 @@ console.log("%cThreeDGarden<FC>", ccm1)
 // ==========================================================
 // DELETE OBJECT KEYS: RESET OBJECT TO {}
 
-const clearObject = (object: Object, option: number = 1) => {
+const clearObject = (object: any, option: number = 1) => {
   switch (option) {
     // option 1 // ES5
     case 1:
@@ -308,13 +308,13 @@ function ProjectControlPanel() {
   const saveToDisk = useProjectStore((state: any) => state.saveToDisk)
   const loadFromDisk = useProjectStore((state: any) => state.loadFromDisk)
 
-  const addProjectAsFunction = () => {
-    const addProject = useProjectStore.getState().addProject() // this executes automatically !! good
-  }
+  // const addProjectAsFunction = () => {
+  //   const addProject = useProjectStore.getState().addProject() // this executes automatically !! good
+  // }
 
   return (
     <Box>
-      <Button onClick={addProjectAsFunction}>add project()</Button>
+      {/* <Button onClick={addProjectAsFunction}>add project()</Button> */}
       <Button onClick={addProject}>add project</Button>
       <Button onClick={saveToDisk}>save to disk</Button>
       <Button onClick={loadFromDisk}>load from disk</Button>
@@ -351,13 +351,13 @@ function PlanControlPanel() {
   const saveToDisk = usePlanStore((state: any) => state.saveToDisk)
   const loadFromDisk = usePlanStore((state: any) => state.loadFromDisk)
 
-  const addPlanAsFunction = () => {
-    const addPlan = usePlanStore.getState().addPlan() // this executes automatically !! good
-  }
+  // const addPlanAsFunction = () => {
+  //   const addPlan = usePlanStore.getState().addPlan() // this executes automatically !! good
+  // }
 
   return (
     <Box>
-      <Button onClick={addPlanAsFunction}>add plan()</Button>
+      {/* <Button onClick={addPlanAsFunction}>add plan()</Button> */}
       <Button onClick={addPlan}>add plan</Button>
       <Button onClick={saveToDisk}>save to disk</Button>
       <Button onClick={loadFromDisk}>load from disk</Button>
@@ -665,7 +665,7 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
         id="aboutModal"
         // open={useModalStore.getState().isOpenAboutModal}
         open={modalStore.use.isOpenModalAbout()}
-        onClose={useModalStore.getState().handleCloseAboutModal()}
+        // onClose={useModalStore.getState().handleCloseAboutModal()}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -703,7 +703,7 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
                   <input
                     type="checkbox"
                     id="saveEditsToLocalStorage"
-                    onChange={() => handleSaveEditsLocalStorageOption}
+                    // onChange={() => handleSaveEditsLocalStorageOption}
                     style={{ marginLeft: 5, marginRight: 5 }}
                   />
                   <br />
@@ -718,7 +718,7 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
                   <div id="localStoragePlanDiv" style={{ textAlign: "center" }}>
                     <Button
                       size="small"
-                      onClick={() => loadFromLocalStorage}
+                      // onClick={() => loadFromLocalStorage}
                       id="loadLocalStoragePlanBtn">
                       Load Plan from Local Storage
                     </Button>
@@ -736,14 +736,15 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
                 <div id="featuredPlan" style={{ textAlign: "center", padding: 10 }}>
                   <Button
                     size="small"
-                    onClick={() => loadExamplePlan}
+                    // onClick={() => loadExamplePlan}
                     id="loadFeaturedPlanBtn">
                     Load Example Plan
                   </Button>
                   <div>&nbsp;&nbsp;OR&nbsp;&nbsp;</div>
                   <Button
                     size="small"
-                    onClick={() => closeAllModals}>
+                    // onClick={() => closeAllModals}
+                  >
                     Start New Plan
                   </Button>
                   {/* <div>
@@ -758,7 +759,7 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
             </MDTabPanel>
             <MDTabPanel value={tabAboutModal} index={1}>
               <div>
-                ThreeDGarden uses many 3D models which can be found on the internet as Public Domain, Free Art or Creative Commons.
+                ThreeD Garden uses many 3D models which can be found on the internet as Public Domain, Free Art or Creative Commons.
               </div>
               <br />
               <div>
@@ -767,7 +768,7 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
               <div>
                 <ul style={{ paddingLeft: 20 }}>
                   <li>Saved as .obj format along with the .mtl file, plus any texture files used. Blender OBJ default export options work very well.</li>
-                  <li>1 unit in Blender = 1cm in ThreeDGarden. Eg, a cube with X:100, Y:100, Z:100, will display as 1 Meter cubed box in the 3d and Plan views.</li>
+                  <li>1 unit in Blender = 1cm in ThreeD Garden. Eg, a cube with X:100, Y:100, Z:100, will display as 1 Meter cubed box in the 3d and Plan views.</li>
                   <li>If using Blender, Y-Axis in your OBJ export should be UP. Blender IDE defaults with the Z-Axis being UP in normal creatiion mode, but the OBJ export plugin defaults to convert the exported OBJ with the Y-Axis being UP. This is good.</li>
                   <li>Try to keep model low poly and the total download size smaller than 1Mb. Not totally essential but it helps.</li>
                   <li>Your model should be released as public domain or licensed with a non restrictive open source license such as a Free Art or Creative Commons.</li>
@@ -792,8 +793,8 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
                       rel="noopener" className="largeButton">
                       Watch Video
                     </a>
-                    <Button onClick={() => loadPlan('42fbd8ff0f5a37fa1285ae8b6c6ca36529b930c2')}
-                      className="largeButton">Load Plan</Button>
+                    {/* <Button onClick={() => loadPlan('42fbd8ff0f5a37fa1285ae8b6c6ca36529b930c2')}
+                      className="largeButton">Load Plan</Button> */}
                   </div>
                 </Grid>
                 <Grid item xs={4}>
@@ -815,8 +816,8 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
                       rel="noopener" className="largeButton">
                       Watch Video
                     </a>
-                    <Button onClick={() => loadPlan('0d371f9acad19a943f38c3a32f6d5d140bc6c913')}
-                      className="largeButton">Load Plan</Button>
+                    {/* <Button onClick={() => loadPlan('0d371f9acad19a943f38c3a32f6d5d140bc6c913')}
+                      className="largeButton">Load Plan</Button> */}
                   </div>
                 </Grid>
                 <Grid item xs={4}>
@@ -838,8 +839,8 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
                       rel="noopener" className="largeButton">
                       Watch Video
                     </a>
-                    <Button onClick={() => loadPlan('c0300edf03b952872c37744bf570a588184dd3d5')}
-                      className="largeButton">Load Plan</Button>
+                    {/* <Button onClick={() => loadPlan('c0300edf03b952872c37744bf570a588184dd3d5')}
+                      className="largeButton">Load Plan</Button> */}
                   </div>
                 </Grid>
                 <Grid item xs={4}>
@@ -871,7 +872,7 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
           </Box>
 
           <Box className="modal-footer">
-            <h3>&copy; <a href="https://threedgarden.com">ThreeDGarden</a></h3>
+            <h3>&copy; <a href="https://threedgarden.com">ThreeD Garden</a></h3>
           </Box>
         </Box>
       </Modal>
@@ -948,7 +949,7 @@ const Model3dModal: FunctionComponent = (): JSX.Element => {
           </Box>
 
           <Box className="modal-footer">
-            <h3><a href="http://threedgarden.com">ThreeDGarden</a></h3>
+            <h3><a href="https://threedgarden.com">ThreeD Garden</a></h3>
           </Box>
         </Box>
       </Modal>
@@ -1001,7 +1002,7 @@ const LoadingModal: FunctionComponent = (): JSX.Element => {
           </Box>
 
           <Box className="modal-footer">
-            <h3><a href="http://threedgarden.com">ThreeDGarden</a></h3>
+            <h3><a href="https://threedgarden.com">ThreeD Garden</a></h3>
           </Box>
         </Box>
       </Modal>
@@ -1053,7 +1054,8 @@ const ShareModal: FunctionComponent = (): JSX.Element => {
             <Button
               id="getShareLinkBtn"
               className="mediumButton"
-              onClick={() => generateShareLink()}>
+              // onClick={() => generateShareLink()}
+            >
               Generate Share Link
             </Button>
             <Box style={{ margin: "10px 0px 10px 0px" }}>
@@ -1077,7 +1079,8 @@ const ShareModal: FunctionComponent = (): JSX.Element => {
                 <Button
                   id="copyShareLinkBtn"
                   className="smallButton"
-                  onClick={() => copyShareLink()}>
+                  // onClick={() => copyShareLink()}
+                >
                   Copy
                 </Button>
               </Box>
@@ -1102,7 +1105,8 @@ const ShareModal: FunctionComponent = (): JSX.Element => {
                 <Button
                   id="copyShareLinkBtn"
                   className="smallButton"
-                  onClick={() => copyShareLink3d()}>
+                  // onClick={() => copyShareLink3d()}
+                >
                   Copy
                 </Button>
               </Box>
@@ -1127,7 +1131,8 @@ const ShareModal: FunctionComponent = (): JSX.Element => {
                 <Button
                   id="copyShareLinkBtn"
                   className="smallButton"
-                  onClick={() => copyShareLinkPlan()}>
+                  // onClick={() => copyShareLinkPlan()}
+                >
                   Copy
                 </Button>
               </Box>
@@ -1135,7 +1140,7 @@ const ShareModal: FunctionComponent = (): JSX.Element => {
           </Box>
 
           <Box className="modal-footer">
-            <h3><a href="http://threedgarden.com">ThreeDGarden</a></h3>
+            <h3><a href="https://threedgarden.com">ThreeD Garden</a></h3>
           </Box>
         </Box>
       </Modal>
@@ -3312,13 +3317,13 @@ const PlanView: FunctionComponent = (): JSX.Element => {
           <img
             src="/favicon/favicon.png"
             height="77px"
-            title="ThreeDGarden"
-            alt="ThreeDGarden" />
+            title="ThreeD Garden"
+            alt="ThreeD Garden" />
         </a>
         <a
           href="https://threedgarden.com"
           style={{ paddingLeft: "10px", textDecoration: "none", fontSize: "32px" }}
-        >ThreeDGarden</a>
+        >ThreeD Garden</a>
       </div>
       <div id="overlayMenuPlanView">
         <Button
