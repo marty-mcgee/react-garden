@@ -212,7 +212,7 @@ function DataTable({
                 fullWidth
                 onChange={({ currentTarget }: any) => {
                   setSearch(search)
-                  onSearchChange(currentTarget.value)
+                  // onSearchChange(currentTarget.value)
                 }}
               />
             </MDBox>

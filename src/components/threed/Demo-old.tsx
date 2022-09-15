@@ -21,7 +21,7 @@ const Demo: FunctionComponent = (props): JSX.Element => {
 
   const word = "HEY HEY HEY"
 
-  const fragment = null // grenade?
+  // const fragment = null // grenade?
   const readOnly = false // really?
   const UILayout = "default" // ok?
 
@@ -34,7 +34,7 @@ const Demo: FunctionComponent = (props): JSX.Element => {
     // window.Diamonds = require('../public/jquery.diamonds.js')
     const jQuery = require("~/assets/demo/scripts/jquery-1.11.3.min")
     // window.$ = window.jQuery = jQuery
-    window.jQuery = jQuery
+    // window.jQuery = jQuery
     // window.$ = window.jQuery
     // console.debug("$", window.$)
     // console.debug(`[MM] Demo.tsx: $ @ ${new Date().toISOString()}`, window.$)

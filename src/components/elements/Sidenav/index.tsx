@@ -363,7 +363,7 @@ function Sidenav({
             */}
             <MDBox
               component="img"
-              src={brandLogo.src}
+              src={brandLogo}
               alt={brandName}
               width="2.0rem"
             />

@@ -114,7 +114,8 @@ function DefaultDoughnutChart({
       {useMemo(
         () => (
           <MDBox height={height}>
-            <Doughnut data={data} options={options} />
+            <Doughnut data={data} />
+            {/* options={options} */}
           </MDBox>
         ),
         [chart, height]

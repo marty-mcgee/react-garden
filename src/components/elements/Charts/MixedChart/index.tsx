@@ -213,7 +213,8 @@ function MixedChart({
       {useMemo(
         () => (
           <MDBox ref={chartRef} sx={{ height }}>
-            <Line data={data} options={options} />
+            <Line data={data} />
+            {/* options={options} */}
           </MDBox>
         ),
         [chartData, height]

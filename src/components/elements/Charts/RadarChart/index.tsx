@@ -122,7 +122,8 @@ function RadarChart({ icon, title, description, chart }: Props): JSX.Element {
       {useMemo(
         () => (
           <MDBox p={6}>
-            <Radar data={data} options={options} />
+            <Radar data={data} />
+            {/* options={options} */}
           </MDBox>
         ),
         [chart]

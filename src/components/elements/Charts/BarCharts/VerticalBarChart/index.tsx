@@ -128,7 +128,8 @@ function VerticalBarChart({
       {useMemo(
         () => (
           <MDBox height={height}>
-            <Bar data={data} options={options} />
+            <Bar data={data} />
+            {/* options={options} */}
           </MDBox>
         ),
         [chart, height]

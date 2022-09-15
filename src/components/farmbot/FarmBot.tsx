@@ -8,9 +8,10 @@ bot
   .connect()
   .then(() => {
     // alert("MARTY: HEY HEY HEY")
-    bot.setConfig("MARTY", "HEY HEY HEY")
-    console.log(bot.getConfig("MARTY"))
-    return bot.getConfig("MARTY")
+    // bot.setConfig("MARTY", "HEY HEY HEY")
+    // console.log(bot.getConfig("MARTY"))
+    // return bot.getConfig("MARTY")
+    console.debug("[MM] HEY HEY HEY -- FARMBOT INITIATED.")
   })
   .then(() =>
     bot.moveRelative(
@@ -23,7 +24,7 @@ bot
     )
   )
 
-console.log("bot", bot)
+console.debug("bot", bot)
 
 const FarmBot = (): JSX.Element => {
   const word = "HEY HEY HEY"
