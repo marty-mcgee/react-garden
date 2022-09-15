@@ -10,7 +10,7 @@ export default function PostHeader({
   date,
   author,
   categories,
-}) {
+}: any) {
   return (
     <>
       <PostTitle>{title}</PostTitle>

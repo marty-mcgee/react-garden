@@ -7,7 +7,6 @@ module.exports = {
   parser: '@babel/eslint-parser',
   extends: [
     'plugin:react/recommended',
-    'next/core-web-vitals',
     'airbnb',
     'prettier'
   ],

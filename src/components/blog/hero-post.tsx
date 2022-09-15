@@ -10,7 +10,7 @@ export default function HeroPost({
   excerpt,
   author,
   slug,
-}) {
+}: any) {
   return (
     <section>
       <div className="mb-8 md:mb-16">

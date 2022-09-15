@@ -10,7 +10,7 @@ export default function PostPreview({
   excerpt,
   author,
   slug,
-}) {
+}: any) {
   return (
     <div>
       <div className="mb-5">

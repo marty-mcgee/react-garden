@@ -3,7 +3,7 @@ import cn from 'classnames'
 // import { EXAMPLE_PATH } from '~/lib/constants'
 const EXAMPLE_PATH = ""
 
-export default function Alert({ preview }) {
+export default function Alert({ preview }: {preview: boolean}) {
   return (
     <div
       className={cn('border-b', {
