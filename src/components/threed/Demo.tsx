@@ -24,7 +24,7 @@ const Demo: FunctionComponent = (props): JSX.Element => {
 
   const word = `[MM] HEY HEY HEY @ ${new Date().toISOString()}`
 
-  const fragment = null // grenade?
+  // const fragment = null // grenade?
   const readOnly = false // really?
   const UILayout = "default" // ok?
 
@@ -38,10 +38,10 @@ const Demo: FunctionComponent = (props): JSX.Element => {
     const jQuery = require('jquery')
     console.debug("[MM] Demo.tsx: jQuery", jQuery)
     // window.$ = window.jQuery = jQuery
-    window.jQuery = jQuery
-    console.debug("[MM] Demo.tsx: window.jQuery", window.jQuery)
-    window.$ = window.jQuery
-    console.debug("[MM] Demo.tsx: window.$", window.$)
+    // window.jQuery = jQuery
+    // console.debug("[MM] Demo.tsx: window.jQuery", window.jQuery)
+    // window.$ = window.jQuery
+    // console.debug("[MM] Demo.tsx: window.$", window.$)
     // console.debug(`[MM] Demo.tsx: $ @ ${new Date().toISOString()}`, window.$)
 
     // useEffect(() => {

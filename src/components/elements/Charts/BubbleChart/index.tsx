@@ -134,7 +134,8 @@ function BubbleChart({
       {useMemo(
         () => (
           <MDBox height={height}>
-            <Bubble data={data} options={options} />
+            <Bubble data={data} />
+            {/* options={options} */}
           </MDBox>
         ),
         [chart, height]

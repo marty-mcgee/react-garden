@@ -50,7 +50,7 @@ function ComplexProjectCard({
     return (
       <MDAvatar
         key={memberKey}
-        src={member.src}
+        src={member}
         alt="member profile"
         size="xs"
         sx={({ borders: { borderWidth }, palette: { white } }) => ({
@@ -75,7 +75,7 @@ function ComplexProjectCard({
       <MDBox p={2}>
         <MDBox display="flex" alignItems="center">
           <MDAvatar
-            src={image.src}
+            src={image}
             alt={title}
             size="xl"
             variant="rounded"

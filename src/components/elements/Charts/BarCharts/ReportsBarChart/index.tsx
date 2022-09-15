@@ -79,7 +79,8 @@ function ReportsBarChart({
               pr={0.5}
               mt={-5}
               height="12.5rem">
-              <Bar data={data} options={options} />
+              <Bar data={data} />
+              {/* options={options} */}
             </MDBox>
           ),
           [chart, color]

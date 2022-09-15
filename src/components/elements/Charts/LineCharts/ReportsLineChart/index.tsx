@@ -81,7 +81,8 @@ function ReportsLineChart({
               pr={0.5}
               mt={-5}
               height="12.5rem">
-              <Line data={data} options={options} />
+              <Line data={data} />
+            {/* options={options} */}
             </MDBox>
           ),
           [chart, color]

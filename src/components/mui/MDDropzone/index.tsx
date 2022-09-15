@@ -15,6 +15,7 @@ import MDDropzoneRoot from "~/components/mui/MDDropzone/MDDropzoneRoot"
 
 // ThreeD Garden context
 import { useMaterialUIController } from "~/context"
+import Dropzone from "dropzone"
 
 // Declaring props types for MDDropzone
 interface Props {

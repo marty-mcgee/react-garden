@@ -68,7 +68,7 @@ export const useThreeDStore = create((set, get, api) => ({
       threeds: []
     }
   ),
-  addThreeD: () => {
+  addThreeD: ({ set, get }: { set: any, get: any }) => {
     // threedCurrent
     set(
       (state: any) => (
@@ -103,11 +103,11 @@ export const useThreeDStore = create((set, get, api) => ({
 
     console.debug("%cAddThreeD", ccm1, get().threed)
   },
-  saveProject: () => {
+  saveProject: ({ set, get }: { set: any, get: any }) => {
     // saveToDisk
     get().saveToDisk()
   },
-  saveToDisk: () => {
+  saveToDisk: ({ set, get }: { set: any, get: any }) => {
     try {
       localStorage.setItem("threed_threedHistory", JSON.stringify({ subject: "threed", payload: get().threed }))
       console.debug("%cSaveToDisk", ccm1, get().threed)
@@ -117,7 +117,7 @@ export const useThreeDStore = create((set, get, api) => ({
       return false
     }
   },
-  loadFromDisk: () => {
+  loadFromDisk: ({ set, get }: { set: any, get: any }) => {
     try {
       const loaded = localStorage.getItem("threed_threedHistory")
       if (loaded) {
@@ -162,7 +162,7 @@ export const useProjectStore = create((set, get) => ({
       projects: []
     }
   ),
-  addProject: (stated: any) => {
+  addProject: ({ set, get }: { set: any, get: any }) => {
     // projectCurrent
     set(
       (state: any) => (
@@ -196,11 +196,11 @@ export const useProjectStore = create((set, get) => ({
 
     console.debug("%cAddProject", ccm1, get().project)
   },
-  saveProject: () => {
+  saveProject: ({ set, get }: { set: any, get: any }) => {
     // saveToDisk
     get().saveToDisk()
   },
-  saveToDisk: () => {
+  saveToDisk: ({ set, get }: { set: any, get: any }) => {
     try {
       localStorage.setItem("threed_projectHistory", JSON.stringify({ subject: "projects", payload: get().projects }))
       console.debug("%cSaveToDisk", ccm1, get().projects)
@@ -210,7 +210,7 @@ export const useProjectStore = create((set, get) => ({
       return false
     }
   },
-  loadFromDisk: () => {
+  loadFromDisk: ({ set, get }: { set: any, get: any }) => {
     try {
       const loaded = localStorage.getItem("threed_projectHistory")
       if (loaded) {
@@ -300,7 +300,7 @@ export const usePlanStore = create((set, get) => ({
       plans: []
     }
   ),
-  addPlan: () => {
+  addPlan: ({ set, get }: { set: any, get: any }) => {
     // planCurrent
     set(
       (state: any) => (
@@ -339,24 +339,24 @@ export const usePlanStore = create((set, get) => ({
             textEditedKey: null as any,
             textDeletedKey: null as any,
 
-            wallDiffuse: wallMaterial.color.getHexString(),
-            wallOpacity: wallMaterial.opacity,
-            wallSpecular: wallMaterial.specular.getHexString(),
-            roofDiffuse: roofMaterial.color.getHexString(),
-            roofOpacity: roofMaterial.opacity,
-            roofSpecular: roofMaterial.specular.getHexString(),
-            floorDiffuse: floorMaterial.color.getHexString(),
-            floorOpacity: floorMaterial.opacity,
-            floorSpecular: floorMaterial.specular.getHexString(),
-            groundDiffuse: groundMaterial.color.getHexString(),
-            groundOpacity: groundMaterial.opacity,
-            groundSpecular: groundMaterial.specular.getHexString(),
+            // wallDiffuse: wallMaterial.color.getHexString(),
+            // wallOpacity: wallMaterial.opacity,
+            // wallSpecular: wallMaterial.specular.getHexString(),
+            // roofDiffuse: roofMaterial.color.getHexString(),
+            // roofOpacity: roofMaterial.opacity,
+            // roofSpecular: roofMaterial.specular.getHexString(),
+            // floorDiffuse: floorMaterial.color.getHexString(),
+            // floorOpacity: floorMaterial.opacity,
+            // floorSpecular: floorMaterial.specular.getHexString(),
+            // groundDiffuse: groundMaterial.color.getHexString(),
+            // groundOpacity: groundMaterial.opacity,
+            // groundSpecular: groundMaterial.specular.getHexString(),
 
             depthWrite: "checked", // document.getElementById("depthWriteMode").checked,
             sortObjects: "checked", // document.getElementById("sortObjectsMode").checked,
 
-            azimuth: azimuth,
-            inclination: inclination
+            // azimuth: azimuth,
+            // inclination: inclination
           },
           planCount: state.planCount + 1
         }
@@ -378,11 +378,11 @@ export const usePlanStore = create((set, get) => ({
 
     console.debug("%cAddPlan", ccm1, get().plan)
   },
-  savePlan: () => {
+  savePlan: ({ set, get }: { set: any, get: any }) => {
     // saveToDisk
     get().saveToDisk()
   },
-  saveToDisk: () => {
+  saveToDisk: ({ set, get }: { set: any, get: any }) => {
     try {
       localStorage.setItem("threed_planHistory", JSON.stringify({ subject: "plans", payload: get().plans }))
       console.debug("%cSaveToDisk", ccm1, get().plans)
@@ -392,7 +392,7 @@ export const usePlanStore = create((set, get) => ({
       return false
     }
   },
-  loadFromDisk: () => {
+  loadFromDisk: ({ set, get }: { set: any, get: any }) => {
     try {
       const loaded = localStorage.getItem("threed_planHistory")
       if (loaded) {
@@ -420,6 +420,7 @@ export const useFileStore = create((set) => ({
 
 // ==============================================================
 // Bear
+
 export const useBearStore = create((set) => ({
   bears: 0,
   increaseBearCount: () => set((state: any) => ({ bears: state.bears + 1 })),
