@@ -70,6 +70,12 @@ import brandLight from '~/assets/images/logos/logo-threedgarden.png'
 import brandDark from '~/assets/images/logos/logo-threedgarden-alt.png'
 import brandText from '~/assets/images/logos/logo-threedgarden-text.png'
 
+// WORKAROUND -- for ToastPosition bug
+// from: node_modules\react-hot-toast\dist\core\types.d.ts
+// export declare
+type ToastPosition = 'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'
+
+// ** Emotion Cache for client
 const clientSideEmotionCache = createEmotionCache()
 
 // ** Pace Loader
@@ -143,7 +149,7 @@ const App = (props: any) => {
           <meta name='msapplication-TileColor' content='#da532c' />
         </Head>
         <AuthProvider>
-          <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
+          <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : { pageSettings: null })}>
             <SettingsConsumer>
               {({ settings }) => (
                 <ThemeComponent settings={settings}>
@@ -155,7 +161,7 @@ const App = (props: any) => {
                     </Guard>
                   </WindowWrapper>
                   <ReactHotToast>
-                    <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
+                    <Toaster position={settings.toastPosition as ToastPosition} toastOptions={{ className: 'react-hot-toast' }} />
                   </ReactHotToast>
                 </ThemeComponent>
               )}

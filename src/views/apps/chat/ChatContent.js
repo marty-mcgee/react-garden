@@ -192,7 +192,7 @@ const ChatContent = props => {
 
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 {mdAbove ? (
-                  <Fragment>
+                  <>
                     <IconButton size='small' sx={{ color: 'text.secondary' }}>
                       <PhoneOutline sx={{ fontSize: '1.25rem' }} />
                     </IconButton>
@@ -202,7 +202,7 @@ const ChatContent = props => {
                     <IconButton size='small' sx={{ color: 'text.secondary' }}>
                       <Magnify sx={{ fontSize: '1.25rem' }} />
                     </IconButton>
-                  </Fragment>
+                  </>
                 ) : null}
                 <IconButton size='small' onClick={handleClick} sx={{ color: 'text.secondary' }}>
                   <DotsVertical sx={{ fontSize: '1.25rem' }} />

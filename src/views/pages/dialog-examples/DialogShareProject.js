@@ -219,7 +219,7 @@ const DialogShareProject = () => {
                         <ChevronDown fontSize='small' />
                       </IconButton>
                     ) : (
-                      <Fragment>
+                      <>
                         <Button
                           color='secondary'
                           aria-haspopup='true'
@@ -230,7 +230,7 @@ const DialogShareProject = () => {
                         >
                           {member.value}
                         </Button>
-                      </Fragment>
+                      </>
                     )}
                   </ListItemSecondaryAction>
                 </ListItem>

@@ -69,7 +69,7 @@ const UserProfileRight = props => {
       }}
     >
       {store && store.selectedChat ? (
-        <Fragment>
+        <>
           <Box sx={{ position: 'relative' }}>
             <IconButton
               size='small'
@@ -215,7 +215,7 @@ const UserProfileRight = props => {
               </Box>
             </ScrollWrapper>
           </Box>
-        </Fragment>
+        </>
       ) : null}
     </Sidebar>
   )

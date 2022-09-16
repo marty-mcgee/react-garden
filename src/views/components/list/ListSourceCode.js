@@ -19,7 +19,7 @@ import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
 
 const ListDense = () => {
   return (
-    <Fragment>
+    <>
       <List dense>
         <ListItem disablePadding>
           <ListItemButton>
@@ -57,7 +57,7 @@ const ListDense = () => {
           </ListItemButton>
         </ListItem>
       </List>
-    </Fragment>
+    </>
   )
 }
 
@@ -98,7 +98,7 @@ const ListNested = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <List component='nav' aria-label='main mailbox'>
         <ListItem disablePadding>
           <ListItemButton onClick={handleClick}>
@@ -149,7 +149,7 @@ const ListNested = () => {
           </ListItemButton>
         </ListItem>
       </List>
-    </Fragment>
+    </>
   )
 }
 
@@ -255,7 +255,7 @@ import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
 
 const ListSimple = () => {
   return (
-    <Fragment>
+    <>
       <List component='nav' aria-label='main mailbox'>
         <ListItem disablePadding>
           <ListItemButton>
@@ -293,7 +293,7 @@ const ListSimple = () => {
           </ListItemButton>
         </ListItem>
       </List>
-    </Fragment>
+    </>
   )
 }
 

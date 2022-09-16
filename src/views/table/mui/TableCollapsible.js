@@ -49,7 +49,7 @@ const Row = props => {
   const [open, setOpen] = useState(false)
 
   return (
-    <Fragment>
+    <>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
         <TableCell>
           <IconButton aria-label='expand row' size='small' onClick={() => setOpen(!open)}>
@@ -97,7 +97,7 @@ const Row = props => {
           </Collapse>
         </TableCell>
       </TableRow>
-    </Fragment>
+    </>
   )
 }
 

@@ -23,7 +23,7 @@ const SnackbarPositioned = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <div className='demo-space-x'>
         <Button variant='outlined' onClick={handleClick({ vertical: 'top', horizontal: 'center' })}>
           Top Center
@@ -52,7 +52,7 @@ const SnackbarPositioned = () => {
         key={vertical + horizontal}
         anchorOrigin={{ vertical, horizontal }}
       />
-    </Fragment>
+    </>
   )
 }
 

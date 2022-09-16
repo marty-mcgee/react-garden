@@ -79,7 +79,7 @@ const RowOptions = ({ id }) => {
   }
 
   return (
-    <Fragment>
+    <>
       <IconButton size='small' onClick={handleRowOptionsClick}>
         <DotsVertical fontSize='small' />
       </IconButton>
@@ -112,7 +112,7 @@ const RowOptions = ({ id }) => {
           Duplicate
         </MenuItem>
       </Menu>
-    </Fragment>
+    </>
   )
 }
 

@@ -63,10 +63,10 @@ const AutocompleteAsynchronousRequest = () => {
           InputProps={{
             ...params.InputProps,
             endAdornment: (
-              <Fragment>
+              <>
                 {loading ? <CircularProgress color='inherit' size={20} /> : null}
                 {params.InputProps.endAdornment}
-              </Fragment>
+              </>
             )
           }}
         />

@@ -14,7 +14,7 @@ const ChipsOnDelete = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <Typography sx={{ fontWeight: 500 }}>Default</Typography>
       <div className='demo-space-x'>
         <Chip label='Basic' variant='outlined' onDelete={handleDelete} />
@@ -27,7 +27,7 @@ const ChipsOnDelete = () => {
         <Chip label='Primary' color='primary' onDelete={handleDelete} deleteIcon={<DeleteOutline />} />
         <Chip label='Secondary' color='secondary' onDelete={handleDelete} deleteIcon={<DeleteOutline />} />
       </div>
-    </Fragment>
+    </>
   )
 }
 

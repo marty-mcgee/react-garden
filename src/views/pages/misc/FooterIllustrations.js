@@ -34,10 +34,10 @@ const FooterIllustrations = props => {
   const hidden = useMediaQuery(theme.breakpoints.down('md'))
   if (!hidden) {
     return (
-      <Fragment>
+      <>
         {image || <TreeImg alt='tree' src='/images/pages/tree-2.png' />}
         <MaskImg alt='mask' src={`/images/pages/misc-mask-${theme.palette.mode}.png`} />
-      </Fragment>
+      </>
     )
   } else {
     return null

@@ -10,7 +10,7 @@ import CameraIris from 'mdi-material-ui/CameraIris'
 
 const ButtonsSizes = () => {
   return (
-    <Fragment>
+    <>
       <div className='demo-space-x'>
         <Button variant='text' size='small'>
           Small
@@ -58,7 +58,7 @@ const ButtonsSizes = () => {
           <CameraIris fontSize='large' />
         </IconButton>
       </div>
-    </Fragment>
+    </>
   )
 }
 

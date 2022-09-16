@@ -92,7 +92,7 @@ const FileUploaderMultiple = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <div {...getRootProps({ className: 'dropzone' })}>
         <input {...getInputProps()} />
         <Box sx={{ display: 'flex', flexDirection: ['column', 'column', 'row'], alignItems: 'center' }}>
@@ -110,7 +110,7 @@ const FileUploaderMultiple = () => {
         </Box>
       </div>
       {files.length ? (
-        <Fragment>
+        <>
           <List>{fileList}</List>
           <div className='buttons'>
             <Button color='error' variant='outlined' onClick={handleRemoveAllFiles}>
@@ -118,9 +118,9 @@ const FileUploaderMultiple = () => {
             </Button>
             <Button variant='contained'>Upload Files</Button>
           </div>
-        </Fragment>
+        </>
       ) : null}
-    </Fragment>
+    </>
   )
 }
 

@@ -32,11 +32,11 @@ import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
 import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 
-// ** Custom Components Imports
-import StepperCustomDot from './StepperCustomDot'
-
 // ** Styled Components
 import StepperWrapper from '~/@core/styles/mui/stepper'
+
+// ** Custom Components Imports
+import StepperCustomDot from './StepperCustomDot'
 
 const steps = [
   {
@@ -606,14 +606,14 @@ const StepperLinearWithValidation = () => {
   const renderContent = () => {
     if (activeStep === steps.length) {
       return (
-        <Fragment>
+        <>
           <Typography>All steps are completed!</Typography>
           <Box sx={{ mt: 4, display: 'flex', justifyContent: 'flex-end' }}>
             <Button size='large' variant='contained' onClick={handleReset}>
               Reset
             </Button>
           </Box>
-        </Fragment>
+        </>
       )
     } else {
       return getStepContent(activeStep)

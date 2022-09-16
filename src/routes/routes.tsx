@@ -22,7 +22,7 @@
 
 // layouts
 import Home from "~/pages/index"
-import About from "~/pages/about"
+// import About from "~/pages/about"
 import Participate from "~/pages/participate"
 import Analytics from "~/pages/dashboards/analytics"
 import Sales from "~/pages/dashboards/sales"

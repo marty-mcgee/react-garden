@@ -219,7 +219,7 @@ const VerticalNavGroup = props => {
 
   return (
     <CanViewNavGroup navGroup={item}>
-      <Fragment>
+      <>
         <ListItem
           disablePadding
           className='nav-group'
@@ -317,7 +317,7 @@ const VerticalNavGroup = props => {
             />
           </Collapse>
         </ListItem>
-      </Fragment>
+      </>
     </CanViewNavGroup>
   )
 }

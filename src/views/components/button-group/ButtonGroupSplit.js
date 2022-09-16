@@ -42,7 +42,7 @@ const ButtonGroupSplit = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <ButtonGroup variant='contained' ref={anchorRef} aria-label='split button'>
         <Button onClick={handleClick}>{options[selectedIndex]}</Button>
         <Button
@@ -81,7 +81,7 @@ const ButtonGroupSplit = () => {
           </Grow>
         )}
       </Popper>
-    </Fragment>
+    </>
   )
 }
 

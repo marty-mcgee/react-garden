@@ -48,7 +48,7 @@ const restoreSettings = () => {
 
 // set settings in localStorage
 const storeSettings = settings => {
-  const initSettings = Object.assign({}, settings)
+  const initSettings = { ...settings }
   delete initSettings.appBar
   delete initSettings.footer
   delete initSettings.layout
@@ -67,6 +67,12 @@ export const SettingsContext = createContext({
 export const SettingsProvider = ({ children, pageSettings }) => {
   // ** State
   const [settings, setSettings] = useState({ ...initialSettings })
+
+  const saveSettings = updatedSettings => {
+    storeSettings(updatedSettings)
+    setSettings(updatedSettings)
+  }
+
   useEffect(() => {
     const restoredSettings = restoreSettings()
     if (restoredSettings) {
@@ -77,6 +83,7 @@ export const SettingsProvider = ({ children, pageSettings }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageSettings])
+
   useEffect(() => {
     if (settings.layout === 'horizontal' && settings.skin === 'semi-dark') {
       saveSettings({ ...settings, skin: 'default' })
@@ -87,11 +94,7 @@ export const SettingsProvider = ({ children, pageSettings }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settings.layout])
 
-  const saveSettings = updatedSettings => {
-    storeSettings(updatedSettings)
-    setSettings(updatedSettings)
-  }
-
+  // eslint-disable-next-line react/jsx-no-constructed-context-values
   return <SettingsContext.Provider value={{ settings, saveSettings }}>{children}</SettingsContext.Provider>
 }
 

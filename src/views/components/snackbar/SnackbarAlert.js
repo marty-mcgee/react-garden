@@ -22,7 +22,7 @@ const SnackbarAlert = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <Button variant='outlined' onClick={handleClick}>
         Open alert snackbar
       </Button>
@@ -31,7 +31,7 @@ const SnackbarAlert = () => {
           This is a success message!
         </Alert>
       </Snackbar>
-    </Fragment>
+    </>
   )
 }
 

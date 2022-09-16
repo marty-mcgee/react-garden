@@ -1,5 +1,10 @@
 # [🌱 React Garden TypeScript Material UI App](https://github.com/marty-mcgee/react-garden)
 
+React + TypeScript app using Material UI on NextJS as a "Dashboard" for developing Three JS components + apps.
+
+## Live Demo
+[threed.design](https://threed.design/)
+
 **HELPFUL LINKS**
 
 - View [Github Repository](https://github.com/marty-mcgee/react-garden)

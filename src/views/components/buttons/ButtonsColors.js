@@ -6,7 +6,7 @@ import Button from '@mui/material/Button'
 
 const ButtonsColors = () => {
   return (
-    <Fragment>
+    <>
       <div className='demo-space-x'>
         <Button color='success'>Success</Button>
         <Button color='error'>Error</Button>
@@ -41,7 +41,7 @@ const ButtonsColors = () => {
           Info
         </Button>
       </div>
-    </Fragment>
+    </>
   )
 }
 

@@ -10,7 +10,7 @@ import MDBox from "~/components/mui/MDBox"
 // ThreeD Garden Material UI context as Controller
 import { useMaterialUIController, setLayout } from "~/context"
 
-function DashboardLayout({ children }: { children: ReactNode }): JSX.Element {
+function DashboardLayout({ children, stickyNavbar }: { children: ReactNode, stickyNavbar?: boolean }): JSX.Element {
   const [controller, dispatch] = useMaterialUIController()
   const { miniSidenav } = controller
   // const { pathname } = useLocation()

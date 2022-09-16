@@ -24,14 +24,14 @@ import Select from '@mui/material/Select'
 import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 
-// ** Custom Components Imports
-import StepperCustomDot from './StepperCustomDot'
-
 // ** Third Party Imports
 import toast from 'react-hot-toast'
 
 // ** Styled Component
 import StepperWrapper from '~/@core/styles/mui/stepper'
+
+// ** Custom Components Imports
+import StepperCustomDot from './StepperCustomDot'
 
 const steps = [
   {
@@ -131,7 +131,7 @@ const StepperAlternativeLabel = () => {
     switch (step) {
       case 0:
         return (
-          <Fragment>
+          <>
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
@@ -199,7 +199,7 @@ const StepperAlternativeLabel = () => {
                 />
               </FormControl>
             </Grid>
-          </Fragment>
+          </>
         )
       case 1:
         return (
@@ -311,14 +311,14 @@ const StepperAlternativeLabel = () => {
   const renderContent = () => {
     if (activeStep === steps.length) {
       return (
-        <Fragment>
+        <>
           <Typography>All steps are completed!</Typography>
           <Box sx={{ mt: 4, display: 'flex', justifyContent: 'flex-end' }}>
             <Button size='large' variant='contained' onClick={handleReset}>
               Reset
             </Button>
           </Box>
-        </Fragment>
+        </>
       )
     } else {
       return (
@@ -354,7 +354,7 @@ const StepperAlternativeLabel = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <StepperWrapper>
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map((step, index) => {
@@ -376,7 +376,7 @@ const StepperAlternativeLabel = () => {
       <Card sx={{ mt: 4 }}>
         <CardContent>{renderContent()}</CardContent>
       </Card>
-    </Fragment>
+    </>
   )
 }
 

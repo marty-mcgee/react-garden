@@ -5,11 +5,8 @@ import { useState } from 'react'
 import Box from '@mui/material/Box'
 
 // ** Third Party Imports
-import addDays from 'date-fns/addDays'
-import subDays from 'date-fns/subDays'
-import setHours from 'date-fns/setHours'
+import { addDays, subDays, setHours, setMinutes } from 'date-fns'
 import DatePicker from 'react-datepicker'
-import setMinutes from 'date-fns/setMinutes'
 
 // ** Custom Component Imports
 import CustomInput from './PickersCustomInput'

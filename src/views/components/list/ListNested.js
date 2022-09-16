@@ -28,7 +28,7 @@ const ListNested = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <List component='nav' aria-label='main mailbox'>
         <ListItem disablePadding>
           <ListItemButton onClick={handleClick}>
@@ -79,7 +79,7 @@ const ListNested = () => {
           </ListItemButton>
         </ListItem>
       </List>
-    </Fragment>
+    </>
   )
 }
 

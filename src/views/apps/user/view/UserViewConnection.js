@@ -23,7 +23,7 @@ const Img = styled('img')(({ theme }) => ({
 
 const UserViewConnection = () => {
   return (
-    <Fragment>
+    <>
       <Card sx={{ mb: 6 }}>
         <CardHeader
           title='Connected Accounts'
@@ -197,7 +197,7 @@ const UserViewConnection = () => {
           </Box>
         </CardContent>
       </Card>
-    </Fragment>
+    </>
   )
 }
 

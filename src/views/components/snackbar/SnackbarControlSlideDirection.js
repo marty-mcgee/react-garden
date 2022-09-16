@@ -37,7 +37,7 @@ const SnackbarControlSlideDirection = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <div className='demo-space-x'>
         <Button variant='outlined' onClick={handleClick(TransitionLeft)}>
           Right
@@ -60,7 +60,7 @@ const SnackbarControlSlideDirection = () => {
         TransitionComponent={transition}
         key={transition ? transition.name : ''}
       />
-    </Fragment>
+    </>
   )
 }
 

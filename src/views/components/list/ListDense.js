@@ -17,7 +17,7 @@ import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
 
 const ListDense = () => {
   return (
-    <Fragment>
+    <>
       <List dense>
         <ListItem disablePadding>
           <ListItemButton>
@@ -55,7 +55,7 @@ const ListDense = () => {
           </ListItemButton>
         </ListItem>
       </List>
-    </Fragment>
+    </>
   )
 }
 

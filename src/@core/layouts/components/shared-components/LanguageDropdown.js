@@ -46,7 +46,7 @@ const LanguageDropdown = ({ settings, saveSettings }) => {
   }
 
   return (
-    <Fragment>
+    <>
       <IconButton
         color='inherit'
         aria-haspopup='true'
@@ -95,7 +95,7 @@ const LanguageDropdown = ({ settings, saveSettings }) => {
           Arabic
         </MenuItem>
       </Menu>
-    </Fragment>
+    </>
   )
 }
 

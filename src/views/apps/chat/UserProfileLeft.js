@@ -72,7 +72,7 @@ const UserProfileLeft = props => {
       }}
     >
       {store && store.userProfile ? (
-        <Fragment>
+        <>
           <IconButton
             size='small'
             onClick={handleUserProfileLeftSidebarToggle}
@@ -193,7 +193,7 @@ const UserProfileLeft = props => {
               </Box>
             </ScrollWrapper>
           </Box>
-        </Fragment>
+        </>
       ) : null}
     </Sidebar>
   )

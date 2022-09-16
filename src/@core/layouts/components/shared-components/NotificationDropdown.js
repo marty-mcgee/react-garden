@@ -113,7 +113,7 @@ const NotificationDropdown = props => {
   }
 
   return (
-    <Fragment>
+    <>
       <IconButton color='inherit' aria-haspopup='true' onClick={handleDropdownOpen} aria-controls='customized-menu'>
         <BellOutline />
       </IconButton>
@@ -219,7 +219,7 @@ const NotificationDropdown = props => {
           </Button>
         </MenuItem>
       </Menu>
-    </Fragment>
+    </>
   )
 }
 

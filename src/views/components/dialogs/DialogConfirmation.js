@@ -16,7 +16,7 @@ const DialogConfirmation = () => {
   const handleClose = () => setOpen(false)
 
   return (
-    <Fragment>
+    <>
       <Button variant='outlined' onClick={handleClickOpen}>
         Open dialog
       </Button>
@@ -43,7 +43,7 @@ const DialogConfirmation = () => {
           <Button onClick={handleClose}>Agree</Button>
         </DialogActions>
       </Dialog>
-    </Fragment>
+    </>
   )
 }
 

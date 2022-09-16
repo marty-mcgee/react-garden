@@ -155,25 +155,25 @@ const AddEventSidebar = props => {
   const RenderSidebarFooter = () => {
     if (store.selectedEvent === null || (store.selectedEvent !== null && !store.selectedEvent.title.length)) {
       return (
-        <Fragment>
+        <>
           <Button size='large' type='submit' variant='contained' sx={{ mr: 4 }}>
             Add
           </Button>
           <Button size='large' variant='outlined' color='secondary' onClick={resetToEmptyValues}>
             Reset
           </Button>
-        </Fragment>
+        </>
       )
     } else {
       return (
-        <Fragment>
+        <>
           <Button size='large' type='submit' variant='contained' sx={{ mr: 4 }}>
             Update
           </Button>
           <Button size='large' variant='outlined' color='secondary' onClick={resetToStoredValues}>
             Reset
           </Button>
-        </Fragment>
+        </>
       )
     }
   }

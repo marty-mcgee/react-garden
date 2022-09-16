@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography'
 
 const ChipsColors = () => {
   return (
-    <Fragment>
+    <>
       <Typography sx={{ fontWeight: 500 }}>Filled Chips</Typography>
       <div className='demo-space-x'>
         <Chip label='Primary' color='primary' />
@@ -26,7 +26,7 @@ const ChipsColors = () => {
         <Chip label='Warning' color='warning' variant='outlined' />
         <Chip label='Info' color='info' variant='outlined' />
       </div>
-    </Fragment>
+    </>
   )
 }
 

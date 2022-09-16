@@ -267,7 +267,7 @@ const MailDetails = props => {
       }}
     >
       {mail ? (
-        <Fragment>
+        <>
           <Box
             sx={{
               px: 2.6,
@@ -504,7 +504,7 @@ const MailDetails = props => {
                           <Box dangerouslySetInnerHTML={{ __html: reply.message }} />
                         </Box>
                         {reply.attachments.length ? (
-                          <Fragment>
+                          <>
                             <Divider sx={{ m: 0 }} />
                             <Box sx={{ p: 5 }}>
                               <Typography variant='body2'>Attachments</Typography>
@@ -521,7 +521,7 @@ const MailDetails = props => {
                                 })}
                               </List>
                             </Box>
-                          </Fragment>
+                          </>
                         ) : null}
                       </Box>
                     )
@@ -529,10 +529,10 @@ const MailDetails = props => {
                   : null}
 
                 {mail.replies.length && !showReplies ? (
-                  <Fragment>
+                  <>
                     <HiddenReplyBack sx={{ cursor: 'pointer' }} onClick={() => setShowReplies(true)} />
                     <HiddenReplyFront sx={{ cursor: 'pointer' }} onClick={() => setShowReplies(true)} />
-                  </Fragment>
+                  </>
                 ) : null}
 
                 <Box
@@ -585,7 +585,7 @@ const MailDetails = props => {
                     <Box dangerouslySetInnerHTML={{ __html: mail.message }} />
                   </Box>
                   {mail.attachments.length ? (
-                    <Fragment>
+                    <>
                       <Divider sx={{ m: 0 }} />
                       <Box sx={{ p: 5 }}>
                         <Typography variant='body2'>Attachments</Typography>
@@ -602,7 +602,7 @@ const MailDetails = props => {
                           })}
                         </List>
                       </Box>
-                    </Fragment>
+                    </>
                   ) : null}
                 </Box>
 
@@ -637,7 +637,7 @@ const MailDetails = props => {
               </Box>
             </ScrollWrapper>
           </Box>
-        </Fragment>
+        </>
       ) : null}
     </Sidebar>
   )

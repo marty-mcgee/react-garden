@@ -10,7 +10,7 @@ import NavigationOutline from 'mdi-material-ui/NavigationOutline'
 
 const ButtonsFabSizes = () => {
   return (
-    <Fragment>
+    <>
       <div className='demo-space-x'>
         <Fab color='primary' aria-label='add' size='small'>
           <Plus />
@@ -36,7 +36,7 @@ const ButtonsFabSizes = () => {
           Navigate
         </Fab>
       </div>
-    </Fragment>
+    </>
   )
 }
 

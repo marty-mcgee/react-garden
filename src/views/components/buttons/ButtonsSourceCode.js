@@ -120,7 +120,7 @@ import Button from '@mui/material/Button'
 
 const ButtonsColors = () => {
   return (
-    <Fragment>
+    <>
       <div className='demo-space-x'>
         <Button color='success'>Success</Button>
         <Button color='error'>Error</Button>
@@ -155,7 +155,7 @@ const ButtonsColors = () => {
           Info
         </Button>
       </div>
-    </Fragment>
+    </>
   )
 }
 
@@ -279,7 +279,7 @@ import NavigationOutline from 'mdi-material-ui/NavigationOutline'
 
 const ButtonsFabSizes = () => {
   return (
-    <Fragment>
+    <>
       <div className='demo-space-x'>
         <Fab color='primary' aria-label='add' size='small'>
           <Plus />
@@ -305,7 +305,7 @@ const ButtonsFabSizes = () => {
           Navigate
         </Fab>
       </div>
-    </Fragment>
+    </>
   )
 }
 
@@ -409,7 +409,7 @@ import CameraIris from 'mdi-material-ui/CameraIris'
 
 const ButtonsSizes = () => {
   return (
-    <Fragment>
+    <>
       <div className='demo-space-x'>
         <Button variant='text' size='small'>
           Small
@@ -457,7 +457,7 @@ const ButtonsSizes = () => {
           <CameraIris fontSize='large' />
         </IconButton>
       </div>
-    </Fragment>
+    </>
   )
 }
 

@@ -158,7 +158,7 @@ const UserViewBilling = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <Card sx={{ mb: 6 }}>
         <CardHeader title='Current plan' titleTypographyProps={{ variant: 'h6' }} />
         <CardContent>
@@ -751,7 +751,7 @@ const UserViewBilling = () => {
           </DialogActions>
         </Dialog>
       </Card>
-    </Fragment>
+    </>
   )
 }
 

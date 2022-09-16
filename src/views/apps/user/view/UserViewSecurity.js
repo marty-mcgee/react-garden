@@ -117,7 +117,7 @@ const UserViewSecurity = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <Card sx={{ mb: 6 }}>
         <CardHeader title='Change Password' titleTypographyProps={{ variant: 'h6' }} />
         <CardContent>
@@ -298,7 +298,7 @@ const UserViewSecurity = () => {
           </Table>
         </TableContainer>
       </Card>
-    </Fragment>
+    </>
   )
 }
 

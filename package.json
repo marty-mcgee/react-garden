@@ -1,6 +1,6 @@
 {
   "name": "react-garden",
-  "version": "0.7.12",
+  "version": "0.7.13",
   "private": false,
   "description": "React + TypeScript app using Material UI on NextJS",
   "author": "Marty McGee <mcgee.marty@gmail.com> (https://github.com/marty-mcgee)",
@@ -177,7 +177,7 @@
     "react-flatpickr": "3.10.13",
     "react-github-btn": "1.3.0",
     "react-hook-form": "7.3.0",
-    "react-hot-toast": "2.1.1",
+    "react-hot-toast": "2.4.0",
     "react-i18next": "11.14.3",
     "react-images-viewer": "github:marty-mcgee/react-images-viewer#master",
     "react-native": ">=0.64.0",

@@ -38,7 +38,7 @@ const SnackbarTransition = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <div className='demo-space-x'>
         <Button variant='outlined' onClick={handleClick(GrowTransition)}>
           Grow Transition
@@ -58,7 +58,7 @@ const SnackbarTransition = () => {
         key={state.Transition.name}
         TransitionComponent={state.Transition}
       />
-    </Fragment>
+    </>
   )
 }
 

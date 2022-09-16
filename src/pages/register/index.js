@@ -363,7 +363,7 @@ const Register = () => {
                           />
                         }
                         label={
-                          <Fragment>
+                          <>
                             <Typography
                               variant='body2'
                               component='span'
@@ -374,7 +374,7 @@ const Register = () => {
                             <Link href='/' passHref>
                               <LinkStyled onClick={e => e.preventDefault()}>privacy policy & terms</LinkStyled>
                             </Link>
-                          </Fragment>
+                          </>
                         }
                       />
                     )

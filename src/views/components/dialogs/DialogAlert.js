@@ -16,7 +16,7 @@ const DialogAlert = () => {
   const handleClose = () => setOpen(false)
 
   return (
-    <Fragment>
+    <>
       <Button variant='outlined' onClick={handleClickOpen}>
         Open dialog
       </Button>
@@ -38,7 +38,7 @@ const DialogAlert = () => {
           <Button onClick={handleClose}>Agree</Button>
         </DialogActions>
       </Dialog>
-    </Fragment>
+    </>
   )
 }
 

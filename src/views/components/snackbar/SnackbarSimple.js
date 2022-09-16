@@ -25,7 +25,7 @@ const SnackbarSimple = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <Button variant='outlined' onClick={handleClick}>
         Open simple snackbar
       </Button>
@@ -35,17 +35,17 @@ const SnackbarSimple = () => {
         message='Note archived'
         autoHideDuration={3000}
         action={
-          <Fragment>
+          <>
             <Button size='small' onClick={handleClose}>
               UNDO
             </Button>
             <IconButton size='small' aria-label='close' color='inherit' onClick={handleClose}>
               <Close fontSize='small' />
             </IconButton>
-          </Fragment>
+          </>
         }
       />
-    </Fragment>
+    </>
   )
 }
 

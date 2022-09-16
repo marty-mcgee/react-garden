@@ -41,7 +41,7 @@ const DialogSizes = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <Button variant='outlined' onClick={handleClickOpen}>
         Open dialog
       </Button>
@@ -88,7 +88,7 @@ const DialogSizes = () => {
           <Button onClick={handleClose}>Close</Button>
         </DialogActions>
       </Dialog>
-    </Fragment>
+    </>
   )
 }
 

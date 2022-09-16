@@ -22,7 +22,7 @@ const DialogRespoFullScreen = () => {
   const handleClose = () => setOpen(false)
 
   return (
-    <Fragment>
+    <>
       <Button variant='outlined' onClick={handleClickOpen}>
         Open responsive dialog
       </Button>
@@ -39,7 +39,7 @@ const DialogRespoFullScreen = () => {
           <Button onClick={handleClose}>Agree</Button>
         </DialogActions>
       </Dialog>
-    </Fragment>
+    </>
   )
 }
 

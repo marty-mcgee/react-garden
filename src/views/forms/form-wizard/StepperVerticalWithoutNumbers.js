@@ -17,11 +17,11 @@ import StepContent from '@mui/material/StepContent'
 import clsx from 'clsx'
 import toast from 'react-hot-toast'
 
-// ** Custom Components Imports
-import StepperCustomDot from './StepperCustomDot'
-
 // ** Styled Components
 import StepperWrapper from '~/@core/styles/mui/stepper'
+
+// ** Custom Components Imports
+import StepperCustomDot from './StepperCustomDot'
 
 const steps = [
   {

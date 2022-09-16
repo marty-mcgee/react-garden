@@ -21,7 +21,7 @@ const DialogTransition = () => {
   const handleClose = () => setOpen(false)
 
   return (
-    <Fragment>
+    <>
       <Button variant='outlined' onClick={handleClickOpen}>
         Slide in alert dialog
       </Button>
@@ -45,7 +45,7 @@ const DialogTransition = () => {
           <Button onClick={handleClose}>Agree</Button>
         </DialogActions>
       </Dialog>
-    </Fragment>
+    </>
   )
 }
 

@@ -17,7 +17,7 @@ import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
 
 const ListSimple = () => {
   return (
-    <Fragment>
+    <>
       <List component='nav' aria-label='main mailbox'>
         <ListItem disablePadding>
           <ListItemButton>
@@ -55,7 +55,7 @@ const ListSimple = () => {
           </ListItemButton>
         </ListItem>
       </List>
-    </Fragment>
+    </>
   )
 }
 

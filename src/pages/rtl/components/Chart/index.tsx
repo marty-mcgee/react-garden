@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useRef, useEffect, useState, useMemo, ReactNode } from "react"
 
 // @mui material components

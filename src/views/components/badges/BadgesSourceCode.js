@@ -248,7 +248,7 @@ const BadgesVisibility = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <Wrapper className='demo-space-x'>
         <Badge badgeContent={count} color='primary'>
           <Avatar src='/images/avatars/1.png' alt='User Avatar' />
@@ -272,7 +272,7 @@ const BadgesVisibility = () => {
           control={<Switch color='primary' checked={!invisible} onChange={handleBadgeVisibility} />}
         />
       </Wrapper>
-    </Fragment>
+    </>
   )
 }
 

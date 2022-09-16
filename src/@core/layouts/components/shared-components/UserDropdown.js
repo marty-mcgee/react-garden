@@ -80,7 +80,7 @@ const UserDropdown = props => {
   }
 
   return (
-    <Fragment>
+    <>
       <Badge
         overlap='circular'
         onClick={handleDropdownOpen}
@@ -170,7 +170,7 @@ const UserDropdown = props => {
           Logout
         </MenuItem>
       </Menu>
-    </Fragment>
+    </>
   )
 }
 

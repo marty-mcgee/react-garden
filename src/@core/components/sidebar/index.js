@@ -24,7 +24,7 @@ const Sidebar = props => {
   }, [onClose, onOpen, show])
 
   return (
-    <Fragment>
+    <>
       <Box
         {...props}
         sx={{
@@ -51,7 +51,7 @@ const Sidebar = props => {
           sx={{ position: 'absolute', zIndex: theme => theme.zIndex.drawer - 1 }}
         />
       )}
-    </Fragment>
+    </>
   )
 }
 

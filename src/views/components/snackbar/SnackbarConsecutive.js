@@ -37,7 +37,7 @@ const SnackbarConsecutive = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <div className='demo-space-x'>
         <Button variant='outlined' onClick={handleClick('success')}>
           Success Alert
@@ -63,7 +63,7 @@ const SnackbarConsecutive = () => {
           This is {messageInfo?.message === 'success' ? 'a success' : 'an error'} message!
         </Alert>
       </Snackbar>
-    </Fragment>
+    </>
   )
 }
 

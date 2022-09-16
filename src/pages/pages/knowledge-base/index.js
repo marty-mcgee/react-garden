@@ -99,7 +99,7 @@ const KnowledgeBase = ({ apiData }) => {
   )
 
   return (
-    <Fragment>
+    <>
       <KnowledgeBaseHeader searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       {data !== null ? (
         <Grid container spacing={6} className='match-height'>
@@ -108,7 +108,7 @@ const KnowledgeBase = ({ apiData }) => {
       ) : (
         renderNoResult
       )}
-    </Fragment>
+    </>
   )
 }
 

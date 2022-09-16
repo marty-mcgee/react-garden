@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { createTheme } from "@mui/material/styles"
 import { red } from "@mui/material/colors"
 
@@ -13,6 +15,37 @@ const theme = createTheme({
     error: {
       main: red.A400,
     },
+    white: {
+      main: "#FFFFFF",
+    },
+    transparent: {
+      main: "#FFFFFF",
+    },
+    black: {
+      main: "#000000",
+    },
+    light: {
+      main: "#CCCCCC",
+    },
+    dark: {
+      main: "#333333",
+    },
+    gradients: {
+      main: "#FFFFFF",
+    },
+    socialMediaColors: {
+      main: "#AAAAAA",
+    },
+    badgeColors: {
+      main: "#222222",
+    },
+    coloredShadows: {
+      main: "#222222",
+    },
+    inputBorderColor: "#222222",
+    tabs: {
+      main: "#222222",
+    }
   },
 })
 

@@ -118,7 +118,7 @@ const Img = styled('img')(({ theme }) => ({
 
 const UserViewOverview = ({ invoiceData }) => {
   return (
-    <Fragment>
+    <>
       <Card sx={{ mb: 6 }}>
         <CardHeader title='Project List' titleTypographyProps={{ variant: 'h6' }} />
 
@@ -292,7 +292,7 @@ const UserViewOverview = ({ invoiceData }) => {
       </Card>
 
       <UsersInvoiceListTable invoiceData={invoiceData} />
-    </Fragment>
+    </>
   )
 }
 

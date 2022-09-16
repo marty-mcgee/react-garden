@@ -43,22 +43,22 @@ const useStoreImpl2 = create(() => {
 
 // export ??
 export const useThreeDStore = create((set, get, api) => ({
-  _id: newUUID() as string,
-  _ts: new Date().toISOString() as string,
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
   threedCount: 0,
   threeds: [],
   threed: {
-    _id: newUUID() as string,
-    _ts: new Date().toISOString() as string,
+    _id: newUUID(),
+    _ts: new Date().toISOString(),
     name: "HEY HEY HEY 0",
-    layers: new Array,
+    layers: [],
     activeLayer: {
       name: "level0-MM",
       data: {}
     }
   },
   increaseThreeDCount: () => set(
-    (state: any) => (
+    (state) => (
       { threedCount: state.threedCount + 1 }
     )
   ),
@@ -68,16 +68,16 @@ export const useThreeDStore = create((set, get, api) => ({
       threeds: []
     }
   ),
-  addThreeD: ({ set, get }: { set: any, get: any }) => {
+  addThreeD: () => {
     // threedCurrent
     set(
-      (state: any) => (
+      (state) => (
         {
           threed: {
-            _id: newUUID() as string,
-            _ts: new Date().toISOString() as string,
+            _id: newUUID(),
+            _ts: new Date().toISOString(),
             name: "HEY HEY HEY 1",
-            layers: new Array,
+            layers: [],
             activeLayer: {
               name: "level1-MM",
               data: {}
@@ -89,7 +89,7 @@ export const useThreeDStore = create((set, get, api) => ({
     )
     // threedHistory
     set(
-      (state: any) => (
+      (state) => (
         {
           threeds: [state.threed, ...state.threeds],
           threedCount: state.threeds.length,
@@ -103,11 +103,11 @@ export const useThreeDStore = create((set, get, api) => ({
 
     console.debug("%cAddThreeD", ccm1, get().threed)
   },
-  saveProject: ({ set, get }: { set: any, get: any }) => {
+  saveProject: () => {
     // saveToDisk
     get().saveToDisk()
   },
-  saveToDisk: ({ set, get }: { set: any, get: any }) => {
+  saveToDisk: () => {
     try {
       localStorage.setItem("threed_threedHistory", JSON.stringify({ subject: "threed", payload: get().threed }))
       console.debug("%cSaveToDisk", ccm1, get().threed)
@@ -117,7 +117,7 @@ export const useThreeDStore = create((set, get, api) => ({
       return false
     }
   },
-  loadFromDisk: ({ set, get }: { set: any, get: any }) => {
+  loadFromDisk: () => {
     try {
       const loaded = localStorage.getItem("threed_threedHistory")
       if (loaded) {
@@ -138,21 +138,21 @@ export const useThreeDStore = create((set, get, api) => ({
 // Project
 
 export const useProjectStore = create((set, get) => ({
-  _id: newUUID() as string,
-  _ts: new Date().toISOString() as string,
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
   projectCount: 0,
   projects: [],
   project: {
-    _id: newUUID() as string,
-    _ts: new Date().toISOString() as string,
-    layers: new Array,
+    _id: newUUID(),
+    _ts: new Date().toISOString(),
+    layers: [],
     activeLayer: {
       name: "level0-MM",
       data: {}
     }
   },
   increaseProjectCount: () => set(
-    (state: any) => (
+    (state) => (
       { projectCount: state.projectCount + 1 }
     )
   ),
@@ -162,15 +162,15 @@ export const useProjectStore = create((set, get) => ({
       projects: []
     }
   ),
-  addProject: ({ set, get }: { set: any, get: any }) => {
+  addProject: () => {
     // projectCurrent
     set(
-      (state: any) => (
+      (state) => (
         {
           project: {
-            _id: newUUID() as string,
-            _ts: new Date().toISOString() as string,
-            layers: new Array,
+            _id: newUUID(),
+            _ts: new Date().toISOString(),
+            layers: [],
             activeLayer: {
               name: "level1-MM",
               data: {}
@@ -182,7 +182,7 @@ export const useProjectStore = create((set, get) => ({
     )
     // projectHistory
     set(
-      (state: any) => (
+      (state) => (
         {
           projects: [state.project, ...state.projects],
           projectCount: state.projects.length,
@@ -196,11 +196,11 @@ export const useProjectStore = create((set, get) => ({
 
     console.debug("%cAddProject", ccm1, get().project)
   },
-  saveProject: ({ set, get }: { set: any, get: any }) => {
+  saveProject: () => {
     // saveToDisk
     get().saveToDisk()
   },
-  saveToDisk: ({ set, get }: { set: any, get: any }) => {
+  saveToDisk: () => {
     try {
       localStorage.setItem("threed_projectHistory", JSON.stringify({ subject: "projects", payload: get().projects }))
       console.debug("%cSaveToDisk", ccm1, get().projects)
@@ -210,7 +210,7 @@ export const useProjectStore = create((set, get) => ({
       return false
     }
   },
-  loadFromDisk: ({ set, get }: { set: any, get: any }) => {
+  loadFromDisk: () => {
     try {
       const loaded = localStorage.getItem("threed_projectHistory")
       if (loaded) {
@@ -232,65 +232,65 @@ export const useProjectStore = create((set, get) => ({
 
 // export ??
 export const usePlanStore = create((set, get) => ({
-  _id: newUUID() as string,
-  _ts: new Date().toISOString() as string,
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
   planCount: 0,
   plans: [],
   plan: {
-    _id: newUUID() as string,
-    _ts: new Date().toISOString() as string,
-    levels: [{ id: 0, height: 0 }] as Object[],
+    _id: newUUID(),
+    _ts: new Date().toISOString(),
+    levels: [{ id: 0, height: 0 }],
     // levels[0]: { id: 0, height: 0 },
-    floors: [] as Object[],
-    roofs: [] as Object[],
-    walls: [] as Object[],
-    dimensions: [] as Object[],
-    texts: [] as Object[],
-    furniture: [] as Object[],
+    floors: [],
+    roofs: [],
+    walls: [],
+    dimensions: [],
+    texts: [],
+    furniture: [],
 
-    verticalGuides: [] as Object[],
-    horizontalGuides: [] as Object[],
+    verticalGuides: [],
+    horizontalGuides: [],
 
-    furnitureAddedKey: null as any,
-    furnitureDirtyKey: null as any,
-    furnitureDeletedKey: null as any,
-    wallAddedKey: null as any,
-    wallDirtyKey: null as any,
-    wallDeletedKey: null as any,
-    roofAddedKey: null as any,
-    roofDirtyKey: null as any,
-    roofDeletedKey: null as any,
-    floorAddedKey: null as any,
-    floorDirtyKey: null as any,
-    floorDeletedKey: null as any,
-    dimensionAddedKey: null as any,
-    dimensionEditedKey: null as any,
-    dimensionDeletedKey: null as any,
-    textAddedKey: null as any,
-    textEditedKey: null as any,
-    textDeletedKey: null as any,
+    furnitureAddedKey: null,
+    furnitureDirtyKey: null,
+    furnitureDeletedKey: null,
+    wallAddedKey: null,
+    wallDirtyKey: null,
+    wallDeletedKey: null,
+    roofAddedKey: null,
+    roofDirtyKey: null,
+    roofDeletedKey: null,
+    floorAddedKey: null,
+    floorDirtyKey: null,
+    floorDeletedKey: null,
+    dimensionAddedKey: null,
+    dimensionEditedKey: null,
+    dimensionDeletedKey: null,
+    textAddedKey: null,
+    textEditedKey: null,
+    textDeletedKey: null,
 
-    wallDiffuse: null as string,
-    wallOpacity: null as number,
-    wallSpecular: null as string,
-    roofDiffuse: null as string,
-    roofOpacity: null as number,
-    roofSpecular: null as string,
-    floorDiffuse: null as string,
-    floorOpacity: null as number,
-    floorSpecular: null as string,
-    groundDiffuse: null as string,
-    groundOpacity: null as number,
-    groundSpecular: null as string,
+    wallDiffuse: null,
+    wallOpacity: null,
+    wallSpecular: null,
+    roofDiffuse: null,
+    roofOpacity: null,
+    roofSpecular: null,
+    floorDiffuse: null,
+    floorOpacity: null,
+    floorSpecular: null,
+    groundDiffuse: null,
+    groundOpacity: null,
+    groundSpecular: null,
 
-    depthWrite: null as any,
-    sortObjects: null as any,
+    depthWrite: null,
+    sortObjects: null,
 
-    azimuth: null as number,
-    inclination: null as number
+    azimuth: null,
+    inclination: null
   },
   increasePlanCount: () => set(
-    (state: any) => (
+    (state) => (
       { planCount: state.planCount + 1 }
     )
   ),
@@ -300,44 +300,44 @@ export const usePlanStore = create((set, get) => ({
       plans: []
     }
   ),
-  addPlan: ({ set, get }: { set: any, get: any }) => {
+  addPlan: () => {
     // planCurrent
     set(
-      (state: any) => (
+      (state) => (
         {
           plan: {
-            _id: newUUID() as string,
-            _ts: new Date().toISOString() as string,
-            levels: [{ id: 0, height: 0 }] as Object[],
+            _id: newUUID(),
+            _ts: new Date().toISOString(),
+            levels: [{ id: 0, height: 0 }],
             // levels[0]: { id: 0, height: 0 },
-            floors: [] as Object[],
-            roofs: [] as Object[],
-            walls: [] as Object[],
-            dimensions: [] as Object[],
-            texts: [] as Object[],
-            furniture: [] as Object[],
+            floors: [],
+            roofs: [],
+            walls: [],
+            dimensions: [],
+            texts: [],
+            furniture: [],
 
-            verticalGuides: [] as Object[],
-            horizontalGuides: [] as Object[],
+            verticalGuides: [],
+            horizontalGuides: [],
 
-            furnitureAddedKey: null as any,
-            furnitureDirtyKey: null as any,
-            furnitureDeletedKey: null as any,
-            wallAddedKey: null as any,
-            wallDirtyKey: null as any,
-            wallDeletedKey: null as any,
-            roofAddedKey: null as any,
-            roofDirtyKey: null as any,
-            roofDeletedKey: null as any,
-            floorAddedKey: null as any,
-            floorDirtyKey: null as any,
-            floorDeletedKey: null as any,
-            dimensionAddedKey: null as any,
-            dimensionEditedKey: null as any,
-            dimensionDeletedKey: null as any,
-            textAddedKey: null as any,
-            textEditedKey: null as any,
-            textDeletedKey: null as any,
+            furnitureAddedKey: null,
+            furnitureDirtyKey: null,
+            furnitureDeletedKey: null,
+            wallAddedKey: null,
+            wallDirtyKey: null,
+            wallDeletedKey: null,
+            roofAddedKey: null,
+            roofDirtyKey: null,
+            roofDeletedKey: null,
+            floorAddedKey: null,
+            floorDirtyKey: null,
+            floorDeletedKey: null,
+            dimensionAddedKey: null,
+            dimensionEditedKey: null,
+            dimensionDeletedKey: null,
+            textAddedKey: null,
+            textEditedKey: null,
+            textDeletedKey: null,
 
             // wallDiffuse: wallMaterial.color.getHexString(),
             // wallOpacity: wallMaterial.opacity,
@@ -364,7 +364,7 @@ export const usePlanStore = create((set, get) => ({
     )
     // planHistory
     set(
-      (state: any) => (
+      (state) => (
         {
           plans: [state.plan, ...state.plans],
           planCount: state.plans.length,
@@ -382,7 +382,7 @@ export const usePlanStore = create((set, get) => ({
     // saveToDisk
     get().saveToDisk()
   },
-  saveToDisk: ({ set, get }: { set: any, get: any }) => {
+  saveToDisk: () => {
     try {
       localStorage.setItem("threed_planHistory", JSON.stringify({ subject: "plans", payload: get().plans }))
       console.debug("%cSaveToDisk", ccm1, get().plans)
@@ -392,7 +392,7 @@ export const usePlanStore = create((set, get) => ({
       return false
     }
   },
-  loadFromDisk: ({ set, get }: { set: any, get: any }) => {
+  loadFromDisk: () => {
     try {
       const loaded = localStorage.getItem("threed_planHistory")
       if (loaded) {
@@ -423,7 +423,7 @@ export const useFileStore = create((set) => ({
 
 export const useBearStore = create((set) => ({
   bears: 0,
-  increaseBearCount: () => set((state: any) => ({ bears: state.bears + 1 })),
+  increaseBearCount: () => set((state) => ({ bears: state.bears + 1 })),
   removeAllBears: () => set({ bears: 0 }),
 })) // useBearStore
 
@@ -459,7 +459,8 @@ export const useModalStore = create((set, get) => ({
 // ==============================================================
 // EXPORT STORES AS GROUP OBJECT "useStore" (as a HOOK ??)
 
-export const useStore = (sel: any) => useStoreImpl(sel, shallow)
+export const useStore = (sel) => useStoreImpl(sel, shallow)
+
 Object.assign(useStore,
   {
     useStoreImpl,

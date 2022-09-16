@@ -14,11 +14,13 @@ import MDBox from "~/components/mui/MDBox"
 // ThreeD Garden examples components
 import SalesTableCell from "~/components/elements/Tables/SalesTable/SalesTableCell"
 
+import { StaticImageData } from "next/future/image"
+
 // Declaring props types for SalesTable
 interface Props {
   title?: string
   rows?: {
-    [key: string]: string | number | (string | number)[]
+    [key: string]: string | StaticImageData | number | (string | StaticImageData | number)[]
   }[]
   shadow?: boolean
 }
@@ -26,7 +28,7 @@ interface Props {
 function SalesTable({ title, rows, shadow }: Props): JSX.Element {
   const renderTableCells = rows.map(
     (
-      row: { [key: string]: string | number | (string | number)[] },
+      row: { [key: string]: string | StaticImageData | number | (string | StaticImageData | number)[] },
       key: any
     ) => {
       const tableRows: any = []

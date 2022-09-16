@@ -273,12 +273,12 @@ const RegisterV2 = () => {
               <FormControlLabel
                 control={<Checkbox />}
                 label={
-                  <Fragment>
+                  <>
                     <span>I agree to </span>
                     <Link href='/' passHref>
                       <LinkStyled onClick={e => e.preventDefault()}>privacy policy & terms</LinkStyled>
                     </Link>
-                  </Fragment>
+                  </>
                 }
               />
               <Button fullWidth size='large' type='submit' variant='contained' sx={{ mb: 7 }}>

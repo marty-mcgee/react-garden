@@ -39,7 +39,7 @@ const SnackbarConsecutive = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <div className='demo-space-x'>
         <Button variant='outlined' onClick={handleClick('success')}>
           Success Alert
@@ -65,7 +65,7 @@ const SnackbarConsecutive = () => {
           This is {messageInfo?.message === 'success' ? 'a success' : 'an error'} message!
         </Alert>
       </Snackbar>
-    </Fragment>
+    </>
   )
 }
 
@@ -100,7 +100,7 @@ const SnackbarAlert = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <Button variant='outlined' onClick={handleClick}>
         Open alert snackbar
       </Button>
@@ -109,7 +109,7 @@ const SnackbarAlert = () => {
           This is a success message!
         </Alert>
       </Snackbar>
-    </Fragment>
+    </>
   )
 }
 
@@ -159,7 +159,7 @@ const SnackbarControlSlideDirection = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <div className='demo-space-x'>
         <Button variant='outlined' onClick={handleClick(TransitionLeft)}>
           Right
@@ -182,7 +182,7 @@ const SnackbarControlSlideDirection = () => {
         TransitionComponent={transition}
         key={transition ? transition.name : ''}
       />
-    </Fragment>
+    </>
   )
 }
 
@@ -218,7 +218,7 @@ const SnackbarPositioned = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <div className='demo-space-x'>
         <Button variant='outlined' onClick={handleClick({ vertical: 'top', horizontal: 'center' })}>
           Top Center
@@ -247,7 +247,7 @@ const SnackbarPositioned = () => {
         key={vertical + horizontal}
         anchorOrigin={{ vertical, horizontal }}
       />
-    </Fragment>
+    </>
   )
 }
 
@@ -298,7 +298,7 @@ const SnackbarTransition = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <div className='demo-space-x'>
         <Button variant='outlined' onClick={handleClick(GrowTransition)}>
           Grow Transition
@@ -318,7 +318,7 @@ const SnackbarTransition = () => {
         key={state.Transition.name}
         TransitionComponent={state.Transition}
       />
-    </Fragment>
+    </>
   )
 }
 
@@ -356,7 +356,7 @@ const SnackbarSimple = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <Button variant='outlined' onClick={handleClick}>
         Open simple snackbar
       </Button>
@@ -366,17 +366,17 @@ const SnackbarSimple = () => {
         message='Note archived'
         autoHideDuration={3000}
         action={
-          <Fragment>
+          <>
             <Button size='small' onClick={handleClose}>
               UNDO
             </Button>
             <IconButton size='small' aria-label='close' color='inherit' onClick={handleClose}>
               <Close fontSize='small' />
             </IconButton>
-          </Fragment>
+          </>
         }
       />
-    </Fragment>
+    </>
   )
 }
 

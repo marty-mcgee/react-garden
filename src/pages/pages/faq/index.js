@@ -54,13 +54,13 @@ const FAQ = ({ apiData }) => {
   )
 
   return (
-    <Fragment>
+    <>
       <FaqHeader searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <StyledBox>
         {data !== null ? <FaqAccordions data={data} /> : renderNoResult}
         <FaqFooter />
       </StyledBox>
-    </Fragment>
+    </>
   )
 }
 

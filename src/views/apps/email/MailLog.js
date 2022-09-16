@@ -331,7 +331,7 @@ const MailLog = props => {
               ) : null}
 
               {store && store.selectedMails.length && store.mails && store.mails.length ? (
-                <Fragment>
+                <>
                   {routeParams && routeParams.folder !== 'trash' ? (
                     <IconButton onClick={handleMoveToTrash}>
                       <DeleteOutline />
@@ -378,7 +378,7 @@ const MailLog = props => {
                   >
                     {renderFoldersMenu()}
                   </Menu>
-                </Fragment>
+                </>
               ) : null}
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
