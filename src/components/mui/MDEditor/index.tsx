@@ -7,7 +7,7 @@ import { useState, useRef } from "react"
 import dynamic from 'next/dynamic'
 
 // react-quill styles
-import "react-quill/dist/quill.snow.css"
+// import "react-quill/dist/quill.snow.css"
 
 // Custom styles for the MDEditor
 import MDEditorRoot from "~/components/mui/MDEditor/MDEditorRoot"

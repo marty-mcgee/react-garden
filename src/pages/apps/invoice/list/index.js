@@ -54,7 +54,7 @@ import CustomAvatar from '~/@core/components/mui/avatar'
 import TableHeader from '~/views/apps/invoice/list/TableHeader'
 
 // ** Third Party Styles Imports
-import 'react-datepicker/dist/react-datepicker.css'
+// import 'react-datepicker/dist/react-datepicker.css'
 
 // ** Styled Components
 import DatePickerWrapper from '~/@core/styles/libs/react-datepicker'

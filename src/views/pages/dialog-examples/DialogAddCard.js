@@ -19,7 +19,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 
 // ** Third Party Imports
 import Payment from 'payment'
-import Cards from 'react-credit-cards'
+// import Cards from 'react-credit-cards'
 
 // ** Util Import
 import { formatCVC, formatExpirationDate, formatCreditCardNumber } from '~/@core/utils/format'
@@ -28,7 +28,7 @@ import { formatCVC, formatExpirationDate, formatCreditCardNumber } from '~/@core
 import CardWrapper from '~/@core/styles/libs/react-credit-cards'
 
 // ** Styles Import
-import 'react-credit-cards/es/styles-compiled.css'
+// import 'react-credit-cards/es/styles-compiled.css'
 
 // ** Icons Imports
 import Close from 'mdi-material-ui/Close'
@@ -106,7 +106,7 @@ const DialogAddCard = () => {
           <Grid container spacing={6}>
             <Grid item xs={12}>
               <CardWrapper sx={{ '& .rccs': { m: '0 auto', display: { xs: 'none', sm: 'block' } } }}>
-                <Cards cvc={cvc} focused={focus} expiry={expiry} name={name} number={cardNumber} />
+                {/* <Cards cvc={cvc} focused={focus} expiry={expiry} name={name} number={cardNumber} /> */}
               </CardWrapper>
             </Grid>
             <Grid item xs={12}>

@@ -29,7 +29,7 @@ import {
 } from '~/store/apps/calendar'
 
 // ** Third Party Styles Imports
-import 'react-datepicker/dist/react-datepicker.css'
+// import 'react-datepicker/dist/react-datepicker.css'
 
 // ** CalendarColors
 const calendarsColor = {

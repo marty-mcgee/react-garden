@@ -12,7 +12,7 @@ import FormValidationAsync from '~/views/forms/form-validation/FormValidationAsy
 import FormValidationSchema from '~/views/forms/form-validation/FormValidationSchema'
 
 // ** Third Party Styles Imports
-import 'react-datepicker/dist/react-datepicker.css'
+// import 'react-datepicker/dist/react-datepicker.css'
 
 const FormValidation = () => {
   return (

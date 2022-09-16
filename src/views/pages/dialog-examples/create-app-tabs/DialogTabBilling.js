@@ -18,7 +18,7 @@ import { formatCVC, formatExpirationDate, formatCreditCardNumber } from '~/@core
 import CardWrapper from '~/@core/styles/libs/react-credit-cards'
 
 // ** Styles Import
-import 'react-credit-cards/es/styles-compiled.css'
+// import 'react-credit-cards/es/styles-compiled.css'
 
 const TabBilling = () => {
   // ** States

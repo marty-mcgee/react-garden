@@ -23,7 +23,7 @@ import ApexRadialBarChart from '~/views/charts/apex-charts/ApexRadialBarChart'
 import ApexCandlestickChart from '~/views/charts/apex-charts/ApexCandlestickChart'
 
 // ** Third Party Styles Imports
-import 'react-datepicker/dist/react-datepicker.css'
+// import 'react-datepicker/dist/react-datepicker.css'
 
 const ApexCharts = () => {
   return (

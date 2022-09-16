@@ -35,7 +35,7 @@ import CardWrapper from '~/@core/styles/libs/react-credit-cards'
 import { formatCVC, formatExpirationDate, formatCreditCardNumber } from '~/@core/utils/format'
 
 // ** Styles Import
-import 'react-credit-cards/es/styles-compiled.css'
+// import 'react-credit-cards/es/styles-compiled.css'
 
 // Styled component for the Box wrappers in Delivery Options' accordion
 const BoxWrapper = styled(Box)(({ theme }) => ({

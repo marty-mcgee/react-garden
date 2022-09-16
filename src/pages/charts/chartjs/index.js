@@ -22,7 +22,7 @@ import ChartjsHorizontalBarChart from '~/views/charts/chartjs/ChartjsHorizontalB
 
 // ** Third Party Styles Imports
 import 'chart.js/auto'
-import 'react-datepicker/dist/react-datepicker.css'
+// import 'react-datepicker/dist/react-datepicker.css'
 
 const ChartJS = () => {
   // ** Hook

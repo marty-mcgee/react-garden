@@ -22,7 +22,7 @@ import RechartsRadarChart from '~/views/charts/recharts/RechartsRadarChart'
 import RechartsScatterChart from '~/views/charts/recharts/RechartsScatterChart'
 
 // ** Third Party Styles Imports
-import 'react-datepicker/dist/react-datepicker.css'
+// import 'react-datepicker/dist/react-datepicker.css'
 
 const Recharts = () => {
   // ** Hooks

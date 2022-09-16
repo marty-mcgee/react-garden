@@ -13,7 +13,7 @@ import AddActions from '~/views/apps/invoice/add/AddActions'
 import AddNewCustomers from '~/views/apps/invoice/add/AddNewCustomer'
 
 // ** Third Party Styles Imports
-import 'react-datepicker/dist/react-datepicker.css'
+// import 'react-datepicker/dist/react-datepicker.css'
 
 const InvoiceAdd = ({ apiClientData, invoiceNumber }) => {
   // ** State

@@ -25,7 +25,7 @@ import CleaveWrapper from '~/@core/styles/libs/react-cleave'
 import DatePickerWrapper from '~/@core/styles/libs/react-datepicker'
 
 // ** Third Party Styles Imports
-import 'react-datepicker/dist/react-datepicker.css'
+// import 'react-datepicker/dist/react-datepicker.css'
 
 const CustomInput = forwardRef(({ ...props }, ref) => {
   return <TextField inputRef={ref} {...props} />

@@ -34,7 +34,7 @@ import CardWrapper from '~/@core/styles/libs/react-credit-cards'
 import { formatCVC, formatExpirationDate, formatCreditCardNumber } from '~/@core/utils/format'
 
 // ** Styles Import
-import 'react-credit-cards/es/styles-compiled.css'
+// import 'react-credit-cards/es/styles-compiled.css'
 
 // ** Styled Component
 const StyledGrid = styled(Grid)(({ theme }) => ({

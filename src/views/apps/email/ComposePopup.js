@@ -40,7 +40,7 @@ import { EditorWrapper } from '~/@core/styles/libs/react-draft-wysiwyg'
 import { getInitials } from '~/@core/utils/get-initials'
 
 // ** Styles
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+// import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 const menuItemsArr = [
   {

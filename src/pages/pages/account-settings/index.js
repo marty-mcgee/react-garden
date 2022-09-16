@@ -25,7 +25,7 @@ import TabSecurity from '~/views/pages/account-settings/TabSecurity'
 import TabNotifications from '~/views/pages/account-settings/TabNotifications'
 
 // ** Third Party Styles Imports
-import 'react-datepicker/dist/react-datepicker.css'
+// import 'react-datepicker/dist/react-datepicker.css'
 
 const Tab = styled(MuiTab)(({ theme }) => ({
   [theme.breakpoints.down('md')]: {

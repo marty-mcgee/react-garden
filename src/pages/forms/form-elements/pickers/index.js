@@ -6,7 +6,7 @@ import MUIPickers from '~/views/forms/form-elements/pickers/mui-pickers'
 import ReactDatePicker from '~/views/forms/form-elements/pickers/react-datepicker'
 
 // ** Third Party Styles Imports
-import 'react-datepicker/dist/react-datepicker.css'
+// import 'react-datepicker/dist/react-datepicker.css'
 
 const Pickers = () => {
   return (
