@@ -27,10 +27,10 @@ import DashboardNavbar from "~/components/elements/Navbars/DashboardNavbar"
 import Footer from "~/components/elements/Footer"
 
 // Kanban application components
-import Header from "~/pages/applications/kanban/components/Header"
+// import Header from "~/pages/applications/kanban/components/Header"
 
 // Data
-import boards from "~/pages/applications/kanban/data"
+// import boards from "~/pages/applications/kanban/data"
 
 // ThreeD Garden context
 import { useMaterialUIController } from "~/context"
@@ -60,7 +60,7 @@ function Kanban(): JSX.Element {
       <DashboardNavbar />
       <MDBox py={1}>
         <MDBox display="flex" justifyContent="flex-end" m={2}>
-          <Header />
+          {/* <Header /> */}
         </MDBox>
         <MDBox
           position="relative"
@@ -79,7 +79,7 @@ function Kanban(): JSX.Element {
             },
           })}>
           <Board
-            initialBoard={boards}
+            // initialBoard={boards}
             allowAddCard
             allowAddColumn
             renderColumnHeader={({ id, title }: any, { addCard }: any) => (
