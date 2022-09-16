@@ -20,10 +20,10 @@ import DotsVertical from 'mdi-material-ui/DotsVertical'
 import MessageOutline from 'mdi-material-ui/MessageOutline'
 
 // ** Custom Components Import
-import ChatLog from './ChatLog'
 import SendMsgForm from '~/views/apps/chat/SendMsgForm'
 import CustomAvatar from '~/@core/components/mui/avatar'
 import UserProfileRight from '~/views/apps/chat/UserProfileRight'
+import ChatLog from './ChatLog'
 
 // ** Styled Components
 const ChatWrapperStartChat = styled(Box)(({ theme }) => ({
