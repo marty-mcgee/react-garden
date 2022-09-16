@@ -75,11 +75,11 @@ module.exports = {
     ],
 
     // add new line after each var, const, let declaration
-    'padding-line-between-statements': [
-      'error',
-      { blankLine: 'always', prev: ['export'], next: ['*'] },
-      { blankLine: 'always', prev: ['*'], next: ['multiline-const', 'multiline-let', 'multiline-var', 'export'] },
-    ],
+    // 'padding-line-between-statements': [
+    //   'error',
+    //   { blankLine: 'always', prev: ['export'], next: ['*'] },
+    //   { blankLine: 'always', prev: ['*'], next: ['multiline-const', 'multiline-let', 'multiline-var', 'export'] },
+    // ],
 
     // from previous
 
@@ -157,6 +157,18 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-promise-executor-return': 'off',
     'import/prefer-default-export': 'off',
-
+    'radix': 'off',
+    'import/no-unresolved': 'off',
+    'react/jsx-no-useless-fragment': 'off',
+    'camelcase': 'off',
+    'react/self-closing-comp': 'off',
+    'no-useless-return': 'off',
+    'prefer-template': 'off',
+    'dot-notation': 'off',
+    'consistent-return': 'off',
+    'no-underscore-dangle': 'off',
+    'prefer-destructuring': 'off',
+    'padding-line-between-statements': 'off',
+    'no-undef': 'off',
   },
 }
