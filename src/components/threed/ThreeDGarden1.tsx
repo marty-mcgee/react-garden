@@ -216,7 +216,7 @@ const player: IPlayer = {
     return player.action
   },
   toggleAnimation() {
-    if (player.action == "Idle") {
+    if (player.action === "Idle") {
       this.setAction("Pointing Gesture")
     }
     else {
@@ -1535,7 +1535,7 @@ function watchPointer(camera: Camera, targetList) {
 
       // restore previous intersection object (if it exists) to its original color
       if (params.intersectedObject1) {
-        if (params.intersectedObject1.material.constructor.name == "Array") {
+        if (params.intersectedObject1.material.constructor.name === "Array") {
           for (let i = 0; i < params.intersectedObject1.material.length; i++) {
             params.intersectedObject1.material[i].color.setHex(params.intersectedObject1.currentHex)
           }
@@ -1550,7 +1550,7 @@ function watchPointer(camera: Camera, targetList) {
 
       // console.log("params.intersectedObject1, params.intersectedObject1)
 
-      if (params.intersectedObject1.material.constructor.name == "Array") {
+      if (params.intersectedObject1.material.constructor.name === "Array") {
         // SEPARATE FOR LOOPS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // store color of closest object (for later restoration)
         for (let i = 0; i < params.intersectedObject1.material.length; i++) {
@@ -1575,7 +1575,7 @@ function watchPointer(camera: Camera, targetList) {
   else {
     // restore previous intersection object (if it exists) to its original color
     if (params.intersectedObject1) {
-      if (params.intersectedObject1.material.constructor.name == "Array") {
+      if (params.intersectedObject1.material.constructor.name === "Array") {
         for (let i = 0; i < params.intersectedObject1.material.length; i++) {
           params.intersectedObject1.material[i].color.setHex(params.intersectedObject1.currentHex)
         }
@@ -1687,10 +1687,10 @@ function onPointerDown(event) {
     //event.target.controls.reset()
     //event.target.controls.target = new THREE.Vector3(params.intersectedObject2.position.x, params.intersectedObject2.position.y, params.intersectedObject2.position.z)
     //event.target.camera.position.set(100, 200, 200)
-    // if (event.button == 2) {
+    // if (event.button === 2) {
     // 	// zoom in
     // 	panCam(params.intersectedObject2.position.x, params.intersectedObject2.position.y, params.intersectedObject2.position.z, 1200, event.target.camera, event.target.controls)
-    // } else if (event.button == 1) {
+    // } else if (event.button === 1) {
     // 	// zoom out
     // 	panCam(100, 200, 200, 1200, event.target.camera, event.target.controls)
     // }
@@ -1700,7 +1700,7 @@ function onPointerDown(event) {
     // console.log("------------------")
 
     // show/hide infospheres
-    if (params.intersectedObject2.userData.type === "structure" && event.button == 0) {
+    if (params.intersectedObject2.userData.type === "structure" && event.button === 0) {
 
       let infospotObject = scene.getObjectByName(`INFOSPOT: ${params.intersectedObject2.name}`) // , true for recursive
       if (infospotObject) {
@@ -1723,7 +1723,7 @@ function onPointerDown(event) {
       // console.log(`key.element.hidden: ${key.element.hidden}`)
       // console.log(key)
       // console.log("--------------------------------------")
-      // if ( key.type === "Sprite" && event.button == 1 ) {
+      // if ( key.type === "Sprite" && event.button === 1 ) {
       // 	if (key.visible === true) {
       // 		key.visible = false
       // 	}
@@ -1731,9 +1731,9 @@ function onPointerDown(event) {
       // 		key.visible = true
       // 	}
       // }
-      if (key.type === "Object3D" && event.button == 0) {
+      if (key.type === "Object3D" && event.button === 0) {
         if (key.element.hidden === true) {
-          //if (key.visible == false) {
+          //if (key.visible === false) {
           // console.log("-------------------------")
           // console.log("TRUE------")
           // console.log(key.element.hidden)
@@ -1875,7 +1875,7 @@ const animate = () => {
   }
 
   // Running
-  if (player.action == "Walking") {
+  if (player.action === "Walking") {
     const elapsedTime = Date.now() - player.actionTime
     if (elapsedTime > 2000 && player.move.forward > 0.7) {
       //setAction("Running")
@@ -2096,11 +2096,11 @@ const getSceneData = async () => {
       .then(results => {
         console.log("results", results)
         results.forEach((result, num) => {
-          if (result.status == "fulfilled") {
+          if (result.status === "fulfilled") {
             //alert(`${urls[num]}: ${result.value.status}`)
             //console.log(result)
           }
-          if (result.status == "rejected") {
+          if (result.status === "rejected") {
             //alert(`${urls[num]}: ${result.reason}`)
             console.log(result)
           }
@@ -2401,7 +2401,7 @@ function buildAllotments(postObject, plane, sceneID) {
   // alert("HEY HEY HEY: BUILD ALLOTMENTS..")
 
   var filteredPostObject = postObject.filter(function (obj) {
-    return obj.acf.allotment_scene == sceneID
+    return obj.acf.allotment_scene === sceneID
   })
   // console.log("filteredPostObject", filteredPostObject)
 
@@ -2523,7 +2523,7 @@ function buildBeds(postObject, plane, allotmentID, posOffsetX, posOffsetY, posOf
 
   // only show beds for this allotment structure
   var filteredPostObject = postObject.filter(function (obj) {
-    return obj.acf.bed_allotment == allotmentID
+    return obj.acf.bed_allotment === allotmentID
   })
   // console.log("filteredPostObject", filteredPostObject)
 
@@ -2646,7 +2646,7 @@ function buildPlantingPlans(postObject, plane, bedID, posOffsetX, posOffsetY, po
   var matches = []
   postObject.forEach(function (obj) {
     obj.acf.planting_plan_bed_plant_schedule.forEach(function (i) {
-      if (i.planting_plan_bed == bedID) {
+      if (i.planting_plan_bed === bedID) {
         //console.log("MATCHED at: ", i)
         //matches.push(i)
         //matches.push(obj)
@@ -2677,11 +2677,11 @@ function buildPlantingPlans(postObject, plane, bedID, posOffsetX, posOffsetY, po
       // console.log("key2", key2)
 
       // only for this bed..
-      if (key2.planting_plan_bed == bedID) {
+      if (key2.planting_plan_bed === bedID) {
 
         // show this plant (or multiple plants) in this bed..
         var filteredPlant = params.data.plant.filter(function (obj) {
-          return obj.id == key2.planting_plan_plant
+          return obj.id === key2.planting_plan_plant
         })
 
         // console.log("filteredPlant", filteredPlant)

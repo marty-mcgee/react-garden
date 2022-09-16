@@ -1377,7 +1377,7 @@ const ToolBar: FunctionComponent = (): JSX.Element => {
     try {
       Object.keys(Texts).forEach(function (e) {
         let t = Texts[e]
-        "object" == typeof t && deleteTextByKey(e)
+        "object" === typeof t && deleteTextByKey(e)
       }),
         (textIdCounter = 0)
     } catch (e) {
@@ -1386,7 +1386,7 @@ const ToolBar: FunctionComponent = (): JSX.Element => {
     try {
       Object.keys(Dimensions).forEach(function (e) {
         let t = Dimensions[e]
-        "object" == typeof t && deleteDimensionByKey(e)
+        "object" === typeof t && deleteDimensionByKey(e)
       }),
         (dimensionIdCounter = 0)
     } catch (e) {
@@ -1395,7 +1395,7 @@ const ToolBar: FunctionComponent = (): JSX.Element => {
     try {
       Object.keys(Furniture).forEach(function (e) {
         let t = Furniture[e]
-        "object" == typeof t &&
+        "object" === typeof t &&
           (Furniture[e].data.toolsRectangleInner &&
             Furniture[e].data.toolsRectangleInner.remove(),
             Furniture[e].remove(),
@@ -1407,11 +1407,11 @@ const ToolBar: FunctionComponent = (): JSX.Element => {
     try {
       Object.keys(Floors).forEach(function (e) {
         let t = Floors[e]
-        "object" == typeof t && (Floors[e].remove(), delete Floors[e])
+        "object" === typeof t && (Floors[e].remove(), delete Floors[e])
       }),
         Object.keys(Floors3d).forEach(function (e) {
           let t = Floors3d[e]
-          "object" == typeof t && (scene.remove(Floors3d[e]), delete Floors3d[e])
+          "object" === typeof t && (scene.remove(Floors3d[e]), delete Floors3d[e])
         }),
         (floorIdCounter = 0)
     } catch (e) {
@@ -1420,7 +1420,7 @@ const ToolBar: FunctionComponent = (): JSX.Element => {
     try {
       Object.keys(Walls).forEach(function (e) {
         let t = Walls[e]
-        "object" == typeof t && (Walls[e].remove(), delete Walls[e])
+        "object" === typeof t && (Walls[e].remove(), delete Walls[e])
       })
       for (let e in wallsRectangles) wallsRectangles[e].remove()
     } catch (e) {
@@ -1429,14 +1429,14 @@ const ToolBar: FunctionComponent = (): JSX.Element => {
     try {
       Object.keys(wallsRectangles3d).forEach(function (e) {
         let t = wallsRectangles3d[e]
-        "object" == typeof t && scene.remove(wallsRectangles3d[e])
+        "object" === typeof t && scene.remove(wallsRectangles3d[e])
       })
     } catch (e) {
       console.log("resetPlan : 6 : " + e)
     }
     try {
       Object.keys(Roofs).forEach(function (e) {
-        "object" == typeof Roofs[e] && (Roofs[e].remove(), delete Roofs[e])
+        "object" === typeof Roofs[e] && (Roofs[e].remove(), delete Roofs[e])
       })
       for (let t in roofsRectangles) roofsRectangles[t].remove()
     } catch (e) {
@@ -1444,7 +1444,7 @@ const ToolBar: FunctionComponent = (): JSX.Element => {
     }
     try {
       Object.keys(roofsRectangles3d).forEach(function (e) {
-        "object" == typeof roofsRectangles3d[e] &&
+        "object" === typeof roofsRectangles3d[e] &&
           scene.remove(roofsRectangles3d[e])
       })
     } catch (e) {
@@ -1452,7 +1452,7 @@ const ToolBar: FunctionComponent = (): JSX.Element => {
     }
     try {
       Object.keys(maskObjectsApplied).forEach(function (e) {
-        "object" == typeof maskObjectsApplied[e] &&
+        "object" === typeof maskObjectsApplied[e] &&
           scene.remove(maskObjectsApplied[e])
       })
     } catch (e) {
@@ -1460,7 +1460,7 @@ const ToolBar: FunctionComponent = (): JSX.Element => {
     }
     try {
       Object.keys(maskObjectsAppliedRoof).forEach(function (e) {
-        "object" == typeof maskObjectsAppliedRoof[e] &&
+        "object" === typeof maskObjectsAppliedRoof[e] &&
           scene.remove(maskObjectsAppliedRoof[e])
       })
     } catch (e) {
@@ -1469,7 +1469,7 @@ const ToolBar: FunctionComponent = (): JSX.Element => {
     try {
       Object.keys(clickableObjects).forEach(function (e) {
         let t = clickableObjects[e]
-        "object" == typeof t &&
+        "object" === typeof t &&
           "groundLayer" != t.name &&
           (scene.remove(clickableObjects[e]), delete clickableObjects[e])
       })
@@ -1479,7 +1479,7 @@ const ToolBar: FunctionComponent = (): JSX.Element => {
     try {
       Object.keys(maskObjects).forEach(function (e) {
         let t = maskObjects[e]
-        "object" == typeof t &&
+        "object" === typeof t &&
           (scene.remove(maskObjects[e]), delete maskObjects[e])
       }),
         (clickableObjectsCounter = 0)

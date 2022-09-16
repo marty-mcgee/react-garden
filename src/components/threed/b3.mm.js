@@ -2,15 +2,15 @@
 console.log("[MM] HEY HEY HEY -- B3 -- export function x()")
 export function deselectAll() {
   try {
-    ;(mouseMode = -1),
+    ; (mouseMode = -1),
       selectedItem &&
-        selectedItem.data &&
-        (selectedItem.data.toolsRectangleInner &&
-          (selectedItem.data.toolsRectangleInner.visible = !1),
+      selectedItem.data &&
+      (selectedItem.data.toolsRectangleInner &&
+        (selectedItem.data.toolsRectangleInner.visible = !1),
         selectedItem.data.boxHelper &&
-          (selectedItem.data.boxHelper.visible = !1),
+        (selectedItem.data.boxHelper.visible = !1),
         "dimension" === selectedItem.data.type &&
-          ((Dimensions[selectedItem.data.id].text.selected = !1),
+        ((Dimensions[selectedItem.data.id].text.selected = !1),
           (Dimensions[selectedItem.data.id].line.selected = !1)),
         (selectedItem.selected = !1),
         (selectedItem = null),
@@ -43,7 +43,7 @@ export function resetPlan() {
   try {
     Object.keys(Texts).forEach(function (e) {
       let t = Texts[e]
-      "object" == typeof t && deleteTextByKey(e)
+      "object" === typeof t && deleteTextByKey(e)
     }),
       (textIdCounter = 0)
   } catch (e) {
@@ -52,7 +52,7 @@ export function resetPlan() {
   try {
     Object.keys(Dimensions).forEach(function (e) {
       let t = Dimensions[e]
-      "object" == typeof t && deleteDimensionByKey(e)
+      "object" === typeof t && deleteDimensionByKey(e)
     }),
       (dimensionIdCounter = 0)
   } catch (e) {
@@ -61,11 +61,11 @@ export function resetPlan() {
   try {
     Object.keys(Furniture).forEach(function (e) {
       let t = Furniture[e]
-      "object" == typeof t &&
+      "object" === typeof t &&
         (Furniture[e].data.toolsRectangleInner &&
           Furniture[e].data.toolsRectangleInner.remove(),
-        Furniture[e].remove(),
-        delete Furniture[e])
+          Furniture[e].remove(),
+          delete Furniture[e])
     })
   } catch (e) {
     console.log("resetPlan : 3 : " + e)
@@ -73,11 +73,11 @@ export function resetPlan() {
   try {
     Object.keys(Floors).forEach(function (e) {
       let t = Floors[e]
-      "object" == typeof t && (Floors[e].remove(), delete Floors[e])
+      "object" === typeof t && (Floors[e].remove(), delete Floors[e])
     }),
       Object.keys(Floors3d).forEach(function (e) {
         let t = Floors3d[e]
-        "object" == typeof t && (scene.remove(Floors3d[e]), delete Floors3d[e])
+        "object" === typeof t && (scene.remove(Floors3d[e]), delete Floors3d[e])
       }),
       (floorIdCounter = 0)
   } catch (e) {
@@ -86,7 +86,7 @@ export function resetPlan() {
   try {
     Object.keys(Walls).forEach(function (e) {
       let t = Walls[e]
-      "object" == typeof t && (Walls[e].remove(), delete Walls[e])
+      "object" === typeof t && (Walls[e].remove(), delete Walls[e])
     })
     for (let e in wallsRectangles) wallsRectangles[e].remove()
   } catch (e) {
@@ -95,14 +95,14 @@ export function resetPlan() {
   try {
     Object.keys(wallsRectangles3d).forEach(function (e) {
       let t = wallsRectangles3d[e]
-      "object" == typeof t && scene.remove(wallsRectangles3d[e])
+      "object" === typeof t && scene.remove(wallsRectangles3d[e])
     })
   } catch (e) {
     console.log("resetPlan : 6 : " + e)
   }
   try {
     Object.keys(Roofs).forEach(function (e) {
-      "object" == typeof Roofs[e] && (Roofs[e].remove(), delete Roofs[e])
+      "object" === typeof Roofs[e] && (Roofs[e].remove(), delete Roofs[e])
     })
     for (let t in roofsRectangles) roofsRectangles[t].remove()
   } catch (e) {
@@ -110,7 +110,7 @@ export function resetPlan() {
   }
   try {
     Object.keys(roofsRectangles3d).forEach(function (e) {
-      "object" == typeof roofsRectangles3d[e] &&
+      "object" === typeof roofsRectangles3d[e] &&
         scene.remove(roofsRectangles3d[e])
     })
   } catch (e) {
@@ -118,7 +118,7 @@ export function resetPlan() {
   }
   try {
     Object.keys(maskObjectsApplied).forEach(function (e) {
-      "object" == typeof maskObjectsApplied[e] &&
+      "object" === typeof maskObjectsApplied[e] &&
         scene.remove(maskObjectsApplied[e])
     })
   } catch (e) {
@@ -126,7 +126,7 @@ export function resetPlan() {
   }
   try {
     Object.keys(maskObjectsAppliedRoof).forEach(function (e) {
-      "object" == typeof maskObjectsAppliedRoof[e] &&
+      "object" === typeof maskObjectsAppliedRoof[e] &&
         scene.remove(maskObjectsAppliedRoof[e])
     })
   } catch (e) {
@@ -135,7 +135,7 @@ export function resetPlan() {
   try {
     Object.keys(clickableObjects).forEach(function (e) {
       let t = clickableObjects[e]
-      "object" == typeof t &&
+      "object" === typeof t &&
         "groundLayer" != t.name &&
         (scene.remove(clickableObjects[e]), delete clickableObjects[e])
     })
@@ -145,7 +145,7 @@ export function resetPlan() {
   try {
     Object.keys(maskObjects).forEach(function (e) {
       let t = maskObjects[e]
-      "object" == typeof t &&
+      "object" === typeof t &&
         (scene.remove(maskObjects[e]), delete maskObjects[e])
     }),
       (clickableObjectsCounter = 0)
@@ -157,9 +157,9 @@ export function resetPlan() {
       backgroundRaster.data &&
       (backgroundRaster.data.toolsRectangleInner &&
         backgroundRaster.data.toolsRectangleInner.remove(),
-      backgroundRaster.remove(),
-      (backgroundRaster = null),
-      clearFileInput(document.getElementById("backgroundImageFile")))
+        backgroundRaster.remove(),
+        (backgroundRaster = null),
+        clearFileInput(document.getElementById("backgroundImageFile")))
   } catch (e) {
     console.log("resetPlan : 9 : " + e)
   }
@@ -175,7 +175,7 @@ export function resetPlan() {
     console.log("resetPlan : 10 : " + e)
   }
   try {
-    ;(furnitureToLoadCount = 0),
+    ; (furnitureToLoadCount = 0),
       (loadedFurnitureCount = 0),
       (wallIdCounter = 0),
       (wallsRectangles = {}),
@@ -246,12 +246,12 @@ export function resetPlan() {
       (otherLayerWallsRasters.forEach(function (e) {
         e.remove()
       }),
-      (otherLayerWallsRasters = [])),
+        (otherLayerWallsRasters = [])),
       otherLayerFurnitureRasters &&
-        otherLayerFurnitureRasters.length > 0 &&
-        (otherLayerFurnitureRasters.forEach(function (e) {
-          e.remove()
-        }),
+      otherLayerFurnitureRasters.length > 0 &&
+      (otherLayerFurnitureRasters.forEach(function (e) {
+        e.remove()
+      }),
         (otherLayerFurnitureRasters = []))
   } catch (e) {
     console.log("resetPlan : 12 : " + e)
@@ -265,8 +265,8 @@ export function resetPlan() {
     Object.keys(levelButtons).forEach(function (e) {
       "0" !== e.toString() &&
         (levelButtons[e].parentNode.removeChild(levelButtons[e]),
-        delete levelButtons[e],
-        project.layers["level" + e].remove())
+          delete levelButtons[e],
+          project.layers["level" + e].remove())
     })
   } catch (e) {
     console.log("resetPlan : 14 : " + e)
@@ -278,10 +278,10 @@ export function resetPlan() {
   } catch (e) {
     console.log("resetPlan : 15 : " + e)
   }
-  ;(project.activeLayer.name = "level0"),
+  ; (project.activeLayer.name = "level0"),
     (project.activeLayer.data = { id: "0", height: 0 })
   try {
-    ;(floorsGroup = {}),
+    ; (floorsGroup = {}),
       (floorsGroup[0] = new paper.Group()),
       (roofsGroup = {}),
       (roofsGroup[0] = new paper.Group()),
@@ -307,73 +307,73 @@ export function doUndo() {
     plan.furnitureAddedKey
       ? (deleteFurnitureByKey(plan.furnitureAddedKey), updatePlan(e))
       : plan.furnitureDirtyKey
-      ? (editFurnitureByKey(e.furniture[plan.furnitureDirtyKey]), updatePlan(e))
-      : plan.furnitureDeletedKey
-      ? (loadFurniture(e.furniture[plan.furnitureDeletedKey], !1, !1),
-        updatePlan(e))
-      : plan.wallAddedKey || 0 === plan.wallAddedKey
-      ? (deleteWallByKey(plan.wallAddedKey), updatePlan(e))
-      : plan.wallDirtyKey || 0 === plan.wallDirtyKey
-      ? (deleteWallByKey(plan.wallDirtyKey),
-        loadWall(e.walls[plan.wallDirtyKey]),
-        updatePlan(e))
-      : plan.wallDeletedKey || 0 === plan.wallDeletedKey
-      ? (loadWall(e.walls[plan.wallDeletedKey]), updatePlan(e))
-      : plan.roofAddedKey || 0 === plan.roofAddedKey
-      ? (deleteRoofByKey(plan.roofAddedKey), updatePlan(e))
-      : plan.roofDirtyKey || 0 === plan.roofDirtyKey
-      ? (deleteRoofByKey(plan.roofDirtyKey),
-        loadRoof(e.roofs[plan.roofDirtyKey]),
-        updatePlan(e))
-      : plan.roofDeletedKey || 0 === plan.roofDeletedKey
-      ? (loadRoof(e.roofs[plan.roofDeletedKey]), updatePlan(e))
-      : plan.floorAddedKey
-      ? ("floor" != toolMode && setToolMode("floor"),
-        setEndDrawingFloors(),
-        deleteFloorByKey(plan.floorAddedKey),
-        updatePlan(e))
-      : plan.floorDirtyKey
-      ? (setEndDrawingFloors(),
-        deleteFloorByKey(plan.floorDirtyKey),
-        loadFloor(e.floors[plan.floorDirtyKey]),
-        Floors[plan.floorDirtyKey].segments.length > 1 &&
-          ("floor" != toolMode && setToolMode("floor"),
-          (startedDrawingFloor = !0),
-          (floorHelperPath.visible = !0),
-          (floorHelperPath.segments[0].point =
-            Floors[plan.floorDirtyKey].segments[
-              Floors[plan.floorDirtyKey].segments.length - 1
-            ].point),
-          (floorHelperPath.segments[1].point = lastMousePoint),
-          (Floors[plan.floorDirtyKey].closed = !1)),
-        updatePlan(e))
-      : plan.floorDeletedKey
-      ? (loadFloor(e.floors[plan.floorDeletedKey]),
-        2 === Floors[plan.floorDeletedKey].segments.length &&
-          ("floor" != toolMode && setToolMode("floor"),
-          (floorHelperPath.visible = !0),
-          (floorHelperPath.segments[0].point =
-            Floors[plan.floorDeletedKey].segments[
-              Floors[plan.floorDeletedKey].segments.length - 1
-            ].point),
-          (floorHelperPath.segments[1].point = lastMousePoint),
-          (Floors[plan.floorDeletedKey].closed = !1)),
-        updatePlan(e))
-      : plan.dimensionAddedKey
-      ? (deleteDimensionByKey(plan.dimensionAddedKey), updatePlan(e))
-      : plan.dimensionEditedKey ||
-        (plan.dimensionDeletedKey
-          ? (loadDimension(e.dimensions[plan.dimensionDeletedKey]),
+        ? (editFurnitureByKey(e.furniture[plan.furnitureDirtyKey]), updatePlan(e))
+        : plan.furnitureDeletedKey
+          ? (loadFurniture(e.furniture[plan.furnitureDeletedKey], !1, !1),
             updatePlan(e))
-          : plan.textAddedKey
-          ? (deleteTextByKey(plan.textAddedKey), updatePlan(e))
-          : plan.textEditedKey
-          ? (deleteTextByKey(plan.textEditedKey),
-            loadText(e.texts[plan.textEditedKey]),
-            updatePlan(e))
-          : plan.textDeletedKey
-          ? (loadText(e.texts[plan.textDeletedKey]), updatePlan(e))
-          : console.log("nothing to undo"))
+          : plan.wallAddedKey || 0 === plan.wallAddedKey
+            ? (deleteWallByKey(plan.wallAddedKey), updatePlan(e))
+            : plan.wallDirtyKey || 0 === plan.wallDirtyKey
+              ? (deleteWallByKey(plan.wallDirtyKey),
+                loadWall(e.walls[plan.wallDirtyKey]),
+                updatePlan(e))
+              : plan.wallDeletedKey || 0 === plan.wallDeletedKey
+                ? (loadWall(e.walls[plan.wallDeletedKey]), updatePlan(e))
+                : plan.roofAddedKey || 0 === plan.roofAddedKey
+                  ? (deleteRoofByKey(plan.roofAddedKey), updatePlan(e))
+                  : plan.roofDirtyKey || 0 === plan.roofDirtyKey
+                    ? (deleteRoofByKey(plan.roofDirtyKey),
+                      loadRoof(e.roofs[plan.roofDirtyKey]),
+                      updatePlan(e))
+                    : plan.roofDeletedKey || 0 === plan.roofDeletedKey
+                      ? (loadRoof(e.roofs[plan.roofDeletedKey]), updatePlan(e))
+                      : plan.floorAddedKey
+                        ? ("floor" != toolMode && setToolMode("floor"),
+                          setEndDrawingFloors(),
+                          deleteFloorByKey(plan.floorAddedKey),
+                          updatePlan(e))
+                        : plan.floorDirtyKey
+                          ? (setEndDrawingFloors(),
+                            deleteFloorByKey(plan.floorDirtyKey),
+                            loadFloor(e.floors[plan.floorDirtyKey]),
+                            Floors[plan.floorDirtyKey].segments.length > 1 &&
+                            ("floor" != toolMode && setToolMode("floor"),
+                              (startedDrawingFloor = !0),
+                              (floorHelperPath.visible = !0),
+                              (floorHelperPath.segments[0].point =
+                                Floors[plan.floorDirtyKey].segments[
+                                  Floors[plan.floorDirtyKey].segments.length - 1
+                                ].point),
+                              (floorHelperPath.segments[1].point = lastMousePoint),
+                              (Floors[plan.floorDirtyKey].closed = !1)),
+                            updatePlan(e))
+                          : plan.floorDeletedKey
+                            ? (loadFloor(e.floors[plan.floorDeletedKey]),
+                              2 === Floors[plan.floorDeletedKey].segments.length &&
+                              ("floor" != toolMode && setToolMode("floor"),
+                                (floorHelperPath.visible = !0),
+                                (floorHelperPath.segments[0].point =
+                                  Floors[plan.floorDeletedKey].segments[
+                                    Floors[plan.floorDeletedKey].segments.length - 1
+                                  ].point),
+                                (floorHelperPath.segments[1].point = lastMousePoint),
+                                (Floors[plan.floorDeletedKey].closed = !1)),
+                              updatePlan(e))
+                            : plan.dimensionAddedKey
+                              ? (deleteDimensionByKey(plan.dimensionAddedKey), updatePlan(e))
+                              : plan.dimensionEditedKey ||
+                              (plan.dimensionDeletedKey
+                                ? (loadDimension(e.dimensions[plan.dimensionDeletedKey]),
+                                  updatePlan(e))
+                                : plan.textAddedKey
+                                  ? (deleteTextByKey(plan.textAddedKey), updatePlan(e))
+                                  : plan.textEditedKey
+                                    ? (deleteTextByKey(plan.textEditedKey),
+                                      loadText(e.texts[plan.textEditedKey]),
+                                      updatePlan(e))
+                                    : plan.textDeletedKey
+                                      ? (loadText(e.texts[plan.textDeletedKey]), updatePlan(e))
+                                      : console.log("nothing to undo"))
   }
 }
 export function doRedo() {
@@ -407,7 +407,7 @@ export function doRedo() {
         loadFloor(e.floors[e.floorAddedKey]),
         (startedDrawingFloor = !0),
         2 === Floors[e.floorAddedKey].segments.length &&
-          ((floorHelperPath.visible = !0),
+        ((floorHelperPath.visible = !0),
           (floorHelperPath.segments[0].point =
             Floors[e.floorAddedKey].segments[
               Floors[e.floorAddedKey].segments.length - 1
@@ -449,19 +449,19 @@ export function doRedo() {
           deleteFloorByKey(e.floorDeletedKey),
           updatePlan(e))
         : e.dimensionAddedKey
-        ? (loadDimension(e.dimensions[e.dimensionAddedKey]), updatePlan(e))
-        : e.dimensionEditedKey ||
+          ? (loadDimension(e.dimensions[e.dimensionAddedKey]), updatePlan(e))
+          : e.dimensionEditedKey ||
           (e.dimensionDeletedKey
             ? (deleteDimensionByKey(e.dimensionDeletedKey), updatePlan(e))
             : e.textAddedKey
-            ? (loadText(e.texts[e.textAddedKey]), updatePlan(e))
-            : e.textEditedKey
-            ? (deleteTextByKey(e.textEditedKey),
-              loadText(e.texts[e.textEditedKey]),
-              updatePlan(e))
-            : e.textDeletedKey
-            ? (deleteTextByKey(e.textDeletedKey), updatePlan(e))
-            : console.log("nothing to redo"))
+              ? (loadText(e.texts[e.textAddedKey]), updatePlan(e))
+              : e.textEditedKey
+                ? (deleteTextByKey(e.textEditedKey),
+                  loadText(e.texts[e.textEditedKey]),
+                  updatePlan(e))
+                : e.textDeletedKey
+                  ? (deleteTextByKey(e.textDeletedKey), updatePlan(e))
+                  : console.log("nothing to redo"))
   }
 }
 function addVerticalGuide() {
@@ -474,52 +474,52 @@ function addVerticalGuide() {
   const t = new paper.Point(e.x, -100)
   const o = new paper.Point(e.x, 100)
   const a = new paper.Path.Line(t, o)
-  ;(a.strokeColor = "#00ff88"),
-    (a.strokeWidth = 1),
-    (a.strokeScaling = !1),
-    (a.data.type = "verticalGuide"),
-    (a.data.level = -1),
-    guideCounter++,
-    (a.data.id = guideCounter),
-    (verticalGuides[guideCounter] = a),
-    guidesGroup.addChild(a),
-    (selectedGuideId = guideCounter),
-    redrawGrid(),
-    (draggingNewGuide = !0),
-    (mouseMode = 9),
-    (plan.verticalGuides = verticalGuides)
+    ; (a.strokeColor = "#00ff88"),
+      (a.strokeWidth = 1),
+      (a.strokeScaling = !1),
+      (a.data.type = "verticalGuide"),
+      (a.data.level = -1),
+      guideCounter++,
+      (a.data.id = guideCounter),
+      (verticalGuides[guideCounter] = a),
+      guidesGroup.addChild(a),
+      (selectedGuideId = guideCounter),
+      redrawGrid(),
+      (draggingNewGuide = !0),
+      (mouseMode = 9),
+      (plan.verticalGuides = verticalGuides)
 }
 function addHorizontalGuide() {
   let e = paper.view.viewToProject(
-      new paper.Point(
-        event.pageX - planView.offsetLeft,
-        event.pageY - planView.offsetTop
-      )
-    ),
+    new paper.Point(
+      event.pageX - planView.offsetLeft,
+      event.pageY - planView.offsetTop
+    )
+  ),
     t = new paper.Point(-100, e.y),
     o = new paper.Point(100, e.y),
     a = new paper.Path.Line(t, o)
-  ;(a.strokeColor = "#00ff88"),
-    (a.strokeWidth = 1),
-    (a.strokeScaling = !1),
-    (a.data.type = "horizontalGuide"),
-    (a.data.level = -1),
-    guideCounter++,
-    (a.data.id = guideCounter),
-    (horizontalGuides[guideCounter] = a),
-    guidesGroup.addChild(a),
-    (selectedGuideId = guideCounter),
-    redrawGrid(),
-    (draggingNewGuide = !0),
-    (mouseMode = 10),
-    (plan.horizontalGuides = horizontalGuides)
+    ; (a.strokeColor = "#00ff88"),
+      (a.strokeWidth = 1),
+      (a.strokeScaling = !1),
+      (a.data.type = "horizontalGuide"),
+      (a.data.level = -1),
+      guideCounter++,
+      (a.data.id = guideCounter),
+      (horizontalGuides[guideCounter] = a),
+      guidesGroup.addChild(a),
+      (selectedGuideId = guideCounter),
+      redrawGrid(),
+      (draggingNewGuide = !0),
+      (mouseMode = 10),
+      (plan.horizontalGuides = horizontalGuides)
 }
 function removeVerticalGuide() {
   try {
     selectedGuideId > 0 &&
       (verticalGuides[selectedGuideId].remove(),
-      delete verticalGuides[selectedGuideId],
-      delete plan.verticalGuides[selectedGuideId])
+        delete verticalGuides[selectedGuideId],
+        delete plan.verticalGuides[selectedGuideId])
   } catch (e) {
     console.log("removeVerticalGuide " + e)
   }
@@ -528,8 +528,8 @@ function removeHorizontalGuide() {
   try {
     selectedGuideId > 0 &&
       (horizontalGuides[selectedGuideId].remove(),
-      delete horizontalGuides[selectedGuideId],
-      delete plan.horizontalGuides[selectedGuideId])
+        delete horizontalGuides[selectedGuideId],
+        delete plan.horizontalGuides[selectedGuideId])
   } catch (e) {
     console.log("removeHorizontalGuide " + e)
   }
@@ -538,151 +538,151 @@ function resizePlanView() {
   if ("3dView" != UILayout) {
     let e = planCanvas.parentNode.getBoundingClientRect().width,
       t = planCanvas.parentNode.getBoundingClientRect().height
-    ;(planCanvas.width = e),
-      (planCanvas.height = t),
-      (rulerBottom.width = e),
-      (rulerLeft.height = t),
-      (rulerBottomCtx.font = "12px Courier"),
-      (rulerBottomCtx.textAlign = "center"),
-      (rulerBottomCtx.fillStyle = "white"),
-      (rulerLeftCtx.font = "12px Courier"),
-      (rulerLeftCtx.textAlign = "right"),
-      (rulerLeftCtx.fillStyle = "white"),
-      (paper.view.viewSize.width = e),
-      (paper.view.viewSize.height = t),
-      redrawGrid()
+      ; (planCanvas.width = e),
+        (planCanvas.height = t),
+        (rulerBottom.width = e),
+        (rulerLeft.height = t),
+        (rulerBottomCtx.font = "12px Courier"),
+        (rulerBottomCtx.textAlign = "center"),
+        (rulerBottomCtx.fillStyle = "white"),
+        (rulerLeftCtx.font = "12px Courier"),
+        (rulerLeftCtx.textAlign = "right"),
+        (rulerLeftCtx.fillStyle = "white"),
+        (paper.view.viewSize.width = e),
+        (paper.view.viewSize.height = t),
+        redrawGrid()
   }
 }
 function onCanvasResize() {
-  ;(camera.aspect = window.innerWidth / window.innerHeight),
+  ; (camera.aspect = window.innerWidth / window.innerHeight),
     camera.updateProjectionMatrix(),
     renderer.setSize(window.innerWidth, window.innerHeight)
 }
 function initThreeJS() {
-  ;(scene = new THREE.Scene()), (scene.background = new THREE.Color(0))
+  ; (scene = new THREE.Scene()), (scene.background = new THREE.Color(0))
   let e = new THREE.PlaneBufferGeometry(100 * groundWidth, 100 * groundLength)
-  ;(groundMat = new THREE.MeshPhongMaterial({ transparent: !0, opacity: 1 })),
-    (groundMat.color = new THREE.Color(2304293)),
-    (groundMat.specular = new THREE.Color(15925148)),
-    (ground = new THREE.Mesh(e, groundMat)),
-    (ground.rotation.x = -Math.PI / 2),
-    (ground.position.y = -2),
-    (ground.name = "groundLayer"),
-    "3dView" === UILayout && (ground.visible = !1),
-    scene.add(ground),
-    (clickableObjectsCounter = 0),
-    (clickableObjects[clickableObjectsCounter] = ground),
-    (renderer = new THREE.WebGLRenderer({
-      antialias: !0,
-      preserveDrawingBuffer: !0,
-      logarithmicDepthBuffer: !0,
-      canvas: threeCanvas,
-    })),
-    renderer.setClearColor(0),
-    renderer.setPixelRatio(window.devicePixelRatio),
-    (container = document.getElementById("view3d")),
-    renderer.setSize(
-      parseInt(container.clientWidth),
-      parseInt(container.clientHeight)
-    ),
-    (renderer.autoClear = !1),
-    (renderer.sortObjects = !1),
-    (renderer.domElement.ondblclick = onDoubleClick),
-    (camera = new THREE.PerspectiveCamera(
-      45,
-      container.innerWidth / container.innerHeight,
-      10,
-      25e3
-    )),
-    (camera.position.x = 0),
-    (camera.position.y = 265),
-    (camera.position.z = 1e3),
-    camera.lookAt(new THREE.Vector3(0, 0, 0)),
-    (controls = new THREE.TrackballControls(camera, container)),
-    (controls.rotateSpeed = 4),
-    (controls.zoomSpeed = 5),
-    (controls.panSpeed = 1.5),
-    (controls.noZoom = !1),
-    (controls.noPan = !1),
-    (controls.staticMoving = !0),
-    (controls.dynamicDampingFactor = 0.3),
-    (controls.keys = [65, 83, 68]),
-    controls.addEventListener("change", render),
-    (sky = new THREE.Sky()),
-    sky.scale.setScalar(45e4),
-    scene.add(sky),
-    (sunSphere = new THREE.Mesh(
-      new THREE.SphereBufferGeometry(2e4, 16, 8),
-      new THREE.MeshBasicMaterial({ color: 16777215 })
-    )),
-    (sunSphere.position.y = -7e5),
-    (sunSphere.visible = !1),
-    scene.add(sunSphere)
+    ; (groundMat = new THREE.MeshPhongMaterial({ transparent: !0, opacity: 1 })),
+      (groundMat.color = new THREE.Color(2304293)),
+      (groundMat.specular = new THREE.Color(15925148)),
+      (ground = new THREE.Mesh(e, groundMat)),
+      (ground.rotation.x = -Math.PI / 2),
+      (ground.position.y = -2),
+      (ground.name = "groundLayer"),
+      "3dView" === UILayout && (ground.visible = !1),
+      scene.add(ground),
+      (clickableObjectsCounter = 0),
+      (clickableObjects[clickableObjectsCounter] = ground),
+      (renderer = new THREE.WebGLRenderer({
+        antialias: !0,
+        preserveDrawingBuffer: !0,
+        logarithmicDepthBuffer: !0,
+        canvas: threeCanvas,
+      })),
+      renderer.setClearColor(0),
+      renderer.setPixelRatio(window.devicePixelRatio),
+      (container = document.getElementById("view3d")),
+      renderer.setSize(
+        parseInt(container.clientWidth),
+        parseInt(container.clientHeight)
+      ),
+      (renderer.autoClear = !1),
+      (renderer.sortObjects = !1),
+      (renderer.domElement.ondblclick = onDoubleClick),
+      (camera = new THREE.PerspectiveCamera(
+        45,
+        container.innerWidth / container.innerHeight,
+        10,
+        25e3
+      )),
+      (camera.position.x = 0),
+      (camera.position.y = 265),
+      (camera.position.z = 1e3),
+      camera.lookAt(new THREE.Vector3(0, 0, 0)),
+      (controls = new THREE.TrackballControls(camera, container)),
+      (controls.rotateSpeed = 4),
+      (controls.zoomSpeed = 5),
+      (controls.panSpeed = 1.5),
+      (controls.noZoom = !1),
+      (controls.noPan = !1),
+      (controls.staticMoving = !0),
+      (controls.dynamicDampingFactor = 0.3),
+      (controls.keys = [65, 83, 68]),
+      controls.addEventListener("change", render),
+      (sky = new THREE.Sky()),
+      sky.scale.setScalar(45e4),
+      scene.add(sky),
+      (sunSphere = new THREE.Mesh(
+        new THREE.SphereBufferGeometry(2e4, 16, 8),
+        new THREE.MeshBasicMaterial({ color: 16777215 })
+      )),
+      (sunSphere.position.y = -7e5),
+      (sunSphere.visible = !1),
+      scene.add(sunSphere)
   let t = sky.material.uniforms
-  ;(t.turbidity.value = 14.6),
-    (t.rayleigh.value = 0),
-    (t.luminance.value = 1),
-    (t.mieCoefficient.value = 0.008),
-    (t.mieDirectionalG.value = 0.54),
-    (inclination = 0),
-    (azimuth = 0.33)
+    ; (t.turbidity.value = 14.6),
+      (t.rayleigh.value = 0),
+      (t.luminance.value = 1),
+      (t.mieCoefficient.value = 0.008),
+      (t.mieDirectionalG.value = 0.54),
+      (inclination = 0),
+      (azimuth = 0.33)
   let o = Math.PI * (inclination - 0.5),
     a = 2 * Math.PI * (azimuth - 0.5),
     n = 4e5
-  ;(sunSphere.position.x = n * Math.cos(a)),
-    (sunSphere.position.y = n * Math.sin(a) * Math.sin(o)),
-    (sunSphere.position.z = n * Math.sin(a) * Math.cos(o)),
-    (sunSphere.visible = !0),
-    t.sunPosition.value.copy(sunSphere.position),
-    (ambientLight = new THREE.AmbientLight(16777215, 0.3)),
-    scene.add(ambientLight),
-    (hemiLight = new THREE.HemisphereLight(16777215, 16777215, 0.2)),
-    hemiLight.color.setHSL(0.6, 1, 0.6),
-    hemiLight.groundColor.setHSL(0.095, 1, 0.75),
-    hemiLight.position.copy(sunSphere.position),
-    scene.add(hemiLight),
-    (dirLight = new THREE.DirectionalLight(16777215, 0.9)),
-    dirLight.color.setHSL(0.1, 1, 0.95),
-    dirLight.position.copy(sunSphere.position),
-    scene.add(dirLight)
+    ; (sunSphere.position.x = n * Math.cos(a)),
+      (sunSphere.position.y = n * Math.sin(a) * Math.sin(o)),
+      (sunSphere.position.z = n * Math.sin(a) * Math.cos(o)),
+      (sunSphere.visible = !0),
+      t.sunPosition.value.copy(sunSphere.position),
+      (ambientLight = new THREE.AmbientLight(16777215, 0.3)),
+      scene.add(ambientLight),
+      (hemiLight = new THREE.HemisphereLight(16777215, 16777215, 0.2)),
+      hemiLight.color.setHSL(0.6, 1, 0.6),
+      hemiLight.groundColor.setHSL(0.095, 1, 0.75),
+      hemiLight.position.copy(sunSphere.position),
+      scene.add(hemiLight),
+      (dirLight = new THREE.DirectionalLight(16777215, 0.9)),
+      dirLight.color.setHSL(0.1, 1, 0.95),
+      dirLight.position.copy(sunSphere.position),
+      scene.add(dirLight)
   let l = new THREE.BoxGeometry(
-      defaultWallThickness,
-      defaultWallHeight,
-      defaultWallThickness
-    ),
+    defaultWallThickness,
+    defaultWallHeight,
+    defaultWallThickness
+  ),
     i = new THREE.MeshStandardMaterial({
       color: 0,
       transparent: !0,
       opacity: 0.25,
     })
-  ;(wallHelper3dCube = new THREE.Mesh(l, i)),
-    (wallHelper3dCube.position.y = defaultWallHeight / 2),
-    (wallHelper3dCube.visible = !1),
-    scene.add(wallHelper3dCube),
-    (l = new THREE.BoxGeometry(
-      defaultRoofWidth,
-      defaultRoofThickness,
-      defaultRoofWidth
-    )),
-    (i = new THREE.MeshStandardMaterial({
-      color: 0,
-      transparent: !0,
-      opacity: 0.25,
-    })),
-    (roofHelper3dCube = new THREE.Mesh(l, i)),
-    (roofHelper3dCube.position.y = defaultRoofThickness / 2),
-    (roofHelper3dCube.visible = !1),
-    scene.add(roofHelper3dCube),
-    window.addEventListener("resize", resizeViews, !1),
-    (model3dViewContainer = document.getElementById("model3dView")),
-    (model3dSceneCamera = new THREE.PerspectiveCamera(60, 2, 1, 1e4)),
-    (model3dSceneCamera.position.x = 0),
-    (model3dSceneCamera.position.y = 50),
-    (model3dSceneCamera.position.z = 200),
-    model3dSceneCamera.lookAt(new THREE.Vector3(0, 0, 0)),
-    (model3dScene = new THREE.Scene())
+    ; (wallHelper3dCube = new THREE.Mesh(l, i)),
+      (wallHelper3dCube.position.y = defaultWallHeight / 2),
+      (wallHelper3dCube.visible = !1),
+      scene.add(wallHelper3dCube),
+      (l = new THREE.BoxGeometry(
+        defaultRoofWidth,
+        defaultRoofThickness,
+        defaultRoofWidth
+      )),
+      (i = new THREE.MeshStandardMaterial({
+        color: 0,
+        transparent: !0,
+        opacity: 0.25,
+      })),
+      (roofHelper3dCube = new THREE.Mesh(l, i)),
+      (roofHelper3dCube.position.y = defaultRoofThickness / 2),
+      (roofHelper3dCube.visible = !1),
+      scene.add(roofHelper3dCube),
+      window.addEventListener("resize", resizeViews, !1),
+      (model3dViewContainer = document.getElementById("model3dView")),
+      (model3dSceneCamera = new THREE.PerspectiveCamera(60, 2, 1, 1e4)),
+      (model3dSceneCamera.position.x = 0),
+      (model3dSceneCamera.position.y = 50),
+      (model3dSceneCamera.position.z = 200),
+      model3dSceneCamera.lookAt(new THREE.Vector3(0, 0, 0)),
+      (model3dScene = new THREE.Scene())
   let r = new THREE.AmbientLight(16777215, 0.5)
-  ;(model3dScene = new THREE.Scene()), model3dScene.add(r)
+    ; (model3dScene = new THREE.Scene()), model3dScene.add(r)
   let s = new THREE.HemisphereLight(16777215, 16777215, 0.2)
   s.color.setHSL(0.6, 1, 0.6),
     s.groundColor.setHSL(0.095, 1, 0.75),
@@ -733,72 +733,72 @@ function showModel3dView() {
   let e = modalModel3dFurnitureId
   e !== -1 &&
     (model3dObjectRef && model3dScene.remove(model3dObjectRef),
-    new THREE.MTLLoader()
-      .setPath("objects/")
-      .load(e + "/" + e + ".mtl", function (t) {
-        ;(t.baseUrl = "objects/" + e + "/"),
-          t.preload(),
-          new THREE.OBJLoader()
-            .setMaterials(t)
-            .setPath("objects/")
-            .load(
-              e + "/" + e + ".obj",
-              function (t) {
-                try {
-                  let o = new THREE.Box3().setFromObject(t)
-                  ;(t.userData.width = o.max.x - o.min.x),
-                    (t.userData.height = o.max.y - o.min.y),
-                    (t.userData.depth = o.max.z - o.min.z)
-                  for (let a = 0; a < t.children.length; a++) {
-                    let n = o.min.x + (o.max.x - o.min.x) / 2,
-                      l =
-                        o.min.y +
-                        (o.max.y - o.min.y) / 2 -
-                        (o.max.y - o.min.y) / 2,
-                      i = o.min.z + (o.max.z - o.min.z) / 2
-                    t.children[a].translateX(-n),
-                      t.children[a].translateY(-l),
-                      t.children[a].translateZ(-i)
-                  }
-                  ;(t.position.x = 80),
-                    (t.position.y = -(t.userData.height / 2)),
-                    (t.position.z = 0),
-                    model3dScene.add(t),
-                    (model3dObjectRef = t),
-                    renderModel3d()
-                  let r = "",
-                    s = new XMLHttpRequest()
-                  ;(s.onreadystatechange = function () {
-                    if (4 == this.readyState && 200 == this.status) {
-                      let e = this.responseText,
-                        t = e.split("\n")
-                      t.forEach(function (e) {
-                        e.startsWith("#") && (r += e + "\n")
-                      }),
-                        (document.getElementById(
-                          "modalModel3dObjHeader"
-                        ).value = r)
+      new THREE.MTLLoader()
+        .setPath("objects/")
+        .load(e + "/" + e + ".mtl", function (t) {
+          ; (t.baseUrl = "objects/" + e + "/"),
+            t.preload(),
+            new THREE.OBJLoader()
+              .setMaterials(t)
+              .setPath("objects/")
+              .load(
+                e + "/" + e + ".obj",
+                function (t) {
+                  try {
+                    let o = new THREE.Box3().setFromObject(t)
+                      ; (t.userData.width = o.max.x - o.min.x),
+                        (t.userData.height = o.max.y - o.min.y),
+                        (t.userData.depth = o.max.z - o.min.z)
+                    for (let a = 0; a < t.children.length; a++) {
+                      let n = o.min.x + (o.max.x - o.min.x) / 2,
+                        l =
+                          o.min.y +
+                          (o.max.y - o.min.y) / 2 -
+                          (o.max.y - o.min.y) / 2,
+                        i = o.min.z + (o.max.z - o.min.z) / 2
+                      t.children[a].translateX(-n),
+                        t.children[a].translateY(-l),
+                        t.children[a].translateZ(-i)
                     }
-                  }),
-                    s.open("GET", "objects/" + e + "/" + e + ".obj", !0),
-                    s.send()
-                } catch (e) {
-                  console.dir(e)
-                }
-                setModalModelDescription(e),
-                  $("#model3dModal").show(),
-                  hideMouseIndicators(),
-                  (model3dViewOpen = !0),
-                  (progressBar.style.display = "none")
-              },
-              onProgress,
-              onError
-            )
-      }))
+                    ; (t.position.x = 80),
+                      (t.position.y = -(t.userData.height / 2)),
+                      (t.position.z = 0),
+                      model3dScene.add(t),
+                      (model3dObjectRef = t),
+                      renderModel3d()
+                    let r = "",
+                      s = new XMLHttpRequest()
+                      ; (s.onreadystatechange = function () {
+                        if (4 === this.readyState && 200 === this.status) {
+                          let e = this.responseText,
+                            t = e.split("\n")
+                          t.forEach(function (e) {
+                            e.startsWith("#") && (r += e + "\n")
+                          }),
+                            (document.getElementById(
+                              "modalModel3dObjHeader"
+                            ).value = r)
+                        }
+                      }),
+                        s.open("GET", "objects/" + e + "/" + e + ".obj", !0),
+                        s.send()
+                  } catch (e) {
+                    console.dir(e)
+                  }
+                  setModalModelDescription(e),
+                    $("#model3dModal").show(),
+                    hideMouseIndicators(),
+                    (model3dViewOpen = !0),
+                    (progressBar.style.display = "none")
+                },
+                onProgress,
+                onError
+              )
+        }))
 }
 function onDoubleClick(e) {
-  if ((e.preventDefault(), 0 == e.button)) {
-    ;(mouse.x = (e.offsetX / renderer.domElement.clientWidth) * 2 - 1),
+  if ((e.preventDefault(), 0 === e.button)) {
+    ; (mouse.x = (e.offsetX / renderer.domElement.clientWidth) * 2 - 1),
       (mouse.y = 2 * -(e.offsetY / renderer.domElement.clientHeight) + 1),
       raycaster.setFromCamera(mouse, camera)
     let t = raycaster.intersectObjects(Object.values(clickableObjects), !0),
@@ -825,8 +825,8 @@ function onDoubleClick(e) {
               .to({ x: e.point.x, y: e.point.y, z: e.point.z }, 500)
               .onUpdate(render)
               .start()),
-            deselectAll(),
-            "furniture" === t)
+              deselectAll(),
+              "furniture" === t)
           ) {
             let l = Furniture[e.object.parent.name]
             setLevel(l.data.level),
@@ -836,51 +836,51 @@ function onDoubleClick(e) {
               l.data.toolsRectangleInner && l.data.toolsRectangleInner.remove(),
               (l.rotation = 0)
             let i = new paper.Path.Rectangle(l.bounds)
-            ;(l.rotation = l.data.angle),
-              (i.data.type = "toolsRectangle"),
-              (i.strokeColor = "#b19064"),
-              (i.strokeWidth = 1),
-              (i.strokeScaling = !1),
-              (i.locked = !0),
-              i.rotate(l.data.angle),
-              (l.data.toolsRectangleInner = i),
-              (i.visible = !0),
-              (Furniture[e.object.parent.name].data.boxHelper.visible = !0),
-              redrawGrid(),
-              (rotateIcon.visible = !0),
-              (resizeIcon.visible = !0),
-              (elevateIcon.visible = !0),
-              (heightIcon.visible = !0),
-              (toolsGroup.position = selectedItem.bounds.center),
-              (toolsGroup.visible = !0),
-              toolsGroup.bringToFront(),
-              rotateIcon.bringToFront(),
-              resizeIcon.bringToFront(),
-              elevateIcon.bringToFront(),
-              heightIcon.bringToFront(),
-              (rotateIcon.data.level = project.activeLayer.data.id),
-              (resizeIcon.data.level = project.activeLayer.data.id),
-              (elevateIcon.data.level = project.activeLayer.data.id),
-              (heightIcon.data.level = project.activeLayer.data.id),
-              (toolsGroup.data.level = project.activeLayer.data.id),
-              (modalModel3dFurnitureId = selectedItem.data.fid),
-              updateObjectPropertiesWindow(),
-              render(),
-              (focusPoint = paper.view.center),
-              (focusPoint.zoom = paper.view.zoom),
-              (tween = new TWEEN.Tween(focusPoint)
-                .to(
-                  {
-                    x: selectedItem.bounds.center.x,
-                    y: selectedItem.bounds.center.y,
-                    zoom: 1,
-                  },
-                  500
-                )
-                .onUpdate(function () {
-                  reFocus()
-                })
-                .start())
+              ; (l.rotation = l.data.angle),
+                (i.data.type = "toolsRectangle"),
+                (i.strokeColor = "#b19064"),
+                (i.strokeWidth = 1),
+                (i.strokeScaling = !1),
+                (i.locked = !0),
+                i.rotate(l.data.angle),
+                (l.data.toolsRectangleInner = i),
+                (i.visible = !0),
+                (Furniture[e.object.parent.name].data.boxHelper.visible = !0),
+                redrawGrid(),
+                (rotateIcon.visible = !0),
+                (resizeIcon.visible = !0),
+                (elevateIcon.visible = !0),
+                (heightIcon.visible = !0),
+                (toolsGroup.position = selectedItem.bounds.center),
+                (toolsGroup.visible = !0),
+                toolsGroup.bringToFront(),
+                rotateIcon.bringToFront(),
+                resizeIcon.bringToFront(),
+                elevateIcon.bringToFront(),
+                heightIcon.bringToFront(),
+                (rotateIcon.data.level = project.activeLayer.data.id),
+                (resizeIcon.data.level = project.activeLayer.data.id),
+                (elevateIcon.data.level = project.activeLayer.data.id),
+                (heightIcon.data.level = project.activeLayer.data.id),
+                (toolsGroup.data.level = project.activeLayer.data.id),
+                (modalModel3dFurnitureId = selectedItem.data.fid),
+                updateObjectPropertiesWindow(),
+                render(),
+                (focusPoint = paper.view.center),
+                (focusPoint.zoom = paper.view.zoom),
+                (tween = new TWEEN.Tween(focusPoint)
+                  .to(
+                    {
+                      x: selectedItem.bounds.center.x,
+                      y: selectedItem.bounds.center.y,
+                      zoom: 1,
+                    },
+                    500
+                  )
+                  .onUpdate(function () {
+                    reFocus()
+                  })
+                  .start())
           }
         }
       }
@@ -895,13 +895,13 @@ function showAbout() {
 }
 function rotateCompass(e) {
   let t = "rotate(" + parseInt(e) + "deg)"
-  ;(document.getElementById("compass").style.transform = t),
-    (document.getElementById("compassHdgLbl").innerText = parseInt(e) + "°")
+    ; (document.getElementById("compass").style.transform = t),
+      (document.getElementById("compassHdgLbl").innerText = parseInt(e) + "°")
 }
 function enableResizeBackgroundTemplate() {
   deselectAll(),
     backgroundRaster &&
-      ((backgroundRaster.selected = !0),
+    ((backgroundRaster.selected = !0),
       (selectedItem = backgroundRaster),
       (backgroundRaster.data.toolsRectangleInner.visible = !0),
       (toolsGroup.position = selectedItem.bounds.center),
@@ -926,10 +926,10 @@ function openFullscreen(e) {
   t.requestFullscreen
     ? t.requestFullscreen()
     : t.mozRequestFullScreen
-    ? t.mozRequestFullScreen()
-    : t.webkitRequestFullscreen
-    ? t.webkitRequestFullscreen()
-    : t.msRequestFullscreen && t.msRequestFullscreen()
+      ? t.mozRequestFullScreen()
+      : t.webkitRequestFullscreen
+        ? t.webkitRequestFullscreen()
+        : t.msRequestFullscreen && t.msRequestFullscreen()
 }
 function openTab(e) {
   let t, o, a
@@ -945,8 +945,8 @@ function openTab(e) {
     t++
   )
     a[t].className = a[t].className.replace(" active", "")
-  ;(document.getElementById(e + "Content").style.display = "block"),
-    document.getElementById(e).classList.add("active")
+      ; (document.getElementById(e + "Content").style.display = "block"),
+        document.getElementById(e).classList.add("active")
 }
 function doCopy() {
   selectedItem && selectedItem.data && "furniture" === selectedItem.data.type
@@ -958,17 +958,17 @@ function doCopy() {
 function doPaste() {
   if (idToCopyPaste >= 0) {
     let e = JSON.parse(JSON.stringify(plan.furniture[idToCopyPaste]))
-    ;(lastPasteX += 20),
-      (lastPasteY += 20),
-      (e.position.x = lastPasteX),
-      (e.position.z = lastPasteY),
-      clickableObjectsCounter++,
-      (e.id = clickableObjectsCounter),
-      loadFurniture(e, !0, !0)
+      ; (lastPasteX += 20),
+        (lastPasteY += 20),
+        (e.position.x = lastPasteX),
+        (e.position.z = lastPasteY),
+        clickableObjectsCounter++,
+        (e.id = clickableObjectsCounter),
+        loadFurniture(e, !0, !0)
   } else console.log("nothing to paste")
 }
 function updatePlan(e) {
-  ;(plan = e),
+  ; (plan = e),
     repointPlan(),
     relinkWallReferences(project.activeLayer.data.id),
     relinkRoofReferences(project.activeLayer.data.id)
@@ -976,7 +976,7 @@ function updatePlan(e) {
 function repointPlan() {
   Object.keys(plan.furniture).forEach(function (e) {
     let t = plan.furniture[e]
-    "object" == typeof t &&
+    "object" === typeof t &&
       (clickableObjects[e]
         ? ((plan.furniture[e].position = clickableObjects[e].position),
           (plan.furniture[e].scale = clickableObjects[e].scale),
@@ -985,15 +985,15 @@ function repointPlan() {
   }),
     Object.keys(plan.walls).forEach(function (e) {
       let t = plan.walls[e]
-      "object" == typeof t && t && Walls[e] && (t.wallPath = Walls[e])
+      "object" === typeof t && t && Walls[e] && (t.wallPath = Walls[e])
     }),
     Object.keys(plan.roofs).forEach(function (e) {
       let t = plan.roofs[e]
-      "object" == typeof t && t && Roofs[e] && (t.roofPath = Roofs[e])
+      "object" === typeof t && t && Roofs[e] && (t.roofPath = Roofs[e])
     }),
     Object.keys(plan.floors).forEach(function (e) {
       let t = plan.floors[e]
-      "object" == typeof t && t && Floors[e] && (t.floorPath = Floors[e])
+      "object" === typeof t && t && Floors[e] && (t.floorPath = Floors[e])
     })
 }
 function deleteSelectedItem() {
@@ -1167,8 +1167,8 @@ function deleteTextByKey(e) {
     try {
       Object.keys(Texts).forEach(function (t) {
         let o = Texts[t]
-        "object" == typeof o &&
-          o.data.id.toString() == e.toString() &&
+        "object" === typeof o &&
+          o.data.id.toString() === e.toString() &&
           (Texts[t].remove(), delete Texts[t])
       }),
         delete plan.texts[e]
@@ -1181,12 +1181,12 @@ function deleteDimensionByKey(e) {
     try {
       Object.keys(Dimensions).forEach(function (t) {
         let o = Dimensions[t]
-        "object" == typeof o &&
-          o.id.toString() == e.toString() &&
+        "object" === typeof o &&
+          o.id.toString() === e.toString() &&
           (Dimensions[t].line.remove(),
-          Dimensions[t].text.remove(),
-          Dimensions[t].dimensionPath.remove(),
-          delete Dimensions[t])
+            Dimensions[t].text.remove(),
+            Dimensions[t].dimensionPath.remove(),
+            delete Dimensions[t])
       }),
         delete plan.dimensions[e]
     } catch (e) {
@@ -1196,27 +1196,27 @@ function deleteDimensionByKey(e) {
 function deleteWallByKey(e) {
   if (!readOnly)
     try {
-      ;(wallPath = null),
+      ; (wallPath = null),
         Object.keys(Walls).forEach(function (t) {
           let o = Walls[t]
-          "object" == typeof o &&
-            o.data.id.toString() == e.toString() &&
+          "object" === typeof o &&
+            o.data.id.toString() === e.toString() &&
             (Walls[t].remove(), delete Walls[t])
         }),
         Object.keys(wallsRectangles).forEach(function (t) {
           let o = wallsRectangles[t]
-          "object" == typeof o &&
+          "object" === typeof o &&
             o.data.id.toString() === e.toString() &&
             (wallsRectangles[t].remove(), delete wallsRectangles[t])
         }),
         Object.keys(wallsRectangles3d).forEach(function (t) {
           let o = wallsRectangles3d[t]
-          "object" == typeof o &&
+          "object" === typeof o &&
             o.userData.id.toString() === e.toString() &&
             (scene.remove(wallsRectangles3d[t]), delete wallsRectangles3d[t])
         }),
         Object.keys(maskObjectsApplied).forEach(function (t) {
-          "object" == typeof maskObjectsApplied[t] &&
+          "object" === typeof maskObjectsApplied[t] &&
             maskObjectsApplied[t].userData.id.toString() === e.toString() &&
             (scene.remove(maskObjectsApplied[t]), delete maskObjectsApplied[t])
         }),
@@ -1228,30 +1228,30 @@ function deleteWallByKey(e) {
 function deleteRoofByKey(e) {
   if (!readOnly)
     try {
-      ;(roofPath = null),
+      ; (roofPath = null),
         Object.keys(Roofs).forEach(function (t) {
           let o = Roofs[t]
-          "object" == typeof o &&
-            o.data.id.toString() == e.toString() &&
+          "object" === typeof o &&
+            o.data.id.toString() === e.toString() &&
             (Roofs[t].remove(), delete Roofs[t])
         }),
         Object.keys(roofsRectangles).forEach(function (t) {
           let o = roofsRectangles[t]
-          "object" == typeof o &&
+          "object" === typeof o &&
             o.data.id.toString() === e.toString() &&
             (roofsRectangles[t].remove(), delete roofsRectangles[t])
         }),
         Object.keys(roofsRectangles3d).forEach(function (t) {
           let o = roofsRectangles3d[t]
-          "object" == typeof o &&
+          "object" === typeof o &&
             o.userData.id.toString() === e.toString() &&
             (scene.remove(roofsRectangles3d[t]), delete roofsRectangles3d[t])
         }),
         Object.keys(maskObjectsAppliedRoof).forEach(function (t) {
-          "object" == typeof maskObjectsAppliedRoof[t] &&
+          "object" === typeof maskObjectsAppliedRoof[t] &&
             maskObjectsAppliedRoof[t].userData.id.toString() === e.toString() &&
             (scene.remove(maskObjectsAppliedRoof[t]),
-            delete maskObjectsAppliedRoof[t])
+              delete maskObjectsAppliedRoof[t])
         }),
         delete plan.roofs[e]
     } catch (e) {
@@ -1278,25 +1278,25 @@ function deleteFurnitureByKey(e) {
       scene.remove(maskObjects[e]),
         Object.keys(maskObjects).forEach(function (t) {
           let o = maskObjects[t]
-          "object" == typeof o &&
+          "object" === typeof o &&
             o.name.toString() === "mask" + e.toString() &&
             delete maskObjects[t]
         }),
         scene.remove(clickableObjects[e]),
         Object.keys(clickableObjects).forEach(function (t) {
           let o = clickableObjects[t]
-          "object" == typeof o &&
+          "object" === typeof o &&
             o.name.toString() === e.toString() &&
             delete clickableObjects[t]
         }),
         Object.keys(Furniture).forEach(function (t) {
           let o = Furniture[t]
-          "object" == typeof o &&
-            o.data.id.toString() == e.toString() &&
+          "object" === typeof o &&
+            o.data.id.toString() === e.toString() &&
             (Furniture[t].data.toolsRectangleInner &&
               Furniture[t].data.toolsRectangleInner.remove(),
-            Furniture[t].remove(),
-            delete Furniture[t])
+              Furniture[t].remove(),
+              delete Furniture[t])
         }),
         delete plan.furniture[e],
         deselectAll(),
@@ -1326,7 +1326,7 @@ function updatePlanHistory(
   h,
   v
 ) {
-  ;(e.furnitureAddedKey = t),
+  ; (e.furnitureAddedKey = t),
     (e.furnitureDirtyKey = o),
     (e.furnitureDeletedKey = a),
     (e.wallAddedKey = n),
@@ -1365,7 +1365,7 @@ function updatePlanHistory(
     (planHistory.length = planHistoryPosition + 1),
     (planHistory[planHistoryPosition] = JSON.stringify(e))
   try {
-    ;(document.getElementById("shareLinkUrl").value = ""),
+    ; (document.getElementById("shareLinkUrl").value = ""),
       (document.getElementById("shareLinkUrl3d").value = ""),
       (document.getElementById("shareLinkUrlPlan").value = ""),
       localStorage.setItem("plan", JSON.stringify(e))
@@ -1380,11 +1380,11 @@ function createThumbForHistory() {
       t = getHeightFromRatio(360, e),
       o = getWidthFromRatio(t, e),
       a = document.createElement("canvas")
-    ;(a.width = o), (a.height = t)
+      ; (a.width = o), (a.height = t)
     let n = a.getContext("2d")
     n.clearRect(0, 0, o, t), n.drawImage(renderer.domElement, 0, 0, o, t)
     let l = a.toDataURL("image/png", 0.1)
-    ;(plan.thumb = l), showMouseIndicators()
+      ; (plan.thumb = l), showMouseIndicators()
   } catch (e) {
     console.log("failed to create thumb. " + e)
   }
@@ -1401,15 +1401,15 @@ function savePlan() {
   try {
     createThumbForHistory()
     let e = document.createElement("a")
-    ;(e.download = "HomeIdea3D.dat"),
-      (e.innerHTML = "Download File"),
-      (e.href = window.URL.createObjectURL(
-        new Blob([JSON.stringify(plan)], { type: "text/plain" })
-      )),
-      (e.onclick = destroyClickedElement),
-      (e.style.display = "none"),
-      document.body.appendChild(e),
-      e.click()
+      ; (e.download = "HomeIdea3D.dat"),
+        (e.innerHTML = "Download File"),
+        (e.href = window.URL.createObjectURL(
+          new Blob([JSON.stringify(plan)], { type: "text/plain" })
+        )),
+        (e.onclick = destroyClickedElement),
+        (e.style.display = "none"),
+        document.body.appendChild(e),
+        e.click()
   } catch (e) {
     console.dir(e)
   }
@@ -1421,21 +1421,21 @@ function loadFileAsText(e) {
   try {
     let t = e.target,
       o = new FileReader()
-    ;(o.onload = function () {
-      let e = o.result
-      setNewPlan(),
-        (loadingProgressTxt = "Plan decoding\n" + loadingProgressTxt),
+      ; (o.onload = function () {
+        let e = o.result
+        setNewPlan(),
+          (loadingProgressTxt = "Plan decoding\n" + loadingProgressTxt),
+          (document.getElementById("modalLoadingDataInfo").innerHTML =
+            loadingProgressTxt),
+          drawPlan(JSON.parse(e)),
+          clearFileInput(document.getElementById("file"))
+      }),
+        (loadingProgressTxt = "Loading Saved Plan"),
         (document.getElementById("modalLoadingDataInfo").innerHTML =
           loadingProgressTxt),
-        drawPlan(JSON.parse(e)),
-        clearFileInput(document.getElementById("file"))
-    }),
-      (loadingProgressTxt = "Loading Saved Plan"),
-      (document.getElementById("modalLoadingDataInfo").innerHTML =
-        loadingProgressTxt),
-      $("#loadingModal").show(),
-      hideMouseIndicators(),
-      o.readAsText(t.files[0])
+        $("#loadingModal").show(),
+        hideMouseIndicators(),
+        o.readAsText(t.files[0])
   } catch (e) {
     console.log("loadFileAsText : " + e)
   }
@@ -1443,7 +1443,7 @@ function loadFileAsText(e) {
 function clearFileInput(e) {
   try {
     e.value = null
-  } catch (e) {}
+  } catch (e) { }
   e.value && e.parentNode.replaceChild(e.cloneNode(!0), e)
 }
 function drawPlan(e) {
@@ -1451,15 +1451,15 @@ function drawPlan(e) {
     e.levels
       ? ((plan.levels = e.levels),
         Object.keys(e.levels).forEach(function (t) {
-          "object" == typeof e.levels[t] &&
+          "object" === typeof e.levels[t] &&
             ((levelButtons && levelButtons[t]) || addNewLevel(t))
         }))
       : levelButtons || addNewLevel("0"),
     e.furniture &&
-      Object.keys(e.furniture).forEach(function (t) {
-        let o = e.furniture[t]
-        "object" == typeof o &&
-          (furnitureToLoadCount++,
+    Object.keys(e.furniture).forEach(function (t) {
+      let o = e.furniture[t]
+      "object" === typeof o &&
+        (furnitureToLoadCount++,
           (loadingProgressTxt =
             "Loading Furniture id : " +
             o.id +
@@ -1470,66 +1470,66 @@ function drawPlan(e) {
           (document.getElementById("modalLoadingDataInfo").innerHTML =
             loadingProgressTxt),
           loadFurniture(o, !1, !1))
-      }),
+    }),
     console.log("loading " + furnitureToLoadCount + " furnitures"),
     e.walls &&
-      Object.keys(e.walls).forEach(function (t) {
-        let o = e.walls[t]
-        "object" == typeof o &&
-          ((loadingProgressTxt =
-            "Loading Wall Id : " + o.id + "\n" + loadingProgressTxt),
+    Object.keys(e.walls).forEach(function (t) {
+      let o = e.walls[t]
+      "object" === typeof o &&
+        ((loadingProgressTxt =
+          "Loading Wall Id : " + o.id + "\n" + loadingProgressTxt),
           (document.getElementById("modalLoadingDataInfo").innerHTML =
             loadingProgressTxt),
           loadWall(o))
-      }),
+    }),
     e.roofs &&
-      Object.keys(e.roofs).forEach(function (t) {
-        let o = e.roofs[t]
-        "object" == typeof o &&
-          ((loadingProgressTxt =
-            "Loading Roof Id : " + o.id + "\n" + loadingProgressTxt),
+    Object.keys(e.roofs).forEach(function (t) {
+      let o = e.roofs[t]
+      "object" === typeof o &&
+        ((loadingProgressTxt =
+          "Loading Roof Id : " + o.id + "\n" + loadingProgressTxt),
           (document.getElementById("modalLoadingDataInfo").innerHTML =
             loadingProgressTxt),
           loadRoof(o))
-      }),
+    }),
     e.floors &&
-      Object.keys(e.floors).forEach(function (t) {
-        let o = e.floors[t]
-        "object" == typeof o &&
-          ((loadingProgressTxt =
-            "Loading Floor Id : " + o.id + "\n" + loadingProgressTxt),
+    Object.keys(e.floors).forEach(function (t) {
+      let o = e.floors[t]
+      "object" === typeof o &&
+        ((loadingProgressTxt =
+          "Loading Floor Id : " + o.id + "\n" + loadingProgressTxt),
           (document.getElementById("modalLoadingDataInfo").innerHTML =
             loadingProgressTxt),
           loadFloor(o))
-      }),
+    }),
     e.dimensions &&
-      Object.keys(e.dimensions).forEach(function (t) {
-        let o = e.dimensions[t]
-        "object" == typeof o &&
-          ((loadingProgressTxt =
-            "Loading Dimension Id : " + o.id + "\n" + loadingProgressTxt),
+    Object.keys(e.dimensions).forEach(function (t) {
+      let o = e.dimensions[t]
+      "object" === typeof o &&
+        ((loadingProgressTxt =
+          "Loading Dimension Id : " + o.id + "\n" + loadingProgressTxt),
           (document.getElementById("modalLoadingDataInfo").innerHTML =
             loadingProgressTxt),
           loadDimension(o))
-      }),
+    }),
     e.texts &&
-      Object.keys(e.texts).forEach(function (t) {
-        let o = e.texts[t]
-        "object" == typeof o &&
-          ((loadingProgressTxt =
-            "Loading Text Id : " + o.id + "\n" + loadingProgressTxt),
+    Object.keys(e.texts).forEach(function (t) {
+      let o = e.texts[t]
+      "object" === typeof o &&
+        ((loadingProgressTxt =
+          "Loading Text Id : " + o.id + "\n" + loadingProgressTxt),
           (document.getElementById("modalLoadingDataInfo").innerHTML =
             loadingProgressTxt),
           loadText(o))
-      }),
+    }),
     e.verticalGuides &&
-      "default" === UILayout &&
-      Object.keys(e.verticalGuides).forEach(function (t) {
-        let o = e.verticalGuides[t],
-          a = new paper.Point(o[1].segments[0][0], o[1].segments[0][1]),
-          n = new paper.Point(o[1].segments[1][0], o[1].segments[1][1]),
-          l = new paper.Path.Line(a, n)
-        ;(l.strokeColor = "#00ff88"),
+    "default" === UILayout &&
+    Object.keys(e.verticalGuides).forEach(function (t) {
+      let o = e.verticalGuides[t],
+        a = new paper.Point(o[1].segments[0][0], o[1].segments[0][1]),
+        n = new paper.Point(o[1].segments[1][0], o[1].segments[1][1]),
+        l = new paper.Path.Line(a, n)
+        ; (l.strokeColor = "#00ff88"),
           (l.strokeWidth = 1),
           (l.strokeScaling = !1),
           (l.data.type = "verticalGuide"),
@@ -1540,15 +1540,15 @@ function drawPlan(e) {
           guidesGroup.addChild(l),
           (plan.verticalGuides[guideCounter] = l),
           redrawGrid()
-      }),
+    }),
     e.horizontalGuides &&
-      "default" === UILayout &&
-      Object.keys(e.horizontalGuides).forEach(function (t) {
-        let o = e.horizontalGuides[t],
-          a = new paper.Point(o[1].segments[0][0], o[1].segments[0][1]),
-          n = new paper.Point(o[1].segments[1][0], o[1].segments[1][1]),
-          l = new paper.Path.Line(a, n)
-        ;(l.strokeColor = "#00ff88"),
+    "default" === UILayout &&
+    Object.keys(e.horizontalGuides).forEach(function (t) {
+      let o = e.horizontalGuides[t],
+        a = new paper.Point(o[1].segments[0][0], o[1].segments[0][1]),
+        n = new paper.Point(o[1].segments[1][0], o[1].segments[1][1]),
+        l = new paper.Path.Line(a, n)
+        ; (l.strokeColor = "#00ff88"),
           (l.strokeWidth = 1),
           (l.strokeScaling = !1),
           (l.data.type = "horizontalGuide"),
@@ -1559,13 +1559,13 @@ function drawPlan(e) {
           guidesGroup.addChild(l),
           (plan.horizontalGuides[guideCounter] = l),
           redrawGrid()
-      }),
+    }),
     render(),
     console.log("furnitureToLoadCount = " + furnitureToLoadCount),
     0 === furnitureToLoadCount && doLoadFinished()
 }
 function doLoadFinished() {
-  ;(plan.furnitureAddedKey = null),
+  ; (plan.furnitureAddedKey = null),
     (plan.furnitureDirtyKey = null),
     (plan.furnitureDeletedKey = null),
     (plan.wallAddedKey = null),
@@ -1587,7 +1587,7 @@ function doLoadFinished() {
     (planHistoryPosition = 0),
     planHistory.push(JSON.stringify(plan)),
     project.layers.forEach(function (e) {
-      ;(loadingProgressTxt =
+      ; (loadingProgressTxt =
         "Linking Walls : level " + e.data.id + "\n" + loadingProgressTxt),
         (document.getElementById("modalLoadingDataInfo").innerHTML =
           loadingProgressTxt),
@@ -1611,7 +1611,7 @@ function doLoadFinished() {
     }, 100)
 }
 function reFocus() {
-  ;(paper.view.center = focusPoint),
+  ; (paper.view.center = focusPoint),
     (paper.view.zoom = focusPoint.zoom),
     redrawGrid(),
     redrawTexts(),
@@ -1625,14 +1625,14 @@ function relinkWallReferences(e) {
   try {
     Object.keys(Walls).forEach(function (t) {
       let o = Walls[t]
-      if ("object" == typeof o && o.data.level === e) {
+      if ("object" === typeof o && o.data.level === e) {
         let a = 0
         o.segments.forEach(function (e) {
           let t = !1
           Object.keys(Walls).forEach(function (n) {
             let l = Walls[n]
             if (
-              "object" == typeof o &&
+              "object" === typeof o &&
               o.data.id !== l.data.id &&
               o.data.level === l.data.level
             ) {
@@ -1642,12 +1642,12 @@ function relinkWallReferences(e) {
                   parseInt(e.point.x) === parseInt(n.point.x) &&
                     parseInt(e.point.y) === parseInt(n.point.y) &&
                     ((t = !0),
-                    0 === a
-                      ? (Walls[o.data.id].data.join0 = {
+                      0 === a
+                        ? (Walls[o.data.id].data.join0 = {
                           id: l.data.id,
                           seg: i,
                         })
-                      : (Walls[o.data.id].data.join1 = {
+                        : (Walls[o.data.id].data.join1 = {
                           id: l.data.id,
                           seg: i,
                         })),
@@ -1656,9 +1656,9 @@ function relinkWallReferences(e) {
             }
           }),
             t ||
-              (0 === a
-                ? (Walls[o.data.id].data.join0 = { id: null, seg: null })
-                : (Walls[o.data.id].data.join1 = { id: null, seg: null })),
+            (0 === a
+              ? (Walls[o.data.id].data.join0 = { id: null, seg: null })
+              : (Walls[o.data.id].data.join1 = { id: null, seg: null })),
             (a += 1)
         })
       }
@@ -1679,7 +1679,7 @@ function relinkWallReferences(e) {
 function applyMasksToWalls(e) {
   try {
     Object.keys(wallsRectangles3d).forEach(function (t) {
-      "object" == typeof wallsRectangles3d[t] &&
+      "object" === typeof wallsRectangles3d[t] &&
         wallsRectangles3d[t].userData.level === e &&
         applyMasksToWall(t, wallsRectangles3d[t], e)
     }),
@@ -1709,7 +1709,7 @@ function applyMasksToWall(e, t, o) {
         }
       }
     }),
-    i)
+      i)
   ) {
     let r = new THREE.Mesh(a, wallMaterial)
     r.position.copy(t.position),
@@ -1721,21 +1721,21 @@ function applyMasksToWall(e, t, o) {
   } else
     (t.visible = !0),
       maskObjectsApplied[e] &&
-        (scene.remove(maskObjectsApplied[e]), delete maskObjectsApplied[e])
+      (scene.remove(maskObjectsApplied[e]), delete maskObjectsApplied[e])
 }
 function relinkRoofReferences(e) {
   e = e.toString()
   try {
     Object.keys(Roofs).forEach(function (t) {
       let o = Roofs[t]
-      if ("object" == typeof o && o.data.level === e) {
+      if ("object" === typeof o && o.data.level === e) {
         let a = 0
         o.segments.forEach(function (e) {
           let t = !1
           Object.keys(Roofs).forEach(function (n) {
             let l = Roofs[n]
             if (
-              "object" == typeof o &&
+              "object" === typeof o &&
               o.data.id !== l.data.id &&
               o.data.level === l.data.level
             ) {
@@ -1745,12 +1745,12 @@ function relinkRoofReferences(e) {
                   parseInt(e.point.x) === parseInt(n.point.x) &&
                     parseInt(e.point.y) === parseInt(n.point.y) &&
                     ((t = !0),
-                    0 === a
-                      ? (Roofs[o.data.id].data.join0 = {
+                      0 === a
+                        ? (Roofs[o.data.id].data.join0 = {
                           id: l.data.id,
                           seg: i,
                         })
-                      : (Roofs[o.data.id].data.join1 = {
+                        : (Roofs[o.data.id].data.join1 = {
                           id: l.data.id,
                           seg: i,
                         })),
@@ -1759,9 +1759,9 @@ function relinkRoofReferences(e) {
             }
           }),
             t ||
-              (0 === a
-                ? (Roofs[o.data.id].data.join0 = { id: null, seg: null })
-                : (Roofs[o.data.id].data.join1 = { id: null, seg: null })),
+            (0 === a
+              ? (Roofs[o.data.id].data.join0 = { id: null, seg: null })
+              : (Roofs[o.data.id].data.join1 = { id: null, seg: null })),
             (a += 1)
         })
       }
@@ -1782,7 +1782,7 @@ function relinkRoofReferences(e) {
 function applyMasksToRoofs(e) {
   try {
     Object.keys(roofsRectangles3d).forEach(function (t) {
-      "object" == typeof roofsRectangles3d[t] &&
+      "object" === typeof roofsRectangles3d[t] &&
         roofsRectangles3d[t].userData.level === e &&
         applyMasksToRoof(t, roofsRectangles3d[t], e)
     }),
@@ -1812,7 +1812,7 @@ function applyMasksToRoof(e, t, o) {
         }
       }
     }),
-    i)
+      i)
   ) {
     let r = new THREE.Mesh(a, roofMaterial)
     r.position.copy(t.position),
@@ -1824,29 +1824,29 @@ function applyMasksToRoof(e, t, o) {
   } else
     (t.visible = !0),
       maskObjectsAppliedRoof[e] &&
-        (scene.remove(maskObjectsAppliedRoof[e]),
+      (scene.remove(maskObjectsAppliedRoof[e]),
         delete maskObjectsAppliedRoof[e])
 }
 function loadText(e) {
   e.id > textIdCounter && (textIdCounter = e.id)
   let t = new paper.PointText({})
-  ;(t.fontFamily = "Courier New"),
-    (t.fillColor = "white"),
-    (t.point = new paper.Point(e.data.x, e.data.y)),
-    (t.justification = "center"),
-    (t.fontSize = screenScale / 1.5),
-    (t.data.id = e.id),
-    (t.data.type = "text"),
-    (t.data.value = e.data.value),
-    (t.data.x = t.point.x),
-    (t.data.y = t.point.y),
-    (t.data.level = (e.data.level ? e.data.level : 0).toString()),
-    project.layers["level" + t.data.level] || addNewLevel(t.data.level),
-    project.activeLayer.data.id !== t.data.level && setLevel(t.data.level),
-    textsGroup[t.data.level].addChild(t),
-    (t.content = t.data.value),
-    (Texts[e.id] = t),
-    (plan.texts[e.id] = { id: e.id, data: t.data })
+    ; (t.fontFamily = "Courier New"),
+      (t.fillColor = "white"),
+      (t.point = new paper.Point(e.data.x, e.data.y)),
+      (t.justification = "center"),
+      (t.fontSize = screenScale / 1.5),
+      (t.data.id = e.id),
+      (t.data.type = "text"),
+      (t.data.value = e.data.value),
+      (t.data.x = t.point.x),
+      (t.data.y = t.point.y),
+      (t.data.level = (e.data.level ? e.data.level : 0).toString()),
+      project.layers["level" + t.data.level] || addNewLevel(t.data.level),
+      project.activeLayer.data.id !== t.data.level && setLevel(t.data.level),
+      textsGroup[t.data.level].addChild(t),
+      (t.content = t.data.value),
+      (Texts[e.id] = t),
+      (plan.texts[e.id] = { id: e.id, data: t.data })
 }
 function loadDimension(e) {
   e.id > dimensionIdCounter && (dimensionIdCounter = e.id),
@@ -1859,9 +1859,9 @@ function loadDimension(e) {
       e.dimensionPath[1].data.level ? e.dimensionPath[1].data.level : 0
     ).toString()),
     project.layers["level" + dimensionPath.data.level] ||
-      addNewLevel(dimensionPath.data.level),
+    addNewLevel(dimensionPath.data.level),
     project.activeLayer.data.id !== dimensionPath.data.level &&
-      setLevel(dimensionPath.data.level),
+    setLevel(dimensionPath.data.level),
     dimensionsGroup[dimensionPath.data.level].addChild(dimensionPath),
     (dimensionPath.visible = !1),
     e.dimensionPath[1].segments.forEach(function (e) {
@@ -1872,17 +1872,17 @@ function loadDimension(e) {
       dimensionPath.segments[0].point
     ),
     a = new paper.Path()
-  ;(a.data.id = e.id),
-    (a.data.level = dimensionPath.data.level),
-    (a.data.type = "dimension"),
-    (a.style = { strokeColor: "white", strokeWidth: 1, strokeScaling: !1 }),
-    a.moveTo(dimensionPath.segments[0].point),
-    a.lineBy(o.normalize(t).rotate(-90)),
-    a.lineBy(o.normalize(7.5).rotate(-270)),
-    a.lineBy(o.normalize(10).rotate(-225)),
-    a.lineBy(o.normalize(20).rotate(-45)),
-    a.lineBy(o.normalize(10).rotate(-225)),
-    a.lineBy(o.normalize(o.length / 2))
+    ; (a.data.id = e.id),
+      (a.data.level = dimensionPath.data.level),
+      (a.data.type = "dimension"),
+      (a.style = { strokeColor: "white", strokeWidth: 1, strokeScaling: !1 }),
+      a.moveTo(dimensionPath.segments[0].point),
+      a.lineBy(o.normalize(t).rotate(-90)),
+      a.lineBy(o.normalize(7.5).rotate(-270)),
+      a.lineBy(o.normalize(10).rotate(-225)),
+      a.lineBy(o.normalize(20).rotate(-45)),
+      a.lineBy(o.normalize(10).rotate(-225)),
+      a.lineBy(o.normalize(o.length / 2))
   let n = a.lastSegment.point
   a.lineBy(o.normalize(o.length / 2)),
     a.lineBy(o.normalize(10).rotate(-225)),
@@ -1911,14 +1911,14 @@ function loadDimension(e) {
       (l.data.level = dimensionPath.data.level),
       (l.data.type = "dimension"))
   let i = o.length
-  ;(l.content = Math.floor(1e3 * i) / 1e3),
-    (Dimensions[e.id] = {
-      id: e.id,
-      dimensionPath: dimensionPath,
-      line: a,
-      text: l,
-    }),
-    (plan.dimensions[e.id] = { id: e.id, dimensionPath: dimensionPath })
+    ; (l.content = Math.floor(1e3 * i) / 1e3),
+      (Dimensions[e.id] = {
+        id: e.id,
+        dimensionPath: dimensionPath,
+        line: a,
+        text: l,
+      }),
+      (plan.dimensions[e.id] = { id: e.id, dimensionPath: dimensionPath })
 }
 function loadFloor(e) {
   e.floorPath[1]
@@ -1937,9 +1937,9 @@ function loadFloor(e) {
         e.floorPath[1].data.level ? e.floorPath[1].data.level : 0
       ).toString()),
       project.layers["level" + floorPath.data.level] ||
-        addNewLevel(floorPath.data.level),
+      addNewLevel(floorPath.data.level),
       project.activeLayer.data.id !== floorPath.data.level &&
-        setLevel(floorPath.data.level),
+      setLevel(floorPath.data.level),
       floorsGroup[floorPath.data.level].addChild(floorPath),
       e.floorPath[1].segments.forEach(function (e) {
         floorPath.add(new paper.Point(e[0], e[1]))
@@ -1964,15 +1964,15 @@ function loadWall(e) {
         : defaultWallThickness),
       Array.isArray(e.wallPath[1].data.height)
         ? (wallPath.data.height = [
-            parseInt(e.wallPath[1].data.height[0]),
-            parseInt(e.wallPath[1].data.height[1]),
-          ])
+          parseInt(e.wallPath[1].data.height[0]),
+          parseInt(e.wallPath[1].data.height[1]),
+        ])
         : (wallPath.data.height = e.wallPath[1].data.height
-            ? [
-                parseInt(e.wallPath[1].data.height),
-                parseInt(e.wallPath[1].data.height),
-              ]
-            : [defaultWallHeight, defaultWallHeight]),
+          ? [
+            parseInt(e.wallPath[1].data.height),
+            parseInt(e.wallPath[1].data.height),
+          ]
+          : [defaultWallHeight, defaultWallHeight]),
       (wallPath.data.level = (
         e.wallPath[1].data.level ? e.wallPath[1].data.level : 0
       ).toString())
@@ -1993,46 +1993,46 @@ function loadWall(e) {
             s = new Point(n.x - Math.sin(l) * o, n.y + Math.cos(l) * o),
             d = new Point(a.x - Math.sin(l) * o, a.y + Math.cos(l) * o),
             c = new Path()
-          ;(c.data.type = "wallRectangle"),
-            (c.data.id = wallPath.data.id),
-            (c.data.level = wallPath.data.level),
-            (c.fillColor = new paper.Color(1, 0.9, 0, 0.25)),
-            (c.strokeColor = "#b19064"),
-            (c.strokeWidth = 1),
-            (c.strokeScaling = !1),
-            (c.segments = wallHelperRectangle.segments),
-            (c.segments[0].point = i),
-            (c.segments[1].point = r),
-            (c.segments[2].point = s),
-            (c.segments[3].point = d),
-            (wallsRectangles[wallPath.data.id] = c),
-            project.layers["level" + wallPath.data.level] ||
+            ; (c.data.type = "wallRectangle"),
+              (c.data.id = wallPath.data.id),
+              (c.data.level = wallPath.data.level),
+              (c.fillColor = new paper.Color(1, 0.9, 0, 0.25)),
+              (c.strokeColor = "#b19064"),
+              (c.strokeWidth = 1),
+              (c.strokeScaling = !1),
+              (c.segments = wallHelperRectangle.segments),
+              (c.segments[0].point = i),
+              (c.segments[1].point = r),
+              (c.segments[2].point = s),
+              (c.segments[3].point = d),
+              (wallsRectangles[wallPath.data.id] = c),
+              project.layers["level" + wallPath.data.level] ||
               addNewLevel(wallPath.data.level),
-            project.activeLayer.data.id !== wallPath.data.level &&
+              project.activeLayer.data.id !== wallPath.data.level &&
               setLevel(wallPath.data.level),
-            wallsGroup[wallPath.data.level].addChild(
-              wallsRectangles[wallPath.data.id]
-            ),
-            (wallPath.segments[wallPath.segments.length - 1].data = {
-              angleRadians: l,
-              id: wallPath.data.id,
-            })
+              wallsGroup[wallPath.data.level].addChild(
+                wallsRectangles[wallPath.data.id]
+              ),
+              (wallPath.segments[wallPath.segments.length - 1].data = {
+                angleRadians: l,
+                id: wallPath.data.id,
+              })
           let u = new THREE.BoxGeometry(
-              wallPath.data.thickness,
-              wallPath.data.height[0],
-              wallPath.data.thickness
-            ),
+            wallPath.data.thickness,
+            wallPath.data.height[0],
+            wallPath.data.thickness
+          ),
             p = new THREE.Mesh(u, wallMaterial)
-          ;(p.position.x = 0),
-            (p.position.y =
-              wallPath.data.height[0] / 2 +
-              project.layers["level" + wallPath.data.level].data.height),
-            (p.position.z = 0),
-            (p.userData.id = wallPath.data.id),
-            (p.userData.level = wallPath.data.level),
-            (p.frustumCulled = !1),
-            scene.add(p),
-            (wallsRectangles3d[wallPath.data.id] = p)
+            ; (p.position.x = 0),
+              (p.position.y =
+                wallPath.data.height[0] / 2 +
+                project.layers["level" + wallPath.data.level].data.height),
+              (p.position.z = 0),
+              (p.userData.id = wallPath.data.id),
+              (p.userData.level = wallPath.data.level),
+              (p.frustumCulled = !1),
+              scene.add(p),
+              (wallsRectangles3d[wallPath.data.id] = p)
         }
         t = !1
       }),
@@ -2092,51 +2092,51 @@ function loadRoof(e) {
             s = new Point(n.x - Math.sin(l) * o, n.y + Math.cos(l) * o),
             d = new Point(a.x - Math.sin(l) * o, a.y + Math.cos(l) * o),
             c = new Path()
-          ;(c.data.type = "roofRectangle"),
-            (c.data.id = roofPath.data.id),
-            (c.data.level = roofPath.data.level),
-            (c.fillColor = new paper.Color(0.35, 0.65, 0.85, 0.25)),
-            (c.strokeColor = "#b19064"),
-            (c.strokeWidth = 1),
-            (c.strokeScaling = !1),
-            (c.segments = roofHelperRectangle.segments),
-            (c.segments[0].point = i),
-            (c.segments[1].point = r),
-            (c.segments[2].point = s),
-            (c.segments[3].point = d),
-            (roofsRectangles[roofPath.data.id] = c),
-            project.layers["level" + roofPath.data.level] ||
+            ; (c.data.type = "roofRectangle"),
+              (c.data.id = roofPath.data.id),
+              (c.data.level = roofPath.data.level),
+              (c.fillColor = new paper.Color(0.35, 0.65, 0.85, 0.25)),
+              (c.strokeColor = "#b19064"),
+              (c.strokeWidth = 1),
+              (c.strokeScaling = !1),
+              (c.segments = roofHelperRectangle.segments),
+              (c.segments[0].point = i),
+              (c.segments[1].point = r),
+              (c.segments[2].point = s),
+              (c.segments[3].point = d),
+              (roofsRectangles[roofPath.data.id] = c),
+              project.layers["level" + roofPath.data.level] ||
               addNewLevel(roofPath.data.level),
-            project.activeLayer.data.id !== roofPath.data.level &&
+              project.activeLayer.data.id !== roofPath.data.level &&
               setLevel(roofPath.data.level),
-            roofsGroup[roofPath.data.level].addChild(
-              roofsRectangles[roofPath.data.id]
-            ),
-            (roofPath.segments[roofPath.segments.length - 1].data = {
-              angleRadians: l,
-              id: roofPath.data.id,
-            })
+              roofsGroup[roofPath.data.level].addChild(
+                roofsRectangles[roofPath.data.id]
+              ),
+              (roofPath.segments[roofPath.segments.length - 1].data = {
+                angleRadians: l,
+                id: roofPath.data.id,
+              })
           let u = new THREE.BoxGeometry(
-              roofPath.data.width,
-              roofPath.data.thickness,
-              roofPath.data.width
-            ),
+            roofPath.data.width,
+            roofPath.data.thickness,
+            roofPath.data.width
+          ),
             p = new THREE.Mesh(u, roofMaterial)
-          ;(p.position.x = 0),
-            (p.position.y =
-              roofPath.data.thickness / 2 +
-              roofPath.data.rise / 2 +
-              project.layers["level" + roofPath.data.level].data.height +
-              roofPath.data.startHeight),
-            (p.position.z = 0),
-            (p.userData.id = roofPath.data.id),
-            (p.userData.level = roofPath.data.level),
-            (p.frustumCulled = !1),
-            (p.name = "roof" + roofPath.data.id),
-            scene.add(p),
-            (roofsRectangles3d[roofPath.data.id] = p),
-            (clickableObjects["roof" + roofPath.data.id] =
-              roofsRectangles3d[roofPath.data.id])
+            ; (p.position.x = 0),
+              (p.position.y =
+                roofPath.data.thickness / 2 +
+                roofPath.data.rise / 2 +
+                project.layers["level" + roofPath.data.level].data.height +
+                roofPath.data.startHeight),
+              (p.position.z = 0),
+              (p.userData.id = roofPath.data.id),
+              (p.userData.level = roofPath.data.level),
+              (p.frustumCulled = !1),
+              (p.name = "roof" + roofPath.data.id),
+              scene.add(p),
+              (roofsRectangles3d[roofPath.data.id] = p),
+              (clickableObjects["roof" + roofPath.data.id] =
+                roofsRectangles3d[roofPath.data.id])
         }
         t = !1
       }),
@@ -2153,7 +2153,7 @@ function resizeViews() {
   resize3dView(), resizePlanView()
 }
 function resize3dView() {
-  ;(camera.aspect = container.clientWidth / container.clientHeight),
+  ; (camera.aspect = container.clientWidth / container.clientHeight),
     camera.updateProjectionMatrix(),
     renderer.setSize(container.clientWidth, container.clientHeight),
     controls.handleResize(),
@@ -2195,29 +2195,29 @@ function beginDrag(e, t) {
         e.pageY - planView.offsetTop
       )
     )
-    ;(draggingFurnitureRectangle.position = o),
-      furnitureItems[t].scale && furnitureItems[t].scale.x
-        ? (draggingFurnitureRectangle.bounds.width =
+      ; (draggingFurnitureRectangle.position = o),
+        furnitureItems[t].scale && furnitureItems[t].scale.x
+          ? (draggingFurnitureRectangle.bounds.width =
             furnitureItems[t].size.x * furnitureItems[t].scale.x)
-        : (draggingFurnitureRectangle.bounds.width = furnitureItems[t].size.x),
-      furnitureItems[t].scale && furnitureItems[t].scale.z
-        ? (draggingFurnitureRectangle.bounds.height =
+          : (draggingFurnitureRectangle.bounds.width = furnitureItems[t].size.x),
+        furnitureItems[t].scale && furnitureItems[t].scale.z
+          ? (draggingFurnitureRectangle.bounds.height =
             furnitureItems[t].size.z * furnitureItems[t].scale.z)
-        : (draggingFurnitureRectangle.bounds.height = furnitureItems[t].size.z),
-      (draggingFurnitureRectangle.visible = !1),
-      (furnitureDragDiv.style.background = "url('objects/" + t + "_top.png')"),
-      (furnitureDragDiv.style.backgroundRepeat = "no-repeat")
+          : (draggingFurnitureRectangle.bounds.height = furnitureItems[t].size.z),
+        (draggingFurnitureRectangle.visible = !1),
+        (furnitureDragDiv.style.background = "url('objects/" + t + "_top.png')"),
+        (furnitureDragDiv.style.backgroundRepeat = "no-repeat")
     let a, n
-    ;(a = draggingFurnitureRectangle.bounds.width),
-      (n = draggingFurnitureRectangle.bounds.height),
-      (a *= paper.view.zoom),
-      (n *= paper.view.zoom),
-      (furnitureDragDiv.style.left = e.clientX - a / 2 + "px"),
-      (furnitureDragDiv.style.top = e.clientY - n / 2 + "px"),
-      (furnitureDragDiv.style.width = a + "px"),
-      (furnitureDragDiv.style.height = n + "px"),
-      (furnitureDragDiv.style.backgroundSize = a + "px " + n + "px"),
-      (furnitureDragDiv.style.display = "block")
+      ; (a = draggingFurnitureRectangle.bounds.width),
+        (n = draggingFurnitureRectangle.bounds.height),
+        (a *= paper.view.zoom),
+        (n *= paper.view.zoom),
+        (furnitureDragDiv.style.left = e.clientX - a / 2 + "px"),
+        (furnitureDragDiv.style.top = e.clientY - n / 2 + "px"),
+        (furnitureDragDiv.style.width = a + "px"),
+        (furnitureDragDiv.style.height = n + "px"),
+        (furnitureDragDiv.style.backgroundSize = a + "px " + n + "px"),
+        (furnitureDragDiv.style.display = "block")
   } catch (e) {
     console.log(e)
   }
@@ -2228,8 +2228,8 @@ function addFurniture(e) {
     ? t.y > paper.view.bounds.top && t.y < paper.view.bounds.bottom
       ? initFurniture(t)
       : t.y > paper.view.bounds.bottom
-      ? console.log("dropped insoide 3dview drop. todo implement")
-      : console.log("dropped not inside views")
+        ? console.log("dropped insoide 3dview drop. todo implement")
+        : console.log("dropped not inside views")
     : console.log("dropped not inside views"),
     (furnitureDragDiv.style.display = "none"),
     (draggingFurnitureId = -1),
@@ -2239,13 +2239,13 @@ function addFurniture(e) {
     e.preventDefault()
 }
 function initFurniture(e) {
-  ;(e.x = parseInt(e.x)), (e.y = parseInt(e.y))
+  ; (e.x = parseInt(e.x)), (e.y = parseInt(e.y))
   let t = draggingFurnitureId,
     o = draggingFurnitureAngle
   new THREE.MTLLoader()
     .setPath("objects/")
     .load(t + "/" + t + ".mtl", function (a) {
-      ;(a.baseUrl = "objects/" + t + "/"),
+      ; (a.baseUrl = "objects/" + t + "/"),
         a.preload(),
         new THREE.OBJLoader()
           .setMaterials(a)
@@ -2255,200 +2255,200 @@ function initFurniture(e) {
             function (a) {
               try {
                 let n = new Image()
-                ;(n.src = "objects/" + t + "_top.png"),
-                  (n.onload = function () {
-                    let l = new THREE.Box3().setFromObject(a)
-                    ;(a.userData.width = l.max.x - l.min.x),
-                      (a.userData.height = l.max.y - l.min.y),
-                      (a.userData.depth = l.max.z - l.min.z)
-                    for (let i = 0; i < a.children.length; i++) {
-                      let r = l.min.x + (l.max.x - l.min.x) / 2,
-                        s =
-                          l.min.y +
-                          (l.max.y - l.min.y) / 2 -
-                          (l.max.y - l.min.y) / 2,
-                        d = l.min.z + (l.max.z - l.min.z) / 2
-                      a.children[i].translateX(-r),
-                        a.children[i].translateY(-s),
-                        a.children[i].translateZ(-d)
-                    }
-                    let c = new THREE.BoxHelper(a, 16711680)
-                    ;(c.material.linewidth = 5),
-                      (c.visible = !1),
-                      a.add(c),
-                      (a.position.y =
-                        0.1 +
-                        project.activeLayer.data.height +
-                        defaultFloorThickness),
-                      (a.position.x = e.x),
-                      (a.position.z = e.y),
-                      scene.add(a),
-                      clickableObjectsCounter++
-                    let u = clickableObjectsCounter
-                    ;(a.name = u), (clickableObjects[u] = a)
-                    let p = new THREE.BoxGeometry(
+                  ; (n.src = "objects/" + t + "_top.png"),
+                    (n.onload = function () {
+                      let l = new THREE.Box3().setFromObject(a)
+                        ; (a.userData.width = l.max.x - l.min.x),
+                          (a.userData.height = l.max.y - l.min.y),
+                          (a.userData.depth = l.max.z - l.min.z)
+                      for (let i = 0; i < a.children.length; i++) {
+                        let r = l.min.x + (l.max.x - l.min.x) / 2,
+                          s =
+                            l.min.y +
+                            (l.max.y - l.min.y) / 2 -
+                            (l.max.y - l.min.y) / 2,
+                          d = l.min.z + (l.max.z - l.min.z) / 2
+                        a.children[i].translateX(-r),
+                          a.children[i].translateY(-s),
+                          a.children[i].translateZ(-d)
+                      }
+                      let c = new THREE.BoxHelper(a, 16711680)
+                        ; (c.material.linewidth = 5),
+                          (c.visible = !1),
+                          a.add(c),
+                          (a.position.y =
+                            0.1 +
+                            project.activeLayer.data.height +
+                            defaultFloorThickness),
+                          (a.position.x = e.x),
+                          (a.position.z = e.y),
+                          scene.add(a),
+                          clickableObjectsCounter++
+                      let u = clickableObjectsCounter
+                        ; (a.name = u), (clickableObjects[u] = a)
+                      let p = new THREE.BoxGeometry(
                         a.userData.width,
                         a.userData.height,
                         a.userData.depth
                       ),
-                      m = new paper.Raster(n)
-                    ;(m.visible = !1),
-                      (m.onLoad = function () {
-                        if (
-                          ((m.data.type = "furniture"),
-                          (m.opacity = 0.5),
-                          (m.bounds.width = l.max.x - l.min.x),
-                          (m.bounds.height = l.max.z - l.min.z),
-                          (m.position = e),
-                          (m.data.flipX = 1),
-                          (m.data.flipZ = 1),
-                          (m.fillColor = new paper.Color(1, 1, 1, 1)),
-                          (m.selectedColor = new paper.Color(0, 0, 0, 0)),
-                          readOnly ||
-                            (m.onMouseDown = function (e) {
-                              if ("pointer" === toolMode) {
-                                deselectAll(),
-                                  (selectedItem = this),
-                                  (mouseMode = 0),
-                                  (offsetMousePoint =
-                                    selectedItem.position.subtract(e.point)),
-                                  (offsetMousePoint.x = parseInt(
-                                    offsetMousePoint.x
-                                  )),
-                                  (offsetMousePoint.y = parseInt(
-                                    offsetMousePoint.y
-                                  )),
-                                  selectedItem.bringToFront(),
-                                  this.data.toolsRectangleInner &&
-                                    this.data.toolsRectangleInner.remove(),
-                                  (this.rotation = 0)
-                                let o = new paper.Path.Rectangle(this.bounds)
-                                ;(this.rotation = this.data.angle),
-                                  (o.data.type = "toolsRectangle"),
-                                  (o.strokeColor = "#b19064"),
-                                  (o.strokeWidth = 1),
-                                  (o.strokeScaling = !1),
-                                  (o.locked = !0),
-                                  o.rotate(this.data.angle),
-                                  (this.data.toolsRectangleInner = o),
-                                  (o.visible = !0),
-                                  (this.data.boxHelper.visible = !0),
-                                  redrawGrid(),
-                                  (rotateIcon.visible = !0),
-                                  (resizeIcon.visible = !0),
-                                  (elevateIcon.visible = !0),
-                                  (heightIcon.visible = !0),
-                                  (toolsGroup.position =
-                                    selectedItem.bounds.center),
-                                  (toolsGroup.visible = !0),
-                                  toolsGroup.bringToFront(),
-                                  rotateIcon.bringToFront(),
-                                  resizeIcon.bringToFront(),
-                                  elevateIcon.bringToFront(),
-                                  heightIcon.bringToFront(),
-                                  (rotateIcon.data.level =
-                                    project.activeLayer.data.id),
-                                  (resizeIcon.data.level =
-                                    project.activeLayer.data.id),
-                                  (elevateIcon.data.level =
-                                    project.activeLayer.data.id),
-                                  (heightIcon.data.level =
-                                    project.activeLayer.data.id),
-                                  (toolsGroup.data.level =
-                                    project.activeLayer.data.id),
-                                  (modalModel3dFurnitureId = t),
-                                  updateObjectPropertiesWindow()
-                              }
-                            }),
-                          (m.data.id = u),
-                          (m.data.fid = t),
-                          (m.data.boxHelper = c),
-                          (m.data.level = project.activeLayer.data.id),
-                          furnitureItems[t].useMask)
-                        ) {
-                          m.useMask = !0
-                          let n = new THREE.Mesh(
-                            p,
-                            new THREE.MeshStandardMaterial({})
-                          )
-                          ;(n.position.x = a.position.x),
-                            (n.position.y = a.position.y),
-                            (n.position.z = a.position.z),
-                            n.geometry.translate(0, a.userData.height / 2, 0),
-                            (n.visible = !1),
-                            scene.add(n),
-                            (maskObjects[u] = n),
-                            (n.name = "mask" + u)
-                        }
-                        if (o) {
-                          let i = (o + 360) % 360
-                          m.rotate(i),
-                            (m.data.angle = i),
-                            clickableObjects[u].rotateY((-i / 180) * Math.PI),
-                            maskObjects[u] &&
-                              (maskObjects[u].rotateY((-i / 180) * Math.PI),
-                              (maskObjects[u].scale.x = 1),
-                              (maskObjects[u].scale.y = 1),
-                              (maskObjects[u].scale.z = 1))
-                        } else m.data.angle = 0
-                        ;(tween = new TWEEN.Tween(controls.target)
-                          .to(a.position, 500)
-                          .onUpdate(render)
-                          .start()),
-                          (m.visible = !0),
-                          (Furniture[u] = m),
-                          furnitureGroup[project.activeLayer.data.id].addChild(
-                            Furniture[u]
-                          ),
-                          (plan.furniture[u] = {
-                            id: u,
-                            fid: t,
-                            position: clickableObjects[u].position,
-                            scale: clickableObjects[u].scale,
-                            rotation: clickableObjects[u].rotation,
-                            width: m.bounds.width,
-                            depth: m.bounds.height,
-                            angle: m.data.angle,
-                            level: m.data.level,
-                            flipX: m.data.flipX,
-                            flipZ: m.data.flipZ,
-                          }),
-                          (progressBar.style.display = "none")
-                        for (
-                          let r = m.canvas.getContext("2d"),
-                            s = r.getImageData(0, 0, m.width, m.height),
-                            d = s.data,
-                            g = 0;
-                          g < d.length;
-                          g += 4
-                        )
-                          (d[g] = 255 - d[g]),
-                            (d[g + 1] = 255 - d[g + 1]),
-                            (d[g + 2] = 255 - d[g + 2])
-                        r.putImageData(s, 0, 0),
-                          updatePlanHistory(
-                            plan,
-                            u,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null
-                          )
-                      })
-                  })
+                        m = new paper.Raster(n)
+                        ; (m.visible = !1),
+                          (m.onLoad = function () {
+                            if (
+                              ((m.data.type = "furniture"),
+                                (m.opacity = 0.5),
+                                (m.bounds.width = l.max.x - l.min.x),
+                                (m.bounds.height = l.max.z - l.min.z),
+                                (m.position = e),
+                                (m.data.flipX = 1),
+                                (m.data.flipZ = 1),
+                                (m.fillColor = new paper.Color(1, 1, 1, 1)),
+                                (m.selectedColor = new paper.Color(0, 0, 0, 0)),
+                                readOnly ||
+                                (m.onMouseDown = function (e) {
+                                  if ("pointer" === toolMode) {
+                                    deselectAll(),
+                                      (selectedItem = this),
+                                      (mouseMode = 0),
+                                      (offsetMousePoint =
+                                        selectedItem.position.subtract(e.point)),
+                                      (offsetMousePoint.x = parseInt(
+                                        offsetMousePoint.x
+                                      )),
+                                      (offsetMousePoint.y = parseInt(
+                                        offsetMousePoint.y
+                                      )),
+                                      selectedItem.bringToFront(),
+                                      this.data.toolsRectangleInner &&
+                                      this.data.toolsRectangleInner.remove(),
+                                      (this.rotation = 0)
+                                    let o = new paper.Path.Rectangle(this.bounds)
+                                      ; (this.rotation = this.data.angle),
+                                        (o.data.type = "toolsRectangle"),
+                                        (o.strokeColor = "#b19064"),
+                                        (o.strokeWidth = 1),
+                                        (o.strokeScaling = !1),
+                                        (o.locked = !0),
+                                        o.rotate(this.data.angle),
+                                        (this.data.toolsRectangleInner = o),
+                                        (o.visible = !0),
+                                        (this.data.boxHelper.visible = !0),
+                                        redrawGrid(),
+                                        (rotateIcon.visible = !0),
+                                        (resizeIcon.visible = !0),
+                                        (elevateIcon.visible = !0),
+                                        (heightIcon.visible = !0),
+                                        (toolsGroup.position =
+                                          selectedItem.bounds.center),
+                                        (toolsGroup.visible = !0),
+                                        toolsGroup.bringToFront(),
+                                        rotateIcon.bringToFront(),
+                                        resizeIcon.bringToFront(),
+                                        elevateIcon.bringToFront(),
+                                        heightIcon.bringToFront(),
+                                        (rotateIcon.data.level =
+                                          project.activeLayer.data.id),
+                                        (resizeIcon.data.level =
+                                          project.activeLayer.data.id),
+                                        (elevateIcon.data.level =
+                                          project.activeLayer.data.id),
+                                        (heightIcon.data.level =
+                                          project.activeLayer.data.id),
+                                        (toolsGroup.data.level =
+                                          project.activeLayer.data.id),
+                                        (modalModel3dFurnitureId = t),
+                                        updateObjectPropertiesWindow()
+                                  }
+                                }),
+                                (m.data.id = u),
+                                (m.data.fid = t),
+                                (m.data.boxHelper = c),
+                                (m.data.level = project.activeLayer.data.id),
+                                furnitureItems[t].useMask)
+                            ) {
+                              m.useMask = !0
+                              let n = new THREE.Mesh(
+                                p,
+                                new THREE.MeshStandardMaterial({})
+                              )
+                                ; (n.position.x = a.position.x),
+                                  (n.position.y = a.position.y),
+                                  (n.position.z = a.position.z),
+                                  n.geometry.translate(0, a.userData.height / 2, 0),
+                                  (n.visible = !1),
+                                  scene.add(n),
+                                  (maskObjects[u] = n),
+                                  (n.name = "mask" + u)
+                            }
+                            if (o) {
+                              let i = (o + 360) % 360
+                              m.rotate(i),
+                                (m.data.angle = i),
+                                clickableObjects[u].rotateY((-i / 180) * Math.PI),
+                                maskObjects[u] &&
+                                (maskObjects[u].rotateY((-i / 180) * Math.PI),
+                                  (maskObjects[u].scale.x = 1),
+                                  (maskObjects[u].scale.y = 1),
+                                  (maskObjects[u].scale.z = 1))
+                            } else m.data.angle = 0
+                              ; (tween = new TWEEN.Tween(controls.target)
+                                .to(a.position, 500)
+                                .onUpdate(render)
+                                .start()),
+                                (m.visible = !0),
+                                (Furniture[u] = m),
+                                furnitureGroup[project.activeLayer.data.id].addChild(
+                                  Furniture[u]
+                                ),
+                                (plan.furniture[u] = {
+                                  id: u,
+                                  fid: t,
+                                  position: clickableObjects[u].position,
+                                  scale: clickableObjects[u].scale,
+                                  rotation: clickableObjects[u].rotation,
+                                  width: m.bounds.width,
+                                  depth: m.bounds.height,
+                                  angle: m.data.angle,
+                                  level: m.data.level,
+                                  flipX: m.data.flipX,
+                                  flipZ: m.data.flipZ,
+                                }),
+                                (progressBar.style.display = "none")
+                            for (
+                              let r = m.canvas.getContext("2d"),
+                              s = r.getImageData(0, 0, m.width, m.height),
+                              d = s.data,
+                              g = 0;
+                              g < d.length;
+                              g += 4
+                            )
+                              (d[g] = 255 - d[g]),
+                                (d[g + 1] = 255 - d[g + 1]),
+                                (d[g + 2] = 255 - d[g + 2])
+                            r.putImageData(s, 0, 0),
+                              updatePlanHistory(
+                                plan,
+                                u,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null
+                              )
+                          })
+                    })
               } catch (e) {
                 console.dir(e)
               }
@@ -2462,12 +2462,12 @@ function loadFurniture(e, t, o) {
   if (furnitureItems[e.fid])
     if (
       (e.id > clickableObjectsCounter && (clickableObjectsCounter = e.id),
-      "planView" != UILayout)
+        "planView" != UILayout)
     )
       new THREE.MTLLoader()
         .setPath("objects/")
         .load(e.fid + "/" + e.fid + ".mtl", function (a) {
-          ;(a.baseUrl = "objects/" + e.fid + "/"),
+          ; (a.baseUrl = "objects/" + e.fid + "/"),
             a.preload(),
             new THREE.OBJLoader()
               .setMaterials(a)
@@ -2477,238 +2477,238 @@ function loadFurniture(e, t, o) {
                 function (a) {
                   try {
                     let n = new Image()
-                    ;(n.src = "objects/" + e.fid + "_top.png"),
-                      (n.onload = function () {
-                        let l = new THREE.Box3().setFromObject(a)
-                        ;(a.userData.width = l.max.x - l.min.x),
-                          (a.userData.height = l.max.y - l.min.y),
-                          (a.userData.depth = l.max.z - l.min.z)
-                        for (let i = 0; i < a.children.length; i++) {
-                          let r = l.min.x + (l.max.x - l.min.x) / 2,
-                            s =
-                              l.min.y +
-                              (l.max.y - l.min.y) / 2 -
-                              (l.max.y - l.min.y) / 2,
-                            d = l.min.z + (l.max.z - l.min.z) / 2
-                          a.children[i].translateX(-r),
-                            a.children[i].translateY(-s),
-                            a.children[i].translateZ(-d)
-                        }
-                        let c = new THREE.BoxHelper(a, 16711680)
-                        ;(c.material.linewidth = 5),
-                          (c.visible = !1),
-                          a.add(c),
-                          (a.position.x = parseFloat(e.position.x)),
-                          (a.position.y = parseFloat(e.position.y)),
-                          (a.position.z = parseFloat(e.position.z)),
-                          scene.add(a),
-                          (clickableObjects[e.id] = a),
-                          (a.name = e.id)
-                        let u = new THREE.BoxGeometry(
+                      ; (n.src = "objects/" + e.fid + "_top.png"),
+                        (n.onload = function () {
+                          let l = new THREE.Box3().setFromObject(a)
+                            ; (a.userData.width = l.max.x - l.min.x),
+                              (a.userData.height = l.max.y - l.min.y),
+                              (a.userData.depth = l.max.z - l.min.z)
+                          for (let i = 0; i < a.children.length; i++) {
+                            let r = l.min.x + (l.max.x - l.min.x) / 2,
+                              s =
+                                l.min.y +
+                                (l.max.y - l.min.y) / 2 -
+                                (l.max.y - l.min.y) / 2,
+                              d = l.min.z + (l.max.z - l.min.z) / 2
+                            a.children[i].translateX(-r),
+                              a.children[i].translateY(-s),
+                              a.children[i].translateZ(-d)
+                          }
+                          let c = new THREE.BoxHelper(a, 16711680)
+                            ; (c.material.linewidth = 5),
+                              (c.visible = !1),
+                              a.add(c),
+                              (a.position.x = parseFloat(e.position.x)),
+                              (a.position.y = parseFloat(e.position.y)),
+                              (a.position.z = parseFloat(e.position.z)),
+                              scene.add(a),
+                              (clickableObjects[e.id] = a),
+                              (a.name = e.id)
+                          let u = new THREE.BoxGeometry(
                             a.userData.width,
                             a.userData.height,
                             a.userData.depth
                           ),
-                          p = new paper.Raster(n)
-                        ;(p.visible = !1),
-                          (p.data.id = e.id),
-                          (p.data.fid = e.fid),
-                          (p.data.boxHelper = c),
-                          (p.data.level = (e.level ? e.level : 0).toString()),
-                          project.layers["level" + p.data.level] ||
-                            addNewLevel(p.data.level),
-                          project.activeLayer.data.id !== p.data.level &&
-                            (o || setLevel(p.data.level)),
-                          furnitureGroup[p.data.level].addChild(p),
-                          (p.data.flipX = e.flipX ? e.flipX : 1),
-                          (p.data.flipZ = e.flipZ ? e.flipZ : 1),
-                          (p.onLoad = (function (e) {
-                            ;(p.data.type = "furniture"),
-                              (p.opacity = 0.5),
-                              (p.fillColor = new paper.Color(1, 1, 1, 1)),
-                              (p.selectedColor = new paper.Color(0, 0, 0, 0)),
-                              readOnly ||
-                                (p.onMouseDown = function (t) {
-                                  if ("pointer" === toolMode) {
-                                    deselectAll(),
-                                      (selectedItem = this),
-                                      (mouseMode = 0),
-                                      (offsetMousePoint =
-                                        selectedItem.position.subtract(
-                                          t.point
+                            p = new paper.Raster(n)
+                            ; (p.visible = !1),
+                              (p.data.id = e.id),
+                              (p.data.fid = e.fid),
+                              (p.data.boxHelper = c),
+                              (p.data.level = (e.level ? e.level : 0).toString()),
+                              project.layers["level" + p.data.level] ||
+                              addNewLevel(p.data.level),
+                              project.activeLayer.data.id !== p.data.level &&
+                              (o || setLevel(p.data.level)),
+                              furnitureGroup[p.data.level].addChild(p),
+                              (p.data.flipX = e.flipX ? e.flipX : 1),
+                              (p.data.flipZ = e.flipZ ? e.flipZ : 1),
+                              (p.onLoad = (function (e) {
+                                ; (p.data.type = "furniture"),
+                                  (p.opacity = 0.5),
+                                  (p.fillColor = new paper.Color(1, 1, 1, 1)),
+                                  (p.selectedColor = new paper.Color(0, 0, 0, 0)),
+                                  readOnly ||
+                                  (p.onMouseDown = function (t) {
+                                    if ("pointer" === toolMode) {
+                                      deselectAll(),
+                                        (selectedItem = this),
+                                        (mouseMode = 0),
+                                        (offsetMousePoint =
+                                          selectedItem.position.subtract(
+                                            t.point
+                                          )),
+                                        (offsetMousePoint.x = parseInt(
+                                          offsetMousePoint.x
                                         )),
-                                      (offsetMousePoint.x = parseInt(
-                                        offsetMousePoint.x
-                                      )),
-                                      (offsetMousePoint.y = parseInt(
-                                        offsetMousePoint.y
-                                      )),
-                                      selectedItem.bringToFront(),
-                                      this.data.toolsRectangleInner &&
+                                        (offsetMousePoint.y = parseInt(
+                                          offsetMousePoint.y
+                                        )),
+                                        selectedItem.bringToFront(),
+                                        this.data.toolsRectangleInner &&
                                         this.data.toolsRectangleInner.remove(),
-                                      (this.rotation = 0)
-                                    let o = new paper.Path.Rectangle(
-                                      this.bounds
-                                    )
-                                    ;(this.rotation = this.data.angle),
-                                      (o.data.type = "toolsRectangle"),
-                                      (o.strokeColor = "#b19064"),
-                                      (o.strokeWidth = 1),
-                                      (o.strokeScaling = !1),
-                                      (o.locked = !0),
-                                      o.rotate(this.data.angle),
-                                      (this.data.toolsRectangleInner = o),
-                                      (o.visible = !0),
-                                      (this.data.boxHelper.visible = !0),
-                                      redrawGrid(),
-                                      (rotateIcon.visible = !0),
-                                      (resizeIcon.visible = !0),
-                                      (elevateIcon.visible = !0),
-                                      (heightIcon.visible = !0),
-                                      (toolsGroup.position =
-                                        selectedItem.bounds.center),
-                                      (toolsGroup.visible = !0),
-                                      toolsGroup.bringToFront(),
-                                      (rotateIcon.data.level =
-                                        project.activeLayer.data.id),
-                                      (resizeIcon.data.level =
-                                        project.activeLayer.data.id),
-                                      (elevateIcon.data.level =
-                                        project.activeLayer.data.id),
-                                      (heightIcon.data.level =
-                                        project.activeLayer.data.id),
-                                      (toolsGroup.data.level =
-                                        project.activeLayer.data.id),
-                                      (modalModel3dFurnitureId = e.fid),
-                                      updateObjectPropertiesWindow()
-                                  }
-                                }),
-                              (p.visible = !0),
-                              p.bringToFront(),
-                              clickableObjects[e.id].scale.set(
-                                parseFloat(e.scale.x),
-                                parseFloat(e.scale.y),
-                                parseFloat(e.scale.z)
-                              ),
-                              e.flipX === -1 && flipImageDataX(p),
-                              e.flipZ === -1 && flipImageDataZ(p),
-                              (l = new THREE.Box3().setFromObject(a))
-                            let o = l.max.x - l.min.x,
-                              n = l.max.z - l.min.z
-                            if (furnitureItems[e.fid].useMask) {
-                              p.useMask = !0
-                              let i = new THREE.Mesh(
-                                u,
-                                new THREE.MeshStandardMaterial({})
-                              )
-                              ;(i.position.x = a.position.x),
-                                (i.position.y = a.position.y),
-                                (i.position.z = a.position.z),
-                                i.geometry.translate(
-                                  0,
-                                  a.userData.height / 2,
-                                  0
-                                ),
-                                (i.visible = !1),
-                                scene.add(i),
-                                (maskObjects[e.id] = i),
-                                (i.name = "mask" + e.id)
-                            }
-                            if (
-                              ((p.rotation = 0),
-                              (p.bounds.width = Math.abs(o)),
-                              (p.bounds.height = Math.abs(n)),
-                              (p.position = new paper.Point(
-                                parseInt(e.position.x),
-                                parseInt(e.position.z)
-                              )),
-                              e.angle)
-                            ) {
-                              let r = (e.angle + 360) % 360
-                              p.rotate(r),
-                                (p.data.angle = r),
-                                clickableObjects[e.id].rotateY(
-                                  (-r / 180) * Math.PI
-                                ),
-                                maskObjects[e.id] &&
-                                  maskObjects[e.id].rotateY(
-                                    (-r / 180) * Math.PI
+                                        (this.rotation = 0)
+                                      let o = new paper.Path.Rectangle(
+                                        this.bounds
+                                      )
+                                        ; (this.rotation = this.data.angle),
+                                          (o.data.type = "toolsRectangle"),
+                                          (o.strokeColor = "#b19064"),
+                                          (o.strokeWidth = 1),
+                                          (o.strokeScaling = !1),
+                                          (o.locked = !0),
+                                          o.rotate(this.data.angle),
+                                          (this.data.toolsRectangleInner = o),
+                                          (o.visible = !0),
+                                          (this.data.boxHelper.visible = !0),
+                                          redrawGrid(),
+                                          (rotateIcon.visible = !0),
+                                          (resizeIcon.visible = !0),
+                                          (elevateIcon.visible = !0),
+                                          (heightIcon.visible = !0),
+                                          (toolsGroup.position =
+                                            selectedItem.bounds.center),
+                                          (toolsGroup.visible = !0),
+                                          toolsGroup.bringToFront(),
+                                          (rotateIcon.data.level =
+                                            project.activeLayer.data.id),
+                                          (resizeIcon.data.level =
+                                            project.activeLayer.data.id),
+                                          (elevateIcon.data.level =
+                                            project.activeLayer.data.id),
+                                          (heightIcon.data.level =
+                                            project.activeLayer.data.id),
+                                          (toolsGroup.data.level =
+                                            project.activeLayer.data.id),
+                                          (modalModel3dFurnitureId = e.fid),
+                                          updateObjectPropertiesWindow()
+                                    }
+                                  }),
+                                  (p.visible = !0),
+                                  p.bringToFront(),
+                                  clickableObjects[e.id].scale.set(
+                                    parseFloat(e.scale.x),
+                                    parseFloat(e.scale.y),
+                                    parseFloat(e.scale.z)
+                                  ),
+                                  e.flipX === -1 && flipImageDataX(p),
+                                  e.flipZ === -1 && flipImageDataZ(p),
+                                  (l = new THREE.Box3().setFromObject(a))
+                                let o = l.max.x - l.min.x,
+                                  n = l.max.z - l.min.z
+                                if (furnitureItems[e.fid].useMask) {
+                                  p.useMask = !0
+                                  let i = new THREE.Mesh(
+                                    u,
+                                    new THREE.MeshStandardMaterial({})
                                   )
-                            } else p.data.angle = 0
-                            e.scale &&
-                              maskObjects[e.id] &&
-                              ((maskObjects[e.id].scale.x = parseFloat(
-                                Math.abs(e.scale.x)
-                              )),
-                              (maskObjects[e.id].scale.y = parseFloat(
-                                Math.abs(e.scale.y)
-                              )),
-                              (maskObjects[e.id].scale.z = parseFloat(
-                                Math.abs(e.scale.z)
-                              ))),
-                              render(),
-                              (Furniture[e.id] = p),
-                              (plan.furniture[e.id] = {
-                                id: e.id,
-                                fid: e.fid,
-                                position: clickableObjects[e.id].position,
-                                scale: clickableObjects[e.id].scale,
-                                rotation: clickableObjects[e.id].rotation,
-                                width: o,
-                                depth: n,
-                                angle: p.data.angle,
-                                level: p.data.level,
-                                flipX: p.data.flipX,
-                                flipZ: p.data.flipZ,
-                              }),
-                              loadedFurnitureCount++,
-                              (loadingProgressTxt =
-                                "Furniture id : " +
-                                e.id +
-                                " loaded\n" +
-                                loadingProgressTxt),
-                              (document.getElementById(
-                                "modalLoadingDataInfo"
-                              ).innerHTML = loadingProgressTxt),
-                              loadedFurnitureCount === furnitureToLoadCount &&
-                                doLoadFinished(),
-                              (progressBar.style.display = "none")
-                            for (
-                              let s = p.canvas.getContext("2d"),
-                                d = s.getImageData(0, 0, p.width, p.height),
-                                c = d.data,
-                                m = 0;
-                              m < c.length;
-                              m += 4
-                            )
-                              (c[m] = 255 - c[m]),
-                                (c[m + 1] = 255 - c[m + 1]),
-                                (c[m + 2] = 255 - c[m + 2])
-                            s.putImageData(d, 0, 0),
-                              t &&
-                                updatePlanHistory(
-                                  plan,
-                                  e.id,
-                                  null,
-                                  null,
-                                  null,
-                                  null,
-                                  null,
-                                  null,
-                                  null,
-                                  null,
-                                  null,
-                                  null,
-                                  null,
-                                  null,
-                                  null,
-                                  null,
-                                  null,
-                                  null,
-                                  null
+                                    ; (i.position.x = a.position.x),
+                                      (i.position.y = a.position.y),
+                                      (i.position.z = a.position.z),
+                                      i.geometry.translate(
+                                        0,
+                                        a.userData.height / 2,
+                                        0
+                                      ),
+                                      (i.visible = !1),
+                                      scene.add(i),
+                                      (maskObjects[e.id] = i),
+                                      (i.name = "mask" + e.id)
+                                }
+                                if (
+                                  ((p.rotation = 0),
+                                    (p.bounds.width = Math.abs(o)),
+                                    (p.bounds.height = Math.abs(n)),
+                                    (p.position = new paper.Point(
+                                      parseInt(e.position.x),
+                                      parseInt(e.position.z)
+                                    )),
+                                    e.angle)
+                                ) {
+                                  let r = (e.angle + 360) % 360
+                                  p.rotate(r),
+                                    (p.data.angle = r),
+                                    clickableObjects[e.id].rotateY(
+                                      (-r / 180) * Math.PI
+                                    ),
+                                    maskObjects[e.id] &&
+                                    maskObjects[e.id].rotateY(
+                                      (-r / 180) * Math.PI
+                                    )
+                                } else p.data.angle = 0
+                                e.scale &&
+                                  maskObjects[e.id] &&
+                                  ((maskObjects[e.id].scale.x = parseFloat(
+                                    Math.abs(e.scale.x)
+                                  )),
+                                    (maskObjects[e.id].scale.y = parseFloat(
+                                      Math.abs(e.scale.y)
+                                    )),
+                                    (maskObjects[e.id].scale.z = parseFloat(
+                                      Math.abs(e.scale.z)
+                                    ))),
+                                  render(),
+                                  (Furniture[e.id] = p),
+                                  (plan.furniture[e.id] = {
+                                    id: e.id,
+                                    fid: e.fid,
+                                    position: clickableObjects[e.id].position,
+                                    scale: clickableObjects[e.id].scale,
+                                    rotation: clickableObjects[e.id].rotation,
+                                    width: o,
+                                    depth: n,
+                                    angle: p.data.angle,
+                                    level: p.data.level,
+                                    flipX: p.data.flipX,
+                                    flipZ: p.data.flipZ,
+                                  }),
+                                  loadedFurnitureCount++,
+                                  (loadingProgressTxt =
+                                    "Furniture id : " +
+                                    e.id +
+                                    " loaded\n" +
+                                    loadingProgressTxt),
+                                  (document.getElementById(
+                                    "modalLoadingDataInfo"
+                                  ).innerHTML = loadingProgressTxt),
+                                  loadedFurnitureCount === furnitureToLoadCount &&
+                                  doLoadFinished(),
+                                  (progressBar.style.display = "none")
+                                for (
+                                  let s = p.canvas.getContext("2d"),
+                                  d = s.getImageData(0, 0, p.width, p.height),
+                                  c = d.data,
+                                  m = 0;
+                                  m < c.length;
+                                  m += 4
                                 )
-                          })(e))
-                      })
+                                  (c[m] = 255 - c[m]),
+                                    (c[m + 1] = 255 - c[m + 1]),
+                                    (c[m + 2] = 255 - c[m + 2])
+                                s.putImageData(d, 0, 0),
+                                  t &&
+                                  updatePlanHistory(
+                                    plan,
+                                    e.id,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null
+                                  )
+                              })(e))
+                        })
                   } catch (e) {
                     console.dir(e)
                   }
@@ -2719,62 +2719,62 @@ function loadFurniture(e, t, o) {
         })
     else {
       let a = new Image()
-      ;(a.src = "objects/" + e.fid + "_top.png"),
-        (a.onload = function () {
-          let t = new paper.Raster(a)
-          ;(t.visible = !1),
-            (t.data.id = e.id),
-            (t.data.fid = e.fid),
-            (t.data.level = (e.level ? e.level : 0).toString()),
-            project.layers["level" + t.data.level] || addNewLevel(t.data.level),
-            project.activeLayer.data.id !== t.data.level &&
-              setLevel(t.data.level),
-            furnitureGroup[t.data.level].addChild(t),
-            (t.data.flipX = e.flipX ? e.flipX : 1),
-            (t.data.flipZ = e.flipZ ? e.flipZ : 1),
-            (t.onLoad = (function (e) {
-              if (
-                ((t.data.type = "furniture"),
-                (t.opacity = 0.5),
-                (t.fillColor = new paper.Color(1, 1, 1, 1)),
-                (t.visible = !0),
-                t.bringToFront(),
-                e.flipX === -1 && flipImageDataX(t),
-                e.flipZ === -1 && flipImageDataZ(t),
-                (t.rotation = 0),
-                (t.bounds.width = Math.abs(e.width)),
-                (t.bounds.height = Math.abs(e.depth)),
-                (t.position = new paper.Point(
-                  parseInt(e.position.x),
-                  parseInt(e.position.z)
-                )),
-                e.angle)
-              ) {
-                let o = (e.angle + 360) % 360
-                t.rotate(o), (t.data.angle = o)
-              } else t.data.angle = 0
-              ;(Furniture[e.id] = t),
-                loadedFurnitureCount++,
-                (loadingProgressTxt =
-                  "Furniture id : " + e.id + " loaded\n" + loadingProgressTxt),
-                (document.getElementById("modalLoadingDataInfo").innerHTML =
-                  loadingProgressTxt),
-                loadedFurnitureCount === furnitureToLoadCount &&
-                  doLoadFinished()
-              for (
-                let a = t.canvas.getContext("2d"),
-                  n = a.getImageData(0, 0, t.width, t.height),
-                  l = n.data,
-                  i = 0;
-                i < l.length;
-                i += 4
-              )
-                (l[i] = 255 - l[i]),
-                  (l[i + 1] = 255 - l[i + 1]),
-                  (l[i + 2] = 255 - l[i + 2])
-              a.putImageData(n, 0, 0)
-            })(e))
-        })
+        ; (a.src = "objects/" + e.fid + "_top.png"),
+          (a.onload = function () {
+            let t = new paper.Raster(a)
+              ; (t.visible = !1),
+                (t.data.id = e.id),
+                (t.data.fid = e.fid),
+                (t.data.level = (e.level ? e.level : 0).toString()),
+                project.layers["level" + t.data.level] || addNewLevel(t.data.level),
+                project.activeLayer.data.id !== t.data.level &&
+                setLevel(t.data.level),
+                furnitureGroup[t.data.level].addChild(t),
+                (t.data.flipX = e.flipX ? e.flipX : 1),
+                (t.data.flipZ = e.flipZ ? e.flipZ : 1),
+                (t.onLoad = (function (e) {
+                  if (
+                    ((t.data.type = "furniture"),
+                      (t.opacity = 0.5),
+                      (t.fillColor = new paper.Color(1, 1, 1, 1)),
+                      (t.visible = !0),
+                      t.bringToFront(),
+                      e.flipX === -1 && flipImageDataX(t),
+                      e.flipZ === -1 && flipImageDataZ(t),
+                      (t.rotation = 0),
+                      (t.bounds.width = Math.abs(e.width)),
+                      (t.bounds.height = Math.abs(e.depth)),
+                      (t.position = new paper.Point(
+                        parseInt(e.position.x),
+                        parseInt(e.position.z)
+                      )),
+                      e.angle)
+                  ) {
+                    let o = (e.angle + 360) % 360
+                    t.rotate(o), (t.data.angle = o)
+                  } else t.data.angle = 0
+                    ; (Furniture[e.id] = t),
+                      loadedFurnitureCount++,
+                      (loadingProgressTxt =
+                        "Furniture id : " + e.id + " loaded\n" + loadingProgressTxt),
+                      (document.getElementById("modalLoadingDataInfo").innerHTML =
+                        loadingProgressTxt),
+                      loadedFurnitureCount === furnitureToLoadCount &&
+                      doLoadFinished()
+                  for (
+                    let a = t.canvas.getContext("2d"),
+                    n = a.getImageData(0, 0, t.width, t.height),
+                    l = n.data,
+                    i = 0;
+                    i < l.length;
+                    i += 4
+                  )
+                    (l[i] = 255 - l[i]),
+                      (l[i + 1] = 255 - l[i + 1]),
+                      (l[i + 2] = 255 - l[i + 2])
+                  a.putImageData(n, 0, 0)
+                })(e))
+          })
     }
   else
     loadedFurnitureCount++,
@@ -2791,7 +2791,7 @@ function loadFurniture(e, t, o) {
       console.log(e)
 }
 function editFurnitureByKey(e) {
-  ;(clickableObjects[e.id].position.x = parseFloat(e.position.x)),
+  ; (clickableObjects[e.id].position.x = parseFloat(e.position.x)),
     (clickableObjects[e.id].position.y = parseFloat(e.position.y)),
     (clickableObjects[e.id].position.z = parseFloat(e.position.z)),
     clickableObjects[e.id].scale.set(
@@ -2803,7 +2803,7 @@ function editFurnitureByKey(e) {
     (clickableObjects[e.id].rotation.y = parseFloat(e.rotation._y)),
     (clickableObjects[e.id].rotation.z = parseFloat(e.rotation._z)),
     maskObjects[e.id] &&
-      ((maskObjects[e.id].position.x = parseFloat(e.position.x)),
+    ((maskObjects[e.id].position.x = parseFloat(e.position.x)),
       (maskObjects[e.id].position.y = parseFloat(e.position.y)),
       (maskObjects[e.id].position.z = parseFloat(e.position.z)),
       (maskObjects[e.id].scale.x = parseFloat(Math.abs(e.scale.x))),
@@ -2814,21 +2814,21 @@ function editFurnitureByKey(e) {
       (maskObjects[e.id].rotation.z = parseFloat(e.rotation._z))),
     Object.keys(Furniture).forEach(function (t) {
       let o = Furniture[t]
-      if ("object" == typeof o && o.data.id === e.id) {
+      if ("object" === typeof o && o.data.id === e.id) {
         let a = (parseFloat(e.angle) + 360) % 360
-        ;(o.rotation = 0),
-          (o.bounds.width = parseFloat(Math.abs(e.width))),
-          (o.bounds.height = parseFloat(Math.abs(e.depth))),
-          o.data.flipX != e.flipX && flipImageDataX(o),
-          (o.data.flipX = e.flipX),
-          o.data.flipZ != e.flipZ && flipImageDataZ(o),
-          (o.data.flipZ = e.flipZ),
-          o.rotate(a),
-          (o.data.angle = a),
-          (o.position = new paper.Point(
-            parseFloat(e.position.x),
-            parseFloat(e.position.z)
-          ))
+          ; (o.rotation = 0),
+            (o.bounds.width = parseFloat(Math.abs(e.width))),
+            (o.bounds.height = parseFloat(Math.abs(e.depth))),
+            o.data.flipX != e.flipX && flipImageDataX(o),
+            (o.data.flipX = e.flipX),
+            o.data.flipZ != e.flipZ && flipImageDataZ(o),
+            (o.data.flipZ = e.flipZ),
+            o.rotate(a),
+            (o.data.angle = a),
+            (o.position = new paper.Point(
+              parseFloat(e.position.x),
+              parseFloat(e.position.z)
+            ))
       }
     }),
     render()
@@ -2837,26 +2837,26 @@ function redrawGrid() {
   if (!redrawing && "3dView" != UILayout) {
     if (
       ((redrawing = !0),
-      (screenScale = screenAvg / paper.view.zoom / 75),
-      selectedItem && selectedItem.data)
+        (screenScale = screenAvg / paper.view.zoom / 75),
+        selectedItem && selectedItem.data)
     )
       if ("wallPath" === selectedItem.data.type) {
         let e = 0
         selectedItem.segments.forEach(function (t) {
           movePointIcons[e] &&
             ((movePointIcons[e].position = t.point),
-            (movePointIcons[e].bounds.width = screenScale),
-            (movePointIcons[e].bounds.height = screenScale),
-            e++)
+              (movePointIcons[e].bounds.width = screenScale),
+              (movePointIcons[e].bounds.height = screenScale),
+              e++)
         })
       } else if ("roofPath" === selectedItem.data.type) {
         let e = 0
         selectedItem.segments.forEach(function (t) {
           movePointIcons[e] &&
             ((movePointIcons[e].position = t.point),
-            (movePointIcons[e].bounds.width = screenScale),
-            (movePointIcons[e].bounds.height = screenScale),
-            e++)
+              (movePointIcons[e].bounds.width = screenScale),
+              (movePointIcons[e].bounds.height = screenScale),
+              e++)
         })
       } else if ("furniture" === selectedItem.data.type)
         (rotateIcon.bounds.width = screenScale),
@@ -2885,9 +2885,9 @@ function redrawGrid() {
         selectedItem.segments.forEach(function (t) {
           movePointIcons[e] &&
             ((movePointIcons[e].position = t.point),
-            (movePointIcons[e].bounds.width = screenScale),
-            (movePointIcons[e].bounds.height = screenScale),
-            e++)
+              (movePointIcons[e].bounds.width = screenScale),
+              (movePointIcons[e].bounds.height = screenScale),
+              e++)
         })
       }
     let t = 0,
@@ -2898,46 +2898,46 @@ function redrawGrid() {
         (snapTolerance = 100),
         (paper.settings.hitTolerance = 3))
       : paper.view.zoom < 0.375
-      ? ((t = 100),
-        (o = 1e3),
-        (snapTolerance = 50),
-        (paper.settings.hitTolerance = 3))
-      : paper.view.zoom < 0.75
-      ? ((t = 50),
-        (o = 500),
-        (snapTolerance = 25),
-        (paper.settings.hitTolerance = 3))
-      : paper.view.zoom < 1.5
-      ? ((t = 20),
-        (o = 200),
-        (snapTolerance = 10),
-        (paper.settings.hitTolerance = 3))
-      : paper.view.zoom < 3
-      ? ((t = 10),
-        (o = 100),
-        (snapTolerance = 5),
-        (paper.settings.hitTolerance = 3))
-      : paper.view.zoom < 6
-      ? ((t = 5),
-        (o = 50),
-        (snapTolerance = 2),
-        (paper.settings.hitTolerance = 3))
-      : paper.view.zoom < 12
-      ? ((t = 2),
-        (o = 20),
-        (snapTolerance = 1),
-        (paper.settings.hitTolerance = 2))
-      : paper.view.zoom < 24 &&
-        ((t = 1),
-        (o = 10),
-        (snapTolerance = 0.5),
-        (paper.settings.hitTolerance = 1)),
+        ? ((t = 100),
+          (o = 1e3),
+          (snapTolerance = 50),
+          (paper.settings.hitTolerance = 3))
+        : paper.view.zoom < 0.75
+          ? ((t = 50),
+            (o = 500),
+            (snapTolerance = 25),
+            (paper.settings.hitTolerance = 3))
+          : paper.view.zoom < 1.5
+            ? ((t = 20),
+              (o = 200),
+              (snapTolerance = 10),
+              (paper.settings.hitTolerance = 3))
+            : paper.view.zoom < 3
+              ? ((t = 10),
+                (o = 100),
+                (snapTolerance = 5),
+                (paper.settings.hitTolerance = 3))
+              : paper.view.zoom < 6
+                ? ((t = 5),
+                  (o = 50),
+                  (snapTolerance = 2),
+                  (paper.settings.hitTolerance = 3))
+                : paper.view.zoom < 12
+                  ? ((t = 2),
+                    (o = 20),
+                    (snapTolerance = 1),
+                    (paper.settings.hitTolerance = 2))
+                  : paper.view.zoom < 24 &&
+                  ((t = 1),
+                    (o = 10),
+                    (snapTolerance = 0.5),
+                    (paper.settings.hitTolerance = 1)),
       rulerLeftCtx.clearRect(0, 0, 30, rulerLeft.height),
       rulerBottomCtx.clearRect(0, 0, rulerBottom.width, 20)
     let a = paper.view.bounds.left % t,
       n = 0
     xLines.forEach(function (e) {
-      ;(e.segments[0].point.x = paper.view.bounds.left + n - a),
+      ; (e.segments[0].point.x = paper.view.bounds.left + n - a),
         (e.segments[0].point.y = paper.view.bounds.top),
         (e.segments[1].point.x = paper.view.bounds.left + n - a),
         (e.segments[1].point.y = paper.view.bounds.bottom)
@@ -2950,63 +2950,63 @@ function redrawGrid() {
             14
           ))
         : l % o === 0
-        ? ((e.style.strokeColor = "#81673a"),
-          rulerBottomCtx.fillText(
-            parseInt(paper.view.bounds.left + n - a),
-            (l - paper.view.bounds.left) * paper.view.zoom,
-            14
-          ))
-        : (e.style.strokeColor = "#564c3a"),
+          ? ((e.style.strokeColor = "#81673a"),
+            rulerBottomCtx.fillText(
+              parseInt(paper.view.bounds.left + n - a),
+              (l - paper.view.bounds.left) * paper.view.zoom,
+              14
+            ))
+          : (e.style.strokeColor = "#564c3a"),
         (n += t)
     })
     let l = paper.view.bounds.top % t
-    ;(n = 0),
-      yLines.forEach(function (e) {
-        ;(e.segments[0].point.x = paper.view.bounds.left),
-          (e.segments[0].point.y = paper.view.bounds.top + n - l),
-          (e.segments[1].point.x = paper.view.bounds.right),
-          (e.segments[1].point.y = paper.view.bounds.top + n - l)
-        let a = parseInt(e.segments[0].point.y)
-        0 === a
-          ? ((e.style.strokeColor = "white"),
-            rulerLeftCtx.fillText(
-              "0cm",
-              26,
-              (a - paper.view.bounds.top) * paper.view.zoom + 4
-            ))
-          : a % o === 0
-          ? ((e.style.strokeColor = "#81673a"),
-            rulerLeftCtx.fillText(
-              parseInt(paper.view.bounds.top + n - l),
-              26,
-              (a - paper.view.bounds.top) * paper.view.zoom + 4
-            ))
-          : (e.style.strokeColor = "#564c3a"),
-          (n += t)
-      }),
-      Object.keys(verticalGuides).forEach(function (e) {
-        ;(verticalGuides[e].segments[0].point.y = paper.view.bounds.top),
-          (verticalGuides[e].segments[1].point.y = paper.view.bounds.bottom)
-      }),
-      Object.keys(horizontalGuides).forEach(function (e) {
-        ;(horizontalGuides[e].segments[0].point.x = paper.view.bounds.left),
-          (horizontalGuides[e].segments[1].point.x = paper.view.bounds.right)
-      }),
-      (redrawing = !1)
+      ; (n = 0),
+        yLines.forEach(function (e) {
+          ; (e.segments[0].point.x = paper.view.bounds.left),
+            (e.segments[0].point.y = paper.view.bounds.top + n - l),
+            (e.segments[1].point.x = paper.view.bounds.right),
+            (e.segments[1].point.y = paper.view.bounds.top + n - l)
+          let a = parseInt(e.segments[0].point.y)
+          0 === a
+            ? ((e.style.strokeColor = "white"),
+              rulerLeftCtx.fillText(
+                "0cm",
+                26,
+                (a - paper.view.bounds.top) * paper.view.zoom + 4
+              ))
+            : a % o === 0
+              ? ((e.style.strokeColor = "#81673a"),
+                rulerLeftCtx.fillText(
+                  parseInt(paper.view.bounds.top + n - l),
+                  26,
+                  (a - paper.view.bounds.top) * paper.view.zoom + 4
+                ))
+              : (e.style.strokeColor = "#564c3a"),
+            (n += t)
+        }),
+        Object.keys(verticalGuides).forEach(function (e) {
+          ; (verticalGuides[e].segments[0].point.y = paper.view.bounds.top),
+            (verticalGuides[e].segments[1].point.y = paper.view.bounds.bottom)
+        }),
+        Object.keys(horizontalGuides).forEach(function (e) {
+          ; (horizontalGuides[e].segments[0].point.x = paper.view.bounds.left),
+            (horizontalGuides[e].segments[1].point.x = paper.view.bounds.right)
+        }),
+        (redrawing = !1)
   }
 }
 function redrawTexts() {
   Object.keys(Dimensions).forEach(function (e) {
     let t = Dimensions[e]
-    "object" == typeof t && (Dimensions[e].text.fontSize = screenScale / 1.5)
+    "object" === typeof t && (Dimensions[e].text.fontSize = screenScale / 1.5)
   }),
     Object.keys(Texts).forEach(function (e) {
       let t = Texts[e]
-      "object" == typeof t && (Texts[e].fontSize = screenScale / 1.5)
+      "object" === typeof t && (Texts[e].fontSize = screenScale / 1.5)
     })
 }
 function closeAllModals() {
-  ;(model3dViewOpen = !1),
+  ; (model3dViewOpen = !1),
     $("#aboutModal").hide(),
     $("#model3dModal").hide(),
     $("#loadingModal").hide(),
@@ -3053,11 +3053,11 @@ function initPlanView() {
       if (a > 0.0625 && a < 16) {
         paper.view.zoom = a
         let n = paper.view.viewToProject(
-            new paper.Point(
-              e.pageX - planView.offsetLeft,
-              e.pageY - planView.offsetTop
-            )
-          ),
+          new paper.Point(
+            e.pageX - planView.offsetLeft,
+            e.pageY - planView.offsetTop
+          )
+        ),
           l = 0.11 * (paper.view.center.x - n.x),
           i = 0.11 * (paper.view.center.y - n.y)
         if (t > 0) {
@@ -3078,46 +3078,46 @@ function initPlanView() {
   }
   if (
     ((planView = document.getElementById("planView")),
-    (project.activeLayer.name = "level0"),
-    (project.activeLayer.data = { id: "0", height: 0 }),
-    (screenScale = screenAvg / paper.view.zoom / 75),
-    (gridGroup = new paper.Group()),
-    (floorsGroup = {}),
-    (floorsGroup[0] = new paper.Group()),
-    (roofsGroup = {}),
-    (roofsGroup[0] = new paper.Group()),
-    (wallsGroup = {}),
-    (wallsGroup[0] = new paper.Group()),
-    (dimensionsGroup = {}),
-    (dimensionsGroup[0] = new paper.Group()),
-    (furnitureGroup = {}),
-    (furnitureGroup[0] = new paper.Group()),
-    (textsGroup = {}),
-    (textsGroup[0] = new paper.Group()),
-    (guidesGroup = new paper.Group()),
-    (rulerLeft = document.getElementById("rulerLeft")),
-    (rulerBottom = document.getElementById("rulerBottom")),
-    (mouseIndicatorX = document.getElementById("mouseIndicatorX")),
-    (mouseIndicatorY = document.getElementById("mouseIndicatorY")),
-    (planCanvas.width = planCanvas.parentNode.getBoundingClientRect().width),
-    (planCanvas.height = planCanvas.parentNode.getBoundingClientRect().height),
-    (rulerBottom.width = planCanvas.parentNode.getBoundingClientRect().width),
-    (rulerLeft.height = planCanvas.parentNode.getBoundingClientRect().height),
-    (planCanvas.oncontextmenu = function () {
-      return !1
-    }),
-    (document.getElementsByClassName("close")[0].onclick = function () {
-      closeAllModals(), showMouseIndicators()
-    }),
-    (document.getElementsByClassName("close")[1].onclick = function () {
-      closeAllModals(), showMouseIndicators()
-    }),
-    (document.getElementsByClassName("close")[2].onclick = function () {
-      closeAllModals(), showMouseIndicators()
-    }),
-    "3dView" != UILayout)
+      (project.activeLayer.name = "level0"),
+      (project.activeLayer.data = { id: "0", height: 0 }),
+      (screenScale = screenAvg / paper.view.zoom / 75),
+      (gridGroup = new paper.Group()),
+      (floorsGroup = {}),
+      (floorsGroup[0] = new paper.Group()),
+      (roofsGroup = {}),
+      (roofsGroup[0] = new paper.Group()),
+      (wallsGroup = {}),
+      (wallsGroup[0] = new paper.Group()),
+      (dimensionsGroup = {}),
+      (dimensionsGroup[0] = new paper.Group()),
+      (furnitureGroup = {}),
+      (furnitureGroup[0] = new paper.Group()),
+      (textsGroup = {}),
+      (textsGroup[0] = new paper.Group()),
+      (guidesGroup = new paper.Group()),
+      (rulerLeft = document.getElementById("rulerLeft")),
+      (rulerBottom = document.getElementById("rulerBottom")),
+      (mouseIndicatorX = document.getElementById("mouseIndicatorX")),
+      (mouseIndicatorY = document.getElementById("mouseIndicatorY")),
+      (planCanvas.width = planCanvas.parentNode.getBoundingClientRect().width),
+      (planCanvas.height = planCanvas.parentNode.getBoundingClientRect().height),
+      (rulerBottom.width = planCanvas.parentNode.getBoundingClientRect().width),
+      (rulerLeft.height = planCanvas.parentNode.getBoundingClientRect().height),
+      (planCanvas.oncontextmenu = function () {
+        return !1
+      }),
+      (document.getElementsByClassName("close")[0].onclick = function () {
+        closeAllModals(), showMouseIndicators()
+      }),
+      (document.getElementsByClassName("close")[1].onclick = function () {
+        closeAllModals(), showMouseIndicators()
+      }),
+      (document.getElementsByClassName("close")[2].onclick = function () {
+        closeAllModals(), showMouseIndicators()
+      }),
+      "3dView" != UILayout)
   ) {
-    ;(rulerLeft.oncontextmenu = function () {
+    ; (rulerLeft.oncontextmenu = function () {
       return !1
     }),
       (rulerBottom.oncontextmenu = function () {
@@ -3128,7 +3128,7 @@ function initPlanView() {
       planCanvas.addEventListener(
         "mousemove",
         function (e) {
-          ;(mouseIndicatorX.style.left = e.clientX + "px"),
+          ; (mouseIndicatorX.style.left = e.clientX + "px"),
             (mouseIndicatorY.style.top = e.clientY + "px")
         },
         !1
@@ -3141,23 +3141,23 @@ function initPlanView() {
       let a = new paper.Point(10 * o, 0),
         n = new paper.Point(10 * o, 100),
         l = new paper.Path.Line(a, n)
-      ;(l.strokeColor = "#cccccc"),
-        (l.strokeWidth = 0.5),
-        (l.strokeScaling = !1),
-        xLines.push(l),
-        gridGroup.addChild(l)
+        ; (l.strokeColor = "#cccccc"),
+          (l.strokeWidth = 0.5),
+          (l.strokeScaling = !1),
+          xLines.push(l),
+          gridGroup.addChild(l)
     }
     for (let o = 0; o <= 200; o++) {
       let i = new paper.Point(0, 10 * o),
         r = new paper.Point(100, 10 * o),
         l = new paper.Path.Line(i, r)
-      ;(l.strokeColor = "#cccccc"),
-        (l.strokeWidth = 0.5),
-        (l.strokeScaling = !1),
-        yLines.push(l),
-        gridGroup.addChild(l)
+        ; (l.strokeColor = "#cccccc"),
+          (l.strokeWidth = 0.5),
+          (l.strokeScaling = !1),
+          yLines.push(l),
+          gridGroup.addChild(l)
     }
-    ;(toolsGroup = new paper.Group()),
+    ; (toolsGroup = new paper.Group()),
       (toolsGroup.rotation = 0),
       (rotateIcon = new paper.Raster("media/rotate.png")),
       (rotateIcon.data.type = "rotateFurnitureTool"),
@@ -3200,7 +3200,7 @@ function initPlanView() {
       (heightIcon.visible = !1),
       toolsGroup.addChild(heightIcon)
   }
-  ;(wallHelperPath = new paper.Path.Line(
+  ; (wallHelperPath = new paper.Path.Line(
     new paper.Point(0, 0),
     new paper.Point(0, 0)
   )),
@@ -3237,677 +3237,314 @@ function initPlanView() {
     (dimensionHelperPath.strokeScaling = !1),
     dimensionsGroup[project.activeLayer.data.id].addChild(dimensionHelperPath)
   let s = new Rectangle(new Point(0, 0), new Point(0, 0))
-  ;(wallHelperRectangle = new Path.Rectangle(s)),
-    (wallHelperRectangle.strokeColor = "#b19064"),
-    (wallHelperRectangle.strokeWidth = 2),
-    (wallHelperRectangle.strokeScaling = !1),
-    (s = new Rectangle(new Point(0, 0), new Point(0, 0))),
-    (roofHelperRectangle = new Path.Rectangle(s)),
-    (roofHelperRectangle.strokeColor = "#b19064"),
-    (roofHelperRectangle.strokeWidth = 2),
-    (roofHelperRectangle.strokeScaling = !1),
-    (offsetMousePoint = new paper.Point(0, 0)),
-    (tools = new paper.Tool()),
-    (draggingFurnitureRectangle = new paper.Path.Rectangle(
-      new Point(-1, -1),
-      new Point(1, 1)
-    )),
-    (draggingFurnitureRectangle.strokeColor = "#b19064"),
-    (draggingFurnitureRectangle.strokeWidth = 2),
-    (draggingFurnitureRectangle.strokeScaling = !1),
-    (draggingFurnitureRectangle.position = new paper.Point(0, 0)),
-    (draggingFurnitureRectangle.visible = !1),
-    furnitureGroup[project.activeLayer.data.id].addChild(
-      draggingFurnitureRectangle
-    ),
-    (tools.onMouseDown = function (e) {
-      if ("pointer" === toolMode)
-        if (2 === e.event.buttons) mouseMode = -1
-        else if (readOnly) mouseMode = -1
-        else {
-          let t = project.hitTest(e.point)
-          if (t) {
-            if (t.item.data)
-              if (t.item.data.level === project.activeLayer.data.id.toString())
-                if ("toolsRectangle" === t.item.data.type)
-                  (mouseMode = 0),
-                    (offsetMousePoint = selectedItem.position.subtract(
-                      e.point
-                    )),
-                    (offsetMousePoint.x = parseInt(offsetMousePoint.x)),
-                    (offsetMousePoint.y = parseInt(offsetMousePoint.y))
-                else if ("rotateFurnitureTool" === t.item.data.type)
-                  (mouseMode = 1), console.log("isRotateTool")
-                else if ("stretchFurnitureXZTool" === t.item.data.type)
-                  (mouseMode = 2), console.log("isStretchXY")
-                else if ("stretchFurnitureYTool" === t.item.data.type)
-                  console.log("isStretchYTool"),
-                    (mouseMode = 4),
-                    (snapPoint = e.point),
-                    (snapPoint.x = parseInt(e.point.x)),
-                    (snapPoint.y = parseInt(e.point.y)),
-                    scalingY
-                      ? console.log("this should never happen : scalingY")
-                      : ((scalingY = !0),
-                        (stretchYStartHeight =
-                          clickableObjects[selectedItem.data.id].userData
-                            .height *
-                          clickableObjects[selectedItem.data.id].scale.y),
-                        (stretchYPath = new paper.Path()),
-                        (stretchYPath.strokeColor = "black"),
-                        stretchYPath.add(snapPoint),
-                        stretchYPath.add(snapPoint),
-                        (stretchYPath.visible = !0))
-                else if ("elevateFurnitureTool" === t.item.data.type)
-                  (mouseMode = 5),
-                    console.log("isElevateTool"),
-                    (snapPoint = e.point),
-                    (snapPoint.x = parseInt(e.point.x)),
-                    (snapPoint.y = parseInt(e.point.y)),
-                    elevating
-                      ? console.log("this should never happen : elevating")
-                      : ((elevating = !0),
-                        (elevateStartHeight =
-                          clickableObjects[selectedItem.data.id].position.y),
-                        (elevatePath = new paper.Path()),
-                        (elevatePath.strokeColor = "black"),
-                        elevatePath.add(snapPoint),
-                        elevatePath.add(snapPoint),
-                        (elevatePath.visible = !0))
-                else if ("furniture" === t.item.data.type)
-                  selectedItem.data.id &&
-                    (tween = new TWEEN.Tween(controls.target)
-                      .to(clickableObjects[selectedItem.data.id].position, 500)
-                      .onUpdate(render)
-                      .start())
-                else if ("wallRectangle" === t.item.data.type) {
-                  deselectAll()
-                  let o = Walls[t.item.data.id]
-                  o.bringToFront(),
-                    (o.selected = !0),
-                    (selectedItem = o),
-                    o.segments.forEach(function (e) {
-                      let t = new paper.Raster("media/movePointIcon.png")
-                      ;(t.data.type = "movePointIconWalls"),
-                        (t.data.id = e.index),
-                        (t.data.level = project.activeLayer.data.id),
-                        (t.data.wallId = o.data.id),
-                        (t.bounds.width = screenScale),
-                        (t.bounds.height = screenScale),
-                        (t.position = e.point),
-                        (t.onMouseEnter = function (e) {
-                          planView.style.cursor = "move"
-                        }),
-                        (t.onMouseLeave = function (e) {
-                          planView.style.cursor = "default"
-                        }),
-                        (t.visible = !0),
-                        t.bringToFront(),
-                        movePointIcons.push(t)
+    ; (wallHelperRectangle = new Path.Rectangle(s)),
+      (wallHelperRectangle.strokeColor = "#b19064"),
+      (wallHelperRectangle.strokeWidth = 2),
+      (wallHelperRectangle.strokeScaling = !1),
+      (s = new Rectangle(new Point(0, 0), new Point(0, 0))),
+      (roofHelperRectangle = new Path.Rectangle(s)),
+      (roofHelperRectangle.strokeColor = "#b19064"),
+      (roofHelperRectangle.strokeWidth = 2),
+      (roofHelperRectangle.strokeScaling = !1),
+      (offsetMousePoint = new paper.Point(0, 0)),
+      (tools = new paper.Tool()),
+      (draggingFurnitureRectangle = new paper.Path.Rectangle(
+        new Point(-1, -1),
+        new Point(1, 1)
+      )),
+      (draggingFurnitureRectangle.strokeColor = "#b19064"),
+      (draggingFurnitureRectangle.strokeWidth = 2),
+      (draggingFurnitureRectangle.strokeScaling = !1),
+      (draggingFurnitureRectangle.position = new paper.Point(0, 0)),
+      (draggingFurnitureRectangle.visible = !1),
+      furnitureGroup[project.activeLayer.data.id].addChild(
+        draggingFurnitureRectangle
+      ),
+      (tools.onMouseDown = function (e) {
+        if ("pointer" === toolMode)
+          if (2 === e.event.buttons) mouseMode = -1
+          else if (readOnly) mouseMode = -1
+          else {
+            let t = project.hitTest(e.point)
+            if (t) {
+              if (t.item.data)
+                if (t.item.data.level === project.activeLayer.data.id.toString())
+                  if ("toolsRectangle" === t.item.data.type)
+                    (mouseMode = 0),
+                      (offsetMousePoint = selectedItem.position.subtract(
+                        e.point
+                      )),
+                      (offsetMousePoint.x = parseInt(offsetMousePoint.x)),
+                      (offsetMousePoint.y = parseInt(offsetMousePoint.y))
+                  else if ("rotateFurnitureTool" === t.item.data.type)
+                    (mouseMode = 1), console.log("isRotateTool")
+                  else if ("stretchFurnitureXZTool" === t.item.data.type)
+                    (mouseMode = 2), console.log("isStretchXY")
+                  else if ("stretchFurnitureYTool" === t.item.data.type)
+                    console.log("isStretchYTool"),
+                      (mouseMode = 4),
+                      (snapPoint = e.point),
+                      (snapPoint.x = parseInt(e.point.x)),
+                      (snapPoint.y = parseInt(e.point.y)),
+                      scalingY
+                        ? console.log("this should never happen : scalingY")
+                        : ((scalingY = !0),
+                          (stretchYStartHeight =
+                            clickableObjects[selectedItem.data.id].userData
+                              .height *
+                            clickableObjects[selectedItem.data.id].scale.y),
+                          (stretchYPath = new paper.Path()),
+                          (stretchYPath.strokeColor = "black"),
+                          stretchYPath.add(snapPoint),
+                          stretchYPath.add(snapPoint),
+                          (stretchYPath.visible = !0))
+                  else if ("elevateFurnitureTool" === t.item.data.type)
+                    (mouseMode = 5),
+                      console.log("isElevateTool"),
+                      (snapPoint = e.point),
+                      (snapPoint.x = parseInt(e.point.x)),
+                      (snapPoint.y = parseInt(e.point.y)),
+                      elevating
+                        ? console.log("this should never happen : elevating")
+                        : ((elevating = !0),
+                          (elevateStartHeight =
+                            clickableObjects[selectedItem.data.id].position.y),
+                          (elevatePath = new paper.Path()),
+                          (elevatePath.strokeColor = "black"),
+                          elevatePath.add(snapPoint),
+                          elevatePath.add(snapPoint),
+                          (elevatePath.visible = !0))
+                  else if ("furniture" === t.item.data.type)
+                    selectedItem.data.id &&
+                      (tween = new TWEEN.Tween(controls.target)
+                        .to(clickableObjects[selectedItem.data.id].position, 500)
+                        .onUpdate(render)
+                        .start())
+                  else if ("wallRectangle" === t.item.data.type) {
+                    deselectAll()
+                    let o = Walls[t.item.data.id]
+                    o.bringToFront(),
+                      (o.selected = !0),
+                      (selectedItem = o),
+                      o.segments.forEach(function (e) {
+                        let t = new paper.Raster("media/movePointIcon.png")
+                          ; (t.data.type = "movePointIconWalls"),
+                            (t.data.id = e.index),
+                            (t.data.level = project.activeLayer.data.id),
+                            (t.data.wallId = o.data.id),
+                            (t.bounds.width = screenScale),
+                            (t.bounds.height = screenScale),
+                            (t.position = e.point),
+                            (t.onMouseEnter = function (e) {
+                              planView.style.cursor = "move"
+                            }),
+                            (t.onMouseLeave = function (e) {
+                              planView.style.cursor = "default"
+                            }),
+                            (t.visible = !0),
+                            t.bringToFront(),
+                            movePointIcons.push(t)
+                      }),
+                      (selectedMovePointIcon = null),
+                      (movePointIconSelectedId = null),
+                      updateObjectPropertiesWindow()
+                  } else if ("roofRectangle" === t.item.data.type) {
+                    deselectAll()
+                    let a = Roofs[t.item.data.id]
+                    a.bringToFront(),
+                      (a.selected = !0),
+                      (selectedItem = a),
+                      a.segments.forEach(function (e) {
+                        let t = new paper.Raster("media/movePointIcon.png")
+                          ; (t.data.type = "movePointIconRoofs"),
+                            (t.data.id = e.index),
+                            (t.data.level = project.activeLayer.data.id),
+                            (t.data.roofId = a.data.id),
+                            (t.bounds.width = screenScale),
+                            (t.bounds.height = screenScale),
+                            (t.position = e.point),
+                            (t.onMouseEnter = function (e) {
+                              planView.style.cursor = "move"
+                            }),
+                            (t.onMouseLeave = function (e) {
+                              planView.style.cursor = "default"
+                            }),
+                            (t.visible = !0),
+                            t.bringToFront(),
+                            movePointIcons.push(t)
+                      }),
+                      (selectedMovePointIcon = null),
+                      (movePointIconSelectedId = null),
+                      updateObjectPropertiesWindow()
+                  } else if ("movePointIconWalls" === t.item.data.type)
+                    movePointIcons.forEach(function (e) {
+                      e.selected = !1
                     }),
-                    (selectedMovePointIcon = null),
-                    (movePointIconSelectedId = null),
-                    updateObjectPropertiesWindow()
-                } else if ("roofRectangle" === t.item.data.type) {
-                  deselectAll()
-                  let a = Roofs[t.item.data.id]
-                  a.bringToFront(),
-                    (a.selected = !0),
-                    (selectedItem = a),
-                    a.segments.forEach(function (e) {
-                      let t = new paper.Raster("media/movePointIcon.png")
-                      ;(t.data.type = "movePointIconRoofs"),
-                        (t.data.id = e.index),
-                        (t.data.level = project.activeLayer.data.id),
-                        (t.data.roofId = a.data.id),
-                        (t.bounds.width = screenScale),
-                        (t.bounds.height = screenScale),
-                        (t.position = e.point),
-                        (t.onMouseEnter = function (e) {
-                          planView.style.cursor = "move"
-                        }),
-                        (t.onMouseLeave = function (e) {
-                          planView.style.cursor = "default"
-                        }),
-                        (t.visible = !0),
-                        t.bringToFront(),
-                        movePointIcons.push(t)
+                      (selectedMovePointIcon = t.item),
+                      (selectedMovePointIcon.selected = !0),
+                      (movePointIconSelectedId = t.item.data.id),
+                      recalcAllUnjoinedWallSegments(selectedItem.data.id),
+                      (mouseMode = 3)
+                  else if ("movePointIconRoofs" === t.item.data.type)
+                    movePointIcons.forEach(function (e) {
+                      e.selected = !1
                     }),
-                    (selectedMovePointIcon = null),
-                    (movePointIconSelectedId = null),
-                    updateObjectPropertiesWindow()
-                } else if ("movePointIconWalls" === t.item.data.type)
-                  movePointIcons.forEach(function (e) {
-                    e.selected = !1
-                  }),
-                    (selectedMovePointIcon = t.item),
-                    (selectedMovePointIcon.selected = !0),
-                    (movePointIconSelectedId = t.item.data.id),
-                    recalcAllUnjoinedWallSegments(selectedItem.data.id),
-                    (mouseMode = 3)
-                else if ("movePointIconRoofs" === t.item.data.type)
-                  movePointIcons.forEach(function (e) {
-                    e.selected = !1
-                  }),
-                    (selectedMovePointIcon = t.item),
-                    (selectedMovePointIcon.selected = !0),
-                    (movePointIconSelectedId = t.item.data.id),
-                    recalcAllUnjoinedRoofSegments(selectedItem.data.id),
-                    (mouseMode = 11)
-                else if ("movePointIconFloors" === t.item.data.type)
-                  movePointIcons.forEach(function (e) {
-                    e.selected = !1
-                  }),
-                    (selectedMovePointIcon = t.item),
-                    (selectedMovePointIcon.selected = !0),
-                    (movePointIconSelectedId = t.item.data.id),
-                    recalcAllWallCorners(),
-                    (mouseMode = 6)
-                else if ("floor" === t.item.data.type) {
-                  deselectAll()
-                  let n = Floors[t.item.data.id]
-                  ;(n.selected = !0),
-                    (selectedItem = n),
-                    n.segments.forEach(function (e) {
-                      let t = new paper.Raster("media/movePointIcon.png")
-                      ;(t.data.type = "movePointIconFloors"),
-                        (t.data.id = e.index),
-                        (t.data.level = project.activeLayer.data.id),
-                        (t.bounds.width = screenScale),
-                        (t.bounds.height = screenScale),
-                        (t.position = e.point),
-                        (t.onMouseEnter = function (e) {
-                          planView.style.cursor = "move"
-                        }),
-                        (t.onMouseLeave = function (e) {
-                          planView.style.cursor = "default"
-                        }),
-                        (t.visible = !0),
-                        t.bringToFront(),
-                        movePointIcons.push(t)
+                      (selectedMovePointIcon = t.item),
+                      (selectedMovePointIcon.selected = !0),
+                      (movePointIconSelectedId = t.item.data.id),
+                      recalcAllUnjoinedRoofSegments(selectedItem.data.id),
+                      (mouseMode = 11)
+                  else if ("movePointIconFloors" === t.item.data.type)
+                    movePointIcons.forEach(function (e) {
+                      e.selected = !1
                     }),
-                    (selectedMovePointIcon = null),
-                    (movePointIconSelectedId = null),
-                    updateObjectPropertiesWindow()
-                  for (
-                    let l = { x: 0, y: 0, z: 0 },
+                      (selectedMovePointIcon = t.item),
+                      (selectedMovePointIcon.selected = !0),
+                      (movePointIconSelectedId = t.item.data.id),
+                      recalcAllWallCorners(),
+                      (mouseMode = 6)
+                  else if ("floor" === t.item.data.type) {
+                    deselectAll()
+                    let n = Floors[t.item.data.id]
+                      ; (n.selected = !0),
+                        (selectedItem = n),
+                        n.segments.forEach(function (e) {
+                          let t = new paper.Raster("media/movePointIcon.png")
+                            ; (t.data.type = "movePointIconFloors"),
+                              (t.data.id = e.index),
+                              (t.data.level = project.activeLayer.data.id),
+                              (t.bounds.width = screenScale),
+                              (t.bounds.height = screenScale),
+                              (t.position = e.point),
+                              (t.onMouseEnter = function (e) {
+                                planView.style.cursor = "move"
+                              }),
+                              (t.onMouseLeave = function (e) {
+                                planView.style.cursor = "default"
+                              }),
+                              (t.visible = !0),
+                              t.bringToFront(),
+                              movePointIcons.push(t)
+                        }),
+                        (selectedMovePointIcon = null),
+                        (movePointIconSelectedId = null),
+                        updateObjectPropertiesWindow()
+                    for (
+                      let l = { x: 0, y: 0, z: 0 },
                       i =
                         Floors3d[selectedItem.data.id].geometry.attributes
                           .position.array,
                       r = 0;
-                    r < i.length;
-                    r += 3
-                  )
-                    (l.x += i[r]), (l.y += i[r + 2]), (l.z += i[r + 1])
-                  ;(l.x /= i.length / 3),
-                    (l.y /= i.length / 3),
-                    (l.z /= i.length / 3),
-                    (tween = new TWEEN.Tween(controls.target)
-                      .to(l, 500)
-                      .onUpdate(render)
-                      .start()),
-                    recalcAllWallCorners()
-                } else
-                  "dimension" === t.item.data.type
-                    ? (deselectAll(),
-                      (selectedItem = Dimensions[t.item.data.id].text),
-                      (Dimensions[selectedItem.data.id].text.selected = !0),
-                      (Dimensions[selectedItem.data.id].line.selected = !0),
-                      updateObjectPropertiesWindow(),
-                      recalcAllWallCorners(),
-                      recalcAllRoofCorners())
-                    : "text" === t.item.data.type
-                    ? (deselectAll(),
-                      (mouseMode = 7),
-                      (selectedItem = Texts[t.item.data.id]),
-                      (Texts[t.item.data.id].selected = !0),
-                      (editingTextId = t.item.data.id),
-                      updateObjectPropertiesWindow())
-                    : console.log("mouse down not handled")
-              else
-                t.item.data.level === -1 &&
-                  ("verticalGuide" === t.item.data.type
-                    ? ((selectedGuideId = t.item.data.id), (mouseMode = 9))
-                    : "horizontalGuide" === t.item.data.type &&
+                      r < i.length;
+                      r += 3
+                    )
+                      (l.x += i[r]), (l.y += i[r + 2]), (l.z += i[r + 1])
+                        ; (l.x /= i.length / 3),
+                          (l.y /= i.length / 3),
+                          (l.z /= i.length / 3),
+                          (tween = new TWEEN.Tween(controls.target)
+                            .to(l, 500)
+                            .onUpdate(render)
+                            .start()),
+                          recalcAllWallCorners()
+                  } else
+                    "dimension" === t.item.data.type
+                      ? (deselectAll(),
+                        (selectedItem = Dimensions[t.item.data.id].text),
+                        (Dimensions[selectedItem.data.id].text.selected = !0),
+                        (Dimensions[selectedItem.data.id].line.selected = !0),
+                        updateObjectPropertiesWindow(),
+                        recalcAllWallCorners(),
+                        recalcAllRoofCorners())
+                      : "text" === t.item.data.type
+                        ? (deselectAll(),
+                          (mouseMode = 7),
+                          (selectedItem = Texts[t.item.data.id]),
+                          (Texts[t.item.data.id].selected = !0),
+                          (editingTextId = t.item.data.id),
+                          updateObjectPropertiesWindow())
+                        : console.log("mouse down not handled")
+                else
+                  t.item.data.level === -1 &&
+                    ("verticalGuide" === t.item.data.type
+                      ? ((selectedGuideId = t.item.data.id), (mouseMode = 9))
+                      : "horizontalGuide" === t.item.data.type &&
                       ((selectedGuideId = t.item.data.id), (mouseMode = 10)))
-          } else console.log("hit result nothing"), (mouseMode = -1)
-        }
-      else if ("walls" === toolMode)
-        if (2 === e.event.buttons) mouseMode = -1
-        else {
-          if (((mouseMode = 0), Date.now() - lastNewWallSegmentClick > 250)) {
-            if (
-              ((snapPoint = e.point),
-              (snapPoint.x = parseInt(e.point.x)),
-              (snapPoint.y = parseInt(e.point.y)),
-              ctrlKeyPressed &&
-                ((snapPoint.x = snapPoint.x - (snapPoint.x % 10)),
-                (snapPoint.y = snapPoint.y - (snapPoint.y % 10))),
-              recalcAllUnjoinedWallSegments(wallIdCounter),
-              recalcAllWallSegmentsOnOtherLevels(
-                wallIdCounter,
-                project.activeLayer.data.id
-              ),
-              startedDrawingWalls)
-            ) {
-              let s = e.point.subtract(wallHelperPath.segments[0].point)
-              ctrlKeyPressed && (s.angle = 15 * Math.round(s.angle / 15)),
-                (snapPoint = wallHelperPath.segments[0].point.add(s)),
-                snapPointOverride.id &&
-                  ((snapPoint = new paper.Point(
-                    snapPointOverride.x,
-                    snapPointOverride.y
-                  )),
-                  (snapPointOverride = {}))
-              try {
-                let d = wallPath.add(snapPoint),
-                  c = wallPath.segments[wallPath.segments.length - 2].point,
-                  u = wallPath.segments[wallPath.segments.length - 1].point,
-                  p = getAngleRadians(c, u),
-                  m = new Path()
-                ;(m.data.type = "wallRectangle"),
-                  (m.data.id = wallPath.data.id),
-                  (m.data.level = project.activeLayer.data.id),
-                  (m.fillColor = new paper.Color(1, 0.9, 0, 0.25)),
-                  (m.strokeColor = "#b19064"),
-                  (m.strokeWidth = 1),
-                  (m.strokeScaling = !1),
-                  (m.segments = wallHelperRectangle.segments),
-                  (m.closed = !0),
-                  (wallsRectangles[wallPath.data.id] = m),
-                  wallsGroup[project.activeLayer.data.id].addChild(
-                    wallsRectangles[wallPath.data.id]
-                  )
-                let g = wallHelper3dCube.geometry.clone(),
-                  y = new THREE.Mesh(g, wallMaterial)
-                ;(y.position.x = wallHelper3dCube.position.x),
-                  (y.position.y = wallHelper3dCube.position.y),
-                  (y.position.z = wallHelper3dCube.position.z),
-                  (y.userData.id = wallPath.data.id),
-                  (y.userData.level = wallPath.data.level),
-                  (y.frustumCulled = !1),
-                  y.geometry.computeFlatVertexNormals(),
-                  scene.add(y),
-                  (wallsRectangles3d[wallPath.data.id] = y),
-                  (d.data = { angleRadians: p, id: wallPath.data.id }),
-                  (plan.walls[wallPath.data.id] = {
-                    id: wallPath.data.id,
-                    wallPath: wallPath,
-                  }),
-                  relinkWallReferences(project.activeLayer.data.id),
-                  updatePlanHistory(
-                    plan,
-                    null,
-                    null,
-                    null,
-                    wallPath.data.id,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null
-                  ),
-                  wallPath.segments.length > 2 &&
-                    alert("problem to many segments"),
-                  (wallPath = new paper.Path()),
-                  (wallPath.strokeColor = new paper.Color(0, 0, 0, 0)),
-                  wallPath.add(snapPoint),
-                  (wallPath.data.join0 = { id: null, seg: null }),
-                  (wallPath.data.join1 = { id: null, seg: null }),
-                  updateObjectPropertiesWindow(),
-                  wallIdCounter++,
-                  (wallPath.data.id = wallIdCounter),
-                  (wallPath.data.type = "wallPath"),
-                  (wallPath.data.thickness = defaultWallThickness),
-                  (wallPath.data.height = [
-                    defaultWallHeight,
-                    defaultWallHeight,
-                  ]),
-                  (wallPath.data.level = project.activeLayer.data.id),
-                  (Walls[wallPath.data.id] = wallPath),
-                  (selectedItem = wallPath)
-              } catch (e) {
-                console.log(e)
-              }
-            } else
-              (startedDrawingWalls = !0),
-                (wallPath = new paper.Path()),
-                (wallPath.strokeColor = new paper.Color(0, 0, 0, 0)),
-                snapPointOverride.id &&
-                  ((snapPoint = new paper.Point(
-                    snapPointOverride.x,
-                    snapPointOverride.y
-                  )),
-                  (snapPointOverride = {})),
-                wallPath.add(snapPoint),
-                wallIdCounter++,
-                (wallPath.data.id = wallIdCounter),
-                (wallPath.data.join0 = { id: null, seg: null }),
-                (wallPath.data.join1 = { id: null, seg: null }),
-                (wallPath.data.type = "wallPath"),
-                (wallPath.data.thickness = defaultWallThickness),
-                (wallPath.data.height = [defaultWallHeight, defaultWallHeight]),
-                (wallPath.data.level = project.activeLayer.data.id),
-                (Walls[wallPath.data.id] = wallPath),
-                (selectedItem = wallPath),
-                updateObjectPropertiesWindow()
-            ;(wallHelperPath.segments[0].point = snapPoint),
-              (wallHelperPath.segments[1].point = snapPoint),
-              wallHelperPath.bringToFront(),
-              (wallHelperPath.visible = !0),
-              (wallHelperRectangle.segments[0].point = new Point(0, 0)),
-              (wallHelperRectangle.segments[1].point = new Point(0, 0)),
-              (wallHelperRectangle.segments[2].point = new Point(0, 0)),
-              (wallHelperRectangle.segments[3].point = new Point(0, 0)),
-              (wallHelperRectangle.visible = !0),
-              (wallHelper3dCube.geometry.vertices[1].x =
-                wallHelperRectangle.segments[0].point.x),
-              (wallHelper3dCube.geometry.vertices[1].z =
-                wallHelperRectangle.segments[0].point.y),
-              (wallHelper3dCube.geometry.vertices[3].x =
-                wallHelperRectangle.segments[0].point.x),
-              (wallHelper3dCube.geometry.vertices[3].z =
-                wallHelperRectangle.segments[0].point.y),
-              (wallHelper3dCube.geometry.vertices[0].x =
-                wallHelperRectangle.segments[1].point.x),
-              (wallHelper3dCube.geometry.vertices[0].z =
-                wallHelperRectangle.segments[1].point.y),
-              (wallHelper3dCube.geometry.vertices[2].x =
-                wallHelperRectangle.segments[1].point.x),
-              (wallHelper3dCube.geometry.vertices[2].z =
-                wallHelperRectangle.segments[1].point.y),
-              (wallHelper3dCube.geometry.vertices[5].x =
-                wallHelperRectangle.segments[2].point.x),
-              (wallHelper3dCube.geometry.vertices[5].z =
-                wallHelperRectangle.segments[2].point.y),
-              (wallHelper3dCube.geometry.vertices[7].x =
-                wallHelperRectangle.segments[2].point.x),
-              (wallHelper3dCube.geometry.vertices[7].z =
-                wallHelperRectangle.segments[2].point.y),
-              (wallHelper3dCube.geometry.vertices[4].x =
-                wallHelperRectangle.segments[3].point.x),
-              (wallHelper3dCube.geometry.vertices[4].z =
-                wallHelperRectangle.segments[3].point.y),
-              (wallHelper3dCube.geometry.vertices[6].x =
-                wallHelperRectangle.segments[3].point.x),
-              (wallHelper3dCube.geometry.vertices[6].z =
-                wallHelperRectangle.segments[3].point.y),
-              (wallHelper3dCube.geometry.verticesNeedUpdate = !0),
-              (wallHelper3dCube.visible = !0),
-              (tween = new TWEEN.Tween(controls.target)
-                .to(wallHelper3dCube.position, 500)
-                .onUpdate(render)
-                .start()),
-              snapPointOverride.id &&
-                ((snapPointOverride = {}), setEndDrawingWalls())
+            } else console.log("hit result nothing"), (mouseMode = -1)
           }
-          lastNewWallSegmentClick = Date.now()
-        }
-      else if ("roof" === toolMode)
-        if (2 === e.event.buttons) mouseMode = -1
-        else {
-          if (((mouseMode = 0), Date.now() - lastNewRoofSegmentClick > 250)) {
-            if (
-              ((snapPoint = e.point),
-              (snapPoint.x = parseInt(e.point.x)),
-              (snapPoint.y = parseInt(e.point.y)),
-              ctrlKeyPressed &&
-                ((snapPoint.x = snapPoint.x - (snapPoint.x % 10)),
-                (snapPoint.y = snapPoint.y - (snapPoint.y % 10))),
-              recalcAllUnjoinedRoofSegments(roofIdCounter),
-              recalcAllRoofSegmentsOnOtherLevels(
-                roofIdCounter,
-                project.activeLayer.data.id
-              ),
-              startedDrawingRoofs)
-            ) {
-              let s = e.point.subtract(roofHelperPath.segments[0].point)
-              ctrlKeyPressed && (s.angle = 15 * Math.round(s.angle / 15)),
-                (snapPoint = roofHelperPath.segments[0].point.add(s)),
-                snapPointOverride.id &&
-                  ((snapPoint = new paper.Point(
-                    snapPointOverride.x,
-                    snapPointOverride.y
-                  )),
-                  (snapPointOverride = {}))
-              try {
-                let d = roofPath.add(snapPoint),
-                  c = roofPath.segments[roofPath.segments.length - 2].point,
-                  u = roofPath.segments[roofPath.segments.length - 1].point,
-                  p = getAngleRadians(c, u),
-                  f = new Path()
-                ;(f.data.type = "roofRectangle"),
-                  (f.data.id = roofPath.data.id),
-                  (f.data.level = project.activeLayer.data.id),
-                  (f.fillColor = new paper.Color(0.35, 0.65, 0.85, 0.25)),
-                  (f.strokeColor = "#b19064"),
-                  (f.strokeWidth = 1),
-                  (f.strokeScaling = !1),
-                  (f.segments = roofHelperRectangle.segments),
-                  (f.closed = !0),
-                  (roofsRectangles[roofPath.data.id] = f),
-                  roofsGroup[project.activeLayer.data.id].addChild(
-                    roofsRectangles[roofPath.data.id]
-                  )
-                let g = roofHelper3dCube.geometry.clone(),
-                  h = new THREE.Mesh(g, roofMaterial)
-                ;(h.position.x = roofHelper3dCube.position.x),
-                  (h.position.y = roofHelper3dCube.position.y),
-                  (h.position.z = roofHelper3dCube.position.z),
-                  (h.userData.id = roofPath.data.id),
-                  (h.userData.level = roofPath.data.level),
-                  (h.frustumCulled = !1),
-                  h.geometry.computeFlatVertexNormals(),
-                  scene.add(h),
-                  (roofsRectangles3d[roofPath.data.id] = h),
-                  (d.data = { angleRadians: p, id: roofPath.data.id }),
-                  (plan.roofs[roofPath.data.id] = {
-                    id: roofPath.data.id,
-                    roofPath: roofPath,
-                  }),
-                  relinkRoofReferences(project.activeLayer.data.id),
-                  updatePlanHistory(
-                    plan,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    roofPath.data.id,
-                    null,
-                    null
+        else if ("walls" === toolMode)
+          if (2 === e.event.buttons) mouseMode = -1
+          else {
+            if (((mouseMode = 0), Date.now() - lastNewWallSegmentClick > 250)) {
+              if (
+                ((snapPoint = e.point),
+                  (snapPoint.x = parseInt(e.point.x)),
+                  (snapPoint.y = parseInt(e.point.y)),
+                  ctrlKeyPressed &&
+                  ((snapPoint.x = snapPoint.x - (snapPoint.x % 10)),
+                    (snapPoint.y = snapPoint.y - (snapPoint.y % 10))),
+                  recalcAllUnjoinedWallSegments(wallIdCounter),
+                  recalcAllWallSegmentsOnOtherLevels(
+                    wallIdCounter,
+                    project.activeLayer.data.id
                   ),
-                  roofPath.segments.length > 2 &&
-                    alert("problem to many segments"),
-                  (roofPath = new paper.Path()),
-                  (roofPath.strokeColor = new paper.Color(0, 0, 0, 0)),
-                  roofPath.add(snapPoint),
-                  (roofPath.data.join0 = { id: null, seg: null }),
-                  (roofPath.data.join1 = { id: null, seg: null }),
-                  updateObjectPropertiesWindow(),
-                  roofIdCounter++,
-                  (roofPath.data.id = roofIdCounter),
-                  (roofPath.data.type = "roofPath"),
-                  (roofPath.data.width = defaultRoofWidth),
-                  (roofPath.data.rise = defaultRoofRise),
-                  (roofPath.data.startHeight = defaultRoofStartHeight),
-                  (roofPath.data.thickness = defaultRoofThickness),
-                  (roofPath.data.level = project.activeLayer.data.id),
-                  (Roofs[roofPath.data.id] = roofPath),
-                  (selectedItem = roofPath)
-              } catch (e) {
-                console.log(e)
-              }
-            } else
-              (startedDrawingRoofs = !0),
-                (roofPath = new paper.Path()),
-                (roofPath.strokeColor = new paper.Color(0, 0, 0, 0)),
-                snapPointOverride.id &&
+                  startedDrawingWalls)
+              ) {
+                let s = e.point.subtract(wallHelperPath.segments[0].point)
+                ctrlKeyPressed && (s.angle = 15 * Math.round(s.angle / 15)),
+                  (snapPoint = wallHelperPath.segments[0].point.add(s)),
+                  snapPointOverride.id &&
                   ((snapPoint = new paper.Point(
                     snapPointOverride.x,
                     snapPointOverride.y
                   )),
-                  (snapPointOverride = {})),
-                roofPath.add(snapPoint),
-                roofIdCounter++,
-                (roofPath.data.id = roofIdCounter),
-                (roofPath.data.join0 = { id: null, seg: null }),
-                (roofPath.data.join1 = { id: null, seg: null }),
-                (roofPath.data.type = "roofPath"),
-                (roofPath.data.width = defaultRoofWidth),
-                (roofPath.data.rise = defaultRoofRise),
-                (roofPath.data.startHeight = defaultRoofStartHeight),
-                (roofPath.data.thickness = defaultRoofThickness),
-                (roofPath.data.level = project.activeLayer.data.id),
-                (Roofs[roofPath.data.id] = roofPath),
-                (selectedItem = roofPath),
-                updateObjectPropertiesWindow()
-            ;(roofHelperPath.segments[0].point = snapPoint),
-              (roofHelperPath.segments[1].point = snapPoint),
-              roofHelperPath.bringToFront(),
-              (roofHelperPath.visible = !0),
-              (roofHelperRectangle.segments[0].point = new Point(0, 0)),
-              (roofHelperRectangle.segments[1].point = new Point(0, 0)),
-              (roofHelperRectangle.segments[2].point = new Point(0, 0)),
-              (roofHelperRectangle.segments[3].point = new Point(0, 0)),
-              (roofHelperRectangle.visible = !0),
-              (roofHelper3dCube.geometry.vertices[1].x =
-                roofHelperRectangle.segments[0].point.x),
-              (roofHelper3dCube.geometry.vertices[1].z =
-                roofHelperRectangle.segments[0].point.y),
-              (roofHelper3dCube.geometry.vertices[3].x =
-                roofHelperRectangle.segments[0].point.x),
-              (roofHelper3dCube.geometry.vertices[3].z =
-                roofHelperRectangle.segments[0].point.y),
-              (roofHelper3dCube.geometry.vertices[0].x =
-                roofHelperRectangle.segments[1].point.x),
-              (roofHelper3dCube.geometry.vertices[0].z =
-                roofHelperRectangle.segments[1].point.y),
-              (roofHelper3dCube.geometry.vertices[2].x =
-                roofHelperRectangle.segments[1].point.x),
-              (roofHelper3dCube.geometry.vertices[2].z =
-                roofHelperRectangle.segments[1].point.y),
-              (roofHelper3dCube.geometry.vertices[5].x =
-                roofHelperRectangle.segments[2].point.x),
-              (roofHelper3dCube.geometry.vertices[5].z =
-                roofHelperRectangle.segments[2].point.y),
-              (roofHelper3dCube.geometry.vertices[7].x =
-                roofHelperRectangle.segments[2].point.x),
-              (roofHelper3dCube.geometry.vertices[7].z =
-                roofHelperRectangle.segments[2].point.y),
-              (roofHelper3dCube.geometry.vertices[4].x =
-                roofHelperRectangle.segments[3].point.x),
-              (roofHelper3dCube.geometry.vertices[4].z =
-                roofHelperRectangle.segments[3].point.y),
-              (roofHelper3dCube.geometry.vertices[6].x =
-                roofHelperRectangle.segments[3].point.x),
-              (roofHelper3dCube.geometry.vertices[6].z =
-                roofHelperRectangle.segments[3].point.y)
-            let v = defaultRoofThickness / 2,
-              w = defaultRoofRise / 2
-            ;(roofHelper3dCube.geometry.vertices[0].y = v - w),
-              (roofHelper3dCube.geometry.vertices[1].y = v - w),
-              (roofHelper3dCube.geometry.vertices[4].y = v + w),
-              (roofHelper3dCube.geometry.vertices[5].y = v + w),
-              (roofHelper3dCube.geometry.vertices[2].y = -v - w),
-              (roofHelper3dCube.geometry.vertices[3].y = -v - w),
-              (roofHelper3dCube.geometry.vertices[6].y = -v + w),
-              (roofHelper3dCube.geometry.vertices[7].y = -v + w),
-              (roofHelper3dCube.geometry.verticesNeedUpdate = !0),
-              (roofHelper3dCube.visible = !0),
-              (tween = new TWEEN.Tween(controls.target)
-                .to(roofHelper3dCube.position, 500)
-                .onUpdate(render)
-                .start()),
-              snapPointOverride.id &&
-                ((snapPointOverride = {}), setEndDrawingRoofs())
-          }
-          lastNewRoofSegmentClick = Date.now()
-        }
-      else if ("background" === toolMode) {
-        let t = project.hitTest(e.point)
-        t && t.item.data
-          ? "background" === t.item.data.type
-            ? ((mouseMode = 0),
-              (offsetMousePoint = selectedItem.position.subtract(e.point)),
-              (offsetMousePoint.x = parseInt(offsetMousePoint.x)),
-              (offsetMousePoint.y = parseInt(offsetMousePoint.y)))
-            : "stretchFurnitureXZTool" === t.item.data.type
-            ? (mouseMode = 2)
-            : "verticalGuide" === t.item.data.type
-            ? (console.log(t.item.data.type),
-              (selectedGuideId = t.item.data.id),
-              (mouseMode = 9))
-            : "horizontalGuide" === t.item.data.type &&
-              (console.log(t.item.data.type),
-              (selectedGuideId = t.item.data.id),
-              (mouseMode = 10))
-          : (mouseMode = -1)
-      } else if ("floor" === toolMode)
-        2 === e.event.buttons
-          ? (mouseMode = -1)
-          : ((mouseMode = 0),
-            Date.now() - lastNewFloorSegmentClick > 250 &&
-              (startedDrawingFloor
-                ? (floorPath.add(snapPoint),
-                  (floorHelperPath.segments[0].point = snapPoint),
-                  (floorHelperPath.segments[1].point = snapPoint),
-                  redrawFloor(floorPath),
-                  (plan.floors[floorPath.data.id] = {
-                    id: floorPath.data.id,
-                    floorPath: floorPath,
-                  }),
-                  2 === floorPath.segments.length
-                    ? updatePlanHistory(
-                        plan,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        floorPath.data.id,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null
+                    (snapPointOverride = {}))
+                try {
+                  let d = wallPath.add(snapPoint),
+                    c = wallPath.segments[wallPath.segments.length - 2].point,
+                    u = wallPath.segments[wallPath.segments.length - 1].point,
+                    p = getAngleRadians(c, u),
+                    m = new Path()
+                    ; (m.data.type = "wallRectangle"),
+                      (m.data.id = wallPath.data.id),
+                      (m.data.level = project.activeLayer.data.id),
+                      (m.fillColor = new paper.Color(1, 0.9, 0, 0.25)),
+                      (m.strokeColor = "#b19064"),
+                      (m.strokeWidth = 1),
+                      (m.strokeScaling = !1),
+                      (m.segments = wallHelperRectangle.segments),
+                      (m.closed = !0),
+                      (wallsRectangles[wallPath.data.id] = m),
+                      wallsGroup[project.activeLayer.data.id].addChild(
+                        wallsRectangles[wallPath.data.id]
                       )
-                    : updatePlanHistory(
+                  let g = wallHelper3dCube.geometry.clone(),
+                    y = new THREE.Mesh(g, wallMaterial)
+                    ; (y.position.x = wallHelper3dCube.position.x),
+                      (y.position.y = wallHelper3dCube.position.y),
+                      (y.position.z = wallHelper3dCube.position.z),
+                      (y.userData.id = wallPath.data.id),
+                      (y.userData.level = wallPath.data.level),
+                      (y.frustumCulled = !1),
+                      y.geometry.computeFlatVertexNormals(),
+                      scene.add(y),
+                      (wallsRectangles3d[wallPath.data.id] = y),
+                      (d.data = { angleRadians: p, id: wallPath.data.id }),
+                      (plan.walls[wallPath.data.id] = {
+                        id: wallPath.data.id,
+                        wallPath: wallPath,
+                      }),
+                      relinkWallReferences(project.activeLayer.data.id),
+                      updatePlanHistory(
                         plan,
                         null,
                         null,
                         null,
+                        wallPath.data.id,
                         null,
                         null,
                         null,
                         null,
-                        floorPath.data.id,
                         null,
                         null,
                         null,
@@ -3919,6 +3556,369 @@ function initPlanView() {
                         null,
                         null
                       ),
+                      wallPath.segments.length > 2 &&
+                      alert("problem to many segments"),
+                      (wallPath = new paper.Path()),
+                      (wallPath.strokeColor = new paper.Color(0, 0, 0, 0)),
+                      wallPath.add(snapPoint),
+                      (wallPath.data.join0 = { id: null, seg: null }),
+                      (wallPath.data.join1 = { id: null, seg: null }),
+                      updateObjectPropertiesWindow(),
+                      wallIdCounter++,
+                      (wallPath.data.id = wallIdCounter),
+                      (wallPath.data.type = "wallPath"),
+                      (wallPath.data.thickness = defaultWallThickness),
+                      (wallPath.data.height = [
+                        defaultWallHeight,
+                        defaultWallHeight,
+                      ]),
+                      (wallPath.data.level = project.activeLayer.data.id),
+                      (Walls[wallPath.data.id] = wallPath),
+                      (selectedItem = wallPath)
+                } catch (e) {
+                  console.log(e)
+                }
+              } else
+                (startedDrawingWalls = !0),
+                  (wallPath = new paper.Path()),
+                  (wallPath.strokeColor = new paper.Color(0, 0, 0, 0)),
+                  snapPointOverride.id &&
+                  ((snapPoint = new paper.Point(
+                    snapPointOverride.x,
+                    snapPointOverride.y
+                  )),
+                    (snapPointOverride = {})),
+                  wallPath.add(snapPoint),
+                  wallIdCounter++,
+                  (wallPath.data.id = wallIdCounter),
+                  (wallPath.data.join0 = { id: null, seg: null }),
+                  (wallPath.data.join1 = { id: null, seg: null }),
+                  (wallPath.data.type = "wallPath"),
+                  (wallPath.data.thickness = defaultWallThickness),
+                  (wallPath.data.height = [defaultWallHeight, defaultWallHeight]),
+                  (wallPath.data.level = project.activeLayer.data.id),
+                  (Walls[wallPath.data.id] = wallPath),
+                  (selectedItem = wallPath),
+                  updateObjectPropertiesWindow()
+                  ; (wallHelperPath.segments[0].point = snapPoint),
+                    (wallHelperPath.segments[1].point = snapPoint),
+                    wallHelperPath.bringToFront(),
+                    (wallHelperPath.visible = !0),
+                    (wallHelperRectangle.segments[0].point = new Point(0, 0)),
+                    (wallHelperRectangle.segments[1].point = new Point(0, 0)),
+                    (wallHelperRectangle.segments[2].point = new Point(0, 0)),
+                    (wallHelperRectangle.segments[3].point = new Point(0, 0)),
+                    (wallHelperRectangle.visible = !0),
+                    (wallHelper3dCube.geometry.vertices[1].x =
+                      wallHelperRectangle.segments[0].point.x),
+                    (wallHelper3dCube.geometry.vertices[1].z =
+                      wallHelperRectangle.segments[0].point.y),
+                    (wallHelper3dCube.geometry.vertices[3].x =
+                      wallHelperRectangle.segments[0].point.x),
+                    (wallHelper3dCube.geometry.vertices[3].z =
+                      wallHelperRectangle.segments[0].point.y),
+                    (wallHelper3dCube.geometry.vertices[0].x =
+                      wallHelperRectangle.segments[1].point.x),
+                    (wallHelper3dCube.geometry.vertices[0].z =
+                      wallHelperRectangle.segments[1].point.y),
+                    (wallHelper3dCube.geometry.vertices[2].x =
+                      wallHelperRectangle.segments[1].point.x),
+                    (wallHelper3dCube.geometry.vertices[2].z =
+                      wallHelperRectangle.segments[1].point.y),
+                    (wallHelper3dCube.geometry.vertices[5].x =
+                      wallHelperRectangle.segments[2].point.x),
+                    (wallHelper3dCube.geometry.vertices[5].z =
+                      wallHelperRectangle.segments[2].point.y),
+                    (wallHelper3dCube.geometry.vertices[7].x =
+                      wallHelperRectangle.segments[2].point.x),
+                    (wallHelper3dCube.geometry.vertices[7].z =
+                      wallHelperRectangle.segments[2].point.y),
+                    (wallHelper3dCube.geometry.vertices[4].x =
+                      wallHelperRectangle.segments[3].point.x),
+                    (wallHelper3dCube.geometry.vertices[4].z =
+                      wallHelperRectangle.segments[3].point.y),
+                    (wallHelper3dCube.geometry.vertices[6].x =
+                      wallHelperRectangle.segments[3].point.x),
+                    (wallHelper3dCube.geometry.vertices[6].z =
+                      wallHelperRectangle.segments[3].point.y),
+                    (wallHelper3dCube.geometry.verticesNeedUpdate = !0),
+                    (wallHelper3dCube.visible = !0),
+                    (tween = new TWEEN.Tween(controls.target)
+                      .to(wallHelper3dCube.position, 500)
+                      .onUpdate(render)
+                      .start()),
+                    snapPointOverride.id &&
+                    ((snapPointOverride = {}), setEndDrawingWalls())
+            }
+            lastNewWallSegmentClick = Date.now()
+          }
+        else if ("roof" === toolMode)
+          if (2 === e.event.buttons) mouseMode = -1
+          else {
+            if (((mouseMode = 0), Date.now() - lastNewRoofSegmentClick > 250)) {
+              if (
+                ((snapPoint = e.point),
+                  (snapPoint.x = parseInt(e.point.x)),
+                  (snapPoint.y = parseInt(e.point.y)),
+                  ctrlKeyPressed &&
+                  ((snapPoint.x = snapPoint.x - (snapPoint.x % 10)),
+                    (snapPoint.y = snapPoint.y - (snapPoint.y % 10))),
+                  recalcAllUnjoinedRoofSegments(roofIdCounter),
+                  recalcAllRoofSegmentsOnOtherLevels(
+                    roofIdCounter,
+                    project.activeLayer.data.id
+                  ),
+                  startedDrawingRoofs)
+              ) {
+                let s = e.point.subtract(roofHelperPath.segments[0].point)
+                ctrlKeyPressed && (s.angle = 15 * Math.round(s.angle / 15)),
+                  (snapPoint = roofHelperPath.segments[0].point.add(s)),
+                  snapPointOverride.id &&
+                  ((snapPoint = new paper.Point(
+                    snapPointOverride.x,
+                    snapPointOverride.y
+                  )),
+                    (snapPointOverride = {}))
+                try {
+                  let d = roofPath.add(snapPoint),
+                    c = roofPath.segments[roofPath.segments.length - 2].point,
+                    u = roofPath.segments[roofPath.segments.length - 1].point,
+                    p = getAngleRadians(c, u),
+                    f = new Path()
+                    ; (f.data.type = "roofRectangle"),
+                      (f.data.id = roofPath.data.id),
+                      (f.data.level = project.activeLayer.data.id),
+                      (f.fillColor = new paper.Color(0.35, 0.65, 0.85, 0.25)),
+                      (f.strokeColor = "#b19064"),
+                      (f.strokeWidth = 1),
+                      (f.strokeScaling = !1),
+                      (f.segments = roofHelperRectangle.segments),
+                      (f.closed = !0),
+                      (roofsRectangles[roofPath.data.id] = f),
+                      roofsGroup[project.activeLayer.data.id].addChild(
+                        roofsRectangles[roofPath.data.id]
+                      )
+                  let g = roofHelper3dCube.geometry.clone(),
+                    h = new THREE.Mesh(g, roofMaterial)
+                    ; (h.position.x = roofHelper3dCube.position.x),
+                      (h.position.y = roofHelper3dCube.position.y),
+                      (h.position.z = roofHelper3dCube.position.z),
+                      (h.userData.id = roofPath.data.id),
+                      (h.userData.level = roofPath.data.level),
+                      (h.frustumCulled = !1),
+                      h.geometry.computeFlatVertexNormals(),
+                      scene.add(h),
+                      (roofsRectangles3d[roofPath.data.id] = h),
+                      (d.data = { angleRadians: p, id: roofPath.data.id }),
+                      (plan.roofs[roofPath.data.id] = {
+                        id: roofPath.data.id,
+                        roofPath: roofPath,
+                      }),
+                      relinkRoofReferences(project.activeLayer.data.id),
+                      updatePlanHistory(
+                        plan,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        roofPath.data.id,
+                        null,
+                        null
+                      ),
+                      roofPath.segments.length > 2 &&
+                      alert("problem to many segments"),
+                      (roofPath = new paper.Path()),
+                      (roofPath.strokeColor = new paper.Color(0, 0, 0, 0)),
+                      roofPath.add(snapPoint),
+                      (roofPath.data.join0 = { id: null, seg: null }),
+                      (roofPath.data.join1 = { id: null, seg: null }),
+                      updateObjectPropertiesWindow(),
+                      roofIdCounter++,
+                      (roofPath.data.id = roofIdCounter),
+                      (roofPath.data.type = "roofPath"),
+                      (roofPath.data.width = defaultRoofWidth),
+                      (roofPath.data.rise = defaultRoofRise),
+                      (roofPath.data.startHeight = defaultRoofStartHeight),
+                      (roofPath.data.thickness = defaultRoofThickness),
+                      (roofPath.data.level = project.activeLayer.data.id),
+                      (Roofs[roofPath.data.id] = roofPath),
+                      (selectedItem = roofPath)
+                } catch (e) {
+                  console.log(e)
+                }
+              } else
+                (startedDrawingRoofs = !0),
+                  (roofPath = new paper.Path()),
+                  (roofPath.strokeColor = new paper.Color(0, 0, 0, 0)),
+                  snapPointOverride.id &&
+                  ((snapPoint = new paper.Point(
+                    snapPointOverride.x,
+                    snapPointOverride.y
+                  )),
+                    (snapPointOverride = {})),
+                  roofPath.add(snapPoint),
+                  roofIdCounter++,
+                  (roofPath.data.id = roofIdCounter),
+                  (roofPath.data.join0 = { id: null, seg: null }),
+                  (roofPath.data.join1 = { id: null, seg: null }),
+                  (roofPath.data.type = "roofPath"),
+                  (roofPath.data.width = defaultRoofWidth),
+                  (roofPath.data.rise = defaultRoofRise),
+                  (roofPath.data.startHeight = defaultRoofStartHeight),
+                  (roofPath.data.thickness = defaultRoofThickness),
+                  (roofPath.data.level = project.activeLayer.data.id),
+                  (Roofs[roofPath.data.id] = roofPath),
+                  (selectedItem = roofPath),
+                  updateObjectPropertiesWindow()
+                  ; (roofHelperPath.segments[0].point = snapPoint),
+                    (roofHelperPath.segments[1].point = snapPoint),
+                    roofHelperPath.bringToFront(),
+                    (roofHelperPath.visible = !0),
+                    (roofHelperRectangle.segments[0].point = new Point(0, 0)),
+                    (roofHelperRectangle.segments[1].point = new Point(0, 0)),
+                    (roofHelperRectangle.segments[2].point = new Point(0, 0)),
+                    (roofHelperRectangle.segments[3].point = new Point(0, 0)),
+                    (roofHelperRectangle.visible = !0),
+                    (roofHelper3dCube.geometry.vertices[1].x =
+                      roofHelperRectangle.segments[0].point.x),
+                    (roofHelper3dCube.geometry.vertices[1].z =
+                      roofHelperRectangle.segments[0].point.y),
+                    (roofHelper3dCube.geometry.vertices[3].x =
+                      roofHelperRectangle.segments[0].point.x),
+                    (roofHelper3dCube.geometry.vertices[3].z =
+                      roofHelperRectangle.segments[0].point.y),
+                    (roofHelper3dCube.geometry.vertices[0].x =
+                      roofHelperRectangle.segments[1].point.x),
+                    (roofHelper3dCube.geometry.vertices[0].z =
+                      roofHelperRectangle.segments[1].point.y),
+                    (roofHelper3dCube.geometry.vertices[2].x =
+                      roofHelperRectangle.segments[1].point.x),
+                    (roofHelper3dCube.geometry.vertices[2].z =
+                      roofHelperRectangle.segments[1].point.y),
+                    (roofHelper3dCube.geometry.vertices[5].x =
+                      roofHelperRectangle.segments[2].point.x),
+                    (roofHelper3dCube.geometry.vertices[5].z =
+                      roofHelperRectangle.segments[2].point.y),
+                    (roofHelper3dCube.geometry.vertices[7].x =
+                      roofHelperRectangle.segments[2].point.x),
+                    (roofHelper3dCube.geometry.vertices[7].z =
+                      roofHelperRectangle.segments[2].point.y),
+                    (roofHelper3dCube.geometry.vertices[4].x =
+                      roofHelperRectangle.segments[3].point.x),
+                    (roofHelper3dCube.geometry.vertices[4].z =
+                      roofHelperRectangle.segments[3].point.y),
+                    (roofHelper3dCube.geometry.vertices[6].x =
+                      roofHelperRectangle.segments[3].point.x),
+                    (roofHelper3dCube.geometry.vertices[6].z =
+                      roofHelperRectangle.segments[3].point.y)
+              let v = defaultRoofThickness / 2,
+                w = defaultRoofRise / 2
+                ; (roofHelper3dCube.geometry.vertices[0].y = v - w),
+                  (roofHelper3dCube.geometry.vertices[1].y = v - w),
+                  (roofHelper3dCube.geometry.vertices[4].y = v + w),
+                  (roofHelper3dCube.geometry.vertices[5].y = v + w),
+                  (roofHelper3dCube.geometry.vertices[2].y = -v - w),
+                  (roofHelper3dCube.geometry.vertices[3].y = -v - w),
+                  (roofHelper3dCube.geometry.vertices[6].y = -v + w),
+                  (roofHelper3dCube.geometry.vertices[7].y = -v + w),
+                  (roofHelper3dCube.geometry.verticesNeedUpdate = !0),
+                  (roofHelper3dCube.visible = !0),
+                  (tween = new TWEEN.Tween(controls.target)
+                    .to(roofHelper3dCube.position, 500)
+                    .onUpdate(render)
+                    .start()),
+                  snapPointOverride.id &&
+                  ((snapPointOverride = {}), setEndDrawingRoofs())
+            }
+            lastNewRoofSegmentClick = Date.now()
+          }
+        else if ("background" === toolMode) {
+          let t = project.hitTest(e.point)
+          t && t.item.data
+            ? "background" === t.item.data.type
+              ? ((mouseMode = 0),
+                (offsetMousePoint = selectedItem.position.subtract(e.point)),
+                (offsetMousePoint.x = parseInt(offsetMousePoint.x)),
+                (offsetMousePoint.y = parseInt(offsetMousePoint.y)))
+              : "stretchFurnitureXZTool" === t.item.data.type
+                ? (mouseMode = 2)
+                : "verticalGuide" === t.item.data.type
+                  ? (console.log(t.item.data.type),
+                    (selectedGuideId = t.item.data.id),
+                    (mouseMode = 9))
+                  : "horizontalGuide" === t.item.data.type &&
+                  (console.log(t.item.data.type),
+                    (selectedGuideId = t.item.data.id),
+                    (mouseMode = 10))
+            : (mouseMode = -1)
+        } else if ("floor" === toolMode)
+          2 === e.event.buttons
+            ? (mouseMode = -1)
+            : ((mouseMode = 0),
+              Date.now() - lastNewFloorSegmentClick > 250 &&
+              (startedDrawingFloor
+                ? (floorPath.add(snapPoint),
+                  (floorHelperPath.segments[0].point = snapPoint),
+                  (floorHelperPath.segments[1].point = snapPoint),
+                  redrawFloor(floorPath),
+                  (plan.floors[floorPath.data.id] = {
+                    id: floorPath.data.id,
+                    floorPath: floorPath,
+                  }),
+                  2 === floorPath.segments.length
+                    ? updatePlanHistory(
+                      plan,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      floorPath.data.id,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null
+                    )
+                    : updatePlanHistory(
+                      plan,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      floorPath.data.id,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null
+                    ),
                   render())
                 : ((startedDrawingFloor = !0),
                   (floorPath = new Path()),
@@ -3939,81 +3939,179 @@ function initPlanView() {
                   (floorHelperPath.segments[0].point = snapPoint),
                   (floorHelperPath.segments[1].point = snapPoint),
                   (floorHelperPath.visible = !0))),
-            (lastNewFloorSegmentClick = Date.now()))
-      else if ("dimension" === toolMode)
-        if (2 === e.event.buttons) mouseMode = -1
-        else if (((mouseMode = 0), startedDrawingDimension))
-          if (1 === dimensionPath.segments.length) dimensionPath.add(snapPoint)
-          else {
-            s = dimensionHelperPath.segments[1].point.subtract(
+              (lastNewFloorSegmentClick = Date.now()))
+        else if ("dimension" === toolMode)
+          if (2 === e.event.buttons) mouseMode = -1
+          else if (((mouseMode = 0), startedDrawingDimension))
+            if (1 === dimensionPath.segments.length) dimensionPath.add(snapPoint)
+            else {
+              s = dimensionHelperPath.segments[1].point.subtract(
                 dimensionHelperPath.segments[0].point
               ),
-              I = dimensionHelperPath.segments[1].point.subtract(snapPoint),
-              P = (I.angle - s.angle + 360) % 360,
-              b = (P / 180) * Math.PI,
-              x = I.length * Math.sin(b)
-            ;(dimensionPath.data.adjacent = x), (dimensionPath.visible = !1)
-            let s = dimensionPath.segments[1].point.subtract(
+                I = dimensionHelperPath.segments[1].point.subtract(snapPoint),
+                P = (I.angle - s.angle + 360) % 360,
+                b = (P / 180) * Math.PI,
+                x = I.length * Math.sin(b)
+                ; (dimensionPath.data.adjacent = x), (dimensionPath.visible = !1)
+              let s = dimensionPath.segments[1].point.subtract(
                 dimensionPath.segments[0].point
               ),
-              R = new paper.Path()
-            ;(R.data.id = dimensionPath.data.id),
-              (R.data.level = project.activeLayer.data.id),
-              (R.data.type = "dimension"),
-              (R.style = {
-                strokeColor: "white",
-                strokeWidth: 1,
-                strokeScaling: !1,
-              }),
-              R.moveTo(dimensionPath.segments[0].point),
-              R.lineBy(s.normalize(x).rotate(-90)),
-              R.lineBy(s.normalize(7.5).rotate(-270)),
-              R.lineBy(s.normalize(10).rotate(-225)),
-              R.lineBy(s.normalize(20).rotate(-45)),
-              R.lineBy(s.normalize(10).rotate(-225)),
-              R.lineBy(s.normalize(s.length / 2))
-            let M = R.lastSegment.point
-            R.lineBy(s.normalize(s.length / 2)),
-              R.lineBy(s.normalize(10).rotate(-225)),
-              R.lineBy(s.normalize(20).rotate(-45)),
-              R.lineBy(s.normalize(10).rotate(-225)),
-              R.lineBy(s.normalize(7.5).rotate(-90)),
-              R.lineBy(s.normalize(x).rotate(90))
+                R = new paper.Path()
+                ; (R.data.id = dimensionPath.data.id),
+                  (R.data.level = project.activeLayer.data.id),
+                  (R.data.type = "dimension"),
+                  (R.style = {
+                    strokeColor: "white",
+                    strokeWidth: 1,
+                    strokeScaling: !1,
+                  }),
+                  R.moveTo(dimensionPath.segments[0].point),
+                  R.lineBy(s.normalize(x).rotate(-90)),
+                  R.lineBy(s.normalize(7.5).rotate(-270)),
+                  R.lineBy(s.normalize(10).rotate(-225)),
+                  R.lineBy(s.normalize(20).rotate(-45)),
+                  R.lineBy(s.normalize(10).rotate(-225)),
+                  R.lineBy(s.normalize(s.length / 2))
+              let M = R.lastSegment.point
+              R.lineBy(s.normalize(s.length / 2)),
+                R.lineBy(s.normalize(10).rotate(-225)),
+                R.lineBy(s.normalize(20).rotate(-45)),
+                R.lineBy(s.normalize(10).rotate(-225)),
+                R.lineBy(s.normalize(7.5).rotate(-90)),
+                R.lineBy(s.normalize(x).rotate(90))
+              let k = new paper.PointText({})
+              Math.abs(s.angle) > 90
+                ? ((k.fontFamily = "Courier New"),
+                  (k.fillColor = "white"),
+                  (k.point = M.add(s.normalize(-8).rotate(-90))),
+                  (k.justification = "center"),
+                  (k.fontSize = screenScale / 1.5),
+                  k.rotate(180 + s.angle),
+                  (k.data.id = dimensionPath.data.id),
+                  (k.data.level = project.activeLayer.data.id),
+                  (k.data.type = "dimension"))
+                : ((k.fontFamily = "Courier New"),
+                  (k.fillColor = "white"),
+                  (k.point = M.add(s.normalize(8).rotate(-90))),
+                  (k.justification = "center"),
+                  (k.fontSize = screenScale / 1.5),
+                  k.rotate(s.angle),
+                  (k.data.id = dimensionPath.data.id),
+                  (k.data.level = project.activeLayer.data.id),
+                  (k.data.type = "dimension"))
+              let E = s.length
+                ; (k.content = Math.floor(1e3 * E) / 1e3),
+                  (Dimensions[dimensionPath.data.id] = {
+                    id: dimensionPath.data.id,
+                    dimensionPath: dimensionPath,
+                    line: R,
+                    text: k,
+                  }),
+                  (plan.dimensions[dimensionPath.data.id] = {
+                    id: dimensionPath.data.id,
+                    dimensionPath: dimensionPath,
+                  }),
+                  updatePlanHistory(
+                    plan,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    dimensionPath.data.id,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                  ),
+                  setEndDrawingDimension()
+            }
+          else
+            (startedDrawingDimension = !0),
+              (dimensionPath = new Path()),
+              (dimensionPath.data.type = "dimension"),
+              (dimensionPath.strokeColor = "white"),
+              dimensionPath.add(snapPoint),
+              dimensionIdCounter++,
+              (dimensionPath.data.id = dimensionIdCounter),
+              (dimensionPath.data.adjacent = 0),
+              (dimensionPath.data.level = project.activeLayer.data.id),
+              (dimensionPath.visible = !1),
+              dimensionsGroup[dimensionPath.data.level].addChild(dimensionPath),
+              (dimensionHelperPath.segments[0].point = snapPoint),
+              (dimensionHelperPath.segments[1].point = snapPoint),
+              (dimensionHelperPath.visible = !0)
+        else if ("text" === toolMode)
+          if (2 === e.event.buttons) mouseMode = -1
+          else if (((mouseMode = 0), !startedDrawingText)) {
+            deselectAll(), (startedDrawingText = !0)
             let k = new paper.PointText({})
-            Math.abs(s.angle) > 90
-              ? ((k.fontFamily = "Courier New"),
+              ; (k.fontFamily = "Courier New"),
                 (k.fillColor = "white"),
-                (k.point = M.add(s.normalize(-8).rotate(-90))),
+                (k.point = e.point),
                 (k.justification = "center"),
                 (k.fontSize = screenScale / 1.5),
-                k.rotate(180 + s.angle),
-                (k.data.id = dimensionPath.data.id),
+                textIdCounter++,
+                (k.data.id = textIdCounter),
+                (editingTextId = k.data.id),
+                (k.data.type = "text"),
+                (k.data.value = ""),
+                (k.data.x = k.point.x),
+                (k.data.y = k.point.y),
                 (k.data.level = project.activeLayer.data.id),
-                (k.data.type = "dimension"))
-              : ((k.fontFamily = "Courier New"),
-                (k.fillColor = "white"),
-                (k.point = M.add(s.normalize(8).rotate(-90))),
-                (k.justification = "center"),
-                (k.fontSize = screenScale / 1.5),
-                k.rotate(s.angle),
-                (k.data.id = dimensionPath.data.id),
-                (k.data.level = project.activeLayer.data.id),
-                (k.data.type = "dimension"))
-            let E = s.length
-            ;(k.content = Math.floor(1e3 * E) / 1e3),
-              (Dimensions[dimensionPath.data.id] = {
-                id: dimensionPath.data.id,
-                dimensionPath: dimensionPath,
-                line: R,
-                text: k,
-              }),
-              (plan.dimensions[dimensionPath.data.id] = {
-                id: dimensionPath.data.id,
-                dimensionPath: dimensionPath,
-              }),
+                textsGroup[project.activeLayer.data.id].addChild(k),
+                (k.content = k.data.value),
+                (Texts[k.data.id] = k),
+                (plan.texts[k.data.id] = { id: k.data.id, data: k.data }),
+                updatePlanHistory(
+                  plan,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  k.data.id,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null
+                ),
+                (selectedItem = Texts[k.data.id]),
+                (Texts[k.data.id].selected = !0),
+                updateObjectPropertiesWindow(),
+                (document.getElementById("textValueProp").style.backgroundColor =
+                  "#4e4e4e"),
+                document.getElementById("textValueProp").select(),
+                (startedDrawingText = !1)
+          }
+      }),
+      (tools.onMouseUp = function (e) {
+        0 === mouseMode && dragging
+          ? selectedItem &&
+            selectedItem.data &&
+            "furniture" === selectedItem.data.type
+            ? ((dragging = !1),
+              (mouseMode = -1),
               updatePlanHistory(
                 plan,
                 null,
+                selectedItem.data.id,
                 null,
                 null,
                 null,
@@ -4022,7 +4120,6 @@ function initPlanView() {
                 null,
                 null,
                 null,
-                dimensionPath.data.id,
                 null,
                 null,
                 null,
@@ -4032,447 +4129,547 @@ function initPlanView() {
                 null,
                 null
               ),
-              setEndDrawingDimension()
-          }
-        else
-          (startedDrawingDimension = !0),
-            (dimensionPath = new Path()),
-            (dimensionPath.data.type = "dimension"),
-            (dimensionPath.strokeColor = "white"),
-            dimensionPath.add(snapPoint),
-            dimensionIdCounter++,
-            (dimensionPath.data.id = dimensionIdCounter),
-            (dimensionPath.data.adjacent = 0),
-            (dimensionPath.data.level = project.activeLayer.data.id),
-            (dimensionPath.visible = !1),
-            dimensionsGroup[dimensionPath.data.level].addChild(dimensionPath),
-            (dimensionHelperPath.segments[0].point = snapPoint),
-            (dimensionHelperPath.segments[1].point = snapPoint),
-            (dimensionHelperPath.visible = !0)
-      else if ("text" === toolMode)
-        if (2 === e.event.buttons) mouseMode = -1
-        else if (((mouseMode = 0), !startedDrawingText)) {
-          deselectAll(), (startedDrawingText = !0)
-          let k = new paper.PointText({})
-          ;(k.fontFamily = "Courier New"),
-            (k.fillColor = "white"),
-            (k.point = e.point),
-            (k.justification = "center"),
-            (k.fontSize = screenScale / 1.5),
-            textIdCounter++,
-            (k.data.id = textIdCounter),
-            (editingTextId = k.data.id),
-            (k.data.type = "text"),
-            (k.data.value = ""),
-            (k.data.x = k.point.x),
-            (k.data.y = k.point.y),
-            (k.data.level = project.activeLayer.data.id),
-            textsGroup[project.activeLayer.data.id].addChild(k),
-            (k.content = k.data.value),
-            (Texts[k.data.id] = k),
-            (plan.texts[k.data.id] = { id: k.data.id, data: k.data }),
-            updatePlanHistory(
-              plan,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              k.data.id,
-              null,
-              null,
-              null,
-              null,
-              null
-            ),
-            (selectedItem = Texts[k.data.id]),
-            (Texts[k.data.id].selected = !0),
-            updateObjectPropertiesWindow(),
-            (document.getElementById("textValueProp").style.backgroundColor =
-              "#4e4e4e"),
-            document.getElementById("textValueProp").select(),
-            (startedDrawingText = !1)
-        }
-    }),
-    (tools.onMouseUp = function (e) {
-      0 === mouseMode && dragging
-        ? selectedItem &&
-          selectedItem.data &&
-          "furniture" === selectedItem.data.type
-          ? ((dragging = !1),
-            (mouseMode = -1),
-            updatePlanHistory(
-              plan,
-              null,
-              selectedItem.data.id,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null
-            ),
-            applyMasksToWalls(project.activeLayer.data.id),
-            applyMasksToRoofs(project.activeLayer.data.id),
-            redrawLevelsFloors(project.activeLayer.data.id))
-          : console.log("*** mouseup, mousemode=0, " + selectedItem)
-        : 1 === mouseMode && rotating
-        ? ((rotating = !1),
-          (mouseMode = -1),
-          (selectedItem.data.angle = selectedItem.rotation),
-          updatePlanHistory(
-            plan,
-            null,
-            selectedItem.data.id,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-          ),
-          applyMasksToWalls(project.activeLayer.data.id),
-          applyMasksToRoofs(project.activeLayer.data.id),
-          redrawLevelsFloors(project.activeLayer.data.id))
-        : 2 === mouseMode && scalingXY
-        ? ((scalingXY = !1),
-          (mouseMode = -1),
-          updatePlanHistory(
-            plan,
-            null,
-            selectedItem.data.id,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-          ),
-          applyMasksToWalls(project.activeLayer.data.id),
-          applyMasksToRoofs(project.activeLayer.data.id),
-          redrawLevelsFloors(project.activeLayer.data.id))
-        : 3 === mouseMode
-        ? (snapPointOverride.id &&
-            ((selectedItem.segments[movePointIconSelectedId].point.x =
-              snapPointOverride.x),
-            (selectedItem.segments[movePointIconSelectedId].point.y =
-              snapPointOverride.y),
-            (snapPointOverride = {})),
-          relinkWallReferences(project.activeLayer.data.id),
-          updatePlanHistory(
-            plan,
-            null,
-            null,
-            null,
-            null,
-            selectedItem.data.id,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-          ))
-        : 11 === mouseMode
-        ? (snapPointOverride.id &&
-            ((selectedItem.segments[movePointIconSelectedId].point.x =
-              snapPointOverride.x),
-            (selectedItem.segments[movePointIconSelectedId].point.y =
-              snapPointOverride.y),
-            (snapPointOverride = {})),
-          relinkRoofReferences(project.activeLayer.data.id),
-          updatePlanHistory(
-            plan,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            selectedItem.data.id,
-            null
-          ))
-        : 4 === mouseMode && scalingY
-        ? ((scalingY = !1),
-          (mouseMode = -1),
-          (stretchYPath.visible = !1),
-          (clickableObjects[selectedItem.data.id].userData.height +=
-            stretchYPath.length),
-          updatePlanHistory(
-            plan,
-            null,
-            selectedItem.data.id,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-          ),
-          applyMasksToWalls(project.activeLayer.data.id),
-          applyMasksToRoofs(project.activeLayer.data.id),
-          redrawLevelsFloors(project.activeLayer.data.id))
-        : 5 === mouseMode && elevating
-        ? ((elevating = !1),
-          (mouseMode = -1),
-          (elevatePath.visible = !1),
-          updatePlanHistory(
-            plan,
-            null,
-            selectedItem.data.id,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-          ),
-          applyMasksToWalls(project.activeLayer.data.id),
-          applyMasksToRoofs(project.activeLayer.data.id),
-          redrawLevelsFloors(project.activeLayer.data.id))
-        : 6 === mouseMode
-        ? updatePlanHistory(
-            plan,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            selectedItem.data.id,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-          )
-        : 7 === mouseMode
-        ? updatePlanHistory(
-            plan,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            selectedItem.data.id,
-            null,
-            null,
-            null,
-            null
-          )
-        : 9 === mouseMode
-        ? ((selectedGuideId = -1), (mouseMode = -1))
-        : 10 === mouseMode && ((selectedGuideId = -1), (mouseMode = -1))
-    }),
-    (tools.onMouseDrag = function (e) {
-      let t = e.downPoint.subtract(e.point)
-      if (mouseMode === -1)
-        (paper.view.center = paper.view.center.add(t)), redrawGrid()
-      else if (9 === mouseMode)
-        verticalGuides[selectedGuideId].position.x =
-          parseInt(e.point.x / snapTolerance) * snapTolerance
-      else if (10 === mouseMode)
-        horizontalGuides[selectedGuideId].position.y =
-          parseInt(e.point.y / snapTolerance) * snapTolerance
-      else if ("pointer" === toolMode)
-        if (0 === mouseMode) {
-          if (
-            ((dragging = !0),
-            (snapPoint = e.point),
-            (snapPoint.x = parseInt(e.point.x)),
-            (snapPoint.y = parseInt(e.point.y)),
-            ctrlKeyPressed &&
-              ((snapPoint.x = snapPoint.x - (snapPoint.x % 10)),
-              (snapPoint.y = snapPoint.y - (snapPoint.y % 10))),
-            selectedItem)
-          ) {
-            let o = null
-            if (selectedItem.useMask) {
-              let a = 25,
-                n = 0,
-                l = -1
-              if (
-                (Object.keys(Walls).forEach(function (e) {
-                  let t = Walls[e]
-                  if (
-                    "object" == typeof t &&
-                    t.data.level === project.activeLayer.data.id
-                  ) {
-                    let i = t.getNearestPoint(snapPoint),
-                      r = snapPoint.getDistance(i)
-                    if (r <= a) {
-                      ;(a = r), (o = i)
-                      let s = t.segments[0].point.subtract(t.segments[1].point)
-                      ;(n = s.angle), (l = e)
+              applyMasksToWalls(project.activeLayer.data.id),
+              applyMasksToRoofs(project.activeLayer.data.id),
+              redrawLevelsFloors(project.activeLayer.data.id))
+            : console.log("*** mouseup, mousemode=0, " + selectedItem)
+          : 1 === mouseMode && rotating
+            ? ((rotating = !1),
+              (mouseMode = -1),
+              (selectedItem.data.angle = selectedItem.rotation),
+              updatePlanHistory(
+                plan,
+                null,
+                selectedItem.data.id,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ),
+              applyMasksToWalls(project.activeLayer.data.id),
+              applyMasksToRoofs(project.activeLayer.data.id),
+              redrawLevelsFloors(project.activeLayer.data.id))
+            : 2 === mouseMode && scalingXY
+              ? ((scalingXY = !1),
+                (mouseMode = -1),
+                updatePlanHistory(
+                  plan,
+                  null,
+                  selectedItem.data.id,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null
+                ),
+                applyMasksToWalls(project.activeLayer.data.id),
+                applyMasksToRoofs(project.activeLayer.data.id),
+                redrawLevelsFloors(project.activeLayer.data.id))
+              : 3 === mouseMode
+                ? (snapPointOverride.id &&
+                  ((selectedItem.segments[movePointIconSelectedId].point.x =
+                    snapPointOverride.x),
+                    (selectedItem.segments[movePointIconSelectedId].point.y =
+                      snapPointOverride.y),
+                    (snapPointOverride = {})),
+                  relinkWallReferences(project.activeLayer.data.id),
+                  updatePlanHistory(
+                    plan,
+                    null,
+                    null,
+                    null,
+                    null,
+                    selectedItem.data.id,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                  ))
+                : 11 === mouseMode
+                  ? (snapPointOverride.id &&
+                    ((selectedItem.segments[movePointIconSelectedId].point.x =
+                      snapPointOverride.x),
+                      (selectedItem.segments[movePointIconSelectedId].point.y =
+                        snapPointOverride.y),
+                      (snapPointOverride = {})),
+                    relinkRoofReferences(project.activeLayer.data.id),
+                    updatePlanHistory(
+                      plan,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      selectedItem.data.id,
+                      null
+                    ))
+                  : 4 === mouseMode && scalingY
+                    ? ((scalingY = !1),
+                      (mouseMode = -1),
+                      (stretchYPath.visible = !1),
+                      (clickableObjects[selectedItem.data.id].userData.height +=
+                        stretchYPath.length),
+                      updatePlanHistory(
+                        plan,
+                        null,
+                        selectedItem.data.id,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                      ),
+                      applyMasksToWalls(project.activeLayer.data.id),
+                      applyMasksToRoofs(project.activeLayer.data.id),
+                      redrawLevelsFloors(project.activeLayer.data.id))
+                    : 5 === mouseMode && elevating
+                      ? ((elevating = !1),
+                        (mouseMode = -1),
+                        (elevatePath.visible = !1),
+                        updatePlanHistory(
+                          plan,
+                          null,
+                          selectedItem.data.id,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null
+                        ),
+                        applyMasksToWalls(project.activeLayer.data.id),
+                        applyMasksToRoofs(project.activeLayer.data.id),
+                        redrawLevelsFloors(project.activeLayer.data.id))
+                      : 6 === mouseMode
+                        ? updatePlanHistory(
+                          plan,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          selectedItem.data.id,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null
+                        )
+                        : 7 === mouseMode
+                          ? updatePlanHistory(
+                            plan,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            selectedItem.data.id,
+                            null,
+                            null,
+                            null,
+                            null
+                          )
+                          : 9 === mouseMode
+                            ? ((selectedGuideId = -1), (mouseMode = -1))
+                            : 10 === mouseMode && ((selectedGuideId = -1), (mouseMode = -1))
+      }),
+      (tools.onMouseDrag = function (e) {
+        let t = e.downPoint.subtract(e.point)
+        if (mouseMode === -1)
+          (paper.view.center = paper.view.center.add(t)), redrawGrid()
+        else if (9 === mouseMode)
+          verticalGuides[selectedGuideId].position.x =
+            parseInt(e.point.x / snapTolerance) * snapTolerance
+        else if (10 === mouseMode)
+          horizontalGuides[selectedGuideId].position.y =
+            parseInt(e.point.y / snapTolerance) * snapTolerance
+        else if ("pointer" === toolMode)
+          if (0 === mouseMode) {
+            if (
+              ((dragging = !0),
+                (snapPoint = e.point),
+                (snapPoint.x = parseInt(e.point.x)),
+                (snapPoint.y = parseInt(e.point.y)),
+                ctrlKeyPressed &&
+                ((snapPoint.x = snapPoint.x - (snapPoint.x % 10)),
+                  (snapPoint.y = snapPoint.y - (snapPoint.y % 10))),
+                selectedItem)
+            ) {
+              let o = null
+              if (selectedItem.useMask) {
+                let a = 25,
+                  n = 0,
+                  l = -1
+                if (
+                  (Object.keys(Walls).forEach(function (e) {
+                    let t = Walls[e]
+                    if (
+                      "object" === typeof t &&
+                      t.data.level === project.activeLayer.data.id
+                    ) {
+                      let i = t.getNearestPoint(snapPoint),
+                        r = snapPoint.getDistance(i)
+                      if (r <= a) {
+                        ; (a = r), (o = i)
+                        let s = t.segments[0].point.subtract(t.segments[1].point)
+                          ; (n = s.angle), (l = e)
+                      }
                     }
-                  }
-                }),
-                o)
-              ) {
-                new Path.Circle({
-                  center: o,
-                  radius: screenScale / 2,
-                  fillColor: new paper.Color(0.3, 1, 0.5, 0.75),
-                  strokeWidth: 1,
-                })
-                  .removeOnMove()
-                  .removeOnDrag(),
-                  (snapPoint = o),
-                  (selectedItem.data.angle = n),
-                  selectedItem.data.toolsRectangleInner &&
+                  }),
+                    o)
+                ) {
+                  new Path.Circle({
+                    center: o,
+                    radius: screenScale / 2,
+                    fillColor: new paper.Color(0.3, 1, 0.5, 0.75),
+                    strokeWidth: 1,
+                  })
+                    .removeOnMove()
+                    .removeOnDrag(),
+                    (snapPoint = o),
+                    (selectedItem.data.angle = n),
+                    selectedItem.data.toolsRectangleInner &&
                     selectedItem.data.toolsRectangleInner.remove(),
-                  (selectedItem.rotation = 0)
-                let i = new paper.Path.Rectangle(selectedItem.bounds)
-                ;(selectedItem.rotation = selectedItem.data.angle),
+                    (selectedItem.rotation = 0)
+                  let i = new paper.Path.Rectangle(selectedItem.bounds)
+                    ; (selectedItem.rotation = selectedItem.data.angle),
+                      (i.data.type = "toolsRectangle"),
+                      (i.strokeColor = "#b19064"),
+                      (i.strokeWidth = 1),
+                      (i.strokeScaling = !1),
+                      (i.locked = !0),
+                      (selectedItem.data.toolsRectangleInner = i),
+                      i.rotate(selectedItem.data.angle),
+                      (furnitureAngleProp.innerText = (
+                        (selectedItem.rotation + 360) %
+                        360
+                      ).toFixed(2)),
+                      (plan.furniture[selectedItem.data.id].angle =
+                        selectedItem.rotation),
+                      (rotateIcon.position =
+                        selectedItem.data.toolsRectangleInner.segments[1].point),
+                      (resizeIcon.position =
+                        selectedItem.data.toolsRectangleInner.segments[3].point),
+                      (heightIcon.position =
+                        selectedItem.data.toolsRectangleInner.segments[2].point),
+                      (elevateIcon.position =
+                        selectedItem.data.toolsRectangleInner.segments[0].point),
+                      (clickableObjects[selectedItem.data.id].rotation.y =
+                        (((selectedItem.rotation + 180) % 360) / 180) * Math.PI),
+                      (clickableObjects[selectedItem.data.id].rotation.x = Math.PI),
+                      (clickableObjects[selectedItem.data.id].rotation.z = Math.PI),
+                      maskObjects[selectedItem.data.id] &&
+                      ((maskObjects[selectedItem.data.id].rotation.y =
+                        (((selectedItem.rotation + 180) % 360) / 180) * Math.PI),
+                        (maskObjects[selectedItem.data.id].rotation.x = Math.PI),
+                        (maskObjects[selectedItem.data.id].rotation.z = Math.PI)),
+                      (selectedItem.position = snapPoint),
+                      (toolsGroup.position = snapPoint),
+                      applyMasksToWall(
+                        l,
+                        wallsRectangles3d[l],
+                        project.activeLayer.data.id
+                      )
+                } else snapPoint = snapPoint.add(offsetMousePoint)
+              } else snapPoint = snapPoint.add(offsetMousePoint)
+              if (null === o) {
+                let r
+                Object.keys(verticalGuides).forEach(function (e) {
+                  snapPoint.x >= verticalGuides[e].position.x - 10 &&
+                    snapPoint.x <= verticalGuides[e].position.x + 10 &&
+                    (r = new paper.Point(
+                      verticalGuides[e].position.x,
+                      snapPoint.y
+                    ))
+                }),
+                  Object.keys(horizontalGuides).forEach(function (e) {
+                    snapPoint.y >= horizontalGuides[e].position.y - 10 &&
+                      snapPoint.y <= horizontalGuides[e].position.y + 10 &&
+                      (r
+                        ? (r.y = horizontalGuides[e].position.y)
+                        : (r = new paper.Point(
+                          snapPoint.x,
+                          horizontalGuides[e].position.y
+                        )))
+                  }),
+                  r &&
+                  ((snapPoint = r),
+                    new Path.Circle({
+                      center: snapPoint,
+                      radius: screenScale / 2,
+                      fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
+                      strokeWidth: 1,
+                    })
+                      .removeOnMove()
+                      .removeOnDrag())
+              }
+              if (furnitureItems[selectedItem.data.fid].pivot) {
+                let s = furnitureItems[selectedItem.data.fid].pivot
+                if (1 === selectedItem.data.flipZ) {
+                  let d = snapPoint.add(new paper.Point(s).rotate(n)),
+                    c = snapPoint,
+                    u = c.subtract(d)
+                  snapPoint = snapPoint.add(u)
+                } else {
+                  let d = snapPoint.add(new paper.Point(s.x, -s.y).rotate(n)),
+                    c = snapPoint,
+                    u = c.subtract(d)
+                  snapPoint = snapPoint.add(u)
+                }
+              }
+              ; (selectedItem.position = snapPoint),
+                (toolsGroup.position = snapPoint),
+                (selectedItem.data.toolsRectangleInner.position =
+                  selectedItem.position)
+              let p = snapPoint.x,
+                m = snapPoint.y
+              selectedItem.data.id &&
+                ((clickableObjects[selectedItem.data.id].position.x = p),
+                  (clickableObjects[selectedItem.data.id].position.z = m),
+                  maskObjects[selectedItem.data.id] &&
+                  ((maskObjects[selectedItem.data.id].position.x = p),
+                    (maskObjects[selectedItem.data.id].position.z = m)),
+                  (controls.target.x = p),
+                  (controls.target.z = m),
+                  setTimeout(function () {
+                    render()
+                  }, 1)),
+                (furnitureXProp.value = p.toFixed(3)),
+                (furnitureZProp.value = m.toFixed(3))
+            }
+          } else if (1 === mouseMode) {
+            let g = selectedItem.bounds.center,
+              y = g.subtract(e.lastPoint),
+              f = g.subtract(e.point),
+              n = (f.angle - y.angle + 360) % 360
+            if (((selectedItem.data.angle += n), ctrlKeyPressed)) {
+              let h = 15 * Math.round(selectedItem.data.angle / 15)
+              selectedItem.data.toolsRectangleInner &&
+                selectedItem.data.toolsRectangleInner.remove(),
+                (selectedItem.rotation = 0)
+              let i = new paper.Path.Rectangle(selectedItem.bounds)
+                ; (selectedItem.rotation = h),
                   (i.data.type = "toolsRectangle"),
                   (i.strokeColor = "#b19064"),
                   (i.strokeWidth = 1),
                   (i.strokeScaling = !1),
                   (i.locked = !0),
                   (selectedItem.data.toolsRectangleInner = i),
-                  i.rotate(selectedItem.data.angle),
-                  (furnitureAngleProp.innerText = (
-                    (selectedItem.rotation + 360) %
-                    360
-                  ).toFixed(2)),
-                  (plan.furniture[selectedItem.data.id].angle =
-                    selectedItem.rotation),
-                  (rotateIcon.position =
-                    selectedItem.data.toolsRectangleInner.segments[1].point),
+                  i.rotate(h)
+            } else {
+              selectedItem.data.toolsRectangleInner &&
+                selectedItem.data.toolsRectangleInner.remove(),
+                (selectedItem.rotation = 0)
+              let i = new paper.Path.Rectangle(selectedItem.bounds)
+                ; (selectedItem.rotation = selectedItem.data.angle),
+                  (i.data.type = "toolsRectangle"),
+                  (i.strokeColor = "#b19064"),
+                  (i.strokeWidth = 1),
+                  (i.strokeScaling = !1),
+                  (i.locked = !0),
+                  (selectedItem.data.toolsRectangleInner = i),
+                  i.rotate(selectedItem.data.angle)
+            }
+            ; (furnitureAngleProp.innerText = (
+              (selectedItem.rotation + 360) %
+              360
+            ).toFixed(2)),
+              (plan.furniture[selectedItem.data.id].angle =
+                selectedItem.rotation),
+              (rotateIcon.position =
+                selectedItem.data.toolsRectangleInner.segments[1].point),
+              (resizeIcon.position =
+                selectedItem.data.toolsRectangleInner.segments[3].point),
+              (heightIcon.position =
+                selectedItem.data.toolsRectangleInner.segments[2].point),
+              (elevateIcon.position =
+                selectedItem.data.toolsRectangleInner.segments[0].point),
+              selectedItem.data.id &&
+              ((rotating = !0),
+                (clickableObjects[selectedItem.data.id].rotation.y =
+                  (((selectedItem.rotation + 180) % 360) / 180) * Math.PI),
+                (clickableObjects[selectedItem.data.id].rotation.x = Math.PI),
+                (clickableObjects[selectedItem.data.id].rotation.z = Math.PI),
+                maskObjects[selectedItem.data.id] &&
+                ((maskObjects[selectedItem.data.id].rotation.y =
+                  (((selectedItem.rotation + 180) % 360) / 180) * Math.PI),
+                  (maskObjects[selectedItem.data.id].rotation.x = Math.PI),
+                  (maskObjects[selectedItem.data.id].rotation.z = Math.PI)),
+                render())
+          } else if (2 === mouseMode) {
+            if (selectedItem.data.id) {
+              scalingXY = !0
+              try {
+                let v = (selectedItem.data.angle / 90) * Math.PI,
+                  w = e.point,
+                  I = selectedItem.position.subtract(
+                    e.point.subtract(selectedItem.position)
+                  ),
+                  P = w.subtract(I),
+                  b = P.angleInRadians - v,
+                  x = P.length * Math.cos(b),
+                  R = P.length * Math.sin(b),
+                  M = new paper.Point(
+                    selectedItem.position.x + x / 2,
+                    selectedItem.position.y - R / 2
+                  ),
+                  k = new paper.Point(
+                    selectedItem.position.x - x / 2,
+                    selectedItem.position.y + R / 2
+                  )
+                  ; (selectedItem.data.toolsRectangleInner.segments[3].point = w),
+                    (selectedItem.data.toolsRectangleInner.segments[1].point = I),
+                    (selectedItem.data.toolsRectangleInner.segments[2].point = M),
+                    (selectedItem.data.toolsRectangleInner.segments[0].point = k)
+                let E = k.subtract(w),
+                  j = M.subtract(w),
+                  T = E.length,
+                  H = j.length
+                if (Math.abs(T) >= 1e-5 && Math.abs(H) >= 1e-5) {
+                  ; (clickableObjects[selectedItem.data.id].scale.x =
+                    T /
+                    (clickableObjects[selectedItem.data.id].userData.width *
+                      selectedItem.data.flipX)),
+                    (clickableObjects[selectedItem.data.id].scale.z =
+                      H /
+                      (clickableObjects[selectedItem.data.id].userData.depth *
+                        selectedItem.data.flipZ)),
+                    maskObjects[selectedItem.data.id] &&
+                    ((maskObjects[selectedItem.data.id].scale.x = Math.abs(
+                      clickableObjects[selectedItem.data.id].scale.x
+                    )),
+                      (maskObjects[selectedItem.data.id].scale.z = Math.abs(
+                        clickableObjects[selectedItem.data.id].scale.z
+                      )))
+                  let C = selectedItem.position,
+                    B = selectedItem.rotation
+                    ; (selectedItem.rotation = 0),
+                      (selectedItem.bounds.width = Math.abs(T)),
+                      (selectedItem.bounds.height = Math.abs(H)),
+                      (plan.furniture[selectedItem.data.id].width = T),
+                      (plan.furniture[selectedItem.data.id].depth = H),
+                      (selectedItem.rotation = B),
+                      (selectedItem.position = C),
+                      render(),
+                      (furnitureWidthProp.value = (
+                        clickableObjects[selectedItem.data.id].userData.width *
+                        clickableObjects[selectedItem.data.id].scale.x
+                      ).toFixed(3)),
+                      (furnitureDepthProp.value = (
+                        clickableObjects[selectedItem.data.id].userData.depth *
+                        clickableObjects[selectedItem.data.id].scale.z
+                      ).toFixed(3))
+                }
+                ; (rotateIcon.position =
+                  selectedItem.data.toolsRectangleInner.segments[1].point),
                   (resizeIcon.position =
                     selectedItem.data.toolsRectangleInner.segments[3].point),
                   (heightIcon.position =
                     selectedItem.data.toolsRectangleInner.segments[2].point),
                   (elevateIcon.position =
-                    selectedItem.data.toolsRectangleInner.segments[0].point),
-                  (clickableObjects[selectedItem.data.id].rotation.y =
-                    (((selectedItem.rotation + 180) % 360) / 180) * Math.PI),
-                  (clickableObjects[selectedItem.data.id].rotation.x = Math.PI),
-                  (clickableObjects[selectedItem.data.id].rotation.z = Math.PI),
-                  maskObjects[selectedItem.data.id] &&
-                    ((maskObjects[selectedItem.data.id].rotation.y =
-                      (((selectedItem.rotation + 180) % 360) / 180) * Math.PI),
-                    (maskObjects[selectedItem.data.id].rotation.x = Math.PI),
-                    (maskObjects[selectedItem.data.id].rotation.z = Math.PI)),
-                  (selectedItem.position = snapPoint),
-                  (toolsGroup.position = snapPoint),
-                  applyMasksToWall(
-                    l,
-                    wallsRectangles3d[l],
-                    project.activeLayer.data.id
-                  )
-              } else snapPoint = snapPoint.add(offsetMousePoint)
-            } else snapPoint = snapPoint.add(offsetMousePoint)
-            if (null === o) {
-              let r
-              Object.keys(verticalGuides).forEach(function (e) {
-                snapPoint.x >= verticalGuides[e].position.x - 10 &&
-                  snapPoint.x <= verticalGuides[e].position.x + 10 &&
-                  (r = new paper.Point(
-                    verticalGuides[e].position.x,
-                    snapPoint.y
-                  ))
-              }),
-                Object.keys(horizontalGuides).forEach(function (e) {
-                  snapPoint.y >= horizontalGuides[e].position.y - 10 &&
-                    snapPoint.y <= horizontalGuides[e].position.y + 10 &&
-                    (r
-                      ? (r.y = horizontalGuides[e].position.y)
-                      : (r = new paper.Point(
-                          snapPoint.x,
-                          horizontalGuides[e].position.y
-                        )))
-                }),
-                r &&
-                  ((snapPoint = r),
+                    selectedItem.data.toolsRectangleInner.segments[0].point)
+              } catch (e) {
+                console.log(e)
+              }
+            }
+          } else if (3 === mouseMode) {
+            ; (snapPoint = e.point),
+              (snapPoint.x = parseInt(e.point.x)),
+              (snapPoint.y = parseInt(e.point.y)),
+              ctrlKeyPressed &&
+              ((snapPoint.x = snapPoint.x - (snapPoint.x % 10)),
+                (snapPoint.y = snapPoint.y - (snapPoint.y % 10))),
+              (snapPointOverride = {})
+            e: for (let L = 0; L < unjoinedWallSegments.length; L++)
+              if (
+                e.point.x >= unjoinedWallSegments[L].x - 10 &&
+                e.point.x <= unjoinedWallSegments[L].x + 10 &&
+                e.point.y >= unjoinedWallSegments[L].y - 10 &&
+                e.point.y <= unjoinedWallSegments[L].y + 10
+              ) {
+                ; (snapPoint = new paper.Point(
+                  unjoinedWallSegments[L].x,
+                  unjoinedWallSegments[L].y
+                )),
                   new Path.Circle({
                     center: snapPoint,
                     radius: screenScale / 2,
@@ -4480,196 +4677,137 @@ function initPlanView() {
                     strokeWidth: 1,
                   })
                     .removeOnMove()
-                    .removeOnDrag())
-            }
-            if (furnitureItems[selectedItem.data.fid].pivot) {
-              let s = furnitureItems[selectedItem.data.fid].pivot
-              if (1 === selectedItem.data.flipZ) {
-                let d = snapPoint.add(new paper.Point(s).rotate(n)),
-                  c = snapPoint,
-                  u = c.subtract(d)
-                snapPoint = snapPoint.add(u)
-              } else {
-                let d = snapPoint.add(new paper.Point(s.x, -s.y).rotate(n)),
-                  c = snapPoint,
-                  u = c.subtract(d)
-                snapPoint = snapPoint.add(u)
+                    .removeOnDrag(),
+                  (snapPointOverride = {
+                    id: unjoinedWallSegments[L].id,
+                    x: unjoinedWallSegments[L].x,
+                    y: unjoinedWallSegments[L].y,
+                  })
+                break e
               }
-            }
-            ;(selectedItem.position = snapPoint),
-              (toolsGroup.position = snapPoint),
-              (selectedItem.data.toolsRectangleInner.position =
-                selectedItem.position)
-            let p = snapPoint.x,
-              m = snapPoint.y
-            selectedItem.data.id &&
-              ((clickableObjects[selectedItem.data.id].position.x = p),
-              (clickableObjects[selectedItem.data.id].position.z = m),
-              maskObjects[selectedItem.data.id] &&
-                ((maskObjects[selectedItem.data.id].position.x = p),
-                (maskObjects[selectedItem.data.id].position.z = m)),
-              (controls.target.x = p),
-              (controls.target.z = m),
-              setTimeout(function () {
-                render()
-              }, 1)),
-              (furnitureXProp.value = p.toFixed(3)),
-              (furnitureZProp.value = m.toFixed(3))
-          }
-        } else if (1 === mouseMode) {
-          let g = selectedItem.bounds.center,
-            y = g.subtract(e.lastPoint),
-            f = g.subtract(e.point),
-            n = (f.angle - y.angle + 360) % 360
-          if (((selectedItem.data.angle += n), ctrlKeyPressed)) {
-            let h = 15 * Math.round(selectedItem.data.angle / 15)
-            selectedItem.data.toolsRectangleInner &&
-              selectedItem.data.toolsRectangleInner.remove(),
-              (selectedItem.rotation = 0)
-            let i = new paper.Path.Rectangle(selectedItem.bounds)
-            ;(selectedItem.rotation = h),
-              (i.data.type = "toolsRectangle"),
-              (i.strokeColor = "#b19064"),
-              (i.strokeWidth = 1),
-              (i.strokeScaling = !1),
-              (i.locked = !0),
-              (selectedItem.data.toolsRectangleInner = i),
-              i.rotate(h)
-          } else {
-            selectedItem.data.toolsRectangleInner &&
-              selectedItem.data.toolsRectangleInner.remove(),
-              (selectedItem.rotation = 0)
-            let i = new paper.Path.Rectangle(selectedItem.bounds)
-            ;(selectedItem.rotation = selectedItem.data.angle),
-              (i.data.type = "toolsRectangle"),
-              (i.strokeColor = "#b19064"),
-              (i.strokeWidth = 1),
-              (i.strokeScaling = !1),
-              (i.locked = !0),
-              (selectedItem.data.toolsRectangleInner = i),
-              i.rotate(selectedItem.data.angle)
-          }
-          ;(furnitureAngleProp.innerText = (
-            (selectedItem.rotation + 360) %
-            360
-          ).toFixed(2)),
-            (plan.furniture[selectedItem.data.id].angle =
-              selectedItem.rotation),
-            (rotateIcon.position =
-              selectedItem.data.toolsRectangleInner.segments[1].point),
-            (resizeIcon.position =
-              selectedItem.data.toolsRectangleInner.segments[3].point),
-            (heightIcon.position =
-              selectedItem.data.toolsRectangleInner.segments[2].point),
-            (elevateIcon.position =
-              selectedItem.data.toolsRectangleInner.segments[0].point),
-            selectedItem.data.id &&
-              ((rotating = !0),
-              (clickableObjects[selectedItem.data.id].rotation.y =
-                (((selectedItem.rotation + 180) % 360) / 180) * Math.PI),
-              (clickableObjects[selectedItem.data.id].rotation.x = Math.PI),
-              (clickableObjects[selectedItem.data.id].rotation.z = Math.PI),
-              maskObjects[selectedItem.data.id] &&
-                ((maskObjects[selectedItem.data.id].rotation.y =
-                  (((selectedItem.rotation + 180) % 360) / 180) * Math.PI),
-                (maskObjects[selectedItem.data.id].rotation.x = Math.PI),
-                (maskObjects[selectedItem.data.id].rotation.z = Math.PI)),
-              render())
-        } else if (2 === mouseMode) {
-          if (selectedItem.data.id) {
-            scalingXY = !0
-            try {
-              let v = (selectedItem.data.angle / 90) * Math.PI,
-                w = e.point,
-                I = selectedItem.position.subtract(
-                  e.point.subtract(selectedItem.position)
-                ),
-                P = w.subtract(I),
-                b = P.angleInRadians - v,
-                x = P.length * Math.cos(b),
-                R = P.length * Math.sin(b),
-                M = new paper.Point(
-                  selectedItem.position.x + x / 2,
-                  selectedItem.position.y - R / 2
-                ),
-                k = new paper.Point(
-                  selectedItem.position.x - x / 2,
-                  selectedItem.position.y + R / 2
-                )
-              ;(selectedItem.data.toolsRectangleInner.segments[3].point = w),
-                (selectedItem.data.toolsRectangleInner.segments[1].point = I),
-                (selectedItem.data.toolsRectangleInner.segments[2].point = M),
-                (selectedItem.data.toolsRectangleInner.segments[0].point = k)
-              let E = k.subtract(w),
-                j = M.subtract(w),
-                T = E.length,
-                H = j.length
-              if (Math.abs(T) >= 1e-5 && Math.abs(H) >= 1e-5) {
-                ;(clickableObjects[selectedItem.data.id].scale.x =
-                  T /
-                  (clickableObjects[selectedItem.data.id].userData.width *
-                    selectedItem.data.flipX)),
-                  (clickableObjects[selectedItem.data.id].scale.z =
-                    H /
-                    (clickableObjects[selectedItem.data.id].userData.depth *
-                      selectedItem.data.flipZ)),
-                  maskObjects[selectedItem.data.id] &&
-                    ((maskObjects[selectedItem.data.id].scale.x = Math.abs(
-                      clickableObjects[selectedItem.data.id].scale.x
-                    )),
-                    (maskObjects[selectedItem.data.id].scale.z = Math.abs(
-                      clickableObjects[selectedItem.data.id].scale.z
-                    )))
-                let C = selectedItem.position,
-                  B = selectedItem.rotation
-                ;(selectedItem.rotation = 0),
-                  (selectedItem.bounds.width = Math.abs(T)),
-                  (selectedItem.bounds.height = Math.abs(H)),
-                  (plan.furniture[selectedItem.data.id].width = T),
-                  (plan.furniture[selectedItem.data.id].depth = H),
-                  (selectedItem.rotation = B),
-                  (selectedItem.position = C),
-                  render(),
-                  (furnitureWidthProp.value = (
-                    clickableObjects[selectedItem.data.id].userData.width *
-                    clickableObjects[selectedItem.data.id].scale.x
-                  ).toFixed(3)),
-                  (furnitureDepthProp.value = (
-                    clickableObjects[selectedItem.data.id].userData.depth *
-                    clickableObjects[selectedItem.data.id].scale.z
-                  ).toFixed(3))
-              }
-              ;(rotateIcon.position =
-                selectedItem.data.toolsRectangleInner.segments[1].point),
-                (resizeIcon.position =
-                  selectedItem.data.toolsRectangleInner.segments[3].point),
-                (heightIcon.position =
-                  selectedItem.data.toolsRectangleInner.segments[2].point),
-                (elevateIcon.position =
-                  selectedItem.data.toolsRectangleInner.segments[0].point)
-            } catch (e) {
-              console.log(e)
-            }
-          }
-        } else if (3 === mouseMode) {
-          ;(snapPoint = e.point),
-            (snapPoint.x = parseInt(e.point.x)),
-            (snapPoint.y = parseInt(e.point.y)),
-            ctrlKeyPressed &&
+            if (!snapPointOverride.id)
+              e: for (let L = 0; L < allWallSegments.length; L++)
+                if (
+                  e.point.x >= allWallSegments[L].x - 10 &&
+                  e.point.x <= allWallSegments[L].x + 10 &&
+                  e.point.y >= allWallSegments[L].y - 10 &&
+                  e.point.y <= allWallSegments[L].y + 10
+                ) {
+                  ; (snapPoint = new paper.Point(
+                    allWallSegments[L].x,
+                    allWallSegments[L].y
+                  )),
+                    new Path.Circle({
+                      center: snapPoint,
+                      radius: screenScale / 2,
+                      fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
+                      strokeWidth: 1,
+                    }).removeOnMove(),
+                    (snapPointOverride = {
+                      id: allWallSegments[L].id,
+                      x: allWallSegments[L].x,
+                      y: allWallSegments[L].y,
+                    })
+                  break e
+                }
+            let r = null,
+              t = selectedItem.data.thickness / 2,
+              z = selectedItem.data.thickness / 4
+            snapPointOverride.id ||
+              (Object.keys(verticalGuides).forEach(function (o) {
+                e.point.x >= verticalGuides[o].position.x - z &&
+                  e.point.x <= verticalGuides[o].position.x + z &&
+                  (r = new paper.Point(verticalGuides[o].position.x, e.point.y)),
+                  null === r &&
+                  e.point.x >= verticalGuides[o].position.x - t - z &&
+                  e.point.x <= verticalGuides[o].position.x - t + z &&
+                  (r = new paper.Point(
+                    verticalGuides[o].position.x - t,
+                    e.point.y
+                  )),
+                  null === r &&
+                  e.point.x >= verticalGuides[o].position.x + t - z &&
+                  e.point.x <= verticalGuides[o].position.x + t + z &&
+                  (r = new paper.Point(
+                    verticalGuides[o].position.x + t,
+                    e.point.y
+                  ))
+              }),
+                Object.keys(horizontalGuides).forEach(function (o) {
+                  let a = null
+                  e.point.y >= horizontalGuides[o].position.y - z &&
+                    e.point.y <= horizontalGuides[o].position.y + z &&
+                    (a = horizontalGuides[o].position.y),
+                    null === a &&
+                    e.point.y >= horizontalGuides[o].position.y - t - z &&
+                    e.point.y <= horizontalGuides[o].position.y - t + z &&
+                    (a = horizontalGuides[o].position.y - t),
+                    null === a &&
+                    e.point.y >= horizontalGuides[o].position.y + t - z &&
+                    e.point.y <= horizontalGuides[o].position.y + t + z &&
+                    (a = horizontalGuides[o].position.y + t),
+                    a && (r ? (r.y = a) : (r = new paper.Point(e.point.x, a)))
+                }),
+                r &&
+                ((snapPoint = r),
+                  new Path.Circle({
+                    center: snapPoint,
+                    radius: screenScale / 2,
+                    fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
+                    strokeWidth: 1,
+                  })
+                    .removeOnMove()
+                    .removeOnDrag())),
+              (selectedMovePointIcon.position = snapPoint),
+              (selectedItem.segments[movePointIconSelectedId].point = snapPoint),
+              relinkWallReferences(project.activeLayer.data.id)
+          } else if (11 === mouseMode) {
+            ; (snapPoint = e.point),
+              (snapPoint.x = parseInt(e.point.x)),
+              (snapPoint.y = parseInt(e.point.y)),
+              ctrlKeyPressed &&
               ((snapPoint.x = snapPoint.x - (snapPoint.x % 10)),
-              (snapPoint.y = snapPoint.y - (snapPoint.y % 10))),
-            (snapPointOverride = {})
-          e: for (let L = 0; L < unjoinedWallSegments.length; L++)
-            if (
-              e.point.x >= unjoinedWallSegments[L].x - 10 &&
-              e.point.x <= unjoinedWallSegments[L].x + 10 &&
-              e.point.y >= unjoinedWallSegments[L].y - 10 &&
-              e.point.y <= unjoinedWallSegments[L].y + 10
-            ) {
-              ;(snapPoint = new paper.Point(
-                unjoinedWallSegments[L].x,
-                unjoinedWallSegments[L].y
-              )),
+                (snapPoint.y = snapPoint.y - (snapPoint.y % 10))),
+              (snapPointOverride = {})
+            let r = null,
+              t = selectedItem.data.width / 2,
+              z = selectedItem.data.width / 10
+            Object.keys(verticalGuides).forEach(function (o) {
+              e.point.x >= verticalGuides[o].position.x - z &&
+                e.point.x <= verticalGuides[o].position.x + z &&
+                (r = new paper.Point(verticalGuides[o].position.x, e.point.y)),
+                null === r &&
+                e.point.x >= verticalGuides[o].position.x - t - z &&
+                e.point.x <= verticalGuides[o].position.x - t + z &&
+                (r = new paper.Point(
+                  verticalGuides[o].position.x - t,
+                  e.point.y
+                )),
+                null === r &&
+                e.point.x >= verticalGuides[o].position.x + t - z &&
+                e.point.x <= verticalGuides[o].position.x + t + z &&
+                (r = new paper.Point(
+                  verticalGuides[o].position.x + t,
+                  e.point.y
+                ))
+            }),
+              Object.keys(horizontalGuides).forEach(function (o) {
+                let a = null
+                e.point.y >= horizontalGuides[o].position.y - z &&
+                  e.point.y <= horizontalGuides[o].position.y + z &&
+                  (a = horizontalGuides[o].position.y),
+                  null === a &&
+                  e.point.y >= horizontalGuides[o].position.y - t - z &&
+                  e.point.y <= horizontalGuides[o].position.y - t + z &&
+                  (a = horizontalGuides[o].position.y - t),
+                  null === a &&
+                  e.point.y >= horizontalGuides[o].position.y + t - z &&
+                  e.point.y <= horizontalGuides[o].position.y + t + z &&
+                  (a = horizontalGuides[o].position.y + t),
+                  a && (r ? (r.y = a) : (r = new paper.Point(e.point.x, a)))
+              }),
+              r &&
+              ((snapPoint = r),
                 new Path.Circle({
                   center: snapPoint,
                   radius: screenScale / 2,
@@ -4677,25 +4815,330 @@ function initPlanView() {
                   strokeWidth: 1,
                 })
                   .removeOnMove()
-                  .removeOnDrag(),
-                (snapPointOverride = {
-                  id: unjoinedWallSegments[L].id,
-                  x: unjoinedWallSegments[L].x,
-                  y: unjoinedWallSegments[L].y,
-                })
-              break e
-            }
-          if (!snapPointOverride.id)
-            e: for (let L = 0; L < allWallSegments.length; L++)
+                  .removeOnDrag()),
+              (selectedMovePointIcon.position = snapPoint),
+              (selectedItem.segments[movePointIconSelectedId].point = snapPoint),
+              relinkRoofReferences(project.activeLayer.data.id)
+          } else if (4 === mouseMode) {
+            if (selectedItem.data.id)
+              try {
+                ; (snapPoint = e.point),
+                  (snapPoint.x = stretchYPath.segments[0].point.x),
+                  (stretchYPath.segments[1].point = snapPoint)
+                let u = stretchYPath.segments[1].point.subtract(
+                  stretchYPath.segments[0].point
+                ),
+                  O = stretchYPath.length
+                u.angle > 0 && (O *= -1),
+                  (clickableObjects[selectedItem.data.id].scale.y =
+                    (stretchYStartHeight + O) /
+                    clickableObjects[selectedItem.data.id].userData.height),
+                  maskObjects[selectedItem.data.id] &&
+                  (maskObjects[selectedItem.data.id].scale.y = Math.abs(
+                    clickableObjects[selectedItem.data.id].scale.y
+                  )),
+                  drawHeight(
+                    stretchYPath.segments[0].point,
+                    stretchYPath.segments[1].point,
+                    stretchYStartHeight
+                  ),
+                  render(),
+                  (furnitureHeightProp.value = (
+                    clickableObjects[selectedItem.data.id].userData.height *
+                    clickableObjects[selectedItem.data.id].scale.y
+                  ).toFixed(3))
+              } catch (e) {
+                console.log(e)
+              }
+          } else if (5 === mouseMode) {
+            if (selectedItem.data.id)
+              try {
+                ; (snapPoint = e.point),
+                  (snapPoint.x = elevatePath.segments[0].point.x),
+                  (elevatePath.segments[1].point = snapPoint)
+                let u = elevatePath.segments[1].point.subtract(
+                  elevatePath.segments[0].point
+                ),
+                  O = elevatePath.length
+                u.angle > 0 && (O *= -1),
+                  (clickableObjects[selectedItem.data.id].position.y =
+                    elevateStartHeight + O),
+                  maskObjects[selectedItem.data.id] &&
+                  (maskObjects[selectedItem.data.id].position.y =
+                    elevateStartHeight + O),
+                  drawHeight(
+                    elevatePath.segments[0].point,
+                    elevatePath.segments[1].point,
+                    elevateStartHeight
+                  ),
+                  (controls.target.y =
+                    clickableObjects[selectedItem.data.id].position.y),
+                  render(),
+                  (furnitureYProp.value = (elevateStartHeight + O).toFixed(3))
+              } catch (e) {
+                console.log(e)
+              }
+          } else if (6 === mouseMode) {
+            ; (snapPoint = e.point),
+              (snapPoint.x = parseInt(e.point.x)),
+              (snapPoint.y = parseInt(e.point.y)),
+              ctrlKeyPressed &&
+              ((snapPoint.x = snapPoint.x - (snapPoint.x % 10)),
+                (snapPoint.y = snapPoint.y - (snapPoint.y % 10)))
+            e: for (let L = 0; L < wallCornersX.length; L++)
               if (
-                e.point.x >= allWallSegments[L].x - 10 &&
-                e.point.x <= allWallSegments[L].x + 10 &&
-                e.point.y >= allWallSegments[L].y - 10 &&
-                e.point.y <= allWallSegments[L].y + 10
+                e.point.x >= wallCornersX[L] - 10 &&
+                e.point.x <= wallCornersX[L] + 10 &&
+                e.point.y >= wallCornersY[L] - 10 &&
+                e.point.y <= wallCornersY[L] + 10
               ) {
-                ;(snapPoint = new paper.Point(
-                  allWallSegments[L].x,
-                  allWallSegments[L].y
+                ; (snapPoint = new paper.Point(wallCornersX[L], wallCornersY[L])),
+                  new Path.Circle({
+                    center: snapPoint,
+                    radius: screenScale / 2,
+                    fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
+                    strokeWidth: 1,
+                  })
+                    .removeOnMove()
+                    .removeOnDrag()
+                break e
+              }
+            let r
+            Object.keys(verticalGuides).forEach(function (t) {
+              e.point.x >= verticalGuides[t].position.x - 10 &&
+                e.point.x <= verticalGuides[t].position.x + 10 &&
+                (r = new paper.Point(verticalGuides[t].position.x, e.point.y))
+            }),
+              Object.keys(horizontalGuides).forEach(function (t) {
+                e.point.y >= horizontalGuides[t].position.y - 10 &&
+                  e.point.y <= horizontalGuides[t].position.y + 10 &&
+                  (r
+                    ? (r.y = horizontalGuides[t].position.y)
+                    : (r = new paper.Point(
+                      e.point.x,
+                      horizontalGuides[t].position.y
+                    )))
+              }),
+              r &&
+              ((snapPoint = r),
+                new Path.Circle({
+                  center: snapPoint,
+                  radius: screenScale / 2,
+                  fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
+                  strokeWidth: 1,
+                })
+                  .removeOnMove()
+                  .removeOnDrag()),
+              (selectedMovePointIcon.position = snapPoint),
+              (selectedItem.segments[movePointIconSelectedId].point = snapPoint),
+              setTimeout(function () {
+                redrawFloor(selectedItem)
+              }, 1),
+              (document.getElementById("floorAreaProp").innerHTML =
+                Math.abs(selectedItem.area / 1e4).toFixed(3) + " M&sup2;")
+          } else
+            7 === mouseMode &&
+              ((snapPoint = e.point),
+                (snapPoint.x = parseInt(e.point.x)),
+                (snapPoint.y = parseInt(e.point.y)),
+                ctrlKeyPressed &&
+                ((snapPoint.x = snapPoint.x - (snapPoint.x % 10)),
+                  (snapPoint.y = snapPoint.y - (snapPoint.y % 10))),
+                (selectedItem.position = snapPoint.add(offsetMousePoint)),
+                (plan.texts[selectedItem.data.id].data.x = snapPoint.x),
+                (plan.texts[selectedItem.data.id].data.y = snapPoint.y),
+                (document.getElementById("textXProp").value =
+                  snapPoint.x.toFixed(3)),
+                (document.getElementById("textYProp").value =
+                  snapPoint.y.toFixed(3)))
+        else if ("background" === toolMode)
+          if (2 === e.event.buttons)
+            (paper.view.center = paper.view.center.add(t)), redrawGrid()
+          else if (0 === mouseMode) {
+            ; (dragging = !0),
+              (snapPoint = e.point),
+              (snapPoint.x = parseInt(e.point.x)),
+              (snapPoint.y = parseInt(e.point.y)),
+              ctrlKeyPressed &&
+              ((snapPoint.x = snapPoint.x - (snapPoint.x % 10)),
+                (snapPoint.y = snapPoint.y - (snapPoint.y % 10)))
+            let o = snapPoint.add(offsetMousePoint)
+            backgroundRaster &&
+              ((backgroundRaster.position = o),
+                (toolsGroup.position = o),
+                (backgroundRaster.data.toolsRectangleInner.position =
+                  backgroundRaster.position),
+                (resizeIcon.position =
+                  selectedItem.data.toolsRectangleInner.segments[3].point))
+          } else if (2 === mouseMode) {
+            scalingXY = !0
+            try {
+              if (e.point.x > 1 && e.point.y > 1) {
+                ; (backgroundRasterRatioX = Math.abs(
+                  backgroundRaster.bounds.right / backgroundRaster.bounds.left
+                )),
+                  (backgroundRasterRatioY = Math.abs(
+                    backgroundRaster.bounds.bottom / backgroundRaster.bounds.top
+                  ))
+                let S = new paper.Point(
+                  -e.point.x / backgroundRasterRatioX,
+                  -e.point.y / backgroundRasterRatioY
+                ),
+                  D = e.point
+                  ; (backgroundRaster.data.toolsRectangleInner.bounds =
+                    new Rectangle(S, D)),
+                    (backgroundRaster.bounds.width =
+                      backgroundRaster.data.toolsRectangleInner.bounds.width),
+                    (backgroundRaster.bounds.height =
+                      backgroundRaster.data.toolsRectangleInner.bounds.height),
+                    (backgroundRaster.position.x =
+                      backgroundRaster.data.toolsRectangleInner.position.x),
+                    (backgroundRaster.position.y =
+                      backgroundRaster.data.toolsRectangleInner.position.y),
+                    (resizeIcon.position =
+                      backgroundRaster.data.toolsRectangleInner.segments[3].point)
+              }
+            } catch (e) {
+              console.log(e)
+            }
+          }
+      }),
+      (tools.onMouseMove = function (e) {
+        if (((lastMousePoint = e.point), "walls" === toolMode)) {
+          if (((snapPoint = null), startedDrawingWalls)) {
+            let t = e.point.subtract(wallHelperPath.segments[0].point)
+            ctrlKeyPressed && (t.angle = 15 * Math.round(t.angle / 15)),
+              (snapPoint = wallHelperPath.segments[0].point.add(t))
+            let o = wallHelperPath.segments[0],
+              a = snapPoint,
+              n = getAngleRadians(o.point, a)
+              ; (wallHelperRectangle.segments[0].point = new Point(
+                o.point.x + (Math.sin(n) * defaultWallThickness) / 2,
+                o.point.y - (Math.cos(n) * defaultWallThickness) / 2
+              )),
+                (wallHelperRectangle.segments[1].point = new Point(
+                  a.x + (Math.sin(n) * defaultWallThickness) / 2,
+                  a.y - (Math.cos(n) * defaultWallThickness) / 2
+                )),
+                (wallHelperRectangle.segments[2].point = new Point(
+                  a.x - (Math.sin(n) * defaultWallThickness) / 2,
+                  a.y + (Math.cos(n) * defaultWallThickness) / 2
+                )),
+                (wallHelperRectangle.segments[3].point = new Point(
+                  o.point.x - (Math.sin(n) * defaultWallThickness) / 2,
+                  o.point.y + (Math.cos(n) * defaultWallThickness) / 2
+                )),
+                (wallHelperPath.segments[1].point = snapPoint),
+                drawLength(
+                  wallHelperPath.segments[0].point,
+                  wallHelperPath.segments[1].point,
+                  n < 0 ? -1 : 1
+                ),
+                (wallHelper3dCube.geometry.vertices[1].x =
+                  wallHelperRectangle.segments[0].point.x),
+                (wallHelper3dCube.geometry.vertices[1].z =
+                  wallHelperRectangle.segments[0].point.y),
+                (wallHelper3dCube.geometry.vertices[3].x =
+                  wallHelperRectangle.segments[0].point.x),
+                (wallHelper3dCube.geometry.vertices[3].z =
+                  wallHelperRectangle.segments[0].point.y),
+                (wallHelper3dCube.geometry.vertices[0].x =
+                  wallHelperRectangle.segments[1].point.x),
+                (wallHelper3dCube.geometry.vertices[0].z =
+                  wallHelperRectangle.segments[1].point.y),
+                (wallHelper3dCube.geometry.vertices[2].x =
+                  wallHelperRectangle.segments[1].point.x),
+                (wallHelper3dCube.geometry.vertices[2].z =
+                  wallHelperRectangle.segments[1].point.y),
+                (wallHelper3dCube.geometry.vertices[5].x =
+                  wallHelperRectangle.segments[2].point.x),
+                (wallHelper3dCube.geometry.vertices[5].z =
+                  wallHelperRectangle.segments[2].point.y),
+                (wallHelper3dCube.geometry.vertices[7].x =
+                  wallHelperRectangle.segments[2].point.x),
+                (wallHelper3dCube.geometry.vertices[7].z =
+                  wallHelperRectangle.segments[2].point.y),
+                (wallHelper3dCube.geometry.vertices[4].x =
+                  wallHelperRectangle.segments[3].point.x),
+                (wallHelper3dCube.geometry.vertices[4].z =
+                  wallHelperRectangle.segments[3].point.y),
+                (wallHelper3dCube.geometry.vertices[6].x =
+                  wallHelperRectangle.segments[3].point.x),
+                (wallHelper3dCube.geometry.vertices[6].z =
+                  wallHelperRectangle.segments[3].point.y),
+                (wallHelper3dCube.geometry.verticesNeedUpdate = !0),
+                (tween = new TWEEN.Tween(controls.target)
+                  .to(wallHelper3dCube.position, 1)
+                  .onUpdate(render)
+                  .start())
+          }
+          snapPointOverride = {}
+          let l = null,
+            i = null,
+            r = defaultWallThickness / 2,
+            s = defaultWallThickness / 4
+          if (
+            (snapPointOverride.id ||
+              (Object.keys(verticalGuides).forEach(function (t) {
+                e.point.x >= verticalGuides[t].position.x - s &&
+                  e.point.x <= verticalGuides[t].position.x + s &&
+                  ((l = new paper.Point(verticalGuides[t].position.x, e.point.y)),
+                    (i = verticalGuides[t].data.id)),
+                  null === l &&
+                  e.point.x >= verticalGuides[t].position.x - r - s &&
+                  e.point.x <= verticalGuides[t].position.x - r + s &&
+                  ((l = new paper.Point(
+                    verticalGuides[t].position.x - r,
+                    e.point.y
+                  )),
+                    (i = verticalGuides[t].data.id)),
+                  null === l &&
+                  e.point.x >= verticalGuides[t].position.x + r - s &&
+                  e.point.x <= verticalGuides[t].position.x + r + s &&
+                  ((l = new paper.Point(
+                    verticalGuides[t].position.x + r,
+                    e.point.y
+                  )),
+                    (i = verticalGuides[t].data.id))
+              }),
+                Object.keys(horizontalGuides).forEach(function (t) {
+                  let o = null
+                  e.point.y >= horizontalGuides[t].position.y - s &&
+                    e.point.y <= horizontalGuides[t].position.y + s &&
+                    (o = horizontalGuides[t].position.y),
+                    null === o &&
+                    e.point.y >= horizontalGuides[t].position.y - r - s &&
+                    e.point.y <= horizontalGuides[t].position.y - r + s &&
+                    (o = horizontalGuides[t].position.y - r),
+                    null === o &&
+                    e.point.y >= horizontalGuides[t].position.y + r - s &&
+                    e.point.y <= horizontalGuides[t].position.y + r + s &&
+                    (o = horizontalGuides[t].position.y + r),
+                    o &&
+                    ((i = horizontalGuides[t].data.id),
+                      l ? (l.y = o) : (l = new paper.Point(e.point.x, o)))
+                }),
+                l &&
+                ((snapPoint = l),
+                  new Path.Circle({
+                    center: snapPoint,
+                    radius: screenScale / 2,
+                    fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
+                    strokeWidth: 1,
+                  }).removeOnMove(),
+                  (snapPointOverride = { id: i, x: snapPoint.x, y: snapPoint.y }))),
+              !snapPointOverride.id)
+          )
+            e: for (let d = 0; d < unjoinedWallSegments.length; d++)
+              if (
+                e.point.x >= unjoinedWallSegments[d].x - 10 &&
+                e.point.x <= unjoinedWallSegments[d].x + 10 &&
+                e.point.y >= unjoinedWallSegments[d].y - 10 &&
+                e.point.y <= unjoinedWallSegments[d].y + 10
+              ) {
+                ; (snapPoint = new paper.Point(
+                  unjoinedWallSegments[d].x,
+                  unjoinedWallSegments[d].y
                 )),
                   new Path.Circle({
                     center: snapPoint,
@@ -4704,720 +5147,277 @@ function initPlanView() {
                     strokeWidth: 1,
                   }).removeOnMove(),
                   (snapPointOverride = {
-                    id: allWallSegments[L].id,
-                    x: allWallSegments[L].x,
-                    y: allWallSegments[L].y,
+                    id: unjoinedWallSegments[d].id,
+                    x: unjoinedWallSegments[d].x,
+                    y: unjoinedWallSegments[d].y,
                   })
                 break e
               }
-          let r = null,
-            t = selectedItem.data.thickness / 2,
-            z = selectedItem.data.thickness / 4
-          snapPointOverride.id ||
-            (Object.keys(verticalGuides).forEach(function (o) {
-              e.point.x >= verticalGuides[o].position.x - z &&
-                e.point.x <= verticalGuides[o].position.x + z &&
-                (r = new paper.Point(verticalGuides[o].position.x, e.point.y)),
-                null === r &&
-                  e.point.x >= verticalGuides[o].position.x - t - z &&
-                  e.point.x <= verticalGuides[o].position.x - t + z &&
-                  (r = new paper.Point(
-                    verticalGuides[o].position.x - t,
-                    e.point.y
-                  )),
-                null === r &&
-                  e.point.x >= verticalGuides[o].position.x + t - z &&
-                  e.point.x <= verticalGuides[o].position.x + t + z &&
-                  (r = new paper.Point(
-                    verticalGuides[o].position.x + t,
-                    e.point.y
-                  ))
-            }),
-            Object.keys(horizontalGuides).forEach(function (o) {
-              let a = null
-              e.point.y >= horizontalGuides[o].position.y - z &&
-                e.point.y <= horizontalGuides[o].position.y + z &&
-                (a = horizontalGuides[o].position.y),
-                null === a &&
-                  e.point.y >= horizontalGuides[o].position.y - t - z &&
-                  e.point.y <= horizontalGuides[o].position.y - t + z &&
-                  (a = horizontalGuides[o].position.y - t),
-                null === a &&
-                  e.point.y >= horizontalGuides[o].position.y + t - z &&
-                  e.point.y <= horizontalGuides[o].position.y + t + z &&
-                  (a = horizontalGuides[o].position.y + t),
-                a && (r ? (r.y = a) : (r = new paper.Point(e.point.x, a)))
-            }),
-            r &&
-              ((snapPoint = r),
-              new Path.Circle({
-                center: snapPoint,
-                radius: screenScale / 2,
-                fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
-                strokeWidth: 1,
-              })
-                .removeOnMove()
-                .removeOnDrag())),
-            (selectedMovePointIcon.position = snapPoint),
-            (selectedItem.segments[movePointIconSelectedId].point = snapPoint),
-            relinkWallReferences(project.activeLayer.data.id)
-        } else if (11 === mouseMode) {
-          ;(snapPoint = e.point),
-            (snapPoint.x = parseInt(e.point.x)),
-            (snapPoint.y = parseInt(e.point.y)),
-            ctrlKeyPressed &&
-              ((snapPoint.x = snapPoint.x - (snapPoint.x % 10)),
-              (snapPoint.y = snapPoint.y - (snapPoint.y % 10))),
-            (snapPointOverride = {})
-          let r = null,
-            t = selectedItem.data.width / 2,
-            z = selectedItem.data.width / 10
-          Object.keys(verticalGuides).forEach(function (o) {
-            e.point.x >= verticalGuides[o].position.x - z &&
-              e.point.x <= verticalGuides[o].position.x + z &&
-              (r = new paper.Point(verticalGuides[o].position.x, e.point.y)),
-              null === r &&
-                e.point.x >= verticalGuides[o].position.x - t - z &&
-                e.point.x <= verticalGuides[o].position.x - t + z &&
-                (r = new paper.Point(
-                  verticalGuides[o].position.x - t,
-                  e.point.y
+          if (!snapPointOverride.id)
+            e: for (let d = 0; d < allWallSegments.length; d++)
+              if (
+                e.point.x >= allWallSegments[d].x - 10 &&
+                e.point.x <= allWallSegments[d].x + 10 &&
+                e.point.y >= allWallSegments[d].y - 10 &&
+                e.point.y <= allWallSegments[d].y + 10
+              ) {
+                ; (snapPoint = new paper.Point(
+                  allWallSegments[d].x,
+                  allWallSegments[d].y
                 )),
-              null === r &&
-                e.point.x >= verticalGuides[o].position.x + t - z &&
-                e.point.x <= verticalGuides[o].position.x + t + z &&
-                (r = new paper.Point(
-                  verticalGuides[o].position.x + t,
-                  e.point.y
-                ))
-          }),
-            Object.keys(horizontalGuides).forEach(function (o) {
-              let a = null
-              e.point.y >= horizontalGuides[o].position.y - z &&
-                e.point.y <= horizontalGuides[o].position.y + z &&
-                (a = horizontalGuides[o].position.y),
-                null === a &&
-                  e.point.y >= horizontalGuides[o].position.y - t - z &&
-                  e.point.y <= horizontalGuides[o].position.y - t + z &&
-                  (a = horizontalGuides[o].position.y - t),
-                null === a &&
-                  e.point.y >= horizontalGuides[o].position.y + t - z &&
-                  e.point.y <= horizontalGuides[o].position.y + t + z &&
-                  (a = horizontalGuides[o].position.y + t),
-                a && (r ? (r.y = a) : (r = new paper.Point(e.point.x, a)))
-            }),
-            r &&
-              ((snapPoint = r),
-              new Path.Circle({
-                center: snapPoint,
-                radius: screenScale / 2,
-                fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
-                strokeWidth: 1,
-              })
-                .removeOnMove()
-                .removeOnDrag()),
-            (selectedMovePointIcon.position = snapPoint),
-            (selectedItem.segments[movePointIconSelectedId].point = snapPoint),
-            relinkRoofReferences(project.activeLayer.data.id)
-        } else if (4 === mouseMode) {
-          if (selectedItem.data.id)
-            try {
-              ;(snapPoint = e.point),
-                (snapPoint.x = stretchYPath.segments[0].point.x),
-                (stretchYPath.segments[1].point = snapPoint)
-              let u = stretchYPath.segments[1].point.subtract(
-                  stretchYPath.segments[0].point
-                ),
-                O = stretchYPath.length
-              u.angle > 0 && (O *= -1),
-                (clickableObjects[selectedItem.data.id].scale.y =
-                  (stretchYStartHeight + O) /
-                  clickableObjects[selectedItem.data.id].userData.height),
-                maskObjects[selectedItem.data.id] &&
-                  (maskObjects[selectedItem.data.id].scale.y = Math.abs(
-                    clickableObjects[selectedItem.data.id].scale.y
-                  )),
-                drawHeight(
-                  stretchYPath.segments[0].point,
-                  stretchYPath.segments[1].point,
-                  stretchYStartHeight
-                ),
-                render(),
-                (furnitureHeightProp.value = (
-                  clickableObjects[selectedItem.data.id].userData.height *
-                  clickableObjects[selectedItem.data.id].scale.y
-                ).toFixed(3))
-            } catch (e) {
-              console.log(e)
-            }
-        } else if (5 === mouseMode) {
-          if (selectedItem.data.id)
-            try {
-              ;(snapPoint = e.point),
-                (snapPoint.x = elevatePath.segments[0].point.x),
-                (elevatePath.segments[1].point = snapPoint)
-              let u = elevatePath.segments[1].point.subtract(
-                  elevatePath.segments[0].point
-                ),
-                O = elevatePath.length
-              u.angle > 0 && (O *= -1),
-                (clickableObjects[selectedItem.data.id].position.y =
-                  elevateStartHeight + O),
-                maskObjects[selectedItem.data.id] &&
-                  (maskObjects[selectedItem.data.id].position.y =
-                    elevateStartHeight + O),
-                drawHeight(
-                  elevatePath.segments[0].point,
-                  elevatePath.segments[1].point,
-                  elevateStartHeight
-                ),
-                (controls.target.y =
-                  clickableObjects[selectedItem.data.id].position.y),
-                render(),
-                (furnitureYProp.value = (elevateStartHeight + O).toFixed(3))
-            } catch (e) {
-              console.log(e)
-            }
-        } else if (6 === mouseMode) {
-          ;(snapPoint = e.point),
-            (snapPoint.x = parseInt(e.point.x)),
-            (snapPoint.y = parseInt(e.point.y)),
-            ctrlKeyPressed &&
-              ((snapPoint.x = snapPoint.x - (snapPoint.x % 10)),
-              (snapPoint.y = snapPoint.y - (snapPoint.y % 10)))
-          e: for (let L = 0; L < wallCornersX.length; L++)
-            if (
-              e.point.x >= wallCornersX[L] - 10 &&
-              e.point.x <= wallCornersX[L] + 10 &&
-              e.point.y >= wallCornersY[L] - 10 &&
-              e.point.y <= wallCornersY[L] + 10
-            ) {
-              ;(snapPoint = new paper.Point(wallCornersX[L], wallCornersY[L])),
-                new Path.Circle({
-                  center: snapPoint,
-                  radius: screenScale / 2,
-                  fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
-                  strokeWidth: 1,
-                })
-                  .removeOnMove()
-                  .removeOnDrag()
-              break e
-            }
-          let r
-          Object.keys(verticalGuides).forEach(function (t) {
-            e.point.x >= verticalGuides[t].position.x - 10 &&
-              e.point.x <= verticalGuides[t].position.x + 10 &&
-              (r = new paper.Point(verticalGuides[t].position.x, e.point.y))
-          }),
-            Object.keys(horizontalGuides).forEach(function (t) {
-              e.point.y >= horizontalGuides[t].position.y - 10 &&
-                e.point.y <= horizontalGuides[t].position.y + 10 &&
-                (r
-                  ? (r.y = horizontalGuides[t].position.y)
-                  : (r = new paper.Point(
-                      e.point.x,
-                      horizontalGuides[t].position.y
-                    )))
-            }),
-            r &&
-              ((snapPoint = r),
-              new Path.Circle({
-                center: snapPoint,
-                radius: screenScale / 2,
-                fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
-                strokeWidth: 1,
-              })
-                .removeOnMove()
-                .removeOnDrag()),
-            (selectedMovePointIcon.position = snapPoint),
-            (selectedItem.segments[movePointIconSelectedId].point = snapPoint),
-            setTimeout(function () {
-              redrawFloor(selectedItem)
-            }, 1),
-            (document.getElementById("floorAreaProp").innerHTML =
-              Math.abs(selectedItem.area / 1e4).toFixed(3) + " M&sup2;")
-        } else
-          7 === mouseMode &&
-            ((snapPoint = e.point),
-            (snapPoint.x = parseInt(e.point.x)),
-            (snapPoint.y = parseInt(e.point.y)),
-            ctrlKeyPressed &&
-              ((snapPoint.x = snapPoint.x - (snapPoint.x % 10)),
-              (snapPoint.y = snapPoint.y - (snapPoint.y % 10))),
-            (selectedItem.position = snapPoint.add(offsetMousePoint)),
-            (plan.texts[selectedItem.data.id].data.x = snapPoint.x),
-            (plan.texts[selectedItem.data.id].data.y = snapPoint.y),
-            (document.getElementById("textXProp").value =
-              snapPoint.x.toFixed(3)),
-            (document.getElementById("textYProp").value =
-              snapPoint.y.toFixed(3)))
-      else if ("background" === toolMode)
-        if (2 === e.event.buttons)
-          (paper.view.center = paper.view.center.add(t)), redrawGrid()
-        else if (0 === mouseMode) {
-          ;(dragging = !0),
-            (snapPoint = e.point),
-            (snapPoint.x = parseInt(e.point.x)),
-            (snapPoint.y = parseInt(e.point.y)),
-            ctrlKeyPressed &&
-              ((snapPoint.x = snapPoint.x - (snapPoint.x % 10)),
-              (snapPoint.y = snapPoint.y - (snapPoint.y % 10)))
-          let o = snapPoint.add(offsetMousePoint)
-          backgroundRaster &&
-            ((backgroundRaster.position = o),
-            (toolsGroup.position = o),
-            (backgroundRaster.data.toolsRectangleInner.position =
-              backgroundRaster.position),
-            (resizeIcon.position =
-              selectedItem.data.toolsRectangleInner.segments[3].point))
-        } else if (2 === mouseMode) {
-          scalingXY = !0
-          try {
-            if (e.point.x > 1 && e.point.y > 1) {
-              ;(backgroundRasterRatioX = Math.abs(
-                backgroundRaster.bounds.right / backgroundRaster.bounds.left
+                  new Path.Circle({
+                    center: snapPoint,
+                    radius: screenScale / 2,
+                    fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
+                    strokeWidth: 1,
+                  }).removeOnMove(),
+                  (snapPointOverride = {
+                    id: allWallSegments[d].id,
+                    x: allWallSegments[d].x,
+                    y: allWallSegments[d].y,
+                  })
+                break e
+              }
+        } else if ("roof" === toolMode) {
+          if (startedDrawingRoofs) {
+            let t = e.point.subtract(roofHelperPath.segments[0].point)
+            ctrlKeyPressed && (t.angle = 15 * Math.round(t.angle / 15)),
+              (snapPoint = roofHelperPath.segments[0].point.add(t))
+            let o = roofHelperPath.segments[0],
+              a = snapPoint,
+              n = getAngleRadians(o.point, a)
+              ; (roofHelperRectangle.segments[0].point = new Point(
+                o.point.x + (Math.sin(n) * defaultRoofWidth) / 2,
+                o.point.y - (Math.cos(n) * defaultRoofWidth) / 2
               )),
-                (backgroundRasterRatioY = Math.abs(
-                  backgroundRaster.bounds.bottom / backgroundRaster.bounds.top
-                ))
-              let S = new paper.Point(
-                  -e.point.x / backgroundRasterRatioX,
-                  -e.point.y / backgroundRasterRatioY
+                (roofHelperRectangle.segments[1].point = new Point(
+                  a.x + (Math.sin(n) * defaultRoofWidth) / 2,
+                  a.y - (Math.cos(n) * defaultRoofWidth) / 2
+                )),
+                (roofHelperRectangle.segments[2].point = new Point(
+                  a.x - (Math.sin(n) * defaultRoofWidth) / 2,
+                  a.y + (Math.cos(n) * defaultRoofWidth) / 2
+                )),
+                (roofHelperRectangle.segments[3].point = new Point(
+                  o.point.x - (Math.sin(n) * defaultRoofWidth) / 2,
+                  o.point.y + (Math.cos(n) * defaultRoofWidth) / 2
+                )),
+                (roofHelperPath.segments[1].point = snapPoint),
+                drawLength(
+                  roofHelperPath.segments[0].point,
+                  roofHelperPath.segments[1].point,
+                  n < 0 ? -1 : 1
                 ),
-                D = e.point
-              ;(backgroundRaster.data.toolsRectangleInner.bounds =
-                new Rectangle(S, D)),
-                (backgroundRaster.bounds.width =
-                  backgroundRaster.data.toolsRectangleInner.bounds.width),
-                (backgroundRaster.bounds.height =
-                  backgroundRaster.data.toolsRectangleInner.bounds.height),
-                (backgroundRaster.position.x =
-                  backgroundRaster.data.toolsRectangleInner.position.x),
-                (backgroundRaster.position.y =
-                  backgroundRaster.data.toolsRectangleInner.position.y),
-                (resizeIcon.position =
-                  backgroundRaster.data.toolsRectangleInner.segments[3].point)
-            }
-          } catch (e) {
-            console.log(e)
+                (roofHelper3dCube.geometry.vertices[1].x =
+                  roofHelperRectangle.segments[0].point.x),
+                (roofHelper3dCube.geometry.vertices[1].z =
+                  roofHelperRectangle.segments[0].point.y),
+                (roofHelper3dCube.geometry.vertices[3].x =
+                  roofHelperRectangle.segments[0].point.x),
+                (roofHelper3dCube.geometry.vertices[3].z =
+                  roofHelperRectangle.segments[0].point.y),
+                (roofHelper3dCube.geometry.vertices[0].x =
+                  roofHelperRectangle.segments[1].point.x),
+                (roofHelper3dCube.geometry.vertices[0].z =
+                  roofHelperRectangle.segments[1].point.y),
+                (roofHelper3dCube.geometry.vertices[2].x =
+                  roofHelperRectangle.segments[1].point.x),
+                (roofHelper3dCube.geometry.vertices[2].z =
+                  roofHelperRectangle.segments[1].point.y),
+                (roofHelper3dCube.geometry.vertices[5].x =
+                  roofHelperRectangle.segments[2].point.x),
+                (roofHelper3dCube.geometry.vertices[5].z =
+                  roofHelperRectangle.segments[2].point.y),
+                (roofHelper3dCube.geometry.vertices[7].x =
+                  roofHelperRectangle.segments[2].point.x),
+                (roofHelper3dCube.geometry.vertices[7].z =
+                  roofHelperRectangle.segments[2].point.y),
+                (roofHelper3dCube.geometry.vertices[4].x =
+                  roofHelperRectangle.segments[3].point.x),
+                (roofHelper3dCube.geometry.vertices[4].z =
+                  roofHelperRectangle.segments[3].point.y),
+                (roofHelper3dCube.geometry.vertices[6].x =
+                  roofHelperRectangle.segments[3].point.x),
+                (roofHelper3dCube.geometry.vertices[6].z =
+                  roofHelperRectangle.segments[3].point.y)
+            let c = defaultRoofThickness / 2,
+              u = defaultRoofRise / 2
+              ; (roofHelper3dCube.geometry.vertices[0].y = c - u),
+                (roofHelper3dCube.geometry.vertices[1].y = c - u),
+                (roofHelper3dCube.geometry.vertices[4].y = c + u),
+                (roofHelper3dCube.geometry.vertices[5].y = c + u),
+                (roofHelper3dCube.geometry.vertices[2].y = -c - u),
+                (roofHelper3dCube.geometry.vertices[3].y = -c - u),
+                (roofHelper3dCube.geometry.vertices[6].y = -c + u),
+                (roofHelper3dCube.geometry.vertices[7].y = -c + u),
+                (roofHelper3dCube.geometry.verticesNeedUpdate = !0),
+                (tween = new TWEEN.Tween(controls.target)
+                  .to(roofHelper3dCube.position, 1)
+                  .onUpdate(render)
+                  .start())
           }
-        }
-    }),
-    (tools.onMouseMove = function (e) {
-      if (((lastMousePoint = e.point), "walls" === toolMode)) {
-        if (((snapPoint = null), startedDrawingWalls)) {
-          let t = e.point.subtract(wallHelperPath.segments[0].point)
-          ctrlKeyPressed && (t.angle = 15 * Math.round(t.angle / 15)),
-            (snapPoint = wallHelperPath.segments[0].point.add(t))
-          let o = wallHelperPath.segments[0],
-            a = snapPoint,
-            n = getAngleRadians(o.point, a)
-          ;(wallHelperRectangle.segments[0].point = new Point(
-            o.point.x + (Math.sin(n) * defaultWallThickness) / 2,
-            o.point.y - (Math.cos(n) * defaultWallThickness) / 2
-          )),
-            (wallHelperRectangle.segments[1].point = new Point(
-              a.x + (Math.sin(n) * defaultWallThickness) / 2,
-              a.y - (Math.cos(n) * defaultWallThickness) / 2
-            )),
-            (wallHelperRectangle.segments[2].point = new Point(
-              a.x - (Math.sin(n) * defaultWallThickness) / 2,
-              a.y + (Math.cos(n) * defaultWallThickness) / 2
-            )),
-            (wallHelperRectangle.segments[3].point = new Point(
-              o.point.x - (Math.sin(n) * defaultWallThickness) / 2,
-              o.point.y + (Math.cos(n) * defaultWallThickness) / 2
-            )),
-            (wallHelperPath.segments[1].point = snapPoint),
-            drawLength(
-              wallHelperPath.segments[0].point,
-              wallHelperPath.segments[1].point,
-              n < 0 ? -1 : 1
-            ),
-            (wallHelper3dCube.geometry.vertices[1].x =
-              wallHelperRectangle.segments[0].point.x),
-            (wallHelper3dCube.geometry.vertices[1].z =
-              wallHelperRectangle.segments[0].point.y),
-            (wallHelper3dCube.geometry.vertices[3].x =
-              wallHelperRectangle.segments[0].point.x),
-            (wallHelper3dCube.geometry.vertices[3].z =
-              wallHelperRectangle.segments[0].point.y),
-            (wallHelper3dCube.geometry.vertices[0].x =
-              wallHelperRectangle.segments[1].point.x),
-            (wallHelper3dCube.geometry.vertices[0].z =
-              wallHelperRectangle.segments[1].point.y),
-            (wallHelper3dCube.geometry.vertices[2].x =
-              wallHelperRectangle.segments[1].point.x),
-            (wallHelper3dCube.geometry.vertices[2].z =
-              wallHelperRectangle.segments[1].point.y),
-            (wallHelper3dCube.geometry.vertices[5].x =
-              wallHelperRectangle.segments[2].point.x),
-            (wallHelper3dCube.geometry.vertices[5].z =
-              wallHelperRectangle.segments[2].point.y),
-            (wallHelper3dCube.geometry.vertices[7].x =
-              wallHelperRectangle.segments[2].point.x),
-            (wallHelper3dCube.geometry.vertices[7].z =
-              wallHelperRectangle.segments[2].point.y),
-            (wallHelper3dCube.geometry.vertices[4].x =
-              wallHelperRectangle.segments[3].point.x),
-            (wallHelper3dCube.geometry.vertices[4].z =
-              wallHelperRectangle.segments[3].point.y),
-            (wallHelper3dCube.geometry.vertices[6].x =
-              wallHelperRectangle.segments[3].point.x),
-            (wallHelper3dCube.geometry.vertices[6].z =
-              wallHelperRectangle.segments[3].point.y),
-            (wallHelper3dCube.geometry.verticesNeedUpdate = !0),
-            (tween = new TWEEN.Tween(controls.target)
-              .to(wallHelper3dCube.position, 1)
-              .onUpdate(render)
-              .start())
-        }
-        snapPointOverride = {}
-        let l = null,
-          i = null,
-          r = defaultWallThickness / 2,
-          s = defaultWallThickness / 4
-        if (
-          (snapPointOverride.id ||
-            (Object.keys(verticalGuides).forEach(function (t) {
-              e.point.x >= verticalGuides[t].position.x - s &&
-                e.point.x <= verticalGuides[t].position.x + s &&
-                ((l = new paper.Point(verticalGuides[t].position.x, e.point.y)),
+          snapPointOverride = {}
+          let l = null,
+            i = null,
+            r = defaultRoofWidth / 2,
+            s = defaultRoofWidth / 10
+          Object.keys(verticalGuides).forEach(function (t) {
+            e.point.x >= verticalGuides[t].position.x - s &&
+              e.point.x <= verticalGuides[t].position.x + s &&
+              ((l = new paper.Point(verticalGuides[t].position.x, e.point.y)),
                 (i = verticalGuides[t].data.id)),
-                null === l &&
-                  e.point.x >= verticalGuides[t].position.x - r - s &&
-                  e.point.x <= verticalGuides[t].position.x - r + s &&
-                  ((l = new paper.Point(
-                    verticalGuides[t].position.x - r,
-                    e.point.y
-                  )),
-                  (i = verticalGuides[t].data.id)),
-                null === l &&
-                  e.point.x >= verticalGuides[t].position.x + r - s &&
-                  e.point.x <= verticalGuides[t].position.x + r + s &&
-                  ((l = new paper.Point(
-                    verticalGuides[t].position.x + r,
-                    e.point.y
-                  )),
-                  (i = verticalGuides[t].data.id))
-            }),
-            Object.keys(horizontalGuides).forEach(function (t) {
-              let o = null
-              e.point.y >= horizontalGuides[t].position.y - s &&
-                e.point.y <= horizontalGuides[t].position.y + s &&
-                (o = horizontalGuides[t].position.y),
-                null === o &&
-                  e.point.y >= horizontalGuides[t].position.y - r - s &&
-                  e.point.y <= horizontalGuides[t].position.y - r + s &&
-                  (o = horizontalGuides[t].position.y - r),
-                null === o &&
-                  e.point.y >= horizontalGuides[t].position.y + r - s &&
-                  e.point.y <= horizontalGuides[t].position.y + r + s &&
-                  (o = horizontalGuides[t].position.y + r),
-                o &&
-                  ((i = horizontalGuides[t].data.id),
-                  l ? (l.y = o) : (l = new paper.Point(e.point.x, o)))
-            }),
-            l &&
-              ((snapPoint = l),
-              new Path.Circle({
-                center: snapPoint,
-                radius: screenScale / 2,
-                fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
-                strokeWidth: 1,
-              }).removeOnMove(),
-              (snapPointOverride = { id: i, x: snapPoint.x, y: snapPoint.y }))),
-          !snapPointOverride.id)
-        )
-          e: for (let d = 0; d < unjoinedWallSegments.length; d++)
-            if (
-              e.point.x >= unjoinedWallSegments[d].x - 10 &&
-              e.point.x <= unjoinedWallSegments[d].x + 10 &&
-              e.point.y >= unjoinedWallSegments[d].y - 10 &&
-              e.point.y <= unjoinedWallSegments[d].y + 10
-            ) {
-              ;(snapPoint = new paper.Point(
-                unjoinedWallSegments[d].x,
-                unjoinedWallSegments[d].y
-              )),
-                new Path.Circle({
-                  center: snapPoint,
-                  radius: screenScale / 2,
-                  fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
-                  strokeWidth: 1,
-                }).removeOnMove(),
-                (snapPointOverride = {
-                  id: unjoinedWallSegments[d].id,
-                  x: unjoinedWallSegments[d].x,
-                  y: unjoinedWallSegments[d].y,
-                })
-              break e
-            }
-        if (!snapPointOverride.id)
-          e: for (let d = 0; d < allWallSegments.length; d++)
-            if (
-              e.point.x >= allWallSegments[d].x - 10 &&
-              e.point.x <= allWallSegments[d].x + 10 &&
-              e.point.y >= allWallSegments[d].y - 10 &&
-              e.point.y <= allWallSegments[d].y + 10
-            ) {
-              ;(snapPoint = new paper.Point(
-                allWallSegments[d].x,
-                allWallSegments[d].y
-              )),
-                new Path.Circle({
-                  center: snapPoint,
-                  radius: screenScale / 2,
-                  fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
-                  strokeWidth: 1,
-                }).removeOnMove(),
-                (snapPointOverride = {
-                  id: allWallSegments[d].id,
-                  x: allWallSegments[d].x,
-                  y: allWallSegments[d].y,
-                })
-              break e
-            }
-      } else if ("roof" === toolMode) {
-        if (startedDrawingRoofs) {
-          let t = e.point.subtract(roofHelperPath.segments[0].point)
-          ctrlKeyPressed && (t.angle = 15 * Math.round(t.angle / 15)),
-            (snapPoint = roofHelperPath.segments[0].point.add(t))
-          let o = roofHelperPath.segments[0],
-            a = snapPoint,
-            n = getAngleRadians(o.point, a)
-          ;(roofHelperRectangle.segments[0].point = new Point(
-            o.point.x + (Math.sin(n) * defaultRoofWidth) / 2,
-            o.point.y - (Math.cos(n) * defaultRoofWidth) / 2
-          )),
-            (roofHelperRectangle.segments[1].point = new Point(
-              a.x + (Math.sin(n) * defaultRoofWidth) / 2,
-              a.y - (Math.cos(n) * defaultRoofWidth) / 2
-            )),
-            (roofHelperRectangle.segments[2].point = new Point(
-              a.x - (Math.sin(n) * defaultRoofWidth) / 2,
-              a.y + (Math.cos(n) * defaultRoofWidth) / 2
-            )),
-            (roofHelperRectangle.segments[3].point = new Point(
-              o.point.x - (Math.sin(n) * defaultRoofWidth) / 2,
-              o.point.y + (Math.cos(n) * defaultRoofWidth) / 2
-            )),
-            (roofHelperPath.segments[1].point = snapPoint),
-            drawLength(
-              roofHelperPath.segments[0].point,
-              roofHelperPath.segments[1].point,
-              n < 0 ? -1 : 1
-            ),
-            (roofHelper3dCube.geometry.vertices[1].x =
-              roofHelperRectangle.segments[0].point.x),
-            (roofHelper3dCube.geometry.vertices[1].z =
-              roofHelperRectangle.segments[0].point.y),
-            (roofHelper3dCube.geometry.vertices[3].x =
-              roofHelperRectangle.segments[0].point.x),
-            (roofHelper3dCube.geometry.vertices[3].z =
-              roofHelperRectangle.segments[0].point.y),
-            (roofHelper3dCube.geometry.vertices[0].x =
-              roofHelperRectangle.segments[1].point.x),
-            (roofHelper3dCube.geometry.vertices[0].z =
-              roofHelperRectangle.segments[1].point.y),
-            (roofHelper3dCube.geometry.vertices[2].x =
-              roofHelperRectangle.segments[1].point.x),
-            (roofHelper3dCube.geometry.vertices[2].z =
-              roofHelperRectangle.segments[1].point.y),
-            (roofHelper3dCube.geometry.vertices[5].x =
-              roofHelperRectangle.segments[2].point.x),
-            (roofHelper3dCube.geometry.vertices[5].z =
-              roofHelperRectangle.segments[2].point.y),
-            (roofHelper3dCube.geometry.vertices[7].x =
-              roofHelperRectangle.segments[2].point.x),
-            (roofHelper3dCube.geometry.vertices[7].z =
-              roofHelperRectangle.segments[2].point.y),
-            (roofHelper3dCube.geometry.vertices[4].x =
-              roofHelperRectangle.segments[3].point.x),
-            (roofHelper3dCube.geometry.vertices[4].z =
-              roofHelperRectangle.segments[3].point.y),
-            (roofHelper3dCube.geometry.vertices[6].x =
-              roofHelperRectangle.segments[3].point.x),
-            (roofHelper3dCube.geometry.vertices[6].z =
-              roofHelperRectangle.segments[3].point.y)
-          let c = defaultRoofThickness / 2,
-            u = defaultRoofRise / 2
-          ;(roofHelper3dCube.geometry.vertices[0].y = c - u),
-            (roofHelper3dCube.geometry.vertices[1].y = c - u),
-            (roofHelper3dCube.geometry.vertices[4].y = c + u),
-            (roofHelper3dCube.geometry.vertices[5].y = c + u),
-            (roofHelper3dCube.geometry.vertices[2].y = -c - u),
-            (roofHelper3dCube.geometry.vertices[3].y = -c - u),
-            (roofHelper3dCube.geometry.vertices[6].y = -c + u),
-            (roofHelper3dCube.geometry.vertices[7].y = -c + u),
-            (roofHelper3dCube.geometry.verticesNeedUpdate = !0),
-            (tween = new TWEEN.Tween(controls.target)
-              .to(roofHelper3dCube.position, 1)
-              .onUpdate(render)
-              .start())
-        }
-        snapPointOverride = {}
-        let l = null,
-          i = null,
-          r = defaultRoofWidth / 2,
-          s = defaultRoofWidth / 10
-        Object.keys(verticalGuides).forEach(function (t) {
-          e.point.x >= verticalGuides[t].position.x - s &&
-            e.point.x <= verticalGuides[t].position.x + s &&
-            ((l = new paper.Point(verticalGuides[t].position.x, e.point.y)),
-            (i = verticalGuides[t].data.id)),
-            null === l &&
+              null === l &&
               e.point.x >= verticalGuides[t].position.x - r - s &&
               e.point.x <= verticalGuides[t].position.x - r + s &&
               ((l = new paper.Point(
                 verticalGuides[t].position.x - r,
                 e.point.y
               )),
-              (i = verticalGuides[t].data.id)),
-            null === l &&
+                (i = verticalGuides[t].data.id)),
+              null === l &&
               e.point.x >= verticalGuides[t].position.x + r - s &&
               e.point.x <= verticalGuides[t].position.x + r + s &&
               ((l = new paper.Point(
                 verticalGuides[t].position.x + r,
                 e.point.y
               )),
-              (i = verticalGuides[t].data.id))
-        }),
-          Object.keys(horizontalGuides).forEach(function (t) {
-            let o = null
-            e.point.y >= horizontalGuides[t].position.y - s &&
-              e.point.y <= horizontalGuides[t].position.y + s &&
-              (o = horizontalGuides[t].position.y),
-              null === o &&
+                (i = verticalGuides[t].data.id))
+          }),
+            Object.keys(horizontalGuides).forEach(function (t) {
+              let o = null
+              e.point.y >= horizontalGuides[t].position.y - s &&
+                e.point.y <= horizontalGuides[t].position.y + s &&
+                (o = horizontalGuides[t].position.y),
+                null === o &&
                 e.point.y >= horizontalGuides[t].position.y - r - s &&
                 e.point.y <= horizontalGuides[t].position.y - r + s &&
                 (o = horizontalGuides[t].position.y - r),
-              null === o &&
+                null === o &&
                 e.point.y >= horizontalGuides[t].position.y + r - s &&
                 e.point.y <= horizontalGuides[t].position.y + r + s &&
                 (o = horizontalGuides[t].position.y + r),
-              o &&
+                o &&
                 ((i = horizontalGuides[t].data.id),
-                l ? (l.y = o) : (l = new paper.Point(e.point.x, o)))
-          }),
-          l &&
+                  l ? (l.y = o) : (l = new paper.Point(e.point.x, o)))
+            }),
+            l &&
             ((snapPoint = l),
-            new Path.Circle({
-              center: snapPoint,
-              radius: screenScale / 2,
-              fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
-              strokeWidth: 1,
-            }).removeOnMove(),
-            (snapPointOverride = { id: i, x: snapPoint.x, y: snapPoint.y }))
-      } else if ("floor" === toolMode) {
-        snapPoint = e.point
-        e: for (let d = 0; d < wallCornersX.length; d++)
-          if (
-            e.point.x >= wallCornersX[d] - 10 &&
-            e.point.x <= wallCornersX[d] + 10 &&
-            e.point.y >= wallCornersY[d] - 10 &&
-            e.point.y <= wallCornersY[d] + 10
-          ) {
-            ;(snapPoint = new paper.Point(wallCornersX[d], wallCornersY[d])),
               new Path.Circle({
                 center: snapPoint,
                 radius: screenScale / 2,
                 fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
                 strokeWidth: 1,
-              }).removeOnMove()
-            break e
-          }
-        let l
-        Object.keys(verticalGuides).forEach(function (t) {
-          e.point.x >= verticalGuides[t].position.x - 10 &&
-            e.point.x <= verticalGuides[t].position.x + 10 &&
-            ((l = new paper.Point(verticalGuides[t].position.x, e.point.y)),
-            (i = verticalGuides[t].data.id))
-        }),
-          Object.keys(horizontalGuides).forEach(function (t) {
-            e.point.y >= horizontalGuides[t].position.y - 10 &&
-              e.point.y <= horizontalGuides[t].position.y + 10 &&
-              (l
-                ? (l.y = horizontalGuides[t].position.y)
-                : (l = new paper.Point(
+              }).removeOnMove(),
+              (snapPointOverride = { id: i, x: snapPoint.x, y: snapPoint.y }))
+        } else if ("floor" === toolMode) {
+          snapPoint = e.point
+          e: for (let d = 0; d < wallCornersX.length; d++)
+            if (
+              e.point.x >= wallCornersX[d] - 10 &&
+              e.point.x <= wallCornersX[d] + 10 &&
+              e.point.y >= wallCornersY[d] - 10 &&
+              e.point.y <= wallCornersY[d] + 10
+            ) {
+              ; (snapPoint = new paper.Point(wallCornersX[d], wallCornersY[d])),
+                new Path.Circle({
+                  center: snapPoint,
+                  radius: screenScale / 2,
+                  fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
+                  strokeWidth: 1,
+                }).removeOnMove()
+              break e
+            }
+          let l
+          Object.keys(verticalGuides).forEach(function (t) {
+            e.point.x >= verticalGuides[t].position.x - 10 &&
+              e.point.x <= verticalGuides[t].position.x + 10 &&
+              ((l = new paper.Point(verticalGuides[t].position.x, e.point.y)),
+                (i = verticalGuides[t].data.id))
+          }),
+            Object.keys(horizontalGuides).forEach(function (t) {
+              e.point.y >= horizontalGuides[t].position.y - 10 &&
+                e.point.y <= horizontalGuides[t].position.y + 10 &&
+                (l
+                  ? (l.y = horizontalGuides[t].position.y)
+                  : (l = new paper.Point(
                     e.point.x,
                     horizontalGuides[t].position.y
                   )),
-              (i = horizontalGuides[t].data.id))
-          }),
-          l &&
+                  (i = horizontalGuides[t].data.id))
+            }),
+            l &&
             ((snapPoint = l),
-            new Path.Circle({
-              center: snapPoint,
-              radius: screenScale / 2,
-              fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
-              strokeWidth: 1,
-            }).removeOnMove()),
-          startedDrawingFloor && (floorHelperPath.segments[1].point = snapPoint)
-      } else if ("dimension" === toolMode) {
-        snapPoint = e.point
-        e: for (let d = 0; d < wallCornersX.length; d++)
-          if (
-            e.point.x >= wallCornersX[d] - 10 &&
-            e.point.x <= wallCornersX[d] + 10 &&
-            e.point.y >= wallCornersY[d] - 10 &&
-            e.point.y <= wallCornersY[d] + 10
-          ) {
-            ;(snapPoint = new paper.Point(wallCornersX[d], wallCornersY[d])),
               new Path.Circle({
                 center: snapPoint,
                 radius: screenScale / 2,
                 fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
                 strokeWidth: 1,
-              }).removeOnMove()
-            break e
-          }
-        if (startedDrawingDimension)
-          if (1 === dimensionPath.segments.length)
-            (dimensionHelperPath.segments[1].point = snapPoint),
+              }).removeOnMove()),
+            startedDrawingFloor && (floorHelperPath.segments[1].point = snapPoint)
+        } else if ("dimension" === toolMode) {
+          snapPoint = e.point
+          e: for (let d = 0; d < wallCornersX.length; d++)
+            if (
+              e.point.x >= wallCornersX[d] - 10 &&
+              e.point.x <= wallCornersX[d] + 10 &&
+              e.point.y >= wallCornersY[d] - 10 &&
+              e.point.y <= wallCornersY[d] + 10
+            ) {
+              ; (snapPoint = new paper.Point(wallCornersX[d], wallCornersY[d])),
+                new Path.Circle({
+                  center: snapPoint,
+                  radius: screenScale / 2,
+                  fillColor: new paper.Color(1, 0.3, 0.5, 0.75),
+                  strokeWidth: 1,
+                }).removeOnMove()
+              break e
+            }
+          if (startedDrawingDimension)
+            if (1 === dimensionPath.segments.length)
+              (dimensionHelperPath.segments[1].point = snapPoint),
+                drawDimension(
+                  dimensionHelperPath.segments[0].point,
+                  dimensionHelperPath.segments[1].point,
+                  10
+                )
+            else {
+              let t = dimensionHelperPath.segments[1].point.subtract(
+                dimensionHelperPath.segments[0].point
+              ),
+                p = dimensionHelperPath.segments[1].point.subtract(snapPoint),
+                m = (p.angle - t.angle + 360) % 360,
+                g = (m / 180) * Math.PI,
+                y = p.length * Math.sin(g)
               drawDimension(
                 dimensionHelperPath.segments[0].point,
                 dimensionHelperPath.segments[1].point,
-                10
+                y
               )
-          else {
-            let t = dimensionHelperPath.segments[1].point.subtract(
-                dimensionHelperPath.segments[0].point
-              ),
-              p = dimensionHelperPath.segments[1].point.subtract(snapPoint),
-              m = (p.angle - t.angle + 360) % 360,
-              g = (m / 180) * Math.PI,
-              y = p.length * Math.sin(g)
-            drawDimension(
-              dimensionHelperPath.segments[0].point,
-              dimensionHelperPath.segments[1].point,
-              y
-            )
-          }
-      }
-    }),
-    planCanvas.addEventListener(
-      "dblclick",
-      function (e) {
-        "pointer" === toolMode
-          ? deselectAll()
-          : "floor" === toolMode &&
+            }
+        }
+      }),
+      planCanvas.addEventListener(
+        "dblclick",
+        function (e) {
+          "pointer" === toolMode
+            ? deselectAll()
+            : "floor" === toolMode &&
             startedDrawingFloor &&
             ((startedDrawingFloor = !1),
-            (floorHelperPath.visible = !1),
-            (floorPath.closed = !0))
-      },
-      !1
-    ),
-    (paper.view.center = [350, 130]),
-    paper.view.draw(),
-    redrawGrid()
+              (floorHelperPath.visible = !1),
+              (floorPath.closed = !0))
+        },
+        !1
+      ),
+      (paper.view.center = [350, 130]),
+      paper.view.draw(),
+      redrawGrid()
 }
 function setEndDrawingGround() {
   console.log("todo")
 }
 function setEndDrawingText() {
-  ;(startedDrawingText = !1), deselectAll()
+  ; (startedDrawingText = !1), deselectAll()
 }
 function setEndDrawingDimension() {
   startedDrawingDimension &&
@@ -5426,20 +5426,20 @@ function setEndDrawingDimension() {
 function setEndDrawingFloors() {
   startedDrawingFloor &&
     ((startedDrawingFloor = !1),
-    (floorHelperPath.visible = !1),
-    Floors[floorPath.data.id].segments.length < 3
-      ? deleteFloorByKey(floorPath.data.id)
-      : (floorPath.closed = !0))
+      (floorHelperPath.visible = !1),
+      Floors[floorPath.data.id].segments.length < 3
+        ? deleteFloorByKey(floorPath.data.id)
+        : (floorPath.closed = !0))
 }
 function setEndDrawingRoofs() {
-  ;(startedDrawingRoofs = !1),
+  ; (startedDrawingRoofs = !1),
     (roofHelperPath.visible = !1),
     (roofHelperRectangle.visible = !1),
     (roofHelper3dCube.visible = !1),
     roofPath && roofPath.segments && 2 === roofPath.segments.length
       ? relinkRoofReferences(project.activeLayer.data.id)
       : roofPath &&
-        (plan.roofs[roofPath.data.id] && delete plan.roofs[roofPath.data.id],
+      (plan.roofs[roofPath.data.id] && delete plan.roofs[roofPath.data.id],
         Roofs[roofPath.data.id] && delete Roofs[roofPath.data.id],
         (roofPath = null),
         dltext && dltext.remove())
@@ -5450,9 +5450,9 @@ function drawAngle(e, t, o, a) {
   let l = avgAngleRad(e, t),
     i =
       ((t - e + 2 * Math.PI) % (2 * Math.PI),
-      o.add(new Point(-Math.cos(-e) * n, Math.sin(-e) * n))),
+        o.add(new Point(-Math.cos(-e) * n, Math.sin(-e) * n))),
     r = (180 * (e - t)) / Math.PI
-  ;(r = 180 - r), (r = (r + 360) % 360)
+    ; (r = 180 - r), (r = (r + 360) % 360)
   let s
   r < 180
     ? (s = o.add(new Point(Math.sin(l) * n, -Math.cos(l) * n)))
@@ -5479,10 +5479,10 @@ function drawHeight(e, t, o) {
     })
       .removeOnMove()
       .removeOnDrag()
-  ;(c.fontFamily = "Courier New"),
-    (c.fillColor = "white"),
-    (c.fontSize = screenScale / 1.5),
-    c.rotate(s)
+    ; (c.fontFamily = "Courier New"),
+      (c.fillColor = "white"),
+      (c.fontSize = screenScale / 1.5),
+      c.rotate(s)
   let u = o + n.length
   c.content = Math.floor(1e3 * u) / 1e3
 }
@@ -5493,16 +5493,16 @@ function drawLength(e, t, o) {
     i = e.add(n.normalize(n.length / 2)),
     r = Math.abs(n.angle) > 90 ? (r = 180 + n.angle) : n.angle,
     s = (o >= 0 ? [1, 4] : [2, 3]).indexOf(n.quadrant) != -1 ? 8 : 0
-  ;(dltext = new paper.PointText({
-    point: i.add(l.normalize(s - screenScale / 3)),
-    justification: "center",
-  })
-    .removeOnMove()
-    .removeOnDrag()),
-    (dltext.fontFamily = "Courier New"),
-    (dltext.fillColor = "white"),
-    (dltext.fontSize = screenScale / 1.5),
-    dltext.rotate(r)
+    ; (dltext = new paper.PointText({
+      point: i.add(l.normalize(s - screenScale / 3)),
+      justification: "center",
+    })
+      .removeOnMove()
+      .removeOnDrag()),
+      (dltext.fontFamily = "Courier New"),
+      (dltext.fillColor = "white"),
+      (dltext.fontSize = screenScale / 1.5),
+      dltext.rotate(r)
   let d = n.length
   return (dltext.content = Math.floor(1e3 * d) / 1e3), d
 }
@@ -5515,14 +5515,14 @@ function compareAnglesRadians(e, t) {
   )
 }
 function setEndDrawingWalls() {
-  ;(startedDrawingWalls = !1),
+  ; (startedDrawingWalls = !1),
     (wallHelperPath.visible = !1),
     (wallHelperRectangle.visible = !1),
     (wallHelper3dCube.visible = !1),
     wallPath && wallPath.segments && 2 === wallPath.segments.length
       ? relinkWallReferences(project.activeLayer.data.id)
       : wallPath &&
-        (plan.walls[wallPath.data.id] && delete plan.walls[wallPath.data.id],
+      (plan.walls[wallPath.data.id] && delete plan.walls[wallPath.data.id],
         Walls[wallPath.data.id] && delete Walls[wallPath.data.id],
         (wallPath = null),
         dltext && dltext.remove())
@@ -5538,17 +5538,17 @@ function setCtrlKeyPressed(e) {
 }
 function setToolMode(e) {
   switch (
-    ("walls" === toolMode
-      ? setEndDrawingWalls()
-      : "floor" === toolMode
+  ("walls" === toolMode
+    ? setEndDrawingWalls()
+    : "floor" === toolMode
       ? setEndDrawingFloors()
       : "roof" === toolMode
-      ? setEndDrawingRoofs()
-      : "dimension" === toolMode
-      ? setEndDrawingDimension()
-      : "text" === toolMode
-      ? setEndDrawingText()
-      : "ground" === toolMode && setEndDrawingGround(),
+        ? setEndDrawingRoofs()
+        : "dimension" === toolMode
+          ? setEndDrawingDimension()
+          : "text" === toolMode
+            ? setEndDrawingText()
+            : "ground" === toolMode && setEndDrawingGround(),
     (toolMode = e),
     e)
   ) {
@@ -5564,7 +5564,7 @@ function setToolMode(e) {
         document.getElementById("addTextTool").classList.remove("activeTool")
       break
     case "walls":
-      ;(defaultCursor = "crosshair"),
+      ; (defaultCursor = "crosshair"),
         deselectAll(),
         recalcAllUnjoinedWallSegments(-1),
         recalcAllWallSegmentsOnOtherLevels(-1, project.activeLayer.data.id),
@@ -5577,7 +5577,7 @@ function setToolMode(e) {
         setPropertiesView("wallDefaults")
       break
     case "floor":
-      ;(defaultCursor = "crosshair"),
+      ; (defaultCursor = "crosshair"),
         deselectAll(),
         document.getElementById("pointerTool").classList.remove("activeTool"),
         document.getElementById("addWallTool").classList.remove("activeTool"),
@@ -5589,7 +5589,7 @@ function setToolMode(e) {
         setPropertiesView("floorDefaults")
       break
     case "roof":
-      ;(defaultCursor = "crosshair"),
+      ; (defaultCursor = "crosshair"),
         deselectAll(),
         document.getElementById("pointerTool").classList.remove("activeTool"),
         document.getElementById("addWallTool").classList.remove("activeTool"),
@@ -5601,7 +5601,7 @@ function setToolMode(e) {
         setPropertiesView("roofDefaults")
       break
     case "dimension":
-      ;(defaultCursor = "crosshair"),
+      ; (defaultCursor = "crosshair"),
         deselectAll(),
         document.getElementById("pointerTool").classList.remove("activeTool"),
         document.getElementById("addWallTool").classList.remove("activeTool"),
@@ -5614,7 +5614,7 @@ function setToolMode(e) {
         setPropertiesView("dimensionDefaults")
       break
     case "text":
-      ;(defaultCursor = "crosshair"),
+      ; (defaultCursor = "crosshair"),
         deselectAll(),
         document.getElementById("pointerTool").classList.remove("activeTool"),
         document.getElementById("addWallTool").classList.remove("activeTool"),
@@ -5625,7 +5625,7 @@ function setToolMode(e) {
         setPropertiesView("textnDefaults")
       break
     case "background":
-      ;(defaultCursor = "default"),
+      ; (defaultCursor = "default"),
         document.getElementById("pointerTool").classList.remove("activeTool"),
         document.getElementById("addWallTool").classList.remove("activeTool"),
         document.getElementById("addFloorTool").classList.remove("activeTool"),
@@ -5649,7 +5649,7 @@ function setToolMode(e) {
         setPropertiesView("ground")
       break
     case "defaults":
-      ;(defaultCursor = "default"),
+      ; (defaultCursor = "default"),
         deselectAll(),
         document.getElementById("pointerTool").classList.remove("activeTool"),
         document.getElementById("addWallTool").classList.remove("activeTool"),
@@ -5691,32 +5691,32 @@ function reDrawWallCorners(e) {
           y = n.add(new paper.Point(-c, -u)),
           f = n.add(new paper.Point(p, m)),
           h = n.add(new paper.Point(-p, -m))
-        ;(wallsRectangles[e.data.id].segments[2].point = g),
-          (wallsRectangles[e.data.join0.id].segments[3].point = f),
-          (wallsRectangles[e.data.join0.id].segments[0].point = h),
-          (wallsRectangles[e.data.id].segments[1].point = y),
-          (wallsRectangles[e.data.id].closed = !0),
-          (wallsRectangles[e.data.join0.id].closed = !0)
+          ; (wallsRectangles[e.data.id].segments[2].point = g),
+            (wallsRectangles[e.data.join0.id].segments[3].point = f),
+            (wallsRectangles[e.data.join0.id].segments[0].point = h),
+            (wallsRectangles[e.data.id].segments[1].point = y),
+            (wallsRectangles[e.data.id].closed = !0),
+            (wallsRectangles[e.data.join0.id].closed = !0)
         let v = wallsRectangles3d[e.data.id],
           w = wallsRectangles3d[e.data.join0.id]
-        ;(w.geometry.vertices[4].x = f.x),
-          (w.geometry.vertices[4].z = f.y),
-          (w.geometry.vertices[6].x = f.x),
-          (w.geometry.vertices[6].z = f.y),
-          (v.geometry.vertices[0].x = g.x),
-          (v.geometry.vertices[0].z = g.y),
-          (v.geometry.vertices[2].x = g.x),
-          (v.geometry.vertices[2].z = g.y),
-          (v.geometry.vertices[5].x = y.x),
-          (v.geometry.vertices[5].z = y.y),
-          (v.geometry.vertices[7].x = y.x),
-          (v.geometry.vertices[7].z = y.y),
-          (w.geometry.vertices[1].x = h.x),
-          (w.geometry.vertices[1].z = h.y),
-          (w.geometry.vertices[3].x = h.x),
-          (w.geometry.vertices[3].z = h.y),
-          (w.geometry.verticesNeedUpdate = !0),
-          (v.geometry.verticesNeedUpdate = !0)
+          ; (w.geometry.vertices[4].x = f.x),
+            (w.geometry.vertices[4].z = f.y),
+            (w.geometry.vertices[6].x = f.x),
+            (w.geometry.vertices[6].z = f.y),
+            (v.geometry.vertices[0].x = g.x),
+            (v.geometry.vertices[0].z = g.y),
+            (v.geometry.vertices[2].x = g.x),
+            (v.geometry.vertices[2].z = g.y),
+            (v.geometry.vertices[5].x = y.x),
+            (v.geometry.vertices[5].z = y.y),
+            (v.geometry.vertices[7].x = y.x),
+            (v.geometry.vertices[7].z = y.y),
+            (w.geometry.vertices[1].x = h.x),
+            (w.geometry.vertices[1].z = h.y),
+            (w.geometry.vertices[3].x = h.x),
+            (w.geometry.vertices[3].z = h.y),
+            (w.geometry.verticesNeedUpdate = !0),
+            (v.geometry.verticesNeedUpdate = !0)
       } else {
         let a = Walls[e.data.join0.id].data.thickness / 2
         o = Walls[e.data.join0.id].segments[0].point
@@ -5743,32 +5743,32 @@ function reDrawWallCorners(e) {
           y = n.add(new paper.Point(-c, -u)),
           f = n.add(new paper.Point(p, m)),
           h = n.add(new paper.Point(-p, -m))
-        ;(wallsRectangles[e.data.id].segments[0].point = g),
-          (wallsRectangles[e.data.join0.id].segments[1].point = f),
-          (wallsRectangles[e.data.join0.id].segments[2].point = h),
-          (wallsRectangles[e.data.id].segments[3].point = y),
-          (wallsRectangles[e.data.id].closed = !0),
-          (wallsRectangles[e.data.join0.id].closed = !0)
+          ; (wallsRectangles[e.data.id].segments[0].point = g),
+            (wallsRectangles[e.data.join0.id].segments[1].point = f),
+            (wallsRectangles[e.data.join0.id].segments[2].point = h),
+            (wallsRectangles[e.data.id].segments[3].point = y),
+            (wallsRectangles[e.data.id].closed = !0),
+            (wallsRectangles[e.data.join0.id].closed = !0)
         let w = wallsRectangles3d[e.data.id],
           v = wallsRectangles3d[e.data.join0.id]
-        ;(w.geometry.vertices[1].x = g.x),
-          (w.geometry.vertices[1].z = g.y),
-          (w.geometry.vertices[3].x = g.x),
-          (w.geometry.vertices[3].z = g.y),
-          (v.geometry.vertices[0].x = f.x),
-          (v.geometry.vertices[0].z = f.y),
-          (v.geometry.vertices[2].x = f.x),
-          (v.geometry.vertices[2].z = f.y),
-          (v.geometry.vertices[5].x = h.x),
-          (v.geometry.vertices[5].z = h.y),
-          (v.geometry.vertices[7].x = h.x),
-          (v.geometry.vertices[7].z = h.y),
-          (w.geometry.vertices[4].x = y.x),
-          (w.geometry.vertices[4].z = y.y),
-          (w.geometry.vertices[6].x = y.x),
-          (w.geometry.vertices[6].z = y.y),
-          (w.geometry.verticesNeedUpdate = !0),
-          (v.geometry.verticesNeedUpdate = !0)
+          ; (w.geometry.vertices[1].x = g.x),
+            (w.geometry.vertices[1].z = g.y),
+            (w.geometry.vertices[3].x = g.x),
+            (w.geometry.vertices[3].z = g.y),
+            (v.geometry.vertices[0].x = f.x),
+            (v.geometry.vertices[0].z = f.y),
+            (v.geometry.vertices[2].x = f.x),
+            (v.geometry.vertices[2].z = f.y),
+            (v.geometry.vertices[5].x = h.x),
+            (v.geometry.vertices[5].z = h.y),
+            (v.geometry.vertices[7].x = h.x),
+            (v.geometry.vertices[7].z = h.y),
+            (w.geometry.vertices[4].x = y.x),
+            (w.geometry.vertices[4].z = y.y),
+            (w.geometry.vertices[6].x = y.x),
+            (w.geometry.vertices[6].z = y.y),
+            (w.geometry.verticesNeedUpdate = !0),
+            (v.geometry.verticesNeedUpdate = !0)
       }
     } else {
       let n = e.segments[0].point,
@@ -5778,19 +5778,19 @@ function reDrawWallCorners(e) {
         y = new Point(l.x + Math.sin(i) * t, l.y - Math.cos(i) * t),
         I = new Point(l.x - Math.sin(i) * t, l.y + Math.cos(i) * t),
         P = new Point(n.x - Math.sin(i) * t, n.y + Math.cos(i) * t)
-      ;(wallsRectangles[e.data.id].segments[0].point = g),
-        (wallsRectangles[e.data.id].segments[3].point = P),
-        (wallsRectangles[e.data.id].closed = !0)
+        ; (wallsRectangles[e.data.id].segments[0].point = g),
+          (wallsRectangles[e.data.id].segments[3].point = P),
+          (wallsRectangles[e.data.id].closed = !0)
       let w = wallsRectangles3d[e.data.id]
-      ;(w.geometry.vertices[1].x = g.x),
-        (w.geometry.vertices[1].z = g.y),
-        (w.geometry.vertices[3].x = g.x),
-        (w.geometry.vertices[3].z = g.y),
-        (w.geometry.vertices[4].x = P.x),
-        (w.geometry.vertices[4].z = P.y),
-        (w.geometry.vertices[6].x = P.x),
-        (w.geometry.vertices[6].z = P.y),
-        (w.geometry.verticesNeedUpdate = !0)
+        ; (w.geometry.vertices[1].x = g.x),
+          (w.geometry.vertices[1].z = g.y),
+          (w.geometry.vertices[3].x = g.x),
+          (w.geometry.vertices[3].z = g.y),
+          (w.geometry.vertices[4].x = P.x),
+          (w.geometry.vertices[4].z = P.y),
+          (w.geometry.vertices[6].x = P.x),
+          (w.geometry.vertices[6].z = P.y),
+          (w.geometry.verticesNeedUpdate = !0)
     }
     if (e.data.join1.id) {
       let l,
@@ -5820,32 +5820,32 @@ function reDrawWallCorners(e) {
           y = n.add(new paper.Point(-c, -u)),
           f = n.add(new paper.Point(p, m)),
           h = n.add(new paper.Point(-p, -m))
-        ;(wallsRectangles[e.data.id].segments[1].point = g),
-          (wallsRectangles[e.data.join1.id].segments[0].point = f),
-          (wallsRectangles[e.data.join1.id].segments[3].point = h),
-          (wallsRectangles[e.data.id].segments[2].point = y),
-          (wallsRectangles[e.data.id].closed = !0),
-          (wallsRectangles[e.data.join1.id].closed = !0)
+          ; (wallsRectangles[e.data.id].segments[1].point = g),
+            (wallsRectangles[e.data.join1.id].segments[0].point = f),
+            (wallsRectangles[e.data.join1.id].segments[3].point = h),
+            (wallsRectangles[e.data.id].segments[2].point = y),
+            (wallsRectangles[e.data.id].closed = !0),
+            (wallsRectangles[e.data.join1.id].closed = !0)
         let w = wallsRectangles3d[e.data.join1.id],
           v = wallsRectangles3d[e.data.id]
-        ;(w.geometry.vertices[1].x = f.x),
-          (w.geometry.vertices[1].z = f.y),
-          (w.geometry.vertices[3].x = f.x),
-          (w.geometry.vertices[3].z = f.y),
-          (v.geometry.vertices[0].x = g.x),
-          (v.geometry.vertices[0].z = g.y),
-          (v.geometry.vertices[2].x = g.x),
-          (v.geometry.vertices[2].z = g.y),
-          (v.geometry.vertices[5].x = y.x),
-          (v.geometry.vertices[5].z = y.y),
-          (v.geometry.vertices[7].x = y.x),
-          (v.geometry.vertices[7].z = y.y),
-          (w.geometry.vertices[4].x = h.x),
-          (w.geometry.vertices[4].z = h.y),
-          (w.geometry.vertices[6].x = h.x),
-          (w.geometry.vertices[6].z = h.y),
-          (w.geometry.verticesNeedUpdate = !0),
-          (v.geometry.verticesNeedUpdate = !0)
+          ; (w.geometry.vertices[1].x = f.x),
+            (w.geometry.vertices[1].z = f.y),
+            (w.geometry.vertices[3].x = f.x),
+            (w.geometry.vertices[3].z = f.y),
+            (v.geometry.vertices[0].x = g.x),
+            (v.geometry.vertices[0].z = g.y),
+            (v.geometry.vertices[2].x = g.x),
+            (v.geometry.vertices[2].z = g.y),
+            (v.geometry.vertices[5].x = y.x),
+            (v.geometry.vertices[5].z = y.y),
+            (v.geometry.vertices[7].x = y.x),
+            (v.geometry.vertices[7].z = y.y),
+            (w.geometry.vertices[4].x = h.x),
+            (w.geometry.vertices[4].z = h.y),
+            (w.geometry.vertices[6].x = h.x),
+            (w.geometry.vertices[6].z = h.y),
+            (w.geometry.verticesNeedUpdate = !0),
+            (v.geometry.verticesNeedUpdate = !0)
       } else {
         let a = Walls[e.data.join1.id].data.thickness / 2
         l = Walls[e.data.join1.id].segments[0].point
@@ -5870,24 +5870,24 @@ function reDrawWallCorners(e) {
           y = n.add(new paper.Point(-c, -u)),
           f = n.add(new paper.Point(p, m)),
           h = n.add(new paper.Point(-p, -m))
-        ;(wallsRectangles[e.data.id].segments[1].point = g),
-          (wallsRectangles[e.data.join1.id].segments[1].point = h),
-          (wallsRectangles[e.data.join1.id].segments[2].point = f),
-          (wallsRectangles[e.data.id].segments[2].point = y),
-          (wallsRectangles[e.data.id].closed = !0),
-          (wallsRectangles[e.data.join1.id].closed = !0)
+          ; (wallsRectangles[e.data.id].segments[1].point = g),
+            (wallsRectangles[e.data.join1.id].segments[1].point = h),
+            (wallsRectangles[e.data.join1.id].segments[2].point = f),
+            (wallsRectangles[e.data.id].segments[2].point = y),
+            (wallsRectangles[e.data.id].closed = !0),
+            (wallsRectangles[e.data.join1.id].closed = !0)
         let w = wallsRectangles3d[e.data.join1.id],
           v = wallsRectangles3d[e.data.id]
-        ;(v.geometry.vertices[0].x = g.x),
-          (v.geometry.vertices[0].z = g.y),
-          (v.geometry.vertices[2].x = g.x),
-          (v.geometry.vertices[2].z = g.y),
-          (v.geometry.vertices[5].x = y.x),
-          (v.geometry.vertices[5].z = y.y),
-          (v.geometry.vertices[7].x = y.x),
-          (v.geometry.vertices[7].z = y.y),
-          (w.geometry.verticesNeedUpdate = !0),
-          (v.geometry.verticesNeedUpdate = !0)
+          ; (v.geometry.vertices[0].x = g.x),
+            (v.geometry.vertices[0].z = g.y),
+            (v.geometry.vertices[2].x = g.x),
+            (v.geometry.vertices[2].z = g.y),
+            (v.geometry.vertices[5].x = y.x),
+            (v.geometry.vertices[5].z = y.y),
+            (v.geometry.vertices[7].x = y.x),
+            (v.geometry.vertices[7].z = y.y),
+            (w.geometry.verticesNeedUpdate = !0),
+            (v.geometry.verticesNeedUpdate = !0)
       }
     } else {
       let n = e.segments[0].point,
@@ -5897,33 +5897,33 @@ function reDrawWallCorners(e) {
         y = new Point(l.x + Math.sin(i) * t, l.y - Math.cos(i) * t),
         I = new Point(l.x - Math.sin(i) * t, l.y + Math.cos(i) * t),
         P = new Point(n.x - Math.sin(i) * t, n.y + Math.cos(i) * t)
-      ;(wallsRectangles[e.data.id].segments[1].point = y),
-        (wallsRectangles[e.data.id].segments[2].point = I),
-        (wallsRectangles[e.data.id].closed = !0)
+        ; (wallsRectangles[e.data.id].segments[1].point = y),
+          (wallsRectangles[e.data.id].segments[2].point = I),
+          (wallsRectangles[e.data.id].closed = !0)
       let w = wallsRectangles3d[e.data.id]
-      ;(w.geometry.vertices[0].x = y.x),
-        (w.geometry.vertices[0].z = y.y),
-        (w.geometry.vertices[2].x = y.x),
-        (w.geometry.vertices[2].z = y.y),
-        (w.geometry.vertices[5].x = I.x),
-        (w.geometry.vertices[5].z = I.y),
-        (w.geometry.vertices[7].x = I.x),
-        (w.geometry.vertices[7].z = I.y),
-        (w.geometry.verticesNeedUpdate = !0)
+        ; (w.geometry.vertices[0].x = y.x),
+          (w.geometry.vertices[0].z = y.y),
+          (w.geometry.vertices[2].x = y.x),
+          (w.geometry.vertices[2].z = y.y),
+          (w.geometry.vertices[5].x = I.x),
+          (w.geometry.vertices[5].z = I.y),
+          (w.geometry.vertices[7].x = I.x),
+          (w.geometry.vertices[7].z = I.y),
+          (w.geometry.verticesNeedUpdate = !0)
     }
     let b = e.data.height[0] / 2,
       x = (e.data.height[1] / 2, wallsRectangles3d[e.data.id].geometry.vertices)
-    ;(x[0].y = -b + e.data.height[1]),
-      (x[1].y = -b + e.data.height[0]),
-      (x[4].y = -b + e.data.height[0]),
-      (x[5].y = -b + e.data.height[1]),
-      (x[2].y = -b),
-      (x[3].y = -b),
-      (x[6].y = -b),
-      (x[7].y = -b),
-      wallsRectangles3d[e.data.id].geometry.computeFlatVertexNormals(),
-      (wallsRectangles3d[e.data.id].position.y =
-        b + project.layers[e.data.level].data.height)
+      ; (x[0].y = -b + e.data.height[1]),
+        (x[1].y = -b + e.data.height[0]),
+        (x[4].y = -b + e.data.height[0]),
+        (x[5].y = -b + e.data.height[1]),
+        (x[2].y = -b),
+        (x[3].y = -b),
+        (x[6].y = -b),
+        (x[7].y = -b),
+        wallsRectangles3d[e.data.id].geometry.computeFlatVertexNormals(),
+        (wallsRectangles3d[e.data.id].position.y =
+          b + project.layers[e.data.level].data.height)
   } else console.log("segments lenght was not 2")
 }
 function reDrawRoofCorners(e) {
@@ -5957,32 +5957,32 @@ function reDrawRoofCorners(e) {
           y = n.add(new paper.Point(-c, -u)),
           f = n.add(new paper.Point(p, m)),
           h = n.add(new paper.Point(-p, -m))
-        ;(roofsRectangles[e.data.id].segments[2].point = g),
-          (roofsRectangles[e.data.join0.id].segments[3].point = f),
-          (roofsRectangles[e.data.join0.id].segments[0].point = h),
-          (roofsRectangles[e.data.id].segments[1].point = y),
-          (roofsRectangles[e.data.id].closed = !0),
-          (roofsRectangles[e.data.join0.id].closed = !0)
+          ; (roofsRectangles[e.data.id].segments[2].point = g),
+            (roofsRectangles[e.data.join0.id].segments[3].point = f),
+            (roofsRectangles[e.data.join0.id].segments[0].point = h),
+            (roofsRectangles[e.data.id].segments[1].point = y),
+            (roofsRectangles[e.data.id].closed = !0),
+            (roofsRectangles[e.data.join0.id].closed = !0)
         let v = roofsRectangles3d[e.data.id],
           w = roofsRectangles3d[e.data.join0.id]
-        ;(w.geometry.vertices[4].x = f.x),
-          (w.geometry.vertices[4].z = f.y),
-          (w.geometry.vertices[6].x = f.x),
-          (w.geometry.vertices[6].z = f.y),
-          (v.geometry.vertices[0].x = g.x),
-          (v.geometry.vertices[0].z = g.y),
-          (v.geometry.vertices[2].x = g.x),
-          (v.geometry.vertices[2].z = g.y),
-          (v.geometry.vertices[5].x = y.x),
-          (v.geometry.vertices[5].z = y.y),
-          (v.geometry.vertices[7].x = y.x),
-          (v.geometry.vertices[7].z = y.y),
-          (w.geometry.vertices[1].x = h.x),
-          (w.geometry.vertices[1].z = h.y),
-          (w.geometry.vertices[3].x = h.x),
-          (w.geometry.vertices[3].z = h.y),
-          (w.geometry.verticesNeedUpdate = !0),
-          (v.geometry.verticesNeedUpdate = !0)
+          ; (w.geometry.vertices[4].x = f.x),
+            (w.geometry.vertices[4].z = f.y),
+            (w.geometry.vertices[6].x = f.x),
+            (w.geometry.vertices[6].z = f.y),
+            (v.geometry.vertices[0].x = g.x),
+            (v.geometry.vertices[0].z = g.y),
+            (v.geometry.vertices[2].x = g.x),
+            (v.geometry.vertices[2].z = g.y),
+            (v.geometry.vertices[5].x = y.x),
+            (v.geometry.vertices[5].z = y.y),
+            (v.geometry.vertices[7].x = y.x),
+            (v.geometry.vertices[7].z = y.y),
+            (w.geometry.vertices[1].x = h.x),
+            (w.geometry.vertices[1].z = h.y),
+            (w.geometry.vertices[3].x = h.x),
+            (w.geometry.vertices[3].z = h.y),
+            (w.geometry.verticesNeedUpdate = !0),
+            (v.geometry.verticesNeedUpdate = !0)
       } else {
         let a = Roofs[e.data.join0.id].data.width / 2
         o = Roofs[e.data.join0.id].segments[0].point
@@ -6009,32 +6009,32 @@ function reDrawRoofCorners(e) {
           y = n.add(new paper.Point(-c, -u)),
           f = n.add(new paper.Point(p, m)),
           h = n.add(new paper.Point(-p, -m))
-        ;(roofsRectangles[e.data.id].segments[0].point = g),
-          (roofsRectangles[e.data.join0.id].segments[1].point = f),
-          (roofsRectangles[e.data.join0.id].segments[2].point = h),
-          (roofsRectangles[e.data.id].segments[3].point = y),
-          (roofsRectangles[e.data.id].closed = !0),
-          (roofsRectangles[e.data.join0.id].closed = !0)
+          ; (roofsRectangles[e.data.id].segments[0].point = g),
+            (roofsRectangles[e.data.join0.id].segments[1].point = f),
+            (roofsRectangles[e.data.join0.id].segments[2].point = h),
+            (roofsRectangles[e.data.id].segments[3].point = y),
+            (roofsRectangles[e.data.id].closed = !0),
+            (roofsRectangles[e.data.join0.id].closed = !0)
         let w = roofsRectangles3d[e.data.id],
           v = roofsRectangles3d[e.data.join0.id]
-        ;(w.geometry.vertices[1].x = g.x),
-          (w.geometry.vertices[1].z = g.y),
-          (w.geometry.vertices[3].x = g.x),
-          (w.geometry.vertices[3].z = g.y),
-          (v.geometry.vertices[0].x = f.x),
-          (v.geometry.vertices[0].z = f.y),
-          (v.geometry.vertices[2].x = f.x),
-          (v.geometry.vertices[2].z = f.y),
-          (v.geometry.vertices[5].x = h.x),
-          (v.geometry.vertices[5].z = h.y),
-          (v.geometry.vertices[7].x = h.x),
-          (v.geometry.vertices[7].z = h.y),
-          (w.geometry.vertices[4].x = y.x),
-          (w.geometry.vertices[4].z = y.y),
-          (w.geometry.vertices[6].x = y.x),
-          (w.geometry.vertices[6].z = y.y),
-          (w.geometry.verticesNeedUpdate = !0),
-          (v.geometry.verticesNeedUpdate = !0)
+          ; (w.geometry.vertices[1].x = g.x),
+            (w.geometry.vertices[1].z = g.y),
+            (w.geometry.vertices[3].x = g.x),
+            (w.geometry.vertices[3].z = g.y),
+            (v.geometry.vertices[0].x = f.x),
+            (v.geometry.vertices[0].z = f.y),
+            (v.geometry.vertices[2].x = f.x),
+            (v.geometry.vertices[2].z = f.y),
+            (v.geometry.vertices[5].x = h.x),
+            (v.geometry.vertices[5].z = h.y),
+            (v.geometry.vertices[7].x = h.x),
+            (v.geometry.vertices[7].z = h.y),
+            (w.geometry.vertices[4].x = y.x),
+            (w.geometry.vertices[4].z = y.y),
+            (w.geometry.vertices[6].x = y.x),
+            (w.geometry.vertices[6].z = y.y),
+            (w.geometry.verticesNeedUpdate = !0),
+            (v.geometry.verticesNeedUpdate = !0)
       }
     } else {
       let n = e.segments[0].point,
@@ -6044,19 +6044,19 @@ function reDrawRoofCorners(e) {
         y = new Point(l.x + Math.sin(i) * t, l.y - Math.cos(i) * t),
         I = new Point(l.x - Math.sin(i) * t, l.y + Math.cos(i) * t),
         P = new Point(n.x - Math.sin(i) * t, n.y + Math.cos(i) * t)
-      ;(roofsRectangles[e.data.id].segments[0].point = g),
-        (roofsRectangles[e.data.id].segments[3].point = P),
-        (roofsRectangles[e.data.id].closed = !0)
+        ; (roofsRectangles[e.data.id].segments[0].point = g),
+          (roofsRectangles[e.data.id].segments[3].point = P),
+          (roofsRectangles[e.data.id].closed = !0)
       let w = roofsRectangles3d[e.data.id]
-      ;(w.geometry.vertices[1].x = g.x),
-        (w.geometry.vertices[1].z = g.y),
-        (w.geometry.vertices[3].x = g.x),
-        (w.geometry.vertices[3].z = g.y),
-        (w.geometry.vertices[4].x = P.x),
-        (w.geometry.vertices[4].z = P.y),
-        (w.geometry.vertices[6].x = P.x),
-        (w.geometry.vertices[6].z = P.y),
-        (w.geometry.verticesNeedUpdate = !0)
+        ; (w.geometry.vertices[1].x = g.x),
+          (w.geometry.vertices[1].z = g.y),
+          (w.geometry.vertices[3].x = g.x),
+          (w.geometry.vertices[3].z = g.y),
+          (w.geometry.vertices[4].x = P.x),
+          (w.geometry.vertices[4].z = P.y),
+          (w.geometry.vertices[6].x = P.x),
+          (w.geometry.vertices[6].z = P.y),
+          (w.geometry.verticesNeedUpdate = !0)
     }
     if (e.data.join1.id) {
       let l,
@@ -6086,32 +6086,32 @@ function reDrawRoofCorners(e) {
           y = n.add(new paper.Point(-c, -u)),
           f = n.add(new paper.Point(p, m)),
           h = n.add(new paper.Point(-p, -m))
-        ;(roofsRectangles[e.data.id].segments[1].point = g),
-          (roofsRectangles[e.data.join1.id].segments[0].point = f),
-          (roofsRectangles[e.data.join1.id].segments[3].point = h),
-          (roofsRectangles[e.data.id].segments[2].point = y),
-          (roofsRectangles[e.data.id].closed = !0),
-          (roofsRectangles[e.data.join1.id].closed = !0)
+          ; (roofsRectangles[e.data.id].segments[1].point = g),
+            (roofsRectangles[e.data.join1.id].segments[0].point = f),
+            (roofsRectangles[e.data.join1.id].segments[3].point = h),
+            (roofsRectangles[e.data.id].segments[2].point = y),
+            (roofsRectangles[e.data.id].closed = !0),
+            (roofsRectangles[e.data.join1.id].closed = !0)
         let w = roofsRectangles3d[e.data.join1.id],
           v = roofsRectangles3d[e.data.id]
-        ;(w.geometry.vertices[1].x = f.x),
-          (w.geometry.vertices[1].z = f.y),
-          (w.geometry.vertices[3].x = f.x),
-          (w.geometry.vertices[3].z = f.y),
-          (v.geometry.vertices[0].x = g.x),
-          (v.geometry.vertices[0].z = g.y),
-          (v.geometry.vertices[2].x = g.x),
-          (v.geometry.vertices[2].z = g.y),
-          (v.geometry.vertices[5].x = y.x),
-          (v.geometry.vertices[5].z = y.y),
-          (v.geometry.vertices[7].x = y.x),
-          (v.geometry.vertices[7].z = y.y),
-          (w.geometry.vertices[4].x = h.x),
-          (w.geometry.vertices[4].z = h.y),
-          (w.geometry.vertices[6].x = h.x),
-          (w.geometry.vertices[6].z = h.y),
-          (w.geometry.verticesNeedUpdate = !0),
-          (v.geometry.verticesNeedUpdate = !0)
+          ; (w.geometry.vertices[1].x = f.x),
+            (w.geometry.vertices[1].z = f.y),
+            (w.geometry.vertices[3].x = f.x),
+            (w.geometry.vertices[3].z = f.y),
+            (v.geometry.vertices[0].x = g.x),
+            (v.geometry.vertices[0].z = g.y),
+            (v.geometry.vertices[2].x = g.x),
+            (v.geometry.vertices[2].z = g.y),
+            (v.geometry.vertices[5].x = y.x),
+            (v.geometry.vertices[5].z = y.y),
+            (v.geometry.vertices[7].x = y.x),
+            (v.geometry.vertices[7].z = y.y),
+            (w.geometry.vertices[4].x = h.x),
+            (w.geometry.vertices[4].z = h.y),
+            (w.geometry.vertices[6].x = h.x),
+            (w.geometry.vertices[6].z = h.y),
+            (w.geometry.verticesNeedUpdate = !0),
+            (v.geometry.verticesNeedUpdate = !0)
       } else {
         let a = Roofs[e.data.join1.id].data.width / 2
         l = Roofs[e.data.join1.id].segments[0].point
@@ -6136,24 +6136,24 @@ function reDrawRoofCorners(e) {
           y = n.add(new paper.Point(-c, -u)),
           f = n.add(new paper.Point(p, m)),
           h = n.add(new paper.Point(-p, -m))
-        ;(roofsRectangles[e.data.id].segments[1].point = g),
-          (roofsRectangles[e.data.join1.id].segments[1].point = h),
-          (roofsRectangles[e.data.join1.id].segments[2].point = f),
-          (roofsRectangles[e.data.id].segments[2].point = y),
-          (roofsRectangles[e.data.id].closed = !0),
-          (roofsRectangles[e.data.join1.id].closed = !0)
+          ; (roofsRectangles[e.data.id].segments[1].point = g),
+            (roofsRectangles[e.data.join1.id].segments[1].point = h),
+            (roofsRectangles[e.data.join1.id].segments[2].point = f),
+            (roofsRectangles[e.data.id].segments[2].point = y),
+            (roofsRectangles[e.data.id].closed = !0),
+            (roofsRectangles[e.data.join1.id].closed = !0)
         let w = roofsRectangles3d[e.data.join1.id],
           v = roofsRectangles3d[e.data.id]
-        ;(v.geometry.vertices[0].x = g.x),
-          (v.geometry.vertices[0].z = g.y),
-          (v.geometry.vertices[2].x = g.x),
-          (v.geometry.vertices[2].z = g.y),
-          (v.geometry.vertices[5].x = y.x),
-          (v.geometry.vertices[5].z = y.y),
-          (v.geometry.vertices[7].x = y.x),
-          (v.geometry.vertices[7].z = y.y),
-          (w.geometry.verticesNeedUpdate = !0),
-          (v.geometry.verticesNeedUpdate = !0)
+          ; (v.geometry.vertices[0].x = g.x),
+            (v.geometry.vertices[0].z = g.y),
+            (v.geometry.vertices[2].x = g.x),
+            (v.geometry.vertices[2].z = g.y),
+            (v.geometry.vertices[5].x = y.x),
+            (v.geometry.vertices[5].z = y.y),
+            (v.geometry.vertices[7].x = y.x),
+            (v.geometry.vertices[7].z = y.y),
+            (w.geometry.verticesNeedUpdate = !0),
+            (v.geometry.verticesNeedUpdate = !0)
       }
     } else {
       let n = e.segments[0].point,
@@ -6163,34 +6163,34 @@ function reDrawRoofCorners(e) {
         y = new Point(l.x + Math.sin(i) * t, l.y - Math.cos(i) * t),
         I = new Point(l.x - Math.sin(i) * t, l.y + Math.cos(i) * t),
         P = new Point(n.x - Math.sin(i) * t, n.y + Math.cos(i) * t)
-      ;(roofsRectangles[e.data.id].segments[1].point = y),
-        (roofsRectangles[e.data.id].segments[2].point = I),
-        (roofsRectangles[e.data.id].closed = !0)
+        ; (roofsRectangles[e.data.id].segments[1].point = y),
+          (roofsRectangles[e.data.id].segments[2].point = I),
+          (roofsRectangles[e.data.id].closed = !0)
       let w = roofsRectangles3d[e.data.id]
-      ;(w.geometry.vertices[0].x = y.x),
-        (w.geometry.vertices[0].z = y.y),
-        (w.geometry.vertices[2].x = y.x),
-        (w.geometry.vertices[2].z = y.y),
-        (w.geometry.vertices[5].x = I.x),
-        (w.geometry.vertices[5].z = I.y),
-        (w.geometry.vertices[7].x = I.x),
-        (w.geometry.vertices[7].z = I.y),
-        (w.geometry.verticesNeedUpdate = !0)
+        ; (w.geometry.vertices[0].x = y.x),
+          (w.geometry.vertices[0].z = y.y),
+          (w.geometry.vertices[2].x = y.x),
+          (w.geometry.vertices[2].z = y.y),
+          (w.geometry.vertices[5].x = I.x),
+          (w.geometry.vertices[5].z = I.y),
+          (w.geometry.vertices[7].x = I.x),
+          (w.geometry.vertices[7].z = I.y),
+          (w.geometry.verticesNeedUpdate = !0)
     }
     let b = e.data.thickness / 2,
       x = e.data.rise / 2,
       R = roofsRectangles3d[e.data.id].geometry.vertices
-    ;(R[0].y = b - x),
-      (R[1].y = b - x),
-      (R[4].y = b + x),
-      (R[5].y = b + x),
-      (R[2].y = -b - x),
-      (R[3].y = -b - x),
-      (R[6].y = -b + x),
-      (R[7].y = -b + x),
-      roofsRectangles3d[e.data.id].geometry.computeFlatVertexNormals(),
-      (roofsRectangles3d[e.data.id].position.y =
-        b + x + project.layers[e.data.level].data.height + e.data.startHeight)
+      ; (R[0].y = b - x),
+        (R[1].y = b - x),
+        (R[4].y = b + x),
+        (R[5].y = b + x),
+        (R[2].y = -b - x),
+        (R[3].y = -b - x),
+        (R[6].y = -b + x),
+        (R[7].y = -b + x),
+        roofsRectangles3d[e.data.id].geometry.computeFlatVertexNormals(),
+        (roofsRectangles3d[e.data.id].position.y =
+          b + x + project.layers[e.data.level].data.height + e.data.startHeight)
   } else console.log("segments lenght was not 2")
 }
 function updateObjectPropertiesWindow() {
@@ -6199,7 +6199,7 @@ function updateObjectPropertiesWindow() {
       case "furniture":
         setPropertiesView("furniture")
         try {
-          ;(document.getElementById("objectId").innerText =
+          ; (document.getElementById("objectId").innerText =
             selectedItem.data.id),
             (document.getElementById("objectName").innerText =
               camelCaseToSentence(selectedItem.data.fid)),
@@ -6350,8 +6350,8 @@ function updateObjectPropertiesWindow() {
       default:
         alert(
           "set properties view for " +
-            selectedItem.data.type +
-            " not implemented"
+          selectedItem.data.type +
+          " not implemented"
         )
     }
   else setPropertiesView("")
@@ -6362,52 +6362,52 @@ function loadBackgroundImage(e) {
       o = t.files
     if (FileReader && o && o.length) {
       let a = new FileReader()
-      ;(a.onload = function () {
-        let e = new Image()
-        ;(e.src = a.result),
-          (e.onload = function () {
-            ;(backgroundRaster = new paper.Raster(e)),
-              (backgroundRaster.visible = !1),
-              (backgroundRaster.onLoad = function () {
-                deselectAll(),
-                  (mouseMode = 0),
-                  (backgroundRaster.data = { type: "background" }),
-                  (backgroundRaster.data.angle = 0),
-                  (backgroundRaster.position = new paper.Point(0, 0)),
-                  guidesGroup.sendToBack(),
-                  backgroundRaster.sendToBack(),
-                  gridGroup.sendToBack(),
-                  (backgroundRaster.visible = !0),
-                  (backgroundRaster.selected = !0),
-                  (backgroundRaster.opacity = 0.33),
-                  (selectedItem = backgroundRaster)
-                let e = new paper.Path.Rectangle(backgroundRaster.bounds)
-                ;(e.data.type = "toolsRectangle"),
-                  (e.strokeColor = "#b19064"),
-                  (e.strokeWidth = 1),
-                  (e.strokeScaling = !1),
-                  (e.locked = !0),
-                  (e.position = backgroundRaster.position),
-                  (e.visible = !1),
-                  e.bringToFront(),
-                  (backgroundRaster.data.toolsRectangleInner = e),
-                  (backgroundRaster.data.toolsRectangleInner.visible = !0),
-                  (rotateIcon.visible = !1),
-                  (resizeIcon.visible = !0),
-                  (elevateIcon.visible = !1),
-                  (heightIcon.visible = !1),
-                  (toolsGroup.position = selectedItem.bounds.center),
-                  (toolsGroup.visible = !0),
-                  toolsGroup.bringToFront(),
-                  (resizeIcon.data.level = project.activeLayer.data.id),
-                  resizeIcon.bringToFront(),
-                  (toolsGroup.data.level = project.activeLayer.data.id),
-                  setToolMode("background"),
-                  redrawGrid()
+        ; (a.onload = function () {
+          let e = new Image()
+            ; (e.src = a.result),
+              (e.onload = function () {
+                ; (backgroundRaster = new paper.Raster(e)),
+                  (backgroundRaster.visible = !1),
+                  (backgroundRaster.onLoad = function () {
+                    deselectAll(),
+                      (mouseMode = 0),
+                      (backgroundRaster.data = { type: "background" }),
+                      (backgroundRaster.data.angle = 0),
+                      (backgroundRaster.position = new paper.Point(0, 0)),
+                      guidesGroup.sendToBack(),
+                      backgroundRaster.sendToBack(),
+                      gridGroup.sendToBack(),
+                      (backgroundRaster.visible = !0),
+                      (backgroundRaster.selected = !0),
+                      (backgroundRaster.opacity = 0.33),
+                      (selectedItem = backgroundRaster)
+                    let e = new paper.Path.Rectangle(backgroundRaster.bounds)
+                      ; (e.data.type = "toolsRectangle"),
+                        (e.strokeColor = "#b19064"),
+                        (e.strokeWidth = 1),
+                        (e.strokeScaling = !1),
+                        (e.locked = !0),
+                        (e.position = backgroundRaster.position),
+                        (e.visible = !1),
+                        e.bringToFront(),
+                        (backgroundRaster.data.toolsRectangleInner = e),
+                        (backgroundRaster.data.toolsRectangleInner.visible = !0),
+                        (rotateIcon.visible = !1),
+                        (resizeIcon.visible = !0),
+                        (elevateIcon.visible = !1),
+                        (heightIcon.visible = !1),
+                        (toolsGroup.position = selectedItem.bounds.center),
+                        (toolsGroup.visible = !0),
+                        toolsGroup.bringToFront(),
+                        (resizeIcon.data.level = project.activeLayer.data.id),
+                        resizeIcon.bringToFront(),
+                        (toolsGroup.data.level = project.activeLayer.data.id),
+                        setToolMode("background"),
+                        redrawGrid()
+                  })
               })
-          })
-      }),
-        a.readAsDataURL(o[0])
+        }),
+          a.readAsDataURL(o[0])
     } else console.log("upload not supported")
   } catch (e) {
     console.log("loadBackgroundImage : " + e)
@@ -6419,15 +6419,15 @@ function setBgTemplateOpacity(e) {
 function deleteBackgroundImage() {
   backgroundRaster &&
     ((resizeIcon.visible = !1),
-    backgroundRaster.data.toolsRectangleInner.remove(),
-    (backgroundRaster.data.toolsRectangleInner = null),
-    backgroundRaster.remove(),
-    (backgroundRaster = null),
-    clearFileInput(document.getElementById("backgroundImageFile")))
+      backgroundRaster.data.toolsRectangleInner.remove(),
+      (backgroundRaster.data.toolsRectangleInner = null),
+      backgroundRaster.remove(),
+      (backgroundRaster = null),
+      clearFileInput(document.getElementById("backgroundImageFile")))
 }
 function setPropertiesView(e) {
   switch (
-    ("background" != e && "background" === toolMode && setToolMode("pointer"),
+  ("background" != e && "background" === toolMode && setToolMode("pointer"),
     (document.getElementById("furniture3DModelPropertiesView").style.display =
       "none"),
     (document.getElementById("furniturePropertiesView").style.display = "none"),
@@ -6485,7 +6485,7 @@ function setPropertiesView(e) {
       document.getElementById("levelPropertiesView").style.display = "block"
       break
     case "ground":
-      ;(document.getElementById("groundPropertiesView").style.display =
+      ; (document.getElementById("groundPropertiesView").style.display =
         "block"),
         (document.getElementById("groundWidthProp").value = groundWidth),
         (document.getElementById("groundLengthProp").value = groundLength)
@@ -6494,7 +6494,7 @@ function setPropertiesView(e) {
       document.getElementById("defaultsPropertiesView").style.display = "block"
       break
     case "wallDefaults":
-      ;(document.getElementById("defaultWallHeightProp").style.backgroundColor =
+      ; (document.getElementById("defaultWallHeightProp").style.backgroundColor =
         "#4e4e4e"),
         (document.getElementById("defaultWallHeightProp").value =
           defaultWallHeight),
@@ -6507,7 +6507,7 @@ function setPropertiesView(e) {
           "block")
       break
     case "floorDefaults":
-      ;(document.getElementById(
+      ; (document.getElementById(
         "defaultFloorThicknessProp"
       ).style.backgroundColor = "#4e4e4e"),
         (document.getElementById("defaultFloorThicknessProp").value =
@@ -6516,7 +6516,7 @@ function setPropertiesView(e) {
           "block")
       break
     case "roofDefaults":
-      ;(document.getElementById(
+      ; (document.getElementById(
         "defaultRoofThicknessProp"
       ).style.backgroundColor = "#4e4e4e"),
         (document.getElementById("defaultRoofThicknessProp").value =
@@ -6544,11 +6544,11 @@ function setPropertiesView(e) {
   }
 }
 function recalcAllWallCorners() {
-  ;(wallCornersX = []),
+  ; (wallCornersX = []),
     (wallCornersY = []),
     Object.keys(wallsRectangles).forEach(function (e) {
       let t = wallsRectangles[e]
-      "object" == typeof t &&
+      "object" === typeof t &&
         Walls[t.data.id].data.level === project.activeLayer.data.id &&
         t.segments.forEach(function (e) {
           wallCornersX.push(e.point.x), wallCornersY.push(e.point.y)
@@ -6556,11 +6556,11 @@ function recalcAllWallCorners() {
     })
 }
 function recalcAllRoofCorners() {
-  ;(roofCornersX = []),
+  ; (roofCornersX = []),
     (roofCornersY = []),
     Object.keys(roofsRectangles).forEach(function (e) {
       let t = roofsRectangles[e]
-      "object" == typeof t &&
+      "object" === typeof t &&
         Roofs[t.data.id].data.level === project.activeLayer.data.id &&
         t.segments.forEach(function (e) {
           roofCornersX.push(e.point.x), roofCornersY.push(e.point.y)
@@ -6568,10 +6568,10 @@ function recalcAllRoofCorners() {
     })
 }
 function recalcAllUnjoinedWallSegments(e) {
-  ;(unjoinedWallSegments = []),
+  ; (unjoinedWallSegments = []),
     Object.keys(Walls).forEach(function (t) {
       let o = Walls[t]
-      "object" == typeof o &&
+      "object" === typeof o &&
         o.data.id !== e &&
         2 === o.segments.length &&
         (o.data.join0.id ||
@@ -6581,7 +6581,7 @@ function recalcAllUnjoinedWallSegments(e) {
             seg: 0,
             id: o.data.id,
           }),
-        o.data.join1.id ||
+          o.data.join1.id ||
           unjoinedWallSegments.push({
             x: o.segments[1].point.x,
             y: o.segments[1].point.y,
@@ -6591,10 +6591,10 @@ function recalcAllUnjoinedWallSegments(e) {
     })
 }
 function recalcAllUnjoinedRoofSegments(e) {
-  ;(unjoinedRoofSegments = []),
+  ; (unjoinedRoofSegments = []),
     Object.keys(Roofs).forEach(function (t) {
       let o = Roofs[t]
-      "object" == typeof o &&
+      "object" === typeof o &&
         o.data.id !== e &&
         2 === o.segments.length &&
         (o.data.join0.id ||
@@ -6604,7 +6604,7 @@ function recalcAllUnjoinedRoofSegments(e) {
             seg: 0,
             id: o.data.id,
           }),
-        o.data.join1.id ||
+          o.data.join1.id ||
           unjoinedRoofSegments.push({
             x: o.segments[1].point.x,
             y: o.segments[1].point.y,
@@ -6614,10 +6614,10 @@ function recalcAllUnjoinedRoofSegments(e) {
     })
 }
 function recalcAllWallSegmentsOnOtherLevels(e, t) {
-  ;(allWallSegments = []),
+  ; (allWallSegments = []),
     Object.keys(Walls).forEach(function (o) {
       let a = Walls[o]
-      "object" == typeof a &&
+      "object" === typeof a &&
         a.data.id !== e &&
         a.data.level != t &&
         2 === a.segments.length &&
@@ -6627,19 +6627,19 @@ function recalcAllWallSegmentsOnOtherLevels(e, t) {
           seg: 0,
           id: a.data.id,
         }),
-        allWallSegments.push({
-          x: a.segments[1].point.x,
-          y: a.segments[1].point.y,
-          seg: 1,
-          id: a.data.id,
-        }))
+          allWallSegments.push({
+            x: a.segments[1].point.x,
+            y: a.segments[1].point.y,
+            seg: 1,
+            id: a.data.id,
+          }))
     })
 }
 function recalcAllRoofSegmentsOnOtherLevels(e, t) {
-  ;(allRoofSegments = []),
+  ; (allRoofSegments = []),
     Object.keys(Roofs).forEach(function (o) {
       let a = Roofs[o]
-      "object" == typeof a &&
+      "object" === typeof a &&
         a.data.id !== e &&
         a.data.level != t &&
         2 === a.segments.length &&
@@ -6649,25 +6649,25 @@ function recalcAllRoofSegmentsOnOtherLevels(e, t) {
           seg: 0,
           id: a.data.id,
         }),
-        allRoofSegments.push({
-          x: a.segments[1].point.x,
-          y: a.segments[1].point.y,
-          seg: 1,
-          id: a.data.id,
-        }))
+          allRoofSegments.push({
+            x: a.segments[1].point.x,
+            y: a.segments[1].point.y,
+            seg: 1,
+            id: a.data.id,
+          }))
     })
 }
 function drawDimension(e, t, o) {
   let a = t.subtract(e),
     n = new paper.Path().removeOnMove()
-  ;(n.style = { strokeColor: "white", strokeWidth: 1, strokeScaling: !1 }),
-    n.moveTo(e),
-    n.lineBy(a.normalize(o).rotate(-90)),
-    n.lineBy(a.normalize(7.5).rotate(-270)),
-    n.lineBy(a.normalize(10).rotate(-225)),
-    n.lineBy(a.normalize(20).rotate(-45)),
-    n.lineBy(a.normalize(10).rotate(-225)),
-    n.lineBy(a.normalize(a.length / 2))
+    ; (n.style = { strokeColor: "white", strokeWidth: 1, strokeScaling: !1 }),
+      n.moveTo(e),
+      n.lineBy(a.normalize(o).rotate(-90)),
+      n.lineBy(a.normalize(7.5).rotate(-270)),
+      n.lineBy(a.normalize(10).rotate(-225)),
+      n.lineBy(a.normalize(20).rotate(-45)),
+      n.lineBy(a.normalize(10).rotate(-225)),
+      n.lineBy(a.normalize(a.length / 2))
   let l = n.lastSegment.point
   n.lineBy(a.normalize(a.length / 2)),
     n.lineBy(a.normalize(10).rotate(-225)),
@@ -6694,7 +6694,7 @@ function drawDimension(e, t, o) {
 }
 function updateTextX(e) {
   try {
-    ;(Texts[editingTextId].point.x = parseInt(e)),
+    ; (Texts[editingTextId].point.x = parseInt(e)),
       (Texts[editingTextId].data.x = parseInt(e)),
       (plan.texts[editingTextId].data.x = parseInt(e)),
       updatePlanHistory(
@@ -6724,7 +6724,7 @@ function updateTextX(e) {
 }
 function updateTextY(e) {
   try {
-    ;(Texts[editingTextId].point.y = parseInt(e)),
+    ; (Texts[editingTextId].point.y = parseInt(e)),
       (Texts[editingTextId].data.y = parseInt(e)),
       (plan.texts[editingTextId].data.y = parseInt(e)),
       updatePlanHistory(
@@ -6754,7 +6754,7 @@ function updateTextY(e) {
 }
 function clickColor(e) {
   let t = parseInt(e.replace("#", "0x"))
-  ;(ground.material.color = new THREE.Color(t)), render()
+    ; (ground.material.color = new THREE.Color(t)), render()
 }
 function updateWallThickness(e) {
   let t = parseInt(document.getElementById("wallIdHidden").value)
@@ -6786,339 +6786,339 @@ function updateWallThickness(e) {
 }
 function updateWallHeight(e) {
   let t = parseInt(document.getElementById("wallIdHidden").value)
-  ;(Walls[t].data.height = [parseInt(e), parseInt(e)]),
-    (plan.walls[t].wallPath.data.height = [parseInt(e), parseInt(e)]),
-    updatePlanHistory(
-      plan,
-      null,
-      null,
-      null,
-      null,
-      t,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
-    ),
-    relinkWallReferences(project.activeLayer.data.id)
+    ; (Walls[t].data.height = [parseInt(e), parseInt(e)]),
+      (plan.walls[t].wallPath.data.height = [parseInt(e), parseInt(e)]),
+      updatePlanHistory(
+        plan,
+        null,
+        null,
+        null,
+        null,
+        t,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ),
+      relinkWallReferences(project.activeLayer.data.id)
 }
 function updateWallHeight0(e) {
   let t = parseInt(document.getElementById("wallIdHidden").value)
-  ;(Walls[t].data.height[0] = parseInt(e)),
-    (plan.walls[t].wallPath.data.height[0] = parseInt(e)),
-    updatePlanHistory(
-      plan,
-      null,
-      null,
-      null,
-      null,
-      t,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
-    ),
-    relinkWallReferences(project.activeLayer.data.id)
+    ; (Walls[t].data.height[0] = parseInt(e)),
+      (plan.walls[t].wallPath.data.height[0] = parseInt(e)),
+      updatePlanHistory(
+        plan,
+        null,
+        null,
+        null,
+        null,
+        t,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ),
+      relinkWallReferences(project.activeLayer.data.id)
 }
 function updateWallHeight1(e) {
   let t = parseInt(document.getElementById("wallIdHidden").value)
-  ;(Walls[t].data.height[1] = parseInt(e)),
-    (plan.walls[t].wallPath.data.height[1] = parseInt(e)),
-    updatePlanHistory(
-      plan,
-      null,
-      null,
-      null,
-      null,
-      t,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
-    ),
-    relinkWallReferences(project.activeLayer.data.id)
+    ; (Walls[t].data.height[1] = parseInt(e)),
+      (plan.walls[t].wallPath.data.height[1] = parseInt(e)),
+      updatePlanHistory(
+        plan,
+        null,
+        null,
+        null,
+        null,
+        t,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ),
+      relinkWallReferences(project.activeLayer.data.id)
 }
 function updateDefaultWallHeight(e) {
-  ;(defaultWallHeight = parseInt(e)), scene.remove(wallHelper3dCube)
+  ; (defaultWallHeight = parseInt(e)), scene.remove(wallHelper3dCube)
   let t = new THREE.BoxGeometry(
-      defaultWallThickness,
-      defaultWallHeight,
-      defaultWallThickness
-    ),
+    defaultWallThickness,
+    defaultWallHeight,
+    defaultWallThickness
+  ),
     o = new THREE.MeshStandardMaterial({
       color: 0,
       transparent: !0,
       opacity: 0.25,
     })
-  ;(wallHelper3dCube = new THREE.Mesh(t, o)),
-    (wallHelper3dCube.position.y =
-      defaultWallHeight / 2 + project.activeLayer.data.height),
-    (wallHelper3dCube.visible = !1),
-    scene.add(wallHelper3dCube)
+    ; (wallHelper3dCube = new THREE.Mesh(t, o)),
+      (wallHelper3dCube.position.y =
+        defaultWallHeight / 2 + project.activeLayer.data.height),
+      (wallHelper3dCube.visible = !1),
+      scene.add(wallHelper3dCube)
 }
 function updateDefaultWallThickness(e) {
-  ;(defaultWallThickness = parseInt(e)), scene.remove(wallHelper3dCube)
+  ; (defaultWallThickness = parseInt(e)), scene.remove(wallHelper3dCube)
   let t = new THREE.BoxGeometry(
-      defaultWallThickness,
-      defaultWallHeight,
-      defaultWallThickness
-    ),
+    defaultWallThickness,
+    defaultWallHeight,
+    defaultWallThickness
+  ),
     o = new THREE.MeshStandardMaterial({
       color: 0,
       transparent: !0,
       opacity: 0.25,
     })
-  ;(wallHelper3dCube = new THREE.Mesh(t, o)),
-    (wallHelper3dCube.position.y =
-      defaultWallHeight / 2 + project.activeLayer.data.height),
-    (wallHelper3dCube.visible = !1),
-    scene.add(wallHelper3dCube)
+    ; (wallHelper3dCube = new THREE.Mesh(t, o)),
+      (wallHelper3dCube.position.y =
+        defaultWallHeight / 2 + project.activeLayer.data.height),
+      (wallHelper3dCube.visible = !1),
+      scene.add(wallHelper3dCube)
 }
 function updateRoofWidth(e) {
   let t = parseInt(document.getElementById("roofIdHidden").value)
-  ;(Roofs[t].data.width = parseInt(e)),
-    (plan.roofs[t].roofPath.data.width = parseInt(e)),
-    updatePlanHistory(
-      plan,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      t,
-      null
-    ),
-    relinkRoofReferences(project.activeLayer.data.id),
-    updateExtraRoofInfo()
+    ; (Roofs[t].data.width = parseInt(e)),
+      (plan.roofs[t].roofPath.data.width = parseInt(e)),
+      updatePlanHistory(
+        plan,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        t,
+        null
+      ),
+      relinkRoofReferences(project.activeLayer.data.id),
+      updateExtraRoofInfo()
 }
 function updateRoofThickness(e) {
   let t = parseInt(document.getElementById("roofIdHidden").value)
-  ;(Roofs[t].data.thickness = parseInt(e)),
-    (plan.roofs[t].roofPath.data.thickness = parseInt(e)),
-    updatePlanHistory(
-      plan,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      t,
-      null
-    ),
-    relinkRoofReferences(project.activeLayer.data.id),
-    updateExtraRoofInfo()
+    ; (Roofs[t].data.thickness = parseInt(e)),
+      (plan.roofs[t].roofPath.data.thickness = parseInt(e)),
+      updatePlanHistory(
+        plan,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        t,
+        null
+      ),
+      relinkRoofReferences(project.activeLayer.data.id),
+      updateExtraRoofInfo()
 }
 function updateRoofRise(e) {
   let t = parseInt(document.getElementById("roofIdHidden").value)
-  ;(Roofs[t].data.rise = parseInt(e)),
-    (plan.roofs[t].roofPath.data.rise = parseInt(e)),
-    updatePlanHistory(
-      plan,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      t,
-      null
-    ),
-    relinkRoofReferences(project.activeLayer.data.id),
-    updateExtraRoofInfo()
+    ; (Roofs[t].data.rise = parseInt(e)),
+      (plan.roofs[t].roofPath.data.rise = parseInt(e)),
+      updatePlanHistory(
+        plan,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        t,
+        null
+      ),
+      relinkRoofReferences(project.activeLayer.data.id),
+      updateExtraRoofInfo()
 }
 function updateRoofStartHeight(e) {
   let t = parseInt(document.getElementById("roofIdHidden").value)
-  ;(Roofs[t].data.startHeight = parseInt(e)),
-    (plan.roofs[t].roofPath.data.startHeight = parseInt(e)),
-    updatePlanHistory(
-      plan,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      t,
-      null
-    ),
-    relinkRoofReferences(project.activeLayer.data.id),
-    updateExtraRoofInfo()
+    ; (Roofs[t].data.startHeight = parseInt(e)),
+      (plan.roofs[t].roofPath.data.startHeight = parseInt(e)),
+      updatePlanHistory(
+        plan,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        t,
+        null
+      ),
+      relinkRoofReferences(project.activeLayer.data.id),
+      updateExtraRoofInfo()
 }
 function updateDefaultRoofThickness(e) {
-  ;(defaultRoofThickness = parseInt(e)), scene.remove(roofHelper3dCube)
+  ; (defaultRoofThickness = parseInt(e)), scene.remove(roofHelper3dCube)
   let t = new THREE.BoxGeometry(
-      defaultRoofWidth,
-      defaultRoofThickness,
-      defaultRoofWidth
-    ),
+    defaultRoofWidth,
+    defaultRoofThickness,
+    defaultRoofWidth
+  ),
     o = new THREE.MeshStandardMaterial({
       color: 0,
       transparent: !0,
       opacity: 0.25,
     })
-  ;(roofHelper3dCube = new THREE.Mesh(t, o)),
-    (roofHelper3dCube.position.y =
-      defaultRoofThickness / 2 + project.activeLayer.data.height),
-    (roofHelper3dCube.visible = !1),
-    scene.add(roofHelper3dCube),
-    updateExtraDefaultRoofInfo()
+    ; (roofHelper3dCube = new THREE.Mesh(t, o)),
+      (roofHelper3dCube.position.y =
+        defaultRoofThickness / 2 + project.activeLayer.data.height),
+      (roofHelper3dCube.visible = !1),
+      scene.add(roofHelper3dCube),
+      updateExtraDefaultRoofInfo()
 }
 function updateDefaultRoofRise(e) {
-  ;(defaultRoofRise = parseInt(e)), scene.remove(roofHelper3dCube)
+  ; (defaultRoofRise = parseInt(e)), scene.remove(roofHelper3dCube)
   let t = new THREE.BoxGeometry(
-      defaultRoofWidth,
-      defaultRoofThickness,
-      defaultRoofWidth
-    ),
+    defaultRoofWidth,
+    defaultRoofThickness,
+    defaultRoofWidth
+  ),
     o = new THREE.MeshStandardMaterial({
       color: 0,
       transparent: !0,
       opacity: 0.25,
     })
-  ;(roofHelper3dCube = new THREE.Mesh(t, o)),
-    (roofHelper3dCube.position.y =
-      defaultRoofThickness / 2 + project.activeLayer.data.height),
-    (roofHelper3dCube.visible = !1),
-    scene.add(roofHelper3dCube),
-    updateExtraDefaultRoofInfo()
+    ; (roofHelper3dCube = new THREE.Mesh(t, o)),
+      (roofHelper3dCube.position.y =
+        defaultRoofThickness / 2 + project.activeLayer.data.height),
+      (roofHelper3dCube.visible = !1),
+      scene.add(roofHelper3dCube),
+      updateExtraDefaultRoofInfo()
 }
 function updateDefaultRoofStartHeight(e) {
-  ;(defaultRoofStartHeight = parseInt(e)), scene.remove(roofHelper3dCube)
+  ; (defaultRoofStartHeight = parseInt(e)), scene.remove(roofHelper3dCube)
   let t = new THREE.BoxGeometry(
-      defaultRoofWidth,
-      defaultRoofThickness,
-      defaultRoofWidth
-    ),
+    defaultRoofWidth,
+    defaultRoofThickness,
+    defaultRoofWidth
+  ),
     o = new THREE.MeshStandardMaterial({
       color: 0,
       transparent: !0,
       opacity: 0.25,
     })
-  ;(roofHelper3dCube = new THREE.Mesh(t, o)),
-    (roofHelper3dCube.position.y =
-      defaultRoofThickness / 2 +
-      project.activeLayer.data.height +
-      defaultRoofStartHeight),
-    (roofHelper3dCube.visible = !1),
-    scene.add(roofHelper3dCube),
-    updateExtraDefaultRoofInfo()
+    ; (roofHelper3dCube = new THREE.Mesh(t, o)),
+      (roofHelper3dCube.position.y =
+        defaultRoofThickness / 2 +
+        project.activeLayer.data.height +
+        defaultRoofStartHeight),
+      (roofHelper3dCube.visible = !1),
+      scene.add(roofHelper3dCube),
+      updateExtraDefaultRoofInfo()
 }
 function updateDefaultRoofWidth(e) {
-  ;(defaultRoofWidth = parseInt(e)), scene.remove(roofHelper3dCube)
+  ; (defaultRoofWidth = parseInt(e)), scene.remove(roofHelper3dCube)
   let t = new THREE.BoxGeometry(
-      defaultRoofWidth,
-      defaultRoofThickness,
-      defaultRoofWidth
-    ),
+    defaultRoofWidth,
+    defaultRoofThickness,
+    defaultRoofWidth
+  ),
     o = new THREE.MeshStandardMaterial({
       color: 0,
       transparent: !0,
       opacity: 0.25,
     })
-  ;(roofHelper3dCube = new THREE.Mesh(t, o)),
-    (roofHelper3dCube.position.y =
-      defaultRoofThickness / 2 + project.activeLayer.data.height),
-    (roofHelper3dCube.visible = !1),
-    scene.add(roofHelper3dCube),
-    updateExtraDefaultRoofInfo()
+    ; (roofHelper3dCube = new THREE.Mesh(t, o)),
+      (roofHelper3dCube.position.y =
+        defaultRoofThickness / 2 + project.activeLayer.data.height),
+      (roofHelper3dCube.visible = !1),
+      scene.add(roofHelper3dCube),
+      updateExtraDefaultRoofInfo()
 }
 function updateExtraDefaultRoofInfo() {
   let e = document.getElementById("defaultRoofWidthProp").value,
     t = document.getElementById("defaultRoofRiseProp").value,
     o = Math.hypot(e, t),
     a = (180 * Math.atan2(parseFloat(t), parseFloat(e))) / Math.PI
-  ;(document.getElementById("defaultRafterLengthProp").innerText =
-    o.toFixed(2)),
-    (document.getElementById("defaultRoofPitchProp").innerText = a.toFixed(2))
+    ; (document.getElementById("defaultRafterLengthProp").innerText =
+      o.toFixed(2)),
+      (document.getElementById("defaultRoofPitchProp").innerText = a.toFixed(2))
 }
 function updateExtraRoofInfo() {
   let e = document.getElementById("roofWidthProp").value,
     t = document.getElementById("roofRiseProp").value,
     o = Math.hypot(e, t),
     a = (180 * Math.atan2(parseFloat(t), parseFloat(e))) / Math.PI
-  ;(document.getElementById("rafterLengthProp").innerText = o.toFixed(2)),
-    (document.getElementById("roofPitchProp").innerText = a.toFixed(2))
+    ; (document.getElementById("rafterLengthProp").innerText = o.toFixed(2)),
+      (document.getElementById("roofPitchProp").innerText = a.toFixed(2))
 }
 function updateDefaultFloorThickness() {
   alert("not implemented yet")
 }
 function adjustAmbientLightBrightness(e) {
-  ;(ambientLight.intensity = e), render()
+  ; (ambientLight.intensity = e), render()
 }
 function adjustDirLightBrightness(e) {
-  ;(dirLight.intensity = e), render()
+  ; (dirLight.intensity = e), render()
 }
 function adjustHemiLightBrightness(e) {
-  ;(hemiLight.intensity = e), render()
+  ; (hemiLight.intensity = e), render()
 }
 function newLevel() {
   console.log("new level button pressed"), deselectAll()
@@ -7126,30 +7126,30 @@ function newLevel() {
     t = document.createElement("BUTTON")
   if (
     (t.classList.add("levelBtn"),
-    (t.innerHTML = "Level " + e),
-    (t.value = e),
-    (t.style.top = levelButtons[0].style.top),
-    (t.style.bottom = levelButtons[0].style.bottom),
-    (t.style.left = levelButtons[0].style.left),
-    "planView" != UILayout && (t.style.marginBottom = "26px"),
-    (t.style.marginLeft = 104 * e + "px"),
-    "3dView" != UILayout &&
+      (t.innerHTML = "Level " + e),
+      (t.value = e),
+      (t.style.top = levelButtons[0].style.top),
+      (t.style.bottom = levelButtons[0].style.bottom),
+      (t.style.left = levelButtons[0].style.left),
+      "planView" != UILayout && (t.style.marginBottom = "26px"),
+      (t.style.marginLeft = 104 * e + "px"),
+      "3dView" != UILayout &&
       ((levelButtons[0].style.display = "block"),
-      (t.style.display = "block"),
-      t.addEventListener(
-        "click",
-        function () {
-          setLevel(this.value)
-        },
-        !1
-      )),
-    (floorsGroup[e] = new paper.Group()),
-    (roofsGroup[e] = new paper.Group()),
-    (wallsGroup[e] = new paper.Group()),
-    (dimensionsGroup[e] = new paper.Group()),
-    (furnitureGroup[e] = new paper.Group()),
-    (textsGroup[e] = new paper.Group()),
-    !project.layers["level" + e])
+        (t.style.display = "block"),
+        t.addEventListener(
+          "click",
+          function () {
+            setLevel(this.value)
+          },
+          !1
+        )),
+      (floorsGroup[e] = new paper.Group()),
+      (roofsGroup[e] = new paper.Group()),
+      (wallsGroup[e] = new paper.Group()),
+      (dimensionsGroup[e] = new paper.Group()),
+      (furnitureGroup[e] = new paper.Group()),
+      (textsGroup[e] = new paper.Group()),
+      !project.layers["level" + e])
   ) {
     new Layer({
       name: "level" + e,
@@ -7177,36 +7177,36 @@ function addNewLevel(e) {
   let t = document.createElement("BUTTON")
   if (
     (t.classList.add("levelBtn"),
-    (t.innerHTML = "Level " + e),
-    (t.value = e),
-    levelButtons
-      ? ((t.style.top = levelButtons[0].style.top),
-        (t.style.bottom = levelButtons[0].style.bottom),
-        (t.style.left = levelButtons[0].style.left))
-      : ((levelButtons = {}),
-        "planView" === UILayout
-          ? ((t.style.left = "286px"), (t.style.bottom = "30px"))
-          : ((t.style.left = "354px"),
-            (t.style.bottom = "50%"),
-            (t.style.marginBottom = "26px"))),
-    "planView" != UILayout && (t.style.marginBottom = "26px"),
-    (t.style.marginLeft = 104 * e + "px"),
-    "3dView" != UILayout &&
+      (t.innerHTML = "Level " + e),
+      (t.value = e),
+      levelButtons
+        ? ((t.style.top = levelButtons[0].style.top),
+          (t.style.bottom = levelButtons[0].style.bottom),
+          (t.style.left = levelButtons[0].style.left))
+        : ((levelButtons = {}),
+          "planView" === UILayout
+            ? ((t.style.left = "286px"), (t.style.bottom = "30px"))
+            : ((t.style.left = "354px"),
+              (t.style.bottom = "50%"),
+              (t.style.marginBottom = "26px"))),
+      "planView" != UILayout && (t.style.marginBottom = "26px"),
+      (t.style.marginLeft = 104 * e + "px"),
+      "3dView" != UILayout &&
       ((t.style.display = "block"),
-      t.addEventListener(
-        "click",
-        function () {
-          setLevel(this.value)
-        },
-        !1
-      )),
-    (floorsGroup[e] = new paper.Group()),
-    (roofsGroup[e] = new paper.Group()),
-    (wallsGroup[e] = new paper.Group()),
-    (dimensionsGroup[e] = new paper.Group()),
-    (furnitureGroup[e] = new paper.Group()),
-    (textsGroup[e] = new paper.Group()),
-    !project.layers["level" + e])
+        t.addEventListener(
+          "click",
+          function () {
+            setLevel(this.value)
+          },
+          !1
+        )),
+      (floorsGroup[e] = new paper.Group()),
+      (roofsGroup[e] = new paper.Group()),
+      (wallsGroup[e] = new paper.Group()),
+      (dimensionsGroup[e] = new paper.Group()),
+      (furnitureGroup[e] = new paper.Group()),
+      (textsGroup[e] = new paper.Group()),
+      !project.layers["level" + e])
   ) {
     new Layer({
       name: "level" + e,
@@ -7238,16 +7238,16 @@ function setLevel(e) {
   deselectAll(),
     setToolMode("pointer"),
     otherLayerWallsRasters &&
-      otherLayerWallsRasters.length > 0 &&
-      (otherLayerWallsRasters.forEach(function (e) {
-        e.remove()
-      }),
+    otherLayerWallsRasters.length > 0 &&
+    (otherLayerWallsRasters.forEach(function (e) {
+      e.remove()
+    }),
       (otherLayerWallsRasters = [])),
     otherLayerFurnitureRasters &&
-      otherLayerFurnitureRasters.length > 0 &&
-      (otherLayerFurnitureRasters.forEach(function (e) {
-        e.remove()
-      }),
+    otherLayerFurnitureRasters.length > 0 &&
+    (otherLayerFurnitureRasters.forEach(function (e) {
+      e.remove()
+    }),
       (otherLayerFurnitureRasters = []))
   let t = 0
   project.layers.forEach(function (o) {
@@ -7257,15 +7257,15 @@ function setLevel(e) {
         (otherLayerWallsRasters.push(
           wallsGroup[o.data.id].rasterize(view.resolution, !1)
         ),
-        (otherLayerWallsRasters[otherLayerWallsRasters.length - 1].data.level =
-          o.data.id)),
-      furnitureGroup[o.data.id] &&
+          (otherLayerWallsRasters[otherLayerWallsRasters.length - 1].data.level =
+            o.data.id)),
+        furnitureGroup[o.data.id] &&
         (otherLayerFurnitureRasters.push(
           furnitureGroup[o.data.id].rasterize(view.resolution, !1)
         ),
-        (otherLayerFurnitureRasters[
-          otherLayerFurnitureRasters.length - 1
-        ].data.level = o.data.id))),
+          (otherLayerFurnitureRasters[
+            otherLayerFurnitureRasters.length - 1
+          ].data.level = o.data.id))),
       (o.visible = !1),
       (levelButtons[t].style.backgroundColor = "#4e4e4e"),
       (t += 1)
@@ -7287,7 +7287,7 @@ function setLevel(e) {
     project.activeLayer.addChild(guidesGroup),
     gridGroup.sendToBack(),
     backgroundRaster &&
-      (project.activeLayer.addChild(backgroundRaster),
+    (project.activeLayer.addChild(backgroundRaster),
       backgroundRaster.sendToBack(),
       gridGroup.sendToBack()),
     (project.activeLayer.visible = !0),
@@ -7306,7 +7306,7 @@ function setLevel(e) {
       project.activeLayer.data.height)
 }
 function updateLevelHeight(e) {
-  ;(project.activeLayer.data.height = parseInt(e)),
+  ; (project.activeLayer.data.height = parseInt(e)),
     (plan.levels[project.activeLayer.data.id].height = parseInt(e)),
     relinkWallReferences(project.activeLayer.data.id),
     relinkRoofReferences(project.activeLayer.data.id)
@@ -7332,7 +7332,7 @@ function validateText(e, t, o) {
 }
 function updateTextValue(e) {
   try {
-    ;(Texts[editingTextId].content = e),
+    ; (Texts[editingTextId].content = e),
       (Texts[editingTextId].data.value = e),
       (plan.texts[editingTextId].data.value = e),
       updatePlanHistory(
@@ -7363,7 +7363,7 @@ function updateTextValue(e) {
 function redrawLevelsFloors(e) {
   Object.keys(Floors).forEach(function (t) {
     let o = Floors[t]
-    "object" == typeof o && o.data.level === e && redrawFloor(o)
+    "object" === typeof o && o.data.level === e && redrawFloor(o)
   })
 }
 function redrawFloor(e) {
@@ -7412,13 +7412,13 @@ function redrawFloor(e) {
 }
 function camelCaseToSentence(e) {
   try {
-    ;(e = e.replace(/([A-Z])/g, " $1")),
+    ; (e = e.replace(/([A-Z])/g, " $1")),
       (e = e.replace(/_/g, " ")),
       (e = e.replace(/\b\w/g, function (e) {
         return e.toUpperCase()
       })),
       (e = e.charAt(0).toUpperCase() + e.slice(1))
-  } catch (e) {}
+  } catch (e) { }
   return e
 }
 function showFurnitureLicenseSummary(e) {
@@ -7456,7 +7456,7 @@ function showFurnitureLicenseSummary(e) {
     default:
       a = furnitureItems[e].license
   }
-  ;(document.getElementById("model3dLicense").innerHTML = a),
+  ; (document.getElementById("model3dLicense").innerHTML = a),
     (document.getElementById("model3dLargeThumb").src =
       "objects/" + e + ".png"),
     setPropertiesView("model3dMeta")
@@ -7500,15 +7500,15 @@ function setModalModelDescription(e) {
 function hideMouseIndicators() {
   mouseIndicatorX &&
     ((modalsActive = !0),
-    (mouseIndicatorX.style.display = "none"),
-    (mouseIndicatorY.style.display = "none"))
+      (mouseIndicatorX.style.display = "none"),
+      (mouseIndicatorY.style.display = "none"))
 }
 function showMouseIndicators() {
   mouseIndicatorX &&
     "3dView" != UILayout &&
     ((modalsActive = !1),
-    (mouseIndicatorX.style.display = "block"),
-    (mouseIndicatorY.style.display = "block"))
+      (mouseIndicatorX.style.display = "block"),
+      (mouseIndicatorY.style.display = "block"))
 }
 function loadExamplePlan() {
   hideMouseIndicators(),
@@ -7523,7 +7523,7 @@ function loadExamplePlan() {
     planHistory.push(JSON.stringify(plan)),
     setToolMode("pointer")
   try {
-    ;(loadingProgressTxt = "Plan decoding\n" + loadingProgressTxt),
+    ; (loadingProgressTxt = "Plan decoding\n" + loadingProgressTxt),
       (document.getElementById("modalLoadingDataInfo").innerHTML =
         loadingProgressTxt),
       $.ajax({
@@ -7547,271 +7547,271 @@ function loadPlan(e) {
 function updateFurniturePosX(e) {
   if (selectedItem.data.id) {
     let t = parseFloat(e)
-    ;(selectedItem.position.x = t),
-      (toolsGroup.position.x = t),
-      (selectedItem.data.toolsRectangleInner.position.x = t),
-      (clickableObjects[selectedItem.data.id].position.x = t),
-      maskObjects[selectedItem.data.id] &&
+      ; (selectedItem.position.x = t),
+        (toolsGroup.position.x = t),
+        (selectedItem.data.toolsRectangleInner.position.x = t),
+        (clickableObjects[selectedItem.data.id].position.x = t),
+        maskObjects[selectedItem.data.id] &&
         (maskObjects[selectedItem.data.id].position.x = t),
-      (tween = new TWEEN.Tween(controls.target)
-        .to(clickableObjects[selectedItem.data.id].position, 100)
-        .onUpdate(render)
-        .start()),
-      updatePlanHistory(
-        plan,
-        null,
-        selectedItem.data.id,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      )
+        (tween = new TWEEN.Tween(controls.target)
+          .to(clickableObjects[selectedItem.data.id].position, 100)
+          .onUpdate(render)
+          .start()),
+        updatePlanHistory(
+          plan,
+          null,
+          selectedItem.data.id,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        )
   }
 }
 function updateFurniturePosZ(e) {
   if (selectedItem.data.id) {
     let t = parseFloat(e)
-    ;(selectedItem.position.y = t),
-      (toolsGroup.position.y = t),
-      (selectedItem.data.toolsRectangleInner.position.y = t),
-      (clickableObjects[selectedItem.data.id].position.z = t),
-      maskObjects[selectedItem.data.id] &&
+      ; (selectedItem.position.y = t),
+        (toolsGroup.position.y = t),
+        (selectedItem.data.toolsRectangleInner.position.y = t),
+        (clickableObjects[selectedItem.data.id].position.z = t),
+        maskObjects[selectedItem.data.id] &&
         (maskObjects[selectedItem.data.id].position.z = t),
-      (tween = new TWEEN.Tween(controls.target)
-        .to(clickableObjects[selectedItem.data.id].position, 100)
-        .onUpdate(render)
-        .start()),
-      updatePlanHistory(
-        plan,
-        null,
-        selectedItem.data.id,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      )
+        (tween = new TWEEN.Tween(controls.target)
+          .to(clickableObjects[selectedItem.data.id].position, 100)
+          .onUpdate(render)
+          .start()),
+        updatePlanHistory(
+          plan,
+          null,
+          selectedItem.data.id,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        )
   }
 }
 function updateFurniturePosY(e) {
   if (selectedItem.data.id) {
     let t = parseFloat(e)
-    ;(clickableObjects[selectedItem.data.id].position.y = t),
-      maskObjects[selectedItem.data.id] &&
+      ; (clickableObjects[selectedItem.data.id].position.y = t),
+        maskObjects[selectedItem.data.id] &&
         (maskObjects[selectedItem.data.id].position.y = t),
-      (tween = new TWEEN.Tween(controls.target)
-        .to(clickableObjects[selectedItem.data.id].position, 100)
-        .onUpdate(render)
-        .start()),
-      updatePlanHistory(
-        plan,
-        null,
-        selectedItem.data.id,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      )
+        (tween = new TWEEN.Tween(controls.target)
+          .to(clickableObjects[selectedItem.data.id].position, 100)
+          .onUpdate(render)
+          .start()),
+        updatePlanHistory(
+          plan,
+          null,
+          selectedItem.data.id,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        )
   }
 }
 function updateFurnitureWidth(e) {
   if (selectedItem.data.id) {
     let t = parseFloat(e)
-    ;(clickableObjects[selectedItem.data.id].scale.x =
-      t / clickableObjects[selectedItem.data.id].userData.width),
-      maskObjects[selectedItem.data.id] &&
+      ; (clickableObjects[selectedItem.data.id].scale.x =
+        t / clickableObjects[selectedItem.data.id].userData.width),
+        maskObjects[selectedItem.data.id] &&
         (maskObjects[selectedItem.data.id].scale.x =
           clickableObjects[selectedItem.data.id].scale.x)
     let o = selectedItem.position,
       a = selectedItem.rotation
-    ;(selectedItem.rotation = 0),
-      (selectedItem.bounds.width = Math.abs(t)),
-      selectedItem.data.toolsRectangleInner &&
+      ; (selectedItem.rotation = 0),
+        (selectedItem.bounds.width = Math.abs(t)),
+        selectedItem.data.toolsRectangleInner &&
         selectedItem.data.toolsRectangleInner.remove()
     let n = new paper.Path.Rectangle(selectedItem.bounds)
-    ;(n.data.type = "toolsRectangle"),
-      (n.strokeColor = "#b19064"),
-      (n.strokeWidth = 1),
-      (n.strokeScaling = !1),
-      (n.locked = !0),
-      (selectedItem.data.toolsRectangleInner = n),
-      n.rotate(selectedItem.data.angle),
-      (rotateIcon.position =
-        selectedItem.data.toolsRectangleInner.segments[1].point),
-      (resizeIcon.position =
-        selectedItem.data.toolsRectangleInner.segments[3].point),
-      (heightIcon.position =
-        selectedItem.data.toolsRectangleInner.segments[2].point),
-      (elevateIcon.position =
-        selectedItem.data.toolsRectangleInner.segments[0].point),
-      (plan.furniture[selectedItem.data.id].width = Math.abs(t)),
-      (selectedItem.rotation = a),
-      (selectedItem.position = o),
-      (selectedItem.data.toolsRectangleInner.position = o),
-      updatePlanHistory(
-        plan,
-        null,
-        selectedItem.data.id,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ),
-      render(),
-      (rotateIcon.position =
-        selectedItem.data.toolsRectangleInner.segments[1].point),
-      (resizeIcon.position =
-        selectedItem.data.toolsRectangleInner.segments[3].point),
-      (heightIcon.position =
-        selectedItem.data.toolsRectangleInner.segments[2].point),
-      (elevateIcon.position =
-        selectedItem.data.toolsRectangleInner.segments[0].point)
+      ; (n.data.type = "toolsRectangle"),
+        (n.strokeColor = "#b19064"),
+        (n.strokeWidth = 1),
+        (n.strokeScaling = !1),
+        (n.locked = !0),
+        (selectedItem.data.toolsRectangleInner = n),
+        n.rotate(selectedItem.data.angle),
+        (rotateIcon.position =
+          selectedItem.data.toolsRectangleInner.segments[1].point),
+        (resizeIcon.position =
+          selectedItem.data.toolsRectangleInner.segments[3].point),
+        (heightIcon.position =
+          selectedItem.data.toolsRectangleInner.segments[2].point),
+        (elevateIcon.position =
+          selectedItem.data.toolsRectangleInner.segments[0].point),
+        (plan.furniture[selectedItem.data.id].width = Math.abs(t)),
+        (selectedItem.rotation = a),
+        (selectedItem.position = o),
+        (selectedItem.data.toolsRectangleInner.position = o),
+        updatePlanHistory(
+          plan,
+          null,
+          selectedItem.data.id,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ),
+        render(),
+        (rotateIcon.position =
+          selectedItem.data.toolsRectangleInner.segments[1].point),
+        (resizeIcon.position =
+          selectedItem.data.toolsRectangleInner.segments[3].point),
+        (heightIcon.position =
+          selectedItem.data.toolsRectangleInner.segments[2].point),
+        (elevateIcon.position =
+          selectedItem.data.toolsRectangleInner.segments[0].point)
   }
 }
 function updateFurnitureDepth(e) {
   if (selectedItem.data.id) {
     let t = parseFloat(e)
-    ;(clickableObjects[selectedItem.data.id].scale.z =
-      t / clickableObjects[selectedItem.data.id].userData.depth),
-      maskObjects[selectedItem.data.id] &&
+      ; (clickableObjects[selectedItem.data.id].scale.z =
+        t / clickableObjects[selectedItem.data.id].userData.depth),
+        maskObjects[selectedItem.data.id] &&
         (maskObjects[selectedItem.data.id].scale.z =
           clickableObjects[selectedItem.data.id].scale.z)
     let o = selectedItem.position,
       a = selectedItem.rotation
-    ;(selectedItem.rotation = 0),
-      (selectedItem.bounds.height = Math.abs(t)),
-      selectedItem.data.toolsRectangleInner &&
+      ; (selectedItem.rotation = 0),
+        (selectedItem.bounds.height = Math.abs(t)),
+        selectedItem.data.toolsRectangleInner &&
         selectedItem.data.toolsRectangleInner.remove()
     let n = new paper.Path.Rectangle(selectedItem.bounds)
-    ;(n.data.type = "toolsRectangle"),
-      (n.strokeColor = "#b19064"),
-      (n.strokeWidth = 1),
-      (n.strokeScaling = !1),
-      (n.locked = !0),
-      (selectedItem.data.toolsRectangleInner = n),
-      n.rotate(selectedItem.data.angle),
-      (rotateIcon.position =
-        selectedItem.data.toolsRectangleInner.segments[1].point),
-      (resizeIcon.position =
-        selectedItem.data.toolsRectangleInner.segments[3].point),
-      (heightIcon.position =
-        selectedItem.data.toolsRectangleInner.segments[2].point),
-      (elevateIcon.position =
-        selectedItem.data.toolsRectangleInner.segments[0].point),
-      (plan.furniture[selectedItem.data.id].depth = Math.abs(t)),
-      (selectedItem.rotation = a),
-      (selectedItem.position = o),
-      (selectedItem.data.toolsRectangleInner.position = o),
-      updatePlanHistory(
-        plan,
-        null,
-        selectedItem.data.id,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ),
-      render(),
-      (rotateIcon.position =
-        selectedItem.data.toolsRectangleInner.segments[1].point),
-      (resizeIcon.position =
-        selectedItem.data.toolsRectangleInner.segments[3].point),
-      (heightIcon.position =
-        selectedItem.data.toolsRectangleInner.segments[2].point),
-      (elevateIcon.position =
-        selectedItem.data.toolsRectangleInner.segments[0].point)
+      ; (n.data.type = "toolsRectangle"),
+        (n.strokeColor = "#b19064"),
+        (n.strokeWidth = 1),
+        (n.strokeScaling = !1),
+        (n.locked = !0),
+        (selectedItem.data.toolsRectangleInner = n),
+        n.rotate(selectedItem.data.angle),
+        (rotateIcon.position =
+          selectedItem.data.toolsRectangleInner.segments[1].point),
+        (resizeIcon.position =
+          selectedItem.data.toolsRectangleInner.segments[3].point),
+        (heightIcon.position =
+          selectedItem.data.toolsRectangleInner.segments[2].point),
+        (elevateIcon.position =
+          selectedItem.data.toolsRectangleInner.segments[0].point),
+        (plan.furniture[selectedItem.data.id].depth = Math.abs(t)),
+        (selectedItem.rotation = a),
+        (selectedItem.position = o),
+        (selectedItem.data.toolsRectangleInner.position = o),
+        updatePlanHistory(
+          plan,
+          null,
+          selectedItem.data.id,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ),
+        render(),
+        (rotateIcon.position =
+          selectedItem.data.toolsRectangleInner.segments[1].point),
+        (resizeIcon.position =
+          selectedItem.data.toolsRectangleInner.segments[3].point),
+        (heightIcon.position =
+          selectedItem.data.toolsRectangleInner.segments[2].point),
+        (elevateIcon.position =
+          selectedItem.data.toolsRectangleInner.segments[0].point)
   }
 }
 function updateFurnitureHeight(e) {
   if (selectedItem.data.id) {
     let t = parseFloat(e)
-    ;(clickableObjects[selectedItem.data.id].scale.y =
-      t / clickableObjects[selectedItem.data.id].userData.height),
-      maskObjects[selectedItem.data.id] &&
+      ; (clickableObjects[selectedItem.data.id].scale.y =
+        t / clickableObjects[selectedItem.data.id].userData.height),
+        maskObjects[selectedItem.data.id] &&
         (maskObjects[selectedItem.data.id].scale.y =
           clickableObjects[selectedItem.data.id].scale.y),
-      render(),
-      updatePlanHistory(
-        plan,
-        null,
-        selectedItem.data.id,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ),
-      render()
+        render(),
+        updatePlanHistory(
+          plan,
+          null,
+          selectedItem.data.id,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ),
+        render()
   }
 }
 function flipX(e) {
@@ -7880,76 +7880,76 @@ function flipZ(e) {
 function flipImageDataX(e) {
   for (
     let t = e.canvas.getContext("2d"),
-      o = t.getImageData(0, 0, e.width, e.height),
-      a = o.data,
-      n = a.slice(),
-      l = 0;
+    o = t.getImageData(0, 0, e.width, e.height),
+    a = o.data,
+    n = a.slice(),
+    l = 0;
     l < e.height;
     l++
   )
     for (let i = 0; i < e.width; i++) {
       let r = l * e.width * 4 + 4 * i,
         s = l * e.width * 4 + 4 * (e.width - i)
-      ;(a[r] = n[s]),
-        (a[r + 1] = n[s + 1]),
-        (a[r + 2] = n[s + 2]),
-        (a[r + 3] = n[s + 3])
+        ; (a[r] = n[s]),
+          (a[r + 1] = n[s + 1]),
+          (a[r + 2] = n[s + 2]),
+          (a[r + 3] = n[s + 3])
     }
   t.putImageData(o, 0, 0), render(), redrawGrid()
 }
 function flipImageDataZ(e) {
   for (
     let t = e.canvas.getContext("2d"),
-      o = t.getImageData(0, 0, e.width, e.height),
-      a = o.data,
-      n = a.slice(),
-      l = 0;
+    o = t.getImageData(0, 0, e.width, e.height),
+    a = o.data,
+    n = a.slice(),
+    l = 0;
     l < e.height;
     l++
   )
     for (let i = 0; i < e.width; i++) {
       let r = l * e.width * 4 + 4 * i,
         s = e.height * e.width * 4 - l * e.width * 4 + 4 * i
-      ;(a[r] = n[s]),
-        (a[r + 1] = n[s + 1]),
-        (a[r + 2] = n[s + 2]),
-        (a[r + 3] = n[s + 3])
+        ; (a[r] = n[s]),
+          (a[r + 1] = n[s + 1]),
+          (a[r + 2] = n[s + 2]),
+          (a[r + 3] = n[s + 3])
     }
   t.putImageData(o, 0, 0), redrawGrid()
 }
 function setDepthWriteMode(e) {
-  ;(wallMaterial.depthWrite = e),
+  ; (wallMaterial.depthWrite = e),
     (roofMaterial.depthWrite = e),
     (floorMaterial.depthWrite = e),
     (plan.depthWrite = e),
     render()
 }
 function setSortObjectsMode(e) {
-  ;(renderer.sortObjects = e), (plan.sortObjects = e), render()
+  ; (renderer.sortObjects = e), (plan.sortObjects = e), render()
 }
 function setSunAzimuth(e) {
   azimuth = parseFloat(e)
   let t = Math.PI * (inclination - 0.5),
     o = 2 * Math.PI * (azimuth - 0.5),
     a = 4e5
-  ;(sunSphere.position.x = a * Math.cos(o)),
-    (sunSphere.position.y = a * Math.sin(o) * Math.sin(t)),
-    (sunSphere.position.z = a * Math.sin(o) * Math.cos(t)),
-    sky.material.uniforms.sunPosition.value.copy(sunSphere.position),
-    dirLight.position.copy(sunSphere.position),
-    render()
+    ; (sunSphere.position.x = a * Math.cos(o)),
+      (sunSphere.position.y = a * Math.sin(o) * Math.sin(t)),
+      (sunSphere.position.z = a * Math.sin(o) * Math.cos(t)),
+      sky.material.uniforms.sunPosition.value.copy(sunSphere.position),
+      dirLight.position.copy(sunSphere.position),
+      render()
 }
 function setSunIncline(e) {
   inclination = parseFloat(e)
   let t = Math.PI * (inclination - 0.5),
     o = 2 * Math.PI * (azimuth - 0.5),
     a = 4e5
-  ;(sunSphere.position.x = a * Math.cos(o)),
-    (sunSphere.position.y = a * Math.sin(o) * Math.sin(t)),
-    (sunSphere.position.z = a * Math.sin(o) * Math.cos(t)),
-    sky.material.uniforms.sunPosition.value.copy(sunSphere.position),
-    dirLight.position.copy(sunSphere.position),
-    render()
+    ; (sunSphere.position.x = a * Math.cos(o)),
+      (sunSphere.position.y = a * Math.sin(o) * Math.sin(t)),
+      (sunSphere.position.z = a * Math.sin(o) * Math.cos(t)),
+      sky.material.uniforms.sunPosition.value.copy(sunSphere.position),
+      dirLight.position.copy(sunSphere.position),
+      render()
 }
 function flipBackgroundTemplateX() {
   backgroundRaster && flipImageDataX(backgroundRaster)
@@ -7975,32 +7975,32 @@ function exportToObj() {
       t = new THREE.Object3D()
     Object.keys(wallsRectangles3d).forEach(function (e) {
       let o = wallsRectangles3d[e]
-      "object" == typeof o &&
+      "object" === typeof o &&
         (o.visible ? t.add(o.clone()) : t.add(maskObjectsApplied[e].clone()))
     }),
       Object.keys(roofsRectangles3d).forEach(function (e) {
         let o = roofsRectangles3d[e]
-        "object" == typeof o &&
+        "object" === typeof o &&
           (o.visible
             ? t.add(o.clone())
             : t.add(maskObjectsAppliedRoof[e].clone()))
       }),
       Object.keys(Floors3d).forEach(function (e) {
         let o = Floors3d[e]
-        "object" == typeof o && t.add(o.clone())
+        "object" === typeof o && t.add(o.clone())
       })
     let o = e.parse(t),
       a = document.createElement("a")
     for (
       a.download = "HomeIdea3D.obj",
-        a.innerHTML = "Download File",
-        a.href = window.URL.createObjectURL(
-          new Blob([o], { type: "text/plain" })
-        ),
-        a.onclick = destroyClickedElement,
-        a.style.display = "none",
-        document.body.appendChild(a),
-        a.click();
+      a.innerHTML = "Download File",
+      a.href = window.URL.createObjectURL(
+        new Blob([o], { type: "text/plain" })
+      ),
+      a.onclick = destroyClickedElement,
+      a.style.display = "none",
+      document.body.appendChild(a),
+      a.click();
       t.children.length > 0;
 
     )
@@ -8016,95 +8016,95 @@ function rgba2hex(e) {
     )),
     e && 4 === e.length
       ? "0x" +
-        ("0" + parseInt(e[1], 10).toString(16)).slice(-2) +
-        ("0" + parseInt(e[2], 10).toString(16)).slice(-2) +
-        ("0" + parseInt(e[3], 10).toString(16)).slice(-2)
+      ("0" + parseInt(e[1], 10).toString(16)).slice(-2) +
+      ("0" + parseInt(e[2], 10).toString(16)).slice(-2) +
+      ("0" + parseInt(e[3], 10).toString(16)).slice(-2)
       : ""
   )
 }
 function setInterfacePropertiesFromPlan(e) {
   e.wallDiffuse &&
     ((wallMaterial.color = new THREE.Color(e.wallDiffuse)),
-    "default" === UILayout &&
+      "default" === UILayout &&
       $("#wallDiffuse").minicolors(
         "value",
         "#" + wallMaterial.color.getHexString()
       )),
     e.wallOpacity &&
-      ((wallMaterial.opacity = parseFloat(e.wallOpacity)),
+    ((wallMaterial.opacity = parseFloat(e.wallOpacity)),
       "default" === UILayout &&
-        $("#wallDiffuse").minicolors("opacity", parseFloat(e.wallOpacity))),
+      $("#wallDiffuse").minicolors("opacity", parseFloat(e.wallOpacity))),
     e.wallSpecular &&
-      ((wallMaterial.specular = new THREE.Color(e.wallSpecular)),
+    ((wallMaterial.specular = new THREE.Color(e.wallSpecular)),
       "default" === UILayout &&
-        $("#wallSpecular").minicolors(
-          "value",
-          "#" + wallMaterial.specular.getHexString()
-        )),
+      $("#wallSpecular").minicolors(
+        "value",
+        "#" + wallMaterial.specular.getHexString()
+      )),
     e.roofDiffuse &&
-      ((roofMaterial.color = new THREE.Color(e.roofDiffuse)),
+    ((roofMaterial.color = new THREE.Color(e.roofDiffuse)),
       "default" === UILayout &&
-        $("#roofDiffuse").minicolors(
-          "value",
-          "#" + roofMaterial.color.getHexString()
-        )),
+      $("#roofDiffuse").minicolors(
+        "value",
+        "#" + roofMaterial.color.getHexString()
+      )),
     e.roofOpacity &&
-      ((roofMaterial.opacity = parseFloat(e.roofOpacity)),
+    ((roofMaterial.opacity = parseFloat(e.roofOpacity)),
       "default" === UILayout &&
-        $("#roofDiffuse").minicolors("opacity", parseFloat(e.roofOpacity))),
+      $("#roofDiffuse").minicolors("opacity", parseFloat(e.roofOpacity))),
     e.roofSpecular &&
-      ((roofMaterial.specular = new THREE.Color(e.roofSpecular)),
+    ((roofMaterial.specular = new THREE.Color(e.roofSpecular)),
       "default" === UILayout &&
-        $("#roofSpecular").minicolors(
-          "value",
-          "#" + roofMaterial.specular.getHexString()
-        )),
+      $("#roofSpecular").minicolors(
+        "value",
+        "#" + roofMaterial.specular.getHexString()
+      )),
     e.floorDiffuse &&
-      ((floorMaterial.color = new THREE.Color(e.floorDiffuse)),
+    ((floorMaterial.color = new THREE.Color(e.floorDiffuse)),
       "default" === UILayout &&
-        $("#floorDiffuse").minicolors(
-          "value",
-          "#" + floorMaterial.color.getHexString()
-        )),
+      $("#floorDiffuse").minicolors(
+        "value",
+        "#" + floorMaterial.color.getHexString()
+      )),
     e.floorOpacity &&
-      ((floorMaterial.opacity = parseFloat(e.floorOpacity)),
+    ((floorMaterial.opacity = parseFloat(e.floorOpacity)),
       "default" === UILayout &&
-        $("#floorDiffuse").minicolors("opacity", parseFloat(e.floorOpacity))),
+      $("#floorDiffuse").minicolors("opacity", parseFloat(e.floorOpacity))),
     e.floorSpecular &&
-      ((floorMaterial.specular = new THREE.Color(e.floorSpecular)),
+    ((floorMaterial.specular = new THREE.Color(e.floorSpecular)),
       "default" === UILayout &&
-        $("#floorSpecular").minicolors(
-          "value",
-          "#" + floorMaterial.specular.getHexString()
-        )),
+      $("#floorSpecular").minicolors(
+        "value",
+        "#" + floorMaterial.specular.getHexString()
+      )),
     e.groundDiffuse &&
-      (e.groundDiffuse.startsWith("rgba")
-        ? (groundMat.color = new THREE.Color(
-            parseInt(rgba2hex(e.groundDiffuse))
-          ))
-        : (groundMat.color = new THREE.Color(parseInt("0x" + e.groundDiffuse))),
+    (e.groundDiffuse.startsWith("rgba")
+      ? (groundMat.color = new THREE.Color(
+        parseInt(rgba2hex(e.groundDiffuse))
+      ))
+      : (groundMat.color = new THREE.Color(parseInt("0x" + e.groundDiffuse))),
       "default" === UILayout &&
-        $("#groundDiffuse").minicolors(
-          "value",
-          "#" + groundMat.color.getHexString()
-        )),
+      $("#groundDiffuse").minicolors(
+        "value",
+        "#" + groundMat.color.getHexString()
+      )),
     e.groundOpacity &&
-      ((groundMat.opacity = parseFloat(e.groundOpacity)),
+    ((groundMat.opacity = parseFloat(e.groundOpacity)),
       "default" === UILayout &&
-        $("#groundDiffuse").minicolors("opacity", parseFloat(e.groundOpacity))),
+      $("#groundDiffuse").minicolors("opacity", parseFloat(e.groundOpacity))),
     e.groundSpecular &&
-      (e.groundSpecular.startsWith("rgba")
-        ? (groundMat.specular = new THREE.Color(
-            parseInt(rgba2hex(e.groundSpecular))
-          ))
-        : (groundMat.specular = new THREE.Color(
-            parseInt("0x" + e.groundSpecular)
-          )),
+    (e.groundSpecular.startsWith("rgba")
+      ? (groundMat.specular = new THREE.Color(
+        parseInt(rgba2hex(e.groundSpecular))
+      ))
+      : (groundMat.specular = new THREE.Color(
+        parseInt("0x" + e.groundSpecular)
+      )),
       "default" === UILayout &&
-        $("#groundSpecular").minicolors(
-          "value",
-          "#" + groundMat.specular.getHexString()
-        )),
+      $("#groundSpecular").minicolors(
+        "value",
+        "#" + groundMat.specular.getHexString()
+      )),
     e.depthWrite
       ? ((document.getElementById("depthWriteMode").checked = e.depthWrite),
         setDepthWriteMode(e.depthWrite))
@@ -8116,11 +8116,11 @@ function setInterfacePropertiesFromPlan(e) {
       : ((document.getElementById("sortObjectsMode").checked = !1),
         setSortObjectsMode(!1)),
     e.azimuth &&
-      ((azimuth = e.azimuth),
+    ((azimuth = e.azimuth),
       (document.getElementById("sunAzimuth").value = azimuth),
       setSunAzimuth(e.azimuth)),
     e.inclination &&
-      ((inclination = e.inclination),
+    ((inclination = e.inclination),
       (document.getElementById("sunIncline").value = inclination),
       setSunIncline(e.inclination)),
     render()
@@ -8146,7 +8146,7 @@ function recenter3dview() {
     d = 0
   Object.keys(wallsRectangles3d).forEach(function (e) {
     let r = wallsRectangles3d[e]
-    if ("object" == typeof r) {
+    if ("object" === typeof r) {
       let s = new THREE.Box3().setFromObject(r)
       s.min.x < t && (t = s.min.x),
         s.max.x > o && (o = s.max.x),
@@ -8158,7 +8158,7 @@ function recenter3dview() {
   }),
     Object.keys(roofsRectangles3d).forEach(function (e) {
       let r = roofsRectangles3d[e]
-      if ("object" == typeof r) {
+      if ("object" === typeof r) {
         let s = new THREE.Box3().setFromObject(r)
         s.min.x < t && (t = s.min.x),
           s.max.x > o && (o = s.max.x),
@@ -8170,7 +8170,7 @@ function recenter3dview() {
     }),
     Object.keys(Floors3d).forEach(function (e) {
       let r = Floors3d[e]
-      if ("object" == typeof r) {
+      if ("object" === typeof r) {
         let s = new THREE.Box3().setFromObject(r)
         s.min.x < t && (t = s.min.x),
           s.max.x > o && (o = s.max.x),
@@ -8199,43 +8199,43 @@ function recenterPlanView() {
     o = { x: -1e3, y: -1e3 }
   Object.keys(Furniture).forEach(function (a) {
     let n = Furniture[a]
-    "object" == typeof n &&
+    "object" === typeof n &&
       ((e.x += Furniture[a].position.x),
-      (e.y += Furniture[a].position.y),
-      (t.x = Math.min(t.x, Furniture[a].position.x)),
-      (t.y = Math.min(t.y, Furniture[a].position.y)),
-      (o.x = Math.max(o.x, Furniture[a].position.x)),
-      (o.y = Math.max(o.y, Furniture[a].position.y)))
+        (e.y += Furniture[a].position.y),
+        (t.x = Math.min(t.x, Furniture[a].position.x)),
+        (t.y = Math.min(t.y, Furniture[a].position.y)),
+        (o.x = Math.max(o.x, Furniture[a].position.x)),
+        (o.y = Math.max(o.y, Furniture[a].position.y)))
   }),
     Object.keys(Floors).forEach(function (a) {
       let n = Floors[a]
-      "object" == typeof n &&
+      "object" === typeof n &&
         ((e.x += Floors[a].position.x),
-        (e.y += Floors[a].position.y),
-        (t.x = Math.min(t.x, Floors[a].position.x)),
-        (t.y = Math.min(t.y, Floors[a].position.y)),
-        (o.x = Math.max(o.x, Floors[a].position.x)),
-        (o.y = Math.max(o.y, Floors[a].position.y)))
+          (e.y += Floors[a].position.y),
+          (t.x = Math.min(t.x, Floors[a].position.x)),
+          (t.y = Math.min(t.y, Floors[a].position.y)),
+          (o.x = Math.max(o.x, Floors[a].position.x)),
+          (o.y = Math.max(o.y, Floors[a].position.y)))
     }),
     Object.keys(Walls).forEach(function (a) {
       let n = Walls[a]
-      "object" == typeof n &&
+      "object" === typeof n &&
         ((e.x += Walls[a].position.x),
-        (e.y += Walls[a].position.y),
-        (t.x = Math.min(t.x, Walls[a].position.x)),
-        (t.y = Math.min(t.y, Walls[a].position.y)),
-        (o.x = Math.max(o.x, Walls[a].position.x)),
-        (o.y = Math.max(o.y, Walls[a].position.y)))
+          (e.y += Walls[a].position.y),
+          (t.x = Math.min(t.x, Walls[a].position.x)),
+          (t.y = Math.min(t.y, Walls[a].position.y)),
+          (o.x = Math.max(o.x, Walls[a].position.x)),
+          (o.y = Math.max(o.y, Walls[a].position.y)))
     }),
     Object.keys(Roofs).forEach(function (a) {
       let n = Roofs[a]
-      "object" == typeof n &&
+      "object" === typeof n &&
         ((e.x += Roofs[a].position.x),
-        (e.y += Roofs[a].position.y),
-        (t.x = Math.min(t.x, Roofs[a].position.x)),
-        (t.y = Math.min(t.y, Roofs[a].position.y)),
-        (o.x = Math.max(o.x, Roofs[a].position.x)),
-        (o.y = Math.max(o.y, Roofs[a].position.y)))
+          (e.y += Roofs[a].position.y),
+          (t.x = Math.min(t.x, Roofs[a].position.x)),
+          (t.y = Math.min(t.y, Roofs[a].position.y)),
+          (o.x = Math.max(o.x, Roofs[a].position.x)),
+          (o.y = Math.max(o.y, Roofs[a].position.y)))
     }),
     (zoomRectangle = new paper.Path.Rectangle(t, o))
   let a = paper.view.bounds.width * paper.view.bounds.height,
@@ -8244,7 +8244,7 @@ function recenterPlanView() {
       1e5
     ),
     l = Math.sqrt(a / n)
-  ;(focusPoint = paper.view.center), (focusPoint.zoom = paper.view.zoom)
+    ; (focusPoint = paper.view.center), (focusPoint.zoom = paper.view.zoom)
   let i = zoomRectangle.bounds.center.x,
     r = zoomRectangle.bounds.center.y
   tween = new TWEEN.Tween(focusPoint)
@@ -8255,44 +8255,44 @@ function recenterPlanView() {
     .start()
 }
 function gotoPlanView() {
-  ;(window.location.hash = "#" + fragment + "_plan"), location.reload()
+  ; (window.location.hash = "#" + fragment + "_plan"), location.reload()
 }
 function goto3dView() {
-  ;(window.location.hash = "#" + fragment + "_3d"), location.reload()
+  ; (window.location.hash = "#" + fragment + "_3d"), location.reload()
 }
 function updateGroundWidth(e) {
-  ;(groundWidth = parseInt(e)), scene.remove(clickableObjects[0])
+  ; (groundWidth = parseInt(e)), scene.remove(clickableObjects[0])
   let t = new THREE.PlaneBufferGeometry(100 * groundWidth, 100 * groundLength)
-  ;(groundMat = new THREE.MeshPhongMaterial({ transparent: !0, opacity: 1 })),
-    (groundMat.color = new THREE.Color(2304293)),
-    console.log(
-      "groundDiffuse = " + document.getElementById("groundDiffuse").value
-    ),
-    (groundMat.specular = new THREE.Color(15925148)),
-    (ground = new THREE.Mesh(t, groundMat)),
-    (ground.rotation.x = -Math.PI / 2),
-    (ground.position.y = -2),
-    (ground.name = "groundLayer"),
-    scene.add(ground),
-    (clickableObjects[0] = ground),
-    render()
+    ; (groundMat = new THREE.MeshPhongMaterial({ transparent: !0, opacity: 1 })),
+      (groundMat.color = new THREE.Color(2304293)),
+      console.log(
+        "groundDiffuse = " + document.getElementById("groundDiffuse").value
+      ),
+      (groundMat.specular = new THREE.Color(15925148)),
+      (ground = new THREE.Mesh(t, groundMat)),
+      (ground.rotation.x = -Math.PI / 2),
+      (ground.position.y = -2),
+      (ground.name = "groundLayer"),
+      scene.add(ground),
+      (clickableObjects[0] = ground),
+      render()
 }
 function updateGroundLength(e) {
-  ;(groundLength = parseInt(e)), scene.remove(clickableObjects[0])
+  ; (groundLength = parseInt(e)), scene.remove(clickableObjects[0])
   let t = new THREE.PlaneBufferGeometry(100 * groundWidth, 100 * groundLength)
-  ;(groundMat = new THREE.MeshPhongMaterial({ transparent: !0, opacity: 1 })),
-    (groundMat.color = new THREE.Color(2304293)),
-    console.log(
-      "groundDiffuse = " + document.getElementById("groundDiffuse").value
-    ),
-    (groundMat.specular = new THREE.Color(15925148)),
-    (ground = new THREE.Mesh(t, groundMat)),
-    (ground.rotation.x = -Math.PI / 2),
-    (ground.position.y = -2),
-    (ground.name = "groundLayer"),
-    scene.add(ground),
-    (clickableObjects[0] = ground),
-    render()
+    ; (groundMat = new THREE.MeshPhongMaterial({ transparent: !0, opacity: 1 })),
+      (groundMat.color = new THREE.Color(2304293)),
+      console.log(
+        "groundDiffuse = " + document.getElementById("groundDiffuse").value
+      ),
+      (groundMat.specular = new THREE.Color(15925148)),
+      (ground = new THREE.Mesh(t, groundMat)),
+      (ground.rotation.x = -Math.PI / 2),
+      (ground.position.y = -2),
+      (ground.name = "groundLayer"),
+      scene.add(ground),
+      (clickableObjects[0] = ground),
+      render()
 }
 
 
@@ -8469,16 +8469,16 @@ let mouseMode = 0, //
   Texts = {}, //
 
   plan = {} //
-;(plan.furniture = {}), //
-  (plan.walls = {}), //
-  (plan.roofs = {}), //
-  (plan.floors = {}), //
-  (plan.levels = {}), //
-  (plan.levels[0] = { id: 0, height: 0 }), //
-  (plan.dimensions = {}), //
-  (plan.texts = {}), //
-  (plan.verticalGuides = {}), //
-  (plan.horizontalGuides = {}) //
+  ; (plan.furniture = {}), //
+    (plan.walls = {}), //
+    (plan.roofs = {}), //
+    (plan.floors = {}), //
+    (plan.levels = {}), //
+    (plan.levels[0] = { id: 0, height: 0 }), //
+    (plan.dimensions = {}), //
+    (plan.texts = {}), //
+    (plan.verticalGuides = {}), //
+    (plan.horizontalGuides = {}) //
 
 let planHistory = [], //
   planHistoryPosition = 0 //
@@ -8974,7 +8974,7 @@ $(document).ready(function () {
           (Object.keys(Walls).forEach(function (e) {
             let t = Walls[e]
             if (
-              "object" == typeof t &&
+              "object" === typeof t &&
               t.data.level === project.activeLayer.data.id
             ) {
               let o = t.getNearestPoint(a),
@@ -9346,15 +9346,15 @@ $(document).ready(function () {
     17 === e.keyCode && setCtrlKeyPressed(!1)
   }),
   window.addEventListener("click", function (e) {
-    e.target == aboutModal
+    e.target === aboutModal
       ? ($("#aboutModal").hide(), showMouseIndicators())
-      : e.target == model3dModal
+      : e.target === model3dModal
       ? ((model3dViewOpen = !1),
         $("#model3dModal").hide(),
         showMouseIndicators())
-      : e.target == loadingModal
+      : e.target === loadingModal
       ? ($("#loadingModal").hide(), showMouseIndicators())
-      : e.target == shareModal &&
+      : e.target === shareModal &&
         ($("#shareModal").hide(), showMouseIndicators())
   })
 */
@@ -9363,25 +9363,25 @@ $(document).ready(function () {
 // [MM] HEY HEY HEY -- more variables
 
 let busy = !1,
-onProgress = function (e) {
-  if (e.lengthComputable) {
-    let t = (e.loaded / e.total) * 100
-    ;(progressBar.value = t), (progressBar.style.display = "block")
+  onProgress = function (e) {
+    if (e.lengthComputable) {
+      let t = (e.loaded / e.total) * 100
+        ; (progressBar.value = t), (progressBar.style.display = "block")
+    }
+  },
+  onError = function (e) { },
+  screenAvg = (screen.width + screen.height) / 2,
+  redrawing = !1,
+  strokeWidth = 0,
+  getAngleRadians = function (e, t) {
+    return Math.atan2(t.y - e.y, t.x - e.x)
+  },
+  getDistance = function (e, t) {
+    let o = e.x - t.x,
+      a = e.y - t.y,
+      n = Math.sqrt(o * o + a * a)
+    return n
   }
-},
-onError = function (e) {},
-screenAvg = (screen.width + screen.height) / 2,
-redrawing = !1,
-strokeWidth = 0,
-getAngleRadians = function (e, t) {
-  return Math.atan2(t.y - e.y, t.x - e.x)
-},
-getDistance = function (e, t) {
-  let o = e.x - t.x,
-    a = e.y - t.y,
-    n = Math.sqrt(o * o + a * a)
-  return n
-}
 
 // ========================================================
 // [MM] HEY HEY HEY -- a prototype function :)
