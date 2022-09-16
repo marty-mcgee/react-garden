@@ -196,7 +196,7 @@ module.exports = {
     'padding-line-between-statements': 'off',
     'no-undef': 'off',
     'no-restricted-globals': 'off',
-    'react-hooks/exhaustive-deps': 'off',
+    // 'react-hooks/exhaustive-deps': 'off',
     'prefer-const': 'off',
     'no-unused-expressions': 'off',
     'no-sequences': 'off',
@@ -229,5 +229,8 @@ module.exports = {
     'default-case': 'off',
     'no-continue': 'off',
     'no-labels': 'off',
+
+    'prefer-promise-reject-errors': 'off',
+    '@typescript-eslint/no-explicit-any': 'off'
   },
 }
