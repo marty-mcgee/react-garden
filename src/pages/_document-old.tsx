@@ -25,12 +25,10 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
           {/* Google Fonts -- Material Icons */}
-          {/* eslint-disable @next/next/google-font-display */}
           <link
             href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
             rel="stylesheet"
           />
-          {/* eslint-enable @next/next/google-font-display */}
         </Head>
         <body>
           <Suspense fallback={<CircularProgress />}>

@@ -25,7 +25,7 @@ module.exports = {
       experimentalObjectRestSpread: true,
     },
   },
-  ignorePatterns: ['*.js', '*.jsx'], // ignoring here works ??
+  ignorePatterns: ['*.js', '*.jsx', 'ThreeDGarden.tsx', 'ThreeDGarden1.tsx'], // ignoring here works ??
   overrides: [
     {
       files: ['*.ts', '*.tsx'], // Your TypeScript files extension
@@ -251,9 +251,19 @@ module.exports = {
     'no-prototype-builtins': 'off',
     'no-throw-literal': 'off',
     'no-loss-of-precision': 'off',
-    'no-new-func': 'off'
+    'no-new-func': 'off',
+    'global-require': 'off',
+    'no-array-constructor': 'off',
+    'import/extensions': 'off',
+    'import/no-duplicates': 'off',
+    'react/no-danger': 'off',
+    'no-alert': 'off',
+    'no-loop-func': 'off',
+    'no-inner-declarations': 'off',
+    'no-case-declarations': 'off',
+    'no-fallthrough': 'off',
 
-    // '': 'off',
+    // 'rule': 'off',
 
   },
 }
