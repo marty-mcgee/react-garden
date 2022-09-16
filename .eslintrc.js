@@ -11,6 +11,7 @@ module.exports = {
     'prettier'
   ],
   parserOptions: {
+    requireConfigFile: false, // no babel config needed
     ecmaVersion: 11,
     sourceType: 'module',
     project: './tsconfig.json',
