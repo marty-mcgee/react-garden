@@ -110,7 +110,7 @@ function AllProjects(): JSX.Element {
                   title="slack bot"
                   description="If everything I did failed - which it doesn't, I think that it actually succeeds."
                   dateTime="02.03.22"
-                  members={[team1, team2, team3, team4, team5]}
+                  members={[team1.src, team2.src, team3.src, team4.src, team5.src]}
                   dropdown={{
                     action: openSlackBotMenu,
                     menu: renderMenu(slackBotMenu, closeSlackBotMenu),
@@ -125,7 +125,7 @@ function AllProjects(): JSX.Element {
                   title="premium support"
                   description="Pink is obviously a better color. Everyone’s born confident, and everything’s taken away from you."
                   dateTime="22.11.21"
-                  members={[team1, team2, team3]}
+                  members={[team1.src, team2.src, team3.src]}
                   dropdown={{
                     action: openPremiumSupportMenu,
                     menu: renderMenu(
@@ -143,7 +143,7 @@ function AllProjects(): JSX.Element {
                   title="design tools"
                   description="Constantly growing. We’re constantly making mistakes from which we learn and improve."
                   dateTime="06.03.20"
-                  members={[team1, team2, team3, team4]}
+                  members={[team1.src, team2.src, team3.src, team4.src]}
                   dropdown={{
                     action: openDesignToolsMenu,
                     menu: renderMenu(designToolsMenu, closeDesignToolsMenu),
@@ -158,7 +158,7 @@ function AllProjects(): JSX.Element {
                   title="looking great"
                   description="You have the opportunity to play this game of life you need to appreciate every moment."
                   dateTime="14.03.24"
-                  members={[team1, team2, team3, team4, team5, team3]}
+                  members={[team1.src, team2.src, team3.src, team4.src, team5.src, team3.src]}
                   dropdown={{
                     action: openLookingGreatMenu,
                     menu: renderMenu(lookingGreatMenu, closeLookingGreatMenu),
@@ -173,7 +173,7 @@ function AllProjects(): JSX.Element {
                   title="developer first"
                   description="For standing out. But the time is now to be okay to be the greatest you."
                   dateTime="16.01.22"
-                  members={[team1, team2, team3, team4]}
+                  members={[team1.src, team2.src, team3.src, team4.src]}
                   dropdown={{
                     action: openDeveloperFirstMenu,
                     menu: renderMenu(
@@ -191,7 +191,7 @@ function AllProjects(): JSX.Element {
                   title="Product Development"
                   description="We strive to embrace and drive change in our industry. We are happy to work at such a project."
                   dateTime="16.01.22"
-                  members={[team1, team2, team3, team4]}
+                  members={[team1.src, team2.src, team3.src, team4.src]}
                   dropdown={{
                     action: openDeveloperFirstMenu,
                     menu: renderMenu(

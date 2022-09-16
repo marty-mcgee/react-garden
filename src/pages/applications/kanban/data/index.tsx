@@ -32,11 +32,11 @@ const boards = {
           id: uuidv4(),
           template: (
             <Card
-              image={officeDark}
+              image={officeDark.src}
               badge={{ color: "dark", label: "pending" }}
               content="Website Design: New cards for blog section and profile details"
               attachedFiles={3}
-              members={[team1, team2, team3]}
+              members={[team1.src, team2.src, team3.src]}
             />
           ),
         },
@@ -53,7 +53,7 @@ const boards = {
               badge={{ color: "error", label: "errors" }}
               content="Fix firefox errors"
               attachedFiles={9}
-              members={[team2, team3]}
+              members={[team2.src, team3.src]}
             />
           ),
         },
@@ -64,7 +64,7 @@ const boards = {
               badge={{ color: "info", label: "updates" }}
               content="Argon Dashboard PRO - React"
               attachedFiles={3}
-              members={[team5, team4]}
+              members={[team5.src, team4.src]}
             />
           ),
         },
@@ -72,11 +72,11 @@ const boards = {
           id: uuidv4(),
           template: (
             <Card
-              image={meeting}
+              image={meeting.src}
               badge={{ color: "info", label: "updates" }}
               content="ReactJS v17 Updates"
               attachedFiles={3}
-              members={[team1, team2, team3]}
+              members={[team1.src, team2.src, team3.src]}
             />
           ),
         },
@@ -93,7 +93,7 @@ const boards = {
               badge={{ color: "warning", label: "in testing" }}
               content="Responsive Changes"
               attachedFiles={11}
-              members={[team3, team2]}
+              members={[team3.src, team2.src]}
             />
           ),
         },
@@ -104,7 +104,7 @@ const boards = {
               badge={{ color: "success", label: "in review" }}
               content="Change images dimension"
               progress={80}
-              members={[team3]}
+              members={[team3.src]}
             />
           ),
         },
@@ -116,7 +116,7 @@ const boards = {
               content="Update links"
               progress={60}
               attachedFiles={6}
-              members={[team5, team1]}
+              members={[team5.src, team1.src]}
             />
           ),
         },
@@ -130,11 +130,11 @@ const boards = {
           id: uuidv4(),
           template: (
             <Card
-              image={homeDecor}
+              image={homeDecor.src}
               badge={{ color: "success", label: "done" }}
               content="Redesign for the home page"
               attachedFiles={8}
-              members={[team5, team1, team4]}
+              members={[team5.src, team1.src, team4.src]}
             />
           ),
         },
@@ -145,7 +145,7 @@ const boards = {
               badge={{ color: "success", label: "done" }}
               content="Schedule winter campaign"
               attachedFiles={2}
-              members={[team1, team4]}
+              members={[team1.src, team4.src]}
             />
           ),
         },

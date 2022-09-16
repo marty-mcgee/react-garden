@@ -171,7 +171,7 @@ function Analytics(): JSX.Element {
             <Grid item xs={12} md={6} lg={4}>
               <MDBox mt={3}>
                 <BookingCard
-                  image={booking1}
+                  image={booking1.src}
                   title="Cozy 5 Stars Apartment"
                   description='The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona.'
                   price="$899/night"
@@ -183,7 +183,7 @@ function Analytics(): JSX.Element {
             <Grid item xs={12} md={6} lg={4}>
               <MDBox mt={3}>
                 <BookingCard
-                  image={booking2}
+                  image={booking2.src}
                   title="Office Studio"
                   description='The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the night life in London, UK.'
                   price="$1.119/night"
@@ -195,7 +195,7 @@ function Analytics(): JSX.Element {
             <Grid item xs={12} md={6} lg={4}>
               <MDBox mt={3}>
                 <BookingCard
-                  image={booking3}
+                  image={booking3.src}
                   title="Beautiful Castle"
                   description='The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Milan.'
                   price="$459/night"

@@ -27,7 +27,7 @@ function Illustration(): JSX.Element {
     <IllustrationLayout
       title="Sign In"
       description="Enter your email and password to sign in"
-      illustration={bgImage}>
+      illustration={bgImage.src}>
       <MDBox component="form" role="form">
         <MDBox mb={2}>
           <MDInput type="email" label="Email" fullWidth />

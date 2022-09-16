@@ -34,7 +34,7 @@ function About(): JSX.Element {
           <Grid item xs={12} sm={4} container justifyContent="center">
             <MDBox position="relative" height="max-content" mx="auto">
               <MDAvatar
-                src={team2}
+                src={team2.src}
                 alt="profile picture"
                 size="xxl"
                 variant="rounded"

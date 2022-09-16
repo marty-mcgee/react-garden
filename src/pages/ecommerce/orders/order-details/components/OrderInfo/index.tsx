@@ -17,7 +17,7 @@ function OrderInfo(): JSX.Element {
       <Grid item xs={12} md={6}>
         <MDBox display="flex" alignItems="center">
           <MDBox mr={2}>
-            <MDAvatar size="xxl" src={orderImage} alt="Gold Glasses" />
+            <MDAvatar size="xxl" src={orderImage.src} alt="Gold Glasses" />
           </MDBox>
           <MDBox lineHeight={1}>
             <MDTypography variant="h6" fontWeight="medium">

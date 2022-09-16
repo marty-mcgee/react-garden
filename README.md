@@ -1,16 +1,27 @@
 # [🌱 React Garden TypeScript Material UI App](https://github.com/marty-mcgee/react-garden)
 
-React + TypeScript app using Material UI on NextJS as a "Dashboard" for developing Three JS components + apps.
+React + TypeScript app using Material UI on NextJS as a "Design Dashboard" for developing Three JS components + apps.
 
 ## Live Demo
 [threed.design](https://threed.design/)
+
+## Development
+install: `pnpm i`
+
+develop: `pnpm next` // default, there are other JS frameworks available
+
+build: `pnpm next:build` // default, (or vite:build or vue:build, etc..)
+
+deploy: `pnpm next:export` // default, for Vercel Zero-Config Deployments
+
+====
 
 **HELPFUL LINKS**
 
 - View [Github Repository](https://github.com/marty-mcgee/react-garden)
 - Check [FAQ + Issues Page](https://github.com/marty-mcgee/react-garden/issues)
 
-#### Special Thanks
+**SPECIAL THANKS**
 
 During the development of this app, we have used many existing resources from awesome developers. We want to thank them for providing their tools open source:
 

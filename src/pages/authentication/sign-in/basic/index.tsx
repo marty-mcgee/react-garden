@@ -32,7 +32,7 @@ function Basic(): JSX.Element {
   const handleSetRememberMe = () => setRememberMe(!rememberMe)
 
   return (
-    <BasicLayout image={bgImage}>
+    <BasicLayout image={bgImage.src}>
       <Card>
         <MDBox
           variant="gradient"

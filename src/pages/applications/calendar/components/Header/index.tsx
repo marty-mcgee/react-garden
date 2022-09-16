@@ -41,22 +41,22 @@ function Header(): JSX.Element {
         </MDBox>
         <MDBox display="flex">
           <Tooltip title="Juice Master" placement="top">
-            <MDAvatar src={team0} alt="team-0" size="sm" sx={avatarStyles} />
+            <MDAvatar src={team0.src} alt="team-0" size="sm" sx={avatarStyles} />
           </Tooltip>
           <Tooltip title="Jessica Rowland" placement="top">
-            <MDAvatar src={team1} alt="team-1" size="sm" sx={avatarStyles} />
+            <MDAvatar src={team1.src} alt="team-1" size="sm" sx={avatarStyles} />
           </Tooltip>
           <Tooltip title="Michael Lewis" placement="top">
-            <MDAvatar src={team2} alt="team-2" size="sm" sx={avatarStyles} />
+            <MDAvatar src={team2.src} alt="team-2" size="sm" sx={avatarStyles} />
           </Tooltip>
           <Tooltip title="Audrey Loveland" placement="top">
-            <MDAvatar src={team3} alt="team-3" size="sm" sx={avatarStyles} />
+            <MDAvatar src={team3.src} alt="team-3" size="sm" sx={avatarStyles} />
           </Tooltip>
           <Tooltip title="Ronald Miller" placement="top">
-            <MDAvatar src={team4} alt="team-4" size="sm" sx={avatarStyles} />
+            <MDAvatar src={team4.src} alt="team-4" size="sm" sx={avatarStyles} />
           </Tooltip>
           <Tooltip title="Lucia Linda" placement="top">
-            <MDAvatar src={team5} alt="team-5" size="sm" sx={avatarStyles} />
+            <MDAvatar src={team5.src} alt="team-5" size="sm" sx={avatarStyles} />
           </Tooltip>
         </MDBox>
       </MDBox>

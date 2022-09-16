@@ -38,11 +38,11 @@ function Header(): JSX.Element {
           </MDTypography>
         </MDBox>
         <MDBox display="flex">
-          <MDAvatar src={team1} alt="team-1" size="sm" sx={avatarStyles} />
-          <MDAvatar src={team2} alt="team-1" size="sm" sx={avatarStyles} />
-          <MDAvatar src={team3} alt="team-1" size="sm" sx={avatarStyles} />
-          <MDAvatar src={team4} alt="team-1" size="sm" sx={avatarStyles} />
-          <MDAvatar src={team5} alt="team-1" size="sm" sx={avatarStyles} />
+          <MDAvatar src={team1.src} alt="team-1" size="sm" sx={avatarStyles} />
+          <MDAvatar src={team2.src} alt="team-1" size="sm" sx={avatarStyles} />
+          <MDAvatar src={team3.src} alt="team-1" size="sm" sx={avatarStyles} />
+          <MDAvatar src={team4.src} alt="team-1" size="sm" sx={avatarStyles} />
+          <MDAvatar src={team5.src} alt="team-1" size="sm" sx={avatarStyles} />
         </MDBox>
       </MDBox>
       <MDBox height="75%" alignSelf="flex-end">
