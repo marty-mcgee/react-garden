@@ -12,19 +12,19 @@ module.exports = {
     'prettier'
   ],
   // parser: '@babel/eslint-parser',
-  parser: '@typescript-eslint/parser',
-  // parserOptions: {
-  //   requireConfigFile: false, // no babel config needed
-  //   project: './tsconfig.json',
-  //   tsconfigRootDir: __dirname,
-  //   ecmaVersion: 11,
-  //   sourceType: 'module',
-  //   ecmaFeatures: {
-  //     jsx: true,
-  //     modules: true,
-  //     experimentalObjectRestSpread: true,
-  //   },
-  // },
+  // parser: '@typescript-eslint/parser',
+  parserOptions: {
+    requireConfigFile: false, // no babel config needed
+    // project: './tsconfig.json',
+    // tsconfigRootDir: __dirname,
+    ecmaVersion: 11,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+      modules: true,
+      experimentalObjectRestSpread: true,
+    },
+  },
 
   overrides: [
     {
@@ -50,7 +50,7 @@ module.exports = {
     },
   },
   plugins: [
-    '@typescript-eslint',
+    // '@typescript-eslint',
     'react',
     'prettier'
   ],
