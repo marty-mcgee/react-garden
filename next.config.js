@@ -87,9 +87,9 @@ const nextConfig = {
     config.plugin('eslint')
       .tap(args => {
         args[0].emitWarning = false
-        args[1].emitError = false
-        args[2].failOnWarning = false
-        args[3].failOnError = false
+        args[0].emitError = false
+        args[0].failOnWarning = false
+        args[0].failOnError = false
         return args
       })
     return config
