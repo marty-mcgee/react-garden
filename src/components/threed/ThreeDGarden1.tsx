@@ -1531,7 +1531,7 @@ function watchPointer(camera: Camera, targetList) {
     // }
 
     // if the closest object intersected is not the currently stored intersection object
-    if (intersects[0].object != params.intersectedObject1) {
+    if (intersects[0].object !== params.intersectedObject1) {
 
       // restore previous intersection object (if it exists) to its original color
       if (params.intersectedObject1) {
@@ -1651,7 +1651,7 @@ function onPointerDown(event) {
     const theIntersectedObject = intersects[0].object
 
     // for testing only
-    // if ( theIntersectedObject != params.intersectedObject2 ) {
+    // if ( theIntersectedObject !== params.intersectedObject2 ) {
     // 	console.log("-----------------------------")
     // 	console.log("params.intersectedObject2 null------------")
     // 	console.log("theIntersectedObject NEW--------")
@@ -1888,7 +1888,7 @@ const animate = () => {
   }
 
   // Move Cameras
-  if (player.cameras != undefined && player.cameras.active != undefined) {
+  if (player.cameras !== undefined && player.cameras.active !== undefined) {
     camera.position.lerp(player.cameras.active.getWorldPosition(new THREE.Vector3()), 0.05)
     const pos = player.object.position.clone()
     pos.y += 200
@@ -2048,7 +2048,7 @@ const getSceneData = async () => {
   if (localStorage && getDataFromLocalStorage && !debug) {
     const getdata = localStorage.getItem('threedgarden') || ''
     const threedgarden = getdata ? JSON.parse(getdata) : undefined
-    if (threedgarden != undefined) {
+    if (threedgarden !== undefined) {
       console.log("LOCALSTORAGE ITEM RETRIEVED", threedgarden)
       //this.threedgarden = threedgarden
       params.data = threedgarden.data
@@ -2453,7 +2453,7 @@ function buildAllotments(postObject, plane, sceneID) {
     structure.position.y = allotment.position.y
     structure.position.z = (structure.geometry.parameters.depth / 2) + allotment.position.z // - 10 for gap between plane
     structure.material.roughness = 0.9
-    if (allotment.images.texture != null && allotment.images.texture != false) {
+    if (allotment.images.texture !== null && allotment.images.texture !== false) {
       structure.material.map = loaderTexture.load(allotment.images.texture)
       for (let i = 0; i < structure.material.length; i++) {
         // hightlight object
@@ -2574,7 +2574,7 @@ function buildBeds(postObject, plane, allotmentID, posOffsetX, posOffsetY, posOf
     structure.position.z = bed.position.z ? bed.position.z : 0
     //structure.rotation.x = -Math.PI / 2 // -90 degrees in radians
     structure.material.roughness = 0.9
-    if (bed.images.texture != null && bed.images.texture != false) {
+    if (bed.images.texture !== null && bed.images.texture !== false) {
       structure.material.map = loaderTexture.load(bed.images.texture)
       for (let i = 0; i < structure.material.length; i++) {
         // hightlight object
@@ -2730,7 +2730,7 @@ function buildPlantingPlans(postObject, plane, bedID, posOffsetX, posOffsetY, po
           structure.position.z = plant.position.z ? plant.position.z : 0
           structure.rotation.x = Math.PI / 2 // 90 degrees in radians
           structure.material.roughness = 0.9
-          if (plant.images.texture != null && plant.images.texture != false) {
+          if (plant.images.texture !== null && plant.images.texture !== false) {
             structure.material.map = loaderTexture.load(plant.images.texture)
             for (let i = 0; i < structure.material.length; i++) {
               // hightlight object

@@ -104,7 +104,7 @@ var paper = function (self, undefined) {
 					if ((describe(dest, name)
 						|| { configurable: true }).configurable) {
 						res.configurable = true;
-						res.enumerable = enumerable != null ? enumerable : !bean;
+						res.enumerable = enumerable !== null ? enumerable : !bean;
 					}
 					define(dest, name, res);
 				}
@@ -213,7 +213,7 @@ var paper = function (self, undefined) {
 				},
 
 				isPlainObject: function (obj) {
-					var ctor = obj != null && obj.constructor;
+					var ctor = obj !== null && obj.constructor;
 					return ctor && (ctor === Object || ctor === Base
 						|| ctor.name === 'Object');
 				},
@@ -236,7 +236,7 @@ var paper = function (self, undefined) {
 		enumerable: false,
 
 		toString: function () {
-			return this._id != null
+			return this._id !== null
 				? (this._class || 'Object') + (this._name
 					? " '" + this._name + "'"
 					: ' @' + this._id)
@@ -2871,7 +2871,7 @@ var paper = function (self, undefined) {
 						var item = set[id];
 						for (var key in sets) {
 							var other = sets[key];
-							if (other && other != set)
+							if (other && other !== set)
 								delete other[item._id];
 						}
 						item.remove();
@@ -3109,7 +3109,7 @@ var paper = function (self, undefined) {
 				return this[key];
 			};
 			this['set' + part] = function (value) {
-				if (value != this[key]) {
+				if (value !== this[key]) {
 					this[key] = value;
 					this._changed(flags[name] || 129);
 				}
@@ -3183,7 +3183,7 @@ var paper = function (self, undefined) {
 		},
 
 		setClipMask: function (clipMask) {
-			if (this._clipMask != (clipMask = !!clipMask)) {
+			if (this._clipMask !== (clipMask = !!clipMask)) {
 				this._clipMask = clipMask;
 				if (clipMask) {
 					this.setFillColor(null);
@@ -3266,7 +3266,7 @@ var paper = function (self, undefined) {
 					center = rect.getCenter();
 				matrix.translate(center);
 
-				if (rect.width != bounds.width || rect.height != bounds.height) {
+				if (rect.width !== bounds.width || rect.height !== bounds.height) {
 					if (!_matrix.isInvertible()) {
 						_matrix.set(_matrix._backup
 							|| new Matrix().translate(_matrix.getTranslation()));
@@ -3418,7 +3418,7 @@ var paper = function (self, undefined) {
 
 		setRotation: function (rotation) {
 			var current = this.getRotation();
-			if (current != null && rotation != null) {
+			if (current !== null && rotation !== null) {
 				var decomposed = this._decomposed;
 				this.rotate(rotation - current);
 				if (decomposed) {
@@ -4104,7 +4104,7 @@ var paper = function (self, undefined) {
 			if (owner) {
 				if (this._name)
 					this._removeNamed();
-				if (index != null) {
+				if (index !== null) {
 					if (project._activeLayer === this)
 						project._activeLayer = this.getNextSibling()
 							|| this.getPreviousSibling();
@@ -4195,7 +4195,7 @@ var paper = function (self, undefined) {
 			var list1 = getList(this),
 				list2 = getList(item);
 			for (var i = 0, l = Math.min(list1.length, list2.length); i < l; i++) {
-				if (list1[i] != list2[i]) {
+				if (list1[i] !== list2[i]) {
 					return list1[i]._index < list2[i]._index ? 1 : -1;
 				}
 			}
@@ -4682,11 +4682,11 @@ var paper = function (self, undefined) {
 		},
 
 		_getOwner: function () {
-			return this._parent || this._index != null && this._project;
+			return this._parent || this._index !== null && this._project;
 		},
 
 		isInserted: function isInserted() {
-			return this._parent ? isInserted.base.call(this) : this._index != null;
+			return this._parent ? isInserted.base.call(this) : this._index !== null;
 		},
 
 		activate: function () {
@@ -5357,7 +5357,7 @@ var paper = function (self, undefined) {
 			data[0] = components[0] * 255;
 			data[1] = components[1] * 255;
 			data[2] = components[2] * 255;
-			data[3] = alpha != null ? alpha * 255 : 255;
+			data[3] = alpha !== null ? alpha * 255 : 255;
 			ctx.putImageData(imageData, point.x, point.y);
 		},
 
@@ -6472,7 +6472,7 @@ var paper = function (self, undefined) {
 					maxPad = max[coord] + padding;
 				if (v0 < minPad || v1 < minPad || v2 < minPad || v3 < minPad ||
 					v0 > maxPad || v1 > maxPad || v2 > maxPad || v3 > maxPad) {
-					if (v1 < v0 != v1 < v3 && v2 < v0 != v2 < v3) {
+					if (v1 < v0 !== v1 < v3 && v2 < v0 !== v2 < v3) {
 						add(v0, padding);
 						add(v3, padding);
 					} else {
@@ -6593,7 +6593,7 @@ var paper = function (self, undefined) {
 		},
 
 		getLocationAtTime: function (t) {
-			return t != null && t >= 0 && t <= 1
+			return t !== null && t >= 0 && t <= 1
 				? new CurveLocation(this, t)
 				: null;
 		},
@@ -7250,7 +7250,7 @@ var paper = function (self, undefined) {
 						t2 = Curve.getTimeOf(v[i1], new Point(
 							v[i2][t1 ? 6 : 0],
 							v[i2][t1 ? 7 : 1]));
-					if (t2 != null) {
+					if (t2 !== null) {
 						var pair = i1 ? [t1, t2] : [t2, t1];
 						if (!pairs.length ||
 							abs(pair[0] - pairs[0][0]) > timeEpsilon &&
@@ -7336,7 +7336,7 @@ var paper = function (self, undefined) {
 					segment = curve._segment1;
 				} else if (time === 1) {
 					segment = curve._segment2;
-				} else if (time != null) {
+				} else if (time !== null) {
 					segment = curve.getPartLength(0, time)
 						< curve.getPartLength(time, 1)
 						? curve._segment1
@@ -7356,7 +7356,7 @@ var paper = function (self, undefined) {
 
 			function trySegment(segment) {
 				var curve = segment && segment.getCurve();
-				if (curve && (that._time = curve.getTimeOf(that._point)) != null) {
+				if (curve && (that._time = curve.getTimeOf(that._point)) !== null) {
 					that._setCurve(curve);
 					return curve;
 				}
@@ -7398,7 +7398,7 @@ var paper = function (self, undefined) {
 				offset = 0;
 				var path = this.getPath(),
 					index = this.getIndex();
-				if (path && index != null) {
+				if (path && index !== null) {
 					var curves = path.getCurves();
 					for (var i = 0; i < index; i++)
 						offset += curves[i].getLength();
@@ -7413,7 +7413,7 @@ var paper = function (self, undefined) {
 			if (offset === null) {
 				var curve = this.getCurve(),
 					time = this.getTime();
-				this._curveOffset = offset = time != null && curve
+				this._curveOffset = offset = time !== null && curve
 					&& curve.getPartLength(0, time);
 			}
 			return offset;
@@ -7474,12 +7474,12 @@ var paper = function (self, undefined) {
 			if (point)
 				parts.push('point: ' + point);
 			var index = this.getIndex();
-			if (index != null)
+			if (index !== null)
 				parts.push('index: ' + index);
 			var time = this.getTime();
-			if (time != null)
+			if (time !== null)
 				parts.push('time: ' + f.number(time));
-			if (this._distance != null)
+			if (this._distance !== null)
 				parts.push('distance: ' + f.number(this._distance));
 			return '{ ' + parts.join(', ') + ' }';
 		},
@@ -7573,7 +7573,7 @@ var paper = function (self, undefined) {
 		this[name] = function () {
 			var curve = this.getCurve(),
 				time = this.getTime();
-			return time != null && curve && curve[get](time, true);
+			return time !== null && curve && curve[get](time, true);
 		};
 	}, {
 		preserve: true
@@ -7682,7 +7682,7 @@ var paper = function (self, undefined) {
 		},
 
 		setClockwise: function (clockwise) {
-			if (this.isClockwise() != (clockwise = !!clockwise))
+			if (this.isClockwise() !== (clockwise = !!clockwise))
 				this.reverse();
 		},
 
@@ -8027,7 +8027,7 @@ var paper = function (self, undefined) {
 		},
 
 		setClosed: function (closed) {
-			if (this._closed != (closed = !!closed)) {
+			if (this._closed !== (closed = !!closed)) {
 				this._closed = closed;
 				if (this._curves) {
 					var length = this._curves.length = this._countCurves();
@@ -8365,7 +8365,7 @@ var paper = function (self, undefined) {
 				location = time === undefined ? index
 					: (curve = this.getCurves()[index])
 					&& curve.getLocationAtTime(time);
-			return location != null ? this.splitAt(location) : null;
+			return location !== null ? this.splitAt(location) : null;
 		},
 
 		join: function (path, tolerance) {
@@ -8465,7 +8465,7 @@ var paper = function (self, undefined) {
 
 			function getIndex(value, _default) {
 				var index = value && value.index;
-				if (index != null) {
+				if (index !== null) {
 					var path = value.path;
 					if (path && path !== that)
 						throw new Error(value._class + ' ' + index + ' of ' + path
@@ -8906,7 +8906,7 @@ var paper = function (self, undefined) {
 				function drawHandle(index) {
 					var hX = coords[index],
 						hY = coords[index + 1];
-					if (pX != hX || pY != hY) {
+					if (pX !== hX || pY !== hY) {
 						ctx.beginPath();
 						ctx.moveTo(pX, pY);
 						ctx.lineTo(hX, hY);
@@ -10176,7 +10176,7 @@ var paper = function (self, undefined) {
 						} else if (a0 > paR) {
 							pathWindingR += winding;
 						}
-					} else if (a0 != a3Prev) {
+					} else if (a0 !== a3Prev) {
 						if (a3Prev < paR && a > paR) {
 							pathWindingR += winding;
 							onPath = true;
@@ -11305,7 +11305,7 @@ var paper = function (self, undefined) {
 					args = arg;
 					arg = args[0];
 				}
-				var argType = arg != null && typeof arg;
+				var argType = arg !== null && typeof arg;
 				if (argType === 'string' && arg in types) {
 					type = arg;
 					arg = args[1];
@@ -11322,7 +11322,7 @@ var paper = function (self, undefined) {
 				if (!components) {
 					values = argType === 'number'
 						? args
-						: argType === 'object' && arg.length != null
+						: argType === 'object' && arg.length !== null
 							? arg
 							: null;
 					if (values) {
@@ -11334,7 +11334,7 @@ var paper = function (self, undefined) {
 						alpha = values[length];
 						if (reading) {
 							read += values === arguments
-								? length + (alpha != null ? 1 : 0)
+								? length + (alpha !== null ? 1 : 0)
 								: 1;
 						}
 						if (values.length > length)
@@ -11385,7 +11385,7 @@ var paper = function (self, undefined) {
 									};
 								}
 								value = parsers[i].call(this, value);
-								if (value != null)
+								if (value !== null)
 									components[i] = value;
 							}
 							alpha = arg.alpha;
@@ -11400,7 +11400,7 @@ var paper = function (self, undefined) {
 					var parsers = componentParsers[this._type];
 					for (var i = 0, l = parsers.length; i < l; i++) {
 						var value = parsers[i].call(this, values && values[i]);
-						if (value != null)
+						if (value !== null)
 							components[i] = value;
 					}
 				}
@@ -11456,13 +11456,13 @@ var paper = function (self, undefined) {
 
 			getComponents: function () {
 				var components = this._components.slice();
-				if (this._alpha != null)
+				if (this._alpha !== null)
 					components.push(this._alpha);
 				return components;
 			},
 
 			getAlpha: function () {
-				return this._alpha != null ? this._alpha : 1;
+				return this._alpha !== null ? this._alpha : 1;
 			},
 
 			setAlpha: function (alpha) {
@@ -11471,7 +11471,7 @@ var paper = function (self, undefined) {
 			},
 
 			hasAlpha: function () {
-				return this._alpha != null;
+				return this._alpha !== null;
 			},
 
 			equals: function (color) {
@@ -11492,11 +11492,11 @@ var paper = function (self, undefined) {
 					f = Formatter.instance;
 				for (var i = 0, l = properties.length; i < l; i++) {
 					var value = this._components[i];
-					if (value != null)
+					if (value !== null)
 						parts.push(properties[i] + ': '
 							+ (isGradient ? value : f.number(value)));
 				}
-				if (this._alpha != null)
+				if (this._alpha !== null)
 					parts.push('alpha: ' + f.number(this._alpha));
 				return '{ ' + parts.join(', ') + ' }';
 			},
@@ -11614,7 +11614,7 @@ var paper = function (self, undefined) {
 					for (var i = 0, l = components1.length; i < l; i++)
 						components2[i] = operator(components1[i], components2[i]);
 					return new Color(type, components2,
-						this._alpha != null
+						this._alpha !== null
 							? operator(this._alpha, color.getAlpha())
 							: null);
 				};
@@ -11661,7 +11661,7 @@ var paper = function (self, undefined) {
 
 		_removeOwner: function (color) {
 			var index = this._owners ? this._owners.indexOf(color) : -1;
-			if (index != -1) {
+			if (index !== -1) {
 				this._owners.splice(index, 1);
 				if (!this._owners.length)
 					this._owners = undefined;
@@ -12011,7 +12011,7 @@ var paper = function (self, undefined) {
 				fontSize = this.getFontSize();
 			if (/pt|em|%|px/.test(fontSize))
 				fontSize = this.getView().getPixelSize(fontSize);
-			return leading != null ? leading : fontSize * 1.2;
+			return leading !== null ? leading : fontSize * 1.2;
 		}
 
 	});
@@ -12520,7 +12520,7 @@ var paper = function (self, undefined) {
 
 		setRotation: function (rotation) {
 			var current = this.getRotation();
-			if (current != null && rotation != null) {
+			if (current !== null && rotation !== null) {
 				this.rotate(rotation - current);
 			}
 		},
@@ -13334,7 +13334,7 @@ var paper = function (self, undefined) {
 
 		setMinDistance: function (minDistance) {
 			this._minDistance = minDistance;
-			if (minDistance != null && this._maxDistance != null
+			if (minDistance !== null && this._maxDistance !== null
 				&& minDistance > this._maxDistance) {
 				this._maxDistance = minDistance;
 			}
@@ -13346,7 +13346,7 @@ var paper = function (self, undefined) {
 
 		setMaxDistance: function (maxDistance) {
 			this._maxDistance = maxDistance;
-			if (this._minDistance != null && maxDistance != null
+			if (this._minDistance !== null && maxDistance !== null
 				&& maxDistance < this._minDistance) {
 				this._minDistance = maxDistance;
 			}
@@ -13378,7 +13378,7 @@ var paper = function (self, undefined) {
 					if (tool._moveCount && pt.equals(toolPoint)) {
 						return false;
 					}
-					if (toolPoint && (minDistance != null || maxDistance != null)) {
+					if (toolPoint && (minDistance !== null || maxDistance !== null)) {
 						var vector = pt.subtract(toolPoint),
 							distance = vector.getLength();
 						if (distance < (minDistance || 0))
@@ -14090,7 +14090,7 @@ var paper = function (self, undefined) {
 				parent = !isRoot && item.getParent(),
 				style = [];
 
-			if (item._name != null)
+			if (item._name !== null)
 				attrs.id = item._name;
 
 			Base.each(SvgStyles, function (entry) {
@@ -14100,7 +14100,7 @@ var paper = function (self, undefined) {
 				if (entry.exportFilter
 					? entry.exportFilter(item, value)
 					: !parent || !Base.equals(parent[get](), value)) {
-					if (type === 'color' && value != null) {
+					if (type === 'color' && value !== null) {
 						var alpha = value.getAlpha();
 						if (alpha < 1)
 							attrs[entry.attribute + '-opacity'] = alpha;
@@ -15315,7 +15315,7 @@ var paper = function (self, undefined) {
 						++tokPos;
 						total = total * radix + val;
 					}
-					if (tokPos === start || len != null && tokPos - start !== len) return null;
+					if (tokPos === start || len !== null && tokPos - start !== len) return null;
 
 					return total;
 				}
@@ -15420,7 +15420,7 @@ var paper = function (self, undefined) {
 						} else if (ch === 92) {
 							if (!containsEsc) word = input.slice(start, tokPos);
 							containsEsc = true;
-							if (input.charCodeAt(++tokPos) != 117)
+							if (input.charCodeAt(++tokPos) !== 117)
 								raise(tokPos, "Expecting Unicode escape sequence \\uXXXX");
 							++tokPos;
 							var esc = readHexChar(4);
@@ -15588,7 +15588,7 @@ var paper = function (self, undefined) {
 							for (var i = 0; i < labels.length; ++i) {
 								var lab = labels[i];
 								if (node.label === null || lab.name === node.label.name) {
-									if (lab.kind != null && (isBreak || lab.kind === "loop")) break;
+									if (lab.kind !== null && (isBreak || lab.kind === "loop")) break;
 									if (node.label && isBreak) break;
 								}
 							}
@@ -15655,7 +15655,7 @@ var paper = function (self, undefined) {
 							expect(_braceL);
 							labels.push(switchLabel);
 
-							for (var cur, sawDefault; tokType != _braceR;) {
+							for (var cur, sawDefault; tokType !== _braceR;) {
 								if (tokType === _case || tokType === _default) {
 									var isCase = tokType === _case;
 									if (cur) finishNode(cur, "SwitchCase");
@@ -15859,7 +15859,7 @@ var paper = function (self, undefined) {
 
 				function parseExprOp(left, minPrec, noIn) {
 					var prec = tokType.binop;
-					if (prec != null && (!noIn || tokType !== _in)) {
+					if (prec !== null && (!noIn || tokType !== _in)) {
 						if (prec > minPrec) {
 							var node = startNodeFrom(left);
 							node.left = left;
@@ -16157,7 +16157,7 @@ var paper = function (self, undefined) {
 				case '/': return left / right;
 				case '%': return left % right;
 				case '==': return left === right;
-				case '!=': return left != right;
+				case '!=': return left !== right;
 			}
 		}
 

@@ -136,7 +136,7 @@ export function resetPlan() {
     Object.keys(clickableObjects).forEach(function (e) {
       let t = clickableObjects[e]
       "object" === typeof t &&
-        "groundLayer" != t.name &&
+        "groundLayer" !== t.name &&
         (scene.remove(clickableObjects[e]), delete clickableObjects[e])
     })
   } catch (e) {
@@ -328,7 +328,7 @@ export function doUndo() {
                     : plan.roofDeletedKey || 0 === plan.roofDeletedKey
                       ? (loadRoof(e.roofs[plan.roofDeletedKey]), updatePlan(e))
                       : plan.floorAddedKey
-                        ? ("floor" != toolMode && setToolMode("floor"),
+                        ? ("floor" !== toolMode && setToolMode("floor"),
                           setEndDrawingFloors(),
                           deleteFloorByKey(plan.floorAddedKey),
                           updatePlan(e))
@@ -337,7 +337,7 @@ export function doUndo() {
                             deleteFloorByKey(plan.floorDirtyKey),
                             loadFloor(e.floors[plan.floorDirtyKey]),
                             Floors[plan.floorDirtyKey].segments.length > 1 &&
-                            ("floor" != toolMode && setToolMode("floor"),
+                            ("floor" !== toolMode && setToolMode("floor"),
                               (startedDrawingFloor = !0),
                               (floorHelperPath.visible = !0),
                               (floorHelperPath.segments[0].point =
@@ -350,7 +350,7 @@ export function doUndo() {
                           : plan.floorDeletedKey
                             ? (loadFloor(e.floors[plan.floorDeletedKey]),
                               2 === Floors[plan.floorDeletedKey].segments.length &&
-                              ("floor" != toolMode && setToolMode("floor"),
+                              ("floor" !== toolMode && setToolMode("floor"),
                                 (floorHelperPath.visible = !0),
                                 (floorHelperPath.segments[0].point =
                                   Floors[plan.floorDeletedKey].segments[
@@ -403,7 +403,7 @@ export function doRedo() {
     else if (e.roofDeletedKey || 0 === e.roofDeletedKey)
       deleteRoofByKey(e.roofDeletedKey), updatePlan(e)
     else if (e.floorAddedKey)
-      "floor" != toolMode && setToolMode("floor"),
+      "floor" !== toolMode && setToolMode("floor"),
         loadFloor(e.floors[e.floorAddedKey]),
         (startedDrawingFloor = !0),
         2 === Floors[e.floorAddedKey].segments.length &&
@@ -416,7 +416,7 @@ export function doRedo() {
           (Floors[e.floorAddedKey].closed = !1)),
         updatePlan(e)
     else if (e.floorDirtyKey) {
-      "floor" != toolMode && setToolMode("floor"),
+      "floor" !== toolMode && setToolMode("floor"),
         deleteFloorByKey(e.floorDirtyKey),
         loadFloor(e.floors[e.floorDirtyKey])
       let t
@@ -445,7 +445,7 @@ export function doRedo() {
         updatePlan(e)
     } else
       e.floorDeletedKey
-        ? ("floor" != toolMode && setToolMode("floor"),
+        ? ("floor" !== toolMode && setToolMode("floor"),
           deleteFloorByKey(e.floorDeletedKey),
           updatePlan(e))
         : e.dimensionAddedKey
@@ -535,7 +535,7 @@ function removeHorizontalGuide() {
   }
 }
 function resizePlanView() {
-  if ("3dView" != UILayout) {
+  if ("3dView" !== UILayout) {
     let e = planCanvas.parentNode.getBoundingClientRect().width,
       t = planCanvas.parentNode.getBoundingClientRect().height
       ; (planCanvas.width = e),
@@ -2462,7 +2462,7 @@ function loadFurniture(e, t, o) {
   if (furnitureItems[e.fid])
     if (
       (e.id > clickableObjectsCounter && (clickableObjectsCounter = e.id),
-        "planView" != UILayout)
+        "planView" !== UILayout)
     )
       new THREE.MTLLoader()
         .setPath("objects/")
@@ -2819,9 +2819,9 @@ function editFurnitureByKey(e) {
           ; (o.rotation = 0),
             (o.bounds.width = parseFloat(Math.abs(e.width))),
             (o.bounds.height = parseFloat(Math.abs(e.depth))),
-            o.data.flipX != e.flipX && flipImageDataX(o),
+            o.data.flipX !== e.flipX && flipImageDataX(o),
             (o.data.flipX = e.flipX),
-            o.data.flipZ != e.flipZ && flipImageDataZ(o),
+            o.data.flipZ !== e.flipZ && flipImageDataZ(o),
             (o.data.flipZ = e.flipZ),
             o.rotate(a),
             (o.data.angle = a),
@@ -2834,7 +2834,7 @@ function editFurnitureByKey(e) {
     render()
 }
 function redrawGrid() {
-  if (!redrawing && "3dView" != UILayout) {
+  if (!redrawing && "3dView" !== UILayout) {
     if (
       ((redrawing = !0),
         (screenScale = screenAvg / paper.view.zoom / 75),
@@ -3115,7 +3115,7 @@ function initPlanView() {
       (document.getElementsByClassName("close")[2].onclick = function () {
         closeAllModals(), showMouseIndicators()
       }),
-      "3dView" != UILayout)
+      "3dView" !== UILayout)
   ) {
     ; (rulerLeft.oncontextmenu = function () {
       return !1
@@ -5472,7 +5472,7 @@ function drawHeight(e, t, o) {
     i = (n.normalize(a).rotate(45), e.add(n.normalize(n.length / 2))),
     r = 1,
     s = Math.abs(n.angle) > 90 ? (s = 180 + n.angle) : n.angle,
-    d = (r >= 0 ? [1, 4] : [2, 3]).indexOf(n.quadrant) != -1 ? 8 : 0,
+    d = (r >= 0 ? [1, 4] : [2, 3]).indexOf(n.quadrant) !== -1 ? 8 : 0,
     c = new paper.PointText({
       point: i.add(l.normalize(d + screenScale / 3)),
       justification: "center",
@@ -5492,7 +5492,7 @@ function drawLength(e, t, o) {
     l = n.normalize(a).rotate(90 * o),
     i = e.add(n.normalize(n.length / 2)),
     r = Math.abs(n.angle) > 90 ? (r = 180 + n.angle) : n.angle,
-    s = (o >= 0 ? [1, 4] : [2, 3]).indexOf(n.quadrant) != -1 ? 8 : 0
+    s = (o >= 0 ? [1, 4] : [2, 3]).indexOf(n.quadrant) !== -1 ? 8 : 0
     ; (dltext = new paper.PointText({
       point: i.add(l.normalize(s - screenScale / 3)),
       justification: "center",
@@ -6427,7 +6427,7 @@ function deleteBackgroundImage() {
 }
 function setPropertiesView(e) {
   switch (
-  ("background" != e && "background" === toolMode && setToolMode("pointer"),
+  ("background" !== e && "background" === toolMode && setToolMode("pointer"),
     (document.getElementById("furniture3DModelPropertiesView").style.display =
       "none"),
     (document.getElementById("furniturePropertiesView").style.display = "none"),
@@ -6619,7 +6619,7 @@ function recalcAllWallSegmentsOnOtherLevels(e, t) {
       let a = Walls[o]
       "object" === typeof a &&
         a.data.id !== e &&
-        a.data.level != t &&
+        a.data.level !== t &&
         2 === a.segments.length &&
         (allWallSegments.push({
           x: a.segments[0].point.x,
@@ -6641,7 +6641,7 @@ function recalcAllRoofSegmentsOnOtherLevels(e, t) {
       let a = Roofs[o]
       "object" === typeof a &&
         a.data.id !== e &&
-        a.data.level != t &&
+        a.data.level !== t &&
         2 === a.segments.length &&
         (allRoofSegments.push({
           x: a.segments[0].point.x,
@@ -7131,9 +7131,9 @@ function newLevel() {
       (t.style.top = levelButtons[0].style.top),
       (t.style.bottom = levelButtons[0].style.bottom),
       (t.style.left = levelButtons[0].style.left),
-      "planView" != UILayout && (t.style.marginBottom = "26px"),
+      "planView" !== UILayout && (t.style.marginBottom = "26px"),
       (t.style.marginLeft = 104 * e + "px"),
-      "3dView" != UILayout &&
+      "3dView" !== UILayout &&
       ((levelButtons[0].style.display = "block"),
         (t.style.display = "block"),
         t.addEventListener(
@@ -7189,9 +7189,9 @@ function addNewLevel(e) {
             : ((t.style.left = "354px"),
               (t.style.bottom = "50%"),
               (t.style.marginBottom = "26px"))),
-      "planView" != UILayout && (t.style.marginBottom = "26px"),
+      "planView" !== UILayout && (t.style.marginBottom = "26px"),
       (t.style.marginLeft = 104 * e + "px"),
-      "3dView" != UILayout &&
+      "3dView" !== UILayout &&
       ((t.style.display = "block"),
         t.addEventListener(
           "click",
@@ -7505,7 +7505,7 @@ function hideMouseIndicators() {
 }
 function showMouseIndicators() {
   mouseIndicatorX &&
-    "3dView" != UILayout &&
+    "3dView" !== UILayout &&
     ((modalsActive = !1),
       (mouseIndicatorX.style.display = "block"),
       (mouseIndicatorY.style.display = "block"))

@@ -1470,7 +1470,7 @@ const ToolBar: FunctionComponent = (): JSX.Element => {
       Object.keys(clickableObjects).forEach(function (e) {
         let t = clickableObjects[e]
         "object" === typeof t &&
-          "groundLayer" != t.name &&
+          "groundLayer" !== t.name &&
           (scene.remove(clickableObjects[e]), delete clickableObjects[e])
       })
     } catch (e) {
