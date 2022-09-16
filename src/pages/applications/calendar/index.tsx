@@ -10,7 +10,7 @@ import MDBox from "~/components/mui/MDBox"
 import DashboardLayout from "~/components/elements/LayoutContainers/DashboardLayout"
 import DashboardNavbar from "~/components/elements/Navbars/DashboardNavbar"
 import Footer from "~/components/elements/Footer"
-import EventCalendar from "~/components/elements/Calendar"
+// import EventCalendar from "~/components/elements/Calendar"
 
 // Calendar application components
 import Header from "~/pages/applications/calendar/components/Header"
@@ -29,7 +29,7 @@ function Calendar(): JSX.Element {
           <Header />
         </MDBox>
         <Grid container spacing={2}>
-          <Grid item xs={12} xl={9} sx={{ height: "max-content" }}>
+          {/* <Grid item xs={12} xl={9} sx={{ height: "max-content" }}>
             {useMemo(
               () => (
                 <EventCalendar
@@ -42,7 +42,7 @@ function Calendar(): JSX.Element {
               ),
               [calendarEventsData]
             )}
-          </Grid>
+          </Grid> */}
           <Grid item xs={12} xl={3}>
             <MDBox mb={3}>
               <NextEvents />

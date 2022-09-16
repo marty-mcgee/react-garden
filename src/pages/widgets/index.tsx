@@ -18,7 +18,7 @@ import DefaultInfoCard from "~/components/elements/Cards/InfoCards/DefaultInfoCa
 import MasterCard from "~/components/elements/Cards/MasterCard"
 import MiniInfoCard from "~/components/elements/Cards/InfoCards/MiniInfoCard"
 import ControllerCard from "~/components/elements/Cards/ControllerCard"
-import Calendar from "~/components/elements/Calendar"
+// import Calendar from "~/components/elements/Calendar"
 import CategoriesList from "~/components/elements/Lists/CategoriesList"
 
 // Widgets page components
@@ -45,7 +45,7 @@ function Widgets(): JSX.Element {
       <DashboardNavbar />
       <MDBox mx={1}>
         <Grid container spacing={2}>
-          <Grid item xs={12} lg={5}>
+          {/* <Grid item xs={12} lg={5}>
             {useMemo(
               () => (
                 <Calendar
@@ -60,7 +60,7 @@ function Widgets(): JSX.Element {
               ),
               [calendarEventsData]
             )}
-          </Grid>
+          </Grid> */}
           <Grid item xs={12} lg={3}>
             <MDBox mb={3}>
               <CategoriesList
