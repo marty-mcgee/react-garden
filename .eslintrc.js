@@ -231,6 +231,7 @@ module.exports = {
     'no-labels': 'off',
 
     'prefer-promise-reject-errors': 'off',
-    '@typescript-eslint/no-explicit-any': 'off'
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-inferrable-types': 'off',
   },
 }
