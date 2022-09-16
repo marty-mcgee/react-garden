@@ -196,7 +196,7 @@ module.exports = {
     'padding-line-between-statements': 'off',
     'no-undef': 'off',
     'no-restricted-globals': 'off',
-    // 'react-hooks/exhaustive-deps': 'off',
+    'react-hooks/exhaustive-deps': 'off',
     'prefer-const': 'off',
     'no-unused-expressions': 'off',
     'no-sequences': 'off',
@@ -216,7 +216,7 @@ module.exports = {
     'no-restricted-syntax': 'off',
     'guard-for-in': 'off',
     'valid-typeof': 'off',
-    '': 'off',
+    // '': 'off',
 
     'block-scoped-var': 'off',
     'no-redeclare': 'off',

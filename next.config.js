@@ -84,6 +84,11 @@ const nextConfig = {
       apexcharts: path.resolve(__dirname, './node_modules/apexcharts-clevision')
     }
 
+    config.plugin('eslint')
+      .tap(args => {
+        args[0].failOnError = false
+        return args
+      })
     return config
   }
 }

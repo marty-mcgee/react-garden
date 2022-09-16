@@ -150,7 +150,6 @@ const TableServerSide = () => {
           setRows(loadServerRows(page, res.data.data))
         })
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [page, pageSize]
   )
   useEffect(() => {
