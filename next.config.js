@@ -84,14 +84,15 @@ const nextConfig = {
       apexcharts: path.resolve(__dirname, './node_modules/apexcharts-clevision')
     }
 
-    config.plugin('@typescript-eslint')
-      .tap(args => {
-        args[0].emitWarning = false
-        args[0].emitError = false
-        args[0].failOnWarning = false
-        args[0].failOnError = false
-        return args
-      })
+    // doesn't work, but the thought is there
+    // config.plugin('@typescript-eslint')
+    //   .tap(args => {
+    //     args[0].emitWarning = false
+    //     args[0].emitError = false
+    //     args[0].failOnWarning = false
+    //     args[0].failOnError = false
+    //     return args
+    //   })
 
     return config
   }
