@@ -1,27 +1,49 @@
 module.exports = {
+  root: true,
   env: {
     node: true,
     es6: true,
     browser: true,
   },
-  parser: '@babel/eslint-parser',
   extends: [
+    // 'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'airbnb',
     'prettier'
   ],
-  parserOptions: {
-    requireConfigFile: false, // no babel config needed
-    ecmaVersion: 11,
-    sourceType: 'module',
-    project: './tsconfig.json',
-    tsconfigRootDir: __dirname,
-    ecmaFeatures: {
-      jsx: true,
-      modules: true,
-      experimentalObjectRestSpread: true,
+  // parser: '@babel/eslint-parser',
+  parser: '@typescript-eslint/parser',
+  // parserOptions: {
+  //   requireConfigFile: false, // no babel config needed
+  //   project: './tsconfig.json',
+  //   tsconfigRootDir: __dirname,
+  //   ecmaVersion: 11,
+  //   sourceType: 'module',
+  //   ecmaFeatures: {
+  //     jsx: true,
+  //     modules: true,
+  //     experimentalObjectRestSpread: true,
+  //   },
+  // },
+
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'], // Your TypeScript files extension
+
+      // As mentioned in the comments, you should extend TypeScript plugins here,
+      // instead of extending them outside the `overrides`.
+      // If you don't want to extend any rules, you don't need an `extends` attribute.
+      extends: [
+        'plugin:@typescript-eslint/recommended',
+        // 'plugin:@typescript-eslint/recommended-requiring-type-checking',
+      ],
+
+      parserOptions: {
+        project: ['./tsconfig.json'], // Specify it only for TypeScript files
+      },
     },
-  },
+  ],
+
   settings: {
     'import/resolver': {
       typescript: {},
@@ -33,6 +55,8 @@ module.exports = {
     'prettier'
   ],
   rules: {
+
+    'strict': 'off',
 
     'arrow-body-style': 'off',
     // ['error', 'as-needed', { requireReturnForObjectLiteral: true }], // 'as-needed' is default | 'always'
