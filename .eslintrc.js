@@ -25,7 +25,7 @@ module.exports = {
       experimentalObjectRestSpread: true,
     },
   },
-
+  ignorePatterns: ['*.js', '*.jsx'], // ignoring here works ??
   overrides: [
     {
       files: ['*.ts', '*.tsx'], // Your TypeScript files extension
@@ -55,8 +55,6 @@ module.exports = {
     'prettier'
   ],
   rules: {
-
-    'strict': 'off',
 
     'arrow-body-style': 'off',
     // ['error', 'as-needed', { requireReturnForObjectLiteral: true }], // 'as-needed' is default | 'always'
@@ -216,7 +214,6 @@ module.exports = {
     'no-restricted-syntax': 'off',
     'guard-for-in': 'off',
     'valid-typeof': 'off',
-    // '': 'off',
 
     'block-scoped-var': 'off',
     'no-redeclare': 'off',
@@ -233,5 +230,30 @@ module.exports = {
     'prefer-promise-reject-errors': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-inferrable-types': 'off',
+
+    'eqeqeq': 'off',
+    'no-self-compare': 'off',
+    'import/order': 'off',
+    'no-extend-native': 'off',
+    'no-new': 'off',
+    'no-empty': 'off',
+    'spaced-comment': 'off',
+    'operator-assignment': 'off',
+    'no-extra-label': 'off',
+    'no-label-var': 'off',
+    'lines-around-directive': 'off',
+    'no-unneeded-ternary': 'off',
+    'array-callback-return': 'off',
+    'prefer-object-spread': 'off',
+    'no-useless-escape': 'off',
+    'react/jsx-curly-brace-presence': 'off',
+    'import/no-cycle': 'off',
+    'no-prototype-builtins': 'off',
+    'no-throw-literal': 'off',
+    'no-loss-of-precision': 'off',
+    'no-new-func': 'off'
+
+    // '': 'off',
+
   },
 }
