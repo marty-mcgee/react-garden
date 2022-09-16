@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Container from './container'
 import cn from 'classnames'
 // import { EXAMPLE_PATH } from '~/lib/constants'
@@ -16,23 +17,23 @@ export default function Alert({ preview }: {preview: boolean}) {
           {preview ? (
             <>
               This is a page preview.{' '}
-              <a
+              <Link
                 href="/api/exit-preview"
                 className="underline hover:text-cyan duration-200 transition-colors"
               >
                 Click here
-              </a>{' '}
+              </Link>{' '}
               to exit preview mode.
             </>
           ) : (
             <>
               The source code for this blog is{' '}
-              <a
+              <Link
                 href={`https://github.com/vercel/next.js/tree/canary/examples/${EXAMPLE_PATH}`}
                 className="underline hover:text-success duration-200 transition-colors"
               >
                 available on GitHub
-              </a>
+              </Link>
               .
             </>
           )}
