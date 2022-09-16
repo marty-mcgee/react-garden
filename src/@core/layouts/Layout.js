@@ -27,7 +27,6 @@ const Layout = props => {
         saveSettings({ ...settings, layout: settings.lastLayout })
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hidden])
   if (settings.layout === 'horizontal') {
     return <HorizontalLayout {...props}>{children}</HorizontalLayout>

@@ -138,7 +138,6 @@ const HorizontalNavGroup = props => {
   }
   useEffect(() => {
     handleGroupClose()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.asPath])
   const IconTag = item.icon ? item.icon : navSubItemIcon
   const ToggleIcon = direction === 'rtl' ? ChevronLeft : ChevronRight

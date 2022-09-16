@@ -27,7 +27,6 @@ const AuthGuard = props => {
         }
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [router.route]
   )
   if (auth.loading || auth.user === null) {

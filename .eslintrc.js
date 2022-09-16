@@ -12,7 +12,7 @@ module.exports = {
     'prettier'
   ],
   // parser: '@babel/eslint-parser',
-  // parser: '@typescript-eslint/parser',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     requireConfigFile: false, // no babel config needed
     // project: './tsconfig.json',

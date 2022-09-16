@@ -40,7 +40,6 @@ const useClipboard = (options = {}) => {
     } else if (targetRef.current) {
       clipboardCopy(targetRef.current.value)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return {
