@@ -75,9 +75,9 @@ const nextConfig = {
   experimental: {
     esmExternals: false,
     // jsconfigPaths: true, // enables it for both jsconfig.json and tsconfig.json
-    // images: {
-    //   allowFutureImage: true
-    // }
+    images: {
+      allowFutureImage: true
+    }
   },
 
   // ** WEBPACK 5

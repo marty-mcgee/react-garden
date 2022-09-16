@@ -25,7 +25,7 @@ module.exports = {
       experimentalObjectRestSpread: true,
     },
   },
-  ignorePatterns: ['*.js', '*.jsx', 'ThreeDGarden.tsx', 'ThreeDGarden1.tsx'], // ignoring here works ??
+  ignorePatterns: ['*.js', '*.jsx', 'src/_testing', 'ThreeDGarden.tsx', 'ThreeDGarden1.tsx'], // ignoring here works ??
   // overrides: [
   //   {
   //     files: ['*.ts', '*.tsx'], // Your TypeScript files extension
@@ -54,7 +54,7 @@ module.exports = {
     'react',
     'prettier',
     // 'plugin:@next/next/recommended',
-    '@next/next',
+    // '@next/next',
   ],
   rules: {
 
