@@ -52,7 +52,9 @@ module.exports = {
   plugins: [
     // '@typescript-eslint',
     'react',
-    'prettier'
+    'prettier',
+    // 'plugin:@next/next/recommended',
+    '@next/next',
   ],
   rules: {
 
