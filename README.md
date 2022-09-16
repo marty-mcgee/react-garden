@@ -5,6 +5,8 @@ React + TypeScript app using Material UI on NextJS as a "Design Dashboard" for d
 ## Live Demo
 [threed.design](https://threed.design/)
 
+[threed.design/login/](https://threed.design/login/)
+
 ## Development
 requires pnpm: `npm install -G pnpm`
 
