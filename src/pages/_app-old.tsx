@@ -67,13 +67,14 @@ import routes from "~/routes/routes"
 // import pageRoutes from "~/routes/page.routes"
 // const routes = pageRoutes
 
-// css
-// DEMO
-import "~/assets/demo/css/style.css"
-// @fullcalendar styles (HERE ??)
-import "@fullcalendar/common/main.css"
-import "@fullcalendar/daygrid/main.css"
-import "@fullcalendar/timegrid/main.css"
+// NOT HERE PLEASE
+// // css
+// // DEMO
+// import "~/assets/demo/css/style.css"
+// // @fullcalendar styles (HERE ??)
+// import "@fullcalendar/common/main.css"
+// import "@fullcalendar/daygrid/main.css"
+// import "@fullcalendar/timegrid/main.css"
 
 // api: apollo: graphql
 // import { ApolloProvider } from "@apollo/client"

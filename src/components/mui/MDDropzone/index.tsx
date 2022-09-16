@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react"
 // import Dropzone from "dropzone"
 
 // Dropzone styles
-import "dropzone/dist/dropzone.css"
+import styles from "~/styles/dropzone/dist/dropzone.module.css"
 
 // ThreeD Garden components
 import MDBox from "~/components/mui/MDBox"

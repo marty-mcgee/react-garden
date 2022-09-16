@@ -40,6 +40,7 @@ const nextConfig = {
   env: {
     customKey: process.env.HEY_HEY_HEY, // "HEY HEY HEY" | process.env.HEY_HEY_HEY
   },
+  // cssModules: true, // doesn't work in Next 12+ because "already included"
   images: {
     domains: [
       process.env.WP_GRAPHQL_API_URL.match(/(?!(w+)\.)\w*(?:\w+\.)+\w+/)[0], // Valid WP Image domain.
@@ -70,6 +71,7 @@ const nextConfig = {
   // },
   reactStrictMode: false, // true causes components to load TWICE in dev, not prod
   trailingSlash: true,
+
   // experimental: {
   //   esmExternals: false,
   //   // jsconfigPaths: true, // enables it for both jsconfig.json and tsconfig.json
@@ -77,25 +79,42 @@ const nextConfig = {
   //   //   allowFutureImage: true
   //   // }
   // },
-  webpack: config => {
-    // eslint-disable-next-line no-param-reassign
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      apexcharts: path.resolve(__dirname, './node_modules/apexcharts-clevision')
-    }
 
-    // doesn't work, but the thought is there
-    // config.plugin('@typescript-eslint')
-    //   .tap(args => {
-    //     args[0].emitWarning = false
-    //     args[0].emitError = false
-    //     args[0].failOnWarning = false
-    //     args[0].failOnError = false
-    //     return args
-    //   })
+  // ** WEBPACK 5
+  // webpack: (config, options) => {
+  //   // eslint-disable-next-line no-param-reassign
+  //   config.resolve.alias = {
+  //     ...config.resolve.alias,
+  //     apexcharts: path.resolve(__dirname, './node_modules/apexcharts-clevision')
+  //   }
 
-    return config
-  }
+  //   // doesn't work, but the thought is there
+  //   // config.plugin('@typescript-eslint')
+  //   //   .tap(args => {
+  //   //     args[0].emitWarning = false
+  //   //     args[0].emitError = false
+  //   //     args[0].failOnWarning = false
+  //   //     args[0].failOnError = false
+  //   //     return args
+  //   //   })
+
+  //   // config.node = {
+  //   //   fs: "empty",
+  //   // }
+  //   config.module.rules.push({
+  //     use: [
+  //       options.defaultLoaders.babel,
+  //       {
+  //         loader: "url-loader?limit=100000",
+  //       },
+  //       {
+  //         loader: "file-loader",
+  //       },
+  //     ],
+  //   })
+
+  //   return config
+  // }
 }
 
 module.exports = withTM(nextConfig)

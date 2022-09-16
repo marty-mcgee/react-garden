@@ -54,14 +54,15 @@ import { createEmotionCache } from '~/@core/utils/create-emotion-cache'
 // import 'react-perfect-scrollbar/dist/css/styles.css'
 
 // ** Global css styles
-// import '~/styles/globals.css'
+import stylesGlobal from '~/styles/globals.module.css'
 // css
 // @fullcalendar styles
-// import '~/styles/@fullcalendar/common/main.css'
-// import '~/styles/@fullcalendar/daygrid/main.css'
-// import '~/styles/@fullcalendar/timegrid/main.css'
+import stylesFCCommon from '~/styles/@fullcalendar/common/main.module.css'
+import stylesFCDayGrid from '~/styles/@fullcalendar/daygrid/main.module.css'
+import stylesFCTimeGrid from '~/styles/@fullcalendar/timegrid/main.module.css'
 // DEMO
 // import '~/assets/demo/css/style.css'
+import stylesDemo from '~/styles/demo/demo.module.css'
 
 // images
 import favicon from '~/assets/images/logos/favicon.png'
