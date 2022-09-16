@@ -2,7 +2,7 @@
 import { v4 as uuidv4 } from "uuid"
 
 // Kanban application components
-// import Card from "~/pages/applications/kanban/components/Card"
+import Card from "~/pages/applications/kanban/components/Card"
 
 // Images
 import officeDark from "~/assets/images/any/office-dark.jpg"

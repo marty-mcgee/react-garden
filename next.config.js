@@ -72,13 +72,13 @@ const nextConfig = {
   reactStrictMode: false, // true causes components to load TWICE in dev, not prod
   trailingSlash: true,
 
-  // experimental: {
-  //   esmExternals: false,
-  //   // jsconfigPaths: true, // enables it for both jsconfig.json and tsconfig.json
-  //   // images: {
-  //   //   allowFutureImage: true
-  //   // }
-  // },
+  experimental: {
+    esmExternals: false,
+    // jsconfigPaths: true, // enables it for both jsconfig.json and tsconfig.json
+    // images: {
+    //   allowFutureImage: true
+    // }
+  },
 
   // ** WEBPACK 5
   // webpack: (config, options) => {

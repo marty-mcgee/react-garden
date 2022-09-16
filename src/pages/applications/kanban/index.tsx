@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 // @asseinfo/react-kanban components
-import Board from "@asseinfo/react-kanban"
+// import Board from "@asseinfo/react-kanban"
 // new way [MM]
 // import dynamic from "next/dynamic"
 
@@ -27,10 +27,10 @@ import DashboardNavbar from "~/components/elements/Navbars/DashboardNavbar"
 import Footer from "~/components/elements/Footer"
 
 // Kanban application components
-// import Header from "~/pages/applications/kanban/components/Header"
+import Header from "~/pages/applications/kanban/components/Header"
 
 // Data
-// import boards from "~/pages/applications/kanban/data"
+import boards from "~/pages/applications/kanban/data"
 
 // ThreeD Garden context
 import { useMaterialUIController } from "~/context"
@@ -78,7 +78,7 @@ function Kanban(): JSX.Element {
               borderRadius: borderRadius.lg,
             },
           })}>
-          <Board
+          {/* <Board
             // initialBoard={boards}
             allowAddCard
             allowAddColumn
@@ -162,7 +162,7 @@ function Kanban(): JSX.Element {
               </MDBox>
             )}
             onCardNew={(): any => null}
-          />
+          /> */}
         </MDBox>
       </MDBox>
       <Footer />

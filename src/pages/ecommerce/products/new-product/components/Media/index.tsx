@@ -19,12 +19,12 @@ function Media(): JSX.Element {
             Product Image
           </MDTypography>
         </MDBox>
-        {useMemo(
+        {/* {useMemo(
           () => (
             <MDDropzone options={{ addRemoveLinks: true }} />
           ),
           []
-        )}
+        )} */}
       </MDBox>
     </MDBox>
   )
