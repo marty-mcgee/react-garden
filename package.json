@@ -1,6 +1,6 @@
 {
   "name": "react-garden",
-  "version": "0.7.13",
+  "version": "0.7.14",
   "private": false,
   "description": "React + TypeScript app using Material UI on NextJS",
   "author": "Marty McGee <mcgee.marty@gmail.com> (https://github.com/marty-mcgee)",
@@ -65,6 +65,7 @@
     "stylis-plugin-rtl": "github:marty-mcgee/stylis-plugin-rtl#main",
     "tailwindcss": "^3.1.8",
     "three": "^0.143.0",
+    "threed-garden": "^0.11.6",
     "uuid": "8.3.2",
     "web-vitals": "2.1.4",
     "webgl-detector": "^1.1.11",
@@ -109,6 +110,7 @@
     "prettier": "2.7.1",
     "prettier-eslint-cli": "6.0.1",
     "typescript": "^4.7.4",
+    "webpack": ">=5.9.0 <6.0.0",
     "wordpress-plugin": "^0.1.8-alpha"
   },
   "optionalDependencies": {
