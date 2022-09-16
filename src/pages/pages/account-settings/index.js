@@ -20,7 +20,7 @@ import InformationOutline from 'mdi-material-ui/InformationOutline'
 // ** Demo Tabs Imports
 import TabInfo from '~/views/pages/account-settings/TabInfo'
 import TabAccount from '~/views/pages/account-settings/TabAccount'
-import TabBilling from '~/views/pages/account-settings/TabBilling'
+// import TabBilling from '~/views/pages/account-settings/TabBilling'
 import TabSecurity from '~/views/pages/account-settings/TabSecurity'
 import TabNotifications from '~/views/pages/account-settings/TabNotifications'
 
@@ -118,7 +118,7 @@ const AccountSettings = () => {
           <TabInfo />
         </TabPanel>
         <TabPanel sx={{ p: 0 }} value='billing'>
-          <TabBilling />
+          {/* <TabBilling /> */}
         </TabPanel>
         <TabPanel sx={{ p: 0 }} value='notifications'>
           <TabNotifications />

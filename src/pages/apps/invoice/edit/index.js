@@ -2,7 +2,7 @@
 import Edit from '~/views/apps/invoice/edit/Edit'
 
 // ** Third Party Styles Imports
-import 'react-datepicker/dist/react-datepicker.css'
+// import 'react-datepicker/dist/react-datepicker.css'
 
 const InvoiceEdit = () => {
   return <Edit id='4987' />

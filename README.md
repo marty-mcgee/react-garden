@@ -6,7 +6,9 @@ React + TypeScript app using Material UI on NextJS as a "Design Dashboard" for d
 [threed.design](https://threed.design/)
 
 ## Development
-install: `pnpm i`
+requires pnpm: `npm install -G pnpm`
+
+install: `pnpm i` // equiv to pnpm install
 
 develop: `pnpm next` // default, there are other JS frameworks available
 

@@ -11,10 +11,10 @@ import FormLayoutsBasic from '~/views/forms/form-layouts/FormLayoutsBasic'
 import FormLayoutsIcons from '~/views/forms/form-layouts/FormLayoutsIcons'
 import FormLayoutsSeparator from '~/views/forms/form-layouts/FormLayoutsSeparator'
 import FormLayoutsAlignment from '~/views/forms/form-layouts/FormLayoutsAlignment'
-import FormLayoutsCollapsible from '~/views/forms/form-layouts/FormLayoutsCollapsible'
+// import FormLayoutsCollapsible from '~/views/forms/form-layouts/FormLayoutsCollapsible'
 
 // ** Third Party Styles Imports
-import 'react-datepicker/dist/react-datepicker.css'
+// import 'react-datepicker/dist/react-datepicker.css'
 
 const FormLayouts = () => {
   return (
@@ -39,7 +39,7 @@ const FormLayouts = () => {
           <Typography variant='h6'>Collapsible Sections</Typography>
         </Grid>
         <Grid item xs={12} sx={{ pt: theme => `${theme.spacing(4)} !important` }}>
-          <FormLayoutsCollapsible />
+          {/* <FormLayoutsCollapsible /> */}
         </Grid>
         <Grid item xs={12}>
           <FormLayoutsAlignment />

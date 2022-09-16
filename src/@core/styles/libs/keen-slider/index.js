@@ -2,7 +2,7 @@
 import { styled } from '@mui/material/styles'
 
 // ** KeenSlider CSS
-import 'keen-slider/keen-slider.min.css'
+// import 'keen-slider/keen-slider.min.css'
 
 const KeenSliderWrapper = styled('div')(({ theme }) => ({
   '& .keen-slider': {

@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useSettings } from '~/@core/hooks/useSettings'
 
 // ** FullCalendar & App Components Imports
-import Calendar from '~/views/apps/calendar/Calendar'
+// import Calendar from '~/views/apps/calendar/Calendar'
 import SidebarLeft from '~/views/apps/calendar/SidebarLeft'
 import CalendarWrapper from '~/@core/styles/libs/fullcalendar'
 import AddEventSidebar from '~/views/apps/calendar/AddEventSidebar'
@@ -94,7 +94,7 @@ const AppCalendar = () => {
           ...(mdAbove ? { borderTopLeftRadius: 0, borderBottomLeftRadius: 0 } : {})
         }}
       >
-        <Calendar
+        {/* <Calendar
           store={store}
           dispatch={dispatch}
           direction={direction}
@@ -105,7 +105,7 @@ const AppCalendar = () => {
           handleSelectEvent={handleSelectEvent}
           handleLeftSidebarToggle={handleLeftSidebarToggle}
           handleAddEventSidebarToggle={handleAddEventSidebarToggle}
-        />
+        /> */}
       </Box>
       <AddEventSidebar
         store={store}

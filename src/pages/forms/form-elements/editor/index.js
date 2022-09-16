@@ -18,7 +18,7 @@ import EditorUncontrolled from '~/views/forms/form-elements/editor/EditorUncontr
 import * as source from '~/views/forms/form-elements/editor/EditorSourceCode'
 
 // ** Styles
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+// import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 const Editors = () => {
   return (
