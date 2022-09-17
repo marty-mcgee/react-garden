@@ -7,7 +7,7 @@ export default function Copyright() {
     <Typography variant="body2" color="dark">
       {"© "}
       <MuiLink color="inherit" href="https://companyjuice.com/?ref=threedgarden.com">
-        Company Juice
+        Company Juice (Open Source Solutions)
       </MuiLink>{" "}
       {new Date().getFullYear()}
     </Typography>

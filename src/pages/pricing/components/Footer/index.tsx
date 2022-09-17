@@ -101,7 +101,7 @@ function Footer(): JSX.Element {
         </Grid>
         <Grid item xs={12} lg={8} sx={{ textAlign: "center" }}>
           <MDTypography variant="body2" color="secondary">
-            Copyright &copy; 2022 Company Juice.
+            Copyright &copy; 2022 Company Juice (Open Source Solutions)
           </MDTypography>
         </Grid>
       </Grid>

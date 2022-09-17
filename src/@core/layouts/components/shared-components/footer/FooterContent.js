@@ -18,7 +18,7 @@ const FooterContent = () => {
           </Box> */}
           {` `}
           <Link target='_blank' href='https://companyjuice.com/'>
-           © Company Juice
+           © Company Juice (Open Source Solutions)
           </Link>
         </Typography>
       )}
