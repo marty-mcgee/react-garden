@@ -80,7 +80,9 @@ import {
   useFileStore,
   useBearStore,
   useModalStore,
-  modalStore
+  modalStore,
+  useSceneStore,
+  sceneStore
 } from '~/components/threed/stores'
 
 // ** Next Imports
@@ -249,7 +251,9 @@ const Toolbar = styled(MuiToolbar)(({ theme }) => ({
 //   useFileStore,
 //   useBearStore,
 //   useModalStore,
-//   modalStore
+//   modalStore,
+//   useSceneStore,
+//   sceneStore
 // }: any = useStore
 
 // ==========================================================
@@ -476,6 +480,102 @@ function BearControlPanel() {
 // }))
 
 // ==========================================================
+// Scene
+
+// moved to stores
+// const useSceneStore = create((set, get) => ({
+
+function SceneInfoPanel() {
+  const sceneCount = useSceneStore((state: any) => state.sceneCount)
+  const scenes = useSceneStore((state: any) => state.scenes)
+  const scene = useSceneStore((state: any) => state.scene)
+
+  // console.debug("%cCurrentScene", ccm1, scene)
+  return (
+    <Box>
+      <Typography>{scenes.length} scenes around here ...</Typography>
+      {/* <Typography>{sceneCount} scenes around here ...</Typography> */}
+    </Box>
+  )
+}
+
+function SceneControlPanel() {
+  // const increaseSceneCount = useSceneStore((state: any) => state.increaseSceneCount)
+
+  const addScene = useSceneStore((state: any) => state.addScene)
+  // const addScene = useSceneStore.getState().addScene() // this executes automatically !! bad
+  const saveToDisk = useSceneStore((state: any) => state.saveToDisk)
+  const loadFromDisk = useSceneStore((state: any) => state.loadFromDisk)
+
+  // const addSceneAsFunction = () => {
+  //   const addScene = useSceneStore.getState().addScene() // this executes automatically !! good
+  // }
+
+  return (
+    <Box>
+      {/* <Button onClick={addSceneAsFunction}>add scene()</Button> */}
+      <Button onClick={addScene}>add scene</Button>
+      <Button onClick={saveToDisk}>save to disk</Button>
+      <Button onClick={loadFromDisk}>load from disk</Button>
+      {/* <Button onClick={increaseSceneCount}>add to scene count</Button> */}
+    </Box>
+  )
+}
+
+const createScene = () => {
+  const scene = useSceneStore(
+    (state: any) => {
+      state.addScene
+      state.increaseSceneCount
+    }
+  )
+  return scene
+}
+
+// ==========================================================
+// Allotment
+
+// moved to stores
+// const useAllotmentStore = create((set) => ({
+
+function AllotmentInfoPanel() {
+  const fileCount = useAllotmentStore((state: any) => state.fileCount)
+  const files = useAllotmentStore((state: any) => state.files)
+  const file = useAllotmentStore((state: any) => state.file)
+
+  // console.debug("%cCurrentAllotment", ccm1, file)
+  return (
+    <Box>
+      <Typography>{files.length} files around here ...</Typography>
+      {/* <Typography>{fileCount} files around here ...</Typography> */}
+    </Box>
+  )
+}
+
+function AllotmentControlPanel() {
+  const increaseAllotmentCount = useAllotmentStore((state: any) => state.increaseAllotmentCount)
+
+  const addAllotment = useAllotmentStore((state: any) => state.addAllotment)
+
+  return (
+    <Box>
+      <Button onClick={addAllotment}>add file</Button>
+      {/* <Button onClick={increaseAllotmentCount}>add to file count</Button> */}
+    </Box>
+  )
+}
+
+const createAllotment = () => {
+  const file = useAllotmentStore(
+    (state: any) => {
+      state.addAllotment
+      state.increaseAllotmentCount
+    }
+  )
+  return file
+}
+
+// ==========================================================
 // BEGIN COMPONENT PROPERTIES (VARIABLES, PARAMETERS)
 // ==========================================================
 
@@ -636,6 +736,26 @@ let planHistoryPosition = 0
 // // SIMULATION HISTORY
 const simulationHistory: Object[] = []
 let simulationHistoryPosition = 0
+
+// // FILE HISTORY
+const fileHistory: Object[] = []
+let fileHistoryPosition = 0
+
+// // SCENE HISTORY
+const sceneHistory: Object[] = []
+let sceneHistoryPosition = 0
+
+// // ALLOTMENT HISTORY
+const allotmentHistory: Object[] = []
+let allotmentHistoryPosition = 0
+
+// // BED HISTORY
+const bedHistory: Object[] = []
+let bedHistoryPosition = 0
+
+// // PLANT HISTORY
+const plantHistory: Object[] = []
+let plantHistoryPosition = 0
 
 
 // ==========================================================
@@ -3543,16 +3663,16 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
           <ReactThreeFiberView />
           <hr />
           <ThreeDInfoPanel />
-          {/* <ThreeDControlPanel /> */}
+          <ThreeDControlPanel />
           <hr />
           <ProjectInfoPanel />
-          {/* <ProjectControlPanel /> */}
+          <ProjectControlPanel />
           <hr />
           <PlanInfoPanel />
-          {/* <PlanControlPanel /> */}
+          <PlanControlPanel />
           <hr />
           <FileInfoPanel />
-          {/* <FileControlPanel /> */}
+          <FileControlPanel />
           <hr />
           {/* <CharacterInfoPanel /> */}
           {/* <CharacterControlPanel /> */}
@@ -3566,6 +3686,9 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
           {/* <ChickenInfoPanel /> */}
           {/* <ChickenControlPanel /> */}
           {/* <hr /> */}
+          <SceneInfoPanel />
+          <SceneControlPanel />
+          <hr />
           {/* <AllotmentInfoPanel /> */}
           {/* <AllotmentControlPanel /> */}
           {/* <hr /> */}

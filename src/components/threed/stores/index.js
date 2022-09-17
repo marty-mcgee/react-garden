@@ -456,6 +456,100 @@ export const useModalStore = create((set, get) => ({
   handleCloseShareModal: () => set(() => ({ isOpenShareModal: false })),
 }))
 
+
+// export ??
+export const useSceneStore = create((set, get, api) => ({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
+  sceneCount: 0,
+  scenes: [],
+  scene: {
+    _id: newUUID(),
+    _ts: new Date().toISOString(),
+    name: "HEY HEY HEY 0",
+    layers: [],
+    activeLayer: {
+      name: "level0-MM",
+      data: {}
+    }
+  },
+  increaseSceneCount: () => set(
+    (state) => (
+      { sceneCount: state.sceneCount + 1 }
+    )
+  ),
+  removeAllScenes: () => set(
+    {
+      sceneCount: 0,
+      scenes: []
+    }
+  ),
+  addScene: () => {
+    // sceneCurrent
+    set(
+      (state) => (
+        {
+          scene: {
+            _id: newUUID(),
+            _ts: new Date().toISOString(),
+            name: "HEY HEY HEY 1",
+            layers: [],
+            activeLayer: {
+              name: "level1-MM",
+              data: {}
+            }
+          },
+          sceneCount: state.sceneCount + 1,
+        }
+      )
+    )
+    // sceneHistory
+    set(
+      (state) => (
+        {
+          scenes: [state.scene, ...state.scenes],
+          sceneCount: state.scenes.length,
+        }
+      )
+    )
+    // saveToDisk
+    get().saveToDisk()
+    // loadFromDisk
+    get().loadFromDisk()
+
+    console.debug("%cAddScene", ccm1, get().scene)
+  },
+  saveProject: () => {
+    // saveToDisk
+    get().saveToDisk()
+  },
+  saveToDisk: () => {
+    try {
+      localStorage.setItem("threed_sceneHistory", JSON.stringify({ subject: "scene", payload: get().scene }))
+      console.debug("%cSaveToDisk", ccm1, get().scene)
+      return true
+    } catch (err) {
+      console.debug("%cSaveToDisk", ccm3, err)
+      return false
+    }
+  },
+  loadFromDisk: () => {
+    try {
+      const loaded = localStorage.getItem("threed_sceneHistory")
+      if (loaded) {
+        console.debug("%cLoadFromDisk", ccm1, true) // loaded
+        return loaded // string[]
+      }
+      console.debug("%cLoadFromDisk", ccm3, loaded)
+      return false
+    } catch (err) {
+      console.debug("%cLoadFromDisk", ccm3, err)
+      return false
+    }
+  }
+
+})) // useSceneStore
+
 // ==============================================================
 // EXPORT STORES AS GROUP OBJECT "useStore" (as a HOOK ??)
 
@@ -472,7 +566,9 @@ Object.assign(useStore,
     useFileStore,
     useBearStore,
     useModalStore,
-    modalStore
+    modalStore,
+    useSceneStore,
+    // sceneStore
   }
 )
 
