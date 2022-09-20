@@ -493,7 +493,7 @@ const navigation = () => {
       icon: DotsHorizontal,
       externalLink: true,
       openInNewTab: true,
-      path: 'https://companyjuice.com/support'
+      path: 'https://companyjuice.com/contact'
     },
     {
       title: 'Documentation',

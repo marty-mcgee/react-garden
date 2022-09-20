@@ -16,9 +16,9 @@ const FooterContent = () => {
           {/* <Box component='span' sx={{ color: 'error.main' }}>
             💚
           </Box> */}
-          {` `}
-          <Link target='_blank' href='https://companyjuice.com/'>
-           © Company Juice (Open Source Solutions)
+          {``}
+          <Link target='_blank' href='https://threed.ai/'>
+            🌱 threed.ai
           </Link>
         </Typography>
       )}
@@ -27,7 +27,7 @@ const FooterContent = () => {
           <Link target='_blank' href='https://companyjuice.com/terms-conditions/'>
             License
           </Link>
-          <Link target='_blank' href='https://companyjuice.com/support/'>
+          <Link target='_blank' href='https://companyjuice.com/contact/'>
             Support
           </Link>
         </Box>

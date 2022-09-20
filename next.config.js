@@ -8,7 +8,7 @@ if (!process.env.WP_GRAPHQL_API_URL) {
 const path = require('path')
 
 const withTM = require("next-transpile-modules")([
-  // "@babel/preset-react",
+  "@babel/preset-react",
   "@fullcalendar/common",
   "@fullcalendar/daygrid",
   "@fullcalendar/interaction",
