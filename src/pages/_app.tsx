@@ -13,12 +13,12 @@ import NProgress from 'nprogress'
 import { CacheProvider } from '@emotion/react'
 
 // ** Config Imports
-import 'src/configs/i18n'
+import '~/configs/i18n'
 import { defaultACLObj } from '~/configs/acl'
 import themeConfig from '~/configs/themeConfig'
 
 // ** Fake-DB Import
-import 'src/@fake-db'
+import '~/@fake-db'
 
 // ** Third Party Import
 import { Toaster } from 'react-hot-toast'
