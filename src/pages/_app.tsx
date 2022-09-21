@@ -44,6 +44,18 @@ import ReactHotToast from '~/@core/styles/libs/react-hot-toast'
 // ** Utils Imports
 import { createEmotionCache } from '~/@core/utils/create-emotion-cache'
 
+// ** Global css styles
+import stylesGlobal from '~/styles/globals.module.css'
+
+// @fullcalendar styles
+import stylesFCCommon from '~/styles/@fullcalendar/common/main.module.css'
+import stylesFCDayGrid from '~/styles/@fullcalendar/daygrid/main.module.css'
+import stylesFCTimeGrid from '~/styles/@fullcalendar/timegrid/main.module.css'
+
+// DEMO
+// import '~/assets/demo/css/style.css'
+// import stylesDemo from '~/styles/demo/demo.module.css'
+
 // ** Prismjs Styles
 // import 'prismjs'
 // import 'prismjs/themes/prism-tomorrow.css'
@@ -52,17 +64,6 @@ import { createEmotionCache } from '~/@core/utils/create-emotion-cache'
 
 // ** React Perfect Scrollbar Style
 // import 'react-perfect-scrollbar/dist/css/styles.css'
-
-// ** Global css styles
-import stylesGlobal from '~/styles/globals.module.css'
-// css
-// @fullcalendar styles
-import stylesFCCommon from '~/styles/@fullcalendar/common/main.module.css'
-import stylesFCDayGrid from '~/styles/@fullcalendar/daygrid/main.module.css'
-import stylesFCTimeGrid from '~/styles/@fullcalendar/timegrid/main.module.css'
-// DEMO
-// import '~/assets/demo/css/style.css'
-import stylesDemo from '~/styles/demo/demo.module.css'
 
 // images
 import favicon from '~/assets/images/logos/favicon.png'
@@ -120,7 +121,7 @@ const App = (props: any) => {
           <title>{`${themeConfig.templateName} - ThreeD Garden Admin Dashboard`}</title>
           <meta
             name='description'
-            content={`${themeConfig.templateName} – Material Design React NextJS Admin Dashboard on MUI v5.`}
+            content={`${themeConfig.templateName} – React Three Fiber with MUI v5 on NextJS - Admin Dashboard`}
           />
           <meta name='keywords' content='Architecture, Planning, 3D Plan, Home Ideas, Floor Plan, Garden Planning, 3D Design Ideas, Building Plan' />
           <meta name='author' content='Marty McGee' />

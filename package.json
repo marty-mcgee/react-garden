@@ -1,6 +1,6 @@
 {
   "name": "react-garden",
-  "version": "0.7.15-beta.3",
+  "version": "0.7.15-beta.4",
   "private": false,
   "description": "React + TypeScript app using Material UI on NextJS using GraphQL + WordPress APIs",
   "author": "Marty McGee <mcgee.marty@gmail.com> (https://github.com/marty-mcgee)",
@@ -21,7 +21,7 @@
     "mm:install:pnpm":    "pnpm i",
     "_______________1": "____ use these _________________________________________",
     "mm:scrub:pnpm":      "rd /S /Q .\\node_modules & del /F .\\pnpm-lock.yaml ;",
-    "mm:scrub:next":      "rd /S /Q .\\.next ;",
+    "mm:scrub:next":      "rd /S /Q .\\.next & del /F .\\next-env.d.ts ;",
     "_______________2": "____ use these _________________________________________",
     "dev":                "next",
     "next":               "next -p 7777",

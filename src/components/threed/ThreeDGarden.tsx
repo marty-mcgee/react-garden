@@ -132,6 +132,7 @@ import { Canvas, useFrame } from "@react-three/fiber"
 
 // css
 // import "~/assets/demo/css/Demo.module.css"
+import stylesDemo from '~/styles/demo/demo.module.css'
 
 // no no no, never again
 // import * as $ from "jquery"

@@ -36,11 +36,25 @@ const { PHASE_DEVELOPMENT_SERVER } = require("next/constants")
  * @type {import("next").NextConfig}
  */
 const nextConfig = {
-  /* nextjs config options here */
-  env: {
-    customKey: process.env.HEY_HEY_HEY, // "HEY HEY HEY" | process.env.HEY_HEY_HEY
+
+  reactStrictMode: false, // true causes components to load TWICE in dev only, not prod
+
+  trailingSlash: true,
+
+  experimental: {
+    esmExternals: false, // helps with 3rd party modules trying to call non-module js
+    images: {
+      allowFutureImage: true // for better img support, and use of layout='raw'
+    }
   },
+
+  // NOT NEEDED HERE: instead, use .env.local to safely load env variables as needed (NEXT_PUBLIC_)
+  // env: {
+  //   customKey: process.env.HEY_HEY_HEY, // "HEY HEY HEY" | process.env.HEY_HEY_HEY
+  // },
+
   // cssModules: true, // doesn't work in Next 12+ because "already included"
+
   images: {
     domains: [
       process.env.WP_GRAPHQL_API_URL.match(/(?!(w+)\.)\w*(?:\w+\.)+\w+/)[0], // Valid WP Image domain.
@@ -60,6 +74,7 @@ const nextConfig = {
     // dangerouslyAllowSVG: true,
     // contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+
   // async redirects() {
   //   return [
   //     {
@@ -69,16 +84,6 @@ const nextConfig = {
   //     },
   //   ]
   // },
-  reactStrictMode: false, // true causes components to load TWICE in dev, not prod
-  trailingSlash: true,
-
-  experimental: {
-    esmExternals: false,
-    // jsconfigPaths: true, // enables it for both jsconfig.json and tsconfig.json
-    images: {
-      allowFutureImage: true
-    }
-  },
 
   // ** WEBPACK 5
   // webpack: (config, options) => {

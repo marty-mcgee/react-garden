@@ -20,8 +20,10 @@ const ParticipatePage = () => {
 
   return (
     <Grid container spacing={6}>
-      {/* HEY HEY HEY */}
+
+      {/* [MM] HEY HEY HEY */}
       <ThreeDGarden />
+
       <Grid item md={6} xs={12}>
         <Card>
           <CardHeader title='Public Content' />
