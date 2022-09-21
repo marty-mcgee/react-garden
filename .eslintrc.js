@@ -10,7 +10,7 @@ module.exports = {
     'plugin:react/recommended',
     'airbnb',
     'prettier',
-    // 'next' // or 'plugin:@next/next/recommended'
+    'next' // or 'plugin:@next/next/recommended'
   ],
   // parser: '@babel/eslint-parser',
   parser: '@typescript-eslint/parser',

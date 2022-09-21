@@ -48,9 +48,9 @@ import { createEmotionCache } from '~/@core/utils/create-emotion-cache'
 import stylesGlobal from '~/styles/globals.module.css'
 
 // @fullcalendar styles
-import stylesFCCommon from '~/styles/@fullcalendar/common/main.module.css'
-import stylesFCDayGrid from '~/styles/@fullcalendar/daygrid/main.module.css'
-import stylesFCTimeGrid from '~/styles/@fullcalendar/timegrid/main.module.css'
+// import stylesFCCommon from '~/styles/@fullcalendar/common/main.module.css'
+// import stylesFCDayGrid from '~/styles/@fullcalendar/daygrid/main.module.css'
+// import stylesFCTimeGrid from '~/styles/@fullcalendar/timegrid/main.module.css'
 
 // DEMO
 // import '~/assets/demo/css/style.css'

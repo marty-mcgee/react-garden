@@ -1,3 +1,5 @@
+// ** NEXT JS BUILD CONFIGURATION FILE
+
 if (!process.env.WP_GRAPHQL_API_URL) {
   throw new Error(`
     Please provide a valid WordPress instance URL.
@@ -5,10 +7,10 @@ if (!process.env.WP_GRAPHQL_API_URL) {
   `)
 }
 
-const path = require('path')
+// const path = require('path')
 
 const withTM = require("next-transpile-modules")([
-  "@babel/preset-react",
+  // "@babel/preset-react",
   "@fullcalendar/common",
   "@fullcalendar/daygrid",
   "@fullcalendar/interaction",
@@ -17,20 +19,6 @@ const withTM = require("next-transpile-modules")([
   "react-github-btn",
   "three"
 ])
-
-const { PHASE_DEVELOPMENT_SERVER } = require("next/constants")
-
-// console.log("PHASE_DEVELOPMENT_SERVER", PHASE_DEVELOPMENT_SERVER)
-
-// if (phase === PHASE_DEVELOPMENT_SERVER) {
-//     return {
-//       /* development only config options here */
-//       env: {
-//         customKey: "my-value",
-//       },
-//     }
-//   }
-// }
 
 /**
  * @type {import("next").NextConfig}
@@ -55,6 +43,7 @@ const nextConfig = {
 
   // cssModules: true, // doesn't work in Next 12+ because "already included"
 
+  // ** IMAGES
   images: {
     domains: [
       process.env.WP_GRAPHQL_API_URL.match(/(?!(w+)\.)\w*(?:\w+\.)+\w+/)[0], // Valid WP Image domain.
@@ -75,6 +64,7 @@ const nextConfig = {
     // contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
+  // ** REDIRECTS
   // async redirects() {
   //   return [
   //     {
