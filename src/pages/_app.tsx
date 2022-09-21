@@ -45,7 +45,7 @@ import ReactHotToast from '~/@core/styles/libs/react-hot-toast'
 import { createEmotionCache } from '~/@core/utils/create-emotion-cache'
 
 // ** Global css styles
-import stylesGlobal from '~/styles/globals.module.css'
+// import stylesGlobal from '~/styles/globals.module.css'
 
 // @fullcalendar styles
 // import stylesFCCommon from '~/styles/@fullcalendar/common/main.module.css'
@@ -68,9 +68,9 @@ import stylesGlobal from '~/styles/globals.module.css'
 // images
 import favicon from '~/assets/images/logos/favicon.png'
 import appleIcon from '~/assets/images/logos/apple-icon.png'
-import brandLight from '~/assets/images/logos/logo-threedgarden.png'
-import brandDark from '~/assets/images/logos/logo-threedgarden-alt.png'
-import brandText from '~/assets/images/logos/logo-threedgarden-text.png'
+// import brandLight from '~/assets/images/logos/logo-threedgarden.png'
+// import brandDark from '~/assets/images/logos/logo-threedgarden-alt.png'
+// import brandText from '~/assets/images/logos/logo-threedgarden-text.png'
 
 // WORKAROUND -- for ToastPosition bug
 // from: node_modules\react-hot-toast\dist\core\types.d.ts
