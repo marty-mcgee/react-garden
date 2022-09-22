@@ -1,8 +1,8 @@
 {
   "name": "react-garden",
-  "version": "0.7.15-beta.5",
+  "version": "0.7.15-beta.6",
   "private": false,
-  "description": "React + TypeScript app using Material UI on NextJS using GraphQL + WordPress APIs",
+  "description": "React + TypeScript app using Material UI on NextJS using GraphQL + WordPress REST APIs",
   "author": "Marty McGee <mcgee.marty@gmail.com> (https://github.com/marty-mcgee)",
   "license": "MIT",
   "repository": {

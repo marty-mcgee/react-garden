@@ -36,12 +36,9 @@ const nextConfig = {
     }
   },
 
-  // NOT NEEDED HERE: instead, use .env.local to safely load env variables as needed (NEXT_PUBLIC_)
-  // env: {
-  //   customKey: process.env.HEY_HEY_HEY, // "HEY HEY HEY" | process.env.HEY_HEY_HEY
-  // },
-
-  // cssModules: true, // doesn't work in Next 12+ because "already included"
+  // [MM] ONLY USE THE NEXT /PAGES THAT YU WAN>
+  // https://stackoverflow.com/questions/65598753/cant-build-react-next-project-found-page-without-a-react-component-as-default
+  // pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js'],
 
   // ** IMAGES
   images: {
@@ -110,7 +107,15 @@ const nextConfig = {
 
   //   return config
   // }
-}
+
+  // NOT NEEDED HERE: instead, use .env.local to safely load env variables as needed (NEXT_PUBLIC_)
+  // env: {
+  //   customKey: process.env.HEY_HEY_HEY, // "HEY HEY HEY" | process.env.HEY_HEY_HEY
+  // },
+
+  // cssModules: true, // doesn't work in Next 12+ because "already included"
+
+} // end nextConfig
 
 module.exports = withTM(nextConfig)
 
