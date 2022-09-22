@@ -19,6 +19,7 @@
     "mm:install:noop":    "npm install --no-optional --omit_optional",
     "mm:install:full":    "npm install",
     "mm:install:pnpm":    "pnpm i",
+    "mm:install:wp":      "pnpm wordpress-plugin",
     "_______________1": "____ delete build files: use these _____________________",
     "scrub:pnpm":         "rd /S /Q .\\node_modules & del /F .\\pnpm-lock.yaml ;",
     "scrub:next":         "rd /S /Q .\\.next & del /F .\\next-env.d.ts ;",
