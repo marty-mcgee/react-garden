@@ -34,7 +34,7 @@ During the development of this app, we have used many existing resources from aw
 - [React Flatpickr](https://github.com/haoxins/react-flatpickr) - Useful library used to select date.
 - [React ChartJS 2](http://reactchartjs.github.io/react-chartjs-2/#/) - Simple yet flexible React charting for designers + developers.
 - [Full Calendar](https://fullcalendar.io/) - Full-sized drag + drop event calendar.
-- [Dropzone](https://www.dropzonejs.com/) - An open source library that provides drag & drop file uploads with image previews.
+- [Dropzone](https://www.dropzonejs.com/) - An open source library that provides drag + drop file uploads with image previews.
 - [React Kanban](https://github.com/asseinfo/react-kanban) - Kanban/Trello board lib for React.
 - [React Images Viewer](https://guonanci.github.io/react-images-viewer/) - A simple, responsive images viewer component for ReactJS.
 - [React Quill](https://github.com/zenoamaro/react-quill) - A free, open source WYSIWYG editor built for the modern web.
