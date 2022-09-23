@@ -525,10 +525,10 @@ export const useSceneStore = create((set, get, api) => ({
   saveToDisk: () => {
     try {
       localStorage.setItem("threed_sceneHistory", JSON.stringify({ subject: "scene", payload: get().scene }))
-      console.debug("%cSaveToDisk", ccm1, get().scene)
+      console.debug("%c SaveToDisk", ccm1, get().scene)
       return true
     } catch (err) {
-      console.debug("%cSaveToDisk", ccm3, err)
+      console.debug("%c SaveToDisk", ccm3, err)
       return false
     }
   },
@@ -536,18 +536,30 @@ export const useSceneStore = create((set, get, api) => ({
     try {
       const loaded = localStorage.getItem("threed_sceneHistory")
       if (loaded) {
-        console.debug("%cLoadFromDisk", ccm1, true) // loaded
+        console.debug("%c LoadFromDisk", ccm1, true) // loaded
         return loaded // string[]
       }
-      console.debug("%cLoadFromDisk", ccm3, loaded)
+      console.debug("%c LoadFromDisk", ccm3, loaded)
       return false
     } catch (err) {
-      console.debug("%cLoadFromDisk", ccm3, err)
+      console.debug("%c LoadFromDisk", ccm3, err)
       return false
     }
   }
 
 })) // useSceneStore
+
+// ==============================================================
+
+// ==============================================================
+
+// ==============================================================
+
+// ==============================================================
+
+// ==============================================================
+
+// ==============================================================
 
 // ==============================================================
 // EXPORT STORES AS GROUP OBJECT "useStore" (as a HOOK ??)
