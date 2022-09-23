@@ -18,7 +18,7 @@ const ccm2 = "color: red; font-size: 12px;"
 const ccm3 = "color: orange; font-size: 12px;"
 const ccm4 = "color: yellow; font-size: 12px;"
 const ccm5 = "color: blue; font-size: 12px;"
-console.log("%cThreeDGarden<FC>", ccm1)
+console.log("%c stores for ThreeDGarden<FC,R3F>", ccm1)
 // console.log("%cWHOOPSIES", ccm2)
 // ==========================================================
 
@@ -41,7 +41,6 @@ const useStoreImpl2 = create(() => {
 // ThreeD
 // aka "Master File with Settings"
 
-// export ??
 export const useThreeDStore = create((set, get, api) => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
@@ -230,7 +229,6 @@ export const useProjectStore = create((set, get) => ({
 // ==============================================================
 // Plan
 
-// export ??
 export const usePlanStore = create((set, get) => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
@@ -456,8 +454,9 @@ export const useModalStore = create((set, get) => ({
   handleCloseShareModal: () => set(() => ({ isOpenShareModal: false })),
 }))
 
+// ==============================================================
+// Scene
 
-// export ??
 export const useSceneStore = create((set, get, api) => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
@@ -517,7 +516,7 @@ export const useSceneStore = create((set, get, api) => ({
     // loadFromDisk
     get().loadFromDisk()
 
-    console.debug("%cAddScene", ccm1, get().scene)
+    console.debug("%c AddScene", ccm2, get().scene)
   },
   saveProject: () => {
     // saveToDisk
