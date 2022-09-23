@@ -15,18 +15,18 @@ class CustomDocument extends Document {
     return (
       <Html lang='en'>
         <Head>
-          <link rel='preconnect' href='https://fonts.googleapis.com' />
-          <link rel='preconnect' href='https://fonts.gstatic.com' />
-          {/* Google Fonts -- Text */}
+          {/* <link rel='preconnect' href='https://fonts.googleapis.com' /> */}
+          {/* <link rel='preconnect' href='https://fonts.gstatic.com' /> */}
+          {/* Google Fonts -- Text
           <link
             rel='stylesheet'
             href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
-          />
-          {/* Google Fonts -- Material Icons */}
+          /> */}
+          {/* Google Fonts -- Material Icons
           <link
-            href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+            href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp&display=optional"
             rel="stylesheet"
-          />
+          /> */}
         </Head>
         <body>
           <Main />
@@ -53,7 +53,7 @@ CustomDocument.getInitialProps = async ctx => {
   const initialProps = await Document.getInitialProps(ctx)
   const emotionStyles = extractCriticalToChunks(initialProps.html)
 
-  const emotionStyleTags = emotionStyles.styles.map(style => (
+  const emotionStyleTags = emotionStyles.styles.map((style: any) => (
     <style
       key={style.key}
       dangerouslySetInnerHTML={{ __html: style.css }}

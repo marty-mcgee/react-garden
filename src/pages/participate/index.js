@@ -15,6 +15,7 @@ import CardContent from '@mui/material/CardContent'
 import ThreeDGarden from "~/components/threed/ThreeDGarden"
 
 const ParticipatePage = () => {
+  
   // ** Hooks
   const ability = useContext(AbilityContext)
 

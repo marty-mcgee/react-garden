@@ -1,5 +1,9 @@
 const FarmbotDemoSVG = () => (
   <div>
+    {`<style>
+#water-line path{stroke-opacity:.2;stroke-width:6;stroke:#00f;stroke-linecap:round}#stage-1 .st370{fill:#c5cfd6}#stage-1 .st371{fill:#aa7e4f}#stage-1 .st372{fill:#cdd6e0}#stage-1 .st373{fill:#516666}#stage-2 .st0{display:none}#stage-2 .st1{fill:#aa7e4f}#stage-2 .st2{fill:#7d961b}#stage-2 .st3{fill:#1a4b29}#stage-5 .bed-lines{fill:#aa7e4f}#stage-5 .st2{fill:#7d961b}#stage-5 .st3{fill:#1a4b29}#stage-5 .st4{fill:#104b11}#stage-5 .st5{fill:#ec4e1d}#stage-5 .st6{fill:#f6a267}#stage-5 .st7{fill:#fff}#stage-5 .st8{fill:#96231c}#stage-5 .st9{fill:#4f8125}#stage-5 .st10{fill:#fcba4f}#stage-5 .st11{fill:#e3682c}#stage-5 .st12{fill:#b33f38}#stage-5 .st13{fill:#512b26}#stage-5 .st14{fill:#68664d}#stage-5 .st15{fill:#a7c63b}#stage-5 .st16{fill:#e9db30}#stage-5 .st17{fill:#adc645}#stage-5 .st18{fill:#b7c943}#stage-5 .st19{fill:#c1cc42}#stage-5 .st20{fill:#cbd042}#stage-5 .st21{fill:#d6d343}#stage-5 .st22{fill:#dfd643}#stage-5 .st23{fill:#273f0d}#vines .vine{fill:none;stroke:#1a4b29;stroke-width:10;stroke-linecap:round;stroke-miterlimit:10}#vine-leaves .st172{fill:#1a4b29}#vine-leaves .st79{fill:#7d961b}
+/*# sourceMappingURL=/s/files/1/2040/0289/t/41/assets/what-you-can-grow.scss.css.map?v=174676776694382640931660686796 */
+    </style>`}
     <div dangerouslySetInnerHTML={{
       __html: `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 2724.3 1131.6" style="enable-background:new 0 0 2724.3 1131.6;" xml:space="preserve">
       <image xlink:href="https://cdn.shopify.com/s/files/1/2040/0289/files/whatyoucangrow-soil.png?2909" width="100%"></image>
@@ -402,7 +406,6 @@ const FarmbotDemoSVG = () => (
               }
       `}
     </style>
-    <link href="//cdn.shopify.com/s/files/1/2040/0289/t/41/assets/what-you-can-grow.scss.css?v=174676776694382640931660686796" rel="stylesheet" type="text/css" media="all"></link>
   </div>
 )
 
