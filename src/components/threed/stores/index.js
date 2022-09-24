@@ -470,7 +470,10 @@ export const useSceneStore = create((set, get, api) => ({
     activeLayer: {
       name: "level0-MM",
       data: {}
-    }
+    },
+
+    
+
   },
   increaseSceneCount: () => set(
     (state) => (
