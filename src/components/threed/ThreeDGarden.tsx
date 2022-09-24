@@ -162,7 +162,7 @@ const ccm2 = "color: red; font-size: 12px;"
 const ccm3 = "color: orange; font-size: 12px;"
 const ccm4 = "color: yellow; font-size: 12px;"
 const ccm5 = "color: blue; font-size: 12px;"
-console.log("%c ThreeDGarden<FC,R3F>", ccm1)
+console.log("%cThreeDGarden<FC,R3F>: {.tsx}", ccm1)
 // console.log("%cWHOOPSIES", ccm2)
 
 // ==========================================================
@@ -270,7 +270,9 @@ function ThreeDInfoPanel() {
   const threedCount = useThreeDStore((state: any) => state.threedCount)
   const threeds = useThreeDStore((state: any) => state.threeds)
   const threed = useThreeDStore((state: any) => state.threed)
-  console.debug("%cthreed", ccm1, threed)
+
+  console.debug("%cThreeDInfoPanel: {threed}", ccm1, threed)
+
   return (
     <Box>
       <Typography>{threeds.length} threeds around here ...</Typography>
@@ -488,11 +490,12 @@ function BearControlPanel() {
 // const useSceneStore = create((set, get) => ({
 
 function SceneInfoPanel() {
-  const sceneCount = useSceneStore((state: any) => state.sceneCount)
+  // const sceneCount = useSceneStore((state: any) => state.sceneCount)
   const scenes = useSceneStore((state: any) => state.scenes)
   const scene = useSceneStore((state: any) => state.scene)
 
-  // console.debug("%cCurrentScene", ccm1, scene)
+  console.debug("%cSceneInfoPanel: {scene}", ccm3, scene)
+
   return (
     <Box>
       <Typography>{scenes.length} scenes around here ...</Typography>

@@ -18,7 +18,7 @@ const ccm2 = "color: red; font-size: 12px;"
 const ccm3 = "color: orange; font-size: 12px;"
 const ccm4 = "color: yellow; font-size: 12px;"
 const ccm5 = "color: blue; font-size: 12px;"
-console.log("%c stores for ThreeDGarden<FC,R3F>", ccm1)
+console.log("%cThreeDGarden<FC,R3F>: {stores}", ccm4)
 // console.log("%cWHOOPSIES", ccm2)
 // ==========================================================
 
@@ -465,7 +465,7 @@ export const useSceneStore = create((set, get, api) => ({
   scene: {
     _id: newUUID(),
     _ts: new Date().toISOString(),
-    name: "HEY HEY HEY 0",
+    name: "MARTY MARTY MARTY MARTY 0",
     layers: [],
     activeLayer: {
       name: "level0-MM",
@@ -491,7 +491,7 @@ export const useSceneStore = create((set, get, api) => ({
           scene: {
             _id: newUUID(),
             _ts: new Date().toISOString(),
-            name: "HEY HEY HEY 1",
+            name: "MARTY MARTY MARTY MARTY 1",
             layers: [],
             activeLayer: {
               name: "level1-MM",
@@ -516,7 +516,7 @@ export const useSceneStore = create((set, get, api) => ({
     // loadFromDisk
     get().loadFromDisk()
 
-    console.debug("%c AddScene", ccm2, get().scene)
+    console.debug("%cAddScene: {get().scene}", ccm3, get().scene)
   },
   saveProject: () => {
     // saveToDisk
@@ -525,10 +525,10 @@ export const useSceneStore = create((set, get, api) => ({
   saveToDisk: () => {
     try {
       localStorage.setItem("threed_sceneHistory", JSON.stringify({ subject: "scene", payload: get().scene }))
-      console.debug("%c SaveToDisk", ccm1, get().scene)
+      console.debug("%cSaveToDisk", ccm1, get().scene)
       return true
     } catch (err) {
-      console.debug("%c SaveToDisk", ccm3, err)
+      console.debug("%cSaveToDisk", ccm3, err)
       return false
     }
   },
@@ -536,13 +536,13 @@ export const useSceneStore = create((set, get, api) => ({
     try {
       const loaded = localStorage.getItem("threed_sceneHistory")
       if (loaded) {
-        console.debug("%c LoadFromDisk", ccm1, true) // loaded
+        console.debug("%cLoadFromDisk", ccm1, true) // loaded
         return loaded // string[]
       }
-      console.debug("%c LoadFromDisk", ccm3, loaded)
+      console.debug("%cLoadFromDisk", ccm3, loaded)
       return false
     } catch (err) {
-      console.debug("%c LoadFromDisk", ccm3, err)
+      console.debug("%cLoadFromDisk", ccm3, err)
       return false
     }
   }
