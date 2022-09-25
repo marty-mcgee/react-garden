@@ -1,10 +1,14 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+// ** Import React stuff
+import { FunctionComponent } from 'react'
+
+// ** Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next"
 
 // GET CLIENT FROM CONTEXT PROVIDER !!!
 // import { client } from '~/api/graphql/client'
 // console.debug('APOLLO CLIENT HTTP', client)
 
+// ** Import Apollo stuff
 import { useApolloClient } from '@apollo/client'
 
 type Data = {
@@ -12,11 +16,11 @@ type Data = {
   // client: ApolloClient<NormalizedCacheObject>
 }
 
-const handler = (req: NextApiRequest, res: NextApiResponse<Data>) => {
+const Handler = (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
-  const word = "[MM] HEY HEY HEY -- apollo client handler (from local node server (next))"
-  console.debug('APOLLO CLIENT HTTP (api page/handler) req', req)
-  console.debug('APOLLO CLIENT HTTP (api page/handler) Data', word)
+  const word = "[MM] HEY HEY HEY -- apollo client Handler (from local node server (next))"
+  console.debug('APOLLO CLIENT HTTP (api page/Handler) req', req)
+  console.debug('APOLLO CLIENT HTTP (api page/Handler) Data', word)
 
   // function SomeComponent() {
   const client = useApolloClient()
@@ -26,9 +30,9 @@ const handler = (req: NextApiRequest, res: NextApiResponse<Data>) => {
   // }
 
   res.status(200).json({ word: word }) // , client: JSON.stringify(client)
-  console.debug('APOLLO CLIENT HTTP (api page/handler) res', res)
+  console.debug('APOLLO CLIENT HTTP (api page/Handler) res', res)
 
   // return ??
 }
 
-export default handler
+export default Handler
