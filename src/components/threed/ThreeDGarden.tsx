@@ -85,6 +85,11 @@ import {
   sceneStore
 } from '~/components/threed/stores'
 
+// ** GraphQL Apollo Client (in App context provider)
+// import '~/api/graphql/client'
+// ** GraphQL Queries + Mutations (here, locally specific data needs)
+// import '~/api/graphql/getScenes.gql'
+
 // ** Next Imports
 import Image from "next/future/image"
 
