@@ -7,8 +7,6 @@ import type { NextApiRequest, NextApiResponse } from "next"
 
 import { useApolloClient } from '@apollo/client'
 
-const client = useApolloClient()
-
 type Data = {
   word: string,
   // client: ApolloClient<NormalizedCacheObject>
@@ -21,6 +19,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse<Data>) => {
   console.debug('APOLLO CLIENT HTTP (api page/handler) Data', word)
 
   // function SomeComponent() {
+  const client = useApolloClient()
   // `client` is now set to the `ApolloClient` instance being used by the
   // application (that was configured using something like `ApolloProvider`)
   console.debug('APOLLO CLIENT HTTP', client)
