@@ -20,7 +20,7 @@
     "mm:install:pnpm":    "pnpm i",
     "mm:install:noop":    "npm install --no-optional --omit_optional",
     "mm:install:wp":      "pnpm wordpress-plugin",
-    "_______________1": "____ delete build files: use these _____________________",
+    "_______________1": "____ to delete build files: use these __________________",
     "scrub:pnpm":         "rd /S /Q .\\node_modules & del /F .\\pnpm-lock.yaml ;",
     "scrub:next":         "rd /S /Q .\\.next & del /F .\\next-env.d.ts ;",
     "_______________2": "____ active commons: use these _________________________",
