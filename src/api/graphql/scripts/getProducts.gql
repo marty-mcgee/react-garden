@@ -1,5 +1,5 @@
-query GetScenes ($first: Int, $last: Int, $after: String, $before: String) {
-  scenes (first: $first, last: $last, after: $after, before: $before) {
+query GetProducts($first: Int, $last: Int, $after: String, $before: String) {
+  products(first: $first, last: $last, after: $after, before: $before) {
     pageInfo {
       endCursor
       hasNextPage
@@ -9,182 +9,39 @@ query GetScenes ($first: Int, $last: Int, $after: String, $before: String) {
     edges {
       cursor
       node {
-        content
-        contentTypeName
-        # databaseId
-        # date
-        # dateGmt
-        # desiredSlug
-        # enclosure
-        # guid
         id
-        # isContentNode
-        # isPreview
-        # isRestricted
-        # isTermNode
-        link
-        # modified
-        # modifiedGmt
-        # previewRevisionDatabaseId
-        # previewRevisionId
         slug
-        status
-        # template {
-        #   templateName
-        # }
-        title
-        uri
-        # custom fields
-        sceneId
-        sceneBgColor
-        sceneBgImage {
-          node {
+        name
+        type
+        databaseId
+        shortDescription
+        image {
+          id
+          sourceUrl
+          altText
+        }
+        galleryImages {
+          nodes {
             id
-            link
-            mediaItemId
-            mediaItemUrl
-            mediaType
-            mediaDetails {
-              file
-              height
-              width
-            }
+            sourceUrl
+            altText
           }
         }
-        sceneBgImageNx {
-          node {
-            mediaItemId
-            mediaItemUrl
-            mediaType
-            mediaDetails {
-              file
-              height
-              width
-            }
-            sourceUrl
-            title
-            uri
-            link
-            slug
-          }
+        ... on SimpleProduct {
+          onSale
+          price
+          content
+          regularPrice
         }
-        sceneBgImageNy {
-          node {
-            mediaItemId
-            mediaItemUrl
-            mediaType
-            mediaDetails {
-              file
-              height
-              width
-            }
-            sourceUrl
-            title
-            uri
-            link
-            slug
-          }
-        }
-        sceneBgImageNz {
-          node {
-            mediaItemId
-            mediaItemUrl
-            mediaType
-            mediaDetails {
-              file
-              height
-              width
-            }
-            sourceUrl
-            title
-            uri
-            link
-            slug
-          }
-        }
-        sceneBgImagePx {
-          node {
-            mediaItemId
-            mediaItemUrl
-            mediaType
-            mediaDetails {
-              file
-              height
-              width
-            }
-            sourceUrl
-            title
-            uri
-            link
-            slug
-          }
-        }
-        sceneBgImagePy {
-          node {
-            mediaItemId
-            mediaItemUrl
-            mediaType
-            mediaDetails {
-              file
-              height
-              width
-            }
-            sourceUrl
-            title
-            uri
-            link
-            slug
-          }
-        }
-        sceneBgImagePz {
-          node {
-            mediaItemId
-            mediaItemUrl
-            mediaType
-            mediaDetails {
-              file
-              height
-              width
-            }
-            sourceUrl
-            title
-            uri
-            link
-            slug
-          }
-        }
-        scenePlaneWidthX
-        scenePlaneHeightY
-        scenePlaneLengthZ
-        scenePlaneTextureRepeatX
-        scenePlaneTextureRepeatY
-        scenePlaneTextureRepeatZ
-        scenePlaneTextureImage {
-          node {
-            mediaDetails {
-              file
-              height
-              width
-            }
-            link
-            slug
-            sourceUrl
-            title
-            uri
-          }
+        ... on VariableProduct {
+          onSale
+          price
+          content
+          regularPrice
         }
       }
     }
   }
-  # allotments {
-  #   nodes
-  # }
-  # beds {
-  #   nodes
-  # }
-  # plants {
-  #   nodes
-  # }
 }
 
 # GQL QUERY RETURNS: {.json}

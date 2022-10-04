@@ -2,10 +2,12 @@ import { ApolloClient, ApolloLink, InMemoryCache } from "@apollo/client"
 import { HttpLink } from "apollo-link-http"
 import { RestLink } from "apollo-link-rest"
 
+const uri = process.env.NEXT_PUBLIC_WP_GRAPHQL_API_URL
+// console.debug("uri", uri)
+
 // ** GraphQL over HTTP directly
 const httpLink1 = new HttpLink({
-  // uri: process.env.WP_GRAPHQL_API_URL,
-  uri: 'https://threed.design.local/graphql',
+  uri: uri,
 })
 // const httpLink2 = new HttpLink({
 //   // uri: "https://48p1r2roz4.sse.codesandbox.io",

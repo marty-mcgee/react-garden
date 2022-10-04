@@ -1,5 +1,5 @@
-query GetScenes ($first: Int, $last: Int, $after: String, $before: String) {
-  scenes (first: $first, last: $last, after: $after, before: $before) {
+query GetAllotments ($first: Int, $last: Int, $after: String, $before: String) {
+  allotments (first: $first, last: $last, after: $after, before: $before) {
     pageInfo {
       endCursor
       hasNextPage
@@ -35,144 +35,38 @@ query GetScenes ($first: Int, $last: Int, $after: String, $before: String) {
         title
         uri
         # custom fields
-        sceneId
-        sceneBgColor
-        sceneBgImage {
+        allotmentColor
+        allotmentHeightY
+        allotmentId
+        allotmentLengthZ
+        allotmentOrientation
+        allotmentScene {
           node {
             id
-            link
-            mediaItemId
+            sceneId
+            title
+          }
+        }
+        allotmentShape
+        allotmentTextureImage {
+          node {
+            id
             mediaItemUrl
+            mediaItemId
             mediaType
             mediaDetails {
               file
               height
               width
             }
-          }
-        }
-        sceneBgImageNx {
-          node {
-            mediaItemId
-            mediaItemUrl
-            mediaType
-            mediaDetails {
-              file
-              height
-              width
-            }
-            sourceUrl
-            title
-            uri
-            link
-            slug
-          }
-        }
-        sceneBgImageNy {
-          node {
-            mediaItemId
-            mediaItemUrl
-            mediaType
-            mediaDetails {
-              file
-              height
-              width
-            }
-            sourceUrl
-            title
-            uri
-            link
-            slug
-          }
-        }
-        sceneBgImageNz {
-          node {
-            mediaItemId
-            mediaItemUrl
-            mediaType
-            mediaDetails {
-              file
-              height
-              width
-            }
-            sourceUrl
-            title
-            uri
-            link
-            slug
-          }
-        }
-        sceneBgImagePx {
-          node {
-            mediaItemId
-            mediaItemUrl
-            mediaType
-            mediaDetails {
-              file
-              height
-              width
-            }
-            sourceUrl
-            title
-            uri
-            link
-            slug
-          }
-        }
-        sceneBgImagePy {
-          node {
-            mediaItemId
-            mediaItemUrl
-            mediaType
-            mediaDetails {
-              file
-              height
-              width
-            }
-            sourceUrl
-            title
-            uri
-            link
-            slug
-          }
-        }
-        sceneBgImagePz {
-          node {
-            mediaItemId
-            mediaItemUrl
-            mediaType
-            mediaDetails {
-              file
-              height
-              width
-            }
-            sourceUrl
-            title
-            uri
-            link
-            slug
-          }
-        }
-        scenePlaneWidthX
-        scenePlaneHeightY
-        scenePlaneLengthZ
-        scenePlaneTextureRepeatX
-        scenePlaneTextureRepeatY
-        scenePlaneTextureRepeatZ
-        scenePlaneTextureImage {
-          node {
-            mediaDetails {
-              file
-              height
-              width
-            }
-            link
             slug
             sourceUrl
-            title
+            status
             uri
+            title
           }
         }
+        allotmentWidthX
       }
     }
   }

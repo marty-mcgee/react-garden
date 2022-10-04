@@ -89,8 +89,13 @@ import {
 import { useApolloClient } from '@apollo/client'
 // ** GraphQL Apollo Client (in App context provider)
 // import '~/api/graphql/client'
-// ** GraphQL Queries + Mutations (here, locally specific data needs)
-// import '~/api/graphql/getScenes.gql'
+// ** GraphQL Queries + Mutations (here, locally-specific data needs)
+import GetScenes from '~/api/graphql/scripts/getScenes.gql'
+// import GetAllotments from '~/api/graphql/scripts/getAllotments.gql'
+// import GetBeds from '~/api/graphql/scripts/getBeds.gql'
+// import GetPlants from '~/api/graphql/scripts/getPlants.gql'
+// import GetPlantingPlans from '~/api/graphql/scripts/getPlantingPlans.gql'
+import GetProducts from '~/api/graphql/scripts/getProducts.gql'
 
 // ** Next Imports
 import Image from "next/future/image"

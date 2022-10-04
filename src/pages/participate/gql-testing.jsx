@@ -1,61 +1,21 @@
-import { FunctionComponent } from 'react'
+// import { FunctionComponent } from 'react'
 import { useQuery, gql } from '@apollo/client'
 
 import GetScenes from '~/api/graphql/scripts/getScenes.gql'
+// import GetAllotments from '~/api/graphql/scripts/getAllotments.gql'
+// import GetBeds from '~/api/graphql/scripts/getBeds.gql'
+// import GetPlants from '~/api/graphql/scripts/getPlants.gql'
+// import GetPlantingPlans from '~/api/graphql/scripts/getPlantingPlans.gql'
+import GetProducts from '~/api/graphql/scripts/getProducts.gql'
 
 // gql string
 const SCENES = GetScenes
 
 // https://scottbolinger.com/woocommerce-app-react-wpgraphql/
-const PRODUCTS = gql`
-query GetProducts($first: Int, $last: Int, $after: String, $before: String) {
-  products(first: $first, last: $last, after: $after, before: $before) {
-    pageInfo {
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-    }
-    edges {
-      cursor
-      node {
-        id
-        slug
-        name
-        type
-        databaseId
-        shortDescription
-        image {
-          id
-          sourceUrl
-          altText
-        }
-        galleryImages {
-          nodes {
-            id
-            sourceUrl
-            altText
-          }
-        }
-        ... on SimpleProduct {
-          onSale
-          price
-          content
-          regularPrice
-        }
-        ... on VariableProduct {
-          onSale
-          price
-          content
-          regularPrice
-        }
-      }
-    }
-  }
-}
-`
+const PRODUCTS = GetProducts
 
-function Scenes() {
+// FunctionComponent
+const Scenes = () => {
 
   // return <div>MARTY MARTY MARTY MARTY</div>
 
