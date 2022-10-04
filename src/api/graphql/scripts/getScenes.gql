@@ -190,223 +190,163 @@ query GetScenes ($first: Int, $last: Int, $after: String, $before: String) {
 # {
 #   "data": {
 #     "scenes": {
-#       "nodes": [
-#         {
-#           "content": "\n<p>Private home set of 2 gardening allotments, 1 hen house, 1 greenhouse, 1 power station, in Inglenook, California.</p>\n",
-#           "contentTypeName": "threed_scene",
-#           "databaseId": 78,
-#           "date": "2022-09-17T18:19:30",
-#           "dateGmt": "2022-09-17T18:19:30",
-#           "desiredSlug": null,
-#           "enclosure": null,
-#           "guid": "https://threed.design.local/?post_type=threed_scene&#038;p=78",
-#           "id": "cG9zdDo3OA==",
-#           "isContentNode": true,
-#           "isPreview": false,
-#           "isRestricted": false,
-#           "isTermNode": false,
-#           "link": "https://threed.design.local/threed-scene/mcgee-home-garden/",
-#           "modified": "2022-09-17T18:58:32",
-#           "modifiedGmt": "2022-09-17T18:58:32",
-#           "previewRevisionDatabaseId": null,
-#           "previewRevisionId": null,
-#           "sceneBgColor": "#333333",
-#           "sceneBgImage": {
-#             "node": {
-#               "id": "cG9zdDo4Mw==",
-#               "link": "https://threed.design.local/threed-scene/mcgee-home-garden/idahomeadow_01-scaled/",
-#               "mediaItemId": 83,
-#               "mediaItemUrl": "https://threed.design.local/wp-content/uploads/2022/09/idahomeadow_01-scaled-1.jpg",
-#               "mediaType": "image",
-#               "mediaDetails": {
-#                 "file": "2022/09/idahomeadow_01-scaled-1.jpg",
-#                 "height": 561,
-#                 "width": 2560
-#               }
-#             }
-#           },
-#           "sceneBgImageNx": {
-#             "node": {
-#               "mediaItemId": 84,
-#               "mediaItemUrl": "https://threed.design.local/wp-content/uploads/2022/09/nx.png",
-#               "mediaType": "image",
-#               "mediaDetails": {
-#                 "file": "2022/09/nx.png",
-#                 "height": 512,
-#                 "width": 512
-#               },
-#               "sourceUrl": "https://threed.design.local/wp-content/uploads/2022/09/nx.png",
-#               "title": "nx",
-#               "uri": "/threed-scene/mcgee-home-garden/nx/",
-#               "link": "https://threed.design.local/threed-scene/mcgee-home-garden/nx/",
-#               "slug": "nx"
-#             }
-#           },
-#           "sceneBgImageNy": {
-#             "node": {
-#               "mediaItemId": 85,
-#               "mediaItemUrl": "https://threed.design.local/wp-content/uploads/2022/09/ny.png",
-#               "mediaType": "image",
-#               "mediaDetails": {
-#                 "file": "2022/09/ny.png",
-#                 "height": 512,
-#                 "width": 512
-#               },
-#               "sourceUrl": "https://threed.design.local/wp-content/uploads/2022/09/ny.png",
-#               "title": "ny",
-#               "uri": "/threed-scene/mcgee-home-garden/ny/",
-#               "link": "https://threed.design.local/threed-scene/mcgee-home-garden/ny/",
-#               "slug": "ny"
-#             }
-#           },
-#           "sceneBgImageNz": {
-#             "node": {
-#               "mediaItemId": 86,
-#               "mediaItemUrl": "https://threed.design.local/wp-content/uploads/2022/09/nz.png",
-#               "mediaType": "image",
-#               "mediaDetails": {
-#                 "file": "2022/09/nz.png",
-#                 "height": 512,
-#                 "width": 512
-#               },
-#               "sourceUrl": "https://threed.design.local/wp-content/uploads/2022/09/nz.png",
-#               "title": "nz",
-#               "uri": "/threed-scene/mcgee-home-garden/nz/",
-#               "link": "https://threed.design.local/threed-scene/mcgee-home-garden/nz/",
-#               "slug": "nz"
-#             }
-#           },
-#           "sceneBgImagePx": {
-#             "node": {
-#               "mediaItemId": 87,
-#               "mediaItemUrl": "https://threed.design.local/wp-content/uploads/2022/09/px.png",
-#               "mediaType": "image",
-#               "mediaDetails": {
-#                 "file": "2022/09/px.png",
-#                 "height": 512,
-#                 "width": 512
-#               },
-#               "sourceUrl": "https://threed.design.local/wp-content/uploads/2022/09/px.png",
-#               "title": "px",
-#               "uri": "/threed-scene/mcgee-home-garden/px/",
-#               "link": "https://threed.design.local/threed-scene/mcgee-home-garden/px/",
-#               "slug": "px"
-#             }
-#           },
-#           "sceneBgImagePy": {
-#             "node": {
-#               "mediaItemId": 88,
-#               "mediaItemUrl": "https://threed.design.local/wp-content/uploads/2022/09/py.png",
-#               "mediaType": "image",
-#               "mediaDetails": {
-#                 "file": "2022/09/py.png",
-#                 "height": 512,
-#                 "width": 512
-#               },
-#               "sourceUrl": "https://threed.design.local/wp-content/uploads/2022/09/py.png",
-#               "title": "py",
-#               "uri": "/threed-scene/mcgee-home-garden/py/",
-#               "link": "https://threed.design.local/threed-scene/mcgee-home-garden/py/",
-#               "slug": "py"
-#             }
-#           },
-#           "sceneBgImagePz": {
-#             "node": {
-#               "mediaItemId": 89,
-#               "mediaItemUrl": "https://threed.design.local/wp-content/uploads/2022/09/pz.png",
-#               "mediaType": "image",
-#               "mediaDetails": {
-#                 "file": "2022/09/pz.png",
-#                 "height": 512,
-#                 "width": 512
-#               },
-#               "sourceUrl": "https://threed.design.local/wp-content/uploads/2022/09/pz.png",
-#               "title": "pz",
-#               "uri": "/threed-scene/mcgee-home-garden/pz/",
-#               "link": "https://threed.design.local/threed-scene/mcgee-home-garden/pz/",
-#               "slug": "pz"
-#             }
-#           },
-#           "sceneId": 78,
-#           "scenePlaneWidthX": 300,
-#           "scenePlaneHeightY": 300,
-#           "scenePlaneLengthZ": 0,
-#           "scenePlaneTextureRepeatX": 4,
-#           "scenePlaneTextureRepeatY": 4,
-#           "scenePlaneTextureRepeatZ": 0,
-#           "scenePlaneTextureImage": {
-#             "node": {
-#               "mediaDetails": {
-#                 "file": "2022/09/grasslight-big.jpg",
-#                 "height": 2048,
-#                 "width": 2048
-#               },
-#               "link": "https://threed.design.local/threed-scene/mcgee-home-garden/grasslight-big/",
-#               "slug": "grasslight-big",
-#               "sourceUrl": "https://threed.design.local/wp-content/uploads/2022/09/grasslight-big.jpg",
-#               "title": "grasslight-big",
-#               "uri": "/threed-scene/mcgee-home-garden/grasslight-big/"
-#             }
-#           },
-#           "slug": "mcgee-home-garden",
-#           "status": "publish",
-#           "template": {
-#             "templateName": "Default"
-#           },
-#           "title": "McGee Home Garden",
-#           "uri": "/threed-scene/mcgee-home-garden/"
-#         }
-#       ],
 #       "pageInfo": {
 #         "endCursor": "YXJyYXljb25uZWN0aW9uOjc4",
+#         "hasNextPage": false,
+#         "hasPreviousPage": false,
 #         "startCursor": "YXJyYXljb25uZWN0aW9uOjc4"
-#       }
-#     },
-#     "allotments": {
-#       "nodes": [
+#       },
+#       "edges": [
 #         {
-#           "id": "cG9zdDoxMDQ="
-#         },
-#         {
-#           "id": "cG9zdDoxMDM="
-#         },
-#         {
-#           "id": "cG9zdDoxMDI="
-#         },
-#         {
-#           "id": "cG9zdDoxMDE="
-#         }
-#       ]
-#     },
-#     "beds": {
-#       "nodes": [
-#         {
-#           "id": "cG9zdDoxNjc="
-#         },
-#         {
-#           "id": "cG9zdDoxNjY="
-#         },
-#         {
-#           "id": "cG9zdDoxNjU="
-#         },
-#         {
-#           "id": "cG9zdDoxNjQ="
-#         },
-#         {
-#           "id": "cG9zdDoxNjM="
-#         },
-#         {
-#           "id": "cG9zdDoxNjI="
-#         },
-#         {
-#           "id": "cG9zdDoxNDk="
-#         }
-#       ]
-#     },
-#     "plants": {
-#       "nodes": [
-#         {
-#           "id": "cG9zdDoxNjg="
+#           "cursor": "YXJyYXljb25uZWN0aW9uOjc4",
+#           "node": {
+#             "content": "\n<p>Private home set of 2 gardening allotments, 1 hen house, 1 greenhouse, 1 power station, in Inglenook, California.</p>\n",
+#             "contentTypeName": "threed_scene",
+#             "id": "cG9zdDo3OA==",
+#             "link": "https://threed.design.local/threed-scene/mcgee-home-garden/",
+#             "sceneBgColor": "#333333",
+#             "sceneBgImage": {
+#               "node": {
+#                 "id": "cG9zdDo4Mw==",
+#                 "link": "https://threed.design.local/threed-scene/mcgee-home-garden/idahomeadow_01-scaled/",
+#                 "mediaItemId": 83,
+#                 "mediaItemUrl": "https://threed.design.local/wp-content/uploads/2022/09/idahomeadow_01-scaled-1.jpg",
+#                 "mediaType": "image",
+#                 "mediaDetails": {
+#                   "file": "2022/09/idahomeadow_01-scaled-1.jpg",
+#                   "height": 561,
+#                   "width": 2560
+#                 }
+#               }
+#             },
+#             "sceneBgImageNx": {
+#               "node": {
+#                 "mediaItemId": 84,
+#                 "mediaItemUrl": "https://threed.design.local/wp-content/uploads/2022/09/nx.png",
+#                 "mediaType": "image",
+#                 "mediaDetails": {
+#                   "file": "2022/09/nx.png",
+#                   "height": 512,
+#                   "width": 512
+#                 },
+#                 "sourceUrl": "https://threed.design.local/wp-content/uploads/2022/09/nx.png",
+#                 "title": "nx",
+#                 "uri": "/threed-scene/mcgee-home-garden/nx/",
+#                 "link": "https://threed.design.local/threed-scene/mcgee-home-garden/nx/",
+#                 "slug": "nx"
+#               }
+#             },
+#             "sceneBgImageNy": {
+#               "node": {
+#                 "mediaItemId": 85,
+#                 "mediaItemUrl": "https://threed.design.local/wp-content/uploads/2022/09/ny.png",
+#                 "mediaType": "image",
+#                 "mediaDetails": {
+#                   "file": "2022/09/ny.png",
+#                   "height": 512,
+#                   "width": 512
+#                 },
+#                 "sourceUrl": "https://threed.design.local/wp-content/uploads/2022/09/ny.png",
+#                 "title": "ny",
+#                 "uri": "/threed-scene/mcgee-home-garden/ny/",
+#                 "link": "https://threed.design.local/threed-scene/mcgee-home-garden/ny/",
+#                 "slug": "ny"
+#               }
+#             },
+#             "sceneBgImageNz": {
+#               "node": {
+#                 "mediaItemId": 86,
+#                 "mediaItemUrl": "https://threed.design.local/wp-content/uploads/2022/09/nz.png",
+#                 "mediaType": "image",
+#                 "mediaDetails": {
+#                   "file": "2022/09/nz.png",
+#                   "height": 512,
+#                   "width": 512
+#                 },
+#                 "sourceUrl": "https://threed.design.local/wp-content/uploads/2022/09/nz.png",
+#                 "title": "nz",
+#                 "uri": "/threed-scene/mcgee-home-garden/nz/",
+#                 "link": "https://threed.design.local/threed-scene/mcgee-home-garden/nz/",
+#                 "slug": "nz"
+#               }
+#             },
+#             "sceneBgImagePx": {
+#               "node": {
+#                 "mediaItemId": 87,
+#                 "mediaItemUrl": "https://threed.design.local/wp-content/uploads/2022/09/px.png",
+#                 "mediaType": "image",
+#                 "mediaDetails": {
+#                   "file": "2022/09/px.png",
+#                   "height": 512,
+#                   "width": 512
+#                 },
+#                 "sourceUrl": "https://threed.design.local/wp-content/uploads/2022/09/px.png",
+#                 "title": "px",
+#                 "uri": "/threed-scene/mcgee-home-garden/px/",
+#                 "link": "https://threed.design.local/threed-scene/mcgee-home-garden/px/",
+#                 "slug": "px"
+#               }
+#             },
+#             "sceneBgImagePy": {
+#               "node": {
+#                 "mediaItemId": 88,
+#                 "mediaItemUrl": "https://threed.design.local/wp-content/uploads/2022/09/py.png",
+#                 "mediaType": "image",
+#                 "mediaDetails": {
+#                   "file": "2022/09/py.png",
+#                   "height": 512,
+#                   "width": 512
+#                 },
+#                 "sourceUrl": "https://threed.design.local/wp-content/uploads/2022/09/py.png",
+#                 "title": "py",
+#                 "uri": "/threed-scene/mcgee-home-garden/py/",
+#                 "link": "https://threed.design.local/threed-scene/mcgee-home-garden/py/",
+#                 "slug": "py"
+#               }
+#             },
+#             "sceneBgImagePz": {
+#               "node": {
+#                 "mediaItemId": 89,
+#                 "mediaItemUrl": "https://threed.design.local/wp-content/uploads/2022/09/pz.png",
+#                 "mediaType": "image",
+#                 "mediaDetails": {
+#                   "file": "2022/09/pz.png",
+#                   "height": 512,
+#                   "width": 512
+#                 },
+#                 "sourceUrl": "https://threed.design.local/wp-content/uploads/2022/09/pz.png",
+#                 "title": "pz",
+#                 "uri": "/threed-scene/mcgee-home-garden/pz/",
+#                 "link": "https://threed.design.local/threed-scene/mcgee-home-garden/pz/",
+#                 "slug": "pz"
+#               }
+#             },
+#             "sceneId": 78,
+#             "scenePlaneWidthX": 300,
+#             "scenePlaneHeightY": 300,
+#             "scenePlaneLengthZ": 0,
+#             "scenePlaneTextureRepeatX": 4,
+#             "scenePlaneTextureRepeatY": 4,
+#             "scenePlaneTextureRepeatZ": 0,
+#             "scenePlaneTextureImage": {
+#               "node": {
+#                 "mediaDetails": {
+#                   "file": "2022/09/grasslight-big.jpg",
+#                   "height": 2048,
+#                   "width": 2048
+#                 },
+#                 "link": "https://threed.design.local/threed-scene/mcgee-home-garden/grasslight-big/",
+#                 "slug": "grasslight-big",
+#                 "sourceUrl": "https://threed.design.local/wp-content/uploads/2022/09/grasslight-big.jpg",
+#                 "title": "grasslight-big",
+#                 "uri": "/threed-scene/mcgee-home-garden/grasslight-big/"
+#               }
+#             },
+#             "slug": "mcgee-home-garden",
+#             "status": "publish",
+#             "title": "McGee Home Garden",
+#             "uri": "/threed-scene/mcgee-home-garden/"
+#           }
 #         }
 #       ]
 #     }
