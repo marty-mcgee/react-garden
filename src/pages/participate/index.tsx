@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 
 // ** ThreeDGarden Imports
-import ThreeDGarden from "~/components/threed/ThreeDGarden"
+import ThreeDGarden from '~/components/threed/ThreeDGarden'
 
 const ParticipatePage = () => {
 
@@ -30,7 +30,7 @@ const ParticipatePage = () => {
         <Card>
           <CardHeader title='Public Content' />
           <CardContent>
-            <Typography sx={{ mb: 4 }}>No user role "ability" is required to view this card</Typography>
+            <Typography sx={{ mb: 4 }}>No user role 'ability' is required to view this card</Typography>
             <Typography sx={{ color: 'primary.main' }}>This card is visible to both 'user' and 'admin'</Typography>
           </CardContent>
         </Card>

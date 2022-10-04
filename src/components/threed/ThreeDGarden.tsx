@@ -85,6 +85,8 @@ import {
   sceneStore
 } from '~/components/threed/stores'
 
+// ** Import Apollo stuff
+import { useApolloClient } from '@apollo/client'
 // ** GraphQL Apollo Client (in App context provider)
 // import '~/api/graphql/client'
 // ** GraphQL Queries + Mutations (here, locally specific data needs)

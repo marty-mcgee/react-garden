@@ -73,40 +73,53 @@ const nextConfig = {
   // },
 
   // ** WEBPACK 5
-  // webpack: (config, options) => {
-  //   // eslint-disable-next-line no-param-reassign
-  //   config.resolve.alias = {
-  //     ...config.resolve.alias,
-  //     apexcharts: path.resolve(__dirname, './node_modules/apexcharts-clevision')
-  //   }
+  webpack: (config, options) => {
 
-  //   // doesn't work, but the thought is there
-  //   // config.plugin('@typescript-eslint')
-  //   //   .tap(args => {
-  //   //     args[0].emitWarning = false
-  //   //     args[0].emitError = false
-  //   //     args[0].failOnWarning = false
-  //   //     args[0].failOnError = false
-  //   //     return args
-  //   //   })
+    // eslint-disable-next-line no-param-reassign
+    // config.resolve.alias = {
+    //   ...config.resolve.alias,
+    //   apexcharts: path.resolve(__dirname, './node_modules/apexcharts-clevision')
+    // }
 
-  //   // config.node = {
-  //   //   fs: "empty",
-  //   // }
-  //   config.module.rules.push({
-  //     use: [
-  //       options.defaultLoaders.babel,
-  //       {
-  //         loader: "url-loader?limit=100000",
-  //       },
-  //       {
-  //         loader: "file-loader",
-  //       },
-  //     ],
-  //   })
+    // doesn't work, but the thought is there
+    // config.plugin('@typescript-eslint')
+    //   .tap(args => {
+    //     args[0].emitWarning = false
+    //     args[0].emitError = false
+    //     args[0].failOnWarning = false
+    //     args[0].failOnError = false
+    //     return args
+    //   })
 
-  //   return config
-  // }
+    // config.node = {
+    //   fs: "empty",
+    // }
+
+    // config.module.rules.push({
+    //   use: [
+    //     options.defaultLoaders.babel,
+    //     {
+    //       loader: "url-loader?limit=100000",
+    //     },
+    //     {
+    //       loader: "file-loader",
+    //     },
+    //   ],
+    // })
+
+    config.module.rules.push({
+      test: /\.(graphql|gql)$/,
+      include: [/src/],
+      exclude: /node_modules/,
+      use: [
+        {
+          loader: 'graphql-tag/loader'
+        }
+      ]
+    })
+
+    return config
+  }
 
   // NOT NEEDED HERE: instead, use .env.local to safely load env variables as needed (NEXT_PUBLIC_)
   // env: {

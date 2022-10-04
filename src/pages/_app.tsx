@@ -22,7 +22,8 @@ import '~/@fake-db'
 
 // ** GraphQL
 import { ApolloProvider } from '@apollo/client'
-import { client } from '~/api/graphql/client'
+import { client as clientMain } from '~/api/graphql/client'
+import { client as clientExample } from '~/api/graphql/client-example'
 
 // ** Third Party Import
 import { Toaster } from 'react-hot-toast'
@@ -76,14 +77,17 @@ import appleIcon from '~/assets/images/logos/apple-icon.png'
 // import brandDark from '~/assets/images/logos/logo-threedgarden-alt.png'
 // import brandText from '~/assets/images/logos/logo-threedgarden-text.png'
 
+// ============================================================
 // WORKAROUND -- for ToastPosition bug
 // from: node_modules\react-hot-toast\dist\core\types.d.ts
 // export declare
 type ToastPosition = 'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'
 
+// ============================================================
 // ** Emotion Cache for client
 const clientSideEmotionCache = createEmotionCache()
 
+// ============================================================
 // ** Pace Loader
 if (themeConfig.routingLoader) {
   Router.events.on('routeChangeStart', () => {
@@ -97,6 +101,7 @@ if (themeConfig.routingLoader) {
   })
 }
 
+// ============================================================
 const Guard = ({ children, authGuard, guestGuard }: any) => {
   if (guestGuard) {
     return <GuestGuard fallback={<Spinner />}>{children}</GuestGuard>
@@ -107,7 +112,8 @@ const Guard = ({ children, authGuard, guestGuard }: any) => {
   }
 }
 
-// ** Configure JSS & ClassName
+// ============================================================
+// ** Construct App using Function Component (Functional Noun)
 const App = (props: any) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
 
@@ -121,7 +127,7 @@ const App = (props: any) => {
   return (
     <Provider store={store}>
       <CacheProvider value={emotionCache}>
-        <ApolloProvider client={client}>
+        <ApolloProvider client={clientMain}>
           <Head>
             <title>{`${themeConfig.templateName} - ThreeD Garden Admin Dashboard`}</title>
             <meta

@@ -3,17 +3,16 @@ import { HttpLink } from "apollo-link-http"
 import { RestLink } from "apollo-link-rest"
 
 // ** GraphQL over HTTP directly
-const httpLink1 = new HttpLink({
-  // uri: process.env.WP_GRAPHQL_API_URL,
-  uri: 'https://threed.design.local/graphql',
-})
-// const httpLink2 = new HttpLink({
-//   // uri: "https://48p1r2roz4.sse.codesandbox.io",
-//   uri: "https://swop.cx/graphql",
-//   headers: {
-//     "Authorization": "ApiKey 247274635d7e61df438e3bf0952d337dda97c77484c63b333960cce3863242c9"
-//   }
+// const httpLink1 = new HttpLink({
+//   uri: process.env.WP_GRAPHQL_API_URL,
 // })
+const httpLink2 = new HttpLink({
+  // uri: "https://48p1r2roz4.sse.codesandbox.io",
+  uri: "https://swop.cx/graphql",
+  headers: {
+    "Authorization": "ApiKey 247274635d7e61df438e3bf0952d337dda97c77484c63b333960cce3863242c9"
+  }
+})
 
 // ** GraphQL over REST via HTTP
 // const restLink1 = new RestLink({
@@ -31,8 +30,8 @@ export const client = new ApolloClient({
   cache: new InMemoryCache(),
   // link: ApolloLink.from([httpLink1, httpLink2]),
   // link: ApolloLink.from([restLink1, httpLink1]),
-  link: ApolloLink.from([httpLink1]),
-  // link: ApolloLink.from([httpLink2]),
+  // link: ApolloLink.from([httpLink1]),
+  link: ApolloLink.from([httpLink2]),
 })
 
 // export const clientExample = new ApolloClient({

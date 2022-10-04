@@ -1,6 +1,6 @@
-schema
-@sdl(
-  files: ["schema/scenes.graphql"]
-) {
-  query: Query
-}
+// schema
+// @sdl(
+//   files: ["schema/scenes.graphql"]
+// ) {
+//   query: Query
+// }
