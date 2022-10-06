@@ -1,9 +1,10 @@
-import { ApolloClient, ApolloLink, InMemoryCache } from "@apollo/client"
-import { HttpLink } from "apollo-link-http"
+// ** Apollo Client State Management using Cache/Store (via GraphQL)
+import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from "@apollo/client"
 import { RestLink } from "apollo-link-rest"
 
 const uri = process.env.NEXT_PUBLIC_WP_GRAPHQL_API_URL
-// console.debug("uri", uri)
+const uri_rest = process.env.NEXT_PUBLIC_WP_REST_API_URL
+// console.debug("uri", uri, uri_rest)
 
 // ** GraphQL over HTTP directly
 const httpLink1 = new HttpLink({
@@ -30,7 +31,9 @@ const httpLink1 = new HttpLink({
 // })
 
 export const client = new ApolloClient({
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    // typePolicies: ac3Store.getTypePolicies()
+  }),
   // link: ApolloLink.from([httpLink1, httpLink2]),
   // link: ApolloLink.from([restLink1, httpLink1]),
   link: ApolloLink.from([httpLink1]),

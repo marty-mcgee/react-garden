@@ -2,9 +2,9 @@
 import Head from 'next/head'
 import { Router } from 'next/router'
 
-// ** Store Imports
-import { store } from '~/store'
-import { Provider } from 'react-redux'
+// ** Redux Store Imports
+import { Provider as ReduxProvider } from 'react-redux'
+import { store as reduxStore } from '~/store'
 
 // ** Loader Import
 import NProgress from 'nprogress'
@@ -20,10 +20,9 @@ import themeConfig from '~/configs/themeConfig'
 // ** Fake-DB Import
 import '~/@fake-db'
 
-// ** GraphQL
+// ** Apollo Client -- State Management using Cache/Store (via GraphQL)
 import { ApolloProvider } from '@apollo/client'
-import { client as clientMain } from '~/api/graphql/client'
-import { client as clientExample } from '~/api/graphql/client-example'
+import { client } from '~/api/graphql/client'
 
 // ** Third Party Import
 import { Toaster } from 'react-hot-toast'
@@ -125,9 +124,9 @@ const App = (props: any) => {
   const aclAbilities = Component.acl ?? defaultACLObj
 
   return (
-    <Provider store={store}>
+    <ReduxProvider store={reduxStore}>
       <CacheProvider value={emotionCache}>
-        <ApolloProvider client={clientMain}>
+        <ApolloProvider client={client}>
           <Head>
             <title>{`${themeConfig.templateName} - ThreeD Garden Admin Dashboard`}</title>
             <meta
@@ -192,7 +191,7 @@ const App = (props: any) => {
           </AuthProvider>
         </ApolloProvider>
       </CacheProvider>
-    </Provider>
+    </ReduxProvider>
   )
 }
 

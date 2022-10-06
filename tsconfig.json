@@ -33,5 +33,5 @@
   },
   "exclude": ["node_modules"], // does this even work ??
   // "include": ["src"],
-  "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx", "src/components/threed/components/exchangeRates.jsx", "src/pages/participate/gql-testing.jsx"]
+  "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx"]
 }
