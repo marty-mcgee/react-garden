@@ -10,7 +10,7 @@ import { createStore } from '@udecode/zustood'
 import { v4 as newUUID } from 'uuid'
 
 // ** Import Apollo stuff
-import { apolloClient, useApolloClient, useQuery, gql } from '@apollo/client'
+import { ApolloClient, useApolloClient, useQuery, gql } from '@apollo/client'
 import create from '~/api/graphql/createStore'
 // ** GraphQL Queries + Mutations (here, locally-specific data needs)
 import GetScenes from '~/api/graphql/scripts/getScenes.gql'
@@ -613,7 +613,7 @@ export const useSceneStore = create((set, get, api) => ({
       //   networkStatus
       // } = useQuery(SCENES, { parameters })
       // `client` here is your instantiated `ApolloClient` instance
-      const data = await apolloClient.query({
+      const data = await ApolloClient.query({
         query: SCENES,
         variables: { parameters }
       })
