@@ -65,7 +65,7 @@ import {
   SyntheticEvent
 } from "react"
 
-// ** Zustand + Zustood Imports
+// ** Zustand + Zustood Imports (FROM STORES !!!)
 // state management (instead of React.useState)
 // import create from "zustand"
 // import shallow from "zustand/shallow"
@@ -85,17 +85,7 @@ import {
   sceneStore
 } from '~/components/threed/stores'
 
-// ** Import Apollo stuff
-import { useApolloClient } from '@apollo/client'
-// ** GraphQL Apollo Client (in App context provider)
-// import '~/api/graphql/client'
-// ** GraphQL Queries + Mutations (here, locally-specific data needs)
-import GetScenes from '~/api/graphql/scripts/getScenes.gql'
-// import GetAllotments from '~/api/graphql/scripts/getAllotments.gql'
-// import GetBeds from '~/api/graphql/scripts/getBeds.gql'
-// import GetPlants from '~/api/graphql/scripts/getPlants.gql'
-// import GetPlantingPlans from '~/api/graphql/scripts/getPlantingPlans.gql'
-import GetProducts from '~/api/graphql/scripts/getProducts.gql'
+// ** Import Apollo stuff (in STORES !!!)
 
 // ** Next Imports
 import Image from "next/future/image"
@@ -165,48 +155,15 @@ import ToolIconAddRoof from "@mui/icons-material/Roofing"
 import ToolIconAddRuler from "@mui/icons-material/Straighten"
 import ToolIconAddText from "@mui/icons-material/TextFields"
 
-// ==========================================================
-// COLORFUL CONSOLE MESSAGES (ccm)
-
-const ccm0 = "color: white; font-size: 12px;"
-const ccm1 = "color: green; font-size: 12px;"
-const ccm2 = "color: red; font-size: 12px;"
-const ccm3 = "color: orange; font-size: 12px;"
-const ccm4 = "color: yellow; font-size: 12px;"
-const ccm5 = "color: blue; font-size: 12px;"
-console.log("%cThreeDGarden<FC,R3F>: {.tsx}", ccm1)
+// [MM] COLORFUL CONSOLE MESSAGES (ccm)
+import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5 } from '~/@core/utils/console-colors'
+console.log("%cThreeDGarden<FC,R3F>: {.tsx}", ccm4)
 // console.log("%cWHOOPSIES", ccm2)
 
 // ==========================================================
 // DELETE OBJECT KEYS: RESET OBJECT TO {}
 
-const clearObject = (object: any, option: number = 1) => {
-  switch (option) {
-    // option 1 // ES5
-    case 1:
-      Object.keys(object).forEach(key => {
-        delete object[key]
-      })
-      break
-    // option 2 // ES6
-    case 2:
-      for (const key in object) {
-        delete object[key]
-      }
-      break
-    // option 3 // ES5: for enumerable and non-enumerable properties
-    case 3:
-      Object.getOwnPropertyNames(object).forEach(function (key) {
-        delete object[key]
-      })
-      break
-    // option 4 // ES6: for enumerable and non-enumerable properties
-    case 4:
-      for (const key of Object.getOwnPropertyNames(object)) {
-        delete object[key]
-      }
-  }
-}
+import clearObject from '~/@core/utils/clear-object'
 
 // ==========================================================
 // STYLES
@@ -330,10 +287,10 @@ function ProjectControlPanel() {
   // const increaseProjectCount = useProjectStore((state: any) => state.increaseProjectCount)
 
   const addProject = useProjectStore((state: any) => state.addProject)
-  // const addProject = useProjectStore.getState().addProject() // this executes automatically !! bad
   const saveToDisk = useProjectStore((state: any) => state.saveToDisk)
   const loadFromDisk = useProjectStore((state: any) => state.loadFromDisk)
 
+  // const addProject = useProjectStore.getState().addProject() // this executes automatically !! bad
   // const addProjectAsFunction = () => {
   //   const addProject = useProjectStore.getState().addProject() // this executes automatically !! good
   // }
@@ -373,10 +330,10 @@ function PlanControlPanel() {
   // const increasePlanCount = usePlanStore((state: any) => state.increasePlanCount)
 
   const addPlan = usePlanStore((state: any) => state.addPlan)
-  // const addPlan = usePlanStore.getState().addPlan() // this executes automatically !! bad
   const saveToDisk = usePlanStore((state: any) => state.saveToDisk)
   const loadFromDisk = usePlanStore((state: any) => state.loadFromDisk)
 
+  // const addPlan = usePlanStore.getState().addPlan() // this executes automatically !! bad
   // const addPlanAsFunction = () => {
   //   const addPlan = usePlanStore.getState().addPlan() // this executes automatically !! good
   // }
@@ -390,16 +347,6 @@ function PlanControlPanel() {
       {/* <Button onClick={increasePlanCount}>add to plan count</Button> */}
     </Box>
   )
-}
-
-const createPlan = () => {
-  const plan = usePlanStore(
-    (state: any) => {
-      state.addPlan
-      state.increasePlanCount
-    }
-  )
-  return plan
 }
 
 // ==========================================================
@@ -433,16 +380,6 @@ function FileControlPanel() {
       {/* <Button onClick={increaseFileCount}>add to file count</Button> */}
     </Box>
   )
-}
-
-const createFile = () => {
-  const file = useFileStore(
-    (state: any) => {
-      state.addFile
-      state.increaseFileCount
-    }
-  )
-  return file
 }
 
 // ==========================================================
@@ -520,33 +457,25 @@ function SceneControlPanel() {
   // const increaseSceneCount = useSceneStore((state: any) => state.increaseSceneCount)
 
   const addScene = useSceneStore((state: any) => state.addScene)
-  // const addScene = useSceneStore.getState().addScene() // this executes automatically !! bad
   const saveToDisk = useSceneStore((state: any) => state.saveToDisk)
   const loadFromDisk = useSceneStore((state: any) => state.loadFromDisk)
+  const loadFromDB = useSceneStore((state: any) => state.loadFromDB)
 
+  // const addScene = useSceneStore.getState().addScene() // this executes automatically !! bad
   // const addSceneAsFunction = () => {
-  //   const addScene = useSceneStore.getState().addScene() // this executes automatically !! good
+  //   const addScene = useSceneStore.getState().addScene() // this executes when fn called !! good
   // }
 
   return (
     <Box>
+      {/* <Button onClick={increaseSceneCount}>add to scene count</Button> */}
       {/* <Button onClick={addSceneAsFunction}>add scene()</Button> */}
       <Button onClick={addScene}>add scene</Button>
       <Button onClick={saveToDisk}>save to disk</Button>
       <Button onClick={loadFromDisk}>load from disk</Button>
-      {/* <Button onClick={increaseSceneCount}>add to scene count</Button> */}
+      <Button onClick={loadFromDB}>load from db</Button>
     </Box>
   )
-}
-
-const createScene = () => {
-  const scene = useSceneStore(
-    (state: any) => {
-      state.addScene
-      state.increaseSceneCount
-    }
-  )
-  return scene
 }
 
 // ==========================================================
@@ -580,16 +509,6 @@ function AllotmentControlPanel() {
       {/* <Button onClick={increaseAllotmentCount}>add to file count</Button> */}
     </Box>
   )
-}
-
-const createAllotment = () => {
-  const file = useAllotmentStore(
-    (state: any) => {
-      state.addAllotment
-      state.increaseAllotmentCount
-    }
-  )
-  return file
 }
 
 // ==========================================================
@@ -2109,7 +2028,7 @@ const ToolBar: FunctionComponent = (): JSX.Element => {
                 <Typography onClick={() => usePlanStore.getState().addPlan()}>New Plan</Typography>
               </MenuItem>
               <MenuItem key="Save Plan" onClick={handleCloseActionsMenu}>
-                <Typography id="saveBtn" onClick={usePlanStore.getState().savePlan()}>Save Plan</Typography>
+                <Typography id="saveBtn" onClick={() => usePlanStore.getState().savePlan()}>Save Plan</Typography>
               </MenuItem>
               <MenuItem key="New Simulation" onClick={handleCloseActionsMenu}>
                 <Typography>New Simulation</Typography>
@@ -3635,26 +3554,34 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
     // ==========================================================
     // LOAD HISTORIES FROM DISK
 
-    // // PROJECT HISTORY
-    const projectHistoryFromDisk = useProjectStore.getState().loadFromDisk()
+    // ** PROJECT HISTORY
+    // DO THIS STUFF WHEN ASKED BY AN EVENT/REQUEST
+    // useProjectStore.getState().loadFromDisk()
+    // useProjectStore.getState().loadFromDB()
+    // const projectHistoryFromDisk = useProjectStore.getState().loadFromDisk()
     // console.debug("projectHistoryFromDisk", projectHistoryFromDisk)
-    // console.debug("projectHistoryFromDisk.payload", projectHistoryFromDisk?.payload)
-    const savedProject = projectHistoryFromDisk?.payload ? projectHistoryFromDisk.payload : []
-    // console.debug("savedProject", savedProject)
-    if (savedProject.length) {
-      projectHistory.unshift(...savedProject) // unshift to beginning of array[0]
-    }
+    // DO THIS STUFF IN STORE !!!
+    // // console.debug("projectHistoryFromDisk.payload", projectHistoryFromDisk?.payload)
+    // const savedProject = projectHistoryFromDisk?.payload ? projectHistoryFromDisk.payload : []
+    // // console.debug("savedProject", savedProject)
+    // if (savedProject.length) {
+    //   projectHistory.unshift(...savedProject) // unshift to beginning of array[0]
+    // }
     // console.debug("projectHistory", projectHistory)
 
-    // // PLAN HISTORY
-    const planHistoryFromDisk = usePlanStore.getState().loadFromDisk()
+    // ** PLAN HISTORY
+    // DO THIS STUFF WHEN ASKED BY AN EVENT/REQUEST
+    // usePlanStore.getState().loadFromDisk()
+    // usePlanStore.getState().loadFromDB()
+    // const planHistoryFromDisk = usePlanStore.getState().loadFromDisk()
     // console.debug("planHistoryFromDisk", planHistoryFromDisk)
-    // console.debug("planHistoryFromDisk.payload", planHistoryFromDisk?.payload)
-    const savedPlan = planHistoryFromDisk?.payload ? planHistoryFromDisk.payload : []
-    // console.debug("savedPlan", savedPlan)
-    if (savedPlan.length) {
-      planHistory.unshift(...savedPlan) // unshift to beginning of array[0]
-    }
+    // DO THIS STUFF IN STORE !!!
+    // // console.debug("planHistoryFromDisk.payload", planHistoryFromDisk?.payload)
+    // const savedPlan = planHistoryFromDisk?.payload ? planHistoryFromDisk.payload : []
+    // // console.debug("savedPlan", savedPlan)
+    // if (savedPlan.length) {
+    //   planHistory.unshift(...savedPlan) // unshift to beginning of array[0]
+    // }
     // console.debug("planHistory", planHistory)
 
     return () => {

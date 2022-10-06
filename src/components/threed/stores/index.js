@@ -1,27 +1,32 @@
 // ** Zustand + Zustood + Immer Imports
 // state management (instead of React.useState or Redux)
-import create from "zustand"
-import shallow from "zustand/shallow"
-import { subscribeWithSelector } from "zustand/middleware"
+import create from 'zustand'
+import shallow from 'zustand/shallow'
+// import { subscribeWithSelector } from 'zustand/middleware'
 import { createStore } from '@udecode/zustood'
-import produce from "immer"
+// import produce from 'immer'
 
 // ** UUID Imports
-import { v4 as newUUID } from "uuid"
+import { v4 as newUUID } from 'uuid'
 
+// ** Import Apollo stuff
+import { apolloClient, useApolloClient, useQuery, gql } from '@apollo/client'
+// ** GraphQL Queries + Mutations (here, locally-specific data needs)
+import GetScenes from '~/api/graphql/scripts/getScenes.gql'
+// import GetAllotments from '~/api/graphql/scripts/getAllotments.gql'
+// import GetBeds from '~/api/graphql/scripts/getBeds.gql'
+// import GetPlants from '~/api/graphql/scripts/getPlants.gql'
+// import GetPlantingPlans from '~/api/graphql/scripts/getPlantingPlans.gql'
+// import GetProducts from '~/api/graphql/scripts/getProducts.gql'
 
-// ==========================================================
 // [MM] COLORFUL CONSOLE MESSAGES (ccm)
-const ccm0 = "color: white; font-size: 12px;"
-const ccm1 = "color: green; font-size: 12px;"
-const ccm2 = "color: red; font-size: 12px;"
-const ccm3 = "color: orange; font-size: 12px;"
-const ccm4 = "color: yellow; font-size: 12px;"
-const ccm5 = "color: blue; font-size: 12px;"
-console.log("%cThreeDGarden<FC,R3F>: {stores}", ccm4)
-// console.log("%cWHOOPSIES", ccm2)
-// ==========================================================
+import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5 } from '~/@core/utils/console-colors'
+// console.log('%cSUCCESS!!', ccm4)
+// console.log('%cWHOOPSIES', ccm2)
 
+console.log('%cThreeDGarden<FC,R3F>: {stores}', ccm4)
+
+// ==========================================================
 
 const useStoreImpl = create(() => {
   return {
@@ -39,7 +44,7 @@ const useStoreImpl2 = create(() => {
 
 // ==============================================================
 // ThreeD
-// aka "Master File with Settings"
+// aka 'Master File with Settings'
 
 export const useThreeDStore = create((set, get, api) => ({
   _id: newUUID(),
@@ -49,10 +54,10 @@ export const useThreeDStore = create((set, get, api) => ({
   threed: {
     _id: newUUID(),
     _ts: new Date().toISOString(),
-    name: "HEY HEY HEY 0",
+    name: 'HEY HEY HEY 0',
     layers: [],
     activeLayer: {
-      name: "level0-MM",
+      name: 'level0-MM',
       data: {}
     }
   },
@@ -75,10 +80,10 @@ export const useThreeDStore = create((set, get, api) => ({
           threed: {
             _id: newUUID(),
             _ts: new Date().toISOString(),
-            name: "HEY HEY HEY 1",
+            name: 'HEY HEY HEY 1',
             layers: [],
             activeLayer: {
-              name: "level1-MM",
+              name: 'level1-MM',
               data: {}
             }
           },
@@ -100,7 +105,7 @@ export const useThreeDStore = create((set, get, api) => ({
     // loadFromDisk
     get().loadFromDisk()
 
-    console.debug("%cAddThreeD", ccm1, get().threed)
+    console.debug('%cAddThreeD', ccm1, get().threed)
   },
   saveProject: () => {
     // saveToDisk
@@ -108,25 +113,25 @@ export const useThreeDStore = create((set, get, api) => ({
   },
   saveToDisk: () => {
     try {
-      localStorage.setItem("threed_threedHistory", JSON.stringify({ subject: "threed", payload: get().threed }))
-      console.debug("%cSaveToDisk", ccm1, get().threed)
+      localStorage.setItem('threed_threedHistory', JSON.stringify({ subject: 'threed', payload: get().threed }))
+      console.debug('%cSaveToDisk threeds', ccm1, get().threed)
       return true
     } catch (err) {
-      console.debug("%cSaveToDisk", ccm3, err)
+      console.debug('%cSaveToDisk threeds', ccm3, err)
       return false
     }
   },
   loadFromDisk: () => {
     try {
-      const loaded = localStorage.getItem("threed_threedHistory")
-      if (loaded) {
-        console.debug("%cLoadFromDisk", ccm1, true) // loaded
-        return loaded // string[]
+      const payload = localStorage.getItem('threed_threedHistory')
+      if (payload) {
+        console.debug('%cLoadFromDisk threeds', ccm1, true) // payload
+        return payload // string[]
       }
-      console.debug("%cLoadFromDisk", ccm3, loaded)
+      console.debug('%cLoadFromDisk threeds', ccm3, payload)
       return false
     } catch (err) {
-      console.debug("%cLoadFromDisk", ccm3, err)
+      console.debug('%cLoadFromDisk threeds', ccm3, err)
       return false
     }
   }
@@ -146,7 +151,7 @@ export const useProjectStore = create((set, get) => ({
     _ts: new Date().toISOString(),
     layers: [],
     activeLayer: {
-      name: "level0-MM",
+      name: 'level0-MM',
       data: {}
     }
   },
@@ -171,7 +176,7 @@ export const useProjectStore = create((set, get) => ({
             _ts: new Date().toISOString(),
             layers: [],
             activeLayer: {
-              name: "level1-MM",
+              name: 'level1-MM',
               data: {}
             }
           },
@@ -193,7 +198,7 @@ export const useProjectStore = create((set, get) => ({
     // loadFromDisk
     get().loadFromDisk()
 
-    console.debug("%cAddProject", ccm1, get().project)
+    console.debug('%cAddProject', ccm1, get().project)
   },
   saveProject: () => {
     // saveToDisk
@@ -201,25 +206,25 @@ export const useProjectStore = create((set, get) => ({
   },
   saveToDisk: () => {
     try {
-      localStorage.setItem("threed_projectHistory", JSON.stringify({ subject: "projects", payload: get().projects }))
-      console.debug("%cSaveToDisk", ccm1, get().projects)
+      localStorage.setItem('threed_projectHistory', JSON.stringify({ subject: 'projects', payload: get().projects }))
+      console.debug('%cSaveToDisk projects', ccm1, get().projects)
       return true
     } catch (err) {
-      console.debug("%cSaveToDisk", ccm3, err)
+      console.debug('%cSaveToDisk projects', ccm3, err)
       return false
     }
   },
   loadFromDisk: () => {
     try {
-      const loaded = localStorage.getItem("threed_projectHistory")
-      if (loaded) {
-        console.debug("%cLoadFromDisk", ccm1, true) // loaded
-        return loaded // string[]
+      const payload = localStorage.getItem('threed_projectHistory')
+      if (payload) {
+        console.debug('%cLoadFromDisk projects', ccm1, true) // payload
+        return payload // string[]
       }
-      console.debug("%cLoadFromDisk", ccm3, loaded)
+      console.debug('%cLoadFromDisk projects', ccm3, payload)
       return false
     } catch (err) {
-      console.debug("%cLoadFromDisk", ccm3, err)
+      console.debug('%cLoadFromDisk projects', ccm3, err)
       return false
     }
   }
@@ -350,8 +355,8 @@ export const usePlanStore = create((set, get) => ({
             // groundOpacity: groundMaterial.opacity,
             // groundSpecular: groundMaterial.specular.getHexString(),
 
-            depthWrite: "checked", // document.getElementById("depthWriteMode").checked,
-            sortObjects: "checked", // document.getElementById("sortObjectsMode").checked,
+            depthWrite: 'checked', // document.getElementById('depthWriteMode').checked,
+            sortObjects: 'checked', // document.getElementById('sortObjectsMode').checked,
 
             // azimuth: azimuth,
             // inclination: inclination
@@ -374,7 +379,7 @@ export const usePlanStore = create((set, get) => ({
     // loadFromDisk
     get().loadFromDisk()
 
-    console.debug("%cAddPlan", ccm1, get().plan)
+    console.debug('%cAddPlan', ccm1, get().plan)
   },
   savePlan: () => {
     // saveToDisk
@@ -382,25 +387,25 @@ export const usePlanStore = create((set, get) => ({
   },
   saveToDisk: () => {
     try {
-      localStorage.setItem("threed_planHistory", JSON.stringify({ subject: "plans", payload: get().plans }))
-      console.debug("%cSaveToDisk", ccm1, get().plans)
+      localStorage.setItem('threed_planHistory', JSON.stringify({ subject: 'plans', payload: get().plans }))
+      console.debug('%cSaveToDisk plans', ccm1, get().plans)
       return true
     } catch (err) {
-      console.debug("%cSaveToDisk", ccm3, err)
+      console.debug('%cSaveToDisk plans', ccm3, err)
       return false
     }
   },
   loadFromDisk: () => {
     try {
-      const loaded = localStorage.getItem("threed_planHistory")
-      if (loaded) {
-        console.debug("%cLoadFromDisk", ccm1, true) // loaded
-        return loaded // string[]
+      const payload = localStorage.getItem('threed_planHistory')
+      if (payload) {
+        console.debug('%cLoadFromDisk plans', ccm1, true) // payload
+        return payload // string[]
       }
-      console.debug("%cLoadFromDisk", ccm3, loaded)
+      console.debug('%cLoadFromDisk plans', ccm3, payload)
       return false
     } catch (err) {
-      console.debug("%cLoadFromDisk", ccm3, err)
+      console.debug('%cLoadFromDisk plans', ccm3, err)
       return false
     }
   }
@@ -460,32 +465,49 @@ export const useModalStore = create((set, get) => ({
 export const useSceneStore = create((set, get, api) => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
-  sceneCount: 0,
-  scenes: [],
-  scene: {
+  sceneCount: 0, // example counter
+  scenes: [], // working scenes
+  scene: { // the current working scene, aka 'this' scene
     _id: newUUID(),
     _ts: new Date().toISOString(),
-    name: "MARTY MARTY MARTY MARTY 0",
+    name: 'MARTY MARTY MARTY MARTY 0',
     layers: [],
     activeLayer: {
-      name: "level0-MM",
+      name: 'level0-MM',
       data: {}
     },
-
-    
-
+    // wp + custom fields here
+    //
+    //
+    //
   },
+
+  // track current + history
+  // sceneCurrent: ^this,
+  sceneHistory: [], // from local storage
+
+  // track payload from db
+  scenesDB: [], // from db (mysql wordpress via graphql)
+  sceneCountDB: 0, // example counter
+
+  // example method (counter)
   increaseSceneCount: () => set(
     (state) => (
       { sceneCount: state.sceneCount + 1 }
     )
   ),
+
+  // clear local scenes (and db scenes???)
   removeAllScenes: () => set(
     {
       sceneCount: 0,
-      scenes: []
+      scenes: [],
+      // sceneCountDB: 0,
+      // scenesDB: [],
     }
   ),
+
+  // add a new current 'this' scene
   addScene: () => {
     // sceneCurrent
     set(
@@ -494,18 +516,22 @@ export const useSceneStore = create((set, get, api) => ({
           scene: {
             _id: newUUID(),
             _ts: new Date().toISOString(),
-            name: "MARTY MARTY MARTY MARTY 1",
+            name: 'MARTY MARTY MARTY MARTY 1',
             layers: [],
             activeLayer: {
-              name: "level1-MM",
+              name: 'level1-MM',
               data: {}
-            }
+            },
+            // wp + custom fields here
+            //
+            //
+            //
           },
           sceneCount: state.sceneCount + 1,
         }
       )
     )
-    // sceneHistory
+    // update sceneHistory
     set(
       (state) => (
         {
@@ -519,34 +545,131 @@ export const useSceneStore = create((set, get, api) => ({
     // loadFromDisk
     get().loadFromDisk()
 
-    console.debug("%cAddScene: {get().scene}", ccm3, get().scene)
+    console.debug('%cAddScene: {get().scene}', ccm3, get().scene)
   },
-  saveProject: () => {
+
+  // save this scene
+  saveScene: () => {
     // saveToDisk
     get().saveToDisk()
   },
+
+  // save data to local storage
   saveToDisk: () => {
     try {
-      localStorage.setItem("threed_sceneHistory", JSON.stringify({ subject: "scene", payload: get().scene }))
-      console.debug("%cSaveToDisk", ccm1, get().scene)
+      localStorage.setItem('threed_sceneHistory', JSON.stringify({ subject: 'scene', payload: get().scene }))
+      console.debug('%cSaveToDisk scenes', ccm1, get().scene)
       return true
     } catch (err) {
-      console.debug("%cSaveToDisk", ccm3, err)
+      console.debug('%cSaveToDisk scenes', ccm3, err)
       return false
     }
   },
+
+  // get data from local storage
   loadFromDisk: () => {
     try {
-      const loaded = localStorage.getItem("threed_sceneHistory")
-      if (loaded) {
-        console.debug("%cLoadFromDisk", ccm1, true) // loaded
-        return loaded // string[]
+      const payload = localStorage.getItem('threed_sceneHistory')
+      // set state from local storage
+      set(
+        (state) => (
+          {
+            scenes: payload,
+            sceneCount: state.scenes.length,
+          }
+        )
+      )
+      if (payload) {
+        console.debug('%cLoadFromDisk scenes', ccm1, true) // payload
+        return payload // string[]
       }
-      console.debug("%cLoadFromDisk", ccm3, loaded)
+      console.debug('%cLoadFromDisk scenes', ccm3, payload)
       return false
     } catch (err) {
-      console.debug("%cLoadFromDisk", ccm3, err)
+      console.debug('%cLoadFromDisk scenes', ccm3, err)
       return false
+    }
+  },
+
+  // get data from db via graphql
+  loadFromDB: async () => {
+    try {
+      const SCENES = GetScenes // .gql
+
+      const parameters = {
+        first: 10,
+        last: null,
+        after: null,
+        before: null
+      }
+
+      // const {
+      //   data,
+      //   loading,
+      //   error,
+      //   fetchMore,
+      //   refetch,
+      //   networkStatus
+      // } = useQuery(SCENES, { parameters })
+      // `client` here is your instantiated `ApolloClient` instance
+      const data = await apolloClient.query({
+        query: SCENES,
+        variables: { parameters }
+      })
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      if (loading) {
+        return false // <div>loading...</div>
+      }
+
+      if (error) {
+        console.debug('%cLoadFromDB scenes: DATA RETURNED with error', error) // , data, loading, error
+        return false // <div>error.yoyoyo</div> // <div>{error}</div>
+      }
+
+      if (data) {
+        console.debug('%cLoadFromDB scenes: DATA RETURNED', ccm0, data, loading, error)
+
+        if (data.scenes?.edges) {
+
+          // const payload = data.scenes.edges
+          const payload = data.scenes.edges.map(({ node }) => ( // sceneId, id, uri, slug, title
+            // <div key={node.sceneId}>
+            //   <p>
+            //     wp sceneId: {node.sceneId}<br />
+            //     gql id: {node.id}<br />
+            //     uri: {node.uri}<br />
+            //     slug: {node.slug}<br />
+            //     title: {node.title}<br />
+            //   </p>
+            // </div>
+            node
+          ))
+
+          // set state from db
+          set(
+            (state) => (
+              {
+                scenesDB: payload,
+                sceneCountDB: state.scenesDB.length,
+              }
+            )
+          )
+          console.debug('%cLoadFromDB scenes', ccm1, true) // payload
+
+          return true // payload // string[]
+        }
+        else {
+          return false // <div>error.heyheyhey</div>
+        }
+      }
+
+      console.debug('%cLoadFromDB scenes: OTHER ERROR', ccm3, payload)
+      return false
+
+    } catch (err) {
+      console.debug('%cLoadFromDB scenes: DATA RETURNED with err', ccm3, err) // , data, loading, error
+      return false // <div>error.errerrerr</div>
     }
   }
 
@@ -565,7 +688,7 @@ export const useSceneStore = create((set, get, api) => ({
 // ==============================================================
 
 // ==============================================================
-// EXPORT STORES AS GROUP OBJECT "useStore" (as a HOOK ??)
+// EXPORT STORES AS GROUP OBJECT 'useStore' (as a HOOK ??)
 
 export const useStore = (sel) => useStoreImpl(sel, shallow)
 
