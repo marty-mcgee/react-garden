@@ -83,7 +83,7 @@ import {
   modalStore,
   useSceneStore,
   sceneStore
-} from '~/components/threed/stores'
+} from '~/stores'
 
 // ** Import Apollo stuff (in STORES !!!)
 

@@ -124,9 +124,9 @@ const App = (props: any) => {
   const aclAbilities = Component.acl ?? defaultACLObj
 
   return (
-    <ReduxProvider store={reduxStore}>
-      <CacheProvider value={emotionCache}>
-        <ApolloProvider client={client}>
+    <ApolloProvider client={client}>
+      <ReduxProvider store={reduxStore}>
+        <CacheProvider value={emotionCache}>
           <Head>
             <title>{`${themeConfig.templateName} - ThreeD Garden Admin Dashboard`}</title>
             <meta
@@ -189,9 +189,9 @@ const App = (props: any) => {
               </SettingsConsumer>
             </SettingsProvider>
           </AuthProvider>
-        </ApolloProvider>
-      </CacheProvider>
-    </ReduxProvider>
+        </CacheProvider>
+      </ReduxProvider>
+    </ApolloProvider>
   )
 }
 

@@ -1,3 +1,14 @@
+// ** Apollo Imports
+import { ApolloClient, useApolloClient, useQuery, gql } from '@apollo/client'
+import create from '~/api/graphql/createStore'
+// ** GraphQL Queries + Mutations (here, locally-specific data needs)
+import GetScenes from '~/api/graphql/scripts/getScenes.gql'
+// import GetAllotments from '~/api/graphql/scripts/getAllotments.gql'
+// import GetBeds from '~/api/graphql/scripts/getBeds.gql'
+// import GetPlants from '~/api/graphql/scripts/getPlants.gql'
+// import GetPlantingPlans from '~/api/graphql/scripts/getPlantingPlans.gql'
+// import GetProducts from '~/api/graphql/scripts/getProducts.gql'
+
 // ** Zustand + Zustood + Immer Imports
 // state management (instead of React.useState or Redux)
 // import create from 'zustand'
@@ -8,17 +19,6 @@ import { createStore } from '@udecode/zustood'
 
 // ** UUID Imports
 import { v4 as newUUID } from 'uuid'
-
-// ** Import Apollo stuff
-import { ApolloClient, useApolloClient, useQuery, gql } from '@apollo/client'
-import create from '~/api/graphql/createStore'
-// ** GraphQL Queries + Mutations (here, locally-specific data needs)
-import GetScenes from '~/api/graphql/scripts/getScenes.gql'
-// import GetAllotments from '~/api/graphql/scripts/getAllotments.gql'
-// import GetBeds from '~/api/graphql/scripts/getBeds.gql'
-// import GetPlants from '~/api/graphql/scripts/getPlants.gql'
-// import GetPlantingPlans from '~/api/graphql/scripts/getPlantingPlans.gql'
-// import GetProducts from '~/api/graphql/scripts/getProducts.gql'
 
 // [MM] COLORFUL CONSOLE MESSAGES (ccm)
 import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5 } from '~/@core/utils/console-colors'
@@ -42,6 +42,47 @@ const useStoreImpl2 = create(() => {
     dom: null,
   }
 })
+
+const ac3Store = create({
+  counter: 0,
+  modal: {
+    open: true
+  }
+})
+
+const ac3Actions = {
+  increase(n) {
+    return (state) => state + n
+  },
+  toggle() {
+    return (state) => ({ open: !state.open })
+  }
+}
+
+export const testAC3Store = () => {
+  const { loading, error, data } = useQuery(gql`
+    query {
+      counter
+      modal {
+        open
+      }
+    }
+  `, { client: client });
+
+  if (loading || error) { return null }
+
+  const { counter, modal: { open } } = data;
+
+  return (
+    <div>
+      <p>TEST counter: {counter}</p>
+      <button onClick={() => ac3Store.update("counter", ac3Actions.increase(1))}>+1</button>
+      <button onClick={() => ac3Store.update("counter", ac3Actions.increase(-1))}>-1</button>
+      <p>TEST is open? {open.toString()}</p>
+      <button onClick={() => ac3Store.update("modal", ac3Actions.toggle())}>Toggle</button>
+    </div>
+  );
+}
 
 // ==============================================================
 // ThreeD
