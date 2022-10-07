@@ -528,35 +528,35 @@ export const modalStore = create({
 export const modalActions = {
   handleOpenModalAbout: (e = null) => {
     modalStore.update("isOpenModalAbout", true)
-    console.debug("isOpenModalAbout", modalStore.get("isOpenModalAbout"), e)
+    // console.debug("isOpenModalAbout", modalStore.get("isOpenModalAbout"), e)
   },
   handleCloseModalAbout: (e = null) => {
     modalStore.update("isOpenModalAbout", false)
-    console.debug("isOpenModalAbout", modalStore.get("isOpenModalAbout"), e)
+    // console.debug("isOpenModalAbout", modalStore.get("isOpenModalAbout"), e)
   },
-  handleOpenModalModel3d: () => {
+  handleOpenModalModel3d: (e = null) => {
     modalStore.update("isOpenModalModel3d", true)
-    console.debug("isOpenModalModel3d", modalStore.get("isOpenModalModel3d"))
+    // console.debug("isOpenModalModel3d", modalStore.get("isOpenModalModel3d"), e)
   },
-  handleCloseModalModel3d: () => {
+  handleCloseModalModel3d: (e = null) => {
     modalStore.update("isOpenModalModel3d", false)
-    console.debug("isOpenModalModel3d", modalStore.get("isOpenModalModel3d"))
+    // console.debug("isOpenModalModel3d", modalStore.get("isOpenModalModel3d"), e)
   },
-  handleOpenModalLoading: () => {
+  handleOpenModalLoading: (e = null) => {
     modalStore.update("isOpenModalLoading", true)
-    console.debug("isOpenModalLoading", modalStore.get("isOpenModalLoading"))
+    // console.debug("isOpenModalLoading", modalStore.get("isOpenModalLoading"), e)
   },
-  handleCloseModalLoading: () => {
+  handleCloseModalLoading: (e = null) => {
     modalStore.update("isOpenModalLoading", false)
-    console.debug("isOpenModalLoading", modalStore.get("isOpenModalLoading"))
+    // console.debug("isOpenModalLoading", modalStore.get("isOpenModalLoading"), e)
   },
-  handleOpenModalShare: () => {
+  handleOpenModalShare: (e = null) => {
     modalStore.update("isOpenModalShare", true)
-    console.debug("isOpenModalShare", modalStore.get("isOpenModalShare"))
+    // console.debug("isOpenModalShare", modalStore.get("isOpenModalShare"), e)
   },
-  handleCloseModalShare: () => {
+  handleCloseModalShare: (e = null) => {
     modalStore.update("isOpenModalShare", false)
-    console.debug("isOpenModalShare", modalStore.get("isOpenModalShare"))
+    // console.debug("isOpenModalShare", modalStore.get("isOpenModalShare"), e)
   },
 } // modalActions
 

@@ -5,52 +5,6 @@
 /** @ ts-expect-error */
 
 // ==============================================================
-/* FUNCTIONAL NOUNS  (JS OBJECTS, SIMILAR TO CLASSES, BUT BETTER)
-// ================
-// * ThreeD           | as root JS Object       | interface IThreeD         | wp threed
-// ================
-// * Project          | as JS Object            | interface IProject        | wp project
-// * Plan             | as JS Object            | interface IPlan           | wp plan
-// * File             | as JS Object from Any   | interface IFile           | wp file
-// * Edit             | Actions | Relationships | interface IEdit           | wp edit
-// * View             | as JS Object | Settings | interface IView           | wp view
-// ================
-// * Simulation       | as JS Object            | interface ISimulation     | wp simulation
-// * Game             | extends Simulation      | interface IGame           | wp game
-// * Demo             | extends Simulation      | interface IGame           | wp demo
-// ================
-// * World            | as JS Object            | interface IWorld          | wp world
-// * Character        | as JS Object            | interface ICharacter      | wp characters
-// * Bear             | extends Character       | interface IBear           | wp bear
-// * Gardener         | extends Character       | interface IGardener       | wp gardener
-// * Chicken          | extends Character       | interface IChicken        | wp chicken
-// * Scene            | extends THREE.Scene     | interface IScene          | wp scene
-// * Plane            | extends THREE.Object3D  | interface IPlane          | wp plane
-// * Structure        | extends THREE.Object3D  | interface IStructure      | wp structure
-// * Farm             | extends THREE.Group     | interface IFarm           | wp farm
-// * Garden           | extends THREE.Group     | interface IGarden         | wp garden
-// * Allotment        | extends Structure       | interface IAllotment      | wp allotment
-// * Bed              | extends Structure       | interface IBed            | wp bed
-// * Furniture        | extends Structure       | interface IFurniture      | wp furniture
-// * Equipment        | extends Structure       | interface IEquipment      | wp equipment
-// * Plant            | extends Structure       | interface IPlant          | wp plant
-// * Soil             | extends Structure       | interface ISoil           | wp soil
-// * SoilAddendum     | extends Soil            | interface ISoilAddendum   | wp soil_addendum
-// * SoilPlan         | Actions | Relationships | interface ISoilPlan       | wp soil_plan
-// * PlantingPlan     | Actions | Relationships | interface IPlantingPlan   | wp planting_plan
-// * BuildingPlan     | Actions | Relationships | interface IBuildingPlan   | wp building
-// ================
-// * Tool             | as JS Object | extends ThreeD?                      | interface ITool
-// * PlaneTool        | extends Tool                                        | interface IPlane
-// * Camera           | extends Tool | extends THREE.Camera                 | interface ICamera
-// * Renderer         | extends Tool | extends THREE.Renderer               | interface IRenderer
-// * Light            | extends Tool | extends THREE.Light.DirectionalLight | interface ILight
-// * Raster           | extends Tool | extends THREE.Raster.Rasterizer      | interface IRaster
-// * Shader           | extends Tool | extends THREE.Shader.Shaderizer      | interface IShader
-// * Animation        | extends Tool | extends OBJ.animation                | interface IAnimation
-*/
-
-// ==============================================================
 // RESOURCES
 
 // ** React Imports
@@ -2112,31 +2066,31 @@ const ToolBar: ReactNode = (): JSX.Element => {
               onClose={handleCloseViewsMenu}
             >
               <MenuItem key="Modal: About" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalActions.handleOpenModalAbout()}>Modal: About</Typography>
+                <Typography onClick={(e) => modalActions.handleOpenModalAbout(e)}>Modal: About</Typography>
               </MenuItem>
               <MenuItem key="Modal: Model3d" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalActions.handleOpenModalModel3d()}>Modal: Model3d</Typography>
+                <Typography onClick={(e) => modalActions.handleOpenModalModel3d(e)}>Modal: Model3d</Typography>
               </MenuItem>
               <MenuItem key="Modal: Loading" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalActions.handleOpenModalLoading()}>Modal: Loading</Typography>
+                <Typography onClick={(e) => modalActions.handleOpenModalLoading(e)}>Modal: Loading</Typography>
               </MenuItem>
               <MenuItem key="Modal: Share" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalActions.handleOpenModalShare()}>Modal: Share</Typography>
+                <Typography onClick={(e) => modalActions.handleOpenModalShare(e)}>Modal: Share</Typography>
               </MenuItem>
               <MenuItem key="Dialog: Share" onClick={handleCloseViewsMenu}>
                 <Typography onClick={doOpenShareDialog}>Dialog: Share</Typography>
               </MenuItem>
               <MenuItem key="2D Plan Properties" onClick={handleCloseViewsMenu}>
-                <Typography onClick={() => setPropertiesView('planView')}>2D Plan Properties</Typography>
+                <Typography onClick={(e) => setPropertiesView('planView')}>2D Plan Properties</Typography>
               </MenuItem>
               <MenuItem key="2D Plan Fullscreen" onClick={handleCloseViewsMenu}>
-                <Typography onClick={() => doOpenFullscreen('#planView')}>2D Plan Fullscreen</Typography>
+                <Typography onClick={(e) => doOpenFullscreen('#planView')}>2D Plan Fullscreen</Typography>
               </MenuItem>
               <MenuItem key="3D Plan Properties" onClick={handleCloseViewsMenu}>
-                <Typography onClick={() => setPropertiesView('3dView')}>3D Plan Properties</Typography>
+                <Typography onClick={(e) => setPropertiesView('3dView')}>3D Plan Properties</Typography>
               </MenuItem>
               <MenuItem key="3D Plan Fullscreen" onClick={handleCloseViewsMenu}>
-                <Typography onClick={() => doOpenFullscreen('#view3d')}>3D Plan Fullscreen</Typography>
+                <Typography onClick={(e) => doOpenFullscreen('#view3d')}>3D Plan Fullscreen</Typography>
               </MenuItem>
               {/* <MenuItem key="Defaults" onClick={handleCloseViewsMenu}>
                 <Typography onClick={() => setPropertiesView('defaults')}>Defaults</Typography>
