@@ -38,6 +38,7 @@ export const client = new ApolloClient({
   // link: ApolloLink.from([restLink1, httpLink1]),
   link: ApolloLink.from([httpLink1]),
   // link: ApolloLink.from([httpLink2]),
+  connectToDevTools: true,
 })
 
 // export const clientExample = new ApolloClient({

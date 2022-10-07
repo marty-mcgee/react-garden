@@ -9,57 +9,55 @@ import GetScenes from '~/api/graphql/scripts/getScenes.gql'
 // import GetPlantingPlans from '~/api/graphql/scripts/getPlantingPlans.gql'
 // import GetProducts from '~/api/graphql/scripts/getProducts.gql'
 
-// ** Zustand + Zustood + Immer Imports
-// state management (instead of React.useState or Redux)
-// import create from 'zustand'
-import shallow from 'zustand/shallow'
-// import { subscribeWithSelector } from 'zustand/middleware'
-import { createStore } from '@udecode/zustood'
-// import produce from 'immer'
-
 // ** UUID Imports
 import { v4 as newUUID } from 'uuid'
 
 // [MM] COLORFUL CONSOLE MESSAGES (ccm)
 import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5 } from '~/@core/utils/console-colors'
-// console.log('%cSUCCESS!!', ccm4)
-// console.log('%cWHOOPSIES', ccm2)
+// console.debug('%cSUCCESS!!', ccm1)
+// console.debug('%cWHOOPSIES', ccm2)
 
-console.log('%cThreeDGarden<FC,R3F>: {stores}', ccm4)
+console.debug('%cThreeDGarden<FC,R3F>: {stores}', ccm4)
 
 // ==========================================================
+// TESTING
+// Apollo Client 3 (ac3)
 
-const useStoreImpl = create(() => {
-  return {
-    router: null,
-    dom: null,
-  }
-})
-
-const useStoreImpl2 = create(() => {
-  return {
-    router: null,
-    dom: null,
-  }
-})
-
-const ac3Store = create({
+export const ac3Store = create({
   counter: 0,
   modal: {
     open: true
+  },
+  increase(n = 1) {
+    return (state) => state + n
+  },
+  toggle() {
+    return (state) => ({ open: !state.open })
+  },
+  toggle2: (open) => {
+    return (modal) => ({ ...modal, open })
   }
 })
+// console.debug("ac3Store", ac3Store)
+// console.debug("ac3Store.get", ac3Store.get("counter"))
+// console.debug("ac3Store.get", ac3Store.get("modal"))
+// console.debug("ac3Store.get", ac3Store.get("modal").open)
+// console.debug("ac3Store.get", ac3Store.get("increase"))
+// // console.debug("ac3Store.useStore", ac3Store.useStore("increase"))
 
-const ac3Actions = {
+export const ac3Actions = {
   increase(n) {
     return (state) => state + n
   },
   toggle() {
     return (state) => ({ open: !state.open })
+  },
+  toggle2: (open) => {
+    return (modal) => ({ ...modal, open })
   }
 }
 
-export const testAC3Store = () => {
+export const TestAC3Store = () => {
   const { loading, error, data } = useQuery(gql`
     query {
       counter
@@ -67,19 +65,23 @@ export const testAC3Store = () => {
         open
       }
     }
-  `, { client: client });
+  `)
+  // `, { client: client })
 
-  if (loading || error) { return null }
+  if (loading) { return <div>loading...</div> }
+  if (error) { return <div>{JSON.stringify(error)}</div> }
 
-  const { counter, modal: { open } } = data;
+  // destructure data
+  const { counter, modal: { open } } = data
 
   return (
     <div>
-      <p>TEST counter: {counter}</p>
+      <div>TEST counter: {counter}</div>
       <button onClick={() => ac3Store.update("counter", ac3Actions.increase(1))}>+1</button>
       <button onClick={() => ac3Store.update("counter", ac3Actions.increase(-1))}>-1</button>
-      <p>TEST is open? {open.toString()}</p>
+      <div>TEST is open? {open.toString()}</div>
       <button onClick={() => ac3Store.update("modal", ac3Actions.toggle())}>Toggle</button>
+      <button onClick={() => ac3Store.update("modal", ac3Actions.toggle2())}>Toggle2</button>
     </div>
   );
 }
@@ -88,7 +90,7 @@ export const testAC3Store = () => {
 // ThreeD
 // aka 'Master File with Settings'
 
-export const useThreeDStore = create((set, get, api) => ({
+export const threedStore = create({
   _id: newUUID(),
   _ts: new Date().toISOString(),
   threedCount: 0,
@@ -101,13 +103,20 @@ export const useThreeDStore = create((set, get, api) => ({
     activeLayer: {
       name: 'level0-MM',
       data: {}
-    }
+    },
+    // wp custom fields here
+  }
+}) // threedStore
+
+export const threedActions = {
+  // increaseThreeDCount: () => set(
+  //   (state) => (
+  //     { threedCount: state.threedCount + 1 }
+  //   )
+  // ),
+  increaseThreeDCount: (n = 1) => {
+    return (state) => state + n
   },
-  increaseThreeDCount: () => set(
-    (state) => (
-      { threedCount: state.threedCount + 1 }
-    )
-  ),
   removeAllThreeDs: () => set(
     {
       threedCount: 0,
@@ -115,39 +124,40 @@ export const useThreeDStore = create((set, get, api) => ({
     }
   ),
   addThreeD: () => {
-    // threedCurrent
-    set(
-      (state) => (
-        {
-          threed: {
-            _id: newUUID(),
-            _ts: new Date().toISOString(),
-            name: 'HEY HEY HEY 1',
-            layers: [],
-            activeLayer: {
-              name: 'level1-MM',
-              data: {}
-            }
-          },
-          threedCount: state.threedCount + 1,
-        }
-      )
-    )
-    // threedHistory
-    set(
-      (state) => (
-        {
-          threeds: [state.threed, ...state.threeds],
-          threedCount: state.threeds.length,
-        }
-      )
-    )
-    // saveToDisk
-    get().saveToDisk()
-    // loadFromDisk
-    get().loadFromDisk()
+    // // threedCurrent
+    // set(
+    //   (state) => (
+    //     {
+    //       threed: {
+    //         _id: newUUID(),
+    //         _ts: new Date().toISOString(),
+    //         name: 'HEY HEY HEY 1',
+    //         layers: [],
+    //         activeLayer: {
+    //           name: 'level1-MM',
+    //           data: {}
+    //         }
+    //       },
+    //       threedCount: state.threedCount + 1,
+    //     }
+    //   )
+    // )
+    // // threedHistory
+    // set(
+    //   (state) => (
+    //     {
+    //       threeds: [state.threed, ...state.threeds],
+    //       threedCount: state.threeds.length,
+    //     }
+    //   )
+    // )
+    // // saveToDisk
+    // get().saveToDisk()
+    // // loadFromDisk
+    // get().loadFromDisk()
 
-    console.debug('%cAddThreeD', ccm1, get().threed)
+    // console.debug('%cAddThreeD', ccm1, get().threed)
+    console.debug('%cAddThreeD', ccm3)
   },
   saveProject: () => {
     // saveToDisk
@@ -178,12 +188,12 @@ export const useThreeDStore = create((set, get, api) => ({
     }
   }
 
-})) // useThreeDStore
+} // threedActions
 
 // ==============================================================
 // Project
 
-export const useProjectStore = create((set, get) => ({
+export const projectStore = create({
   _id: newUUID(),
   _ts: new Date().toISOString(),
   projectCount: 0,
@@ -196,7 +206,10 @@ export const useProjectStore = create((set, get) => ({
       name: 'level0-MM',
       data: {}
     }
-  },
+  }
+}) // projectStore
+
+export const projectActions = create((set, get) => ({
   increaseProjectCount: () => set(
     (state) => (
       { projectCount: state.projectCount + 1 }
@@ -271,12 +284,12 @@ export const useProjectStore = create((set, get) => ({
     }
   }
 
-})) // useProjectStore
+})) // projectActions
 
 // ==============================================================
 // Plan
 
-export const usePlanStore = create((set, get) => ({
+export const planStore = create({
   _id: newUUID(),
   _ts: new Date().toISOString(),
   planCount: 0,
@@ -334,6 +347,9 @@ export const usePlanStore = create((set, get) => ({
     azimuth: null,
     inclination: null
   },
+}) // planStore
+
+export const planActions = create((set, get) => ({
   increasePlanCount: () => set(
     (state) => (
       { planCount: state.planCount + 1 }
@@ -452,59 +468,78 @@ export const usePlanStore = create((set, get) => ({
     }
   }
 
-})) // usePlanStore
+})) // planActions
 
 // ==============================================================
 // File
 
-export const useFileStore = create((set) => ({
+export const fileStore = create({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
   fileCount: 0,
   files: [],
-  file: {},
-})) // useFileStore
+  file: {
+    _id: newUUID(),
+    _ts: new Date().toISOString(),
+    layers: [],
+    activeLayer: {
+      name: 'level0-MM',
+      data: {}
+    }
+  },
+}) // fileStore
+
+export const fileActions = create((set) => ({
+  increaseFileCount: () => set(
+    (state) => (
+      { fileCount: state.fileCount + 1 }
+    )
+  ),
+  removeAllProjects: () => set(
+    {
+      fileCount: 0,
+      files: []
+    }
+  ),
+})) // fileActions
 
 // ==============================================================
 // Bear
 
-export const useBearStore = create((set) => ({
+export const bearStore = create({
   bears: 0,
+}) // bearStore
+
+export const bearActions = create((set) => ({
   increaseBearCount: () => set((state) => ({ bears: state.bears + 1 })),
   removeAllBears: () => set({ bears: 0 }),
-})) // useBearStore
+})) // bearActions
 
 // ==============================================================
 // Modal
 
-export const modalStore = createStore('modal')({
-  name: 'zustood',
+export const modalStore = create({
   isOpenModalAbout: false,
-  // handleOpenModalAbout: () => set(() => ({ isOpenModalAbout: true })),
-  // handleCloseModalAbout: () => set(() => ({ isOpenModalAbout: false }))
   isOpenModalModel3d: false,
   isOpenModalLoading: false,
   isOpenModalShare: false,
-})
+}) // modalStore
 
-export const useModalStore = create((set, get) => ({
-  name: 'zustand',
-  isOpenAboutModal: false,
-  handleOpenAboutModal: () => set(() => ({ isOpenAboutModal: true })),
-  handleCloseAboutModal: () => set(() => ({ isOpenAboutModal: false })),
-  isOpenModel3dModal: false,
-  handleOpenModel3dModal: () => set(() => ({ isOpenModel3dModal: true })),
-  handleCloseModel3dModal: () => set(() => ({ isOpenModel3dModal: false })),
-  isOpenLoadingModal: false,
-  handleOpenLoadingModal: () => set(() => ({ isOpenLoadingModal: true })),
-  handleCloseLoadingModal: () => set(() => ({ isOpenLoadingModal: false })),
-  isOpenShareModal: false,
-  handleOpenShareModal: () => set(() => ({ isOpenShareModal: true })),
-  handleCloseShareModal: () => set(() => ({ isOpenShareModal: false })),
-}))
+export const modalActions = {
+  handleOpenModalAbout: modalStore.update("isOpenModalAbout", true),
+  handleCloseModalAbout: () => { }, // (() => ({ isOpenModalAbout: false })),
+  handleOpenModalModel3d: () => { }, // (() => ({ isOpenModalModel3d: true })),
+  handleCloseModalModel3d: () => { }, // (() => ({ isOpenModalModel3d: false })),
+  handleOpenModalLoading: () => { }, // (() => ({ isOpenModalLoading: true })),
+  handleCloseModalLoading: () => { }, // (() => ({ isOpenModalLoading: false })),
+  handleOpenModalShare: () => { }, // (() => ({ isOpenModalShare: true })),
+  handleCloseModalShare: () => { }, // (() => ({ isOpenModalShare: false })),
+} // modalActions
 
 // ==============================================================
 // Scene
 
-export const useSceneStore = create((set, get, api) => ({
+export const sceneStore = create({
   _id: newUUID(),
   _ts: new Date().toISOString(),
   sceneCount: 0, // example counter
@@ -531,6 +566,10 @@ export const useSceneStore = create((set, get, api) => ({
   // track payload from db
   scenesDB: [], // from db (mysql wordpress via graphql)
   sceneCountDB: 0, // example counter
+
+}) // sceneStore
+
+export const sceneActions = create((set, get, api) => ({
 
   // example method (counter)
   increaseSceneCount: () => set(
@@ -677,13 +716,11 @@ export const useSceneStore = create((set, get, api) => ({
           // const payload = data.scenes.edges
           const payload = data.scenes.edges.map(({ node }) => ( // sceneId, id, uri, slug, title
             // <div key={node.sceneId}>
-            //   <p>
-            //     wp sceneId: {node.sceneId}<br />
-            //     gql id: {node.id}<br />
-            //     uri: {node.uri}<br />
-            //     slug: {node.slug}<br />
-            //     title: {node.title}<br />
-            //   </p>
+            //   wp sceneId: {node.sceneId}<br />
+            //   gql id: {node.id}<br />
+            //   uri: {node.uri}<br />
+            //   slug: {node.slug}<br />
+            //   title: {node.title}<br />
             // </div>
             node
           ))
@@ -715,7 +752,9 @@ export const useSceneStore = create((set, get, api) => ({
     }
   }
 
-})) // useSceneStore
+})) // sceneActions
+
+// ==============================================================
 
 // ==============================================================
 
@@ -732,29 +771,24 @@ export const useSceneStore = create((set, get, api) => ({
 // ==============================================================
 // EXPORT STORES AS GROUP OBJECT 'useStore' (as a HOOK ??)
 
-export const useStore = (sel) => useStoreImpl(sel, shallow)
+// export const useStore = (sel) => useStoreImpl(sel, shallow)
+const useStore = {
+  threedStore,
+  threedActions,
+  projectStore,
+  projectActions,
+  planStore,
+  planActions,
+  fileStore,
+  fileActions,
+  bearStore,
+  bearActions,
+  modalStore,
+  modalActions,
+  sceneStore,
+  sceneActions,
+}
 
-Object.assign(useStore,
-  {
-    useStoreImpl,
-    useStoreImpl2,
-    //
-    useThreeDStore,
-    useProjectStore,
-    usePlanStore,
-    useFileStore,
-    useBearStore,
-    useModalStore,
-    modalStore,
-    useSceneStore,
-    // sceneStore
-  }
-)
-
-// ==============================================================
-
-const { getState, setState } = useStoreImpl
-
-export { getState, setState }
+// export { getState, setState }
 
 export default useStore

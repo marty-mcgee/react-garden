@@ -65,27 +65,26 @@ import {
   SyntheticEvent
 } from "react"
 
-// ** Zustand + Zustood Imports (FROM STORES !!!)
-// state management (instead of React.useState)
-// import create from "zustand"
-// import shallow from "zustand/shallow"
-// import { subscribeWithSelector } from "zustand/middleware"
-// import produce from "immer"
-// import { createStore } from '@udecode/zustood'
+// ** Apollo Client Store Imports
+// state management (instead of React.useState, Redux, Zustand)
 import {
   useStore,
-  useThreeDStore,
-  useProjectStore,
-  usePlanStore,
-  useFileStore,
-  useBearStore,
-  useModalStore,
+  threedStore,
+  threedActions,
+  projectStore,
+  projectActions,
+  planStore,
+  planActions,
+  fileStore,
+  fileActions,
+  bearStore,
+  bearActions,
   modalStore,
-  useSceneStore,
-  sceneStore
+  modalActions,
+  sceneStore,
+  sceneActions,
+  TestAC3Store
 } from '~/stores'
-
-// ** Import Apollo stuff (in STORES !!!)
 
 // ** Next Imports
 import Image from "next/future/image"
@@ -134,12 +133,12 @@ import { Canvas, useFrame } from "@react-three/fiber"
 
 // css
 // import "~/assets/demo/css/Demo.module.css"
-import stylesDemo from '~/styles/demo/demo.module.css'
+// import stylesDemo from '~/styles/demo/demo.module.css'
+import stylesGarden from '~/styles/threed/garden.module.css'
 
 // no no no, never again
 // import * as $ from "jquery"
 
-// ==========================================================
 // UUID
 import { v4 as newUUID } from "uuid"
 
@@ -155,20 +154,22 @@ import ToolIconAddRoof from "@mui/icons-material/Roofing"
 import ToolIconAddRuler from "@mui/icons-material/Straighten"
 import ToolIconAddText from "@mui/icons-material/TextFields"
 
+// DELETE OBJECT KEYS: RESET OBJECT TO {}
+import clearObject from '~/@core/utils/clear-object'
+
 // [MM] COLORFUL CONSOLE MESSAGES (ccm)
 import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5 } from '~/@core/utils/console-colors'
-console.log("%cThreeDGarden<FC,R3F>: {.tsx}", ccm4)
-// console.log("%cWHOOPSIES", ccm2)
+// console.debug('%cSUCCESS!!', ccm1)
+// console.debug('%cWHOOPSIES', ccm2)
 
 // ==========================================================
-// DELETE OBJECT KEYS: RESET OBJECT TO {}
-
-import clearObject from '~/@core/utils/clear-object'
+// IMPORTS COMPLETE
+console.debug("%cThreeDGarden<FC,R3F>: {.tsx}", ccm4)
 
 // ==========================================================
 // STYLES
 
-const styleModal = {
+const stylesModal = {
   position: "absolute" as "absolute",
   top: "50%",
   left: "50%",
@@ -179,7 +180,7 @@ const styleModal = {
   border: "2px solid #000000",
   boxShadow: 24,
   p: 2
-};
+}
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   // transition: 'none',
@@ -207,58 +208,46 @@ const Toolbar = styled(MuiToolbar)(({ theme }) => ({
 // ==========================================================
 // TS INTERFACES + TYPES
 // ==========================================================
-
 // none yet, but soon
 
 // ==========================================================
 // STORES
-// moved to stores
 // ==========================================================
-
-// const {
-//   useThreeDStore,
-//   useProjectStore,
-//   usePlanStore,
-//   useFileStore,
-//   useBearStore,
-//   useModalStore,
-//   modalStore,
-//   useSceneStore,
-//   sceneStore
-// }: any = useStore
+// moved to stores
 
 // ==========================================================
 // FUNCTIONAL NOUNS
 // ==========================================================
 // ThreeD
 
-// moved to stores
-// const useThreeDStore = create((set) => ({
-
 function ThreeDInfoPanel() {
-  const threedCount = useThreeDStore((state: any) => state.threedCount)
-  const threeds = useThreeDStore((state: any) => state.threeds)
-  const threed = useThreeDStore((state: any) => state.threed)
-
+  // const threedCount = threedStore((state: any) => state.threedCount)
+  const threedCount = threedStore.get("threedCount")
+  // const threeds = threedStore((state: any) => state.threeds)
+  const threeds = threedStore.get("threeds")
+  // const threed = threedStore((state: any) => state.threed)
+  const threed = threedStore.get("threed")
   console.debug("%cThreeDInfoPanel: {threed}", ccm1, threed)
 
   return (
     <Box>
       <Typography>{threeds.length} threeds around here ...</Typography>
-      {/* <Typography>{threedCount} threeds around here ...</Typography> */}
+      <Typography>{threedCount} threeds around here ...</Typography>
     </Box>
   )
 }
 
 function ThreeDControlPanel() {
-  const increaseThreeDCount = useThreeDStore((state: any) => state.increaseThreeDCount)
+  // const increaseThreeDCount = threedStore((state: any) => state.increaseThreeDCount)
+  const increaseThreeDCount = () => threedStore.update("threedCount", threedActions.increaseThreeDCount())
 
-  const addThreeD = useThreeDStore((state: any) => state.addThreeD)
+  // const addThreeD = threedStore((state: any) => state.addThreeD)
+  const addThreeD = () => threedActions.addThreeD()
 
   return (
     <Box>
       <Button onClick={addThreeD}>add threed</Button>
-      {/* <Button onClick={increaseThreeDCount}>add to threed count</Button> */}
+      <Button onClick={increaseThreeDCount}>add to threed count</Button>
     </Box>
   )
 }
@@ -266,15 +255,12 @@ function ThreeDControlPanel() {
 // ==========================================================
 // Project
 
-// moved to stores
-// const useProjectStore = create((set, get) => ({
-
 function ProjectInfoPanel() {
-  const projectCount = useProjectStore((state: any) => state.projectCount)
-  const projects = useProjectStore((state: any) => state.projects)
-  const project = useProjectStore((state: any) => state.project)
-
+  const projectCount = projectStore((state: any) => state.projectCount)
+  const projects = projectStore((state: any) => state.projects)
+  const project = projectStore((state: any) => state.project)
   // console.debug("%cCurrentProject", ccm1, project)
+
   return (
     <Box>
       <Typography>{projects.length} projects around here ...</Typography>
@@ -284,15 +270,15 @@ function ProjectInfoPanel() {
 }
 
 function ProjectControlPanel() {
-  // const increaseProjectCount = useProjectStore((state: any) => state.increaseProjectCount)
+  // const increaseProjectCount = projectActions((state: any) => state.increaseProjectCount)
 
-  const addProject = useProjectStore((state: any) => state.addProject)
-  const saveToDisk = useProjectStore((state: any) => state.saveToDisk)
-  const loadFromDisk = useProjectStore((state: any) => state.loadFromDisk)
+  const addProject = projectActions((state: any) => state.addProject)
+  const saveToDisk = projectActions((state: any) => state.saveToDisk)
+  const loadFromDisk = projectActions((state: any) => state.loadFromDisk)
 
-  // const addProject = useProjectStore.getState().addProject() // this executes automatically !! bad
+  // const addProject = projectActions.getState().addProject() // this executes automatically !! bad
   // const addProjectAsFunction = () => {
-  //   const addProject = useProjectStore.getState().addProject() // this executes automatically !! good
+  //   const addProject = projectActions.getState().addProject() // this executes automatically !! good
   // }
 
   return (
@@ -309,15 +295,12 @@ function ProjectControlPanel() {
 // ==========================================================
 // Plan
 
-// moved to stores
-// const usePlanStore = create((set, get) => ({
-
 function PlanInfoPanel() {
-  const planCount = usePlanStore((state: any) => state.planCount)
-  const plans = usePlanStore((state: any) => state.plans)
-  const plan = usePlanStore((state: any) => state.plan)
-
+  const planCount = planStore((state: any) => state.planCount)
+  const plans = planStore((state: any) => state.plans)
+  const plan = planStore((state: any) => state.plan)
   // console.debug("%cCurrentPlan", ccm1, plan)
+
   return (
     <Box>
       <Typography>{plans.length} plans around here ...</Typography>
@@ -327,15 +310,15 @@ function PlanInfoPanel() {
 }
 
 function PlanControlPanel() {
-  // const increasePlanCount = usePlanStore((state: any) => state.increasePlanCount)
+  // const increasePlanCount = planActions((state: any) => state.increasePlanCount)
 
-  const addPlan = usePlanStore((state: any) => state.addPlan)
-  const saveToDisk = usePlanStore((state: any) => state.saveToDisk)
-  const loadFromDisk = usePlanStore((state: any) => state.loadFromDisk)
+  const addPlan = planActions((state: any) => state.addPlan)
+  const saveToDisk = planActions((state: any) => state.saveToDisk)
+  const loadFromDisk = planActions((state: any) => state.loadFromDisk)
 
-  // const addPlan = usePlanStore.getState().addPlan() // this executes automatically !! bad
+  // const addPlan = planActions.getState().addPlan() // this executes automatically !! bad
   // const addPlanAsFunction = () => {
-  //   const addPlan = usePlanStore.getState().addPlan() // this executes automatically !! good
+  //   const addPlan = planActions.getState().addPlan() // this executes automatically !! good
   // }
 
   return (
@@ -352,13 +335,10 @@ function PlanControlPanel() {
 // ==========================================================
 // File
 
-// moved to stores
-// const useFileStore = create((set) => ({
-
 function FileInfoPanel() {
-  const fileCount = useFileStore((state: any) => state.fileCount)
-  const files = useFileStore((state: any) => state.files)
-  const file = useFileStore((state: any) => state.file)
+  const fileCount = fileStore((state: any) => state.fileCount)
+  const files = fileStore((state: any) => state.files)
+  const file = fileStore((state: any) => state.file)
 
   // console.debug("%cCurrentFile", ccm1, file)
   return (
@@ -370,9 +350,9 @@ function FileInfoPanel() {
 }
 
 function FileControlPanel() {
-  const increaseFileCount = useFileStore((state: any) => state.increaseFileCount)
+  const increaseFileCount = fileActions((state: any) => state.increaseFileCount)
 
-  const addFile = useFileStore((state: any) => state.addFile)
+  const addFile = fileActions((state: any) => state.addFile)
 
   return (
     <Box>
@@ -389,59 +369,26 @@ function FileControlPanel() {
 // ==========================================================
 // Bear
 
-// moved to stores
-// const useBearStore = create((set) => ({
-
 function BearInfoPanel() {
-  const bears = useBearStore((state: any) => state.bears)
+  const bears = bearStore((state: any) => state.bears)
   return <Box>{bears} bears around here ...</Box>
 }
 
 function BearControlPanel() {
-  const increaseBearCount = useBearStore((state: any) => state.increaseBearCount)
+  const increaseBearCount = bearActions((state: any) => state.increaseBearCount)
   return <Button onClick={increaseBearCount}>add a bear</Button>
 }
 
 // ==========================================================
 // Modal
 
-// moved to stores (for further development + testing)
-// const modalStore = createStore('modal')({
-//   name: 'zustood',
-//   isOpenModalAbout: false,
-//   // handleOpenModalAbout: () => set(() => ({ isOpenModalAbout: true })),
-//   // handleCloseModalAbout: () => set(() => ({ isOpenModalAbout: false }))
-//   isOpenModalModel3d: false,
-//   isOpenModalLoading: false,
-//   isOpenModalShare: false,
-// })
-
-// const useModalStore = create((set, get) => ({
-//   name: 'zustand',
-//   isOpenAboutModal: false,
-//   handleOpenAboutModal: () => set(() => ({ isOpenAboutModal: true })),
-//   handleCloseAboutModal: () => set(() => ({ isOpenAboutModal: false })),
-//   isOpenModel3dModal: false,
-//   handleOpenModel3dModal: () => set(() => ({ isOpenModel3dModal: true })),
-//   handleCloseModel3dModal: () => set(() => ({ isOpenModel3dModal: false })),
-//   isOpenLoadingModal: false,
-//   handleOpenLoadingModal: () => set(() => ({ isOpenLoadingModal: true })),
-//   handleCloseLoadingModal: () => set(() => ({ isOpenLoadingModal: false })),
-//   isOpenShareModal: false,
-//   handleOpenShareModal: () => set(() => ({ isOpenShareModal: true })),
-//   handleCloseShareModal: () => set(() => ({ isOpenShareModal: false })),
-// }))
-
 // ==========================================================
 // Scene
 
-// moved to stores
-// const useSceneStore = create((set, get) => ({
-
 function SceneInfoPanel() {
-  // const sceneCount = useSceneStore((state: any) => state.sceneCount)
-  const scenes = useSceneStore((state: any) => state.scenes)
-  const scene = useSceneStore((state: any) => state.scene)
+  // const sceneCount = sceneStore((state: any) => state.sceneCount)
+  const scenes = sceneStore((state: any) => state.scenes)
+  const scene = sceneStore((state: any) => state.scene)
 
   console.debug("%cSceneInfoPanel: {scene}", ccm3, scene)
 
@@ -454,16 +401,16 @@ function SceneInfoPanel() {
 }
 
 function SceneControlPanel() {
-  // const increaseSceneCount = useSceneStore((state: any) => state.increaseSceneCount)
+  // const increaseSceneCount = sceneActions((state: any) => state.increaseSceneCount)
 
-  const addScene = useSceneStore((state: any) => state.addScene)
-  const saveToDisk = useSceneStore((state: any) => state.saveToDisk)
-  const loadFromDisk = useSceneStore((state: any) => state.loadFromDisk)
-  const loadFromDB = useSceneStore((state: any) => state.loadFromDB)
+  const addScene = sceneActions((state: any) => state.addScene)
+  const saveToDisk = sceneActions((state: any) => state.saveToDisk)
+  const loadFromDisk = sceneActions((state: any) => state.loadFromDisk)
+  const loadFromDB = sceneActions((state: any) => state.loadFromDB)
 
-  // const addScene = useSceneStore.getState().addScene() // this executes automatically !! bad
+  // const addScene = sceneActions.getState().addScene() // this executes automatically !! bad
   // const addSceneAsFunction = () => {
-  //   const addScene = useSceneStore.getState().addScene() // this executes when fn called !! good
+  //   const addScene = sceneActions.getState().addScene() // this executes when fn called !! good
   // }
 
   return (
@@ -480,9 +427,6 @@ function SceneControlPanel() {
 
 // ==========================================================
 // Allotment
-
-// moved to stores
-// const useAllotmentStore = create((set) => ({
 
 function AllotmentInfoPanel() {
   const fileCount = useAllotmentStore((state: any) => state.fileCount)
@@ -698,42 +642,46 @@ let plantHistoryPosition = 0
 // COMPONENTS
 
 // Modal: About
-const AboutModal: FunctionComponent = (): JSX.Element => {
+const ModalAbout: FunctionComponent = (): JSX.Element => {
+  // console.debug("ModalAbout")
 
-  // const [isOpenAboutModal, setIsOpenAboutModal] = useState(false)
-  // const handleOpenAboutModal = () => setIsOpenAboutModal(true)
-  // const handleCloseAboutModal = () => setIsOpenAboutModal(false)
+  // react state (old)
+  // const [isOpenModalAbout, setIsOpenModalAbout] = useState(false)
+  // const handleOpenModalAbout = () => setIsOpenModalAbout(true)
+  // const handleCloseModalAbout = () => setIsOpenModalAbout(false)
 
   // tabs
-  const [tabAboutModal, setTabAboutModal] = useState(0)
-  const handleChangeTabAboutModal = (event: SyntheticEvent, newValue: number) => {
-    setTabAboutModal(newValue);
+  const [tabModalAbout, setTabModalAbout] = useState(0)
+  const handleChangeTabModalAbout = (event: SyntheticEvent, newValue: number) => {
+    setTabModalAbout(newValue);
   }
 
-  // console.debug("AboutModal")
   // useEffect(() => {
-  //   console.debug("AboutModal onMount")
+  //   console.debug("ModalAbout onMount")
   //   return () => {
-  //     console.debug("AboutModal onUnmount")
+  //     console.debug("ModalAbout onUnmount")
   //   }
   // }, [])
 
   return (
     <Box id="aboutModalContainer">
-      {/* <Button size="small" onClick={handleOpenAboutModal}>
+      {/* <Button size="small" onClick={handleOpenModalAbout}>
         Open About Modal
       </Button> */}
       <Modal
         id="aboutModal"
-        // open={useModalStore.getState().isOpenAboutModal}
-        open={modalStore.use.isOpenModalAbout()}
-        // onClose={useModalStore.getState().handleCloseAboutModal()}
+        // open={useModalStore.getState().isOpenModalAbout}
+        // open={modalStore.use.isOpenModalAbout}
+        open={modalStore.get("isOpenModalAbout")}
+        // onClose={useModalStore.getState().handleCloseModalAbout()}
+        onClose={modalActions.handleCloseModalAbout()}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        sx={stylesModal}
       >
-        <Box className="modal-content" sx={styleModal}>
+        <Box className={stylesGarden.modalContent}>
 
-          <Box className="modal-header" style={{ textAlign: "center" }}>
+          <Box className={stylesGarden.modalHeader}>
             <Image src="/favicon/favicon.png"
               width={50}
               height={50}
@@ -743,9 +691,9 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
             <h2>ThreeD Garden</h2>
           </Box>
 
-          <Box className="modal-body" sx={{ width: '100%' }}>
+          <Box className={stylesGarden.modalBody}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-              <Tabs value={tabAboutModal} onChange={handleChangeTabAboutModal} aria-label="basic tabs example">
+              <Tabs value={tabModalAbout} onChange={handleChangeTabModalAbout} aria-label="basic tabs example">
                 <Tab label="Intro" {...a11yProps(0)} />
                 <Tab label="Models" {...a11yProps(1)} />
                 <Tab label="Examples" {...a11yProps(2)} />
@@ -755,7 +703,8 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
                 <Tab label="Supporters" {...a11yProps(6)} />
               </Tabs>
             </Box>
-            <MDTabPanel value={tabAboutModal} index={0}>
+            {/*
+            <MDTabPanel value={tabModalAbout} index={0}>
               <div style={{ paddingBottom: 8 }}>
                 Plan + Share Ideas for your Home + Garden in 2D + 3D
               </div>
@@ -786,13 +735,14 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
                     </Button>
                     <br />
                     <span id="localStoragePlanLastSavedDate" />
-                    {/* <div>
-                          <Image
-                            id="localStoragePlanImage"
-                            alt="Local Storage Plan Image"
-                            src={null}
-                            onClick={() => loadFromLocalStorage} />
-                        </div> */}
+                    <div>
+                      <Image
+                        id="localStoragePlanImage"
+                        alt="Local Storage Plan Image"
+                        src={null}
+                        onClick={() => loadFromLocalStorage}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div id="featuredPlan" style={{ textAlign: "center", padding: 10 }}>
@@ -809,17 +759,18 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
                   >
                     Start New Plan
                   </Button>
-                  {/* <div>
-                        <Image
-                          id="featuredPlanImage"
-                          alt="Featured Plan Image"
-                          src={null}
-                          onClick={() => loadExamplePlan} />
-                      </div> */}
+                  <div>
+                    <Image
+                      id="featuredPlanImage"
+                      alt="Featured Plan Image"
+                      src={null}
+                      onClick={() => loadExamplePlan}
+                    />
+                  </div>
                 </div>
               </div>
             </MDTabPanel>
-            <MDTabPanel value={tabAboutModal} index={1}>
+            <MDTabPanel value={tabModalAbout} index={1}>
               <div>
                 ThreeD Garden uses many 3D models which can be found on the internet as Public Domain, Free Art or Creative Commons.
               </div>
@@ -840,7 +791,7 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
                 </ul>
               </div>
             </MDTabPanel>
-            <MDTabPanel value={tabAboutModal} index={2}>
+            <MDTabPanel value={tabModalAbout} index={2}>
               <h3>Tutorial Videos</h3>
               <Grid container alignItems="center"
                 sx={{
@@ -855,8 +806,8 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
                       rel="noopener" className="largeButton">
                       Watch Video
                     </a>
-                    {/* <Button onClick={() => loadPlan('42fbd8ff0f5a37fa1285ae8b6c6ca36529b930c2')}
-                      className="largeButton">Load Plan</Button> */}
+                    <Button onClick={() => loadPlan('42fbd8ff0f5a37fa1285ae8b6c6ca36529b930c2')}
+                      className="largeButton">Load Plan</Button>
                   </div>
                 </Grid>
                 <Grid item xs={4}>
@@ -878,8 +829,8 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
                       rel="noopener" className="largeButton">
                       Watch Video
                     </a>
-                    {/* <Button onClick={() => loadPlan('0d371f9acad19a943f38c3a32f6d5d140bc6c913')}
-                      className="largeButton">Load Plan</Button> */}
+                    <Button onClick={() => loadPlan('0d371f9acad19a943f38c3a32f6d5d140bc6c913')}
+                      className="largeButton">Load Plan</Button>
                   </div>
                 </Grid>
                 <Grid item xs={4}>
@@ -901,8 +852,8 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
                       rel="noopener" className="largeButton">
                       Watch Video
                     </a>
-                    {/* <Button onClick={() => loadPlan('c0300edf03b952872c37744bf570a588184dd3d5')}
-                      className="largeButton">Load Plan</Button> */}
+                    <Button onClick={() => loadPlan('c0300edf03b952872c37744bf570a588184dd3d5')}
+                      className="largeButton">Load Plan</Button>
                   </div>
                 </Grid>
                 <Grid item xs={4}>
@@ -919,22 +870,23 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
                 </Grid>
               </Grid>
             </MDTabPanel>
-            <MDTabPanel value={tabAboutModal} index={3}>
+            <MDTabPanel value={tabModalAbout} index={3}>
               FAQ
             </MDTabPanel>
-            <MDTabPanel value={tabAboutModal} index={4}>
+            <MDTabPanel value={tabModalAbout} index={4}>
               Contact
             </MDTabPanel>
-            <MDTabPanel value={tabAboutModal} index={5}>
+            <MDTabPanel value={tabModalAbout} index={5}>
               Other
             </MDTabPanel>
-            <MDTabPanel value={tabAboutModal} index={6}>
+            <MDTabPanel value={tabModalAbout} index={6}>
               Supporters
             </MDTabPanel>
+            */}
           </Box>
 
-          <Box className="modal-footer">
-            <h3>&copy; <a href="https://threedgarden.com">ThreeD Garden</a></h3>
+          <Box className={stylesGarden.modalFooter}>
+            🌱 a part of the <a href="https://threed.ai">threed.ai</a> family
           </Box>
         </Box>
       </Modal>
@@ -943,35 +895,36 @@ const AboutModal: FunctionComponent = (): JSX.Element => {
 }
 
 // Modal: Model3d
-const Model3dModal: FunctionComponent = (): JSX.Element => {
+const ModalModel3d: FunctionComponent = (): JSX.Element => {
 
-  const [isOpenModel3dModal, setIsOpenModel3dModal] = useState(false)
-  const handleOpenModel3dModal = () => setIsOpenModel3dModal(true)
-  const handleCloseModel3dModal = () => setIsOpenModel3dModal(false)
+  const [isOpenModalModel3d, setIsOpenModalModel3d] = useState(false)
+  const handleOpenModalModel3d = () => setIsOpenModalModel3d(true)
+  const handleCloseModalModel3d = () => setIsOpenModalModel3d(false)
 
-  // console.debug("Model3dModal")
+  // console.debug("ModalModel3d")
   // useEffect(() => {
-  //   console.debug('Model3dModal onMount')
+  //   console.debug('ModalModel3d onMount')
   //   return () => {
-  //     console.debug('Model3dModal onUnmount')
+  //     console.debug('ModalModel3d onUnmount')
   //   }
   // }, [])
 
   return (
-    <Box id="model3dModalContainer">
-      {/* <Button size="small" onClick={handleOpenModel3dModal}>
+    <Box id="ModalModel3dContainer">
+      {/* <Button size="small" onClick={handleOpenModalModel3d}>
         Open Model3d Modal
       </Button> */}
       <Modal
-        id="model3dModal"
-        open={isOpenModel3dModal}
-        onClose={handleCloseModel3dModal}
+        id="ModalModel3d"
+        open={isOpenModalModel3d}
+        onClose={handleCloseModalModel3d}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        sx={stylesModal}
       >
-        <Box className="modal-content" sx={styleModal}>
+        <Box className={stylesGarden.modalContent}>
 
-          <Box className="modal-header" style={{ textAlign: "center" }}>
+          <Box className={stylesGarden.modalHeader}>
             <Image src="/favicon/favicon.png"
               width={50}
               height={50}
@@ -981,7 +934,7 @@ const Model3dModal: FunctionComponent = (): JSX.Element => {
             <h2>ThreeD Garden</h2>
           </Box>
 
-          <Box className="modal-body">
+          <Box className="modalBody">
             <Box id="model3dView">
               <canvas id="model3dViewCanvas" />
             </Box>
@@ -1010,8 +963,8 @@ const Model3dModal: FunctionComponent = (): JSX.Element => {
             </Box>
           </Box>
 
-          <Box className="modal-footer">
-            <h3><a href="https://threedgarden.com">ThreeD Garden</a></h3>
+          <Box className={stylesGarden.modalFooter}>
+            🌱 a part of the <a href="https://threed.ai">threed.ai</a> family
           </Box>
         </Box>
       </Modal>
@@ -1020,35 +973,36 @@ const Model3dModal: FunctionComponent = (): JSX.Element => {
 }
 
 // Modal: Loading
-const LoadingModal: FunctionComponent = (): JSX.Element => {
+const ModalLoading: FunctionComponent = (): JSX.Element => {
 
-  const [isOpenLoadingModal, setIsOpenLoadingModal] = useState(false)
-  const handleOpenLoadingModal = () => setIsOpenLoadingModal(true)
-  const handleCloseLoadingModal = () => setIsOpenLoadingModal(false)
+  const [isOpenModalLoading, setIsOpenModalLoading] = useState(false)
+  const handleOpenModalLoading = () => setIsOpenModalLoading(true)
+  const handleCloseModalLoading = () => setIsOpenModalLoading(false)
 
-  // console.debug("LoadingModal")
+  // console.debug("ModalLoading")
   // useEffect(() => {
-  //   console.debug('LoadingModal onMount')
+  //   console.debug('ModalLoading onMount')
   //   return () => {
-  //     console.debug('LoadingModal onUnmount')
+  //     console.debug('ModalLoading onUnmount')
   //   }
   // }, [])
 
   return (
-    <Box id="loadingModalContainer">
-      {/* <Button size="small" onClick={handleOpenLoadingModal}>
+    <Box id="ModalLoadingContainer">
+      {/* <Button size="small" onClick={handleOpenModalLoading}>
         Open Loading Modal
       </Button> */}
       <Modal
-        id="loadingModal"
-        open={isOpenLoadingModal}
-        onClose={handleCloseLoadingModal}
+        id="ModalLoading"
+        open={isOpenModalLoading}
+        onClose={handleCloseModalLoading}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        sx={stylesModal}
       >
-        <Box className="modal-content" sx={styleModal}>
+        <Box className={stylesGarden.modalContent}>
 
-          <Box className="modal-header" style={{ textAlign: "center" }}>
+          <Box className={stylesGarden.modalHeader}>
             <Image src="/favicon/favicon.png"
               width={50}
               height={50}
@@ -1058,13 +1012,13 @@ const LoadingModal: FunctionComponent = (): JSX.Element => {
             <h2>ThreeD Garden</h2>
           </Box>
 
-          <Box className="modal-body">
+          <Box className="modalBody">
             <h3>Loading Model Progress</h3>
             <textarea id="modalLoadingDataInfo"></textarea>
           </Box>
 
-          <Box className="modal-footer">
-            <h3><a href="https://threedgarden.com">ThreeD Garden</a></h3>
+          <Box className={stylesGarden.modalFooter}>
+            🌱 a part of the <a href="https://threed.ai">threed.ai</a> family
           </Box>
         </Box>
       </Modal>
@@ -1073,35 +1027,36 @@ const LoadingModal: FunctionComponent = (): JSX.Element => {
 }
 
 // Modal: Share
-const ShareModal: FunctionComponent = (): JSX.Element => {
+const ModalShare: FunctionComponent = (): JSX.Element => {
 
-  const [isOpenShareModal, setIsOpenShareModal] = useState(false)
-  const handleOpenShareModal = () => setIsOpenShareModal(true)
-  const handleCloseShareModal = () => setIsOpenShareModal(false)
+  const [isOpenModalShare, setIsOpenModalShare] = useState(false)
+  const handleOpenModalShare = () => setIsOpenModalShare(true)
+  const handleCloseModalShare = () => setIsOpenModalShare(false)
 
-  // console.debug("ShareModal")
+  // console.debug("ModalShare")
   // useEffect(() => {
-  //   console.debug('ShareModal onMount')
+  //   console.debug('ModalShare onMount')
   //   return () => {
-  //     console.debug('ShareModal onUnmount')
+  //     console.debug('ModalShare onUnmount')
   //   }
   // }, [])
 
   return (
-    <Box id="shareModalContainer">
-      {/* <Button size="small" onClick={handleOpenShareModal}>
+    <Box id="ModalShareContainer">
+      {/* <Button size="small" onClick={handleOpenModalShare}>
         Open Share Modal
       </Button> */}
       <Modal
-        id="shareModal"
-        open={isOpenShareModal}
-        onClose={handleCloseShareModal}
+        id="ModalShare"
+        open={isOpenModalShare}
+        onClose={handleCloseModalShare}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        sx={stylesModal}
       >
-        <Box className="modal-content" sx={styleModal}>
+        <Box className={stylesGarden.modalContent}>
 
-          <Box className="modal-header" style={{ textAlign: "center" }}>
+          <Box className={stylesGarden.modalHeader}>
             <Image src="/favicon/favicon.png"
               width={50}
               height={50}
@@ -1111,7 +1066,7 @@ const ShareModal: FunctionComponent = (): JSX.Element => {
             <h2>ThreeD Garden</h2>
           </Box>
 
-          <Box className="smallModal-body">
+          <Box className={stylesGarden.smallModalBody}>
             <h3>Share Plan</h3>
             <Button
               id="getShareLinkBtn"
@@ -1201,8 +1156,8 @@ const ShareModal: FunctionComponent = (): JSX.Element => {
             </Box>
           </Box>
 
-          <Box className="modal-footer">
-            <h3><a href="https://threedgarden.com">ThreeD Garden</a></h3>
+          <Box className={stylesGarden.modalFooter}>
+            🌱 a part of the <a href="https://threed.ai">threed.ai</a> family
           </Box>
         </Box>
       </Modal>
@@ -1886,7 +1841,7 @@ const ToolBar: FunctionComponent = (): JSX.Element => {
       }
       // loadingProgressTxt = "Loading Saved Plan"
       // document.getElementById("modalLoadingDataInfo").innerHTML = loadingProgressTxt
-      // $("#loadingModal").show()
+      // $("#ModalLoading").show()
       // hideMouseIndicators()
       o.readAsText(t.files[0])
 
@@ -1899,7 +1854,7 @@ const ToolBar: FunctionComponent = (): JSX.Element => {
 
   const doOpenShareDialog = () => {
     try {
-      $("#shareModal").show()
+      $("#ModalShare").show()
     } catch (e) {
       console.log("doOpenShareDialog : " + e)
     }
@@ -2016,7 +1971,7 @@ const ToolBar: FunctionComponent = (): JSX.Element => {
               onClose={handleCloseActionsMenu}
             >
               <MenuItem key="New ThreeD" onClick={handleCloseActionsMenu}>
-                <Typography onClick={() => useThreeDStore.getState().addThreeD()}>New ThreeD</Typography>
+                <Typography onClick={() => threedActions.getState().addThreeD()}>New ThreeD</Typography>
               </MenuItem>
               <MenuItem key="New Project" onClick={handleCloseActionsMenu}>
                 <Typography onClick={() => useProjectStore.getState().addProject()}>New Project</Typography>
@@ -2134,16 +2089,16 @@ const ToolBar: FunctionComponent = (): JSX.Element => {
               onClose={handleCloseViewsMenu}
             >
               <MenuItem key="Modal: About" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalStore.set.isOpenModalAbout(true)}>Modal: About</Typography>
+                <Typography onClick={(e) => modalActions.handleOpenModalAbout()}>Modal: About</Typography>
               </MenuItem>
               <MenuItem key="Modal: Model3d" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalStore.set.isOpenModalModel3d(true)}>Modal: Model3d</Typography>
+                <Typography onClick={(e) => modalActions.handleOpenModalModel3d()}>Modal: Model3d</Typography>
               </MenuItem>
               <MenuItem key="Modal: Loading" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalStore.set.isOpenModalLoading(true)}>Modal: Loading</Typography>
+                <Typography onClick={(e) => modalActions.handleOpenModalLoading()}>Modal: Loading</Typography>
               </MenuItem>
               <MenuItem key="Modal: Share" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalStore.set.isOpenModalShare(true)}>Modal: Share</Typography>
+                <Typography onClick={(e) => modalActions.handleOpenModalShare()}>Modal: Share</Typography>
               </MenuItem>
               <MenuItem key="Dialog: Share" onClick={handleCloseViewsMenu}>
                 <Typography onClick={doOpenShareDialog}>Dialog: Share</Typography>
@@ -3606,10 +3561,12 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
           {/* React Three Fiber - View */}
           <ReactThreeFiberView />
           <hr />
+          <TestAC3Store />
+          <hr />
           <ThreeDInfoPanel />
           <ThreeDControlPanel />
           <hr />
-          <ProjectInfoPanel />
+          {/* <ProjectInfoPanel />
           <ProjectControlPanel />
           <hr />
           <PlanInfoPanel />
@@ -3617,7 +3574,7 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
           <hr />
           <FileInfoPanel />
           <FileControlPanel />
-          <hr />
+          <hr /> */}
           {/* <CharacterInfoPanel /> */}
           {/* <CharacterControlPanel /> */}
           {/* <hr /> */}
@@ -3630,9 +3587,9 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
           {/* <ChickenInfoPanel /> */}
           {/* <ChickenControlPanel /> */}
           {/* <hr /> */}
-          <SceneInfoPanel />
+          {/* <SceneInfoPanel />
           <SceneControlPanel />
-          <hr />
+          <hr /> */}
           {/* <AllotmentInfoPanel /> */}
           {/* <AllotmentControlPanel /> */}
           {/* <hr /> */}
@@ -3650,10 +3607,10 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
           {/* <hr /> */}
         </div>
 
-        <AboutModal />
-        <Model3dModal />
-        <LoadingModal />
-        <ShareModal />
+        <ModalAbout />
+        <ModalModel3d />
+        <ModalLoading />
+        <ModalShare />
 
         {/* <CatalogView /> */}
         {/* <PropertiesView /> */}
