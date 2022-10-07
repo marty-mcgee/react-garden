@@ -526,14 +526,38 @@ export const modalStore = create({
 }) // modalStore
 
 export const modalActions = {
-  handleOpenModalAbout: modalStore.update("isOpenModalAbout", true),
-  handleCloseModalAbout: () => { }, // (() => ({ isOpenModalAbout: false })),
-  handleOpenModalModel3d: () => { }, // (() => ({ isOpenModalModel3d: true })),
-  handleCloseModalModel3d: () => { }, // (() => ({ isOpenModalModel3d: false })),
-  handleOpenModalLoading: () => { }, // (() => ({ isOpenModalLoading: true })),
-  handleCloseModalLoading: () => { }, // (() => ({ isOpenModalLoading: false })),
-  handleOpenModalShare: () => { }, // (() => ({ isOpenModalShare: true })),
-  handleCloseModalShare: () => { }, // (() => ({ isOpenModalShare: false })),
+  handleOpenModalAbout: (e = null) => {
+    modalStore.update("isOpenModalAbout", true)
+    console.debug("isOpenModalAbout", modalStore.get("isOpenModalAbout"), e)
+  },
+  handleCloseModalAbout: (e = null) => {
+    modalStore.update("isOpenModalAbout", false)
+    console.debug("isOpenModalAbout", modalStore.get("isOpenModalAbout"), e)
+  },
+  handleOpenModalModel3d: () => {
+    modalStore.update("isOpenModalModel3d", true)
+    console.debug("isOpenModalModel3d", modalStore.get("isOpenModalModel3d"))
+  },
+  handleCloseModalModel3d: () => {
+    modalStore.update("isOpenModalModel3d", false)
+    console.debug("isOpenModalModel3d", modalStore.get("isOpenModalModel3d"))
+  },
+  handleOpenModalLoading: () => {
+    modalStore.update("isOpenModalLoading", true)
+    console.debug("isOpenModalLoading", modalStore.get("isOpenModalLoading"))
+  },
+  handleCloseModalLoading: () => {
+    modalStore.update("isOpenModalLoading", false)
+    console.debug("isOpenModalLoading", modalStore.get("isOpenModalLoading"))
+  },
+  handleOpenModalShare: () => {
+    modalStore.update("isOpenModalShare", true)
+    console.debug("isOpenModalShare", modalStore.get("isOpenModalShare"))
+  },
+  handleCloseModalShare: () => {
+    modalStore.update("isOpenModalShare", false)
+    console.debug("isOpenModalShare", modalStore.get("isOpenModalShare"))
+  },
 } // modalActions
 
 // ==============================================================

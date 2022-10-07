@@ -56,12 +56,12 @@
 // ** React Imports
 import {
   useEffect,
-  useRef,
+  // useRef,
   useState,
-  useCallback,
+  // useCallback,
+  ReactNode,
   FunctionComponent,
   MouseEventHandler,
-  ReactNode,
   SyntheticEvent
 } from "react"
 
@@ -642,8 +642,7 @@ let plantHistoryPosition = 0
 // COMPONENTS
 
 // Modal: About
-const ModalAbout: FunctionComponent = (): JSX.Element => {
-  // console.debug("ModalAbout")
+const ModalAbout: ReactNode = (): JSX.Element => {
 
   // react state (old)
   // const [isOpenModalAbout, setIsOpenModalAbout] = useState(false)
@@ -656,6 +655,7 @@ const ModalAbout: FunctionComponent = (): JSX.Element => {
     setTabModalAbout(newValue);
   }
 
+  // console.debug("ModalAbout")
   // useEffect(() => {
   //   console.debug("ModalAbout onMount")
   //   return () => {
@@ -664,17 +664,16 @@ const ModalAbout: FunctionComponent = (): JSX.Element => {
   // }, [])
 
   return (
-    <Box id="aboutModalContainer">
-      {/* <Button size="small" onClick={handleOpenModalAbout}>
-        Open About Modal
-      </Button> */}
+    <Box id="ModalAboutContainer">
       <Modal
-        id="aboutModal"
-        // open={useModalStore.getState().isOpenModalAbout}
-        // open={modalStore.use.isOpenModalAbout}
-        open={modalStore.get("isOpenModalAbout")}
-        // onClose={useModalStore.getState().handleCloseModalAbout()}
-        onClose={modalActions.handleCloseModalAbout()}
+        id="ModalAbout"
+        // open={isOpenModalAbout} // react state
+        // open={useModalStore.getState().isOpenModalAbout} // zustand
+        // open={modalStore.use.isOpenModalAbout} // zustood
+        open={modalStore.useStore("isOpenModalAbout")} // apollo reactive store
+        // onClose={handleCloseModalAbout} // react state
+        // onClose={useModalStore.getState().handleCloseModalAbout()} // zustand
+        onClose={(e) => modalActions.handleCloseModalAbout(e)} // apollo reactive store
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={stylesModal}
@@ -703,30 +702,34 @@ const ModalAbout: FunctionComponent = (): JSX.Element => {
                 <Tab label="Supporters" {...a11yProps(6)} />
               </Tabs>
             </Box>
-            {/*
             <MDTabPanel value={tabModalAbout} index={0}>
-              <div style={{ paddingBottom: 8 }}>
+              <h3 style={{ paddingBottom: 8 }}>
                 Plan + Share Ideas for your Home + Garden in 2D + 3D
-              </div>
-              <div style={{ border: "1px solid #272727", padding: 10 }}>
+              </h3>
+              <span className="tooltip">
+                <span className="tooltipText">
+                  Edits you make to plans will be saved to your browser&apos;s local storage so that you don&apos;t lose any work between saves. Plans will be deleted if you clean your browser&apos;s cookies, history, or local storage. To save your work long term, use the &quot;Actions: Save Plan&quot; option in the main toolbar.
+                </span>
+              </span>
+              <div>
                 <div style={{ textAlign: "center", padding: 10 }}>
-                  <div>Save Plans to Browser&apos;s Local Storage?:</div>
-                  <input
-                    type="checkbox"
-                    id="saveEditsToLocalStorage"
-                    // onChange={() => handleSaveEditsLocalStorageOption}
-                    style={{ marginLeft: 5, marginRight: 5 }}
-                  />
-                  <br />
-                  <br />
-                  <span className="tooltip">
-                    <span className="tooltiptext">
-                      Edits you make to plans will be saved to your browser&apos;s local storage so that you don&apos;t lose any work between saves. Plans will be removed if you clean your browser&apos;s cookies and history, so to save your work long term, use the &quot;File: Save&quot; option in the main toolbar.
-                    </span>
-                  </span>
-                  <br />
-                  <br />
+                  <hr style={{ border: "1px solid #333", width: "50%" }} />
+                  <div>
+                    <div>
+                      Automatically Save Plans to Browser&apos;s Local Storage?
+                    </div>
+                    <input
+                      type="checkbox"
+                      id="saveEditsToLocalStorage"
+                      // onChange={() => handleSaveEditsLocalStorageOption}
+                      style={{ marginLeft: 5, marginRight: 5 }}
+                    />
+                  </div>
+                  <hr style={{ border: "1px solid #333", width: "50%" }} />
                   <div id="localStoragePlanDiv" style={{ textAlign: "center" }}>
+                    <div>
+                      Actions:
+                    </div>
                     <Button
                       size="small"
                       // onClick={() => loadFromLocalStorage}
@@ -735,14 +738,14 @@ const ModalAbout: FunctionComponent = (): JSX.Element => {
                     </Button>
                     <br />
                     <span id="localStoragePlanLastSavedDate" />
-                    <div>
+                    {/* <div>
                       <Image
                         id="localStoragePlanImage"
                         alt="Local Storage Plan Image"
                         src={null}
                         onClick={() => loadFromLocalStorage}
                       />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div id="featuredPlan" style={{ textAlign: "center", padding: 10 }}>
@@ -752,21 +755,21 @@ const ModalAbout: FunctionComponent = (): JSX.Element => {
                     id="loadFeaturedPlanBtn">
                     Load Example Plan
                   </Button>
-                  <div>&nbsp;&nbsp;OR&nbsp;&nbsp;</div>
+                  <div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
                   <Button
                     size="small"
                     // onClick={() => closeAllModals}
                   >
                     Start New Plan
                   </Button>
-                  <div>
+                  {/* <div>
                     <Image
                       id="featuredPlanImage"
                       alt="Featured Plan Image"
                       src={null}
                       onClick={() => loadExamplePlan}
                     />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </MDTabPanel>
@@ -882,11 +885,13 @@ const ModalAbout: FunctionComponent = (): JSX.Element => {
             <MDTabPanel value={tabModalAbout} index={6}>
               Supporters
             </MDTabPanel>
-            */}
           </Box>
 
           <Box className={stylesGarden.modalFooter}>
-            🌱 a part of the <a href="https://threed.ai">threed.ai</a> family
+            🌱 a part of the <a href="https://threed.ai">threed.ai</a> code family
+            <Button size="small" onClick={() => modalActions.handleCloseModalAbout()}>
+              [X]
+            </Button>
           </Box>
         </Box>
       </Modal>
@@ -895,11 +900,12 @@ const ModalAbout: FunctionComponent = (): JSX.Element => {
 }
 
 // Modal: Model3d
-const ModalModel3d: FunctionComponent = (): JSX.Element => {
+const ModalModel3d: ReactNode = (): JSX.Element => {
 
-  const [isOpenModalModel3d, setIsOpenModalModel3d] = useState(false)
-  const handleOpenModalModel3d = () => setIsOpenModalModel3d(true)
-  const handleCloseModalModel3d = () => setIsOpenModalModel3d(false)
+  // react state (old)
+  // const [isOpenModalModel3d, setIsOpenModalModel3d] = useState(false)
+  // const handleOpenModalModel3d = () => setIsOpenModalModel3d(true)
+  // const handleCloseModalModel3d = () => setIsOpenModalModel3d(false)
 
   // console.debug("ModalModel3d")
   // useEffect(() => {
@@ -911,13 +917,15 @@ const ModalModel3d: FunctionComponent = (): JSX.Element => {
 
   return (
     <Box id="ModalModel3dContainer">
-      {/* <Button size="small" onClick={handleOpenModalModel3d}>
-        Open Model3d Modal
-      </Button> */}
       <Modal
         id="ModalModel3d"
-        open={isOpenModalModel3d}
-        onClose={handleCloseModalModel3d}
+        // open={isOpenModalModel3d} // react state
+        // open={useModalStore.getState().isOpenModalModel3d} // zustand
+        // open={modalStore.use.isOpenModalModel3d} // zustood
+        open={modalStore.useStore("isOpenModalModel3d")} // apollo reactive store
+        // onClose={handleCloseModalModel3d} // react state
+        // onClose={useModalStore.getState().handleCloseModalModel3d()} // zustand
+        onClose={(e) => modalActions.handleCloseModalModel3d(e)} // apollo reactive store
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={stylesModal}
@@ -964,7 +972,10 @@ const ModalModel3d: FunctionComponent = (): JSX.Element => {
           </Box>
 
           <Box className={stylesGarden.modalFooter}>
-            🌱 a part of the <a href="https://threed.ai">threed.ai</a> family
+            🌱 a part of the <a href="https://threed.ai">threed.ai</a> code family
+            <Button size="small" onClick={() => modalActions.handleCloseModalModel3d()}>
+              [X]
+            </Button>
           </Box>
         </Box>
       </Modal>
@@ -973,11 +984,12 @@ const ModalModel3d: FunctionComponent = (): JSX.Element => {
 }
 
 // Modal: Loading
-const ModalLoading: FunctionComponent = (): JSX.Element => {
+const ModalLoading: ReactNode = (): JSX.Element => {
 
-  const [isOpenModalLoading, setIsOpenModalLoading] = useState(false)
-  const handleOpenModalLoading = () => setIsOpenModalLoading(true)
-  const handleCloseModalLoading = () => setIsOpenModalLoading(false)
+  // react state (old)
+  // const [isOpenModalLoading, setIsOpenModalLoading] = useState(false)
+  // const handleOpenModalLoading = () => setIsOpenModalLoading(true)
+  // const handleCloseModalLoading = () => setIsOpenModalLoading(false)
 
   // console.debug("ModalLoading")
   // useEffect(() => {
@@ -989,13 +1001,15 @@ const ModalLoading: FunctionComponent = (): JSX.Element => {
 
   return (
     <Box id="ModalLoadingContainer">
-      {/* <Button size="small" onClick={handleOpenModalLoading}>
-        Open Loading Modal
-      </Button> */}
       <Modal
         id="ModalLoading"
-        open={isOpenModalLoading}
-        onClose={handleCloseModalLoading}
+        // open={isOpenModalLoading} // react state
+        // open={useModalStore.getState().isOpenModalLoading} // zustand
+        // open={modalStore.use.isOpenModalLoading} // zustood
+        open={modalStore.useStore("isOpenModalLoading")} // apollo reactive store
+        // onClose={handleCloseModalLoading} // react state
+        // onClose={useModalStore.getState().handleCloseModalLoading()} // zustand
+        onClose={(e) => modalActions.handleCloseModalLoading(e)} // apollo reactive store
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={stylesModal}
@@ -1018,7 +1032,10 @@ const ModalLoading: FunctionComponent = (): JSX.Element => {
           </Box>
 
           <Box className={stylesGarden.modalFooter}>
-            🌱 a part of the <a href="https://threed.ai">threed.ai</a> family
+            🌱 a part of the <a href="https://threed.ai">threed.ai</a> code family
+            <Button size="small" onClick={() => modalActions.handleCloseModalLoading()}>
+              [X]
+            </Button>
           </Box>
         </Box>
       </Modal>
@@ -1027,11 +1044,12 @@ const ModalLoading: FunctionComponent = (): JSX.Element => {
 }
 
 // Modal: Share
-const ModalShare: FunctionComponent = (): JSX.Element => {
+const ModalShare: ReactNode = (): JSX.Element => {
 
-  const [isOpenModalShare, setIsOpenModalShare] = useState(false)
-  const handleOpenModalShare = () => setIsOpenModalShare(true)
-  const handleCloseModalShare = () => setIsOpenModalShare(false)
+  // react state (old)
+  // const [isOpenModalShare, setIsOpenModalShare] = useState(false)
+  // const handleOpenModalShare = () => setIsOpenModalShare(true)
+  // const handleCloseModalShare = () => setIsOpenModalShare(false)
 
   // console.debug("ModalShare")
   // useEffect(() => {
@@ -1043,13 +1061,15 @@ const ModalShare: FunctionComponent = (): JSX.Element => {
 
   return (
     <Box id="ModalShareContainer">
-      {/* <Button size="small" onClick={handleOpenModalShare}>
-        Open Share Modal
-      </Button> */}
       <Modal
         id="ModalShare"
-        open={isOpenModalShare}
-        onClose={handleCloseModalShare}
+        // open={isOpenModalShare} // react state
+        // open={useModalStore.getState().isOpenModalShare} // zustand
+        // open={modalStore.use.isOpenModalShare} // zustood
+        open={modalStore.useStore("isOpenModalShare")} // apollo reactive store
+        // onClose={handleCloseModalShare} // react state
+        // onClose={useModalStore.getState().handleCloseModalShare()} // zustand
+        onClose={(e) => modalActions.handleCloseModalShare(e)} // apollo reactive store
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={stylesModal}
@@ -1157,7 +1177,10 @@ const ModalShare: FunctionComponent = (): JSX.Element => {
           </Box>
 
           <Box className={stylesGarden.modalFooter}>
-            🌱 a part of the <a href="https://threed.ai">threed.ai</a> family
+            🌱 a part of the <a href="https://threed.ai">threed.ai</a> code family
+            <Button size="small" onClick={() => modalActions.handleCloseModalShare()}>
+              [X]
+            </Button>
           </Box>
         </Box>
       </Modal>
@@ -1165,7 +1188,7 @@ const ModalShare: FunctionComponent = (): JSX.Element => {
   )
 }
 
-const ToolBar: FunctionComponent = (): JSX.Element => {
+const ToolBar: ReactNode = (): JSX.Element => {
 
   const word = `[MM] @ ${new Date().toISOString()}`
   // console.debug("ToolBar", word)
@@ -2304,7 +2327,7 @@ const ToolBar: FunctionComponent = (): JSX.Element => {
   )
 }
 
-const CatalogView: FunctionComponent = (): JSX.Element => {
+const CatalogView: ReactNode = (): JSX.Element => {
   // console.debug("CatalogView")
   useEffect(() => {
     console.debug('CatalogView onMount')
@@ -2322,7 +2345,7 @@ const CatalogView: FunctionComponent = (): JSX.Element => {
   )
 }
 
-const PropertiesView: FunctionComponent = (): JSX.Element => {
+const PropertiesView: ReactNode = (): JSX.Element => {
   // console.debug("PropertiesView")
   useEffect(() => {
     console.debug('PropertiesView onMount')
@@ -3316,7 +3339,7 @@ const PropertiesView: FunctionComponent = (): JSX.Element => {
   )
 }
 
-const PlanView: FunctionComponent = (): JSX.Element => {
+const PlanView: ReactNode = (): JSX.Element => {
   // console.debug("PlanView")
   useEffect(() => {
     console.debug('PlanView onMount')
@@ -3360,7 +3383,7 @@ const PlanView: FunctionComponent = (): JSX.Element => {
   )
 }
 
-const TheBottom: FunctionComponent = (): JSX.Element => {
+const TheBottom: ReactNode = (): JSX.Element => {
 
   const word = `[MM] @ ${new Date().toISOString()}`
 
@@ -3471,7 +3494,7 @@ const ReactThreeFiberView = (): JSX.Element => {
   )
 }
 
-const MyComponent: FunctionComponent = (): JSX.Element => {
+const MyComponent: ReactNode = (): JSX.Element => {
 
   const word = `[MM] @ ${new Date().toISOString()}`
 
@@ -3552,11 +3575,11 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
       {/* <div ref={root}>Three root</div> */}
 
       {/* jQuery Three Happy Messy */}
-      <div id="DEMO">
+      <div id="threedgarden">
         <ToolBar />
 
-        {/* zustand */}
-        <div id="zustandControlPanel" style={{ padding: "1rem" }}>
+        {/* store access */}
+        <div id="storeControlPanel" style={{ padding: "1rem" }}>
 
           {/* React Three Fiber - View */}
           <ReactThreeFiberView />
