@@ -174,28 +174,30 @@ const Toolbar = styled(MuiToolbar)(({ theme }) => ({
 // ==========================================================
 // ThreeD
 
-function ThreeDInfoPanel() {
-  // const threedCount = threedStore((state: any) => state.threedCount)
+const ThreeDInfoPanel = () => {
+
+  // const threedCount = threedStore((state: any) => state.threedCount) // zustand
   const threedCount = threedStore.useStore("threedCount")
-  // const threeds = threedStore((state: any) => state.threeds)
+  // const threeds = threedStore((state: any) => state.threeds) // zustand
   const threeds = threedStore.useStore("threeds")
-  // const threed = threedStore((state: any) => state.threed)
+  // const threed = threedStore((state: any) => state.threed) // zustand
   const threed = threedStore.useStore("threed")
   console.debug("%cThreeDInfoPanel: {threed}", ccm1, threed)
 
   return (
     <Box>
-      <Typography>{threeds.length} threeds around here ...</Typography>
-      <Typography>{threedCount} threeds around here ...</Typography>
+      <Typography>{threeds.length} threeds.length around here ...</Typography>
+      <Typography>{threedCount} threedCount around here ...</Typography>
     </Box>
   )
 }
 
-function ThreeDControlPanel() {
-  // const increaseThreeDCount = threedStore((state: any) => state.increaseThreeDCount)
+const ThreeDControlPanel = () => {
+
+  // const increaseThreeDCount = threedStore((state: any) => state.increaseThreeDCount) // zustand
   const increaseThreeDCount = () => threedStore.update("threedCount", threedActions.increaseThreeDCount())
 
-  // const addThreeD = threedStore((state: any) => state.addThreeD)
+  // const addThreeD = threedStore((state: any) => state.addThreeD) // zustand
   const addThreeD = () => threedActions.addThreeD()
 
   return (

@@ -90,96 +90,152 @@ export const TestAC3Store = () => {
 // ThreeD
 // aka 'Master File with Settings'
 
+const threed = (threedName = 'HEY HEY HEY 0', layerName = 'level0-MM') => ({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
+  name: threedName,
+  layers: [],
+  activeLayer: {
+    name: layerName,
+    data: {}
+  },
+  // wp custom fields here
+})
+
 export const threedStore = create({
   _id: newUUID(),
   _ts: new Date().toISOString(),
   threedCount: 0,
   threeds: [],
-  threed: {
-    _id: newUUID(),
-    _ts: new Date().toISOString(),
-    name: 'HEY HEY HEY 0',
-    layers: [],
-    activeLayer: {
-      name: 'level0-MM',
-      data: {}
-    },
-    // wp custom fields here
-  }
+  threed: {},
 }) // threedStore
 
 export const threedActions = {
+
   // increaseThreeDCount: () => set(
-  //   (state) => (
-  //     { threedCount: state.threedCount + 1 }
-  //   )
+  //   (state) => ({ threedCount: state.threedCount + 1 })
   // ),
   increaseThreeDCount: (n = 1) => {
     return (state) => state + n
   },
+
   removeAllThreeDs: () => set(
     {
       threedCount: 0,
       threeds: []
     }
   ),
-  addThreeD: () => {
-    // threedCount
-    threedStore.update("threedCount", threedStore.get("threedCount") + 1)
-    // threedHistory (pre)
+
+  addThreeD: function () {
+
+    console.debug('%cAddThreeD [threeds] (before)', ccm1, threedStore.get("threeds"))
+
+    // create a new one
+    if (Object.keys(threedStore.get("threed")).length === 0) {
+      threedStore.update("threed", threed())
+    }
+    // save + update old one
+    else {
+      // threedHistory (save existing before mutating, if not empty)
+      threedStore.update("threeds", [
+        threedStore.get("threed"),
+        ...threedStore.get("threeds")
+      ])
+      console.debug('%cAddThreeD [threeds] (during)', ccm1, threedStore.get("threeds"))
+
+      // threedCount (example)
+      // threedStore.update("threedCount", threedStore.get("threedCount") + 1) // manual
+      threedStore.update("threedCount", threedStore.get("threeds").length) // automatic
+      // console.debug('%cAddThreeD {threedCount}', ccm3, threedStore.get("threedCount"))
+      // console.debug('%cAddThreeD [threeds]', ccm3, threedStore.get("threeds").length)
+
+      // threedCurrent (overwrite -- mutate)
+      threedStore.update("threed", {
+        _id: newUUID(),
+        _ts: new Date().toISOString(),
+        name: 'YO YO YO 1',
+        layers: [],
+        activeLayer: {
+          name: 'level1-MM',
+          data: {}
+        }
+      })
+    }
+    console.debug('%cAddThreeD {threed}', ccm1, threedStore.get("threed"))
+
+    // save the new one and the old ones
+    // threedHistory (save recently mutated)
     threedStore.update("threeds", [
       threedStore.get("threed"),
       ...threedStore.get("threeds")
     ])
-    // threedCurrent (overwrite)
-    threedStore.update("threed", {
-      _id: newUUID(),
-      _ts: new Date().toISOString(),
-      name: 'YO YO YO 1',
-      layers: [],
-      activeLayer: {
-        name: 'level1-MM',
-        data: {}
-      }
-    })
-    // threedHistory (post)
-    threedStore.update("threeds", [
-      threedStore.get("threed"),
-      ...threedStore.get("threeds")
-    ])
-    // // saveToDisk
+    console.debug('%cAddThreeD [threeds] (after)', ccm1, threedStore.get("threeds"))
+
+    // threedCount (example)
+    // threedStore.update("threedCount", threedStore.get("threedCount") + 1) // manual
+    threedStore.update("threedCount", threedStore.get("threeds").length) // automatic
+    // console.debug('%cAddThreeD {threedCount}', ccm3, threedStore.get("threedCount"))
+    // console.debug('%cAddThreeD [threeds]', ccm3, threedStore.get("threeds").length)
+
+    // saveToDisk
     // get().saveToDisk()
-    // // loadFromDisk
+    this.saveToDisk()
+    // loadFromDisk
     // get().loadFromDisk()
+    this.loadFromDisk()
 
     // console.debug('%cAddThreeD', ccm1, get().threed)
-    console.debug('%cAddThreeD', ccm1)
   },
-  saveProject: () => {
+
+  saveThreeD: function () {
     // saveToDisk
-    get().saveToDisk()
+    // get().saveToDisk()
+    this.saveToDisk()
+    // saveToDB (coming soon !!!)
+    // this.saveToDB()
   },
-  saveToDisk: () => {
+
+  saveToDisk: function () {
     try {
-      localStorage.setItem('threed_threedHistory', JSON.stringify({ subject: 'threed', payload: get().threed }))
-      console.debug('%cSaveToDisk threeds', ccm1, get().threed)
+      localStorage.setItem(
+        'threed_threedHistory',
+        JSON.stringify({
+          subject: 'threeds',
+          payload: threedStore.get("threeds")
+        })
+      )
+      console.debug('%cSaveToDisk [threeds]', ccm1, threedStore.get("threeds"))
       return true
     } catch (err) {
-      console.debug('%cSaveToDisk threeds', ccm3, err)
+      console.debug('%cSaveToDisk [threeds] err', ccm2, err)
       return false
     }
   },
-  loadFromDisk: () => {
+
+  loadFromDisk: function () {
     try {
-      const payload = localStorage.getItem('threed_threedHistory')
+      const payload = JSON.parse(localStorage.getItem('threed_threedHistory'))
       if (payload) {
-        console.debug('%cLoadFromDisk threeds', ccm1, true) // payload
-        return payload // string[]
+        console.debug('%cLoadFromDisk [threeds] PAYLOAD?', ccm3, payload)
+        console.debug('%cLoadFromDisk [threeds] PAYLOAD.PAYLOAD?', ccm3, payload.payload)
+        if (payload.payload) {
+          console.debug('%cLoadFromDisk [threeds]', ccm3, true) // payload
+          threedStore.update("threeds", [...payload.payload])
+          console.debug('%cLoadFromDisk [threeds] (after)', ccm3, threedStore.get("threeds"))
+          threedStore.update("threed", threedStore.get("threeds")[0])
+          console.debug('%cLoadFromDisk {threed} (after)', ccm3, threedStore.get("threed"))
+          return true // payload // string[]
+        }
+        else {
+          console.debug('%cLoadFromDisk [threeds] NO PAYLOAD?', ccm3, payload)
+        }
       }
-      console.debug('%cLoadFromDisk threeds', ccm3, payload)
+      else {
+        console.debug('%cLoadFromDisk [threeds] NOTHING TO LOAD', ccm3, payload)
+      }
       return false
     } catch (err) {
-      console.debug('%cLoadFromDisk threeds', ccm3, err)
+      console.debug('%cLoadFromDisk [threeds] err', ccm2, err)
       return false
     }
   }
