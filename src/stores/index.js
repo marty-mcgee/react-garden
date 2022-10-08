@@ -124,40 +124,36 @@ export const threedActions = {
     }
   ),
   addThreeD: () => {
-    // // threedCurrent
-    // set(
-    //   (state) => (
-    //     {
-    //       threed: {
-    //         _id: newUUID(),
-    //         _ts: new Date().toISOString(),
-    //         name: 'HEY HEY HEY 1',
-    //         layers: [],
-    //         activeLayer: {
-    //           name: 'level1-MM',
-    //           data: {}
-    //         }
-    //       },
-    //       threedCount: state.threedCount + 1,
-    //     }
-    //   )
-    // )
-    // // threedHistory
-    // set(
-    //   (state) => (
-    //     {
-    //       threeds: [state.threed, ...state.threeds],
-    //       threedCount: state.threeds.length,
-    //     }
-    //   )
-    // )
+    // threedCount
+    threedStore.update("threedCount", threedStore.get("threedCount") + 1)
+    // threedHistory (pre)
+    threedStore.update("threeds", [
+      threedStore.get("threed"),
+      ...threedStore.get("threeds")
+    ])
+    // threedCurrent (overwrite)
+    threedStore.update("threed", {
+      _id: newUUID(),
+      _ts: new Date().toISOString(),
+      name: 'YO YO YO 1',
+      layers: [],
+      activeLayer: {
+        name: 'level1-MM',
+        data: {}
+      }
+    })
+    // threedHistory (post)
+    threedStore.update("threeds", [
+      threedStore.get("threed"),
+      ...threedStore.get("threeds")
+    ])
     // // saveToDisk
     // get().saveToDisk()
     // // loadFromDisk
     // get().loadFromDisk()
 
     // console.debug('%cAddThreeD', ccm1, get().threed)
-    console.debug('%cAddThreeD', ccm3)
+    console.debug('%cAddThreeD', ccm1)
   },
   saveProject: () => {
     // saveToDisk

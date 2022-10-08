@@ -1,13 +1,9 @@
 const FarmbotDemoSVG = () => (
-  <div>
-    {`<style>
-#water-line path{stroke-opacity:.2;stroke-width:6;stroke:#00f;stroke-linecap:round}#stage-1 .st370{fill:#c5cfd6}#stage-1 .st371{fill:#aa7e4f}#stage-1 .st372{fill:#cdd6e0}#stage-1 .st373{fill:#516666}#stage-2 .st0{display:none}#stage-2 .st1{fill:#aa7e4f}#stage-2 .st2{fill:#7d961b}#stage-2 .st3{fill:#1a4b29}#stage-5 .bed-lines{fill:#aa7e4f}#stage-5 .st2{fill:#7d961b}#stage-5 .st3{fill:#1a4b29}#stage-5 .st4{fill:#104b11}#stage-5 .st5{fill:#ec4e1d}#stage-5 .st6{fill:#f6a267}#stage-5 .st7{fill:#fff}#stage-5 .st8{fill:#96231c}#stage-5 .st9{fill:#4f8125}#stage-5 .st10{fill:#fcba4f}#stage-5 .st11{fill:#e3682c}#stage-5 .st12{fill:#b33f38}#stage-5 .st13{fill:#512b26}#stage-5 .st14{fill:#68664d}#stage-5 .st15{fill:#a7c63b}#stage-5 .st16{fill:#e9db30}#stage-5 .st17{fill:#adc645}#stage-5 .st18{fill:#b7c943}#stage-5 .st19{fill:#c1cc42}#stage-5 .st20{fill:#cbd042}#stage-5 .st21{fill:#d6d343}#stage-5 .st22{fill:#dfd643}#stage-5 .st23{fill:#273f0d}#vines .vine{fill:none;stroke:#1a4b29;stroke-width:10;stroke-linecap:round;stroke-miterlimit:10}#vine-leaves .st172{fill:#1a4b29}#vine-leaves .st79{fill:#7d961b}
-/*# sourceMappingURL=/s/files/1/2040/0289/t/41/assets/what-you-can-grow.scss.css.map?v=174676776694382640931660686796 */
-    </style>`}
-    <div dangerouslySetInnerHTML={{
-      __html: `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 2724.3 1131.6" style="enable-background:new 0 0 2724.3 1131.6;" xml:space="preserve">
-      <image xlink:href="https://cdn.shopify.com/s/files/1/2040/0289/files/whatyoucangrow-soil.png?2909" width="100%"></image>
-      <g id="stage-1">
+<div>
+<div dangerouslySetInnerHTML={{ __html: `
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 2724.3 1131.6" style="enable-background:new 0 0 2724.3 1131.6;" xml:space="preserve">
+<image xlink:href="https://cdn.shopify.com/s/files/1/2040/0289/files/whatyoucangrow-soil.png?2909" width="100%"></image>
+<g id="stage-1">
   <image class="bed-crop turnip-1" xlink:href="https://cdn.shopify.com/s/files/1/2040/0289/files/turnip_svgomg.svg?v=1600221926" x="750" y="250"></image>
   <image class="bed-crop turnip-2" xlink:href="https://cdn.shopify.com/s/files/1/2040/0289/files/turnip_svgomg.svg?v=1600221926" x="900" y="250"></image>
   <image class="bed-crop turnip-3" xlink:href="https://cdn.shopify.com/s/files/1/2040/0289/files/turnip_svgomg.svg?v=1600221926" x="1050" y="250"></image>
@@ -66,13 +62,13 @@ const FarmbotDemoSVG = () => (
     </g>
   </g>
 </g>
-      <g id="vines" class="vines">
+<g id="vines" class="vines">
   <path class="vine vine-1" d="M692.9 354.7c-15.4 0-29.8 3.9-42.4 10.9 -20.8 11.4-45.8 11.4-66.6 0 -12.6-6.9-27-10.9-42.4-10.9 -15.4 0-29.8 3.9-42.4 10.9 -20.8 11.4-45.8 11.4-66.6 0v0c-12.6-6.9-27-10.9-42.4-10.9 -15.4 0-29.8 3.9-42.4 10.9 -20.8 11.4-45.8 11.4-66.6 0 -12.6-6.9-27-10.9-42.4-10.9h-0.1c-15.4 0-29.8 3.9-42.4 10.9 -20.8 11.4-45.8 11.4-66.6 0 -12.6-6.9-27-10.9-42.4-10.9 -15.4 0-29.8 3.9-42.4 10.9 -10.5 5.8-22.2 8.7-33.8 8.6"></path>
   <path class="vine vine-2" d="M692.9 777.8c-15.4 0-29.8 3.9-42.4 10.9 -20.8 11.4-45.8 11.4-66.6 0 -12.6-6.9-27-10.9-42.4-10.9 -15.4 0-29.8 3.9-42.4 10.9 -20.8 11.4-45.8 11.4-66.6 0v0c-12.6-6.9-27-10.9-42.4-10.9 -15.4 0-29.8 3.9-42.4 10.9 -20.8 11.4-45.8 11.4-66.6 0 -12.6-6.9-27-10.9-42.4-10.9h-0.1c-15.4 0-29.8 3.9-42.4 10.9 -20.8 11.4-45.8 11.4-66.6 0 -12.6-6.9-27-10.9-42.4-10.9 -15.4 0-29.8 3.9-42.4 10.9 -10.5 5.8-22.2 8.7-33.8 8.6"></path>
   <path class="vine vine-3" d="M2031.7 354.7c15.4 0 29.8 3.9 42.4 10.9 20.8 11.4 45.8 11.4 66.6 0 12.6-6.9 27-10.9 42.4-10.9 15.4 0 29.8 3.9 42.4 10.9 20.8 11.4 45.8 11.4 66.6 0v0c12.6-6.9 27-10.9 42.4-10.9 15.4 0 29.8 3.9 42.4 10.9 20.8 11.4 45.8 11.4 66.6 0 12.6-6.9 27-10.9 42.4-10.9h0.1c15.4 0 29.8 3.9 42.4 10.9 20.8 11.4 45.8 11.4 66.6 0 12.6-6.9 27-10.9 42.4-10.9 15.4 0 29.8 3.9 42.4 10.9 10.5 5.8 22.2 8.7 33.8 8.6"></path>
   <path class="vine vine-4" d="M2031.7 777.8c15.4 0 29.8 3.9 42.4 10.9 20.8 11.4 45.8 11.4 66.6 0 12.6-6.9 27-10.9 42.4-10.9 15.4 0 29.8 3.9 42.4 10.9 20.8 11.4 45.8 11.4 66.6 0v0c12.6-6.9 27-10.9 42.4-10.9 15.4 0 29.8 3.9 42.4 10.9 20.8 11.4 45.8 11.4 66.6 0 12.6-6.9 27-10.9 42.4-10.9h0.1c15.4 0 29.8 3.9 42.4 10.9 20.8 11.4 45.8 11.4 66.6 0 12.6-6.9 27-10.9 42.4-10.9 15.4 0 29.8 3.9 42.4 10.9 10.5 5.8 22.2 8.7 33.8 8.6"></path>
 </g>
-      <g id="vine-leaves" class="vine-leaves">
+<g id="vine-leaves" class="vine-leaves">
   <g class="vine-1-leaves">
     <g class="leaf-1 top-leaf leaf">
       <path class="st79" d="M667.4 291.9c8.3 25.1-0.7 45-18 50.7 -17.3 5.7-36.3-5-44.6-30.1 -10.1-30.6 3.7-64 12.6-66.9S657.3 261.3 667.4 291.9z"></path>
@@ -178,7 +174,7 @@ const FarmbotDemoSVG = () => (
     </g>
   </g>
 </g>
-      <g id="stage-5" class="vine-fruits">
+<g id="stage-5" class="vine-fruits">
   <image class="vine-fruit vine-1-fruit-1" xlink:href="https://cdn.shopify.com/s/files/1/2040/0289/files/cherokee-purple-tomato_svgomg.svg?v=1600225823" x="90" y="210"></image>
   <image class="vine-fruit vine-1-fruit-2" xlink:href="https://cdn.shopify.com/s/files/1/2040/0289/files/cherokee-purple-tomato_svgomg.svg?v=1600225823" x="10" y="350"></image>
   <image class="vine-fruit vine-1-fruit-3" xlink:href="https://cdn.shopify.com/s/files/1/2040/0289/files/cherokee-purple-tomato_svgomg.svg?v=1600225823" x="160" y="350"></image>
@@ -195,218 +191,220 @@ const FarmbotDemoSVG = () => (
   <image class="vine-fruit vine-4-fruit-2" xlink:href="https://cdn.shopify.com/s/files/1/2040/0289/files/green-zebra-tomato_svgomg.svg?v=1600225823" x="2410" y="790"></image>
   <image class="vine-fruit vine-4-fruit-3" xlink:href="https://cdn.shopify.com/s/files/1/2040/0289/files/green-zebra-tomato_svgomg.svg?v=1600225823" x="2560" y="790"></image>
 </g>
-      </svg>`
-    }} />
-    <style>
-      {`
-              g.farmbot {
-                transform: translateX(-125px);
-                animation: farmbot 15s ease-in-out infinite;
-                animation-delay: 4s;
-              }
+</svg>
+`}} />
+<style>{`
+  #water-line path{stroke-opacity:.2;stroke-width:6;stroke:#00f;stroke-linecap:round}#stage-1 .st370{fill:#c5cfd6}#stage-1 .st371{fill:#aa7e4f}#stage-1 .st372{fill:#cdd6e0}#stage-1 .st373{fill:#516666}#stage-2 .st0{display:none}#stage-2 .st1{fill:#aa7e4f}#stage-2 .st2{fill:#7d961b}#stage-2 .st3{fill:#1a4b29}#stage-5 .bed-lines{fill:#aa7e4f}#stage-5 .st2{fill:#7d961b}#stage-5 .st3{fill:#1a4b29}#stage-5 .st4{fill:#104b11}#stage-5 .st5{fill:#ec4e1d}#stage-5 .st6{fill:#f6a267}#stage-5 .st7{fill:#fff}#stage-5 .st8{fill:#96231c}#stage-5 .st9{fill:#4f8125}#stage-5 .st10{fill:#fcba4f}#stage-5 .st11{fill:#e3682c}#stage-5 .st12{fill:#b33f38}#stage-5 .st13{fill:#512b26}#stage-5 .st14{fill:#68664d}#stage-5 .st15{fill:#a7c63b}#stage-5 .st16{fill:#e9db30}#stage-5 .st17{fill:#adc645}#stage-5 .st18{fill:#b7c943}#stage-5 .st19{fill:#c1cc42}#stage-5 .st20{fill:#cbd042}#stage-5 .st21{fill:#d6d343}#stage-5 .st22{fill:#dfd643}#stage-5 .st23{fill:#273f0d}#vines .vine{fill:none;stroke:#1a4b29;stroke-width:10;stroke-linecap:round;stroke-miterlimit:10}#vine-leaves .st172{fill:#1a4b29}#vine-leaves .st79{fill:#7d961b}
+  /*# sourceMappingURL=/s/files/1/2040/0289/t/41/assets/what-you-can-grow.scss.css.map?v=174676776694382640931660686796 */
 
-              @keyframes farmbot {
-                0%   { transform: translateX(-125px) }
-                10%  { transform: translateX(-125px) }
-                50%  { transform: translateX(325px) }
-                60%  { transform: translateX(325px) }
-                100% { transform: translateX(-125px) }
-              }
+  g.farmbot {
+    transform: translateX(-125px);
+    animation: farmbot 15s ease-in-out infinite;
+    animation-delay: 4s;
+  }
 
-              g.cable-carrier {
-                transform: translateY(-50px);
-                animation: cable-carrier 15s ease-in-out infinite;
-                animation-delay: 4s;
-              }
+  @keyframes farmbot {
+    0%   { transform: translateX(-125px) }
+    10%  { transform: translateX(-125px) }
+    50%  { transform: translateX(325px) }
+    60%  { transform: translateX(325px) }
+    100% { transform: translateX(-125px) }
+  }
 
-              @keyframes cable-carrier {
-                0%   { transform: translateY(-50px) }
-                10%  { transform: translateY(-50px) }
-                50%  { transform: translateY(-265px) }
-                60%  { transform: translateY(-265px) }
-                100% { transform: translateY(-50px) }
-              }
+  g.cable-carrier {
+    transform: translateY(-50px);
+    animation: cable-carrier 15s ease-in-out infinite;
+    animation-delay: 4s;
+  }
 
-              g.tool-head {
-                transform: translateY(55px);
-                animation: tool-head 15s ease-in-out infinite;
-                animation-delay: 4s;
-              }
+  @keyframes cable-carrier {
+    0%   { transform: translateY(-50px) }
+    10%  { transform: translateY(-50px) }
+    50%  { transform: translateY(-265px) }
+    60%  { transform: translateY(-265px) }
+    100% { transform: translateY(-50px) }
+  }
 
-              @keyframes tool-head {
-                0%   { transform: translateY(55px) }
-                10%  { transform: translateY(55px) }
-                50%  { transform: translateY(-160px) }
-                60%  { transform: translateY(-160px) }
-                100% { transform: translateY(55px) }
-              }
+  g.tool-head {
+    transform: translateY(55px);
+    animation: tool-head 15s ease-in-out infinite;
+    animation-delay: 4s;
+  }
 
-              g.water {
-                opacity: 0;
-                animation: water-spray 7.5s infinite;
-                transform-origin: center;
-                transform-box: fill-box;
-                animation-delay: 4s;
-              }
+  @keyframes tool-head {
+    0%   { transform: translateY(55px) }
+    10%  { transform: translateY(55px) }
+    50%  { transform: translateY(-160px) }
+    60%  { transform: translateY(-160px) }
+    100% { transform: translateY(55px) }
+  }
 
-              @keyframes water-spray {
-                0% {
-                  transform: scale(0.7) rotate(0deg);
-                  opacity: 0;
-                }
-                7% {
-                  opacity: 1;
-                }
-                9% {
-                  transform: scale(1.1) rotate(15deg);
-                  opacity: 0;
-                }
-                10% {
-                  transform: scale(0.7) rotate(0deg);
-                  opacity: 0;
-                }
-                17% {
-                  opacity: 1;
-                }
-                20% {
-                  transform: scale(1.1) rotate(15deg);
-                  opacity: 0;
-                }
-                100% {
-                  opacity: 0;
-                }
-              }
+  g.water {
+    opacity: 0;
+    animation: water-spray 7.5s infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+    animation-delay: 4s;
+  }
 
-              @keyframes bed-crop {
-                0%   { transform: scale(0); opacity: 0; }
-                8%   { opacity: 1; }
-                60%  { transform: scale(1.1); }
-                85%  { transform: scale(1.1); opacity: 1; }
-                90%  { transform: scale(0.9); opacity: 0; }
-                100% { transform: scale(0); opacity: 0; }
-              }
-              .bed-crop {
-                transform: scale(0);
-                opacity: 0;
-                transform-origin: bottom;
-                transform-box: fill-box;
-                animation: bed-crop 15s infinite;
-              }
-              .turnip-3, .lavender-1 {
-                animation-delay: 0.25s;
-              }
-              .turnip-5, .asparagus-2 {
-                animation-delay: 0.5s;
-              }
-              .spinach-1, .asparagus-3 {
-                animation-delay: 0.75s;
-              }
-              .turnip-2, .spinach-3 {
-                animation-delay: 1s;
-              }
-              .lavender-2, .spinach-4, .turnip-4 {
-                animation-delay: 1.25s;
-              }
-              .asparagus-1, .spinach-5 {
-                animation-delay: 1.5s;
-              }
+  @keyframes water-spray {
+    0% {
+      transform: scale(0.7) rotate(0deg);
+      opacity: 0;
+    }
+    7% {
+      opacity: 1;
+    }
+    9% {
+      transform: scale(1.1) rotate(15deg);
+      opacity: 0;
+    }
+    10% {
+      transform: scale(0.7) rotate(0deg);
+      opacity: 0;
+    }
+    17% {
+      opacity: 1;
+    }
+    20% {
+      transform: scale(1.1) rotate(15deg);
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 
-              /* VINES */
-              @keyframes vine {
-                0%   { opacity: 0; transform: scale(0.5); }
-                15%  { opacity: 1; }
-                70%  { transform: scale(1); }
-                95%  { opacity: 1; }
-                100% { opacity: 0; }
-              }
-              g.vine {
-                opacity: 0;
-                transform-box: fill-box;
-                animation: vine 15s infinite;
-                animation-fill-mode: backwards;
-              }
-              g.vine-1, g.vine-2 {
-                transform-origin: right;
-              }
-              g.vine-3, g.vine-4 {
-                transform-origin: left;
-              }
+  @keyframes bed-crop {
+    0%   { transform: scale(0); opacity: 0; }
+    8%   { opacity: 1; }
+    60%  { transform: scale(1.1); }
+    85%  { transform: scale(1.1); opacity: 1; }
+    90%  { transform: scale(0.9); opacity: 0; }
+    100% { transform: scale(0); opacity: 0; }
+  }
+  .bed-crop {
+    transform: scale(0);
+    opacity: 0;
+    transform-origin: bottom;
+    transform-box: fill-box;
+    animation: bed-crop 15s infinite;
+  }
+  .turnip-3, .lavender-1 {
+    animation-delay: 0.25s;
+  }
+  .turnip-5, .asparagus-2 {
+    animation-delay: 0.5s;
+  }
+  .spinach-1, .asparagus-3 {
+    animation-delay: 0.75s;
+  }
+  .turnip-2, .spinach-3 {
+    animation-delay: 1s;
+  }
+  .lavender-2, .spinach-4, .turnip-4 {
+    animation-delay: 1.25s;
+  }
+  .asparagus-1, .spinach-5 {
+    animation-delay: 1.5s;
+  }
 
-              path.vine {
-                stroke-dasharray: 1000;
-                stroke-dashoffset: 1000;
-                animation: vine-path 15s linear infinite;
-              }
+  /* VINES */
+  @keyframes vine {
+    0%   { opacity: 0; transform: scale(0.5); }
+    15%  { opacity: 1; }
+    70%  { transform: scale(1); }
+    95%  { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  g.vine {
+    opacity: 0;
+    transform-box: fill-box;
+    animation: vine 15s infinite;
+    animation-fill-mode: backwards;
+  }
+  g.vine-1, g.vine-2 {
+    transform-origin: right;
+  }
+  g.vine-3, g.vine-4 {
+    transform-origin: left;
+  }
 
-              @keyframes vine-path {
-                0%   { stroke-dashoffset: 1000; stroke-width: 6px; }
-                50%  { stroke-dashoffset: 0; stroke-width: 9px; }
-                90%  { stroke-dashoffset: 0; stroke-width: 9px; opacity: 1; }
-                95%  { stroke-dashoffset: 0; stroke-width: 9px; opacity: 0; }
-                100% { stroke-dashoffset: 0; stroke-width: 9px; opacity: 0; }
-              }
+  path.vine {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: vine-path 15s linear infinite;
+  }
 
-              /* VINE FRUITS */
-              @keyframes vine-fruit {
-                0%   { transform: scale(0); opacity: 0; }
-                20%  { transform: scale(0); opacity: 0; }
-                45%  { transform: scale(1); opacity: 1; }
-                85%  { opacity: 1; }
-                90% { opacity: 0; }
-              }
-              .vine-fruit {
-                opacity: 0;
-                transform-origin: top;
-                transform-box: fill-box;
-                animation: vine-fruit 15s infinite;
-              }
-              .vine-1-fruit-1, .vine-2-fruit-1, .vine-3-fruit-1, .vine-4-fruit-1 {
-                transform-origin: bottom;
-              }
+  @keyframes vine-path {
+    0%   { stroke-dashoffset: 1000; stroke-width: 6px; }
+    50%  { stroke-dashoffset: 0; stroke-width: 9px; }
+    90%  { stroke-dashoffset: 0; stroke-width: 9px; opacity: 1; }
+    95%  { stroke-dashoffset: 0; stroke-width: 9px; opacity: 0; }
+    100% { stroke-dashoffset: 0; stroke-width: 9px; opacity: 0; }
+  }
 
-              .vine-1-fruit-3, .vine-2-fruit-3, .vine-3-fruit-2, .vine-4-fruit-2 {
-                animation-delay: 0s;
-              }
+  /* VINE FRUITS */
+  @keyframes vine-fruit {
+    0%   { transform: scale(0); opacity: 0; }
+    20%  { transform: scale(0); opacity: 0; }
+    45%  { transform: scale(1); opacity: 1; }
+    85%  { opacity: 1; }
+    90% { opacity: 0; }
+  }
+  .vine-fruit {
+    opacity: 0;
+    transform-origin: top;
+    transform-box: fill-box;
+    animation: vine-fruit 15s infinite;
+  }
+  .vine-1-fruit-1, .vine-2-fruit-1, .vine-3-fruit-1, .vine-4-fruit-1 {
+    transform-origin: bottom;
+  }
 
-              .vine-1-fruit-1, .vine-2-fruit-1, .vine-3-fruit-1, .vine-4-fruit-1 {
-                animation-delay: 0.5s;
-              }
+  .vine-1-fruit-3, .vine-2-fruit-3, .vine-3-fruit-2, .vine-4-fruit-2 {
+    animation-delay: 0s;
+  }
 
-              .vine-1-fruit-2, .vine-2-fruit-2, .vine-3-fruit-3, .vine-4-fruit-3 {
-                animation-delay: 1s;
-              }
+  .vine-1-fruit-1, .vine-2-fruit-1, .vine-3-fruit-1, .vine-4-fruit-1 {
+    animation-delay: 0.5s;
+  }
 
-              /* VINE LEAVES */
-                @keyframes vine-leaf {
-                0%   { transform: scale(0); opacity: 0; }
-                8%  { transform: scale(1); opacity: 1; }
-                70%  { opacity: 1; }
-                80% { opacity: 0; }
-              }
-              g.leaf {
-                opacity: 0;
-                transform-box: fill-box;
-                animation: vine-leaf 15s infinite;
-                animation-timing-function: cubic-bezier(0, 0, 0.2, 1.25);
-              }
-              g.top-leaf {
-                transform-origin: bottom;
-              }
-              g.bottom-leaf {
-                transform-origin: top;
-              }
-              g.leaf-1 {
-                animation-delay: 0.4s;
-              }
-              g.leaf-2 {
-                animation-delay: 1.3s;
-              }
-              g.leaf-3 {
-                animation-delay: 2.4s;
-              }
-      `}
-    </style>
-  </div>
+  .vine-1-fruit-2, .vine-2-fruit-2, .vine-3-fruit-3, .vine-4-fruit-3 {
+    animation-delay: 1s;
+  }
+
+  /* VINE LEAVES */
+    @keyframes vine-leaf {
+    0%   { transform: scale(0); opacity: 0; }
+    8%  { transform: scale(1); opacity: 1; }
+    70%  { opacity: 1; }
+    80% { opacity: 0; }
+  }
+  g.leaf {
+    opacity: 0;
+    transform-box: fill-box;
+    animation: vine-leaf 15s infinite;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1.25);
+  }
+  g.top-leaf {
+    transform-origin: bottom;
+  }
+  g.bottom-leaf {
+    transform-origin: top;
+  }
+  g.leaf-1 {
+    animation-delay: 0.4s;
+  }
+  g.leaf-2 {
+    animation-delay: 1.3s;
+  }
+  g.leaf-3 {
+    animation-delay: 2.4s;
+  }
+`}
+</style>
+</div>
 )
 
 export default FarmbotDemoSVG

@@ -176,11 +176,11 @@ const Toolbar = styled(MuiToolbar)(({ theme }) => ({
 
 function ThreeDInfoPanel() {
   // const threedCount = threedStore((state: any) => state.threedCount)
-  const threedCount = threedStore.get("threedCount")
+  const threedCount = threedStore.useStore("threedCount")
   // const threeds = threedStore((state: any) => state.threeds)
-  const threeds = threedStore.get("threeds")
+  const threeds = threedStore.useStore("threeds")
   // const threed = threedStore((state: any) => state.threed)
-  const threed = threedStore.get("threed")
+  const threed = threedStore.useStore("threed")
   console.debug("%cThreeDInfoPanel: {threed}", ccm1, threed)
 
   return (
