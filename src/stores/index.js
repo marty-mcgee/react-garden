@@ -1,5 +1,5 @@
 // ** Apollo Imports
-import { ApolloClient, useApolloClient, useQuery, gql } from '@apollo/client'
+import { ApolloClient, InMemoryCache, useApolloClient, useQuery, gql } from '@apollo/client'
 import create from '~/api/graphql/createStore'
 // ** GraphQL Queries + Mutations (here, locally-specific data needs)
 import GetScenes from '~/api/graphql/scripts/getScenes.gql'
@@ -57,6 +57,13 @@ export const ac3Actions = {
   }
 }
 
+const clientAC3 = new ApolloClient({
+  uri: "http://localhost:3000/",
+  cache: new InMemoryCache({
+    typePolicies: ac3Store.getTypePolicies()
+  })
+})
+
 export const TestAC3Store = () => {
   const { loading, error, data } = useQuery(gql`
     query {
@@ -65,8 +72,7 @@ export const TestAC3Store = () => {
         open
       }
     }
-  `)
-  // `, { client: client })
+  `, { client: clientAC3 })
 
   if (loading) { return <div>loading...</div> }
   if (error) { return <div>{JSON.stringify(error)}</div> }
