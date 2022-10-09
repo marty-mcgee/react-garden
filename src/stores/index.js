@@ -87,6 +87,10 @@ export const TestAC3Store = () => {
 }
 
 // ==============================================================
+
+// ==============================================================
+
+// ==============================================================
 // ThreeD
 // aka 'Master File with Settings'
 
@@ -100,6 +104,9 @@ const threed = (threedName = 'HEY HEY HEY 0', layerName = 'level0-MM') => ({
     data: {}
   },
   // wp custom fields here
+  //
+  //
+  //
 })
 
 export const threedStore = create({
@@ -119,12 +126,12 @@ export const threedActions = {
     return (state) => state + n
   },
 
-  removeAllThreeDs: () => set(
-    {
-      threedCount: 0,
-      threeds: []
-    }
-  ),
+  // removeAllThreeDs: () => set(
+  //   {
+  //     threedCount: 0,
+  //     threeds: []
+  //   }
+  // ),
 
   addThreeD: function () {
 
@@ -243,6 +250,10 @@ export const threedActions = {
 } // threedActions
 
 // ==============================================================
+
+// ==============================================================
+
+// ==============================================================
 // Project
 
 export const projectStore = create({
@@ -337,6 +348,10 @@ export const projectActions = create((set, get) => ({
   }
 
 })) // projectActions
+
+// ==============================================================
+
+// ==============================================================
 
 // ==============================================================
 // Plan
@@ -523,6 +538,10 @@ export const planActions = create((set, get) => ({
 })) // planActions
 
 // ==============================================================
+
+// ==============================================================
+
+// ==============================================================
 // File
 
 export const fileStore = create({
@@ -556,6 +575,10 @@ export const fileActions = create((set) => ({
 })) // fileActions
 
 // ==============================================================
+
+// ==============================================================
+
+// ==============================================================
 // Bear
 
 export const bearStore = create({
@@ -566,6 +589,10 @@ export const bearActions = create((set) => ({
   increaseBearCount: () => set((state) => ({ bears: state.bears + 1 })),
   removeAllBears: () => set({ bears: 0 }),
 })) // bearActions
+
+// ==============================================================
+
+// ==============================================================
 
 // ==============================================================
 // Modal
@@ -613,27 +640,33 @@ export const modalActions = {
 } // modalActions
 
 // ==============================================================
+
+// ==============================================================
+
+// ==============================================================
 // Scene
+
+const scene = (sceneName = 'SCENE SCENE SCENE 0', layerName = 'level0-MM') => ({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
+  name: sceneName,
+  layers: [],
+  activeLayer: {
+    name: layerName,
+    data: {}
+  },
+  // wp custom fields here
+  //
+  //
+  //
+})
 
 export const sceneStore = create({
   _id: newUUID(),
   _ts: new Date().toISOString(),
   sceneCount: 0, // example counter
   scenes: [], // working scenes
-  scene: { // the current working scene, aka 'this' scene
-    _id: newUUID(),
-    _ts: new Date().toISOString(),
-    name: 'MARTY MARTY MARTY MARTY 0',
-    layers: [],
-    activeLayer: {
-      name: 'level0-MM',
-      data: {}
-    },
-    // wp + custom fields here
-    //
-    //
-    //
-  },
+  scene: {}, // the current working scene, aka 'this' scene
 
   // track current + history
   // sceneCurrent: ^this,
@@ -645,105 +678,133 @@ export const sceneStore = create({
 
 }) // sceneStore
 
-export const sceneActions = create((set, get, api) => ({
+export const sceneActions = {
 
-  // example method (counter)
-  increaseSceneCount: () => set(
-    (state) => (
-      { sceneCount: state.sceneCount + 1 }
-    )
-  ),
+  // increaseSceneCount: () => set(
+  //   (state) => ({ sceneCount: state.sceneCount + 1 })
+  // ),
+  increaseSceneCount: (n = 1) => {
+    return (state) => state + n
+  },
 
-  // clear local scenes (and db scenes???)
-  removeAllScenes: () => set(
-    {
-      sceneCount: 0,
-      scenes: [],
-      // sceneCountDB: 0,
-      // scenesDB: [],
-    }
-  ),
+  // removeAllScenes: () => set(
+  //   {
+  //     sceneCount: 0,
+  //     scenes: []
+  //   }
+  // ),
 
   // add a new current 'this' scene
-  addScene: () => {
-    // sceneCurrent
-    set(
-      (state) => (
-        {
-          scene: {
-            _id: newUUID(),
-            _ts: new Date().toISOString(),
-            name: 'MARTY MARTY MARTY MARTY 1',
-            layers: [],
-            activeLayer: {
-              name: 'level1-MM',
-              data: {}
-            },
-            // wp + custom fields here
-            //
-            //
-            //
-          },
-          sceneCount: state.sceneCount + 1,
+  addScene: function () {
+
+    console.debug('%cAddScene [scenes] (before)', ccm1, sceneStore.get("scenes"))
+
+    // create a new one
+    if (Object.keys(sceneStore.get("scene")).length === 0) {
+      sceneStore.update("scene", scene())
+    }
+    // save + update old one
+    else {
+      // sceneHistory (save existing before mutating, if not empty)
+      sceneStore.update("scenes", [
+        sceneStore.get("scene"),
+        ...sceneStore.get("scenes")
+      ])
+      console.debug('%cAddScene [scenes] (during)', ccm1, sceneStore.get("scenes"))
+
+      // sceneCount (example)
+      // sceneStore.update("sceneCount", sceneStore.get("sceneCount") + 1) // manual
+      sceneStore.update("sceneCount", sceneStore.get("scenes").length) // automatic
+      // console.debug('%cAddScene {sceneCount}', ccm3, sceneStore.get("sceneCount"))
+      // console.debug('%cAddScene [scenes]', ccm3, sceneStore.get("scenes").length)
+
+      // sceneCurrent (overwrite -- mutate)
+      sceneStore.update("scene", {
+        _id: newUUID(),
+        _ts: new Date().toISOString(),
+        name: 'YO YO YO 1',
+        layers: [],
+        activeLayer: {
+          name: 'level1-MM',
+          data: {}
         }
-      )
-    )
-    // update sceneHistory
-    set(
-      (state) => (
-        {
-          scenes: [state.scene, ...state.scenes],
-          sceneCount: state.scenes.length,
-        }
-      )
-    )
+      })
+    }
+    console.debug('%cAddScene {scene}', ccm1, sceneStore.get("scene"))
+
+    // save the new one and the old ones
+    // sceneHistory (save recently mutated)
+    sceneStore.update("scenes", [
+      sceneStore.get("scene"),
+      ...sceneStore.get("scenes")
+    ])
+    console.debug('%cAddScene [scenes] (after)', ccm1, sceneStore.get("scenes"))
+
+    // sceneCount (example)
+    // sceneStore.update("sceneCount", sceneStore.get("sceneCount") + 1) // manual
+    sceneStore.update("sceneCount", sceneStore.get("scenes").length) // automatic
+    // console.debug('%cAddScene {sceneCount}', ccm3, sceneStore.get("sceneCount"))
+    // console.debug('%cAddScene [scenes]', ccm3, sceneStore.get("scenes").length)
+
     // saveToDisk
-    get().saveToDisk()
+    // get().saveToDisk()
+    this.saveToDisk()
     // loadFromDisk
-    get().loadFromDisk()
+    // get().loadFromDisk()
+    this.loadFromDisk()
 
-    console.debug('%cAddScene: {get().scene}', ccm3, get().scene)
+    // console.debug('%cAddScene', ccm1, get().scene)
   },
 
-  // save this scene
-  saveScene: () => {
+  saveScene: function () {
     // saveToDisk
-    get().saveToDisk()
+    // get().saveToDisk()
+    this.saveToDisk()
+    // saveToDB (coming soon !!!)
+    // this.saveToDB()
   },
 
-  // save data to local storage
-  saveToDisk: () => {
+  saveToDisk: function () {
     try {
-      localStorage.setItem('threed_sceneHistory', JSON.stringify({ subject: 'scene', payload: get().scene }))
-      console.debug('%cSaveToDisk scenes', ccm1, get().scene)
+      localStorage.setItem(
+        'threed_sceneHistory',
+        JSON.stringify({
+          subject: 'scenes',
+          payload: sceneStore.get("scenes")
+        })
+      )
+      console.debug('%cSaveToDisk [scenes]', ccm1, sceneStore.get("scenes"))
       return true
     } catch (err) {
-      console.debug('%cSaveToDisk scenes', ccm3, err)
+      console.debug('%cSaveToDisk [scenes] err', ccm2, err)
       return false
     }
   },
 
-  // get data from local storage
-  loadFromDisk: () => {
+  loadFromDisk: function () {
     try {
-      const payload = localStorage.getItem('threed_sceneHistory')
-      // set state from local storage
-      set(
-        (state) => (
-          {
-            scenes: payload,
-            sceneCount: state.scenes.length,
-          }
-        )
-      )
+      const payload = JSON.parse(localStorage.getItem('scene_threedHistory'))
       if (payload) {
-        console.debug('%cLoadFromDisk scenes', ccm1, true) // payload
-        return payload // string[]
+        console.debug('%cLoadFromDisk [scenes] PAYLOAD?', ccm3, payload)
+        console.debug('%cLoadFromDisk [scenes] PAYLOAD.PAYLOAD?', ccm3, payload.payload)
+        if (payload.payload) {
+          console.debug('%cLoadFromDisk [scenes]', ccm3, true) // payload
+          sceneStore.update("scenes", [...payload.payload])
+          console.debug('%cLoadFromDisk [scenes] (after)', ccm3, sceneStore.get("scenes"))
+          sceneStore.update("scene", sceneStore.get("scenes")[0])
+          console.debug('%cLoadFromDisk {scene} (after)', ccm3, sceneStore.get("scene"))
+          return true // payload // string[]
+        }
+        else {
+          console.debug('%cLoadFromDisk [scenes] NO PAYLOAD?', ccm3, payload)
+        }
       }
-      console.debug('%cLoadFromDisk scenes', ccm3, payload)
+      else {
+        console.debug('%cLoadFromDisk [scenes] NOTHING TO LOAD', ccm3, payload)
+      }
       return false
     } catch (err) {
-      console.debug('%cLoadFromDisk scenes', ccm3, err)
+      console.debug('%cLoadFromDisk [scenes] err', ccm2, err)
       return false
     }
   },
@@ -828,7 +889,7 @@ export const sceneActions = create((set, get, api) => ({
     }
   }
 
-})) // sceneActions
+} // sceneActions
 
 // ==============================================================
 

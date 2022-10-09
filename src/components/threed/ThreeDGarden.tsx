@@ -22,7 +22,7 @@ import {
 // ** Apollo Client Store Imports
 // state management (instead of React.useState, Redux, Zustand)
 import {
-  useStore,
+  // useStore,
   threedStore,
   threedActions,
   projectStore,
@@ -54,35 +54,35 @@ import Button from "@mui/material/Button"
 import IconButton from "@mui/material/IconButton"
 import Menu from "@mui/material/Menu"
 import MenuItem from "@mui/material/MenuItem"
-import MenuList from "@mui/material/MenuList"
-import MenuIcon from "@mui/icons-material/Menu"
+// import MenuList from "@mui/material/MenuList"
+// import MenuIcon from "@mui/icons-material/Menu"
 import Grid from "@mui/material/Grid"
 import Modal from "@mui/material/Modal"
 import Tabs from "@mui/material/Tabs"
 import Tab from "@mui/material/Tab"
 import Tooltip from "@mui/material/Tooltip"
 import Typography from "@mui/material/Typography"
-import Avatar from "@mui/material/Avatar"
-import AdbIcon from "@mui/icons-material/Adb"
+// import Avatar from "@mui/material/Avatar"
+// import AdbIcon from "@mui/icons-material/Adb"
 // mui: Material Dashboard 2 PRO React TS components
-import MDBox from "~/components/mui/MDBox"
-import MDTypography from "~/components/mui/MDTypography"
-import MDAlert from "~/components/mui/MDAlert"
-import MDButton from "~/components/mui/MDButton"
-import MDProgress from "~/components/mui/MDProgress"
+// import MDBox from "~/components/mui/MDBox"
+// import MDTypography from "~/components/mui/MDTypography"
+// import MDAlert from "~/components/mui/MDAlert"
+// import MDButton from "~/components/mui/MDButton"
+// import MDProgress from "~/components/mui/MDProgress"
 import MDTabPanel, { a11yProps } from "~/components/mui/MDTabPanel"
 
-import paper from "paper"
+// import paper from "paper"
 
 // import * as THREE from "three"
-import { TrackballControls } from "three/examples/jsm/controls/TrackballControls.js"
-import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader"
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader"
-import { Sky } from "three/examples/jsm/objects/Sky.js"
+// import { TrackballControls } from "three/examples/jsm/controls/TrackballControls.js"
+// import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader"
+// import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+// import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader"
+// import { Sky } from "three/examples/jsm/objects/Sky.js"
 
 // import { TWEEN } from "three/examples/jsm/libs/tween.module.min"
-import TWEEN from "@tweenjs/tween.js"
+// import TWEEN from "@tweenjs/tween.js"
 import { Canvas, useFrame } from "@react-three/fiber"
 
 // css
@@ -186,8 +186,11 @@ const ThreeDInfoPanel = () => {
 
   return (
     <Box>
-      <Typography>{threeds.length} threeds.length around here ...</Typography>
-      <Typography>{threedCount} threedCount around here ...</Typography>
+      {/* <Typography>{threedCount} threeds around here ...</Typography> */}
+      <Typography>threeds.length: {threeds.length}</Typography>
+      <Typography>threed._id: {threed._id}</Typography>
+      <Typography>threed.name: {threed.name}</Typography>
+      <Typography>threed.activeLayer.name: {threed.activeLayer?.name}</Typography>
     </Box>
   )
 }
@@ -203,7 +206,7 @@ const ThreeDControlPanel = () => {
   return (
     <Box>
       <Button onClick={addThreeD}>add threed</Button>
-      <Button onClick={increaseThreeDCount}>add to threed count</Button>
+      {/* <Button onClick={increaseThreeDCount}>add to threed count</Button> */}
     </Box>
   )
 }
@@ -342,41 +345,47 @@ function BearControlPanel() {
 // Scene
 
 function SceneInfoPanel() {
-  // const sceneCount = sceneStore((state: any) => state.sceneCount)
-  const scenes = sceneStore((state: any) => state.scenes)
-  const scene = sceneStore((state: any) => state.scene)
 
-  console.debug("%cSceneInfoPanel: {scene}", ccm3, scene)
+  // const sceneCount = sceneStore((state: any) => state.sceneCount) // zustand
+  const sceneCount = sceneStore.useStore("sceneCount")
+  // const scenes = sceneStore((state: any) => state.scenes) // zustand
+  const scenes = sceneStore.useStore("scenes")
+  // const scene = sceneStore((state: any) => state.scene) // zustand
+  const scene = sceneStore.useStore("scene")
+  console.debug("%cSceneInfoPanel: {scene}", ccm1, scene)
 
   return (
     <Box>
-      <Typography>{scenes.length} scenes around here ...</Typography>
       {/* <Typography>{sceneCount} scenes around here ...</Typography> */}
+      <Typography>scenes.length: {scenes.length}</Typography>
+      <Typography>scene._id: {scene._id}</Typography>
+      <Typography>scene.name: {scene.name}</Typography>
+      <Typography>scene.activeLayer.name: {scene.activeLayer?.name}</Typography>
     </Box>
   )
 }
 
 function SceneControlPanel() {
-  // const increaseSceneCount = sceneActions((state: any) => state.increaseSceneCount)
 
-  const addScene = sceneActions((state: any) => state.addScene)
-  const saveToDisk = sceneActions((state: any) => state.saveToDisk)
-  const loadFromDisk = sceneActions((state: any) => state.loadFromDisk)
-  const loadFromDB = sceneActions((state: any) => state.loadFromDB)
+  // const increaseSceneCount = sceneActions((state: any) => state.increaseSceneCount) // zustand
+  const increaseSceneCount = () => sceneStore.update("sceneCount", sceneActions.increaseSceneCount())
 
-  // const addScene = sceneActions.getState().addScene() // this executes automatically !! bad
-  // const addSceneAsFunction = () => {
-  //   const addScene = sceneActions.getState().addScene() // this executes when fn called !! good
-  // }
+  // const addScene = sceneStore((state: any) => state.addScene) // zustand
+  const addScene = () => sceneActions.addScene()
+  // const saveToDisk = sceneActions((state: any) => state.saveToDisk) // zustand
+  const saveToDisk = () => sceneActions.saveToDisk()
+  // const loadFromDisk = sceneActions((state: any) => state.loadFromDisk) // zustand
+  const loadFromDisk = () => sceneActions.loadFromDisk()
+  // const loadFromDB = sceneActions((state: any) => state.loadFromDB) // zustand
+  const loadFromDB = () => sceneActions.loadFromDB()
 
   return (
     <Box>
-      {/* <Button onClick={increaseSceneCount}>add to scene count</Button> */}
-      {/* <Button onClick={addSceneAsFunction}>add scene()</Button> */}
       <Button onClick={addScene}>add scene</Button>
       <Button onClick={saveToDisk}>save to disk</Button>
       <Button onClick={loadFromDisk}>load from disk</Button>
       <Button onClick={loadFromDB}>load from db</Button>
+      {/* <Button onClick={increaseSceneCount}>add to scene count</Button> */}
     </Box>
   )
 }
@@ -1200,157 +1209,12 @@ const ToolBar: ReactNode = (): JSX.Element => {
     setAnchorElTools(null)
   }
 
-  // ====================================================
+  // =======================================================
   // FUNCTIONAL ACTIONS (FUNCTIONS ON FUNCTIONAL NOUNS)
+  // =======================================================
+  // doThings
 
-  // MouseEventHandler<HTMLAnchorElement>
-  const actionNewThreeD: any = (): any => {
-    // alert("[MM] actionNewPlan")
-    try {
-
-      // TENTATIVE
-      resetPlan() // clear all plan stuff, then create new plan...
-
-      // PLAN
-      // const plan = createPlan()
-      createPlan()
-      const plan = usePlanStore((state: any) => state.plan)
-      const plans = usePlanStore((state: any) => state.plans)
-      console.debug("actionNewPlan plan", plan)
-      console.debug("actionNewPlan plans", plans)
-
-      // PLAN HISTORY
-      // const planHistory: Object[] = []
-      // planHistory.push(plan) // push to end array position [array.length]
-      planHistory.unshift(plan) // unshift to beginning array position [0]
-      console.debug("planHistoryNew", planHistory)
-
-      // latest plan position is now at the beginning of array
-      // planHistoryPosition = planHistory.length - 1
-      planHistoryPosition = 0
-
-      // save to disk (if new plan only)
-      localStorage.setItem("threed_planHistory", JSON.stringify({ subject: "plan", payload: planHistory }))
-
-      setToolMode("pointer")
-
-      // console.debug("[MM] TRY: actionNewPlan")
-    } catch (e) {
-      console.debug("[MM] CATCH: actionNewPlan", e)
-    }
-  }
-
-  // MouseEventHandler<HTMLAnchorElement>
-  const actionNewSimulation: any = (): any => {
-    // alert("[MM] actionNewPlan")
-    try {
-
-      // TENTATIVE
-      resetPlan() // clear all plan stuff, then create new plan...
-
-      // PLAN
-      // const plan = createPlan()
-      createPlan()
-      const plan = usePlanStore((state: any) => state.plan)
-      const plans = usePlanStore((state: any) => state.plans)
-      console.debug("actionNewPlan plan", plan)
-      console.debug("actionNewPlan plans", plans)
-
-      // PLAN HISTORY
-      // const planHistory: Object[] = []
-      // planHistory.push(plan) // push to end array position [array.length]
-      planHistory.unshift(plan) // unshift to beginning array position [0]
-      console.debug("planHistoryNew", planHistory)
-
-      // latest plan position is now at the beginning of array
-      // planHistoryPosition = planHistory.length - 1
-      planHistoryPosition = 0
-
-      // save to disk (if new plan only)
-      localStorage.setItem("threed_planHistory", JSON.stringify({ subject: "plan", payload: planHistory }))
-
-      setToolMode("pointer")
-
-      // console.debug("[MM] TRY: actionNewPlan")
-    } catch (e) {
-      console.debug("[MM] CATCH: actionNewPlan", e)
-    }
-  }
-
-  // MouseEventHandler<HTMLAnchorElement>
-  const actionNewProject: any = (): any => {
-    // alert("[MM] actionNewPlan")
-    try {
-
-      // TENTATIVE
-      resetPlan() // clear all plan stuff, then create new plan...
-
-      // PLAN
-      // const plan = createPlan()
-      createPlan()
-      const plan = usePlanStore((state: any) => state.plan)
-      const plans = usePlanStore((state: any) => state.plans)
-      console.debug("actionNewPlan plan", plan)
-      console.debug("actionNewPlan plans", plans)
-
-      // PLAN HISTORY
-      // const planHistory: Object[] = []
-      // planHistory.push(plan) // push to end array position [array.length]
-      planHistory.unshift(plan) // unshift to beginning array position [0]
-      console.debug("planHistoryNew", planHistory)
-
-      // latest plan position is now at the beginning of array
-      // planHistoryPosition = planHistory.length - 1
-      planHistoryPosition = 0
-
-      // save to disk (if new plan only)
-      localStorage.setItem("threed_planHistory", JSON.stringify({ subject: "plan", payload: planHistory }))
-
-      setToolMode("pointer")
-
-      // console.debug("[MM] TRY: actionNewPlan")
-    } catch (e) {
-      console.debug("[MM] CATCH: actionNewPlan", e)
-    }
-  }
-
-  // MouseEventHandler<HTMLAnchorElement>
-  const actionNewPlan: any = (): any => {
-    // alert("[MM] actionNewPlan")
-    try {
-
-      // TENTATIVE -- [MM] HEY HEY HEY
-      resetPlan() // clear all plan stuff, then create new plan...
-
-      // PLAN
-      // const plan = createPlan()
-      createPlan()
-      const plan = usePlanStore((state: any) => state.plan)
-      const plans = usePlanStore((state: any) => state.plans)
-      console.debug("actionNewPlan plan", plan)
-      console.debug("actionNewPlan plans", plans)
-
-      // PLAN HISTORY
-      // const planHistory: Object[] = []
-      // planHistory.push(plan) // push to end array position [array.length]
-      planHistory.unshift(plan) // unshift to beginning array position [0]
-      console.debug("planHistoryNew", planHistory)
-
-      // latest plan position is now at the beginning of array
-      // planHistoryPosition = planHistory.length - 1
-      planHistoryPosition = 0
-
-      // save to disk (if new plan only)
-      localStorage.setItem("threed_planHistory", JSON.stringify({ subject: "plan", payload: planHistory }))
-
-      setToolMode("pointer")
-
-      // console.debug("[MM] TRY: actionNewPlan")
-    } catch (e) {
-      console.debug("[MM] CATCH: actionNewPlan", e)
-    }
-  }
-
+  // OLD
   const resetPlan: any = (): any => {
     // alert("[MM] resetPlan")
     try {
@@ -1772,10 +1636,6 @@ const ToolBar: ReactNode = (): JSX.Element => {
 
   }
 
-
-  // =====================================================
-  // doThings
-
   const doLoadFile: MouseEventHandler<HTMLAnchorElement> = (): any => {
     // alert("[MM] doLoadFile")
     try {
@@ -1811,7 +1671,7 @@ const ToolBar: ReactNode = (): JSX.Element => {
       // console.debug("%cFileReader", ccm1, o)
       o.onload = function () {
         let g = o.result
-        actionNewPlan()
+        // resetPlan()
         // loadingProgressTxt = "Plan decoding\n" + loadingProgressTxt
         // document.getElementById("modalLoadingDataInfo").innerHTML = loadingProgressTxt
         console.debug("drawPlan", g)
@@ -3566,9 +3426,9 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
           {/* <ChickenInfoPanel /> */}
           {/* <ChickenControlPanel /> */}
           {/* <hr /> */}
-          {/* <SceneInfoPanel />
+          <SceneInfoPanel />
           <SceneControlPanel />
-          <hr /> */}
+          <hr />
           {/* <AllotmentInfoPanel /> */}
           {/* <AllotmentControlPanel /> */}
           {/* <hr /> */}
