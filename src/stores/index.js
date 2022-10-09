@@ -245,6 +245,11 @@ export const threedActions = {
       console.debug('%cLoadFromDisk [threeds] err', ccm2, err)
       return false
     }
+  },
+
+  // get data from db via graphql
+  loadFromDB: async () => {
+    return false
   }
 
 } // threedActions
@@ -783,7 +788,7 @@ export const sceneActions = {
 
   loadFromDisk: function () {
     try {
-      const payload = JSON.parse(localStorage.getItem('scene_threedHistory'))
+      const payload = JSON.parse(localStorage.getItem('threed_sceneHistory'))
       if (payload) {
         console.debug('%cLoadFromDisk [scenes] PAYLOAD?', ccm3, payload)
         console.debug('%cLoadFromDisk [scenes] PAYLOAD.PAYLOAD?', ccm3, payload.payload)

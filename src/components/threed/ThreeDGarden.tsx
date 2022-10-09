@@ -202,10 +202,19 @@ const ThreeDControlPanel = () => {
 
   // const addThreeD = threedStore((state: any) => state.addThreeD) // zustand
   const addThreeD = () => threedActions.addThreeD()
+  // const saveToDisk = sceneActions((state: any) => state.saveToDisk) // zustand
+  const saveToDisk = () => threedActions.saveToDisk()
+  // const loadFromDisk = threedActions((state: any) => state.loadFromDisk) // zustand
+  const loadFromDisk = () => threedActions.loadFromDisk()
+  // const loadFromDB = threedActions((state: any) => state.loadFromDB) // zustand
+  const loadFromDB = () => threedActions.loadFromDB()
 
   return (
     <Box>
       <Button onClick={addThreeD}>add threed</Button>
+      <Button onClick={saveToDisk}>save to disk</Button>
+      <Button onClick={loadFromDisk}>load from disk</Button>
+      <Button onClick={loadFromDB}>load from db</Button>
       {/* <Button onClick={increaseThreeDCount}>add to threed count</Button> */}
     </Box>
   )
