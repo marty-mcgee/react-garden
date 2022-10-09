@@ -163,7 +163,7 @@ export const threedActions = {
         name: 'THREED 1',
         layers: [],
         activeLayer: {
-          name: 'LAYER 1',
+          name: 'LAYER 0',
           data: {}
         }
       })
@@ -294,7 +294,7 @@ export const projectActions = create((set, get) => ({
             _ts: new Date().toISOString(),
             layers: [],
             activeLayer: {
-              name: 'LAYER 1',
+              name: 'LAYER 0',
               data: {}
             }
           },
@@ -725,7 +725,7 @@ export const sceneActions = {
         name: 'SCENE 1',
         layers: [],
         activeLayer: {
-          name: 'LAYER 1',
+          name: 'LAYER 0',
           data: {}
         }
       })
