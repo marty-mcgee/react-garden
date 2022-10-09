@@ -94,7 +94,7 @@ export const TestAC3Store = () => {
 // ThreeD
 // aka 'Master File with Settings'
 
-const threed = (threedName = 'HEY HEY HEY 0', layerName = 'level0-MM') => ({
+const threed = (threedName = 'THREED 0', layerName = 'LAYER 0') => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
   name: threedName,
@@ -160,10 +160,10 @@ export const threedActions = {
       threedStore.update("threed", {
         _id: newUUID(),
         _ts: new Date().toISOString(),
-        name: 'YO YO YO 1',
+        name: 'THREED 1',
         layers: [],
         activeLayer: {
-          name: 'level1-MM',
+          name: 'LAYER 1',
           data: {}
         }
       })
@@ -266,7 +266,7 @@ export const projectStore = create({
     _ts: new Date().toISOString(),
     layers: [],
     activeLayer: {
-      name: 'level0-MM',
+      name: 'LAYER 0',
       data: {}
     }
   }
@@ -294,7 +294,7 @@ export const projectActions = create((set, get) => ({
             _ts: new Date().toISOString(),
             layers: [],
             activeLayer: {
-              name: 'level1-MM',
+              name: 'LAYER 1',
               data: {}
             }
           },
@@ -554,7 +554,7 @@ export const fileStore = create({
     _ts: new Date().toISOString(),
     layers: [],
     activeLayer: {
-      name: 'level0-MM',
+      name: 'LAYER 0',
       data: {}
     }
   },
@@ -646,7 +646,7 @@ export const modalActions = {
 // ==============================================================
 // Scene
 
-const scene = (sceneName = 'SCENE SCENE SCENE 0', layerName = 'level0-MM') => ({
+const scene = (sceneName = 'SCENE 0', layerName = 'LAYER 0') => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
   name: sceneName,
@@ -722,10 +722,10 @@ export const sceneActions = {
       sceneStore.update("scene", {
         _id: newUUID(),
         _ts: new Date().toISOString(),
-        name: 'YO YO YO 1',
+        name: 'SCENE 1',
         layers: [],
         activeLayer: {
-          name: 'level1-MM',
+          name: 'LAYER 1',
           data: {}
         }
       })
