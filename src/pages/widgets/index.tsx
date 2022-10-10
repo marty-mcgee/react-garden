@@ -136,7 +136,7 @@ function Widgets(): JSX.Element {
             <Grid item xs={12} lg={4}>
               <MasterCard
                 number={4562112245947852}
-                holder="juice master"
+                holder="Garden Master"
                 expires="07/27"
               />
             </Grid>

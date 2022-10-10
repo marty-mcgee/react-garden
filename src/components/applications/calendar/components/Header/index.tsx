@@ -40,7 +40,7 @@ function Header(): JSX.Element {
           </MDTypography>
         </MDBox>
         <MDBox display="flex">
-          <Tooltip title="Juice Master" placement="top">
+          <Tooltip title="Garden Master" placement="top">
             <MDAvatar src={team0.src} alt="team-0" size="sm" sx={avatarStyles} />
           </Tooltip>
           <Tooltip title="Jessica Rowland" placement="top">
