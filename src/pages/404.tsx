@@ -45,7 +45,7 @@ const TreeIllustration = styled('img')(({ theme }) => ({
 }))
 
 // const Error404: NextPage = () => {
-  const Error404: any = () => {
+const Error404: any = () => {
   return (
     <Box className='content-center'>
       <Box sx={{ p: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
