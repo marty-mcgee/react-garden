@@ -41,7 +41,7 @@ const Demo: FunctionComponent = (props): JSX.Element => {
 
     // useEffect(() => {
     const B3 = dynamic(
-      () => require("~/components/threed/b3.mm"),
+      () => require("~/components/threed/demo-b3.mm"),
       {
         // loading: () => <p>...loading...</p>,
         ssr: false

@@ -67,7 +67,7 @@ const DemoPage: FunctionComponent = (props): JSX.Element => {
     // console.log("window.$", window.$)
 
     // const B3 = dynamic(() =>
-    //   require("~/components/threed/b3.mm"),
+    //   require("~/components/threed/demo-b3.mm"),
     //   {
     //     ssr: false
     //   }
