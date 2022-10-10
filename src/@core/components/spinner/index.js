@@ -3,6 +3,12 @@ import Box from '@mui/material/Box'
 import { useTheme } from '@mui/material/styles'
 import CircularProgress from '@mui/material/CircularProgress'
 
+// ** Next Imports
+// import Image from 'next/future/image'
+
+// ** Image Imports
+// import logo from '~/assets/images/logos/logo-threedgarden.png'
+
 const FallbackSpinner = () => {
   // ** Hook
   const theme = useTheme()
@@ -17,7 +23,10 @@ const FallbackSpinner = () => {
         justifyContent: 'center'
       }}
     >
-      <svg
+      {/* App Logo */}
+      {/* <Image src={logo} width={48} height={48} alt="Loading App..." /> */}
+      {/* MUI Logo */}
+      {/* <svg
         width={82}
         height={68}
         version='1.1'
@@ -75,7 +84,7 @@ const FallbackSpinner = () => {
             </g>
           </g>
         </g>
-      </svg>
+      </svg> */}
       <CircularProgress disableShrink sx={{ mt: 6 }} />
     </Box>
   )

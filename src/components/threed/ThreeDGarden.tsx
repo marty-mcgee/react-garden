@@ -28,7 +28,7 @@ import {
 } from '~/stores'
 
 // ** Next Imports
-import Image from "next/future/image"
+import Image from 'next/future/image'
 
 // ** MUI Imports
 import { styled, useTheme } from '@mui/material/styles'
