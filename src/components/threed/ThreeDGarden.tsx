@@ -151,6 +151,16 @@ const Toolbar = styled(MuiToolbar)(({ theme }) => ({
 // ==========================================================
 // none yet, but soon
 
+type HEYHEYHEY = {
+  heyheyhey: string
+  yoyoyo: string
+}
+
+interface YOYOYO {
+  heyheyhey: string
+  yoyoyo: string
+}
+
 // ==========================================================
 // FUNCTIONAL STORES
 // ==========================================================
@@ -162,7 +172,11 @@ const {
   fileStore, fileActions,
   bearStore, bearActions,
   modalStore, modalActions,
-  sceneStore, sceneActions
+  sceneStore, sceneActions,
+  allotmentStore, allotmentActions,
+  bedStore, bedActions,
+  plantStore, plantActions,
+  plantingPlanStore, plantingPlanActions,
 } = useStore
 
 // ==========================================================
@@ -178,7 +192,7 @@ const ThreeDInfoPanel = () => {
   const threeds = threedStore.useStore("threeds")
   // const threed = threedStore((state: any) => state.threed) // zustand
   const threed = threedStore.useStore("threed")
-  console.debug("%cThreeDInfoPanel: {threed}", ccm1, threed)
+  // console.debug("%cThreeDInfoPanel: {threed}", ccm1, threed)
 
   return (
     <Box>
@@ -198,7 +212,7 @@ const ThreeDControlPanel = () => {
 
   // const addThreeD = threedStore((state: any) => state.addThreeD) // zustand
   const addThreeD = () => threedActions.addThreeD()
-  // const saveToDisk = sceneActions((state: any) => state.saveToDisk) // zustand
+  // const saveToDisk = threedActions((state: any) => state.saveToDisk) // zustand
   const saveToDisk = () => threedActions.saveToDisk()
   // const loadFromDisk = threedActions((state: any) => state.loadFromDisk) // zustand
   const loadFromDisk = () => threedActions.loadFromDisk()
@@ -357,7 +371,7 @@ function BearControlPanel() {
 // ==========================================================
 // Scene
 
-function SceneInfoPanel() {
+const SceneInfoPanel: ReactNode = (): JSX.Element => {
 
   // const sceneCount = sceneStore((state: any) => state.sceneCount) // zustand
   const sceneCount = sceneStore.useStore("sceneCount")
@@ -365,7 +379,7 @@ function SceneInfoPanel() {
   const scenes = sceneStore.useStore("scenes")
   // const scene = sceneStore((state: any) => state.scene) // zustand
   const scene = sceneStore.useStore("scene")
-  console.debug("%cSceneInfoPanel: {scene}", ccm1, scene)
+  // console.debug("%cSceneInfoPanel: {scene}", ccm1, scene)
 
   return (
     <Box>
@@ -378,8 +392,7 @@ function SceneInfoPanel() {
   )
 }
 
-const SceneControlPanel: FunctionComponent = (): JSX.Element => {
-// function SceneControlPanel() {
+const SceneControlPanel: ReactNode = (): JSX.Element => {
 
   // console.debug("SceneControlPanel PROPS", props)
 
@@ -417,29 +430,235 @@ const SceneControlPanel: FunctionComponent = (): JSX.Element => {
 // ==========================================================
 // Allotment
 
-function AllotmentInfoPanel() {
-  const fileCount = useAllotmentStore((state: any) => state.fileCount)
-  const files = useAllotmentStore((state: any) => state.files)
-  const file = useAllotmentStore((state: any) => state.file)
+const AllotmentInfoPanel: ReactNode = (): JSX.Element => {
 
-  // console.debug("%cCurrentAllotment", ccm1, file)
+  // const allotmentCount = allotmentStore((state: any) => state.allotmentCount) // zustand
+  const allotmentCount = allotmentStore.useStore("allotmentCount")
+  // const allotments = allotmentStore((state: any) => state.allotments) // zustand
+  const allotments = allotmentStore.useStore("allotments")
+  // const allotment = allotmentStore((state: any) => state.allotment) // zustand
+  const allotment = allotmentStore.useStore("allotment")
+  // console.debug("%cAllotmentInfoPanel: {allotment}", ccm1, allotment)
+
   return (
     <Box>
-      <Typography>{files.length} files around here ...</Typography>
-      {/* <Typography>{fileCount} files around here ...</Typography> */}
+      {/* <Typography>{allotmentCount} allotments around here ...</Typography> */}
+      <Typography>allotments.length: {allotments.length}</Typography>
+      <Typography>allotment._id: {allotment._id}</Typography>
+      <Typography>allotment.name: {allotment.name}</Typography>
+      <Typography>allotment.activeLayer.name: {allotment.activeLayer?.name}</Typography>
     </Box>
   )
 }
 
-function AllotmentControlPanel() {
-  const increaseAllotmentCount = useAllotmentStore((state: any) => state.increaseAllotmentCount)
+const AllotmentControlPanel: ReactNode = (): JSX.Element => {
 
-  const addAllotment = useAllotmentStore((state: any) => state.addAllotment)
+  // console.debug("AllotmentControlPanel PROPS", props)
+
+  // const increaseAllotmentCount = allotmentActions((state: any) => state.increaseAllotmentCount) // zustand
+  const increaseAllotmentCount = () => allotmentStore.update("allotmentCount", allotmentActions.increaseAllotmentCount())
+
+  // const addAllotment = allotmentStore((state: any) => state.addAllotment) // zustand
+  const addAllotment = () => allotmentActions.addAllotment()
+  // const saveToDisk = allotmentActions((state: any) => state.saveToDisk) // zustand
+  const saveToDisk = () => allotmentActions.saveToDisk()
+  // const loadFromDisk = allotmentActions((state: any) => state.loadFromDisk) // zustand
+  const loadFromDisk = () => allotmentActions.loadFromDisk()
+  // const loadFromDB = allotmentActions((state: any) => state.loadFromDB) // zustand
+  const loadFromDB = (client) => allotmentActions.loadFromDB(client)
 
   return (
     <Box>
-      <Button onClick={addAllotment}>add file</Button>
-      {/* <Button onClick={increaseAllotmentCount}>add to file count</Button> */}
+      <Button onClick={addAllotment}>add allotment</Button>
+      <Button onClick={saveToDisk}>save to disk</Button>
+      <Button onClick={loadFromDisk}>load from disk</Button>
+      {/* <Button onClick={loadFromDB}>load from db</Button> */}
+      <ApolloConsumer>
+        {
+          client => (
+            // 'We have access to the client!' /* do stuff here */
+            <Button onClick={() => loadFromDB(client)}>load from db</Button>
+          )
+        }
+      </ApolloConsumer>
+      {/* <Button onClick={increaseAllotmentCount}>add to allotment count</Button> */}
+    </Box>
+  )
+}
+
+// ==========================================================
+// Bed
+
+const BedInfoPanel: ReactNode = (): JSX.Element => {
+
+  // const bedCount = bedStore((state: any) => state.bedCount) // zustand
+  const bedCount = bedStore.useStore("bedCount")
+  // const beds = bedStore((state: any) => state.beds) // zustand
+  const beds = bedStore.useStore("beds")
+  // const bed = bedStore((state: any) => state.bed) // zustand
+  const bed = bedStore.useStore("bed")
+  // console.debug("%cBedInfoPanel: {bed}", ccm1, bed)
+
+  return (
+    <Box>
+      {/* <Typography>{bedCount} beds around here ...</Typography> */}
+      <Typography>beds.length: {beds.length}</Typography>
+      <Typography>bed._id: {bed._id}</Typography>
+      <Typography>bed.name: {bed.name}</Typography>
+      <Typography>bed.activeLayer.name: {bed.activeLayer?.name}</Typography>
+    </Box>
+  )
+}
+
+const BedControlPanel: ReactNode = (): JSX.Element => {
+
+  // console.debug("BedControlPanel PROPS", props)
+
+  // const increaseBedCount = bedActions((state: any) => state.increaseBedCount) // zustand
+  const increaseBedCount = () => bedStore.update("bedCount", bedActions.increaseBedCount())
+
+  // const addBed = bedStore((state: any) => state.addBed) // zustand
+  const addBed = () => bedActions.addBed()
+  // const saveToDisk = bedActions((state: any) => state.saveToDisk) // zustand
+  const saveToDisk = () => bedActions.saveToDisk()
+  // const loadFromDisk = bedActions((state: any) => state.loadFromDisk) // zustand
+  const loadFromDisk = () => bedActions.loadFromDisk()
+  // const loadFromDB = bedActions((state: any) => state.loadFromDB) // zustand
+  const loadFromDB = (client) => bedActions.loadFromDB(client)
+
+  return (
+    <Box>
+      <Button onClick={addBed}>add bed</Button>
+      <Button onClick={saveToDisk}>save to disk</Button>
+      <Button onClick={loadFromDisk}>load from disk</Button>
+      {/* <Button onClick={loadFromDB}>load from db</Button> */}
+      <ApolloConsumer>
+        {
+          client => (
+            // 'We have access to the client!' /* do stuff here */
+            <Button onClick={() => loadFromDB(client)}>load from db</Button>
+          )
+        }
+      </ApolloConsumer>
+      {/* <Button onClick={increaseBedCount}>add to bed count</Button> */}
+    </Box>
+  )
+}
+
+// ==========================================================
+// Plant
+
+const PlantInfoPanel: ReactNode = (): JSX.Element => {
+
+  // const plantCount = plantStore((state: any) => state.plantCount) // zustand
+  const plantCount = plantStore.useStore("plantCount")
+  // const plants = plantStore((state: any) => state.plants) // zustand
+  const plants = plantStore.useStore("plants")
+  // const plant = plantStore((state: any) => state.plant) // zustand
+  const plant = plantStore.useStore("plant")
+  // console.debug("%cPlantInfoPanel: {plant}", ccm1, plant)
+
+  return (
+    <Box>
+      {/* <Typography>{plantCount} plants around here ...</Typography> */}
+      <Typography>plants.length: {plants.length}</Typography>
+      <Typography>plant._id: {plant._id}</Typography>
+      <Typography>plant.name: {plant.name}</Typography>
+      <Typography>plant.activeLayer.name: {plant.activeLayer?.name}</Typography>
+    </Box>
+  )
+}
+
+const PlantControlPanel: ReactNode = (): JSX.Element => {
+
+  // console.debug("PlantControlPanel PROPS", props)
+
+  // const increasePlantCount = plantActions((state: any) => state.increasePlantCount) // zustand
+  const increasePlantCount = () => plantStore.update("plantCount", plantActions.increasePlantCount())
+
+  // const addPlant = plantStore((state: any) => state.addPlant) // zustand
+  const addPlant = () => plantActions.addPlant()
+  // const saveToDisk = plantActions((state: any) => state.saveToDisk) // zustand
+  const saveToDisk = () => plantActions.saveToDisk()
+  // const loadFromDisk = plantActions((state: any) => state.loadFromDisk) // zustand
+  const loadFromDisk = () => plantActions.loadFromDisk()
+  // const loadFromDB = plantActions((state: any) => state.loadFromDB) // zustand
+  const loadFromDB = (client) => plantActions.loadFromDB(client)
+
+  return (
+    <Box>
+      <Button onClick={addPlant}>add plant</Button>
+      <Button onClick={saveToDisk}>save to disk</Button>
+      <Button onClick={loadFromDisk}>load from disk</Button>
+      {/* <Button onClick={loadFromDB}>load from db</Button> */}
+      <ApolloConsumer>
+        {
+          client => (
+            // 'We have access to the client!' /* do stuff here */
+            <Button onClick={() => loadFromDB(client)}>load from db</Button>
+          )
+        }
+      </ApolloConsumer>
+      {/* <Button onClick={increasePlantCount}>add to plant count</Button> */}
+    </Box>
+  )
+}
+
+// ==========================================================
+// PlantingPlan
+
+const PlantingPlanInfoPanel: ReactNode = (): JSX.Element => {
+
+  // const plantingPlanCount = plantingPlanStore((state: any) => state.plantingPlanCount) // zustand
+  const plantingPlanCount = plantingPlanStore.useStore("plantingPlanCount")
+  // const plantingPlans = plantingPlanStore((state: any) => state.plantingPlans) // zustand
+  const plantingPlans = plantingPlanStore.useStore("plantingPlans")
+  // const plantingPlan = plantingPlanStore((state: any) => state.plantingPlan) // zustand
+  const plantingPlan = plantingPlanStore.useStore("plantingPlan")
+  // console.debug("%cPlantingPlanInfoPanel: {plantingPlan}", ccm1, plantingPlan)
+
+  return (
+    <Box>
+      {/* <Typography>{plantingPlanCount} plantingPlans around here ...</Typography> */}
+      <Typography>plantingPlans.length: {plantingPlans.length}</Typography>
+      <Typography>plantingPlan._id: {plantingPlan._id}</Typography>
+      <Typography>plantingPlan.name: {plantingPlan.name}</Typography>
+      <Typography>plantingPlan.activeLayer.name: {plantingPlan.activeLayer?.name}</Typography>
+    </Box>
+  )
+}
+
+const PlantingPlanControlPanel: ReactNode = (): JSX.Element => {
+
+  // console.debug("PlantingPlanControlPanel PROPS", props)
+
+  // const increasePlantingPlanCount = plantingPlanActions((state: any) => state.increasePlantingPlanCount) // zustand
+  const increasePlantingPlanCount = () => plantingPlanStore.update("plantingPlanCount", plantingPlanActions.increasePlantingPlanCount())
+
+  // const addPlantingPlan = plantingPlanStore((state: any) => state.addPlantingPlan) // zustand
+  const addPlantingPlan = () => plantingPlanActions.addPlantingPlan()
+  // const saveToDisk = plantingPlanActions((state: any) => state.saveToDisk) // zustand
+  const saveToDisk = () => plantingPlanActions.saveToDisk()
+  // const loadFromDisk = plantingPlanActions((state: any) => state.loadFromDisk) // zustand
+  const loadFromDisk = () => plantingPlanActions.loadFromDisk()
+  // const loadFromDB = plantingPlanActions((state: any) => state.loadFromDB) // zustand
+  const loadFromDB = (client) => plantingPlanActions.loadFromDB(client)
+
+  return (
+    <Box>
+      <Button onClick={addPlantingPlan}>add plantingPlan</Button>
+      <Button onClick={saveToDisk}>save to disk</Button>
+      <Button onClick={loadFromDisk}>load from disk</Button>
+      {/* <Button onClick={loadFromDB}>load from db</Button> */}
+      <ApolloConsumer>
+        {
+          client => (
+            // 'We have access to the client!' /* do stuff here */
+            <Button onClick={() => loadFromDB(client)}>load from db</Button>
+          )
+        }
+      </ApolloConsumer>
+      {/* <Button onClick={increasePlantingPlanCount}>add to plantingPlan count</Button> */}
     </Box>
   )
 }
@@ -681,7 +900,7 @@ const ModalAbout: ReactNode = (): JSX.Element => {
 
           <Box className={stylesGarden.modalBody}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-              <Tabs value={tabModalAbout} onChange={handleChangeTabModalAbout} aria-label="basic tabs example">
+              <Tabs value={tabModalAbout} onChange={handleChangeTabModalAbout} aria-label="About Tabs">
                 <Tab label="Intro" {...a11yProps(0)} />
                 <Tab label="Models" {...a11yProps(1)} />
                 <Tab label="Examples" {...a11yProps(2)} />
@@ -3361,6 +3580,12 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
   // const root = useRef()
   // const scene = new THREE.Scene()
 
+  // tabs
+  const [tabInfoControl, setTabInfoControl] = useState(0)
+  const handleChangeTabInfoControl = (event: SyntheticEvent, newValue: number) => {
+    setTabInfoControl(newValue);
+  }
+
   // ==========================================================
   // Component onMount hook
   useEffect(() => {
@@ -3420,58 +3645,76 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
 
         {/* store access */}
         <div id="storeControlPanel" style={{ padding: "1rem" }}>
-          {/*
-            React Three Fiber - View
-          */}
+
+          {/* React Three Fiber - View */}
           <ReactThreeFiberView />
-          <hr />
-          {/*
-            ThreeD - View
-          */}
-          <ThreeDInfoPanel />
-          <ThreeDControlPanel />
-          <hr />
-          {/* <ProjectInfoPanel /> */}
-          {/* <ProjectControlPanel /> */}
-          {/* <hr /> */}
-          {/* <PlanInfoPanel /> */}
-          {/* <PlanControlPanel /> */}
-          {/* <hr /> */}
-          {/* <FileInfoPanel /> */}
-          {/* <FileControlPanel /> */}
-          {/* <hr /> */}
-          {/* <CharacterInfoPanel /> */}
-          {/* <CharacterControlPanel /> */}
-          {/* <hr /> */}
-          {/* <BearInfoPanel /> */}
-          {/* <BearControlPanel /> */}
-          {/* <hr /> */}
-          {/* <GardenerInfoPanel /> */}
-          {/* <GardenerControlPanel /> */}
-          {/* <hr /> */}
-          {/* <ChickenInfoPanel /> */}
-          {/* <ChickenControlPanel /> */}
-          {/* <hr /> */}
-          <SceneInfoPanel />
-          <SceneControlPanel />
-          <hr />
-          {/* <AllotmentInfoPanel /> */}
-          {/* <AllotmentControlPanel /> */}
-          {/* <hr /> */}
-          {/* <BedInfoPanel /> */}
-          {/* <BedControlPanel /> */}
-          {/* <hr /> */}
-          {/* <FurnitureInfoPanel /> */}
-          {/* <FurnitureControlPanel /> */}
-          {/* <hr /> */}
-          {/* <PlantInfoPanel /> */}
-          {/* <PlantControlPanel /> */}
-          {/* <hr /> */}
-          {/* <PlantingPlanInfoPanel /> */}
-          {/* <PlantingPlanControlPanel /> */}
-          {/* <hr /> */}
-          {/* <TestAC3Store /> */}
-          {/* <hr /> */}
+
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <Tabs value={tabInfoControl} onChange={handleChangeTabInfoControl} aria-label="Info Control Panel">
+                <Tab label="ThreeDs" {...a11yProps(0)} />
+                <Tab label="Scenes" {...a11yProps(1)} />
+                <Tab label="Allotments" {...a11yProps(2)} />
+                <Tab label="Beds" {...a11yProps(3)} />
+                <Tab label="Plants" {...a11yProps(4)} />
+                <Tab label="Planting Plans" {...a11yProps(5)} />
+                <Tab label="Testing" {...a11yProps(6)} />
+              </Tabs>
+            </Box>
+            <MDTabPanel value={tabInfoControl} index={0}>
+              <ThreeDInfoPanel />
+              <ThreeDControlPanel />
+            </MDTabPanel>
+            <MDTabPanel value={tabInfoControl} index={1}>
+              <SceneInfoPanel />
+              <SceneControlPanel />
+            </MDTabPanel>
+            <MDTabPanel value={tabInfoControl} index={2}>
+              <AllotmentInfoPanel />
+              <AllotmentControlPanel />
+            </MDTabPanel>
+            <MDTabPanel value={tabInfoControl} index={3}>
+              <BedInfoPanel />
+              <BedControlPanel />
+            </MDTabPanel>
+            <MDTabPanel value={tabInfoControl} index={4}>
+              <PlantInfoPanel />
+              <PlantControlPanel />
+            </MDTabPanel>
+            <MDTabPanel value={tabInfoControl} index={5}>
+              <PlantingPlanInfoPanel />
+              <PlantingPlanControlPanel />
+            </MDTabPanel>
+            <MDTabPanel value={tabInfoControl} index={6}>
+
+              {/* <ProjectInfoPanel /> */}
+              {/* <ProjectControlPanel /> */}
+              {/* <hr /> */}
+              {/* <PlanInfoPanel /> */}
+              {/* <PlanControlPanel /> */}
+              {/* <hr /> */}
+              {/* <FileInfoPanel /> */}
+              {/* <FileControlPanel /> */}
+              {/* <hr /> */}
+              {/* <CharacterInfoPanel /> */}
+              {/* <CharacterControlPanel /> */}
+              {/* <hr /> */}
+              {/* <BearInfoPanel /> */}
+              {/* <BearControlPanel /> */}
+              {/* <hr /> */}
+              {/* <GardenerInfoPanel /> */}
+              {/* <GardenerControlPanel /> */}
+              {/* <hr /> */}
+              {/* <ChickenInfoPanel /> */}
+              {/* <ChickenControlPanel /> */}
+              {/* <hr /> */}
+
+              {/* <FurnitureInfoPanel /> */}
+              {/* <FurnitureControlPanel /> */}
+              {/* <hr /> */}
+
+              <TestAC3Store />
+              {/* <hr /> */}
+            </MDTabPanel>
         </div>
 
         <ModalAbout />

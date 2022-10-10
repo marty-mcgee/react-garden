@@ -2,11 +2,12 @@
 import { ApolloClient, InMemoryCache, useApolloClient, useQuery, gql } from '@apollo/client'
 import create from '~/api/graphql/createStore'
 // ** GraphQL Queries + Mutations (here, locally-specific data needs)
+import GetThreeDs from '~/api/graphql/scripts/getThreeDs.gql'
 import GetScenes from '~/api/graphql/scripts/getScenes.gql'
-// import GetAllotments from '~/api/graphql/scripts/getAllotments.gql'
-// import GetBeds from '~/api/graphql/scripts/getBeds.gql'
-// import GetPlants from '~/api/graphql/scripts/getPlants.gql'
-// import GetPlantingPlans from '~/api/graphql/scripts/getPlantingPlans.gql'
+import GetAllotments from '~/api/graphql/scripts/getAllotments.gql'
+import GetBeds from '~/api/graphql/scripts/getBeds.gql'
+import GetPlants from '~/api/graphql/scripts/getPlants.gql'
+import GetPlantingPlans from '~/api/graphql/scripts/getPlantingPlans.gql'
 // import GetProducts from '~/api/graphql/scripts/getProducts.gql'
 
 // ** React Imports
@@ -105,6 +106,249 @@ export const TestAC3Store = () => {
 }
 
 // ==============================================================
+// Store Actions (Common)
+
+// const storeActions = (noun = "threed") => {
+const storeActions = {
+
+  increaseCount: (n = 1) => {
+    return (state) => state + n
+  },
+
+  // removeAll: () => set(
+  //   {
+  //     threedCount: 0,
+  //     threeds: []
+  //   }
+  // ),
+
+  addNew: function () {
+
+    console.debug('%cAddNew [] (before)', ccm1, threedStore.get("threeds"))
+
+    // create a new one
+    if (Object.keys(threedStore.get("threed")).length === 0) {
+      threedStore.update("threed", threed())
+    }
+    // save + update old one
+    else {
+      // threedHistory (save existing before mutating, if not empty)
+      threedStore.update("threeds", [
+        threedStore.get("threed"),
+        ...threedStore.get("threeds")
+      ])
+      console.debug('%cAddThreeD [threeds] (during)', ccm1, threedStore.get("threeds"))
+
+      // threedCount (example)
+      // threedStore.update("threedCount", threedStore.get("threedCount") + 1) // manual
+      threedStore.update("threedCount", threedStore.get("threeds").length) // automatic
+      // console.debug('%cAddThreeD {threedCount}', ccm3, threedStore.get("threedCount"))
+      // console.debug('%cAddThreeD [threeds]', ccm3, threedStore.get("threeds").length)
+
+      // threedCurrent (overwrite -- mutate)
+      threedStore.update("threed", {
+        _id: newUUID(),
+        _ts: new Date().toISOString(),
+        name: 'THREED 1',
+        layers: [],
+        activeLayer: {
+          name: 'LAYER 0',
+          data: {}
+        }
+      })
+    }
+    console.debug('%cAddThreeD {threed}', ccm1, threedStore.get("threed"))
+
+    // save the new one and the old ones
+    // threedHistory (save recently mutated)
+    threedStore.update("threeds", [
+      threedStore.get("threed"),
+      ...threedStore.get("threeds")
+    ])
+    console.debug('%cAddThreeD [threeds] (after)', ccm1, threedStore.get("threeds"))
+
+    // threedCount (example)
+    // threedStore.update("threedCount", threedStore.get("threedCount") + 1) // manual
+    threedStore.update("threedCount", threedStore.get("threeds").length) // automatic
+    // console.debug('%cAddThreeD {threedCount}', ccm3, threedStore.get("threedCount"))
+    // console.debug('%cAddThreeD [threeds]', ccm3, threedStore.get("threeds").length)
+
+    // saveToDisk
+    // get().saveToDisk()
+    this.saveToDisk()
+    // loadFromDisk
+    // get().loadFromDisk()
+    this.loadFromDisk()
+
+    // console.debug('%cAddThreeD', ccm1, get().threed)
+  },
+
+  saveThreeD: function () {
+    // saveToDisk
+    // get().saveToDisk()
+    this.saveToDisk()
+    // saveToDB (coming soon !!!)
+    // this.saveToDB()
+  },
+
+  // save data to browser local storage
+  saveToDisk: function () {
+    try {
+      localStorage.setItem(
+        'threed_threedHistory',
+        JSON.stringify({
+          subject: 'threeds',
+          payload: threedStore.get("threeds")
+        })
+      )
+      console.debug('%cSaveToDisk [threeds]', ccm1, threedStore.get("threeds"))
+      return true
+    } catch (err) {
+      console.debug('%cSaveToDisk [threeds] err', ccm2, err)
+      return false
+    }
+  },
+
+  // get data from browser local storage
+  loadFromDisk: function () {
+    try {
+      const query = JSON.parse(localStorage.getItem('threed_threedHistory'))
+      if (query) {
+        console.debug('%cLoadFromDisk [threeds] PAYLOAD?', ccm3, query)
+        const { payload } = query
+        console.debug('%cLoadFromDisk [threeds] PAYLOAD.PAYLOAD?', ccm3, payload)
+
+        if (payload) {
+          console.debug('%cLoadFromDisk [threeds]', ccm3, true) // payload
+
+          threedStore.update("threeds", [...payload])
+          console.debug('%cLoadFromDisk [threeds] (after)', ccm3, threedStore.get("threeds"))
+
+          threedStore.update("threed", threedStore.get("threeds")[0])
+          console.debug('%cLoadFromDisk {threed} (after)', ccm3, threedStore.get("threed"))
+
+          return true // payload // string[]
+        }
+
+        else {
+          console.debug('%cLoadFromDisk [threeds] NO PAYLOAD?', ccm3, query)
+        }
+      }
+      else {
+        console.debug('%cLoadFromDisk [threeds] NOTHING TO LOAD', ccm3, query)
+      }
+      return false
+    } catch (err) {
+      console.debug('%cLoadFromDisk [threeds] err', ccm2, err)
+      return false
+    }
+  },
+
+  // get data from db via graphql
+  loadFromDB: async function (client) {
+    try {
+      // const _this = this
+      // console.debug('threedActions this', this)
+
+      const THREEDS = GetThreeDs // .gql
+
+      const parameters = {
+        first: 10,
+        last: null,
+        after: null,
+        before: null
+      }
+
+      // const {
+      //   data,
+      //   loading,
+      //   error,
+      //   fetchMore,
+      //   refetch,
+      //   networkStatus
+      // } = useQuery(THREEDS, { parameters }, { client })
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      const query = await client.query({
+        query: THREEDS,
+        variables: { parameters }
+      })
+      // console.debug('QUERY RETURNED', query)
+      const { data, loading, error } = query
+      console.debug('DATA RETURNED', data, loading, error)
+
+      if (loading) {
+        return <div>loading...</div>
+      }
+
+      if (error) {
+        console.debug('%cLoadFromDB [threeds]: DATA RETURNED with error', error) // , data, loading, error
+        return <div>error.yoyoyo</div> // <div>{error}</div>
+      }
+
+      if (data) {
+        console.debug('%cLoadFromDB [threeds]: DATA RETURNED', ccm0, data, loading, error)
+
+        if (data.threeds?.edges?.length) {
+
+          // const payload = data.threeds.edges
+          const payload = data.threeds.edges.map(({ node }) => ( // threedId, id, uri, slug, title
+            // <div key={node.threedId}>
+            //   wp threedId: {node.threedId}<br />
+            //   gql id: {node.id}<br />
+            //   uri: {node.uri}<br />
+            //   slug: {node.slug}<br />
+            //   title: {node.title}<br />
+            // </div>
+            node
+          ))
+
+          // set state from db
+          threedStore.update("threedsDB", [...payload]) // nodes
+          console.debug('%cLoadFromDB [threedsDB] (after)', ccm3, threedStore.get("threedsDB"))
+
+          threedStore.update("threedDB", threedStore.get("threedsDB")[0]) // node
+          console.debug('%cLoadFromDB {threedDB}', ccm1, threedStore.get("threedDB"))
+
+          this.saveToDisk()
+
+          // threedCurrent (overwrite -- mutate)
+          threedStore.update("threed", {
+            _id: newUUID(),
+            _ts: new Date().toISOString(),
+            name: 'THREED: ' + threedStore.get("threedDB").title,
+            layers: [],
+            activeLayer: {
+              name: 'LAYER 0',
+              data: {}
+            },
+            // wp custom fields
+            data: threedStore.get("threedDB")
+          })
+          console.debug('%cLoadFromDB {threed} (after)', ccm1, threedStore.get("threed"))
+
+          threedStore.update("threedCountDB", threedStore.get("threeds").length)
+          console.debug('%cLoadFromDB threedCountDB', ccm1, threedStore.get("threedCountDB"))
+
+          return <div>true</div> // payload // string[]
+        }
+
+        else {
+          console.debug('%cLoadFromDB [threeds]: NO data.threeds.edges', ccm3, data)
+          return <div>error.heyheyhey</div>
+        }
+      }
+
+      console.debug('%cLoadFromDB [threeds]: OTHER ERROR', ccm3, data)
+      return <div>false</div>
+
+    } catch (err) {
+      console.debug('%cLoadFromDB [threeds]: DATA RETURNED with err', ccm3, err) // , data, loading, error
+      return <div>error.errerrerr</div>
+    }
+  }
+
+} // storeActions
 
 // ==============================================================
 
@@ -134,6 +378,16 @@ export const threedStore = create({
   threedCount: 0,
   threeds: [],
   threed: {},
+
+  // track current + history
+  // threedCurrent: ^this,
+  threedHistory: [], // from local storage
+
+  // track payload from db
+  threedCountDB: 0, // example counter
+  threedsDB: [], // from db (mysql wordpress via graphql)
+  threedDB: {}, // pre-this threed, ready to be mapped to 'this' threed
+
 }) // threedStore
 
 export const threedActions = {
@@ -221,6 +475,7 @@ export const threedActions = {
     // this.saveToDB()
   },
 
+  // save data to browser local storage
   saveToDisk: function () {
     try {
       localStorage.setItem(
@@ -238,6 +493,7 @@ export const threedActions = {
     }
   },
 
+  // get data from browser local storage
   loadFromDisk: function () {
     try {
       const query = JSON.parse(localStorage.getItem('threed_threedHistory'))
@@ -274,9 +530,106 @@ export const threedActions = {
 
   // get data from db via graphql
   loadFromDB: async function (client) {
-    console.debug('%cLoadFromDB [threeds]: TODO', ccm2)
-    console.debug('%cLoadFromDB [threeds]: client', ccm3, client)
-    return false
+    try {
+      // const _this = this
+      // console.debug('threedActions this', this)
+
+      const THREEDS = GetThreeDs // .gql
+
+      const parameters = {
+        first: 10,
+        last: null,
+        after: null,
+        before: null
+      }
+
+      // const {
+      //   data,
+      //   loading,
+      //   error,
+      //   fetchMore,
+      //   refetch,
+      //   networkStatus
+      // } = useQuery(THREEDS, { parameters }, { client })
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      const query = await client.query({
+        query: THREEDS,
+        variables: { parameters }
+      })
+      // console.debug('QUERY RETURNED', query)
+      const { data, loading, error } = query
+      console.debug('DATA RETURNED', data, loading, error)
+
+      if (loading) {
+        return <div>loading...</div>
+      }
+
+      if (error) {
+        console.debug('%cLoadFromDB [threeds]: DATA RETURNED with error', error) // , data, loading, error
+        return <div>error.yoyoyo</div> // <div>{error}</div>
+      }
+
+      if (data) {
+        console.debug('%cLoadFromDB [threeds]: DATA RETURNED', ccm0, data, loading, error)
+
+        if (data.threeds?.edges?.length) {
+
+          // const payload = data.threeds.edges
+          const payload = data.threeds.edges.map(({ node }) => ( // threedId, id, uri, slug, title
+            // <div key={node.threedId}>
+            //   wp threedId: {node.threedId}<br />
+            //   gql id: {node.id}<br />
+            //   uri: {node.uri}<br />
+            //   slug: {node.slug}<br />
+            //   title: {node.title}<br />
+            // </div>
+            node
+          ))
+
+          // set state from db
+          threedStore.update("threedsDB", [...payload]) // nodes
+          console.debug('%cLoadFromDB [threedsDB] (after)', ccm3, threedStore.get("threedsDB"))
+
+          threedStore.update("threedDB", threedStore.get("threedsDB")[0]) // node
+          console.debug('%cLoadFromDB {threedDB}', ccm1, threedStore.get("threedDB"))
+
+          this.saveToDisk()
+
+          // threedCurrent (overwrite -- mutate)
+          threedStore.update("threed", {
+            _id: newUUID(),
+            _ts: new Date().toISOString(),
+            name: 'THREED: ' + threedStore.get("threedDB").title,
+            layers: [],
+            activeLayer: {
+              name: 'LAYER 0',
+              data: {}
+            },
+            // wp custom fields
+            data: threedStore.get("threedDB")
+          })
+          console.debug('%cLoadFromDB {threed} (after)', ccm1, threedStore.get("threed"))
+
+          threedStore.update("threedCountDB", threedStore.get("threeds").length)
+          console.debug('%cLoadFromDB threedCountDB', ccm1, threedStore.get("threedCountDB"))
+
+          return <div>true</div> // payload // string[]
+        }
+
+        else {
+          console.debug('%cLoadFromDB [threeds]: NO data.threeds.edges', ccm3, data)
+          return <div>error.heyheyhey</div>
+        }
+      }
+
+      console.debug('%cLoadFromDB [threeds]: OTHER ERROR', ccm3, data)
+      return <div>false</div>
+
+    } catch (err) {
+      console.debug('%cLoadFromDB [threeds]: DATA RETURNED with err', ccm3, err) // , data, loading, error
+      return <div>error.errerrerr</div>
+    }
   }
 
 } // threedActions
@@ -861,8 +1214,8 @@ export const sceneActions = {
   // get data from db via graphql
   loadFromDB: async function (client) {
     try {
-      // const this = this
-      console.debug('this', this)
+      // const _this = this
+      // console.debug('sceneActions this', this)
 
       const SCENES = GetScenes // .gql
 
@@ -903,7 +1256,7 @@ export const sceneActions = {
       if (data) {
         console.debug('%cLoadFromDB [scenes]: DATA RETURNED', ccm0, data, loading, error)
 
-        if (data.scenes?.edges) {
+        if (data.scenes?.edges?.length) {
 
           // const payload = data.scenes.edges
           const payload = data.scenes.edges.map(({ node }) => ( // sceneId, id, uri, slug, title
@@ -918,20 +1271,13 @@ export const sceneActions = {
           ))
 
           // set state from db
-          // set(
-          //   (state) => (
-          //     {
-          //       scenesDB: payload,
-          //       sceneCountDB: state.scenesDB.length,
-          //     }
-          //   )
-          // )
           sceneStore.update("scenes", [...payload]) // nodes
           console.debug('%cLoadFromDB [scenes] (after)', ccm3, sceneStore.get("scenes"))
 
-
           sceneStore.update("sceneDB", sceneStore.get("scenes")[0]) // node
           console.debug('%cLoadFromDB {sceneDB}', ccm1, sceneStore.get("sceneDB"))
+
+          this.saveToDisk()
 
           // sceneCurrent (overwrite -- mutate)
           sceneStore.update("scene", {
@@ -946,15 +1292,21 @@ export const sceneActions = {
             // wp custom fields
             data: sceneStore.get("sceneDB")
           })
+          console.debug('%cLoadFromDB {scene} (after)', ccm1, sceneStore.get("scene"))
+
+          sceneStore.update("sceneCountDB", sceneStore.get("scenes").length)
+          console.debug('%cLoadFromDB sceneCountDB', ccm1, sceneStore.get("sceneCountDB"))
 
           return <div>true</div> // payload // string[]
         }
+
         else {
+          console.debug('%cLoadFromDB [scenes]: NO data.scenes.edges', ccm3, data)
           return <div>error.heyheyhey</div>
         }
       }
 
-      console.debug('%cLoadFromDB [scenes]: OTHER ERROR', ccm3, payload)
+      console.debug('%cLoadFromDB [scenes]: OTHER ERROR', ccm3, data)
       return <div>false</div>
 
     } catch (err) {
@@ -970,24 +1322,1193 @@ export const sceneActions = {
 // ==============================================================
 
 // ==============================================================
+// Allotment
+
+const allotment = (allotmentName = 'ALLOTMENT 0', layerName = 'LAYER 0') => ({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
+  name: allotmentName,
+  layers: [],
+  activeLayer: {
+    name: layerName,
+    data: {}
+  },
+  // wp custom fields
+  data: {}, // allotmentStore.get("allotmentDB")
+  //
+  //
+  //
+})
+
+// =========================================================
+// ** Allotment Store
+
+export const allotmentStore = create({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
+  allotmentCount: 0, // example counter
+  allotments: [], // working allotments
+  allotment: {}, // the current working allotment, aka 'this' allotment
+
+  // track current + history
+  // allotmentCurrent: ^this,
+  allotmentHistory: [], // from local storage
+
+  // track payload from db
+  allotmentCountDB: 0, // example counter
+  allotmentsDB: [], // from db (mysql wordpress via graphql)
+  allotmentDB: {}, // pre-this allotment, ready to be mapped to 'this' allotment
+
+}) // allotmentStore
+
+// =========================================================
+// ** Allotment Actions
+
+export const allotmentActions = {
+  // export const allotmentActions = () => {
+
+  // increaseAllotmentCount: () => set(
+  //   (state) => ({ allotmentCount: state.allotmentCount + 1 })
+  // ),
+  increaseAllotmentCount: (n = 1) => {
+    return (state) => state + n
+  },
+
+  // removeAllAllotments: () => set(
+  //   {
+  //     allotmentCount: 0,
+  //     allotments: []
+  //   }
+  // ),
+
+  // add a new current 'this' allotment
+  addAllotment: function () {
+
+    console.debug('%cAddAllotment [allotments] (before)', ccm1, allotmentStore.get("allotments"))
+
+    // create a new one
+    if (Object.keys(allotmentStore.get("allotment")).length === 0) {
+      allotmentStore.update("allotment", allotment())
+    }
+    // save + update old one
+    else {
+      // allotmentHistory (save existing before mutating, if not empty)
+      allotmentStore.update("allotments", [
+        allotmentStore.get("allotment"),
+        ...allotmentStore.get("allotments")
+      ])
+      console.debug('%cAddAllotment [allotments] (during)', ccm1, allotmentStore.get("allotments"))
+
+      // allotmentCount (example)
+      // allotmentStore.update("allotmentCount", allotmentStore.get("allotmentCount") + 1) // manual
+      allotmentStore.update("allotmentCount", allotmentStore.get("allotments").length) // automatic
+      // console.debug('%cAddAllotment {allotmentCount}', ccm3, allotmentStore.get("allotmentCount"))
+      // console.debug('%cAddAllotment [allotments]', ccm3, allotmentStore.get("allotments").length)
+
+      // allotmentCurrent (overwrite -- mutate)
+      allotmentStore.update("allotment", {
+        _id: newUUID(),
+        _ts: new Date().toISOString(),
+        name: 'ALLOTMENT 1',
+        layers: [],
+        activeLayer: {
+          name: 'LAYER 0',
+          data: {}
+        }
+      })
+    }
+    console.debug('%cAddAllotment {allotment}', ccm1, allotmentStore.get("allotment"))
+
+    // save the new one and the old ones
+    // allotmentHistory (save recently mutated)
+    allotmentStore.update("allotments", [
+      allotmentStore.get("allotment"),
+      ...allotmentStore.get("allotments")
+    ])
+    console.debug('%cAddAllotment [allotments] (after)', ccm1, allotmentStore.get("allotments"))
+
+    // allotmentCount (example)
+    // allotmentStore.update("allotmentCount", allotmentStore.get("allotmentCount") + 1) // manual
+    allotmentStore.update("allotmentCount", allotmentStore.get("allotments").length) // automatic
+    // console.debug('%cAddAllotment {allotmentCount}', ccm3, allotmentStore.get("allotmentCount"))
+    // console.debug('%cAddAllotment [allotments]', ccm3, allotmentStore.get("allotments").length)
+
+    // saveToDisk
+    // get().saveToDisk()
+    this.saveToDisk()
+    // loadFromDisk
+    // get().loadFromDisk()
+    this.loadFromDisk()
+
+    // console.debug('%cAddAllotment', ccm1, get().allotment)
+  },
+
+  saveAllotment: function () {
+    // saveToDisk
+    // get().saveToDisk()
+    this.saveToDisk()
+    // saveToDB (coming soon !!!)
+    // this.saveToDB()
+  },
+
+  // save data to browser local storage
+  saveToDisk: function () {
+    try {
+      localStorage.setItem(
+        'threed_allotmentHistory',
+        JSON.stringify({
+          subject: 'allotments',
+          payload: allotmentStore.get("allotments")
+        })
+      )
+      console.debug('%cSaveToDisk [allotments]', ccm1, allotmentStore.get("allotments"))
+      return true
+    } catch (err) {
+      console.debug('%cSaveToDisk [allotments] err', ccm2, err)
+      return false
+    }
+  },
+
+  // get data from browser local storage
+  loadFromDisk: function () {
+    try {
+      const query = JSON.parse(localStorage.getItem('threed_allotmentHistory'))
+      if (query) {
+        console.debug('%cLoadFromDisk [allotments] PAYLOAD?', ccm3, query)
+        const { payload } = query
+        console.debug('%cLoadFromDisk [allotments] PAYLOAD.PAYLOAD?', ccm3, payload)
+
+        if (payload) {
+          console.debug('%cLoadFromDisk [allotments]', ccm3, true) // payload
+
+          allotmentStore.update("allotments", [...payload])
+          console.debug('%cLoadFromDisk [allotments] (after)', ccm3, allotmentStore.get("allotments"))
+
+          allotmentStore.update("allotment", allotmentStore.get("allotments")[0])
+          console.debug('%cLoadFromDisk {allotment} (after)', ccm3, allotmentStore.get("allotment"))
+
+          return true // payload // string[]
+        }
+
+        else {
+          console.debug('%cLoadFromDisk [allotments] NO PAYLOAD?', ccm3, query)
+        }
+      }
+      else {
+        console.debug('%cLoadFromDisk [allotments] NOTHING TO LOAD', ccm3, query)
+      }
+      return false
+    } catch (err) {
+      console.debug('%cLoadFromDisk [allotments] err', ccm2, err)
+      return false
+    }
+  },
+
+  // get data from db via graphql
+  loadFromDB: async function (client) {
+    try {
+      // const _this = this
+      // console.debug('allotmentActions this', this)
+
+      const ALLOTMENTS = GetAllotments // .gql
+
+      const parameters = {
+        first: 10,
+        last: null,
+        after: null,
+        before: null
+      }
+
+      // const {
+      //   data,
+      //   loading,
+      //   error,
+      //   fetchMore,
+      //   refetch,
+      //   networkStatus
+      // } = useQuery(ALLOTMENTS, { parameters }, { client })
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      const query = await client.query({
+        query: ALLOTMENTS,
+        variables: { parameters }
+      })
+      // console.debug('QUERY RETURNED', query)
+      const { data, loading, error } = query
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      if (loading) {
+        return <div>loading...</div>
+      }
+
+      if (error) {
+        console.debug('%cLoadFromDB [allotments]: DATA RETURNED with error', error) // , data, loading, error
+        return <div>error.yoyoyo</div> // <div>{error}</div>
+      }
+
+      if (data) {
+        console.debug('%cLoadFromDB [allotments]: DATA RETURNED', ccm0, data, loading, error)
+
+        if (data.allotments?.edges?.length) {
+
+          // const payload = data.allotments.edges
+          const payload = data.allotments.edges.map(({ node }) => ( // allotmentId, id, uri, slug, title
+            // <div key={node.allotmentId}>
+            //   wp allotmentId: {node.allotmentId}<br />
+            //   gql id: {node.id}<br />
+            //   uri: {node.uri}<br />
+            //   slug: {node.slug}<br />
+            //   title: {node.title}<br />
+            // </div>
+            node
+          ))
+
+          // set state from db
+          allotmentStore.update("allotments", [...payload]) // nodes
+          console.debug('%cLoadFromDB [allotments] (after)', ccm3, allotmentStore.get("allotments"))
+
+          allotmentStore.update("allotmentDB", allotmentStore.get("allotments")[0]) // node
+          console.debug('%cLoadFromDB {allotmentDB}', ccm1, allotmentStore.get("allotmentDB"))
+
+          this.saveToDisk()
+
+          // allotmentCurrent (overwrite -- mutate)
+          allotmentStore.update("allotment", {
+            _id: newUUID(),
+            _ts: new Date().toISOString(),
+            name: 'ALLOTMENT: ' + allotmentStore.get("allotmentDB").title,
+            layers: [],
+            activeLayer: {
+              name: 'LAYER 0',
+              data: {}
+            },
+            // wp custom fields
+            data: allotmentStore.get("allotmentDB")
+          })
+          console.debug('%cLoadFromDB {allotment} (after)', ccm1, allotmentStore.get("allotment"))
+
+          allotmentStore.update("allotmentCountDB", allotmentStore.get("allotments").length)
+          console.debug('%cLoadFromDB allotmentCountDB', ccm1, allotmentStore.get("allotmentCountDB"))
+
+          return <div>true</div> // payload // string[]
+        }
+
+        else {
+          console.debug('%cLoadFromDB [allotments]: NO data.allotments.edges', ccm3, data)
+          return <div>error.heyheyhey</div>
+        }
+      }
+
+      console.debug('%cLoadFromDB [allotments]: OTHER ERROR', ccm3, data)
+      return <div>false</div>
+
+    } catch (err) {
+      console.debug('%cLoadFromDB [allotments]: DATA RETURNED with err', ccm3, err) // , data, loading, error
+      return <div>error.errerrerr</div>
+    }
+  }
+
+} // allotmentActions
+
+// ==============================================================
+
+// ==============================================================
+
+// ==============================================================
+// Bed
+
+const bed = (bedName = 'BED 0', layerName = 'LAYER 0') => ({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
+  name: bedName,
+  layers: [],
+  activeLayer: {
+    name: layerName,
+    data: {}
+  },
+  // wp custom fields
+  data: {}, // bedStore.get("bedDB")
+  //
+  //
+  //
+})
+
+// =========================================================
+// ** Bed Store
+
+export const bedStore = create({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
+  bedCount: 0, // example counter
+  beds: [], // working beds
+  bed: {}, // the current working bed, aka 'this' bed
+
+  // track current + history
+  // bedCurrent: ^this,
+  bedHistory: [], // from local storage
+
+  // track payload from db
+  bedCountDB: 0, // example counter
+  bedsDB: [], // from db (mysql wordpress via graphql)
+  bedDB: {}, // pre-this bed, ready to be mapped to 'this' bed
+
+}) // bedStore
+
+// =========================================================
+// ** Bed Actions
+
+export const bedActions = {
+  // export const bedActions = () => {
+
+  // increaseBedCount: () => set(
+  //   (state) => ({ bedCount: state.bedCount + 1 })
+  // ),
+  increaseBedCount: (n = 1) => {
+    return (state) => state + n
+  },
+
+  // removeAllBeds: () => set(
+  //   {
+  //     bedCount: 0,
+  //     beds: []
+  //   }
+  // ),
+
+  // add a new current 'this' bed
+  addBed: function () {
+
+    console.debug('%cAddBed [beds] (before)', ccm1, bedStore.get("beds"))
+
+    // create a new one
+    if (Object.keys(bedStore.get("bed")).length === 0) {
+      bedStore.update("bed", bed())
+    }
+    // save + update old one
+    else {
+      // bedHistory (save existing before mutating, if not empty)
+      bedStore.update("beds", [
+        bedStore.get("bed"),
+        ...bedStore.get("beds")
+      ])
+      console.debug('%cAddBed [beds] (during)', ccm1, bedStore.get("beds"))
+
+      // bedCount (example)
+      // bedStore.update("bedCount", bedStore.get("bedCount") + 1) // manual
+      bedStore.update("bedCount", bedStore.get("beds").length) // automatic
+      // console.debug('%cAddBed {bedCount}', ccm3, bedStore.get("bedCount"))
+      // console.debug('%cAddBed [beds]', ccm3, bedStore.get("beds").length)
+
+      // bedCurrent (overwrite -- mutate)
+      bedStore.update("bed", {
+        _id: newUUID(),
+        _ts: new Date().toISOString(),
+        name: 'BED 1',
+        layers: [],
+        activeLayer: {
+          name: 'LAYER 0',
+          data: {}
+        }
+      })
+    }
+    console.debug('%cAddBed {bed}', ccm1, bedStore.get("bed"))
+
+    // save the new one and the old ones
+    // bedHistory (save recently mutated)
+    bedStore.update("beds", [
+      bedStore.get("bed"),
+      ...bedStore.get("beds")
+    ])
+    console.debug('%cAddBed [beds] (after)', ccm1, bedStore.get("beds"))
+
+    // bedCount (example)
+    // bedStore.update("bedCount", bedStore.get("bedCount") + 1) // manual
+    bedStore.update("bedCount", bedStore.get("beds").length) // automatic
+    // console.debug('%cAddBed {bedCount}', ccm3, bedStore.get("bedCount"))
+    // console.debug('%cAddBed [beds]', ccm3, bedStore.get("beds").length)
+
+    // saveToDisk
+    // get().saveToDisk()
+    this.saveToDisk()
+    // loadFromDisk
+    // get().loadFromDisk()
+    this.loadFromDisk()
+
+    // console.debug('%cAddBed', ccm1, get().bed)
+  },
+
+  saveBed: function () {
+    // saveToDisk
+    // get().saveToDisk()
+    this.saveToDisk()
+    // saveToDB (coming soon !!!)
+    // this.saveToDB()
+  },
+
+  // save data to browser local storage
+  saveToDisk: function () {
+    try {
+      localStorage.setItem(
+        'threed_bedHistory',
+        JSON.stringify({
+          subject: 'beds',
+          payload: bedStore.get("beds")
+        })
+      )
+      console.debug('%cSaveToDisk [beds]', ccm1, bedStore.get("beds"))
+      return true
+    } catch (err) {
+      console.debug('%cSaveToDisk [beds] err', ccm2, err)
+      return false
+    }
+  },
+
+  // get data from browser local storage
+  loadFromDisk: function () {
+    try {
+      const query = JSON.parse(localStorage.getItem('threed_bedHistory'))
+      if (query) {
+        console.debug('%cLoadFromDisk [beds] PAYLOADscene?', ccm3, query)
+        const { payload } = query
+        console.debug('%cLoadFromDisk [beds] PAYLOAD.PAYLOAD?', ccm3, payload)
+
+        if (payload) {
+          console.debug('%cLoadFromDisk [beds]', ccm3, true) // payload
+
+          bedStore.update("beds", [...payload])
+          console.debug('%cLoadFromDisk [beds] (after)', ccm3, bedStore.get("beds"))
+
+          bedStore.update("bed", bedStore.get("beds")[0])
+          console.debug('%cLoadFromDisk {bed} (after)', ccm3, bedStore.get("bed"))
+
+          return true // payload // string[]
+        }
+
+        else {
+          console.debug('%cLoadFromDisk [beds] NO PAYLOAD?', ccm3, query)
+        }
+      }
+      else {
+        console.debug('%cLoadFromDisk [beds] NOTHING TO LOAD', ccm3, query)
+      }
+      return false
+    } catch (err) {
+      console.debug('%cLoadFromDisk [beds] err', ccm2, err)
+      return false
+    }
+  },
+
+  // get data from db via graphql
+  loadFromDB: async function (client) {
+    try {
+      // const _this = this
+      // console.debug('bedActions this', this)
+
+      const BEDS = GetBeds // .gql
+
+      const parameters = {
+        first: 10,
+        last: null,
+        after: null,
+        before: null
+      }
+
+      // const {
+      //   data,
+      //   loading,
+      //   error,
+      //   fetchMore,
+      //   refetch,
+      //   networkStatus
+      // } = useQuery(BEDS, { parameters }, { client })
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      const query = await client.query({
+        query: BEDS,
+        variables: { parameters }
+      })
+      // console.debug('QUERY RETURNED', query)
+      const { data, loading, error } = query
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      if (loading) {
+        return <div>loading...</div>
+      }
+
+      if (error) {
+        console.debug('%cLoadFromDB [beds]: DATA RETURNED with error', error) // , data, loading, error
+        return <div>error.yoyoyo</div> // <div>{error}</div>
+      }
+
+      if (data) {
+        console.debug('%cLoadFromDB [beds]: DATA RETURNED', ccm0, data, loading, error)
+
+        if (data.beds?.edges?.length) {
+
+          // const payload = data.beds.edges
+          const payload = data.beds.edges.map(({ node }) => ( // bedId, id, uri, slug, title
+            // <div key={node.bedId}>
+            //   wp bedId: {node.bedId}<br />
+            //   gql id: {node.id}<br />
+            //   uri: {node.uri}<br />
+            //   slug: {node.slug}<br />
+            //   title: {node.title}<br />
+            // </div>
+            node
+          ))
+
+          // set state from db
+          bedStore.update("beds", [...payload]) // nodes
+          console.debug('%cLoadFromDB [beds] (after)', ccm3, bedStore.get("beds"))
+
+          bedStore.update("bedDB", bedStore.get("beds")[0]) // node
+          console.debug('%cLoadFromDB {bedDB}', ccm1, bedStore.get("bedDB"))
+
+          this.saveToDisk()
+
+          // bedCurrent (overwrite -- mutate)
+          bedStore.update("bed", {
+            _id: newUUID(),
+            _ts: new Date().toISOString(),
+            name: 'BED: ' + bedStore.get("bedDB").title,
+            layers: [],
+            activeLayer: {
+              name: 'LAYER 0',
+              data: {}
+            },
+            // wp custom fields
+            data: bedStore.get("bedDB")
+          })
+          console.debug('%cLoadFromDB {bed} (after)', ccm1, bedStore.get("bed"))
+
+          bedStore.update("bedCountDB", bedStore.get("beds").length)
+          console.debug('%cLoadFromDB bedCountDB', ccm1, bedStore.get("bedCountDB"))
+
+          return <div>true</div> // payload // string[]
+        }
+
+        else {
+          console.debug('%cLoadFromDB [beds]: NO data.beds.edges', ccm3, data)
+          return <div>error.heyheyhey</div>
+        }
+      }
+
+      console.debug('%cLoadFromDB [beds]: OTHER ERROR', ccm3, data)
+      return <div>false</div>
+
+    } catch (err) {
+      console.debug('%cLoadFromDB [beds]: DATA RETURNED with err', ccm3, err) // , data, loading, error
+      return <div>error.errerrerr</div>
+    }
+  }
+
+} // bedActions
+
+// ==============================================================
+
+// ==============================================================
+
+// ==============================================================
+// Plant
+
+const plant = (plantName = 'PLANT 0', layerName = 'LAYER 0') => ({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
+  name: plantName,
+  layers: [],
+  activeLayer: {
+    name: layerName,
+    data: {}
+  },
+  // wp custom fields
+  data: {}, // plantStore.get("plantDB")
+  //
+  //
+  //
+})
+
+// =========================================================
+// ** Plant Store
+
+export const plantStore = create({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
+  plantCount: 0, // example counter
+  plants: [], // working plants
+  plant: {}, // the current working plant, aka 'this' plant
+
+  // track current + history
+  // plantCurrent: ^this,
+  plantHistory: [], // from local storage
+
+  // track payload from db
+  plantCountDB: 0, // example counter
+  plantsDB: [], // from db (mysql wordpress via graphql)
+  plantDB: {}, // pre-this plant, ready to be mapped to 'this' plant
+
+}) // plantStore
+
+// =========================================================
+// ** Plant Actions
+
+export const plantActions = {
+  // export const plantActions = () => {
+
+  // increasePlantCount: () => set(
+  //   (state) => ({ plantCount: state.plantCount + 1 })
+  // ),
+  increasePlantCount: (n = 1) => {
+    return (state) => state + n
+  },
+
+  // removeAllPlants: () => set(
+  //   {
+  //     plantCount: 0,
+  //     plants: []
+  //   }
+  // ),
+
+  // add a new current 'this' plant
+  addPlant: function () {
+
+    console.debug('%cAddPlant [plants] (before)', ccm1, plantStore.get("plants"))
+
+    // create a new one
+    if (Object.keys(plantStore.get("plant")).length === 0) {
+      plantStore.update("plant", plant())
+    }
+    // save + update old one
+    else {
+      // plantHistory (save existing before mutating, if not empty)
+      plantStore.update("plants", [
+        plantStore.get("plant"),
+        ...plantStore.get("plants")
+      ])
+      console.debug('%cAddPlant [plants] (during)', ccm1, plantStore.get("plants"))
+
+      // plantCount (example)
+      // plantStore.update("plantCount", plantStore.get("plantCount") + 1) // manual
+      plantStore.update("plantCount", plantStore.get("plants").length) // automatic
+      // console.debug('%cAddPlant {plantCount}', ccm3, plantStore.get("plantCount"))
+      // console.debug('%cAddPlant [plants]', ccm3, plantStore.get("plants").length)
+
+      // plantCurrent (overwrite -- mutate)
+      plantStore.update("plant", {
+        _id: newUUID(),
+        _ts: new Date().toISOString(),
+        name: 'PLANT 1',
+        layers: [],
+        activeLayer: {
+          name: 'LAYER 0',
+          data: {}
+        }
+      })
+    }
+    console.debug('%cAddPlant {plant}', ccm1, plantStore.get("plant"))
+
+    // save the new one and the old ones
+    // plantHistory (save recently mutated)
+    plantStore.update("plants", [
+      plantStore.get("plant"),
+      ...plantStore.get("plants")
+    ])
+    console.debug('%cAddPlant [plants] (after)', ccm1, plantStore.get("plants"))
+
+    // plantCount (example)
+    // plantStore.update("plantCount", plantStore.get("plantCount") + 1) // manual
+    plantStore.update("plantCount", plantStore.get("plants").length) // automatic
+    // console.debug('%cAddPlant {plantCount}', ccm3, plantStore.get("plantCount"))
+    // console.debug('%cAddPlant [plants]', ccm3, plantStore.get("plants").length)
+
+    // saveToDisk
+    // get().saveToDisk()
+    this.saveToDisk()
+    // loadFromDisk
+    // get().loadFromDisk()
+    this.loadFromDisk()
+
+    // console.debug('%cAddPlant', ccm1, get().plant)
+  },
+
+  savePlant: function () {
+    // saveToDisk
+    // get().saveToDisk()
+    this.saveToDisk()
+    // saveToDB (coming soon !!!)
+    // this.saveToDB()
+  },
+
+  // save data to browser local storage
+  saveToDisk: function () {
+    try {
+      localStorage.setItem(
+        'threed_plantHistory',
+        JSON.stringify({
+          subject: 'plants',
+          payload: plantStore.get("plants")
+        })
+      )
+      console.debug('%cSaveToDisk [plants]', ccm1, plantStore.get("plants"))
+      return true
+    } catch (err) {
+      console.debug('%cSaveToDisk [plants] err', ccm2, err)
+      return false
+    }
+  },
+
+  // get data from browser local storage
+  loadFromDisk: function () {
+    try {
+      const query = JSON.parse(localStorage.getItem('threed_plantHistory'))
+      if (query) {
+        console.debug('%cLoadFromDisk [plants] PAYLOAD?', ccm3, query)
+        const { payload } = query
+        console.debug('%cLoadFromDisk [plants] PAYLOAD.PAYLOAD?', ccm3, payload)
+
+        if (payload) {
+          console.debug('%cLoadFromDisk [plants]', ccm3, true) // payload
+
+          plantStore.update("plants", [...payload])
+          console.debug('%cLoadFromDisk [plants] (after)', ccm3, plantStore.get("plants"))
+
+          plantStore.update("plant", plantStore.get("plants")[0])
+          console.debug('%cLoadFromDisk {plant} (after)', ccm3, plantStore.get("plant"))
+
+          return true // payload // string[]
+        }
+
+        else {
+          console.debug('%cLoadFromDisk [plants] NO PAYLOAD?', ccm3, query)
+        }
+      }
+      else {
+        console.debug('%cLoadFromDisk [plants] NOTHING TO LOAD', ccm3, query)
+      }
+      return false
+    } catch (err) {
+      console.debug('%cLoadFromDisk [plants] err', ccm2, err)
+      return false
+    }
+  },
+
+  // get data from db via graphql
+  loadFromDB: async function (client) {
+    try {
+      // const _this = this
+      // console.debug('plantActions this', this)
+
+      const PLANTS = GetPlants // .gql
+
+      const parameters = {
+        first: 10,
+        last: null,
+        after: null,
+        before: null
+      }
+
+      // const {
+      //   data,
+      //   loading,
+      //   error,
+      //   fetchMore,
+      //   refetch,
+      //   networkStatus
+      // } = useQuery(PLANTS, { parameters }, { client })
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      const query = await client.query({
+        query: PLANTS,
+        variables: { parameters }
+      })
+      // console.debug('QUERY RETURNED', query)
+      const { data, loading, error } = query
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      if (loading) {
+        return <div>loading...</div>
+      }
+
+      if (error) {
+        console.debug('%cLoadFromDB [plants]: DATA RETURNED with error', error) // , data, loading, error
+        return <div>error.yoyoyo</div> // <div>{error}</div>
+      }
+
+      if (data) {
+        console.debug('%cLoadFromDB [plants]: DATA RETURNED', ccm0, data, loading, error)
+
+        if (data.plants?.edges?.length) {
+
+          // const payload = data.plants.edges
+          const payload = data.plants.edges.map(({ node }) => ( // plantId, id, uri, slug, title
+            // <div key={node.plantId}>
+            //   wp plantId: {node.plantId}<br />
+            //   gql id: {node.id}<br />
+            //   uri: {node.uri}<br />
+            //   slug: {node.slug}<br />
+            //   title: {node.title}<br />
+            // </div>
+            node
+          ))
+
+          // set state from db
+          plantStore.update("plants", [...payload]) // nodes
+          console.debug('%cLoadFromDB [plants] (after)', ccm3, plantStore.get("plants"))
+
+          plantStore.update("plantDB", plantStore.get("plants")[0]) // node
+          console.debug('%cLoadFromDB {plantDB}', ccm1, plantStore.get("plantDB"))
+
+          this.saveToDisk()
+
+          // plantCurrent (overwrite -- mutate)
+          plantStore.update("plant", {
+            _id: newUUID(),
+            _ts: new Date().toISOString(),
+            name: 'PLANT: ' + plantStore.get("plantDB").title,
+            layers: [],
+            activeLayer: {
+              name: 'LAYER 0',
+              data: {}
+            },
+            // wp custom fields
+            data: plantStore.get("plantDB")
+          })
+          console.debug('%cLoadFromDB {plant} (after)', ccm1, plantStore.get("plant"))
+
+          plantStore.update("plantCountDB", plantStore.get("plants").length)
+          console.debug('%cLoadFromDB plantCountDB', ccm1, plantStore.get("plantCountDB"))
+
+          return <div>true</div> // payload // string[]
+        }
+
+        else {
+          console.debug('%cLoadFromDB [plants]: NO data.plants.edges', ccm3, data)
+          return <div>error.heyheyhey</div>
+        }
+      }
+
+      console.debug('%cLoadFromDB [plants]: OTHER ERROR', ccm3, data)
+      return <div>false</div>
+
+    } catch (err) {
+      console.debug('%cLoadFromDB [plants]: DATA RETURNED with err', ccm3, err) // , data, loading, error
+      return <div>error.errerrerr</div>
+    }
+  }
+
+} // plantActions
+
+// ==============================================================
+
+// ==============================================================
+
+// ==============================================================
+// PlantingPlan
+
+const plantingPlan = (plantingPlanName = 'PLANTINGPLAN 0', layerName = 'LAYER 0') => ({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
+  name: plantingPlanName,
+  layers: [],
+  activeLayer: {
+    name: layerName,
+    data: {}
+  },
+  // wp custom fields
+  data: {}, // plantingPlanStore.get("plantingPlanDB")
+  //
+  //
+  //
+})
+
+// =========================================================
+// ** PlantingPlan Store
+
+export const plantingPlanStore = create({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
+  plantingPlanCount: 0, // example counter
+  plantingPlans: [], // working plantingPlans
+  plantingPlan: {}, // the current working plantingPlan, aka 'this' plantingPlan
+
+  // track current + history
+  // plantingPlanCurrent: ^this,
+  plantingPlanHistory: [], // from local storage
+
+  // track payload from db
+  plantingPlanCountDB: 0, // example counter
+  plantingPlansDB: [], // from db (mysql wordpress via graphql)
+  plantingPlanDB: {}, // pre-this plantingPlan, ready to be mapped to 'this' plantingPlan
+
+}) // plantingPlanStore
+
+// =========================================================
+// ** PlantingPlan Actions
+
+export const plantingPlanActions = {
+  // export const plantingPlanActions = () => {
+
+  // increasePlantingPlanCount: () => set(
+  //   (state) => ({ plantingPlanCount: state.plantingPlanCount + 1 })
+  // ),
+  increasePlantingPlanCount: (n = 1) => {
+    return (state) => state + n
+  },
+
+  // removeAllPlantingPlans: () => set(
+  //   {
+  //     plantingPlanCount: 0,
+  //     plantingPlans: []
+  //   }
+  // ),
+
+  // add a new current 'this' plantingPlan
+  addPlantingPlan: function () {
+
+    console.debug('%cAddPlantingPlan [plantingPlans] (before)', ccm1, plantingPlanStore.get("plantingPlans"))
+
+    // create a new one
+    if (Object.keys(plantingPlanStore.get("plantingPlan")).length === 0) {
+      plantingPlanStore.update("plantingPlan", plantingPlan())
+    }
+    // save + update old one
+    else {
+      // plantingPlanHistory (save existing before mutating, if not empty)
+      plantingPlanStore.update("plantingPlans", [
+        plantingPlanStore.get("plantingPlan"),
+        ...plantingPlanStore.get("plantingPlans")
+      ])
+      console.debug('%cAddPlantingPlan [plantingPlans] (during)', ccm1, plantingPlanStore.get("plantingPlans"))
+
+      // plantingPlanCount (example)
+      // plantingPlanStore.update("plantingPlanCount", plantingPlanStore.get("plantingPlanCount") + 1) // manual
+      plantingPlanStore.update("plantingPlanCount", plantingPlanStore.get("plantingPlans").length) // automatic
+      // console.debug('%cAddPlantingPlan {plantingPlanCount}', ccm3, plantingPlanStore.get("plantingPlanCount"))
+      // console.debug('%cAddPlantingPlan [plantingPlans]', ccm3, plantingPlanStore.get("plantingPlans").length)
+
+      // plantingPlanCurrent (overwrite -- mutate)
+      plantingPlanStore.update("plantingPlan", {
+        _id: newUUID(),
+        _ts: new Date().toISOString(),
+        name: 'PLANTINGPLAN 1',
+        layers: [],
+        activeLayer: {
+          name: 'LAYER 0',
+          data: {}
+        }
+      })
+    }
+    console.debug('%cAddPlantingPlan {plantingPlan}', ccm1, plantingPlanStore.get("plantingPlan"))
+
+    // save the new one and the old ones
+    // plantingPlanHistory (save recently mutated)
+    plantingPlanStore.update("plantingPlans", [
+      plantingPlanStore.get("plantingPlan"),
+      ...plantingPlanStore.get("plantingPlans")
+    ])
+    console.debug('%cAddPlantingPlan [plantingPlans] (after)', ccm1, plantingPlanStore.get("plantingPlans"))
+
+    // plantingPlanCount (example)
+    // plantingPlanStore.update("plantingPlanCount", plantingPlanStore.get("plantingPlanCount") + 1) // manual
+    plantingPlanStore.update("plantingPlanCount", plantingPlanStore.get("plantingPlans").length) // automatic
+    // console.debug('%cAddPlantingPlan {plantingPlanCount}', ccm3, plantingPlanStore.get("plantingPlanCount"))
+    // console.debug('%cAddPlantingPlan [plantingPlans]', ccm3, plantingPlanStore.get("plantingPlans").length)
+
+    // saveToDisk
+    // get().saveToDisk()
+    this.saveToDisk()
+    // loadFromDisk
+    // get().loadFromDisk()
+    this.loadFromDisk()
+
+    // console.debug('%cAddPlantingPlan', ccm1, get().plantingPlan)
+  },
+
+  savePlantingPlan: function () {
+    // saveToDisk
+    // get().saveToDisk()
+    this.saveToDisk()
+    // saveToDB (coming soon !!!)
+    // this.saveToDB()
+  },
+
+  // save data to browser local storage
+  saveToDisk: function () {
+    try {
+      localStorage.setItem(
+        'threed_plantingPlanHistory',
+        JSON.stringify({
+          subject: 'plantingPlans',
+          payload: plantingPlanStore.get("plantingPlans")
+        })
+      )
+      console.debug('%cSaveToDisk [plantingPlans]', ccm1, plantingPlanStore.get("plantingPlans"))
+      return true
+    } catch (err) {
+      console.debug('%cSaveToDisk [plantingPlans] err', ccm2, err)
+      return false
+    }
+  },
+
+  // get data from browser local storage
+  loadFromDisk: function () {
+    try {
+      const query = JSON.parse(localStorage.getItem('threed_plantingPlanHistory'))
+      if (query) {
+        console.debug('%cLoadFromDisk [plantingPlans] PAYLOAD?', ccm3, query)
+        const { payload } = query
+        console.debug('%cLoadFromDisk [plantingPlans] PAYLOAD.PAYLOAD?', ccm3, payload)
+
+        if (payload) {
+          console.debug('%cLoadFromDisk [plantingPlans]', ccm3, true) // payload
+
+          plantingPlanStore.update("plantingPlans", [...payload])
+          console.debug('%cLoadFromDisk [plantingPlans] (after)', ccm3, plantingPlanStore.get("plantingPlans"))
+
+          plantingPlanStore.update("plantingPlan", plantingPlanStore.get("plantingPlans")[0])
+          console.debug('%cLoadFromDisk {plantingPlan} (after)', ccm3, plantingPlanStore.get("plantingPlan"))
+
+          return true // payload // string[]
+        }
+
+        else {
+          console.debug('%cLoadFromDisk [plantingPlans] NO PAYLOAD?', ccm3, query)
+        }
+      }
+      else {
+        console.debug('%cLoadFromDisk [plantingPlans] NOTHING TO LOAD', ccm3, query)
+      }
+      return false
+    } catch (err) {
+      console.debug('%cLoadFromDisk [plantingPlans] err', ccm2, err)
+      return false
+    }
+  },
+
+  // get data from db via graphql
+  loadFromDB: async function (client) {
+    try {
+      // const _this = this
+      // console.debug('plantingPlanActions this', this)
+
+      const PLANTINGPLANS = GetPlantingPlans // .gql
+
+      const parameters = {
+        first: 10,
+        last: null,
+        after: null,
+        before: null
+      }
+
+      // const {
+      //   data,
+      //   loading,
+      //   error,
+      //   fetchMore,
+      //   refetch,
+      //   networkStatus
+      // } = useQuery(PLANTINGPLANS, { parameters }, { client })
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      const query = await client.query({
+        query: PLANTINGPLANS,
+        variables: { parameters }
+      })
+      // console.debug('QUERY RETURNED', query)
+      const { data, loading, error } = query
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      if (loading) {
+        return <div>loading...</div>
+      }
+
+      if (error) {
+        console.debug('%cLoadFromDB [plantingPlans]: DATA RETURNED with error', error) // , data, loading, error
+        return <div>error.yoyoyo</div> // <div>{error}</div>
+      }
+
+      if (data) {
+        console.debug('%cLoadFromDB [plantingPlans]: DATA RETURNED', ccm0, data, loading, error)
+
+        if (data.plantingPlans?.edges?.length) {
+
+          // const payload = data.plantingPlans.edges
+          const payload = data.plantingPlans.edges.map(({ node }) => ( // plantingPlanId, id, uri, slug, title
+            // <div key={node.plantingPlanId}>
+            //   wp plantingPlanId: {node.plantingPlanId}<br />
+            //   gql id: {node.id}<br />
+            //   uri: {node.uri}<br />
+            //   slug: {node.slug}<br />
+            //   title: {node.title}<br />
+            // </div>
+            node
+          ))
+
+          // set state from db
+          plantingPlanStore.update("plantingPlans", [...payload]) // nodes
+          console.debug('%cLoadFromDB [plantingPlans] (after)', ccm3, plantingPlanStore.get("plantingPlans"))
+
+          plantingPlanStore.update("plantingPlanDB", plantingPlanStore.get("plantingPlans")[0]) // node
+          console.debug('%cLoadFromDB {plantingPlanDB}', ccm1, plantingPlanStore.get("plantingPlanDB"))
+
+          this.saveToDisk()
+
+          // plantingPlanCurrent (overwrite -- mutate)
+          plantingPlanStore.update("plantingPlan", {
+            _id: newUUID(),
+            _ts: new Date().toISOString(),
+            name: 'PLANTINGPLAN: ' + plantingPlanStore.get("plantingPlanDB").title,
+            layers: [],
+            activeLayer: {
+              name: 'LAYER 0',
+              data: {}
+            },
+            // wp custom fields
+            data: plantingPlanStore.get("plantingPlanDB")
+          })
+          console.debug('%cLoadFromDB {plantingPlan} (after)', ccm1, plantingPlanStore.get("plantingPlan"))
+
+          plantingPlanStore.update("plantingPlanCountDB", plantingPlanStore.get("plantingPlans").length)
+          console.debug('%cLoadFromDB plantingPlanCountDB', ccm1, plantingPlanStore.get("plantingPlanCountDB"))
+
+          return <div>true</div> // payload // string[]
+        }
+
+        else {
+          console.debug('%cLoadFromDB [plantingPlans]: NO data.plantingPlans.edges', ccm3, data)
+          return <div>error.heyheyhey</div>
+        }
+      }
+
+      console.debug('%cLoadFromDB [plantingPlans]: OTHER ERROR', ccm3, data)
+      return <div>false</div>
+
+    } catch (err) {
+      console.debug('%cLoadFromDB [plantingPlans]: DATA RETURNED with err', ccm3, err) // , data, loading, error
+      return <div>error.errerrerr</div>
+    }
+  }
+
+} // plantingPlanActions
+
+// ==============================================================
+
+// ==============================================================
+
+// ==============================================================
 // EXPORT STORES AS GROUP OBJECT 'useStore' (as a HOOK ??)
 
 // export const useStore = (sel) => useStoreImpl(sel, shallow)
 const useStore = {
-  threedStore,
-  threedActions,
-  projectStore,
-  projectActions,
-  planStore,
-  planActions,
-  fileStore,
-  fileActions,
-  bearStore,
-  bearActions,
-  modalStore,
-  modalActions,
-  sceneStore,
-  sceneActions,
+  threedStore, threedActions,
+  projectStore, projectActions,
+  planStore, planActions,
+  fileStore, fileActions,
+  bearStore, bearActions,
+  modalStore, modalActions,
+  sceneStore, sceneActions,
+  allotmentStore, allotmentActions,
+  bedStore, bedActions,
+  plantStore, plantActions,
+  plantingPlanStore, plantingPlanActions,
 }
 
 export { useStore }
