@@ -9,7 +9,6 @@ import produce from "immer"
 // ** UUID Imports
 import { v4 as newUUID } from "uuid"
 
-
 // ==========================================================
 // [MM] COLORFUL CONSOLE MESSAGES (ccm)
 const ccm0 = "color: white; font-size: 12px;"
@@ -18,10 +17,9 @@ const ccm2 = "color: red; font-size: 12px;"
 const ccm3 = "color: orange; font-size: 12px;"
 const ccm4 = "color: yellow; font-size: 12px;"
 const ccm5 = "color: blue; font-size: 12px;"
-console.log("%cThreeDGarden<FC>", ccm1)
+console.log("%cThreeDGarden<FC,R3F> zustand", ccm1)
 // console.log("%cWHOOPSIES", ccm2)
 // ==========================================================
-
 
 const useStoreImpl = create(() => {
   return {
