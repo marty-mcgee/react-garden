@@ -186,11 +186,8 @@ const {
 
 const ThreeDInfoPanel = () => {
 
-  // const threedCount = threedStore((state: any) => state.threedCount) // zustand
   const threedCount = threedStore.useStore("threedCount")
-  // const threeds = threedStore((state: any) => state.threeds) // zustand
   const threeds = threedStore.useStore("threeds")
-  // const threed = threedStore((state: any) => state.threed) // zustand
   const threed = threedStore.useStore("threed")
   // console.debug("%cThreeDInfoPanel: {threed}", ccm1, threed)
 
@@ -207,16 +204,11 @@ const ThreeDInfoPanel = () => {
 
 const ThreeDControlPanel = () => {
 
-  // const increaseThreeDCount = threedStore((state: any) => state.increaseThreeDCount) // zustand
   const increaseThreeDCount = () => threedStore.update("threedCount", threedActions.increaseThreeDCount())
 
-  // const addThreeD = threedStore((state: any) => state.addThreeD) // zustand
   const addThreeD = () => threedActions.addThreeD()
-  // const saveToDisk = threedActions((state: any) => state.saveToDisk) // zustand
   const saveToDisk = () => threedActions.saveToDisk()
-  // const loadFromDisk = threedActions((state: any) => state.loadFromDisk) // zustand
   const loadFromDisk = () => threedActions.loadFromDisk()
-  // const loadFromDB = threedActions((state: any) => state.loadFromDB) // zustand
   const loadFromDB = (client) => threedActions.loadFromDB(client)
 
   return (
@@ -224,11 +216,9 @@ const ThreeDControlPanel = () => {
       <Button onClick={addThreeD}>add threed</Button>
       <Button onClick={saveToDisk}>save to disk</Button>
       <Button onClick={loadFromDisk}>load from disk</Button>
-      {/* <Button onClick={loadFromDB}>load from db</Button> */}
       <ApolloConsumer>
         {
           client => (
-            // 'We have access to the client!' /* do stuff here */
             <Button onClick={() => loadFromDB(client)}>load from db</Button>
           )
         }
@@ -373,11 +363,8 @@ function BearControlPanel() {
 
 const SceneInfoPanel: ReactNode = (): JSX.Element => {
 
-  // const sceneCount = sceneStore((state: any) => state.sceneCount) // zustand
   const sceneCount = sceneStore.useStore("sceneCount")
-  // const scenes = sceneStore((state: any) => state.scenes) // zustand
   const scenes = sceneStore.useStore("scenes")
-  // const scene = sceneStore((state: any) => state.scene) // zustand
   const scene = sceneStore.useStore("scene")
   // console.debug("%cSceneInfoPanel: {scene}", ccm1, scene)
 
@@ -394,18 +381,11 @@ const SceneInfoPanel: ReactNode = (): JSX.Element => {
 
 const SceneControlPanel: ReactNode = (): JSX.Element => {
 
-  // console.debug("SceneControlPanel PROPS", props)
-
-  // const increaseSceneCount = sceneActions((state: any) => state.increaseSceneCount) // zustand
   const increaseSceneCount = () => sceneStore.update("sceneCount", sceneActions.increaseSceneCount())
 
-  // const addScene = sceneStore((state: any) => state.addScene) // zustand
   const addScene = () => sceneActions.addScene()
-  // const saveToDisk = sceneActions((state: any) => state.saveToDisk) // zustand
   const saveToDisk = () => sceneActions.saveToDisk()
-  // const loadFromDisk = sceneActions((state: any) => state.loadFromDisk) // zustand
   const loadFromDisk = () => sceneActions.loadFromDisk()
-  // const loadFromDB = sceneActions((state: any) => state.loadFromDB) // zustand
   const loadFromDB = (client) => sceneActions.loadFromDB(client)
 
   return (
@@ -413,11 +393,9 @@ const SceneControlPanel: ReactNode = (): JSX.Element => {
       <Button onClick={addScene}>add scene</Button>
       <Button onClick={saveToDisk}>save to disk</Button>
       <Button onClick={loadFromDisk}>load from disk</Button>
-      {/* <Button onClick={loadFromDB}>load from db</Button> */}
       <ApolloConsumer>
         {
           client => (
-            // 'We have access to the client!' /* do stuff here */
             <Button onClick={() => loadFromDB(client)}>load from db</Button>
           )
         }
@@ -432,11 +410,8 @@ const SceneControlPanel: ReactNode = (): JSX.Element => {
 
 const AllotmentInfoPanel: ReactNode = (): JSX.Element => {
 
-  // const allotmentCount = allotmentStore((state: any) => state.allotmentCount) // zustand
   const allotmentCount = allotmentStore.useStore("allotmentCount")
-  // const allotments = allotmentStore((state: any) => state.allotments) // zustand
   const allotments = allotmentStore.useStore("allotments")
-  // const allotment = allotmentStore((state: any) => state.allotment) // zustand
   const allotment = allotmentStore.useStore("allotment")
   // console.debug("%cAllotmentInfoPanel: {allotment}", ccm1, allotment)
 
@@ -453,18 +428,11 @@ const AllotmentInfoPanel: ReactNode = (): JSX.Element => {
 
 const AllotmentControlPanel: ReactNode = (): JSX.Element => {
 
-  // console.debug("AllotmentControlPanel PROPS", props)
-
-  // const increaseAllotmentCount = allotmentActions((state: any) => state.increaseAllotmentCount) // zustand
   const increaseAllotmentCount = () => allotmentStore.update("allotmentCount", allotmentActions.increaseAllotmentCount())
 
-  // const addAllotment = allotmentStore((state: any) => state.addAllotment) // zustand
   const addAllotment = () => allotmentActions.addAllotment()
-  // const saveToDisk = allotmentActions((state: any) => state.saveToDisk) // zustand
   const saveToDisk = () => allotmentActions.saveToDisk()
-  // const loadFromDisk = allotmentActions((state: any) => state.loadFromDisk) // zustand
   const loadFromDisk = () => allotmentActions.loadFromDisk()
-  // const loadFromDB = allotmentActions((state: any) => state.loadFromDB) // zustand
   const loadFromDB = (client) => allotmentActions.loadFromDB(client)
 
   return (
@@ -472,11 +440,9 @@ const AllotmentControlPanel: ReactNode = (): JSX.Element => {
       <Button onClick={addAllotment}>add allotment</Button>
       <Button onClick={saveToDisk}>save to disk</Button>
       <Button onClick={loadFromDisk}>load from disk</Button>
-      {/* <Button onClick={loadFromDB}>load from db</Button> */}
       <ApolloConsumer>
         {
           client => (
-            // 'We have access to the client!' /* do stuff here */
             <Button onClick={() => loadFromDB(client)}>load from db</Button>
           )
         }
@@ -491,11 +457,8 @@ const AllotmentControlPanel: ReactNode = (): JSX.Element => {
 
 const BedInfoPanel: ReactNode = (): JSX.Element => {
 
-  // const bedCount = bedStore((state: any) => state.bedCount) // zustand
   const bedCount = bedStore.useStore("bedCount")
-  // const beds = bedStore((state: any) => state.beds) // zustand
   const beds = bedStore.useStore("beds")
-  // const bed = bedStore((state: any) => state.bed) // zustand
   const bed = bedStore.useStore("bed")
   // console.debug("%cBedInfoPanel: {bed}", ccm1, bed)
 
@@ -512,18 +475,11 @@ const BedInfoPanel: ReactNode = (): JSX.Element => {
 
 const BedControlPanel: ReactNode = (): JSX.Element => {
 
-  // console.debug("BedControlPanel PROPS", props)
-
-  // const increaseBedCount = bedActions((state: any) => state.increaseBedCount) // zustand
   const increaseBedCount = () => bedStore.update("bedCount", bedActions.increaseBedCount())
 
-  // const addBed = bedStore((state: any) => state.addBed) // zustand
   const addBed = () => bedActions.addBed()
-  // const saveToDisk = bedActions((state: any) => state.saveToDisk) // zustand
   const saveToDisk = () => bedActions.saveToDisk()
-  // const loadFromDisk = bedActions((state: any) => state.loadFromDisk) // zustand
   const loadFromDisk = () => bedActions.loadFromDisk()
-  // const loadFromDB = bedActions((state: any) => state.loadFromDB) // zustand
   const loadFromDB = (client) => bedActions.loadFromDB(client)
 
   return (
@@ -531,11 +487,9 @@ const BedControlPanel: ReactNode = (): JSX.Element => {
       <Button onClick={addBed}>add bed</Button>
       <Button onClick={saveToDisk}>save to disk</Button>
       <Button onClick={loadFromDisk}>load from disk</Button>
-      {/* <Button onClick={loadFromDB}>load from db</Button> */}
       <ApolloConsumer>
         {
           client => (
-            // 'We have access to the client!' /* do stuff here */
             <Button onClick={() => loadFromDB(client)}>load from db</Button>
           )
         }
@@ -550,11 +504,8 @@ const BedControlPanel: ReactNode = (): JSX.Element => {
 
 const PlantInfoPanel: ReactNode = (): JSX.Element => {
 
-  // const plantCount = plantStore((state: any) => state.plantCount) // zustand
   const plantCount = plantStore.useStore("plantCount")
-  // const plants = plantStore((state: any) => state.plants) // zustand
   const plants = plantStore.useStore("plants")
-  // const plant = plantStore((state: any) => state.plant) // zustand
   const plant = plantStore.useStore("plant")
   // console.debug("%cPlantInfoPanel: {plant}", ccm1, plant)
 
@@ -571,18 +522,11 @@ const PlantInfoPanel: ReactNode = (): JSX.Element => {
 
 const PlantControlPanel: ReactNode = (): JSX.Element => {
 
-  // console.debug("PlantControlPanel PROPS", props)
-
-  // const increasePlantCount = plantActions((state: any) => state.increasePlantCount) // zustand
   const increasePlantCount = () => plantStore.update("plantCount", plantActions.increasePlantCount())
 
-  // const addPlant = plantStore((state: any) => state.addPlant) // zustand
   const addPlant = () => plantActions.addPlant()
-  // const saveToDisk = plantActions((state: any) => state.saveToDisk) // zustand
   const saveToDisk = () => plantActions.saveToDisk()
-  // const loadFromDisk = plantActions((state: any) => state.loadFromDisk) // zustand
   const loadFromDisk = () => plantActions.loadFromDisk()
-  // const loadFromDB = plantActions((state: any) => state.loadFromDB) // zustand
   const loadFromDB = (client) => plantActions.loadFromDB(client)
 
   return (
@@ -590,11 +534,9 @@ const PlantControlPanel: ReactNode = (): JSX.Element => {
       <Button onClick={addPlant}>add plant</Button>
       <Button onClick={saveToDisk}>save to disk</Button>
       <Button onClick={loadFromDisk}>load from disk</Button>
-      {/* <Button onClick={loadFromDB}>load from db</Button> */}
       <ApolloConsumer>
         {
           client => (
-            // 'We have access to the client!' /* do stuff here */
             <Button onClick={() => loadFromDB(client)}>load from db</Button>
           )
         }
@@ -609,11 +551,8 @@ const PlantControlPanel: ReactNode = (): JSX.Element => {
 
 const PlantingPlanInfoPanel: ReactNode = (): JSX.Element => {
 
-  // const plantingPlanCount = plantingPlanStore((state: any) => state.plantingPlanCount) // zustand
   const plantingPlanCount = plantingPlanStore.useStore("plantingPlanCount")
-  // const plantingPlans = plantingPlanStore((state: any) => state.plantingPlans) // zustand
   const plantingPlans = plantingPlanStore.useStore("plantingPlans")
-  // const plantingPlan = plantingPlanStore((state: any) => state.plantingPlan) // zustand
   const plantingPlan = plantingPlanStore.useStore("plantingPlan")
   // console.debug("%cPlantingPlanInfoPanel: {plantingPlan}", ccm1, plantingPlan)
 
@@ -630,18 +569,11 @@ const PlantingPlanInfoPanel: ReactNode = (): JSX.Element => {
 
 const PlantingPlanControlPanel: ReactNode = (): JSX.Element => {
 
-  // console.debug("PlantingPlanControlPanel PROPS", props)
-
-  // const increasePlantingPlanCount = plantingPlanActions((state: any) => state.increasePlantingPlanCount) // zustand
   const increasePlantingPlanCount = () => plantingPlanStore.update("plantingPlanCount", plantingPlanActions.increasePlantingPlanCount())
 
-  // const addPlantingPlan = plantingPlanStore((state: any) => state.addPlantingPlan) // zustand
   const addPlantingPlan = () => plantingPlanActions.addPlantingPlan()
-  // const saveToDisk = plantingPlanActions((state: any) => state.saveToDisk) // zustand
   const saveToDisk = () => plantingPlanActions.saveToDisk()
-  // const loadFromDisk = plantingPlanActions((state: any) => state.loadFromDisk) // zustand
   const loadFromDisk = () => plantingPlanActions.loadFromDisk()
-  // const loadFromDB = plantingPlanActions((state: any) => state.loadFromDB) // zustand
   const loadFromDB = (client) => plantingPlanActions.loadFromDB(client)
 
   return (
@@ -649,11 +581,9 @@ const PlantingPlanControlPanel: ReactNode = (): JSX.Element => {
       <Button onClick={addPlantingPlan}>add plantingPlan</Button>
       <Button onClick={saveToDisk}>save to disk</Button>
       <Button onClick={loadFromDisk}>load from disk</Button>
-      {/* <Button onClick={loadFromDB}>load from db</Button> */}
       <ApolloConsumer>
         {
           client => (
-            // 'We have access to the client!' /* do stuff here */
             <Button onClick={() => loadFromDB(client)}>load from db</Button>
           )
         }

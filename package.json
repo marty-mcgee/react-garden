@@ -1,6 +1,6 @@
 {
   "name": "react-garden",
-  "version": "0.7.16-beta.1",
+  "version": "0.7.16-beta.2",
   "private": false,
   "description": "React + TypeScript + ThreeJS app using Material UI v5 on NextJS v12, Apollo Client v3, GraphQL + WordPress REST APIs, for ThreeD web development.. a part of the threed.ai code family.",
   "author": "Marty McGee <mcgee.marty@gmail.com> (https://github.com/marty-mcgee)",

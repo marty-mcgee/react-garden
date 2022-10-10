@@ -10,7 +10,7 @@ import GetPlants from '~/api/graphql/scripts/getPlants.gql'
 import GetPlantingPlans from '~/api/graphql/scripts/getPlantingPlans.gql'
 // import GetProducts from '~/api/graphql/scripts/getProducts.gql'
 
-// ** React Imports
+// ** React Imports (should not need in this script -- framework agnostic)
 // import React, { FunctionComponent, useState, useEffect, useRef, useMemo } from 'react'
 
 // ** UUID Imports
@@ -106,7 +106,7 @@ export const TestAC3Store = () => {
 }
 
 // ==============================================================
-// Store Actions (Common)
+// Store Actions (Common) TESTING !!!
 
 // const storeActions = (noun = "threed") => {
 const storeActions = {
