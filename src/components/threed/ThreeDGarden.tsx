@@ -21,23 +21,10 @@ import {
 
 // ** Apollo Client Store Imports
 // state management (instead of React.useState, Redux, Zustand)
+import { ApolloConsumer, useQuery, gql } from '@apollo/client'
 import {
-  // useStore,
-  threedStore,
-  threedActions,
-  projectStore,
-  projectActions,
-  planStore,
-  planActions,
-  fileStore,
-  fileActions,
-  bearStore,
-  bearActions,
-  modalStore,
-  modalActions,
-  sceneStore,
-  sceneActions,
-  TestAC3Store
+  useStore,
+  TestAC3Store,
 } from '~/stores'
 
 // ** Next Imports
@@ -165,9 +152,25 @@ const Toolbar = styled(MuiToolbar)(({ theme }) => ({
 // none yet, but soon
 
 // ==========================================================
-// STORES
+// FUNCTIONAL STORES
 // ==========================================================
-// moved to stores
+
+const {
+  threedStore,
+  threedActions,
+  projectStore,
+  projectActions,
+  planStore,
+  planActions,
+  fileStore,
+  fileActions,
+  bearStore,
+  bearActions,
+  modalStore,
+  modalActions,
+  sceneStore,
+  sceneActions
+} = useStore
 
 // ==========================================================
 // FUNCTIONAL NOUNS
@@ -207,14 +210,22 @@ const ThreeDControlPanel = () => {
   // const loadFromDisk = threedActions((state: any) => state.loadFromDisk) // zustand
   const loadFromDisk = () => threedActions.loadFromDisk()
   // const loadFromDB = threedActions((state: any) => state.loadFromDB) // zustand
-  const loadFromDB = () => threedActions.loadFromDB()
+  const loadFromDB = (client) => threedActions.loadFromDB(client)
 
   return (
     <Box>
       <Button onClick={addThreeD}>add threed</Button>
       <Button onClick={saveToDisk}>save to disk</Button>
       <Button onClick={loadFromDisk}>load from disk</Button>
-      <Button onClick={loadFromDB}>load from db</Button>
+      {/* <Button onClick={loadFromDB}>load from db</Button> */}
+      <ApolloConsumer>
+        {
+          client => (
+            // 'We have access to the client!' /* do stuff here */
+            <Button onClick={() => loadFromDB(client)}>load from db</Button>
+          )
+        }
+      </ApolloConsumer>
       {/* <Button onClick={increaseThreeDCount}>add to threed count</Button> */}
     </Box>
   )
@@ -374,7 +385,10 @@ function SceneInfoPanel() {
   )
 }
 
-function SceneControlPanel() {
+const SceneControlPanel: FunctionComponent = (): JSX.Element => {
+// function SceneControlPanel() {
+
+  // console.debug("SceneControlPanel PROPS", props)
 
   // const increaseSceneCount = sceneActions((state: any) => state.increaseSceneCount) // zustand
   const increaseSceneCount = () => sceneStore.update("sceneCount", sceneActions.increaseSceneCount())
@@ -386,14 +400,22 @@ function SceneControlPanel() {
   // const loadFromDisk = sceneActions((state: any) => state.loadFromDisk) // zustand
   const loadFromDisk = () => sceneActions.loadFromDisk()
   // const loadFromDB = sceneActions((state: any) => state.loadFromDB) // zustand
-  const loadFromDB = () => sceneActions.loadFromDB()
+  const loadFromDB = (client) => sceneActions.loadFromDB(client)
 
   return (
     <Box>
       <Button onClick={addScene}>add scene</Button>
       <Button onClick={saveToDisk}>save to disk</Button>
       <Button onClick={loadFromDisk}>load from disk</Button>
-      <Button onClick={loadFromDB}>load from db</Button>
+      {/* <Button onClick={loadFromDB}>load from db</Button> */}
+      <ApolloConsumer>
+        {
+          client => (
+            // 'We have access to the client!' /* do stuff here */
+            <Button onClick={() => loadFromDB(client)}>load from db</Button>
+          )
+        }
+      </ApolloConsumer>
       {/* <Button onClick={increaseSceneCount}>add to scene count</Button> */}
     </Box>
   )
@@ -3405,24 +3427,26 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
 
         {/* store access */}
         <div id="storeControlPanel" style={{ padding: "1rem" }}>
-
-          {/* React Three Fiber - View */}
+          {/*
+            React Three Fiber - View
+          */}
           <ReactThreeFiberView />
           <hr />
-          <TestAC3Store />
-          <hr />
+          {/*
+            ThreeD - View
+          */}
           <ThreeDInfoPanel />
           <ThreeDControlPanel />
           <hr />
-          {/* <ProjectInfoPanel />
-          <ProjectControlPanel />
-          <hr />
-          <PlanInfoPanel />
-          <PlanControlPanel />
-          <hr />
-          <FileInfoPanel />
-          <FileControlPanel />
-          <hr /> */}
+          {/* <ProjectInfoPanel /> */}
+          {/* <ProjectControlPanel /> */}
+          {/* <hr /> */}
+          {/* <PlanInfoPanel /> */}
+          {/* <PlanControlPanel /> */}
+          {/* <hr /> */}
+          {/* <FileInfoPanel /> */}
+          {/* <FileControlPanel /> */}
+          {/* <hr /> */}
           {/* <CharacterInfoPanel /> */}
           {/* <CharacterControlPanel /> */}
           {/* <hr /> */}
@@ -3452,6 +3476,8 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
           {/* <hr /> */}
           {/* <PlantingPlanInfoPanel /> */}
           {/* <PlantingPlanControlPanel /> */}
+          {/* <hr /> */}
+          {/* <TestAC3Store /> */}
           {/* <hr /> */}
         </div>
 

@@ -9,6 +9,9 @@ import GetScenes from '~/api/graphql/scripts/getScenes.gql'
 // import GetPlantingPlans from '~/api/graphql/scripts/getPlantingPlans.gql'
 // import GetProducts from '~/api/graphql/scripts/getProducts.gql'
 
+// ** React Imports
+// import React, { FunctionComponent, useState, useEffect, useRef, useMemo } from 'react'
+
 // ** UUID Imports
 import { v4 as newUUID } from 'uuid'
 
@@ -18,8 +21,11 @@ import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5 } from '~/@core/utils/console-colors
 // console.debug('%cWHOOPSIES', ccm2)
 
 console.debug('%cThreeDGarden<FC,R3F>: {stores}', ccm4)
+// console.debug('%cApolloClient', ccm3, ApolloClient)
+// console.debug('%cuseApolloClient', ccm3, useApolloClient)
+// console.debug('%cuseQuery', ccm3, useQuery)
 
-// ==========================================================
+// ==============================================================
 // TESTING
 // Apollo Client 3 (ac3)
 
@@ -28,15 +34,6 @@ export const ac3Store = create({
   modal: {
     open: true
   },
-  increase(n = 1) {
-    return (state) => state + n
-  },
-  toggle() {
-    return (state) => ({ open: !state.open })
-  },
-  toggle2: (open) => {
-    return (modal) => ({ ...modal, open })
-  }
 })
 // console.debug("ac3Store", ac3Store)
 // console.debug("ac3Store.get", ac3Store.get("counter"))
@@ -47,17 +44,30 @@ export const ac3Store = create({
 
 export const ac3Actions = {
   increase(n) {
-    return (state) => state + n
+    // return (state) => state + n
+    return (state) => {
+      console.debug("STATE increase", state)
+      return (state + n)
+    }
   },
   toggle() {
-    return (state) => ({ open: !state.open })
+    // return (state) => ({ open: !state.open })
+    return (state) => {
+      console.debug("STATE toggle", state)
+      return ({ open: !state.open })
+    }
   },
-  toggle2: (open) => {
-    return (modal) => ({ ...modal, open })
+  toggle2: (doOpen = true) => {
+    // return (state) => ({ ...state, open })
+    return (state) => {
+      console.debug("STATE toggle2", state)
+      const open = !state.open
+      return ({ ...state, open })
+    }
   }
 }
 
-const clientAC3 = new ApolloClient({
+const clientLocal = new ApolloClient({
   uri: "http://localhost:3000/",
   cache: new InMemoryCache({
     typePolicies: ac3Store.getTypePolicies()
@@ -71,8 +81,10 @@ export const TestAC3Store = () => {
       modal {
         open
       }
-    }
-  `, { client: clientAC3 })
+    }`,
+    // `client` here is your instantiated `ApolloClient` instance
+    { client: clientLocal }
+  )
 
   if (loading) { return <div>loading...</div> }
   if (error) { return <div>{JSON.stringify(error)}</div> }
@@ -89,7 +101,7 @@ export const TestAC3Store = () => {
       <button onClick={() => ac3Store.update("modal", ac3Actions.toggle())}>Toggle</button>
       <button onClick={() => ac3Store.update("modal", ac3Actions.toggle2())}>Toggle2</button>
     </div>
-  );
+  )
 }
 
 // ==============================================================
@@ -109,7 +121,8 @@ const threed = (threedName = 'THREED 0', layerName = 'LAYER 0') => ({
     name: layerName,
     data: {}
   },
-  // wp custom fields here
+  // wp custom fields
+  data: {}, // threedStore.get("threedDB")
   //
   //
   //
@@ -227,24 +240,30 @@ export const threedActions = {
 
   loadFromDisk: function () {
     try {
-      const payload = JSON.parse(localStorage.getItem('threed_threedHistory'))
-      if (payload) {
-        console.debug('%cLoadFromDisk [threeds] PAYLOAD?', ccm3, payload)
-        console.debug('%cLoadFromDisk [threeds] PAYLOAD.PAYLOAD?', ccm3, payload.payload)
-        if (payload.payload) {
+      const query = JSON.parse(localStorage.getItem('threed_threedHistory'))
+      if (query) {
+        console.debug('%cLoadFromDisk [threeds] PAYLOAD?', ccm3, query)
+        const { payload } = query
+        console.debug('%cLoadFromDisk [threeds] PAYLOAD.PAYLOAD?', ccm3, payload)
+
+        if (payload) {
           console.debug('%cLoadFromDisk [threeds]', ccm3, true) // payload
-          threedStore.update("threeds", [...payload.payload])
+
+          threedStore.update("threeds", [...payload])
           console.debug('%cLoadFromDisk [threeds] (after)', ccm3, threedStore.get("threeds"))
+
           threedStore.update("threed", threedStore.get("threeds")[0])
           console.debug('%cLoadFromDisk {threed} (after)', ccm3, threedStore.get("threed"))
+
           return true // payload // string[]
         }
+
         else {
-          console.debug('%cLoadFromDisk [threeds] NO PAYLOAD?', ccm3, payload)
+          console.debug('%cLoadFromDisk [threeds] NO PAYLOAD?', ccm3, query)
         }
       }
       else {
-        console.debug('%cLoadFromDisk [threeds] NOTHING TO LOAD', ccm3, payload)
+        console.debug('%cLoadFromDisk [threeds] NOTHING TO LOAD', ccm3, query)
       }
       return false
     } catch (err) {
@@ -254,7 +273,9 @@ export const threedActions = {
   },
 
   // get data from db via graphql
-  loadFromDB: async () => {
+  loadFromDB: async function (client) {
+    console.debug('%cLoadFromDB [threeds]: TODO', ccm2)
+    console.debug('%cLoadFromDB [threeds]: client', ccm3, client)
     return false
   }
 
@@ -666,11 +687,15 @@ const scene = (sceneName = 'SCENE 0', layerName = 'LAYER 0') => ({
     name: layerName,
     data: {}
   },
-  // wp custom fields here
+  // wp custom fields
+  data: {}, // sceneStore.get("sceneDB")
   //
   //
   //
 })
+
+// =========================================================
+// ** Scene Store
 
 export const sceneStore = create({
   _id: newUUID(),
@@ -684,12 +709,17 @@ export const sceneStore = create({
   sceneHistory: [], // from local storage
 
   // track payload from db
-  scenesDB: [], // from db (mysql wordpress via graphql)
   sceneCountDB: 0, // example counter
+  scenesDB: [], // from db (mysql wordpress via graphql)
+  sceneDB: {}, // pre-this scene, ready to be mapped to 'this' scene
 
 }) // sceneStore
 
+// =========================================================
+// ** Scene Actions
+
 export const sceneActions = {
+  // export const sceneActions = () => {
 
   // increaseSceneCount: () => set(
   //   (state) => ({ sceneCount: state.sceneCount + 1 })
@@ -775,6 +805,7 @@ export const sceneActions = {
     // this.saveToDB()
   },
 
+  // save data to browser local storage
   saveToDisk: function () {
     try {
       localStorage.setItem(
@@ -792,26 +823,33 @@ export const sceneActions = {
     }
   },
 
+  // get data from browser local storage
   loadFromDisk: function () {
     try {
-      const payload = JSON.parse(localStorage.getItem('threed_sceneHistory'))
-      if (payload) {
-        console.debug('%cLoadFromDisk [scenes] PAYLOAD?', ccm3, payload)
-        console.debug('%cLoadFromDisk [scenes] PAYLOAD.PAYLOAD?', ccm3, payload.payload)
-        if (payload.payload) {
+      const query = JSON.parse(localStorage.getItem('threed_sceneHistory'))
+      if (query) {
+        console.debug('%cLoadFromDisk [scenes] PAYLOAD?', ccm3, query)
+        const { payload } = query
+        console.debug('%cLoadFromDisk [scenes] PAYLOAD.PAYLOAD?', ccm3, payload)
+
+        if (payload) {
           console.debug('%cLoadFromDisk [scenes]', ccm3, true) // payload
-          sceneStore.update("scenes", [...payload.payload])
+
+          sceneStore.update("scenes", [...payload])
           console.debug('%cLoadFromDisk [scenes] (after)', ccm3, sceneStore.get("scenes"))
+
           sceneStore.update("scene", sceneStore.get("scenes")[0])
           console.debug('%cLoadFromDisk {scene} (after)', ccm3, sceneStore.get("scene"))
+
           return true // payload // string[]
         }
+
         else {
-          console.debug('%cLoadFromDisk [scenes] NO PAYLOAD?', ccm3, payload)
+          console.debug('%cLoadFromDisk [scenes] NO PAYLOAD?', ccm3, query)
         }
       }
       else {
-        console.debug('%cLoadFromDisk [scenes] NOTHING TO LOAD', ccm3, payload)
+        console.debug('%cLoadFromDisk [scenes] NOTHING TO LOAD', ccm3, query)
       }
       return false
     } catch (err) {
@@ -821,8 +859,11 @@ export const sceneActions = {
   },
 
   // get data from db via graphql
-  loadFromDB: async () => {
+  loadFromDB: async function (client) {
     try {
+      // const this = this
+      console.debug('this', this)
+
       const SCENES = GetScenes // .gql
 
       const parameters = {
@@ -839,25 +880,28 @@ export const sceneActions = {
       //   fetchMore,
       //   refetch,
       //   networkStatus
-      // } = useQuery(SCENES, { parameters })
-      // `client` here is your instantiated `ApolloClient` instance
-      const data = await ApolloClient.query({
+      // } = useQuery(SCENES, { parameters }, { client })
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      const query = await client.query({
         query: SCENES,
         variables: { parameters }
       })
+      // console.debug('QUERY RETURNED', query)
+      const { data, loading, error } = query
       // console.debug('DATA RETURNED', data, loading, error)
 
       if (loading) {
-        return false // <div>loading...</div>
+        return <div>loading...</div>
       }
 
       if (error) {
-        console.debug('%cLoadFromDB scenes: DATA RETURNED with error', error) // , data, loading, error
-        return false // <div>error.yoyoyo</div> // <div>{error}</div>
+        console.debug('%cLoadFromDB [scenes]: DATA RETURNED with error', error) // , data, loading, error
+        return <div>error.yoyoyo</div> // <div>{error}</div>
       }
 
       if (data) {
-        console.debug('%cLoadFromDB scenes: DATA RETURNED', ccm0, data, loading, error)
+        console.debug('%cLoadFromDB [scenes]: DATA RETURNED', ccm0, data, loading, error)
 
         if (data.scenes?.edges) {
 
@@ -874,43 +918,52 @@ export const sceneActions = {
           ))
 
           // set state from db
-          set(
-            (state) => (
-              {
-                scenesDB: payload,
-                sceneCountDB: state.scenesDB.length,
-              }
-            )
-          )
-          console.debug('%cLoadFromDB scenes', ccm1, true) // payload
+          // set(
+          //   (state) => (
+          //     {
+          //       scenesDB: payload,
+          //       sceneCountDB: state.scenesDB.length,
+          //     }
+          //   )
+          // )
+          sceneStore.update("scenes", [...payload]) // nodes
+          console.debug('%cLoadFromDB [scenes] (after)', ccm3, sceneStore.get("scenes"))
 
-          return true // payload // string[]
+
+          sceneStore.update("sceneDB", sceneStore.get("scenes")[0]) // node
+          console.debug('%cLoadFromDB {sceneDB}', ccm1, sceneStore.get("sceneDB"))
+
+          // sceneCurrent (overwrite -- mutate)
+          sceneStore.update("scene", {
+            _id: newUUID(),
+            _ts: new Date().toISOString(),
+            name: 'SCENE: ' + sceneStore.get("sceneDB").title,
+            layers: [],
+            activeLayer: {
+              name: 'LAYER 0',
+              data: {}
+            },
+            // wp custom fields
+            data: sceneStore.get("sceneDB")
+          })
+
+          return <div>true</div> // payload // string[]
         }
         else {
-          return false // <div>error.heyheyhey</div>
+          return <div>error.heyheyhey</div>
         }
       }
 
-      console.debug('%cLoadFromDB scenes: OTHER ERROR', ccm3, payload)
-      return false
+      console.debug('%cLoadFromDB [scenes]: OTHER ERROR', ccm3, payload)
+      return <div>false</div>
 
     } catch (err) {
-      console.debug('%cLoadFromDB scenes: DATA RETURNED with err', ccm3, err) // , data, loading, error
-      return false // <div>error.errerrerr</div>
+      console.debug('%cLoadFromDB [scenes]: DATA RETURNED with err', ccm3, err) // , data, loading, error
+      return <div>error.errerrerr</div>
     }
   }
 
 } // sceneActions
-
-// ==============================================================
-
-// ==============================================================
-
-// ==============================================================
-
-// ==============================================================
-
-// ==============================================================
 
 // ==============================================================
 
@@ -937,6 +990,8 @@ const useStore = {
   sceneActions,
 }
 
-// export { getState, setState }
+export { useStore }
+// export default useStore
 
-export default useStore
+// ???
+// export { getState, setState }
