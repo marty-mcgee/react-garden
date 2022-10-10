@@ -50,43 +50,13 @@ import Tab from "@mui/material/Tab"
 import Tooltip from "@mui/material/Tooltip"
 import Typography from "@mui/material/Typography"
 // import Avatar from "@mui/material/Avatar"
-// import AdbIcon from "@mui/icons-material/Adb"
-// mui: Material Dashboard 2 PRO React TS components
-// import MDBox from "~/components/mui/MDBox"
-// import MDTypography from "~/components/mui/MDTypography"
-// import MDAlert from "~/components/mui/MDAlert"
-// import MDButton from "~/components/mui/MDButton"
-// import MDProgress from "~/components/mui/MDProgress"
 import MDTabPanel, { a11yProps } from "~/components/mui/MDTabPanel"
 
-// import paper from "paper"
-
-// import * as THREE from "three"
-// import { TrackballControls } from "three/examples/jsm/controls/TrackballControls.js"
-// import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader"
-// import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-// import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader"
-// import { Sky } from "three/examples/jsm/objects/Sky.js"
-
-// import { TWEEN } from "three/examples/jsm/libs/tween.module.min"
-// import TWEEN from "@tweenjs/tween.js"
-import { Canvas, useFrame } from "@react-three/fiber"
-
-// css
-// import "~/assets/demo/css/Demo.module.css"
-// import stylesDemo from '~/styles/demo/demo.module.css'
-import stylesGarden from '~/styles/threed/garden.module.css'
-
-// no no no, never again
-// import * as $ from "jquery"
-
-// UUID
-import { v4 as newUUID } from "uuid"
-
-// HMMM
+// HMM ???
 import button from "~/themes/theme-dark/components/button"
 
-// TOOL MODE ICONS
+// ** Icon Imports
+// Tool Mode Icons
 import ToolIconPointer from '@mui/icons-material/TouchApp'
 import ToolIconHand from '@mui/icons-material/PanTool'
 import ToolIconAddWall from "@mui/icons-material/HouseSiding"
@@ -95,10 +65,35 @@ import ToolIconAddRoof from "@mui/icons-material/Roofing"
 import ToolIconAddRuler from "@mui/icons-material/Straighten"
 import ToolIconAddText from "@mui/icons-material/TextFields"
 
-// DELETE OBJECT KEYS: RESET OBJECT TO {}
+// ** Paper Imports (deprecated)
+// import paper from "paper"
+
+// ** Three JS Imports
+// import * as THREE from "three"
+// import { TrackballControls } from "three/examples/jsm/controls/TrackballControls.js"
+// import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader"
+// import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+// import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader"
+// import { Sky } from "three/examples/jsm/objects/Sky.js"
+// import { TWEEN } from "three/examples/jsm/libs/tween.module.min"
+// import TWEEN from "@tweenjs/tween.js"
+import { Canvas, useFrame } from "@react-three/fiber"
+
+// ** CSS Styles Imports
+// import "~/assets/demo/css/Demo.module.css"
+// import stylesDemo from '~/styles/demo/demo.module.css'
+import stylesGarden from '~/styles/threed/garden.module.css'
+
+// ** no no no, never again (deprecated)
+// import * as $ from "jquery"
+
+// ** UUID
+// import { v4 as newUUID } from "uuid"
+
+// ** DELETE OBJECT KEYS: RESET OBJECT TO {}
 import clearObject from '~/@core/utils/clear-object'
 
-// [MM] COLORFUL CONSOLE MESSAGES (ccm)
+// ** COLORFUL CONSOLE MESSAGES (ccm)
 import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5 } from '~/@core/utils/console-colors'
 // console.debug('%cSUCCESS!!', ccm1)
 // console.debug('%cWHOOPSIES', ccm2)

@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 // ** MUI Components
 import Typography from '@mui/material/Typography'
 
-// ** Spinner Import
+// ** Component Imports
 import Spinner from '~/@core/components/spinner'
 
 // ** Hook Imports

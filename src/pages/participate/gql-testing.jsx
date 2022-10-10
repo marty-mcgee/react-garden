@@ -1,106 +1,133 @@
-// import { FunctionComponent } from 'react'
-import { useQuery, gql } from '@apollo/client'
+// ==============================================================
+// RESOURCES
 
-import GetScenes from '~/api/graphql/scripts/getScenes.gql'
+// ** React Imports
+// import { FunctionComponent } from 'react'
+
+// ** Apollo Imports
+import { ApolloClient, InMemoryCache, useQuery, gql } from '@apollo/client'
+// ac3: reactive vars (store helper)
+import create from '~/api/graphql/createStore'
+
+// ** GraphQL Imports
+// import GetScenes from '~/api/graphql/scripts/getScenes.gql'
 // import GetAllotments from '~/api/graphql/scripts/getAllotments.gql'
 // import GetBeds from '~/api/graphql/scripts/getBeds.gql'
 // import GetPlants from '~/api/graphql/scripts/getPlants.gql'
 // import GetPlantingPlans from '~/api/graphql/scripts/getPlantingPlans.gql'
 import GetProducts from '~/api/graphql/scripts/getProducts.gql'
 
-// gql string
-const SCENES = GetScenes
+// ** Component Imports
+import Spinner from '~/@core/components/spinner'
 
+// ** UUID Imports
+import { v4 as newUUID } from 'uuid'
+
+// ==============================================================
+// VARIABLES | PROPERTIES | PARAMETERS | METHODS
+
+// ** gql: ThreeD Garden
+// const SCENES = GetScenes
+// const ALLOTMENTS = GetAllotments
+// const BEDS = GetBeds
+// const PLANTS = GetPlants
+// const PLANTINGPLANS = GetPlantingPlans
+
+// ** gql: WooCommerce WP Products
 // https://scottbolinger.com/woocommerce-app-react-wpgraphql/
 const PRODUCTS = GetProducts
 
-// FunctionComponent
-const Scenes = () => {
+// ==============================================================
+// FUNCTIONAL NOUNS + ACTIONS
 
-  // return <div>MARTY MARTY MARTY MARTY</div>
+// ==============================================================
+// Product (WooCommerce)
 
-  // const data = null
-  // const loading = false
-  // const error = "HEY HEY HEY"
+const product = (productName = 'PRODUCT 0', layerName = 'LAYER 0') => ({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
+  name: productName,
+  layers: [],
+  activeLayer: {
+    name: layerName,
+    data: {}
+  },
+  // wp custom fields
+  data: {}, // productStore.get("productDB")
+  //
+  //
+  //
+})
 
-  const parameters = {
-    first: 10,
-    last: null,
-    after: null,
-    before: null
-  }
+export const productStore = create({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
+  productCount: 0,
+  products: [],
+  product: {},
 
-  try {
+  // track current + history
+  // productCurrent: ^this,
+  productHistory: [], // from local storage
 
-    const {
-      data,
-      loading,
-      error,
-      fetchMore,
-      refetch,
-      networkStatus
-    } = useQuery(SCENES, { parameters })
-    // console.debug("DATA RETURNED", data, loading, error)
+  // track payload from db
+  productCountDB: 0, // example counter
+  productsDB: [], // from db (mysql wordpress via graphql)
+  productDB: {}, // pre-this product, ready to be mapped to 'this' product
 
-    if (loading) {
-      return <div>loading...</div>
-    }
+}) // productStore
 
-    if (error) {
-      console.debug("DATA RETURNED with error", error) // , data, loading, error
-      return <div>error.yoyoyo</div> // <div>{error}</div>
-    }
-
-    if (data) {
-      console.debug("DATA RETURNED", data, loading, error)
-
-      if (data.scenes?.edges) {
-        return data.scenes.edges.map(({ node }) => ( // sceneId, id, uri, slug, title
-          <div key={node.sceneId}>
-            <p>
-              wp sceneId: {node.sceneId}<br />
-              gql id: {node.id}<br />
-              uri: {node.uri}<br />
-              slug: {node.slug}<br />
-              title: {node.title}<br />
-            </p>
-          </div>
-        ))
-      }
-      else {
-        return <div>error.heyheyhey</div>
-      }
-    }
-
-  } catch (err) {
-    console.debug("DATA RETURNED with err", err) // , data, loading, error
-    return <div>error.errerrerr</div>
-  }
+export const productActions = {
+  increaseCount: (n = 1) => {
+    return (state) => state + n
+  },
 }
 
-export default Scenes
+const clientLocal = new ApolloClient({
+  uri: "http://localhost:3000/",
+  cache: new InMemoryCache({
+    typePolicies: productStore.getTypePolicies()
+  })
+})
 
 // : FunctionComponent
-export const ProductTab = () => {
+const ProductTab = (client = clientLocal) => {
+
   const variables = {
     first: 10,
     last: null,
     after: null,
     before: null
   }
-  const { loading, error, data, fetchMore, refetch, networkStatus } = useQuery(PRODUCTS, { variables })
-  if (loading) return <div>loading...</div> // <Loading />
+
+  const {
+    loading, error, data,
+    fetchMore, refetch, networkStatus
+  } = useQuery(
+    PRODUCTS,
+    { variables },
+    { client }
+  )
+
+  if (loading) {
+    return <div><Spinner /></div> // loading...
+  }
+
   if (error) {
     console.debug(error)
-    return <p>Error</p>
+    return <div>error</div>
   }
-  // Function to update the query with the new results
+
+  // update query with new results
   const handleUpdateQuery = (previousResult, { fetchMoreResult }) => {
+
     // setDisableInfiniteScroll(true)
     if (!fetchMoreResult || !fetchMoreResult.products.edges.length) return previousResult
     fetchMoreResult.products.edges = [...previousResult.products.edges, ...fetchMoreResult.products.edges]
+
     return fetchMoreResult
   }
+
   const loadMore = () => {
     fetchMore({
       variables: {
@@ -112,7 +139,9 @@ export const ProductTab = () => {
       updateQuery: handleUpdateQuery
     })
   }
+
   const products = data?.products?.edges || []
+
   return (
     <div>
       <ul>
@@ -126,4 +155,5 @@ export const ProductTab = () => {
   )
 }
 
-// export ProductTab
+// export { ProductTab }
+export default ProductTab

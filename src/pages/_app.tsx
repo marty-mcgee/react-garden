@@ -35,7 +35,7 @@ import AuthGuard from '~/@core/components/auth/AuthGuard'
 import GuestGuard from '~/@core/components/auth/GuestGuard'
 import WindowWrapper from '~/@core/components/window-wrapper'
 
-// ** Spinner Import
+// ** Component Imports
 import Spinner from '~/@core/components/spinner'
 
 // ** Contexts

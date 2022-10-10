@@ -392,9 +392,6 @@ export const threedStore = create({
 
 export const threedActions = {
 
-  // increaseThreeDCount: () => set(
-  //   (state) => ({ threedCount: state.threedCount + 1 })
-  // ),
   increaseThreeDCount: (n = 1) => {
     return (state) => state + n
   },
