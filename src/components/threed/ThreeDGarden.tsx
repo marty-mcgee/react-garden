@@ -156,20 +156,13 @@ const Toolbar = styled(MuiToolbar)(({ theme }) => ({
 // ==========================================================
 
 const {
-  threedStore,
-  threedActions,
-  projectStore,
-  projectActions,
-  planStore,
-  planActions,
-  fileStore,
-  fileActions,
-  bearStore,
-  bearActions,
-  modalStore,
-  modalActions,
-  sceneStore,
-  sceneActions
+  threedStore, threedActions,
+  projectStore, projectActions,
+  planStore, planActions,
+  fileStore, fileActions,
+  bearStore, bearActions,
+  modalStore, modalActions,
+  sceneStore, sceneActions
 } = useStore
 
 // ==========================================================
