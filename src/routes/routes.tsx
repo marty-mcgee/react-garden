@@ -68,9 +68,9 @@ import profilePicture from "~/assets/images/people/team-0.png"
 const routes = [
   // {
   //   type: "collapse",
-  //   name: "Garden Master",
+  //   name: "Juice Master",
   //   key: "juice-master",
-  //   icon: <MDAvatar src={profilePicture.src} alt="Garden Master" size="xs" />,
+  //   icon: <MDAvatar src={profilePicture.src} alt="Juice Master" size="xs" />,
   //   collapse: [
   //     {
   //       name: "My Profile",

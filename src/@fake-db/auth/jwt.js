@@ -9,7 +9,7 @@ const users = [
     id: 1,
     role: 'admin',
     password: 'admin',
-    fullName: 'Garden Master',
+    fullName: 'Juice Master',
     username: 'gardenmaster',
     email: 'mcgee.marty@gmail.com'
   },
@@ -18,7 +18,7 @@ const users = [
     role: 'client',
     password: 'client',
     fullName: 'Marty McGee',
-    username: 'martymcgee',
+    username: 'gardenapprentice',
     email: 'marty@companyjuice.com'
   }
 ]
