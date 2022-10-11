@@ -26,6 +26,10 @@ import { v4 as newUUID } from 'uuid'
 // ==============================================================
 // VARIABLES | PROPERTIES | PARAMETERS | METHODS
 
+const uri = process.env.NEXT_PUBLIC_WP_GRAPHQL_API_URL
+const uri_rest = process.env.NEXT_PUBLIC_WP_REST_API_URL
+// console.debug("uri", uri, uri_rest)
+
 // ** gql: ThreeD Garden
 // const SCENES = GetScenes
 // const ALLOTMENTS = GetAllotments
@@ -84,7 +88,7 @@ export const productActions = {
 }
 
 const clientLocal = new ApolloClient({
-  uri: "http://localhost:3000/",
+  uri: uri,
   cache: new InMemoryCache({
     typePolicies: productStore.getTypePolicies()
   })
