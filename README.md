@@ -3,9 +3,7 @@
 React + TypeScript + ThreeJS app using Material UI v5 on NextJS v12, Apollo Client v3, GraphQL + WordPress REST APIs, for ThreeD web development.. a "Design Dashboard" for developing Three JS components + apps.
 
 ## Live Demo
-[threed.design](https://threed.design/)
-
-[threed.design/login/](https://threed.design/login/)
+[threedgarden.com](https://threedgarden.com/)
 
 ## Development
 requires pnpm: `npm install -G pnpm`

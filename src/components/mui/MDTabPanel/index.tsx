@@ -30,7 +30,7 @@ function TabPanel(props: TabPanelProps) {
 
 export default TabPanel
 
-export function a11yProps(index: number) {
+export function tabProps(index: number) {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
