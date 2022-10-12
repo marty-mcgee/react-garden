@@ -22,10 +22,7 @@ import {
 // ** Apollo Client 3 -- Cache Store Imports
 // state management (instead of React.useState, Redux, Zustand)
 import { ApolloConsumer, useQuery, gql } from '@apollo/client'
-import {
-  useStore,
-  TestAC3Store,
-} from '~/stores'
+import useStore, { TestAC3Store } from '~/stores'
 
 // ** Next Imports
 import Image from 'next/future/image'
@@ -160,17 +157,18 @@ interface YOYOYO {
 // ==========================================================
 
 const {
-  threedStore, threedActions,
+  interfaceStore, interfaceActions,
+  modalStore, modalActions,
   projectStore, projectActions,
   planStore, planActions,
+  threedStore, threedActions,
   fileStore, fileActions,
-  bearStore, bearActions,
-  modalStore, modalActions,
   sceneStore, sceneActions,
   allotmentStore, allotmentActions,
   bedStore, bedActions,
   plantStore, plantActions,
   plantingPlanStore, plantingPlanActions,
+  bearStore, bearActions,
 } = useStore
 
 // ==========================================================
@@ -646,147 +644,6 @@ const PlantingPlanControlPanel: ReactNode = (): JSX.Element => {
     </Box>
   )
 }
-
-// ==========================================================
-// BEGIN COMPONENT PROPERTIES (VARIABLES, PARAMETERS)
-// ==========================================================
-
-// const begin = () => {
-
-let mouseMode = 0
-let toolMode = "pointer"
-let selectedItem
-let defaultCursor = "default"
-// let deselectAll
-let UILayout = "default"
-
-const Texts = {}
-const Dimensions = {}
-const Floors = {}
-const Floors3d = {}
-const Roofs = {}
-const Walls = {}
-const Furniture = {}
-
-let textPath = ""
-let textIdCounter = 0
-let startedDrawingText = !1
-let editingTextId = -1
-
-let dimensionPath = ""
-let dimensionIdCounter = 0
-let dimensionHelperPath = ""
-let startedDrawingDimension = !1
-
-let floorPath = ""
-let floorIdCounter = 0
-let floorHelperPath = ""
-let startedDrawingFloor = !1
-
-let wallPath = ""
-let wallIdCounter = 0
-const wallsRectangles = {}
-const wallsRectangles3d = {}
-let wallHelperPath = ""
-let wallHelperRectangle = ""
-let startedDrawingWalls = !1
-
-let roofPath = ""
-let roofIdCounter = 0
-let roofHelperPath = ""
-const roofsRectangles = {}
-const roofsRectangles3d = {}
-let roofHelperRectangle = ""
-let startedDrawingRoofs = !1
-
-const maskObjects = {}
-const maskObjectsApplied = {}
-const maskObjectsAppliedRoof = {}
-
-const clickableObjects = {}
-let clickableObjectsCounter = -1
-
-let backgroundRaster = ""
-let backgroundRasterRatioX = 1
-let backgroundRasterRatioY = 1
-
-let levelButtons = ""
-let otherLayerWallsRasters: Object[] = []
-let otherLayerFurnitureRasters: Object[] = []
-
-const verticalGuides = {}
-const horizontalGuides = {}
-let selectedGuideId = ""
-let guideCounter = 0
-let draggingNewGuide = !1
-let snapTolerance = 1
-
-const furnitureItems = {}
-let furnitureToLoadCount = 0
-let loadedFurnitureCount = 0
-
-// THREE >>
-let canvas3d
-let camera
-let renderer
-let container
-let scene = {}
-let mesh
-let ground
-let controls
-let tween
-let raycaster
-let mouse
-// lights
-let ambientLight
-let dirLight
-let hemiLight
-let pointLight
-// materials
-let groundMaterial = {
-  color: { getHexString: () => "#0xFFFFFF" },
-  opacity: 1,
-  specular: { getHexString: () => "#0xCCCCCC" }
-}
-let floorMaterial = {
-  color: { getHexString: () => "#0xFFFFFF" },
-  opacity: 1,
-  specular: { getHexString: () => "#0xCCCCCC" }
-}
-let roofMaterial = {
-  color: { getHexString: () => "#0xFFFFFF" },
-  opacity: 1,
-  specular: { getHexString: () => "#0xCCCCCC" }
-}
-let wallMaterial = {
-  color: { getHexString: () => "#0xFFFFFF" },
-  opacity: 1,
-  specular: { getHexString: () => "#0xCCCCCC" }
-}
-// << THREE
-
-let inclination = 0
-let azimuth = 0
-
-// GROUPS
-// Paper.Group !! 2D
-// these should be arrays [] ??? YES, CHANGED
-const furnitureGroup: Object[] = []
-// furnitureGroup[0] = new paper.Group()
-const wallsGroup: Object[] = []
-// wallsGroup[0] = new paper.Group()
-const roofsGroup: Object[] = []
-// roofsGroup[0] = new paper.Group()
-const floorsGroup: Object[] = []
-// floorsGroup[0] = new paper.Group()
-const dimensionsGroup: Object[] = []
-// dimensionsGroup[0] = new paper.Group()
-const textsGroup: Object[] = []
-// textsGroup[0] = new paper.Group()
-// these 3 should be const arrays [] ??
-const guidesGroup: Object = {} // new paper.Group()
-const toolsGroup: Object = {} // new paper.Group()
-const gridGroup: Object = {} // new paper.Group()
 
 // ==========================================================
 // ==========================================================

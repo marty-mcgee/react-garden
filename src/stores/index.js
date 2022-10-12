@@ -288,7 +288,7 @@ export const threedActions = {
   saveToDB: async function (client) {
     try {
       // const _this = this
-      // console.debug('sceneActions this', this)
+      // console.debug('%csaveToDB this', ccm0, this)
 
       console.debug('%csaveToDB [threeds]', ccm2, false)
       return false
@@ -303,7 +303,7 @@ export const threedActions = {
   loadFromDB: async function (client) {
     try {
       // const _this = this
-      // console.debug('threedActions this', this)
+      // console.debug('%cloadFromDB this', ccm0, this)
 
       const THREEDS = GetThreeDs // .gql
 
@@ -414,113 +414,330 @@ export const threedActions = {
 // ==============================================================
 // Project
 
+const project = (name = 'PROJECT 0', layerName = 'LAYER 0') => ({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
+  layers: [],
+  activeLayer: {
+    name: layerName,
+    data: {}
+  },
+  // wp custom fields
+  data: {},
+}) // project
+
+// ** Project Store
 export const projectStore = create({
   _id: newUUID(),
   _ts: new Date().toISOString(),
   projectCount: 0,
   projects: [],
-  project: {
-    _id: newUUID(),
-    _ts: new Date().toISOString(),
-    layers: [],
-    activeLayer: {
-      name: 'LAYER 0',
-      data: {}
-    }
-  }
+  project: project(), // {}
+
 }) // projectStore
 
-export const projectActions = create((set, get) => ({
+// ** Project Actions
+export const projectActions = {
 
-  increaseCount: () => set(
-    (state) => (
-      { projectCount: state.projectCount + 1 }
-    )
-  ),
-  removeAll: () => set(
-    {
-      projectCount: 0,
-      projects: []
+  increaseCount: (n = 1) => {
+    return (state) => state + n
+  },
+
+  removeAll: function () {
+    const removeItem = localStorage.removeItem('threed_projectHistory')
+    projectStore.update('projects', [])
+    projectStore.update('project', {})
+    projectStore.update('projectCount', 0)
+    projectStore.update('projectsDB', [])
+    projectStore.update('projectDB', {})
+    projectStore.update('projectCountDB', 0)
+    console.debug('%cremoveAll [projects]', ccm2, true)
+  },
+
+  // add a new current 'this' project
+  addNew: function () {
+
+    console.debug('%caddNew [projects] (before)', ccm1, projectStore.get("projects"))
+
+    // create a new one
+    if (Object.keys(projectStore.get("project")).length === 0) {
+      projectStore.update("project", project())
     }
-  ),
-  addNew: () => {
-    // projectCurrent
-    set(
-      (state) => (
-        {
-          project: {
+    // save + update old one
+    else {
+      // projectHistory (save existing before mutating, if not empty)
+      projectStore.update("projects", [
+        projectStore.get("project"),
+        ...projectStore.get("projects")
+      ])
+      console.debug('%caddNew [projects] (during)', ccm1, projectStore.get("projects"))
+
+      // projectCount
+      // projectStore.update("projectCount", projectStore.get("projectCount") + 1) // manual
+      projectStore.update("projectCount", projectStore.get("projects").length) // automatic
+      // console.debug('%caddNew {projectCount}', ccm3, projectStore.get("projectCount"))
+      // console.debug('%caddNew [projects]', ccm3, projectStore.get("projects").length)
+
+      // projectCurrent (overwrite -- mutate)
+      projectStore.update("project", {
+        _id: newUUID(),
+        _ts: new Date().toISOString(),
+        name: 'PROJECT 1',
+        layers: [],
+        activeLayer: {
+          name: 'LAYER 0',
+          data: {}
+        }
+      })
+    }
+    console.debug('%caddNew {project}', ccm1, projectStore.get("project"))
+
+    // save the new one and the old ones
+    // projectHistory (save recently mutated)
+    projectStore.update("projects", [
+      projectStore.get("project"),
+      ...projectStore.get("projects")
+    ])
+    console.debug('%caddNew [projects] (after)', ccm1, projectStore.get("projects"))
+
+    // projectCount
+    // projectStore.update("projectCount", projectStore.get("projectCount") + 1) // manual
+    projectStore.update("projectCount", projectStore.get("projects").length) // automatic
+    // console.debug('%caddNew {projectCount}', ccm3, projectStore.get("projectCount"))
+    // console.debug('%caddNew [projects]', ccm3, projectStore.get("projects").length)
+
+    // saveToDisk
+    // get().saveToDisk()
+    this.saveToDisk()
+    // loadFromDisk
+    // get().loadFromDisk()
+    this.loadFromDisk()
+
+    // console.debug('%caddNew', ccm1, get().project)
+  },
+
+  save: function () {
+    // saveToDisk
+    // get().saveToDisk()
+    this.saveToDisk()
+    // saveToDB (coming soon !!!)
+    // this.saveToDB()
+  },
+
+  // save data to browser local storage
+  saveToDisk: function () {
+    try {
+      localStorage.setItem(
+        'threed_projectHistory',
+        JSON.stringify({
+          subject: 'projects',
+          payload: projectStore.get("projects")
+        })
+      )
+      console.debug('%csaveToDisk [projects]', ccm1, projectStore.get("projects"))
+      return true
+    } catch (err) {
+      console.debug('%csaveToDisk [projects] err', ccm2, err)
+      return false
+    }
+  },
+
+  // get data from browser local storage
+  loadFromDisk: function () {
+    try {
+      const query = JSON.parse(localStorage.getItem('threed_projectHistory'))
+      if (query) {
+        console.debug('%cloadFromDisk [projects] QUERY?', ccm3, query)
+        const { payload } = query
+        console.debug('%cloadFromDisk [projects] QUERY.PAYLOAD?', ccm3, payload)
+
+        if (payload.length) {
+          console.debug('%cloadFromDisk [projects]', ccm3, true) // payload
+
+          projectStore.update("projects", [...payload])
+          console.debug('%cloadFromDisk [projects] (after)', ccm3, projectStore.get("projects"))
+
+          projectStore.update("project", projectStore.get("projects")[0])
+          console.debug('%cloadFromDisk {project} (after)', ccm3, projectStore.get("project"))
+
+          return true
+        }
+
+        else {
+          console.debug('%cloadFromDisk [projects] EMPTY QUERY.PAYLOAD?', ccm3, query)
+        }
+      }
+      else {
+        console.debug('%cloadFromDisk [projects] NOTHING TO LOAD', ccm3, query)
+      }
+      return false
+
+    } catch (err) {
+      console.debug('%cloadFromDisk [projects] err', ccm2, err)
+      return false
+    }
+  },
+
+  // save data to db via graphql mutation
+  saveToDB: async function (client) {
+    try {
+      // const _this = this
+      // console.debug('%csaveToDB this', ccm0, this)
+
+      console.debug('%csaveToDB [projects]', ccm2, false)
+      return false
+
+    } catch (err) {
+      console.debug('%csaveToDB [projects]: err', ccm3, err)
+      return false
+    }
+  },
+
+  // get data from db via graphql query
+  loadFromDB: async function (client) {
+    try {
+      // const _this = this
+      // console.debug('%cloadFromDB this', ccm0, this)
+
+      const PROJECTS = GetProjects // .gql
+
+      const parameters = {
+        first: 10,
+        last: null,
+        after: null,
+        before: null
+      }
+
+      // const {
+      //   data,
+      //   loading,
+      //   error,
+      //   fetchMore,
+      //   refetch,
+      //   networkStatus
+      // } = useQuery(PROJECTS, { parameters }, { client })
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      const query = await client.query({
+        query: PROJECTS,
+        variables: { parameters }
+      })
+      // console.debug('QUERY RETURNED', query)
+      const { data, loading, error } = query
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      if (loading) {
+        return false
+      }
+
+      if (error) {
+        console.debug('%cloadFromDB [projects]: DATA RETURNED with error', error)
+        return false // <div>{JSON.stringify(error)}</div>
+      }
+
+      if (data) {
+        console.debug('%cloadFromDB [projects]: DATA RETURNED', ccm0, data, loading, error)
+
+        if (data.projects?.edges?.length) {
+
+          // const payload = data.projects.edges
+          const payload = data.projects.edges.map(({ node }) => ( // projectId, id, uri, slug, title
+            // <div key={node.projectId}>
+            //   wp projectId: {node.projectId}<br />
+            //   gql id: {node.id}<br />
+            //   uri: {node.uri}<br />
+            //   slug: {node.slug}<br />
+            //   title: {node.title}<br />
+            // </div>
+            node
+          ))
+
+          // set state from db
+          projectStore.update("projects", [...payload]) // nodes
+          console.debug('%cloadFromDB [projects] (after)', ccm3, projectStore.get("projects"))
+
+          projectStore.update("projectDB", projectStore.get("projects")[0]) // node
+          console.debug('%cloadFromDB {projectDB}', ccm1, projectStore.get("projectDB"))
+
+          this.saveToDisk()
+
+          // projectCurrent (overwrite -- mutate)
+          projectStore.update("project", {
             _id: newUUID(),
             _ts: new Date().toISOString(),
+            name: 'PROJECT: ' + projectStore.get("projectDB").title,
             layers: [],
             activeLayer: {
               name: 'LAYER 0',
               data: {}
-            }
-          },
-          projectCount: state.projectCount + 1,
-        }
-      )
-    )
-    // projectHistory
-    set(
-      (state) => (
-        {
-          projects: [state.project, ...state.projects],
-          projectCount: state.projects.length,
-        }
-      )
-    )
-    // saveToDisk
-    get().saveToDisk()
-    // loadFromDisk
-    get().loadFromDisk()
+            },
+            // wp custom fields
+            data: projectStore.get("projectDB")
+          })
+          console.debug('%cloadFromDB {project} (after)', ccm1, projectStore.get("project"))
 
-    console.debug('%cAddProject', ccm1, get().project)
-  },
-  save: () => {
-    // saveToDisk
-    get().saveToDisk()
-  },
-  saveToDisk: () => {
-    try {
-      localStorage.setItem('threed_projectHistory', JSON.stringify({ subject: 'projects', payload: get().projects }))
-      console.debug('%csaveToDisk projects', ccm1, get().projects)
-      return true
+          projectStore.update("projectCountDB", projectStore.get("projects").length)
+          console.debug('%cloadFromDB projectCountDB', ccm1, projectStore.get("projectCountDB"))
+
+          // save to disk
+          this.saveToDisk()
+
+          return true
+        }
+
+        else {
+          console.debug('%cloadFromDB [projects]: NO data.projects.edges', ccm3, data)
+          return false
+        }
+      }
+
+      console.debug('%cloadFromDB [projects]: OTHER ERROR', ccm3, data)
+      return false
+
     } catch (err) {
-      console.debug('%csaveToDisk projects', ccm3, err)
+      console.debug('%cloadFromDB [projects]: err', ccm3, err)
       return false
     }
   },
-  loadFromDisk: () => {
+
+  // load 'this' project into the React Three Fiber view
+  load: function (id = null) {
     try {
-      const payload = localStorage.getItem('threed_projectHistory')
-      if (payload.length) {
-        console.debug('%cloadFromDisk projects', ccm1, true) // payload
-        return payload // string[]
+
+      project = projectStore.get("project")
+      console.debug('%cload {project}: this', ccm1, project, this)
+
+      if (project) {
+        return true
       }
-      console.debug('%cloadFromDisk projects', ccm3, payload)
+
       return false
+
     } catch (err) {
-      console.debug('%cloadFromDisk projects', ccm3, err)
+      console.debug('%cload {project}: err', ccm3, err)
       return false
     }
   }
 
-})) // projectActions
+} // projectActions
 
 // ==============================================================
 // ==============================================================
 // ==============================================================
 // Plan
 
-export const planStore = create({
+const plan = (name = 'PLAN 0', layerName = 'LAYER 0') => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
-  planCount: 0,
-  plans: [],
-  plan: {
-    _id: newUUID(),
-    _ts: new Date().toISOString(),
+  layers: [],
+  activeLayer: {
+    name: layerName,
+    data: {}
+  },
+  // wp custom fields
+  data: { // {},
+    planId: 0,
+
     levels: [{ id: 0, height: 0 }],
     // levels[0]: { id: 0, height: 0 },
     floors: [],
@@ -569,175 +786,1077 @@ export const planStore = create({
     sortObjects: null,
 
     azimuth: null,
-    inclination: null
-  },
+    inclination: null,
+  }
+}) // plan
+
+// ** Plan Store
+export const planStore = create({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
+  planCount: 0,
+  plans: [],
+  plan: plan(), // {}
+
 }) // planStore
 
-export const planActions = create((set, get) => ({
-  increaseCount: () => set(
-    (state) => (
-      { planCount: state.planCount + 1 }
-    )
-  ),
-  removeAll: () => set(
-    {
-      planCount: 0,
-      plans: []
+// ** Plan Actions
+export const planActions = {
+
+  increaseCount: (n = 1) => {
+    return (state) => state + n
+  },
+
+  removeAll: function () {
+    const removeItem = localStorage.removeItem('threed_planHistory')
+    planStore.update('plans', [])
+    planStore.update('plan', {})
+    planStore.update('planCount', 0)
+    planStore.update('plansDB', [])
+    planStore.update('planDB', {})
+    planStore.update('planCountDB', 0)
+    console.debug('%cremoveAll [plans]', ccm2, true)
+  },
+
+  // add a new current 'this' plan
+  addNew: function () {
+
+    console.debug('%caddNew [plans] (before)', ccm1, planStore.get("plans"))
+
+    // create a new one
+    if (Object.keys(planStore.get("plan")).length === 0) {
+      planStore.update("plan", plan())
     }
-  ),
-  addNew: () => {
-    // planCurrent
-    set(
-      (state) => (
-        {
-          plan: {
-            _id: newUUID(),
-            _ts: new Date().toISOString(),
-            levels: [{ id: 0, height: 0 }],
-            // levels[0]: { id: 0, height: 0 },
-            floors: [],
-            roofs: [],
-            walls: [],
-            dimensions: [],
-            texts: [],
-            furniture: [],
+    // save + update old one
+    else {
+      // planHistory (save existing before mutating, if not empty)
+      planStore.update("plans", [
+        planStore.get("plan"),
+        ...planStore.get("plans")
+      ])
+      console.debug('%caddNew [plans] (during)', ccm1, planStore.get("plans"))
 
-            verticalGuides: [],
-            horizontalGuides: [],
+      // planCount
+      // planStore.update("planCount", planStore.get("planCount") + 1) // manual
+      planStore.update("planCount", planStore.get("plans").length) // automatic
+      // console.debug('%caddNew {planCount}', ccm3, planStore.get("planCount"))
+      // console.debug('%caddNew [plans]', ccm3, planStore.get("plans").length)
 
-            furnitureAddedKey: null,
-            furnitureDirtyKey: null,
-            furnitureDeletedKey: null,
-            wallAddedKey: null,
-            wallDirtyKey: null,
-            wallDeletedKey: null,
-            roofAddedKey: null,
-            roofDirtyKey: null,
-            roofDeletedKey: null,
-            floorAddedKey: null,
-            floorDirtyKey: null,
-            floorDeletedKey: null,
-            dimensionAddedKey: null,
-            dimensionEditedKey: null,
-            dimensionDeletedKey: null,
-            textAddedKey: null,
-            textEditedKey: null,
-            textDeletedKey: null,
-
-            // wallDiffuse: wallMaterial.color.getHexString(),
-            // wallOpacity: wallMaterial.opacity,
-            // wallSpecular: wallMaterial.specular.getHexString(),
-            // roofDiffuse: roofMaterial.color.getHexString(),
-            // roofOpacity: roofMaterial.opacity,
-            // roofSpecular: roofMaterial.specular.getHexString(),
-            // floorDiffuse: floorMaterial.color.getHexString(),
-            // floorOpacity: floorMaterial.opacity,
-            // floorSpecular: floorMaterial.specular.getHexString(),
-            // groundDiffuse: groundMaterial.color.getHexString(),
-            // groundOpacity: groundMaterial.opacity,
-            // groundSpecular: groundMaterial.specular.getHexString(),
-
-            depthWrite: 'checked', // document.getElementById('depthWriteMode').checked,
-            sortObjects: 'checked', // document.getElementById('sortObjectsMode').checked,
-
-            // azimuth: azimuth,
-            // inclination: inclination
-          },
-          planCount: state.planCount + 1
+      // planCurrent (overwrite -- mutate)
+      planStore.update("plan", {
+        _id: newUUID(),
+        _ts: new Date().toISOString(),
+        name: 'PLAN 1',
+        layers: [],
+        activeLayer: {
+          name: 'LAYER 0',
+          data: {}
         }
-      )
-    )
-    // planHistory
-    set(
-      (state) => (
-        {
-          plans: [state.plan, ...state.plans],
-          planCount: state.plans.length,
-        }
-      )
-    )
+      })
+    }
+    console.debug('%caddNew {plan}', ccm1, planStore.get("plan"))
+
+    // save the new one and the old ones
+    // planHistory (save recently mutated)
+    planStore.update("plans", [
+      planStore.get("plan"),
+      ...planStore.get("plans")
+    ])
+    console.debug('%caddNew [plans] (after)', ccm1, planStore.get("plans"))
+
+    // planCount
+    // planStore.update("planCount", planStore.get("planCount") + 1) // manual
+    planStore.update("planCount", planStore.get("plans").length) // automatic
+    // console.debug('%caddNew {planCount}', ccm3, planStore.get("planCount"))
+    // console.debug('%caddNew [plans]', ccm3, planStore.get("plans").length)
+
     // saveToDisk
-    get().saveToDisk()
+    // get().saveToDisk()
+    this.saveToDisk()
     // loadFromDisk
-    get().loadFromDisk()
+    // get().loadFromDisk()
+    this.loadFromDisk()
 
-    console.debug('%caddNew', ccm1, get().plan)
+    // console.debug('%caddNew', ccm1, get().plan)
   },
-  save: () => {
+
+  save: function () {
     // saveToDisk
-    get().saveToDisk()
+    // get().saveToDisk()
+    this.saveToDisk()
+    // saveToDB (coming soon !!!)
+    // this.saveToDB()
   },
-  saveToDisk: () => {
+
+  // save data to browser local storage
+  saveToDisk: function () {
     try {
-      localStorage.setItem('threed_planHistory', JSON.stringify({ subject: 'plans', payload: get().plans }))
-      console.debug('%csaveToDisk plans', ccm1, get().plans)
+      localStorage.setItem(
+        'threed_planHistory',
+        JSON.stringify({
+          subject: 'plans',
+          payload: planStore.get("plans")
+        })
+      )
+      console.debug('%csaveToDisk [plans]', ccm1, planStore.get("plans"))
       return true
     } catch (err) {
-      console.debug('%csaveToDisk plans', ccm3, err)
+      console.debug('%csaveToDisk [plans] err', ccm2, err)
       return false
     }
   },
-  loadFromDisk: () => {
+
+  // get data from browser local storage
+  loadFromDisk: function () {
     try {
-      const payload = localStorage.getItem('threed_planHistory')
-      if (payload.length) {
-        console.debug('%cloadFromDisk plans', ccm1, true) // payload
-        return payload // string[]
+      const query = JSON.parse(localStorage.getItem('threed_planHistory'))
+      if (query) {
+        console.debug('%cloadFromDisk [plans] QUERY?', ccm3, query)
+        const { payload } = query
+        console.debug('%cloadFromDisk [plans] QUERY.PAYLOAD?', ccm3, payload)
+
+        if (payload.length) {
+          console.debug('%cloadFromDisk [plans]', ccm3, true) // payload
+
+          planStore.update("plans", [...payload])
+          console.debug('%cloadFromDisk [plans] (after)', ccm3, planStore.get("plans"))
+
+          planStore.update("plan", planStore.get("plans")[0])
+          console.debug('%cloadFromDisk {plan} (after)', ccm3, planStore.get("plan"))
+
+          return true
+        }
+
+        else {
+          console.debug('%cloadFromDisk [plans] EMPTY QUERY.PAYLOAD?', ccm3, query)
+        }
       }
-      console.debug('%cloadFromDisk plans', ccm3, payload)
+      else {
+        console.debug('%cloadFromDisk [plans] NOTHING TO LOAD', ccm3, query)
+      }
       return false
+
     } catch (err) {
-      console.debug('%cloadFromDisk plans', ccm3, err)
+      console.debug('%cloadFromDisk [plans] err', ccm2, err)
+      return false
+    }
+  },
+
+  // save data to db via graphql mutation
+  saveToDB: async function (client) {
+    try {
+      // const _this = this
+      // console.debug('%csaveToDB this', ccm0, this)
+
+      console.debug('%csaveToDB [plans]', ccm2, false)
+      return false
+
+    } catch (err) {
+      console.debug('%csaveToDB [plans]: err', ccm3, err)
+      return false
+    }
+  },
+
+  // get data from db via graphql query
+  loadFromDB: async function (client) {
+    try {
+      // const _this = this
+      // console.debug('%cloadFromDB this', ccm0, this)
+
+      const PLANS = GetPlans // .gql
+
+      const parameters = {
+        first: 10,
+        last: null,
+        after: null,
+        before: null
+      }
+
+      // const {
+      //   data,
+      //   loading,
+      //   error,
+      //   fetchMore,
+      //   refetch,
+      //   networkStatus
+      // } = useQuery(PLANS, { parameters }, { client })
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      const query = await client.query({
+        query: PLANS,
+        variables: { parameters }
+      })
+      // console.debug('QUERY RETURNED', query)
+      const { data, loading, error } = query
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      if (loading) {
+        return false
+      }
+
+      if (error) {
+        console.debug('%cloadFromDB [plans]: DATA RETURNED with error', error)
+        return false // <div>{JSON.stringify(error)}</div>
+      }
+
+      if (data) {
+        console.debug('%cloadFromDB [plans]: DATA RETURNED', ccm0, data, loading, error)
+
+        if (data.plans?.edges?.length) {
+
+          // const payload = data.plans.edges
+          const payload = data.plans.edges.map(({ node }) => ( // planId, id, uri, slug, title
+            // <div key={node.planId}>
+            //   wp planId: {node.planId}<br />
+            //   gql id: {node.id}<br />
+            //   uri: {node.uri}<br />
+            //   slug: {node.slug}<br />
+            //   title: {node.title}<br />
+            // </div>
+            node
+          ))
+
+          // set state from db
+          planStore.update("plans", [...payload]) // nodes
+          console.debug('%cloadFromDB [plans] (after)', ccm3, planStore.get("plans"))
+
+          planStore.update("planDB", planStore.get("plans")[0]) // node
+          console.debug('%cloadFromDB {planDB}', ccm1, planStore.get("planDB"))
+
+          this.saveToDisk()
+
+          // planCurrent (overwrite -- mutate)
+          planStore.update("plan", {
+            _id: newUUID(),
+            _ts: new Date().toISOString(),
+            name: 'PLAN: ' + planStore.get("planDB").title,
+            layers: [],
+            activeLayer: {
+              name: 'LAYER 0',
+              data: {}
+            },
+            // wp custom fields
+            data: planStore.get("planDB")
+          })
+          console.debug('%cloadFromDB {plan} (after)', ccm1, planStore.get("plan"))
+
+          planStore.update("planCountDB", planStore.get("plans").length)
+          console.debug('%cloadFromDB planCountDB', ccm1, planStore.get("planCountDB"))
+
+          // save to disk
+          this.saveToDisk()
+
+          return true
+        }
+
+        else {
+          console.debug('%cloadFromDB [plans]: NO data.plans.edges', ccm3, data)
+          return false
+        }
+      }
+
+      console.debug('%cloadFromDB [plans]: OTHER ERROR', ccm3, data)
+      return false
+
+    } catch (err) {
+      console.debug('%cloadFromDB [plans]: err', ccm3, err)
+      return false
+    }
+  },
+
+  // load 'this' plan into the React Three Fiber view
+  load: function (id = null) {
+    try {
+
+      plan = planStore.get("plan")
+      console.debug('%cload {plan}: this', ccm1, plan, this)
+
+      if (plan) {
+        return true
+      }
+
+      return false
+
+    } catch (err) {
+      console.debug('%cload {plan}: err', ccm3, err)
       return false
     }
   }
 
-})) // planActions
+} // planActions
+
+// ==============================================================
+// ==============================================================
+// ==============================================================
+// UI
+
+const ui = (name = 'UI 0', layerName = 'LAYER 0') => ({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
+  layers: [],
+  activeLayer: {
+    name: 'LAYER 0',
+    data: {}
+  },
+  data: {
+    uiId: 0,
+
+    mouseMode: 0,
+    toolMode: "pointer",
+    selectedItem: null,
+    defaultCursor: "default",
+    // deselectAll
+    UILayout: "default",
+
+    Texts: {},
+    Dimensions: {},
+    Floors: {},
+    Floors3d: {},
+    Roofs: {},
+    Walls: {},
+    Furniture: {},
+
+    textPath: "",
+    textIdCounter: 0,
+    startedDrawingText: !1,
+    editingTextId: -1,
+
+    dimensionPath: "",
+    dimensionIdCounter: 0,
+    dimensionHelperPath: "",
+    startedDrawingDimension: !1,
+
+    floorPath: "",
+    floorIdCounter: 0,
+    floorHelperPath: "",
+    startedDrawingFloor: !1,
+
+    wallPath: "",
+    wallIdCounter: 0,
+    wallsRectangles: {},
+    wallsRectangles3d: {},
+    wallHelperPath: "",
+    wallHelperRectangle: "",
+    startedDrawingWalls: !1,
+
+    roofPath: "",
+    roofIdCounter: 0,
+    roofHelperPath: "",
+    roofsRectangles: {},
+    roofsRectangles3d: {},
+    roofHelperRectangle: "",
+    startedDrawingRoofs: !1,
+
+    maskObjects: {},
+    maskObjectsApplied: {},
+    maskObjectsAppliedRoof: {},
+
+    clickableObjects: {},
+    clickableObjectsCounter: -1,
+
+    backgroundRaster: "",
+    backgroundRasterRatioX: 1,
+    backgroundRasterRatioY: 1,
+
+    levelButtons: "",
+    otherLayerWallsRasters: [],
+    otherLayerFurnitureRasters: [],
+
+    verticalGuides: {},
+    horizontalGuides: {},
+    selectedGuideId: "",
+    guideCounter: 0,
+    draggingNewGuide: !1,
+    snapTolerance: 1,
+
+    furnitureItems: {},
+    furnitureToLoadCount: 0,
+    loadedFurnitureCount: 0,
+
+    // THREE >>
+    canvas3d: null,
+    camera: null,
+    renderer: null,
+    container: null,
+    scene: {},
+    mesh: null,
+    ground: null,
+    controls: null,
+    tween: null,
+    raycaster: null,
+    mouse: null,
+    // lights
+    ambientLight: null,
+    dirLight: null,
+    hemiLight: null,
+    pointLight: null,
+    // materials
+    groundMaterial: {
+      color: { getHexString: () => "#0xFFFFFF" },
+      opacity: 1,
+      specular: { getHexString: () => "#0xCCCCCC" }
+    },
+    floorMaterial: {
+      color: { getHexString: () => "#0xFFFFFF" },
+      opacity: 1,
+      specular: { getHexString: () => "#0xCCCCCC" }
+    },
+    roofMaterial: {
+      color: { getHexString: () => "#0xFFFFFF" },
+      opacity: 1,
+      specular: { getHexString: () => "#0xCCCCCC" }
+    },
+    wallMaterial: {
+      color: { getHexString: () => "#0xFFFFFF" },
+      opacity: 1,
+      specular: { getHexString: () => "#0xCCCCCC" }
+    },
+    // << THREE
+
+    inclination: 0,
+    azimuth: 0,
+
+    // GROUPS
+    // Paper.Group !! 2D
+    // these should be arrays [] ??? YES, CHANGED
+    furnitureGroup: [],
+    // furnitureGroup[0]: new paper.Group(),
+    wallsGroup: [],
+    // wallsGroup[0]: new paper.Group(),
+    roofsGroup: [],
+    // roofsGroup[0]: new paper.Group(),
+    floorsGroup: [],
+    // floorsGroup[0]: new paper.Group(),
+    dimensionsGroup: [],
+    // dimensionsGroup[0]: new paper.Group(),
+    textsGroup: [],
+    // textsGroup[0]: new paper.Group(),
+    // should these 3 be arrays [] ???
+    guidesGroup: {}, // new paper.Group()
+    toolsGroup: {}, // new paper.Group()
+    gridGroup: {} // new paper.Group()
+
+  } // data
+
+}) // ui
+
+// ** UI Store
+export const uiStore = create({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
+  uiCount: 0,
+  uis: [],
+  ui: ui(), // {},
+
+}) // uiStore
+
+// ** UI Actions
+export const uiActions = {
+
+  increaseCount: (n = 1) => {
+    return (state) => state + n
+  },
+
+  removeAll: function () {
+    const removeItem = localStorage.removeItem('threed_uiHistory')
+    uiStore.update('uis', [])
+    uiStore.update('ui', {})
+    uiStore.update('uiCount', 0)
+    uiStore.update('uisDB', [])
+    uiStore.update('uiDB', {})
+    uiStore.update('uiCountDB', 0)
+    console.debug('%cremoveAll [uis]', ccm2, true)
+  },
+
+  // add a new current 'this' ui
+  addNew: function () {
+
+    console.debug('%caddNew [uis] (before)', ccm1, uiStore.get("uis"))
+
+    // create a new one
+    if (Object.keys(uiStore.get("ui")).length === 0) {
+      uiStore.update("ui", ui())
+    }
+    // save + update old one
+    else {
+      // uiHistory (save existing before mutating, if not empty)
+      uiStore.update("uis", [
+        uiStore.get("ui"),
+        ...uiStore.get("uis")
+      ])
+      console.debug('%caddNew [uis] (during)', ccm1, uiStore.get("uis"))
+
+      // uiCount
+      // uiStore.update("uiCount", uiStore.get("uiCount") + 1) // manual
+      uiStore.update("uiCount", uiStore.get("uis").length) // automatic
+      // console.debug('%caddNew {uiCount}', ccm3, uiStore.get("uiCount"))
+      // console.debug('%caddNew [uis]', ccm3, uiStore.get("uis").length)
+
+      // uiCurrent (overwrite -- mutate)
+      uiStore.update("ui", {
+        _id: newUUID(),
+        _ts: new Date().toISOString(),
+        name: 'UI 1',
+        layers: [],
+        activeLayer: {
+          name: 'LAYER 0',
+          data: {}
+        }
+      })
+    }
+    console.debug('%caddNew {ui}', ccm1, uiStore.get("ui"))
+
+    // save the new one and the old ones
+    // uiHistory (save recently mutated)
+    uiStore.update("uis", [
+      uiStore.get("ui"),
+      ...uiStore.get("uis")
+    ])
+    console.debug('%caddNew [uis] (after)', ccm1, uiStore.get("uis"))
+
+    // uiCount
+    // uiStore.update("uiCount", uiStore.get("uiCount") + 1) // manual
+    uiStore.update("uiCount", uiStore.get("uis").length) // automatic
+    // console.debug('%caddNew {uiCount}', ccm3, uiStore.get("uiCount"))
+    // console.debug('%caddNew [uis]', ccm3, uiStore.get("uis").length)
+
+    // saveToDisk
+    // get().saveToDisk()
+    this.saveToDisk()
+    // loadFromDisk
+    // get().loadFromDisk()
+    this.loadFromDisk()
+
+    // console.debug('%caddNew', ccm1, get().ui)
+  },
+
+  save: function () {
+    // saveToDisk
+    // get().saveToDisk()
+    this.saveToDisk()
+    // saveToDB (coming soon !!!)
+    // this.saveToDB()
+  },
+
+  // save data to browser local storage
+  saveToDisk: function () {
+    try {
+      localStorage.setItem(
+        'threed_uiHistory',
+        JSON.stringify({
+          subject: 'uis',
+          payload: uiStore.get("uis")
+        })
+      )
+      console.debug('%csaveToDisk [uis]', ccm1, uiStore.get("uis"))
+      return true
+    } catch (err) {
+      console.debug('%csaveToDisk [uis] err', ccm2, err)
+      return false
+    }
+  },
+
+  // get data from browser local storage
+  loadFromDisk: function () {
+    try {
+      const query = JSON.parse(localStorage.getItem('threed_uiHistory'))
+      if (query) {
+        console.debug('%cloadFromDisk [uis] QUERY?', ccm3, query)
+        const { payload } = query
+        console.debug('%cloadFromDisk [uis] QUERY.PAYLOAD?', ccm3, payload)
+
+        if (payload.length) {
+          console.debug('%cloadFromDisk [uis]', ccm3, true) // payload
+
+          uiStore.update("uis", [...payload])
+          console.debug('%cloadFromDisk [uis] (after)', ccm3, uiStore.get("uis"))
+
+          uiStore.update("ui", uiStore.get("uis")[0])
+          console.debug('%cloadFromDisk {ui} (after)', ccm3, uiStore.get("ui"))
+
+          return true
+        }
+
+        else {
+          console.debug('%cloadFromDisk [uis] EMPTY QUERY.PAYLOAD?', ccm3, query)
+        }
+      }
+      else {
+        console.debug('%cloadFromDisk [uis] NOTHING TO LOAD', ccm3, query)
+      }
+      return false
+
+    } catch (err) {
+      console.debug('%cloadFromDisk [uis] err', ccm2, err)
+      return false
+    }
+  },
+
+  // save data to db via graphql mutation
+  saveToDB: async function (client) {
+    try {
+      // const _this = this
+      // console.debug('%csaveToDB this', ccm0, this)
+
+      console.debug('%csaveToDB [uis]', ccm2, false)
+      return false
+
+    } catch (err) {
+      console.debug('%csaveToDB [uis]: err', ccm3, err)
+      return false
+    }
+  },
+
+  // get data from db via graphql query
+  loadFromDB: async function (client) {
+    try {
+      // const _this = this
+      // console.debug('%cloadFromDB this', ccm0, this)
+
+      const UIS = GetUIs // .gql
+
+      const parameters = {
+        first: 10,
+        last: null,
+        after: null,
+        before: null
+      }
+
+      // const {
+      //   data,
+      //   loading,
+      //   error,
+      //   fetchMore,
+      //   refetch,
+      //   networkStatus
+      // } = useQuery(UIS, { parameters }, { client })
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      const query = await client.query({
+        query: UIS,
+        variables: { parameters }
+      })
+      // console.debug('QUERY RETURNED', query)
+      const { data, loading, error } = query
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      if (loading) {
+        return false
+      }
+
+      if (error) {
+        console.debug('%cloadFromDB [uis]: DATA RETURNED with error', error)
+        return false // <div>{JSON.stringify(error)}</div>
+      }
+
+      if (data) {
+        console.debug('%cloadFromDB [uis]: DATA RETURNED', ccm0, data, loading, error)
+
+        if (data.uis?.edges?.length) {
+
+          // const payload = data.uis.edges
+          const payload = data.uis.edges.map(({ node }) => ( // uiId, id, uri, slug, title
+            // <div key={node.uiId}>
+            //   wp uiId: {node.uiId}<br />
+            //   gql id: {node.id}<br />
+            //   uri: {node.uri}<br />
+            //   slug: {node.slug}<br />
+            //   title: {node.title}<br />
+            // </div>
+            node
+          ))
+
+          // set state from db
+          uiStore.update("uis", [...payload]) // nodes
+          console.debug('%cloadFromDB [uis] (after)', ccm3, uiStore.get("uis"))
+
+          uiStore.update("uiDB", uiStore.get("uis")[0]) // node
+          console.debug('%cloadFromDB {uiDB}', ccm1, uiStore.get("uiDB"))
+
+          this.saveToDisk()
+
+          // uiCurrent (overwrite -- mutate)
+          uiStore.update("ui", {
+            _id: newUUID(),
+            _ts: new Date().toISOString(),
+            name: 'UI: ' + uiStore.get("uiDB").title,
+            layers: [],
+            activeLayer: {
+              name: 'LAYER 0',
+              data: {}
+            },
+            // wp custom fields
+            data: uiStore.get("uiDB")
+          })
+          console.debug('%cloadFromDB {ui} (after)', ccm1, uiStore.get("ui"))
+
+          uiStore.update("uiCountDB", uiStore.get("uis").length)
+          console.debug('%cloadFromDB uiCountDB', ccm1, uiStore.get("uiCountDB"))
+
+          // save to disk
+          this.saveToDisk()
+
+          return true
+        }
+
+        else {
+          console.debug('%cloadFromDB [uis]: NO data.uis.edges', ccm3, data)
+          return false
+        }
+      }
+
+      console.debug('%cloadFromDB [uis]: OTHER ERROR', ccm3, data)
+      return false
+
+    } catch (err) {
+      console.debug('%cloadFromDB [uis]: err', ccm3, err)
+      return false
+    }
+  },
+
+  // load 'this' ui into the React Three Fiber view
+  load: function (id = null) {
+    try {
+
+      ui = uiStore.get("ui")
+      console.debug('%cload {ui}: this', ccm1, ui, this)
+
+      if (ui) {
+        return true
+      }
+
+      return false
+
+    } catch (err) {
+      console.debug('%cload {ui}: err', ccm3, err)
+      return false
+    }
+  }
+} // uiActions
 
 // ==============================================================
 // ==============================================================
 // ==============================================================
 // File
+// ** ThreeDs use Files as Assets one-to-many relationships
 
+const file = (name = 'FILE 0', layerName = 'LAYER 0') => ({
+  _id: newUUID(),
+  _ts: new Date().toISOString(),
+  layers: [],
+  activeLayer: {
+    name: layerName,
+    data: {}
+  }
+})
+
+// ** File Store
 export const fileStore = create({
   _id: newUUID(),
   _ts: new Date().toISOString(),
   fileCount: 0,
   files: [],
-  file: {
-    _id: newUUID(),
-    _ts: new Date().toISOString(),
-    layers: [],
-    activeLayer: {
-      name: 'LAYER 0',
-      data: {}
-    }
-  },
+  file: file(), // {},
+
 }) // fileStore
 
-export const fileActions = create((set) => ({
-  increaseCount: () => set(
-    (state) => (
-      { fileCount: state.fileCount + 1 }
-    )
-  ),
-  removeAll: () => set(
-    {
-      fileCount: 0,
-      files: []
+// ** File Actions
+export const fileActions = {
+
+  increaseCount: (n = 1) => {
+    return (state) => state + n
+  },
+
+  removeAll: function () {
+    const removeItem = localStorage.removeItem('threed_fileHistory')
+    fileStore.update('files', [])
+    fileStore.update('file', {})
+    fileStore.update('fileCount', 0)
+    fileStore.update('filesDB', [])
+    fileStore.update('fileDB', {})
+    fileStore.update('fileCountDB', 0)
+    console.debug('%cremoveAll [files]', ccm2, true)
+  },
+
+  // add a new current 'this' file
+  addNew: function () {
+
+    console.debug('%caddNew [files] (before)', ccm1, fileStore.get("files"))
+
+    // create a new one
+    if (Object.keys(fileStore.get("file")).length === 0) {
+      fileStore.update("file", file())
     }
-  ),
-})) // fileActions
+    // save + update old one
+    else {
+      // fileHistory (save existing before mutating, if not empty)
+      fileStore.update("files", [
+        fileStore.get("file"),
+        ...fileStore.get("files")
+      ])
+      console.debug('%caddNew [files] (during)', ccm1, fileStore.get("files"))
+
+      // fileCount
+      // fileStore.update("fileCount", fileStore.get("fileCount") + 1) // manual
+      fileStore.update("fileCount", fileStore.get("files").length) // automatic
+      // console.debug('%caddNew {fileCount}', ccm3, fileStore.get("fileCount"))
+      // console.debug('%caddNew [files]', ccm3, fileStore.get("files").length)
+
+      // fileCurrent (overwrite -- mutate)
+      fileStore.update("file", {
+        _id: newUUID(),
+        _ts: new Date().toISOString(),
+        name: 'FILE 1',
+        layers: [],
+        activeLayer: {
+          name: 'LAYER 0',
+          data: {}
+        }
+      })
+    }
+    console.debug('%caddNew {file}', ccm1, fileStore.get("file"))
+
+    // save the new one and the old ones
+    // fileHistory (save recently mutated)
+    fileStore.update("files", [
+      fileStore.get("file"),
+      ...fileStore.get("files")
+    ])
+    console.debug('%caddNew [files] (after)', ccm1, fileStore.get("files"))
+
+    // fileCount
+    // fileStore.update("fileCount", fileStore.get("fileCount") + 1) // manual
+    fileStore.update("fileCount", fileStore.get("files").length) // automatic
+    // console.debug('%caddNew {fileCount}', ccm3, fileStore.get("fileCount"))
+    // console.debug('%caddNew [files]', ccm3, fileStore.get("files").length)
+
+    // saveToDisk
+    // get().saveToDisk()
+    this.saveToDisk()
+    // loadFromDisk
+    // get().loadFromDisk()
+    this.loadFromDisk()
+
+    // console.debug('%caddNew', ccm1, get().file)
+  },
+
+  save: function () {
+    // saveToDisk
+    // get().saveToDisk()
+    this.saveToDisk()
+    // saveToDB (coming soon !!!)
+    // this.saveToDB()
+  },
+
+  // save data to browser local storage
+  saveToDisk: function () {
+    try {
+      localStorage.setItem(
+        'threed_fileHistory',
+        JSON.stringify({
+          subject: 'files',
+          payload: fileStore.get("files")
+        })
+      )
+      console.debug('%csaveToDisk [files]', ccm1, fileStore.get("files"))
+      return true
+    } catch (err) {
+      console.debug('%csaveToDisk [files] err', ccm2, err)
+      return false
+    }
+  },
+
+  // get data from browser local storage
+  loadFromDisk: function () {
+    try {
+      const query = JSON.parse(localStorage.getItem('threed_fileHistory'))
+      if (query) {
+        console.debug('%cloadFromDisk [files] QUERY?', ccm3, query)
+        const { payload } = query
+        console.debug('%cloadFromDisk [files] QUERY.PAYLOAD?', ccm3, payload)
+
+        if (payload.length) {
+          console.debug('%cloadFromDisk [files]', ccm3, true) // payload
+
+          fileStore.update("files", [...payload])
+          console.debug('%cloadFromDisk [files] (after)', ccm3, fileStore.get("files"))
+
+          fileStore.update("file", fileStore.get("files")[0])
+          console.debug('%cloadFromDisk {file} (after)', ccm3, fileStore.get("file"))
+
+          return true
+        }
+
+        else {
+          console.debug('%cloadFromDisk [files] EMPTY QUERY.PAYLOAD?', ccm3, query)
+        }
+      }
+      else {
+        console.debug('%cloadFromDisk [files] NOTHING TO LOAD', ccm3, query)
+      }
+      return false
+
+    } catch (err) {
+      console.debug('%cloadFromDisk [files] err', ccm2, err)
+      return false
+    }
+  },
+
+  // save data to db via graphql mutation
+  saveToDB: async function (client) {
+    try {
+      // const _this = this
+      // console.debug('%csaveToDB this', ccm0, this)
+
+      console.debug('%csaveToDB [files]', ccm2, false)
+      return false
+
+    } catch (err) {
+      console.debug('%csaveToDB [files]: err', ccm3, err)
+      return false
+    }
+  },
+
+  // get data from db via graphql query
+  loadFromDB: async function (client) {
+    try {
+      // const _this = this
+      // console.debug('%cloadFromDB this', ccm0, this)
+
+      const FILES = GetFiles // .gql
+
+      const parameters = {
+        first: 10,
+        last: null,
+        after: null,
+        before: null
+      }
+
+      // const {
+      //   data,
+      //   loading,
+      //   error,
+      //   fetchMore,
+      //   refetch,
+      //   networkStatus
+      // } = useQuery(FILES, { parameters }, { client })
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      const query = await client.query({
+        query: FILES,
+        variables: { parameters }
+      })
+      // console.debug('QUERY RETURNED', query)
+      const { data, loading, error } = query
+      // console.debug('DATA RETURNED', data, loading, error)
+
+      if (loading) {
+        return false
+      }
+
+      if (error) {
+        console.debug('%cloadFromDB [files]: DATA RETURNED with error', error)
+        return false // <div>{JSON.stringify(error)}</div>
+      }
+
+      if (data) {
+        console.debug('%cloadFromDB [files]: DATA RETURNED', ccm0, data, loading, error)
+
+        if (data.files?.edges?.length) {
+
+          // const payload = data.files.edges
+          const payload = data.files.edges.map(({ node }) => ( // fileId, id, uri, slug, title
+            // <div key={node.fileId}>
+            //   wp fileId: {node.fileId}<br />
+            //   gql id: {node.id}<br />
+            //   uri: {node.uri}<br />
+            //   slug: {node.slug}<br />
+            //   title: {node.title}<br />
+            // </div>
+            node
+          ))
+
+          // set state from db
+          fileStore.update("files", [...payload]) // nodes
+          console.debug('%cloadFromDB [files] (after)', ccm3, fileStore.get("files"))
+
+          fileStore.update("fileDB", fileStore.get("files")[0]) // node
+          console.debug('%cloadFromDB {fileDB}', ccm1, fileStore.get("fileDB"))
+
+          this.saveToDisk()
+
+          // fileCurrent (overwrite -- mutate)
+          fileStore.update("file", {
+            _id: newUUID(),
+            _ts: new Date().toISOString(),
+            name: 'FILE: ' + fileStore.get("fileDB").title,
+            layers: [],
+            activeLayer: {
+              name: 'LAYER 0',
+              data: {}
+            },
+            // wp custom fields
+            data: fileStore.get("fileDB")
+          })
+          console.debug('%cloadFromDB {file} (after)', ccm1, fileStore.get("file"))
+
+          fileStore.update("fileCountDB", fileStore.get("files").length)
+          console.debug('%cloadFromDB fileCountDB', ccm1, fileStore.get("fileCountDB"))
+
+          // save to disk
+          this.saveToDisk()
+
+          return true
+        }
+
+        else {
+          console.debug('%cloadFromDB [files]: NO data.files.edges', ccm3, data)
+          return false
+        }
+      }
+
+      console.debug('%cloadFromDB [files]: OTHER ERROR', ccm3, data)
+      return false
+
+    } catch (err) {
+      console.debug('%cloadFromDB [files]: err', ccm3, err)
+      return false
+    }
+  },
+
+  // load 'this' file into the React Three Fiber view
+  load: function (id = null) {
+    try {
+
+      file = fileStore.get("file")
+      console.debug('%cload {file}: this', ccm1, file, this)
+
+      if (file) {
+        return true
+      }
+
+      return false
+
+    } catch (err) {
+      console.debug('%cload {file}: err', ccm3, err)
+      return false
+    }
+  }
+} // fileActions
 
 // ==============================================================
 // ==============================================================
 // ==============================================================
 // Bear
 
+const bear = {}
+
+// ** Bear Store
 export const bearStore = create({
   bears: 0,
 }) // bearStore
 
+// ** Bear Actions
 export const bearActions = create((set) => ({
   increaseCount: () => set((state) => ({ bears: state.bears + 1 })),
   removeAll: () => set({ bears: 0 }),
@@ -748,6 +1867,9 @@ export const bearActions = create((set) => ({
 // ==============================================================
 // Modal
 
+const modal = {}
+
+// ** Modal Store
 export const modalStore = create({
   isOpenModalAbout: false,
   isOpenModalModel3d: false,
@@ -755,6 +1877,7 @@ export const modalStore = create({
   isOpenModalShare: false,
 }) // modalStore
 
+// ** Modal Actions
 export const modalActions = {
   handleOpenModalAbout: (e = null) => {
     modalStore.update("isOpenModalAbout", true)
@@ -795,7 +1918,7 @@ export const modalActions = {
 // ==============================================================
 // Scene
 
-const scene = (sceneName = 'SCENE 0', layerName = 'LAYER 0') => ({
+const scene = (name = 'SCENE 0', layerName = 'LAYER 0') => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
   name: sceneName,
@@ -806,14 +1929,9 @@ const scene = (sceneName = 'SCENE 0', layerName = 'LAYER 0') => ({
   },
   // wp custom fields
   data: {}, // sceneStore.get("sceneDB")
-  //
-  //
-  //
 })
 
-// =========================================================
 // ** Scene Store
-
 export const sceneStore = create({
   _id: newUUID(),
   _ts: new Date().toISOString(),
@@ -832,9 +1950,7 @@ export const sceneStore = create({
 
 }) // sceneStore
 
-// =========================================================
 // ** Scene Actions
-
 export const sceneActions = {
 
   increaseCount: (n = 1) => {
@@ -995,7 +2111,7 @@ export const sceneActions = {
   loadFromDB: async function (client) {
     try {
       // const _this = this
-      // console.debug('sceneActions this', this)
+      // console.debug('%cloadFromDB this', ccm0, this)
 
       const SCENES = GetScenes // .gql
 
@@ -1099,15 +2215,18 @@ export const sceneActions = {
   },
 
   // load 'this' scene into the React Three Fiber view
-  load: function () {
+  load: function (id = null, r3f = null) {
     try {
+
       scene = sceneStore.get("scene")
-      console.debug('%cload {scene}: this', ccm1, scene)
+      console.debug('%cload {scene}: this', ccm1, scene, this)
+
       if (scene) {
         return true
       }
 
       return false
+
     } catch (err) {
       console.debug('%cload {scene}: err', ccm3, err)
       return false
@@ -1137,9 +2256,7 @@ const allotment = (allotmentName = 'ALLOTMENT 0', layerName = 'LAYER 0') => ({
   //
 })
 
-// =========================================================
 // ** Allotment Store
-
 export const allotmentStore = create({
   _id: newUUID(),
   _ts: new Date().toISOString(),
@@ -1158,9 +2275,7 @@ export const allotmentStore = create({
 
 }) // allotmentStore
 
-// =========================================================
 // ** Allotment Actions
-
 export const allotmentActions = {
 
   increaseCount: (n = 1) => {
@@ -1320,7 +2435,7 @@ export const allotmentActions = {
   loadFromDB: async function (client) {
     try {
       // const _this = this
-      // console.debug('allotmentActions this', this)
+      // console.debug('%cloadFromDB this', ccm0, this)
 
       const ALLOTMENTS = GetAllotments // .gql
 
@@ -1443,9 +2558,7 @@ const bed = (bedName = 'BED 0', layerName = 'LAYER 0') => ({
   //
 })
 
-// =========================================================
 // ** Bed Store
-
 export const bedStore = create({
   _id: newUUID(),
   _ts: new Date().toISOString(),
@@ -1464,9 +2577,7 @@ export const bedStore = create({
 
 }) // bedStore
 
-// =========================================================
 // ** Bed Actions
-
 export const bedActions = {
 
   increaseCount: (n = 1) => {
@@ -1626,7 +2737,7 @@ export const bedActions = {
   loadFromDB: async function (client) {
     try {
       // const _this = this
-      // console.debug('bedActions this', this)
+      // console.debug('%cloadFromDB this', ccm0, this)
 
       const BEDS = GetBeds // .gql
 
@@ -1749,9 +2860,7 @@ const plant = (plantName = 'PLANT 0', layerName = 'LAYER 0') => ({
   //
 })
 
-// =========================================================
 // ** Plant Store
-
 export const plantStore = create({
   _id: newUUID(),
   _ts: new Date().toISOString(),
@@ -1770,9 +2879,7 @@ export const plantStore = create({
 
 }) // plantStore
 
-// =========================================================
 // ** Plant Actions
-
 export const plantActions = {
 
   increaseCount: (n = 1) => {
@@ -1932,7 +3039,7 @@ export const plantActions = {
   loadFromDB: async function (client) {
     try {
       // const _this = this
-      // console.debug('plantActions this', this)
+      // console.debug('%cloadFromDB this', ccm0, this)
 
       const PLANTS = GetPlants // .gql
 
@@ -2055,9 +3162,7 @@ const plantingPlan = (plantingPlanName = 'PLANTINGPLAN 0', layerName = 'LAYER 0'
   //
 })
 
-// =========================================================
 // ** PlantingPlan Store
-
 export const plantingPlanStore = create({
   _id: newUUID(),
   _ts: new Date().toISOString(),
@@ -2076,9 +3181,7 @@ export const plantingPlanStore = create({
 
 }) // plantingPlanStore
 
-// =========================================================
 // ** PlantingPlan Actions
-
 export const plantingPlanActions = {
 
   increaseCount: (n = 1) => {
@@ -2238,7 +3341,7 @@ export const plantingPlanActions = {
   loadFromDB: async function (client) {
     try {
       // const _this = this
-      // console.debug('plantingPlanActions this', this)
+      // console.debug('%cloadFromDB this', ccm0, this)
 
       const PLANTINGPLANS = GetPlantingPlans // .gql
 
@@ -2347,24 +3450,22 @@ export const plantingPlanActions = {
 
 // export const useStore = (sel) => useStoreImpl(sel, shallow)
 const useStore = {
-  threedStore, threedActions,
+  uiStore, uiActions,
+  modalStore, modalActions,
   projectStore, projectActions,
   planStore, planActions,
+  threedStore, threedActions,
   fileStore, fileActions,
-  bearStore, bearActions,
-  modalStore, modalActions,
   sceneStore, sceneActions,
   allotmentStore, allotmentActions,
   bedStore, bedActions,
   plantStore, plantActions,
   plantingPlanStore, plantingPlanActions,
+  bearStore, bearActions,
 }
 
-export { useStore }
-// export default useStore
-
-// ???
-// export { getState, setState }
+// export { useStore }
+export default useStore
 
 // ==============================================================
 // ** NOTES AND TESTING BELOW ...
