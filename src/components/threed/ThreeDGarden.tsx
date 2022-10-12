@@ -707,6 +707,9 @@ let wallMaterial = {
 }
 // << THREE
 
+let inclination = 0
+let azimuth = 0
+
 // GROUPS
 // Paper.Group !! 2D
 // these should be arrays [] ??? YES, CHANGED
@@ -727,11 +730,8 @@ const guidesGroup: Object = {} // new paper.Group()
 const toolsGroup: Object = {} // new paper.Group()
 const gridGroup: Object = {} // new paper.Group()
 
-
-let inclination = 0
-let azimuth = 0
-
-
+// ==========================================================
+// ==========================================================
 // ==========================================================
 // COMPONENTS
 
