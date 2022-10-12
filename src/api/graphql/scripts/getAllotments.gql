@@ -35,9 +35,9 @@ query GetAllotments ($first: Int, $last: Int, $after: String, $before: String) {
         title
         uri
         # custom fields
+        allotmentId
         allotmentColor
         allotmentHeightY
-        allotmentId
         allotmentLengthZ
         allotmentOrientation
         allotmentScene {

@@ -1,15 +1,11 @@
 type Scene {
   id: ID!
   name: String!
-  username: String!
-  email: String!
-  phone: String!
-  website: String!
 }
 
 type Query {
   getScenes: [Scene]
     @rest(
-      endpoint:"https://jsonplaceholder.typicode.com/scenes"
+      endpoint:"https://threed.design.local/pods/v1/scenes"
     )
 }

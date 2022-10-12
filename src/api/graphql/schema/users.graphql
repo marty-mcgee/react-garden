@@ -10,6 +10,6 @@ type User {
 type Query {
   getUsers: [User]
     @rest(
-      endpoint:"https://jsonplaceholder.typicode.com/users"
+      endpoint:"https://threed.design.local/pods/v1/users"
     )
 }
