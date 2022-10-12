@@ -1,3 +1,4 @@
+// ==============================================================
 // ** NEXT JS BUILD CONFIGURATION FILE
 
 if (!process.env.WP_GRAPHQL_API_URL) {

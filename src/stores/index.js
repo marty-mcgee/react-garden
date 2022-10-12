@@ -27,7 +27,7 @@ console.debug('%cThreeDGarden<FC,R3F>: {stores}', ccm4)
 // console.debug('%cuseQuery', ccm3, useQuery)
 
 // ==============================================================
-// TESTING
+// FOR TESTING PURPOSES
 // Apollo Client 3 (ac3)
 
 export const ac3Store = create({
@@ -108,249 +108,250 @@ export const TestAC3Store = () => {
 // ==============================================================
 // Store Actions (Common) TESTING !!!
 
-// const storeActions = (noun = "threed") => {
-const storeActions = {
+// // const storeActions = (noun = "threed") => {
+// const storeActions = {
 
-  increaseCount: (n = 1) => {
-    return (state) => state + n
-  },
+//   increaseCount: (n = 1) => {
+//     return (state) => state + n
+//   },
 
-  // removeAll: () => set(
-  //   {
-  //     threedCount: 0,
-  //     threeds: []
-  //   }
-  // ),
+//   // removeAll: () => set(
+//   //   {
+//   //     threedCount: 0,
+//   //     threeds: []
+//   //   }
+//   // ),
 
-  addNew: function () {
+//   addNew: function () {
 
-    console.debug('%cAddNew [] (before)', ccm1, threedStore.get("threeds"))
+//     console.debug('%cAddNew [] (before)', ccm1, threedStore.get("threeds"))
 
-    // create a new one
-    if (Object.keys(threedStore.get("threed")).length === 0) {
-      threedStore.update("threed", threed())
-    }
-    // save + update old one
-    else {
-      // threedHistory (save existing before mutating, if not empty)
-      threedStore.update("threeds", [
-        threedStore.get("threed"),
-        ...threedStore.get("threeds")
-      ])
-      console.debug('%cAddThreeD [threeds] (during)', ccm1, threedStore.get("threeds"))
+//     // create a new one
+//     if (Object.keys(threedStore.get("threed")).length === 0) {
+//       threedStore.update("threed", threed())
+//     }
+//     // save + update old one
+//     else {
+//       // threedHistory (save existing before mutating, if not empty)
+//       threedStore.update("threeds", [
+//         threedStore.get("threed"),
+//         ...threedStore.get("threeds")
+//       ])
+//       console.debug('%cAddThreeD [threeds] (during)', ccm1, threedStore.get("threeds"))
 
-      // threedCount (example)
-      // threedStore.update("threedCount", threedStore.get("threedCount") + 1) // manual
-      threedStore.update("threedCount", threedStore.get("threeds").length) // automatic
-      // console.debug('%cAddThreeD {threedCount}', ccm3, threedStore.get("threedCount"))
-      // console.debug('%cAddThreeD [threeds]', ccm3, threedStore.get("threeds").length)
+//       // threedCount (example)
+//       // threedStore.update("threedCount", threedStore.get("threedCount") + 1) // manual
+//       threedStore.update("threedCount", threedStore.get("threeds").length) // automatic
+//       // console.debug('%cAddThreeD {threedCount}', ccm3, threedStore.get("threedCount"))
+//       // console.debug('%cAddThreeD [threeds]', ccm3, threedStore.get("threeds").length)
 
-      // threedCurrent (overwrite -- mutate)
-      threedStore.update("threed", {
-        _id: newUUID(),
-        _ts: new Date().toISOString(),
-        name: 'THREED 1',
-        layers: [],
-        activeLayer: {
-          name: 'LAYER 0',
-          data: {}
-        }
-      })
-    }
-    console.debug('%cAddThreeD {threed}', ccm1, threedStore.get("threed"))
+//       // threedCurrent (overwrite -- mutate)
+//       threedStore.update("threed", {
+//         _id: newUUID(),
+//         _ts: new Date().toISOString(),
+//         name: 'THREED 1',
+//         layers: [],
+//         activeLayer: {
+//           name: 'LAYER 0',
+//           data: {}
+//         }
+//       })
+//     }
+//     console.debug('%cAddThreeD {threed}', ccm1, threedStore.get("threed"))
 
-    // save the new one and the old ones
-    // threedHistory (save recently mutated)
-    threedStore.update("threeds", [
-      threedStore.get("threed"),
-      ...threedStore.get("threeds")
-    ])
-    console.debug('%cAddThreeD [threeds] (after)', ccm1, threedStore.get("threeds"))
+//     // save the new one and the old ones
+//     // threedHistory (save recently mutated)
+//     threedStore.update("threeds", [
+//       threedStore.get("threed"),
+//       ...threedStore.get("threeds")
+//     ])
+//     console.debug('%cAddThreeD [threeds] (after)', ccm1, threedStore.get("threeds"))
 
-    // threedCount (example)
-    // threedStore.update("threedCount", threedStore.get("threedCount") + 1) // manual
-    threedStore.update("threedCount", threedStore.get("threeds").length) // automatic
-    // console.debug('%cAddThreeD {threedCount}', ccm3, threedStore.get("threedCount"))
-    // console.debug('%cAddThreeD [threeds]', ccm3, threedStore.get("threeds").length)
+//     // threedCount (example)
+//     // threedStore.update("threedCount", threedStore.get("threedCount") + 1) // manual
+//     threedStore.update("threedCount", threedStore.get("threeds").length) // automatic
+//     // console.debug('%cAddThreeD {threedCount}', ccm3, threedStore.get("threedCount"))
+//     // console.debug('%cAddThreeD [threeds]', ccm3, threedStore.get("threeds").length)
 
-    // saveToDisk
-    // get().saveToDisk()
-    this.saveToDisk()
-    // loadFromDisk
-    // get().loadFromDisk()
-    this.loadFromDisk()
+//     // saveToDisk
+//     // get().saveToDisk()
+//     this.saveToDisk()
+//     // loadFromDisk
+//     // get().loadFromDisk()
+//     this.loadFromDisk()
 
-    // console.debug('%cAddThreeD', ccm1, get().threed)
-  },
+//     // console.debug('%cAddThreeD', ccm1, get().threed)
+//   },
 
-  saveThreeD: function () {
-    // saveToDisk
-    // get().saveToDisk()
-    this.saveToDisk()
-    // saveToDB (coming soon !!!)
-    // this.saveToDB()
-  },
+//   saveThreeD: function () {
+//     // saveToDisk
+//     // get().saveToDisk()
+//     this.saveToDisk()
+//     // saveToDB (coming soon !!!)
+//     // this.saveToDB()
+//   },
 
-  // save data to browser local storage
-  saveToDisk: function () {
-    try {
-      localStorage.setItem(
-        'threed_threedHistory',
-        JSON.stringify({
-          subject: 'threeds',
-          payload: threedStore.get("threeds")
-        })
-      )
-      console.debug('%cSaveToDisk [threeds]', ccm1, threedStore.get("threeds"))
-      return true
-    } catch (err) {
-      console.debug('%cSaveToDisk [threeds] err', ccm2, err)
-      return false
-    }
-  },
+//   // save data to browser local storage
+//   saveToDisk: function () {
+//     try {
+//       localStorage.setItem(
+//         'threed_threedHistory',
+//         JSON.stringify({
+//           subject: 'threeds',
+//           payload: threedStore.get("threeds")
+//         })
+//       )
+//       console.debug('%cSaveToDisk [threeds]', ccm1, threedStore.get("threeds"))
+//       return true
+//     } catch (err) {
+//       console.debug('%cSaveToDisk [threeds] err', ccm2, err)
+//       return false
+//     }
+//   },
 
-  // get data from browser local storage
-  loadFromDisk: function () {
-    try {
-      const query = JSON.parse(localStorage.getItem('threed_threedHistory'))
-      if (query) {
-        console.debug('%cLoadFromDisk [threeds] PAYLOAD?', ccm3, query)
-        const { payload } = query
-        console.debug('%cLoadFromDisk [threeds] PAYLOAD.PAYLOAD?', ccm3, payload)
+//   // get data from browser local storage
+//   loadFromDisk: function () {
+//     try {
+//       const query = JSON.parse(localStorage.getItem('threed_threedHistory'))
+//       if (query) {
+//         console.debug('%cLoadFromDisk [threeds] QUERY?', ccm3, query)
+//         const { payload } = query
+//         console.debug('%cLoadFromDisk [threeds] QUERY.PAYLOAD?', ccm3, payload)
 
-        if (payload) {
-          console.debug('%cLoadFromDisk [threeds]', ccm3, true) // payload
+//         if (payload.length) {
+//           console.debug('%cLoadFromDisk [threeds]', ccm3, true) // payload
 
-          threedStore.update("threeds", [...payload])
-          console.debug('%cLoadFromDisk [threeds] (after)', ccm3, threedStore.get("threeds"))
+//           threedStore.update("threeds", [...payload])
+//           console.debug('%cLoadFromDisk [threeds] (after)', ccm3, threedStore.get("threeds"))
 
-          threedStore.update("threed", threedStore.get("threeds")[0])
-          console.debug('%cLoadFromDisk {threed} (after)', ccm3, threedStore.get("threed"))
+//           threedStore.update("threed", threedStore.get("threeds")[0])
+//           console.debug('%cLoadFromDisk {threed} (after)', ccm3, threedStore.get("threed"))
 
-          return true // payload // string[]
-        }
+//           return true // payload // string[]
+//         }
 
-        else {
-          console.debug('%cLoadFromDisk [threeds] NO PAYLOAD?', ccm3, query)
-        }
-      }
-      else {
-        console.debug('%cLoadFromDisk [threeds] NOTHING TO LOAD', ccm3, query)
-      }
-      return false
-    } catch (err) {
-      console.debug('%cLoadFromDisk [threeds] err', ccm2, err)
-      return false
-    }
-  },
+//         else {
+//           console.debug('%cLoadFromDisk [threeds] EMPTY QUERY.PAYLOAD?', ccm3, query)
+//         }
+//       }
+//       else {
+//         console.debug('%cLoadFromDisk [threeds] NOTHING TO LOAD', ccm3, query)
+//       }
+//       return false
+//     } catch (err) {
+//       console.debug('%cLoadFromDisk [threeds] err', ccm2, err)
+//       return false
+//     }
+//   },
 
-  // get data from db via graphql
-  loadFromDB: async function (client) {
-    try {
-      // const _this = this
-      // console.debug('threedActions this', this)
+//   // get data from db via graphql
+//   loadFromDB: async function (client) {
+//     try {
+//       // const _this = this
+//       // console.debug('threedActions this', this)
 
-      const THREEDS = GetThreeDs // .gql
+//       const THREEDS = GetThreeDs // .gql
 
-      const parameters = {
-        first: 10,
-        last: null,
-        after: null,
-        before: null
-      }
+//       const parameters = {
+//         first: 10,
+//         last: null,
+//         after: null,
+//         before: null
+//       }
 
-      // const {
-      //   data,
-      //   loading,
-      //   error,
-      //   fetchMore,
-      //   refetch,
-      //   networkStatus
-      // } = useQuery(THREEDS, { parameters }, { client })
-      // console.debug('DATA RETURNED', data, loading, error)
+//       // const {
+//       //   data,
+//       //   loading,
+//       //   error,
+//       //   fetchMore,
+//       //   refetch,
+//       //   networkStatus
+//       // } = useQuery(THREEDS, { parameters }, { client })
+//       // console.debug('DATA RETURNED', data, loading, error)
 
-      const query = await client.query({
-        query: THREEDS,
-        variables: { parameters }
-      })
-      // console.debug('QUERY RETURNED', query)
-      const { data, loading, error } = query
-      console.debug('DATA RETURNED', data, loading, error)
+//       const query = await client.query({
+//         query: THREEDS,
+//         variables: { parameters }
+//       })
+//       // console.debug('QUERY RETURNED', query)
+//       const { data, loading, error } = query
+//       console.debug('DATA RETURNED', data, loading, error)
 
-      if (loading) {
-        return <div>loading...</div>
-      }
+//       if (loading) {
+//         return <div>loading...</div>
+//       }
 
-      if (error) {
-        console.debug('%cLoadFromDB [threeds]: DATA RETURNED with error', error) // , data, loading, error
-        return <div>error.yoyoyo</div> // <div>{error}</div>
-      }
+//       if (error) {
+//         console.debug('%cLoadFromDB [threeds]: DATA RETURNED with error', error) // , data, loading, error
+//         return <div>error.yoyoyo</div> // <div>{error}</div>
+//       }
 
-      if (data) {
-        console.debug('%cLoadFromDB [threeds]: DATA RETURNED', ccm0, data, loading, error)
+//       if (data) {
+//         console.debug('%cLoadFromDB [threeds]: DATA RETURNED', ccm0, data, loading, error)
 
-        if (data.threeds?.edges?.length) {
+//         if (data.threeds?.edges?.length) {
 
-          // const payload = data.threeds.edges
-          const payload = data.threeds.edges.map(({ node }) => ( // threedId, id, uri, slug, title
-            // <div key={node.threedId}>
-            //   wp threedId: {node.threedId}<br />
-            //   gql id: {node.id}<br />
-            //   uri: {node.uri}<br />
-            //   slug: {node.slug}<br />
-            //   title: {node.title}<br />
-            // </div>
-            node
-          ))
+//           // const payload = data.threeds.edges
+//           const payload = data.threeds.edges.map(({ node }) => ( // threedId, id, uri, slug, title
+//             // <div key={node.threedId}>
+//             //   wp threedId: {node.threedId}<br />
+//             //   gql id: {node.id}<br />
+//             //   uri: {node.uri}<br />
+//             //   slug: {node.slug}<br />
+//             //   title: {node.title}<br />
+//             // </div>
+//             node
+//           ))
 
-          // set state from db
-          threedStore.update("threedsDB", [...payload]) // nodes
-          console.debug('%cLoadFromDB [threedsDB] (after)', ccm3, threedStore.get("threedsDB"))
+//           // set state from db
+//           threedStore.update("threedsDB", [...payload]) // nodes
+//           console.debug('%cLoadFromDB [threedsDB] (after)', ccm3, threedStore.get("threedsDB"))
 
-          threedStore.update("threedDB", threedStore.get("threedsDB")[0]) // node
-          console.debug('%cLoadFromDB {threedDB}', ccm1, threedStore.get("threedDB"))
+//           threedStore.update("threedDB", threedStore.get("threedsDB")[0]) // node
+//           console.debug('%cLoadFromDB {threedDB}', ccm1, threedStore.get("threedDB"))
 
-          this.saveToDisk()
+//           this.saveToDisk()
 
-          // threedCurrent (overwrite -- mutate)
-          threedStore.update("threed", {
-            _id: newUUID(),
-            _ts: new Date().toISOString(),
-            name: 'THREED: ' + threedStore.get("threedDB").title,
-            layers: [],
-            activeLayer: {
-              name: 'LAYER 0',
-              data: {}
-            },
-            // wp custom fields
-            data: threedStore.get("threedDB")
-          })
-          console.debug('%cLoadFromDB {threed} (after)', ccm1, threedStore.get("threed"))
+//           // threedCurrent (overwrite -- mutate)
+//           threedStore.update("threed", {
+//             _id: newUUID(),
+//             _ts: new Date().toISOString(),
+//             name: 'THREED: ' + threedStore.get("threedDB").title,
+//             layers: [],
+//             activeLayer: {
+//               name: 'LAYER 0',
+//               data: {}
+//             },
+//             // wp custom fields
+//             data: threedStore.get("threedDB")
+//           })
+//           console.debug('%cLoadFromDB {threed} (after)', ccm1, threedStore.get("threed"))
 
-          threedStore.update("threedCountDB", threedStore.get("threeds").length)
-          console.debug('%cLoadFromDB threedCountDB', ccm1, threedStore.get("threedCountDB"))
+//           threedStore.update("threedCountDB", threedStore.get("threeds").length)
+//           console.debug('%cLoadFromDB threedCountDB', ccm1, threedStore.get("threedCountDB"))
 
-          return <div>true</div> // payload // string[]
-        }
+//           return <div>true</div> // payload // string[]
+//         }
 
-        else {
-          console.debug('%cLoadFromDB [threeds]: NO data.threeds.edges', ccm3, data)
-          return <div>error.heyheyhey</div>
-        }
-      }
+//         else {
+//           console.debug('%cLoadFromDB [threeds]: NO data.threeds.edges', ccm3, data)
+//           return <div>error.heyheyhey</div>
+//         }
+//       }
 
-      console.debug('%cLoadFromDB [threeds]: OTHER ERROR', ccm3, data)
-      return <div>false</div>
+//       console.debug('%cLoadFromDB [threeds]: OTHER ERROR', ccm3, data)
+//       return <div>false</div>
 
-    } catch (err) {
-      console.debug('%cLoadFromDB [threeds]: DATA RETURNED with err', ccm3, err) // , data, loading, error
-      return <div>error.errerrerr</div>
-    }
-  }
+//     } catch (err) {
+//       console.debug('%cLoadFromDB [threeds]: DATA RETURNED with err', ccm3, err) // , data, loading, error
+//       return <div>error.errerrerr</div>
+//     }
+//   }
 
-} // storeActions
+// } // storeActions
 
 // ==============================================================
+//
 
 // ==============================================================
 // ThreeD
@@ -495,11 +496,11 @@ export const threedActions = {
     try {
       const query = JSON.parse(localStorage.getItem('threed_threedHistory'))
       if (query) {
-        console.debug('%cLoadFromDisk [threeds] PAYLOAD?', ccm3, query)
+        console.debug('%cLoadFromDisk [threeds] HEY HEY HEY QUERY?', ccm3, query)
         const { payload } = query
-        console.debug('%cLoadFromDisk [threeds] PAYLOAD.PAYLOAD?', ccm3, payload)
+        console.debug('%cLoadFromDisk [threeds] QUERY.PAYLOAD?', ccm3, payload)
 
-        if (payload) {
+        if (payload.length) {
           console.debug('%cLoadFromDisk [threeds]', ccm3, true) // payload
 
           threedStore.update("threeds", [...payload])
@@ -512,7 +513,7 @@ export const threedActions = {
         }
 
         else {
-          console.debug('%cLoadFromDisk [threeds] NO PAYLOAD?', ccm3, query)
+          console.debug('%cLoadFromDisk [threeds] EMPTY QUERY.PAYLOAD?', ccm3, query)
         }
       }
       else {
@@ -584,14 +585,18 @@ export const threedActions = {
             node
           ))
 
-          // set state from db
-          threedStore.update("threedsDB", [...payload]) // nodes
+          // set state threedsDB from db
+          threedStore.update("threedsDB", [...payload]) // edges[node]
           console.debug('%cLoadFromDB [threedsDB] (after)', ccm3, threedStore.get("threedsDB"))
 
           threedStore.update("threedDB", threedStore.get("threedsDB")[0]) // node
           console.debug('%cLoadFromDB {threedDB}', ccm1, threedStore.get("threedDB"))
 
-          this.saveToDisk()
+          // this.saveToDisk() ???
+
+          // set state threeds from threedDB
+          threedStore.update("threeds", [...threedStore.get("threedsDB"), ...threedStore.get("threeds")])
+          console.debug('%cLoadFromDB [threeds] (after)', ccm3, threedStore.get("threeds"))
 
           // threedCurrent (overwrite -- mutate)
           threedStore.update("threed", {
@@ -717,7 +722,7 @@ export const projectActions = create((set, get) => ({
   loadFromDisk: () => {
     try {
       const payload = localStorage.getItem('threed_projectHistory')
-      if (payload) {
+      if (payload.length) {
         console.debug('%cLoadFromDisk projects', ccm1, true) // payload
         return payload // string[]
       }
@@ -905,7 +910,7 @@ export const planActions = create((set, get) => ({
   loadFromDisk: () => {
     try {
       const payload = localStorage.getItem('threed_planHistory')
-      if (payload) {
+      if (payload.length) {
         console.debug('%cLoadFromDisk plans', ccm1, true) // payload
         return payload // string[]
       }
@@ -1178,11 +1183,11 @@ export const sceneActions = {
     try {
       const query = JSON.parse(localStorage.getItem('threed_sceneHistory'))
       if (query) {
-        console.debug('%cLoadFromDisk [scenes] PAYLOAD?', ccm3, query)
+        console.debug('%cLoadFromDisk [scenes] QUERY?', ccm3, query)
         const { payload } = query
-        console.debug('%cLoadFromDisk [scenes] PAYLOAD.PAYLOAD?', ccm3, payload)
+        console.debug('%cLoadFromDisk [scenes] QUERY.PAYLOAD?', ccm3, payload)
 
-        if (payload) {
+        if (payload.length) {
           console.debug('%cLoadFromDisk [scenes]', ccm3, true) // payload
 
           sceneStore.update("scenes", [...payload])
@@ -1195,7 +1200,7 @@ export const sceneActions = {
         }
 
         else {
-          console.debug('%cLoadFromDisk [scenes] NO PAYLOAD?', ccm3, query)
+          console.debug('%cLoadFromDisk [scenes] EMPTY QUERY.PAYLOAD?', ccm3, query)
         }
       }
       else {
@@ -1471,11 +1476,11 @@ export const allotmentActions = {
     try {
       const query = JSON.parse(localStorage.getItem('threed_allotmentHistory'))
       if (query) {
-        console.debug('%cLoadFromDisk [allotments] PAYLOAD?', ccm3, query)
+        console.debug('%cLoadFromDisk [allotments] QUERY?', ccm3, query)
         const { payload } = query
-        console.debug('%cLoadFromDisk [allotments] PAYLOAD.PAYLOAD?', ccm3, payload)
+        console.debug('%cLoadFromDisk [allotments] QUERY.PAYLOAD?', ccm3, payload)
 
-        if (payload) {
+        if (payload.length) {
           console.debug('%cLoadFromDisk [allotments]', ccm3, true) // payload
 
           allotmentStore.update("allotments", [...payload])
@@ -1488,7 +1493,7 @@ export const allotmentActions = {
         }
 
         else {
-          console.debug('%cLoadFromDisk [allotments] NO PAYLOAD?', ccm3, query)
+          console.debug('%cLoadFromDisk [allotments] EMPTY QUERY.PAYLOAD?', ccm3, query)
         }
       }
       else {
@@ -1764,11 +1769,11 @@ export const bedActions = {
     try {
       const query = JSON.parse(localStorage.getItem('threed_bedHistory'))
       if (query) {
-        console.debug('%cLoadFromDisk [beds] PAYLOADscene?', ccm3, query)
+        console.debug('%cLoadFromDisk [beds] QUERY?', ccm3, query)
         const { payload } = query
-        console.debug('%cLoadFromDisk [beds] PAYLOAD.PAYLOAD?', ccm3, payload)
+        console.debug('%cLoadFromDisk [beds] QUERY.PAYLOAD?', ccm3, payload)
 
-        if (payload) {
+        if (payload.length) {
           console.debug('%cLoadFromDisk [beds]', ccm3, true) // payload
 
           bedStore.update("beds", [...payload])
@@ -1781,7 +1786,7 @@ export const bedActions = {
         }
 
         else {
-          console.debug('%cLoadFromDisk [beds] NO PAYLOAD?', ccm3, query)
+          console.debug('%cLoadFromDisk [beds] EMPTY QUERY.PAYLOAD?', ccm3, query)
         }
       }
       else {
@@ -2057,11 +2062,11 @@ export const plantActions = {
     try {
       const query = JSON.parse(localStorage.getItem('threed_plantHistory'))
       if (query) {
-        console.debug('%cLoadFromDisk [plants] PAYLOAD?', ccm3, query)
+        console.debug('%cLoadFromDisk [plants] QUERY?', ccm3, query)
         const { payload } = query
-        console.debug('%cLoadFromDisk [plants] PAYLOAD.PAYLOAD?', ccm3, payload)
+        console.debug('%cLoadFromDisk [plants] QUERY.PAYLOAD?', ccm3, payload)
 
-        if (payload) {
+        if (payload.length) {
           console.debug('%cLoadFromDisk [plants]', ccm3, true) // payload
 
           plantStore.update("plants", [...payload])
@@ -2074,7 +2079,7 @@ export const plantActions = {
         }
 
         else {
-          console.debug('%cLoadFromDisk [plants] NO PAYLOAD?', ccm3, query)
+          console.debug('%cLoadFromDisk [plants] EMPTY QUERY.PAYLOAD?', ccm3, query)
         }
       }
       else {
@@ -2350,11 +2355,11 @@ export const plantingPlanActions = {
     try {
       const query = JSON.parse(localStorage.getItem('threed_plantingPlanHistory'))
       if (query) {
-        console.debug('%cLoadFromDisk [plantingPlans] PAYLOAD?', ccm3, query)
+        console.debug('%cLoadFromDisk [plantingPlans] QUERY?', ccm3, query)
         const { payload } = query
-        console.debug('%cLoadFromDisk [plantingPlans] PAYLOAD.PAYLOAD?', ccm3, payload)
+        console.debug('%cLoadFromDisk [plantingPlans] QUERY.PAYLOAD?', ccm3, payload)
 
-        if (payload) {
+        if (payload.length) {
           console.debug('%cLoadFromDisk [plantingPlans]', ccm3, true) // payload
 
           plantingPlanStore.update("plantingPlans", [...payload])
@@ -2367,7 +2372,7 @@ export const plantingPlanActions = {
         }
 
         else {
-          console.debug('%cLoadFromDisk [plantingPlans] NO PAYLOAD?', ccm3, query)
+          console.debug('%cLoadFromDisk [plantingPlans] EMPTY QUERY.PAYLOAD?', ccm3, query)
         }
       }
       else {
@@ -2513,3 +2518,49 @@ export { useStore }
 
 // ???
 // export { getState, setState }
+
+
+
+// ** NOTES AND TESTING BELOW ...
+// ==============================================================
+// ==============================================================
+// NOUN HISTORY
+
+/**
+ * @type {Object}
+ */
+// THREED HISTORY
+// const threedHistory: Object = []
+// let threedHistoryPosition = 0
+
+// PROJECT HISTORY
+// const projectHistory: Object[] = []
+// let projectHistoryPosition = 0
+
+// PLAN HISTORY
+// const planHistory: Object[] = []
+// let planHistoryPosition = 0
+
+// SIMULATION HISTORY
+// const simulationHistory: Object[] = []
+// let simulationHistoryPosition = 0
+
+// FILE HISTORY
+// const fileHistory: Object[] = []
+// let fileHistoryPosition = 0
+
+// SCENE HISTORY
+// const sceneHistory: Object[] = []
+// let sceneHistoryPosition = 0
+
+// ALLOTMENT HISTORY
+// const allotmentHistory: Object[] = []
+// let allotmentHistoryPosition = 0
+
+// BED HISTORY
+// const bedHistory: Object[] = []
+// let bedHistoryPosition = 0
+
+// PLANT HISTORY
+// const plantHistory: Object[] = []
+// let plantHistoryPosition = 0

@@ -91,7 +91,8 @@ const clientLocal = new ApolloClient({
   uri: uri,
   cache: new InMemoryCache({
     typePolicies: productStore.getTypePolicies()
-  })
+  }),
+  connectToDevTools: true,
 })
 
 // : FunctionComponent

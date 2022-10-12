@@ -370,6 +370,7 @@ const SceneInfoPanel: ReactNode = (): JSX.Element => {
       <Typography>scene._id: {scene._id}</Typography>
       <Typography>scene.name: {scene.name}</Typography>
       <Typography>scene.activeLayer.name: {scene.activeLayer?.name}</Typography>
+      <Typography>scene.data.title: {scene.data?.title}</Typography>
     </Box>
   )
 }
@@ -652,8 +653,8 @@ let backgroundRasterRatioX = 1
 let backgroundRasterRatioY = 1
 
 let levelButtons = ""
-let otherLayerWallsRasters: any[] = []
-let otherLayerFurnitureRasters: any[] = []
+let otherLayerWallsRasters: Object[] = []
+let otherLayerFurnitureRasters: Object[] = []
 
 const verticalGuides = {}
 const horizontalGuides = {}
@@ -709,17 +710,17 @@ let wallMaterial = {
 // GROUPS
 // Paper.Group !! 2D
 // these should be arrays [] ??? YES, CHANGED
-const furnitureGroup: any[] = []
+const furnitureGroup: Object[] = []
 // furnitureGroup[0] = new paper.Group()
-const wallsGroup: any[] = []
+const wallsGroup: Object[] = []
 // wallsGroup[0] = new paper.Group()
-const roofsGroup: any[] = []
+const roofsGroup: Object[] = []
 // roofsGroup[0] = new paper.Group()
-const floorsGroup: any[] = []
+const floorsGroup: Object[] = []
 // floorsGroup[0] = new paper.Group()
-const dimensionsGroup: any[] = []
+const dimensionsGroup: Object[] = []
 // dimensionsGroup[0] = new paper.Group()
-const textsGroup: any[] = []
+const textsGroup: Object[] = []
 // textsGroup[0] = new paper.Group()
 // these 3 should be const arrays [] ??
 const guidesGroup: Object = {} // new paper.Group()
@@ -729,46 +730,6 @@ const gridGroup: Object = {} // new paper.Group()
 
 let inclination = 0
 let azimuth = 0
-
-
-// ==========================================================
-// NOUN HISTORY
-
-// // THREED HISTORY
-const threedHistory: Object[] = []
-let threedHistoryPosition = 0
-
-// // PROJECT HISTORY
-const projectHistory: Object[] = []
-let projectHistoryPosition = 0
-
-// // PLAN HISTORY
-const planHistory: Object[] = []
-let planHistoryPosition = 0
-
-// // SIMULATION HISTORY
-const simulationHistory: Object[] = []
-let simulationHistoryPosition = 0
-
-// // FILE HISTORY
-const fileHistory: Object[] = []
-let fileHistoryPosition = 0
-
-// // SCENE HISTORY
-const sceneHistory: Object[] = []
-let sceneHistoryPosition = 0
-
-// // ALLOTMENT HISTORY
-const allotmentHistory: Object[] = []
-let allotmentHistoryPosition = 0
-
-// // BED HISTORY
-const bedHistory: Object[] = []
-let bedHistoryPosition = 0
-
-// // PLANT HISTORY
-const plantHistory: Object[] = []
-let plantHistoryPosition = 0
 
 
 // ==========================================================
@@ -785,7 +746,7 @@ const ModalAbout: ReactNode = (): JSX.Element => {
   // tabs
   const [tabModalAbout, setTabModalAbout] = useState(0)
   const handleChangeTabModalAbout = (event: SyntheticEvent, newValue: number) => {
-    setTabModalAbout(newValue);
+    setTabModalAbout(newValue)
   }
 
   // console.debug("ModalAbout")
@@ -3508,49 +3469,57 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
   // tabs
   const [tabInfoControl, setTabInfoControl] = useState(0)
   const handleChangeTabInfoControl = (event: SyntheticEvent, newValue: number) => {
-    setTabInfoControl(newValue);
+    setTabInfoControl(newValue)
   }
 
   // ==========================================================
   // Component onMount hook
   useEffect(() => {
-    // console.debug("ThreeDGarden onMount", word)
+    console.debug("%cThreeDGarden<FC,R3F>: onMount", word)
 
     // begin here ?? yes
     // bootManager()...
 
     // ==========================================================
-    // LOAD HISTORIES FROM DISK
+    // LOAD HISTORIES FROM DISK ??
+    // -- AND/OR --
+    // DO THIS STUFF WHEN ASKED BY AN EVENT/REQUEST
+
+    // ** THREED HISTORY
+    // useThreeDStore.getState().loadFromDisk() // zustand
+    // threedActions.loadFromDisk()
+    // useThreeDStore.getState().loadFromDB() // zustand
+    // threedActions.loadFromDB()
+    // const threedHistoryFromDisk = useThreeDStore.getState().loadFromDisk() // zustand
+    // console.debug("threedHistoryFromDisk", threedHistoryFromDisk)
+    // threedHistory.unshift(...threedHistoryFromDisk) // unshift to beginning of array[0]
+    // console.debug("threedHistory", threedHistory)
 
     // ** PROJECT HISTORY
-    // DO THIS STUFF WHEN ASKED BY AN EVENT/REQUEST
-    // useProjectStore.getState().loadFromDisk()
-    // useProjectStore.getState().loadFromDB()
-    // const projectHistoryFromDisk = useProjectStore.getState().loadFromDisk()
+    // useProjectStore.getState().loadFromDisk() // zustand
+    // useProjectStore.getState().loadFromDB() // zustand
+    // const projectHistoryFromDisk = useProjectStore.getState().loadFromDisk() // zustand
     // console.debug("projectHistoryFromDisk", projectHistoryFromDisk)
-    // DO THIS STUFF IN STORE !!!
-    // // console.debug("projectHistoryFromDisk.payload", projectHistoryFromDisk?.payload)
-    // const savedProject = projectHistoryFromDisk?.payload ? projectHistoryFromDisk.payload : []
-    // // console.debug("savedProject", savedProject)
-    // if (savedProject.length) {
-    //   projectHistory.unshift(...savedProject) // unshift to beginning of array[0]
-    // }
+    // projectHistory.unshift(...projectHistoryFromDisk) // unshift to beginning of array[0]
     // console.debug("projectHistory", projectHistory)
 
     // ** PLAN HISTORY
-    // DO THIS STUFF WHEN ASKED BY AN EVENT/REQUEST
-    // usePlanStore.getState().loadFromDisk()
-    // usePlanStore.getState().loadFromDB()
-    // const planHistoryFromDisk = usePlanStore.getState().loadFromDisk()
+    // usePlanStore.getState().loadFromDisk() // zustand
+    // usePlanStore.getState().loadFromDB() // zustand
+    // const planHistoryFromDisk = usePlanStore.getState().loadFromDisk() // zustand
     // console.debug("planHistoryFromDisk", planHistoryFromDisk)
-    // DO THIS STUFF IN STORE !!!
-    // // console.debug("planHistoryFromDisk.payload", planHistoryFromDisk?.payload)
-    // const savedPlan = planHistoryFromDisk?.payload ? planHistoryFromDisk.payload : []
-    // // console.debug("savedPlan", savedPlan)
-    // if (savedPlan.length) {
-    //   planHistory.unshift(...savedPlan) // unshift to beginning of array[0]
-    // }
+    // planHistory.unshift(...planHistoryFromDisk) // unshift to beginning of array[0]
     // console.debug("planHistory", planHistory)
+
+    // ** SCENE HISTORY
+    // useSceneStore.getState().loadFromDisk() // zustand
+    // sceneActions.loadFromDisk()
+    // useSceneStore.getState().loadFromDB() // zustand
+    // sceneActions.loadFromDB()
+    // const sceneHistoryFromDisk = useSceneStore.getState().loadFromDisk() // zustand
+    // console.debug("sceneHistoryFromDisk", sceneHistoryFromDisk)
+    // sceneHistory.unshift(...sceneHistoryFromDisk) // unshift to beginning of array[0]
+    // console.debug("sceneHistory", sceneHistory)
 
     return () => {
       // console.debug('ThreeDGarden onUnmount', word)
@@ -3574,7 +3543,7 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
           {/* React Three Fiber - View */}
           <ReactThreeFiberView />
 
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Box sx={{ borderTop: 1, borderBottom: 1, borderColor: 'divider' }}>
               <Tabs value={tabInfoControl} onChange={handleChangeTabInfoControl} aria-label="Info Control Panel">
                 <Tab label="ThreeDs" {...a11yProps(0)} />
                 <Tab label="Scenes" {...a11yProps(1)} />
@@ -3639,6 +3608,7 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
 
               <TestAC3Store />
               {/* <hr /> */}
+
             </MDTabPanel>
         </div>
 
