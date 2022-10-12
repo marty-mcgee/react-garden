@@ -2,13 +2,17 @@
 import { ApolloClient, InMemoryCache, useApolloClient, useQuery, gql } from '@apollo/client'
 import create from '~/api/graphql/createStore'
 // ** GraphQL Queries + Mutations (here, locally-specific data needs)
+import GetProjects from '~/api/graphql/scripts/getProjects.gql'
+import GetPlans from '~/api/graphql/scripts/getPlans.gql'
+import GetUIs from '~/api/graphql/scripts/getUIs.gql'
 import GetThreeDs from '~/api/graphql/scripts/getThreeDs.gql'
+import GetFiles from '~/api/graphql/scripts/getFiles.gql'
 import GetScenes from '~/api/graphql/scripts/getScenes.gql'
 import GetAllotments from '~/api/graphql/scripts/getAllotments.gql'
 import GetBeds from '~/api/graphql/scripts/getBeds.gql'
 import GetPlants from '~/api/graphql/scripts/getPlants.gql'
 import GetPlantingPlans from '~/api/graphql/scripts/getPlantingPlans.gql'
-// import GetProducts from '~/api/graphql/scripts/getProducts.gql'
+import GetProducts from '~/api/graphql/scripts/getProducts.gql'
 
 // ** React Imports (should not need in this script -- framework agnostic)
 // import React, { FunctionComponent, useState, useEffect, useRef, useMemo } from 'react'
@@ -434,6 +438,16 @@ export const projectStore = create({
   projects: [],
   project: project(), // {}
 
+  // track current + history
+  // projectCurrent: ^this,
+  projectHistory: [], // from local storage
+
+  // track payload from db
+  projectCountDB: 0, // example counter
+  projectsDB: [], // from db (mysql wordpress via graphql)
+  projectDB: {}, // pre-this project, ready to be mapped to 'this' project
+
+
 }) // projectStore
 
 // ** Project Actions
@@ -797,6 +811,15 @@ export const planStore = create({
   planCount: 0,
   plans: [],
   plan: plan(), // {}
+
+  // track current + history
+  // planCurrent: ^this,
+  planHistory: [], // from local storage
+
+  // track payload from db
+  planCountDB: 0, // example counter
+  plansDB: [], // from db (mysql wordpress via graphql)
+  planDB: {}, // pre-this plan, ready to be mapped to 'this' plan
 
 }) // planStore
 
@@ -1248,6 +1271,16 @@ export const uiStore = create({
   uis: [],
   ui: ui(), // {},
 
+  // track current + history
+  // uiCurrent: ^this,
+  uiHistory: [], // from local storage
+
+  // track payload from db
+  uiCountDB: 0, // example counter
+  uisDB: [], // from db (mysql wordpress via graphql)
+  uiDB: {}, // pre-this ui, ready to be mapped to 'this' ui
+
+
 }) // uiStore
 
 // ** UI Actions
@@ -1557,6 +1590,16 @@ export const fileStore = create({
   fileCount: 0,
   files: [],
   file: file(), // {},
+
+  // track current + history
+  // fileCurrent: ^this,
+  fileHistory: [], // from local storage
+
+  // track payload from db
+  fileCountDB: 0, // example counter
+  filesDB: [], // from db (mysql wordpress via graphql)
+  fileDB: {}, // pre-this file, ready to be mapped to 'this' file
+
 
 }) // fileStore
 

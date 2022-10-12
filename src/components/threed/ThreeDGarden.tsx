@@ -157,7 +157,7 @@ interface YOYOYO {
 // ==========================================================
 
 const {
-  interfaceStore, interfaceActions,
+  uiStore, uiActions,
   modalStore, modalActions,
   projectStore, projectActions,
   planStore, planActions,
@@ -173,6 +173,182 @@ const {
 
 // ==========================================================
 // FUNCTIONAL NOUNS
+// ==========================================================
+
+// ==========================================================
+// Project
+
+function ProjectInfoPanel() {
+
+  const projectCount = projectStore.useStore("projectCount")
+  const projects = projectStore.useStore("projects")
+  const project = projectStore.useStore("project")
+  const projectsDB = projectStore.useStore("projectsDB")
+  const projectDB = projectStore.useStore("projectDB")
+
+  return (
+    <Box>
+      {/* <Typography>{projectCount} projects around here ...</Typography> */}
+      <Typography>projects: {projects.length}</Typography>
+      <Typography>projectsDB: {projectsDB.length}</Typography>
+      <Typography>project._id: {project._id}</Typography>
+      <Typography>project._ts: {project._ts}</Typography>
+      <Typography>project.name: {project.name}</Typography>
+      <Typography>project.activeLayer.name: {project.activeLayer?.name}</Typography>
+      <Typography>project.data.title: {project.data?.title}</Typography>
+    </Box>
+  )
+}
+
+function ProjectControlPanel() {
+
+  const increaseCount = () => projectStore.update("projectCount", projectActions.increaseCount())
+
+  const addNew = () => projectActions.addNew()
+  const saveToDisk = () => projectActions.saveToDisk()
+  const loadFromDisk = () => projectActions.loadFromDisk()
+  const loadFromDB = (client) => projectActions.loadFromDB(client)
+  const saveToDB = (client) => projectActions.saveToDB(client)
+  const removeAll = () => projectActions.removeAll()
+
+  return (
+    <Box>
+      <Button onClick={addNew}>add new</Button>
+      <Button onClick={saveToDisk}>save to disk</Button>
+      <Button onClick={loadFromDisk}>load from disk</Button>
+      <ApolloConsumer>
+        {
+          client => (
+            <>
+              <Button onClick={() => saveToDB(client)}>save to db</Button>
+              <Button onClick={() => loadFromDB(client)}>load from db</Button>
+            </>
+          )
+        }
+      </ApolloConsumer>
+      <Button onClick={removeAll}>remove all</Button>
+      {/* <Button onClick={increaseCount}>add to count</Button> */}
+    </Box>
+  )
+}
+
+// ==========================================================
+// Plan
+
+function PlanInfoPanel() {
+
+  const planCount = planStore.useStore("planCount")
+  const plans = planStore.useStore("plans")
+  const plan = planStore.useStore("plan")
+  const plansDB = planStore.useStore("plansDB")
+  const planDB = planStore.useStore("planDB")
+
+  return (
+    <Box>
+      {/* <Typography>{planCount} plans around here ...</Typography> */}
+      <Typography>plans: {plans.length}</Typography>
+      <Typography>plansDB: {plansDB.length}</Typography>
+      <Typography>plan._id: {plan._id}</Typography>
+      <Typography>plan._ts: {plan._ts}</Typography>
+      <Typography>plan.name: {plan.name}</Typography>
+      <Typography>plan.activeLayer.name: {plan.activeLayer?.name}</Typography>
+      <Typography>plan.data.title: {plan.data?.title}</Typography>
+    </Box>
+  )
+}
+
+function PlanControlPanel() {
+
+  const increaseCount = () => planStore.update("planCount", planActions.increaseCount())
+
+  const addNew = () => planActions.addNew()
+  const saveToDisk = () => planActions.saveToDisk()
+  const loadFromDisk = () => planActions.loadFromDisk()
+  const loadFromDB = (client) => planActions.loadFromDB(client)
+  const saveToDB = (client) => planActions.saveToDB(client)
+  const removeAll = () => planActions.removeAll()
+
+  return (
+    <Box>
+      <Button onClick={addNew}>add new</Button>
+      <Button onClick={saveToDisk}>save to disk</Button>
+      <Button onClick={loadFromDisk}>load from disk</Button>
+      <ApolloConsumer>
+        {
+          client => (
+            <>
+              <Button onClick={() => saveToDB(client)}>save to db</Button>
+              <Button onClick={() => loadFromDB(client)}>load from db</Button>
+            </>
+          )
+        }
+      </ApolloConsumer>
+      <Button onClick={removeAll}>remove all</Button>
+      {/* <Button onClick={increaseCount}>add to count</Button> */}
+    </Box>
+  )
+}
+
+// ==========================================================
+// Simulation
+
+// ==========================================================
+// UI
+
+function UIInfoPanel() {
+
+  const uiCount = uiStore.useStore("uiCount")
+  const uis = uiStore.useStore("uis")
+  const ui = uiStore.useStore("ui")
+  const uisDB = uiStore.useStore("uisDB")
+  const uiDB = uiStore.useStore("uiDB")
+
+  return (
+    <Box>
+      {/* <Typography>{uiCount} uis around here ...</Typography> */}
+      <Typography>uis: {uis.length}</Typography>
+      <Typography>uisDB: {uisDB.length}</Typography>
+      <Typography>ui._id: {ui._id}</Typography>
+      <Typography>ui._ts: {ui._ts}</Typography>
+      <Typography>ui.name: {ui.name}</Typography>
+      <Typography>ui.activeLayer.name: {ui.activeLayer?.name}</Typography>
+      <Typography>ui.data.title: {ui.data?.title}</Typography>
+    </Box>
+  )
+}
+
+function UIControlPanel() {
+
+  const increaseCount = () => uiStore.update("uiCount", uiActions.increaseCount())
+
+  const addNew = () => uiActions.addNew()
+  const saveToDisk = () => uiActions.saveToDisk()
+  const loadFromDisk = () => uiActions.loadFromDisk()
+  const loadFromDB = (client) => uiActions.loadFromDB(client)
+  const saveToDB = (client) => uiActions.saveToDB(client)
+  const removeAll = () => uiActions.removeAll()
+
+  return (
+    <Box>
+      <Button onClick={addNew}>add new</Button>
+      <Button onClick={saveToDisk}>save to disk</Button>
+      <Button onClick={loadFromDisk}>load from disk</Button>
+      <ApolloConsumer>
+        {
+          client => (
+            <>
+              <Button onClick={() => saveToDB(client)}>save to db</Button>
+              <Button onClick={() => loadFromDB(client)}>load from db</Button>
+            </>
+          )
+        }
+      </ApolloConsumer>
+      <Button onClick={removeAll}>remove all</Button>
+      {/* <Button onClick={increaseCount}>add to count</Button> */}
+    </Box>
+  )
+}
+
 // ==========================================================
 // ThreeD
 
@@ -193,7 +369,7 @@ const ThreeDInfoPanel = () => {
       <Typography>threed._ts: {threed._ts}</Typography>
       <Typography>threed.name: {threed.name}</Typography>
       <Typography>threed.activeLayer.name: {threed.activeLayer?.name}</Typography>
-      <Typography>threed.data.title: {scene.data?.title}</Typography>
+      <Typography>threed.data.title: {threed.data?.title}</Typography>
     </Box>
   )
 }
@@ -231,134 +407,61 @@ const ThreeDControlPanel = () => {
 }
 
 // ==========================================================
-// Project
-
-function ProjectInfoPanel() {
-  const projectCount = projectStore((state: any) => state.projectCount)
-  const projects = projectStore((state: any) => state.projects)
-  const project = projectStore((state: any) => state.project)
-  // console.debug("%cCurrentProject", ccm1, project)
-
-  return (
-    <Box>
-      <Typography>{projects.length} projects around here ...</Typography>
-      {/* <Typography>{projectCount} projects around here ...</Typography> */}
-    </Box>
-  )
-}
-
-function ProjectControlPanel() {
-  // const increaseProjectCount = projectActions((state: any) => state.increaseProjectCount)
-
-  const addProject = projectActions((state: any) => state.addProject)
-  const saveToDisk = projectActions((state: any) => state.saveToDisk)
-  const loadFromDisk = projectActions((state: any) => state.loadFromDisk)
-
-  // const addProject = projectActions.getState().addProject() // this executes automatically !! bad
-  // const addProjectAsFunction = () => {
-  //   const addProject = projectActions.getState().addProject() // this executes automatically !! good
-  // }
-
-  return (
-    <Box>
-      {/* <Button onClick={addProjectAsFunction}>add project()</Button> */}
-      <Button onClick={addProject}>add project</Button>
-      <Button onClick={saveToDisk}>save to disk</Button>
-      <Button onClick={loadFromDisk}>load from disk</Button>
-      {/* <Button onClick={increaseProjectCount}>add to project count</Button> */}
-    </Box>
-  )
-}
-
-// ==========================================================
-// Plan
-
-function PlanInfoPanel() {
-  const planCount = planStore((state: any) => state.planCount)
-  const plans = planStore((state: any) => state.plans)
-  const plan = planStore((state: any) => state.plan)
-  // console.debug("%cCurrentPlan", ccm1, plan)
-
-  return (
-    <Box>
-      <Typography>{plans.length} plans around here ...</Typography>
-      {/* <Typography>{planCount} plans around here ...</Typography> */}
-    </Box>
-  )
-}
-
-function PlanControlPanel() {
-  // const increasePlanCount = planActions((state: any) => state.increasePlanCount)
-
-  const addPlan = planActions((state: any) => state.addPlan)
-  const saveToDisk = planActions((state: any) => state.saveToDisk)
-  const loadFromDisk = planActions((state: any) => state.loadFromDisk)
-
-  // const addPlan = planActions.getState().addPlan() // this executes automatically !! bad
-  // const addPlanAsFunction = () => {
-  //   const addPlan = planActions.getState().addPlan() // this executes automatically !! good
-  // }
-
-  return (
-    <Box>
-      {/* <Button onClick={addPlanAsFunction}>add plan()</Button> */}
-      <Button onClick={addPlan}>add plan</Button>
-      <Button onClick={saveToDisk}>save to disk</Button>
-      <Button onClick={loadFromDisk}>load from disk</Button>
-      {/* <Button onClick={increasePlanCount}>add to plan count</Button> */}
-    </Box>
-  )
-}
-
-// ==========================================================
 // File
 
 function FileInfoPanel() {
-  const fileCount = fileStore((state: any) => state.fileCount)
-  const files = fileStore((state: any) => state.files)
-  const file = fileStore((state: any) => state.file)
 
-  // console.debug("%cCurrentFile", ccm1, file)
+  const fileCount = fileStore.useStore("fileCount")
+  const files = fileStore.useStore("files")
+  const file = fileStore.useStore("file")
+  const filesDB = fileStore.useStore("filesDB")
+  const fileDB = fileStore.useStore("fileDB")
+
   return (
     <Box>
-      <Typography>{files.length} files around here ...</Typography>
       {/* <Typography>{fileCount} files around here ...</Typography> */}
+      <Typography>files: {files.length}</Typography>
+      <Typography>filesDB: {filesDB.length}</Typography>
+      <Typography>file._id: {file._id}</Typography>
+      <Typography>file._ts: {file._ts}</Typography>
+      <Typography>file.name: {file.name}</Typography>
+      <Typography>file.activeLayer.name: {file.activeLayer?.name}</Typography>
+      <Typography>file.data.title: {file.data?.title}</Typography>
     </Box>
   )
 }
 
 function FileControlPanel() {
-  const increaseFileCount = fileActions((state: any) => state.increaseFileCount)
 
-  const addFile = fileActions((state: any) => state.addFile)
+  const increaseCount = () => fileStore.update("fileCount", fileActions.increaseCount())
+
+  const addNew = () => fileActions.addNew()
+  const saveToDisk = () => fileActions.saveToDisk()
+  const loadFromDisk = () => fileActions.loadFromDisk()
+  const loadFromDB = (client) => fileActions.loadFromDB(client)
+  const saveToDB = (client) => fileActions.saveToDB(client)
+  const removeAll = () => fileActions.removeAll()
 
   return (
     <Box>
-      <Button onClick={addFile}>add file</Button>
-      {/* <Button onClick={increaseFileCount}>add to file count</Button> */}
+      <Button onClick={addNew}>add new</Button>
+      <Button onClick={saveToDisk}>save to disk</Button>
+      <Button onClick={loadFromDisk}>load from disk</Button>
+      <ApolloConsumer>
+        {
+          client => (
+            <>
+              <Button onClick={() => saveToDB(client)}>save to db</Button>
+              <Button onClick={() => loadFromDB(client)}>load from db</Button>
+            </>
+          )
+        }
+      </ApolloConsumer>
+      <Button onClick={removeAll}>remove all</Button>
+      {/* <Button onClick={increaseCount}>add to count</Button> */}
     </Box>
   )
 }
-
-// ==========================================================
-// Simulation
-
-
-// ==========================================================
-// Bear
-
-function BearInfoPanel() {
-  const bears = bearStore((state: any) => state.bears)
-  return <Box>{bears} bears around here ...</Box>
-}
-
-function BearControlPanel() {
-  const increaseBearCount = bearActions((state: any) => state.increaseBearCount)
-  return <Button onClick={increaseBearCount}>add a bear</Button>
-}
-
-// ==========================================================
-// Modal
 
 // ==========================================================
 // Scene
@@ -643,6 +746,19 @@ const PlantingPlanControlPanel: ReactNode = (): JSX.Element => {
       {/* <Button onClick={increaseCount}>add to count</Button> */}
     </Box>
   )
+}
+
+// ==========================================================
+// Bear
+
+function BearInfoPanel() {
+  const bears = bearStore((state: any) => state.bears)
+  return <Box>{bears} bears around here ...</Box>
+}
+
+function BearControlPanel() {
+  const increaseBearCount = bearActions((state: any) => state.increaseBearCount)
+  return <Button onClick={increaseBearCount}>add a bear</Button>
 }
 
 // ==========================================================
@@ -3407,10 +3523,6 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
     // ** AND/OR **
     // DO THIS STUFF WHEN ASKED BY AN EVENT/REQUEST
 
-    // ** THREED HISTORY
-    threedActions.loadFromDisk()
-    // threedActions.loadFromDB()
-
     // ** PROJECT HISTORY
     // projectActions.loadFromDisk()
     // projectActions.loadFromDB()
@@ -3419,8 +3531,12 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
     // planActions.loadFromDisk()
     // planActions.loadFromDB()
 
+    // ** THREED HISTORY
+    // threedActions.loadFromDisk()
+    // threedActions.loadFromDB()
+
     // ** SCENE HISTORY
-    sceneActions.loadFromDisk()
+    // sceneActions.loadFromDisk()
     // sceneActions.loadFromDB()
 
     return () => {
@@ -3447,49 +3563,61 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
 
           <Box sx={{ borderTop: 1, borderBottom: 1, borderColor: 'divider' }}>
             <Tabs value={tabInfoControl} onChange={handleChangeTabInfoControl} aria-label="Info Control Panel">
-              <Tab label="ThreeDs" {...tabProps(0)} />
-              <Tab label="Scenes" {...tabProps(1)} />
-              <Tab label="Allotments" {...tabProps(2)} />
-              <Tab label="Beds" {...tabProps(3)} />
-              <Tab label="Plants" {...tabProps(4)} />
-              <Tab label="Planting Plans" {...tabProps(5)} />
-              <Tab label="Testing" {...tabProps(6)} />
+              <Tab label="Projects" {...tabProps(0)} />
+              <Tab label="Plans" {...tabProps(1)} />
+              <Tab label="UIs" {...tabProps(2)} />
+              <Tab label="ThreeDs" {...tabProps(3)} />
+              <Tab label="Files" {...tabProps(4)} />
+              <Tab label="Scenes" {...tabProps(5)} />
+              <Tab label="Allotments" {...tabProps(6)} />
+              <Tab label="Beds" {...tabProps(7)} />
+              <Tab label="Plants" {...tabProps(8)} />
+              <Tab label="Planting Plans" {...tabProps(9)} />
+              <Tab label="Testing" {...tabProps(10)} />
             </Tabs>
           </Box>
           <MDTabPanel value={tabInfoControl} index={0}>
+            <ProjectControlPanel />
+            <ProjectInfoPanel />
+          </MDTabPanel>
+          <MDTabPanel value={tabInfoControl} index={1}>
+            <PlanControlPanel />
+            <PlanInfoPanel />
+          </MDTabPanel>
+          <MDTabPanel value={tabInfoControl} index={2}>
+            <UIControlPanel />
+            <UIInfoPanel />
+          </MDTabPanel>
+          <MDTabPanel value={tabInfoControl} index={3}>
             <ThreeDControlPanel />
             <ThreeDInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={1}>
+          <MDTabPanel value={tabInfoControl} index={4}>
+            <FileControlPanel />
+            <FileInfoPanel />
+          </MDTabPanel>
+          <MDTabPanel value={tabInfoControl} index={5}>
             <SceneControlPanel />
             <SceneInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={2}>
+          <MDTabPanel value={tabInfoControl} index={6}>
             <AllotmentControlPanel />
             <AllotmentInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={3}>
+          <MDTabPanel value={tabInfoControl} index={7}>
             <BedControlPanel />
             <BedInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={4}>
+          <MDTabPanel value={tabInfoControl} index={8}>
             <PlantControlPanel />
             <PlantInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={5}>
+          <MDTabPanel value={tabInfoControl} index={9}>
             <PlantingPlanControlPanel />
             <PlantingPlanInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={6}>
-
-            {/* <ProjectControlPanel /> */}
-            {/* <ProjectInfoPanel /> */}
-            {/* <hr /> */}
-            {/* <PlanControlPanel /> */}
-            {/* <PlanInfoPanel /> */}
-            {/* <hr /> */}
-            {/* <FileControlPanel /> */}
-            {/* <FileInfoPanel /> */}
+          <MDTabPanel value={tabInfoControl} index={10}>
+            <TestAC3Store />
             {/* <hr /> */}
             {/* <CharacterControlPanel /> */}
             {/* <CharacterInfoPanel /> */}
@@ -3503,14 +3631,9 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
             {/* <ChickenControlPanel /> */}
             {/* <ChickenInfoPanel /> */}
             {/* <hr /> */}
-
             {/* <FurnitureControlPanel /> */}
             {/* <FurnitureInfoPanel /> */}
             {/* <hr /> */}
-
-            <TestAC3Store />
-            {/* <hr /> */}
-
           </MDTabPanel>
         </div>
 
