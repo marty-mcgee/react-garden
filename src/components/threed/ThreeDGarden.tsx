@@ -492,6 +492,7 @@ const SceneControlPanel: ReactNode = (): JSX.Element => {
 
   const increaseCount = () => sceneStore.update("sceneCount", sceneActions.increaseCount())
 
+  const load = () => sceneActions.load()
   const addNew = () => sceneActions.addNew()
   const saveToDisk = () => sceneActions.saveToDisk()
   const loadFromDisk = () => sceneActions.loadFromDisk()
@@ -515,7 +516,8 @@ const SceneControlPanel: ReactNode = (): JSX.Element => {
         }
       </ApolloConsumer>
       <Button onClick={removeAll}>remove all</Button>
-      {/* <Button onClick={increaseCount}>add to count</Button> */}
+      <Button onClick={load}>load</Button>
+      <Button onClick={increaseCount}>+</Button>
     </Box>
   )
 }
@@ -3622,14 +3624,14 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
             {/* <CharacterControlPanel /> */}
             {/* <CharacterInfoPanel /> */}
             {/* <hr /> */}
-            {/* <BearControlPanel /> */}
-            {/* <BearInfoPanel /> */}
-            {/* <hr /> */}
             {/* <GardenerControlPanel /> */}
             {/* <GardenerInfoPanel /> */}
             {/* <hr /> */}
             {/* <ChickenControlPanel /> */}
             {/* <ChickenInfoPanel /> */}
+            {/* <hr /> */}
+            {/* <BearControlPanel /> */}
+            {/* <BearInfoPanel /> */}
             {/* <hr /> */}
             {/* <FurnitureControlPanel /> */}
             {/* <FurnitureInfoPanel /> */}
