@@ -3428,9 +3428,9 @@ export const plantingPlanActions = {
         if (data.plantingPlans?.edges?.length) {
 
           // const payload = data.plantingPlans.edges
-          const payload = data.plantingPlans.edges.map(({ node }) => ( // plantingPlanId, id, uri, slug, title
-            // <div key={node.plantingPlanId}>
-            //   wp plantingPlanId: {node.plantingPlanId}<br />
+          const payload = data.plantingPlans.edges.map(({ node }) => ( // planting_planId, id, uri, slug, title
+            // <div key={node.planting_planId}>
+            //   wp planting_planId: {node.planting_planId}<br />
             //   gql id: {node.id}<br />
             //   uri: {node.uri}<br />
             //   slug: {node.slug}<br />

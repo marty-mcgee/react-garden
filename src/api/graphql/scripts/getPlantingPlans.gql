@@ -35,7 +35,7 @@ query GetPlantingPlans ($first: Int, $last: Int, $after: String, $before: String
         title
         uri
         # custom fields
-        plantingPlanId
+        planting_planId
       }
     }
   }
