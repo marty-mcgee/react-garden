@@ -189,7 +189,10 @@ const {
 // ==========================================================
 // Noun
 
-const NounInfoPanel: ReactNode = (): JSX.Element => {
+const NounInfoPanel: ReactNode = (nounType = { type: 'noun' }): JSX.Element => {
+
+  const thisType = nounType
+  console.debug('%cthisType', ccm3, thisType)
 
   const nounCount = nounStore().useStore("count")
   const nounCountDB = nounStore().useStore("countDB")
@@ -200,6 +203,7 @@ const NounInfoPanel: ReactNode = (): JSX.Element => {
 
   return (
     <Box>
+      <Typography variant="h6">thisType: {JSON.stringify(thisType)}</Typography>
       <hr />
       <Typography>{nounCount} nouns around here ...</Typography>
       <Typography>count: {nounCount}</Typography>
@@ -223,15 +227,16 @@ const NounInfoPanel: ReactNode = (): JSX.Element => {
   )
 }
 
-const NounControlPanel: ReactNode = (): JSX.Element => {
+const NounControlPanel: ReactNode = (nounType = 'noun'): JSX.Element => {
 
-  const increaseCount = () => nounStore().update("nounCount", nounActions().increaseCount())
+  const increaseCount = () => nounStore().update("count", nounActions().increaseCount())
 
   const load = () => {
     const noun = nounActions().load()
     console.debug("%cNounControlPanel: load {noun}", ccm3, noun)
     console.debug('%c====================================', ccm5)
     // return noun // ??? nah
+    return true
   }
   const addNew = () => nounActions().addNew()
   const saveToDisk = () => nounActions().saveToDisk()
