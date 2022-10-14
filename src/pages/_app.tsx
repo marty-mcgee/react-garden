@@ -128,7 +128,7 @@ const App = (props: any) => {
       <ReduxProvider store={reduxStore}>
         <CacheProvider value={emotionCache}>
           <Head>
-            <title>{`${themeConfig.templateName} - ThreeD Garden Admin Dashboard`}</title>
+            <title>{`${themeConfig.templateName}: Admin Dashboard`}</title>
             <meta
               name='description'
               content={`${themeConfig.templateName} – React Three Fiber with MUI v5 on NextJS - Admin Dashboard`}
