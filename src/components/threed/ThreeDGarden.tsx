@@ -192,6 +192,7 @@ const {
 const NounInfoPanel: ReactNode = (): JSX.Element => {
 
   const nounCount = nounStore().useStore("count")
+  const nounCountDB = nounStore().useStore("countDB")
   const nouns = nounStore().useStore("all")
   const noun = nounStore().useStore("one")
   const nounsDB = nounStore().useStore("allDB")
@@ -199,14 +200,25 @@ const NounInfoPanel: ReactNode = (): JSX.Element => {
 
   return (
     <Box>
-      {/* <Typography>{nounCount} nouns around here ...</Typography> */}
-      <Typography>nouns: {nouns.length}</Typography>
-      <Typography>nounsDB: {nounsDB.length}</Typography>
-      <Typography>noun._id: {noun._id}</Typography>
-      <Typography>noun._ts: {noun._ts}</Typography>
-      <Typography>noun.name: {noun.name}</Typography>
-      <Typography>noun.layer.name: {noun.layer?.name}</Typography>
-      <Typography>noun.data.title: {noun.data?.title}</Typography>
+      <hr />
+      <Typography>{nounCount} nouns around here ...</Typography>
+      <Typography>count: {nounCount}</Typography>
+      <Typography>countDB: {nounCountDB}</Typography>
+      <hr />
+      <Typography>all.length: {nouns.length}</Typography>
+      <Typography>one._id: {noun._id}</Typography>
+      <Typography>one._ts: {noun._ts}</Typography>
+      <Typography>one.name: {noun.name}</Typography>
+      <Typography>one.layer.name: {noun.layer?.name}</Typography>
+      <Typography>one.data.title: {noun.data?.title}</Typography>
+      <hr />
+      <Typography>allDB.length: {nounsDB.length}</Typography>
+      <Typography>oneDB._id: {nounDB._id}</Typography>
+      <Typography>oneDB._ts: {nounDB._ts}</Typography>
+      <Typography>oneDB.name: {nounDB.name}</Typography>
+      <Typography>oneDB.layer.name: {nounDB.layer?.name}</Typography>
+      <Typography>oneDB.data.title: {nounDB.data?.title}</Typography>
+      <hr />
     </Box>
   )
 }
@@ -3533,10 +3545,13 @@ const ReactThreeFiberView = (): JSX.Element => {
   const word = `[MM] @ ${new Date().toISOString()}`
 
   const scene = sceneStore.useStore("scene")
-  console.debug('ReactThreeFiberView scene', scene)
-  const title = scene.data?.title ? scene.data.title : "NOTHING YET SIR"
-  // const { _id, _ts, name, data } = scene
-  // console.debug('ReactThreeFiberView (scene.data)', data)
+  // console.debug('%cReactThreeFiberView {scene}', ccm1, scene)
+
+  // const title = scene.data?.title ? scene.data.title : "NOTHING YET SIR"
+  // destructure store object
+  const { _id, _ts, name, data } = scene
+  console.debug('%cReactThreeFiberView {scene}', ccm1, scene, _id, _ts, name, data)
+  const title = data?.title ? data.title : "NOTHING YET SIR"
 
   // useEffect(() => {
   //   console.debug('ReactThreeFiberView onMount')
@@ -3545,6 +3560,7 @@ const ReactThreeFiberView = (): JSX.Element => {
   //   }
   // }, [])
 
+  console.debug('%c====================================', ccm5)
   return (
     <Box id="r3f-canvas-container" style={{ width: "100%", minHeight: "20rem" }}>
       <Typography>Scene Title: {title}</Typography>
@@ -3598,7 +3614,8 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
   // ==========================================================
   // Component onMount hook
   useEffect(() => {
-    console.debug("%cThreeDGarden<FC,R3F>: onMount", word)
+    console.debug("%cThreeDGarden<FC,R3F>: onMount", ccm4, word)
+    console.debug('%c====================================', ccm5)
 
     // begin here ?? yes
     // bootManager()...
