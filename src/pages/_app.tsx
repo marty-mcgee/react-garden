@@ -135,10 +135,7 @@ const App = (props: any) => {
             />
             <meta name='keywords' content='Architecture, Planning, 3D Plans, Home Ideas, Floor Plans, Garden Planning, 3D Design, Building Plans, Lanscaping Design, Landscaping, Design, 3D Design App, React 3D, ThreeD Garden' />
             <meta name='author' content='Marty McGee, Company Juice' />
-            <meta name='viewport' content='initial-scale=1, width=device-width' />
-            {/* <meta name='viewport' content='initial-scale=1, viewport-fit=cover' /> */}
-
-            {/* <link rel='manifest' href='/site.webmanifest' /> */}
+            <meta name='viewport' content='initial-scale=1, width=device-width, viewport-fit=cover' />
 
             <meta name='twitter:card' content='Design your home and garden plans in 2D and 3D' />
             <meta name='twitter:site' content='@companyjuice' />
@@ -151,6 +148,8 @@ const App = (props: any) => {
             <meta property='og:image' content='https://threedgarden.com/favicon/android-chrome-512x512.png' />
             <meta property='og:image:width' content='512' />
             <meta property='og:image:height' content='512' />
+
+            {/* <link rel='manifest' href='/site.webmanifest' /> */}
 
             <link rel='shortcut icon' href={favicon.src} />
             <link rel='icon' type='image/png' sizes='32x32' href='/favicon/favicon-32x32.png' />
