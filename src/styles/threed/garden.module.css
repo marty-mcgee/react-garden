@@ -1,4 +1,4 @@
-#toolBar {
+#appBar {
   position: relative; /* absolute */
   /* top: 0px; */
   /* left: 0px; */
@@ -202,7 +202,7 @@
   pointer-events: none;
 }
 
-#toolBar ul {
+#appBar ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -210,11 +210,11 @@
   background-color: #131418; /* 131418 | original 424346 */
 }
 
-#toolBar li {
+#appBar li {
   float: left;
 }
 
-#toolBar li a, .dropbtn {
+#appBar li a, .dropbtn {
   display: inline-block;
   color: white;
   text-align: left;
@@ -228,7 +228,7 @@
   cursor: pointer;
 }
 
-#toolBar .toolButton {
+#appBar .toolButton {
   padding-top: 12px;
   padding-left: 16px;
   padding-right: 16px;
@@ -237,20 +237,20 @@
   transition: 0.5s;
 }
 
-#toolBar .activeTool {
+#appBar .activeTool {
   background-color: #424346; /* 131418 | original 787878 */
 }
 
-#toolBar li a:hover, .dropdown:hover .dropbtn {
+#appBar li a:hover, .dropdown:hover .dropbtn {
   background-color: #424346; /* 131418 | original 787878 */
 }
 
-#toolBar li a:focus,
+#appBar li a:focus,
 .dropdown:hover .dropbtn {
   background-color: #bbbbbb;
 }
 
-#toolBar li.dropdown {
+#appBar li.dropdown {
   display: inline-block;
 }
 

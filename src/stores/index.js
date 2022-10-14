@@ -21,7 +21,7 @@ import GetProducts from '~/api/graphql/scripts/getProducts.gql'
 import { v4 as newUUID } from 'uuid'
 
 // [MM] COLORFUL CONSOLE MESSAGES (ccm)
-import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5 } from '~/@core/utils/console-colors'
+import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5, ccm6 } from '~/@core/utils/console-colors'
 // console.debug('%cSUCCESS!!', ccm1)
 // console.debug('%cWHOOPSIES', ccm2)
 
@@ -2220,6 +2220,7 @@ export const sceneActions = {
           const theSceneDB = sceneStore.get("sceneDB")
           console.debug('%cloadFromDB {sceneDB}', ccm1, theSceneDB)
 
+          // save to disk ???
           // this.saveToDisk()
 
           // sceneCurrent (overwrite -- mutate)
@@ -2239,6 +2240,7 @@ export const sceneActions = {
 
           sceneStore.update("sceneCountDB", sceneStore.get("scenes").length)
           console.debug('%cloadFromDB sceneCountDB', ccm1, sceneStore.get("sceneCountDB"))
+          console.debug('%c====================================', ccm5)
 
           // save to disk
           this.saveToDisk()

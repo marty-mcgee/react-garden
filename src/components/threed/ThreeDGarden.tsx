@@ -23,6 +23,7 @@ import {
 // state management (instead of React.useState, Redux, Zustand)
 import { ApolloConsumer, useQuery, gql } from '@apollo/client'
 import useStore, { TestAC3Store } from '~/stores'
+import useNounStore, { TestNounStore } from '~/stores/nouns'
 
 // ** Next Imports
 import Image from 'next/future/image'
@@ -42,7 +43,7 @@ import MenuItem from '@mui/material/MenuItem'
 // import MenuIcon from '@mui/icons-material/Menu'
 import Grid from '@mui/material/Grid'
 import Modal from '@mui/material/Modal'
-import Tabs from '@mui/material/Tabs'
+import MuiTabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Tooltip from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
@@ -90,13 +91,14 @@ import stylesGarden from '~/styles/threed/garden.module.css'
 import clearObject from '~/@core/utils/clear-object'
 
 // ** COLORFUL CONSOLE MESSAGES (ccm)
-import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5 } from '~/@core/utils/console-colors'
+import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5, ccm6 } from '~/@core/utils/console-colors'
 // console.debug('%cSUCCESS!!', ccm1)
 // console.debug('%cWHOOPSIES', ccm2)
 
 // ==========================================================
 // IMPORTS COMPLETE
 console.debug('%cThreeDGarden<FC,R3F>: {.tsx}', ccm4)
+console.debug('%c====================================', ccm5)
 
 // ==========================================================
 // STYLES
@@ -115,12 +117,13 @@ const stylesModal = {
 }
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
+  position: 'static',
   // transition: 'none',
-  // alignItems: 'center',
-  // justifyContent: 'center',
-  // padding: theme.spacing(0, 6),
-  // backgroundColor: 'transparent',
-  // color: theme.palette.text.primary,
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: theme.spacing(0, 6),
+  backgroundColor: 'transparent',
+  color: theme.palette.text.primary,
   minHeight: `42px !important`,
   // [theme.breakpoints.down('sm')]: {
   //   paddingLeft: theme.spacing(4),
@@ -135,6 +138,10 @@ const Toolbar = styled(MuiToolbar)(({ theme }) => ({
   // padding: `${theme.spacing(0)} !important`,
   minHeight: `42px !important`,
   // transition: 'padding .25s ease-in-out, box-shadow .25s ease-in-out, backdrop-filter .25s ease-in-out'
+}))
+
+const Tabs = styled(MuiTabs)(({ theme }) => ({
+  overflow: `scroll !important`,
 }))
 
 // ==========================================================
@@ -171,9 +178,77 @@ const {
   bearStore, bearActions,
 } = useStore
 
+const {
+  nounStore, nounActions
+} = useNounStore
+
 // ==========================================================
 // FUNCTIONAL NOUNS
 // ==========================================================
+
+// ==========================================================
+// Noun
+
+const NounInfoPanel: ReactNode = (): JSX.Element => {
+
+  const nounCount = nounStore().useStore("count")
+  const nouns = nounStore().useStore("all")
+  const noun = nounStore().useStore("one")
+  const nounsDB = nounStore().useStore("allDB")
+  const nounDB = nounStore().useStore("oneDB")
+
+  return (
+    <Box>
+      {/* <Typography>{nounCount} nouns around here ...</Typography> */}
+      <Typography>nouns: {nouns.length}</Typography>
+      <Typography>nounsDB: {nounsDB.length}</Typography>
+      <Typography>noun._id: {noun._id}</Typography>
+      <Typography>noun._ts: {noun._ts}</Typography>
+      <Typography>noun.name: {noun.name}</Typography>
+      <Typography>noun.layer.name: {noun.layer?.name}</Typography>
+      <Typography>noun.data.title: {noun.data?.title}</Typography>
+    </Box>
+  )
+}
+
+const NounControlPanel: ReactNode = (): JSX.Element => {
+
+  const increaseCount = () => nounStore().update("nounCount", nounActions().increaseCount())
+
+  const load = () => {
+    const noun = nounActions().load()
+    console.debug("%cNounControlPanel: load {noun}", ccm3, noun)
+    console.debug('%c====================================', ccm5)
+    // return noun // ??? nah
+  }
+  const addNew = () => nounActions().addNew()
+  const saveToDisk = () => nounActions().saveToDisk()
+  const loadFromDisk = () => nounActions().loadFromDisk()
+  const loadFromDB = (client) => nounActions().loadFromDB(client)
+  const saveToDB = (client) => nounActions().saveToDB(client)
+  const removeAll = () => nounActions().removeAll()
+
+  return (
+    <Box>
+      <Button onClick={addNew}>add new</Button>
+      <Button onClick={saveToDisk}>save to disk</Button>
+      <Button onClick={loadFromDisk}>load from disk</Button>
+      <ApolloConsumer>
+        {
+          client => (
+            <>
+              <Button onClick={() => saveToDB(client)}>save to db</Button>
+              <Button onClick={() => loadFromDB(client)}>load from db</Button>
+            </>
+          )
+        }
+      </ApolloConsumer>
+      <Button onClick={removeAll}>remove all</Button>
+      <Button onClick={load}>load</Button>
+      <Button onClick={increaseCount}>+</Button>
+    </Box>
+  )
+}
 
 // ==========================================================
 // Project
@@ -495,6 +570,7 @@ const SceneControlPanel: ReactNode = (): JSX.Element => {
   const load = () => {
     const scene = sceneActions.load()
     console.debug("%cSceneControlPanel: load {scene}", ccm3, scene)
+    console.debug('%c====================================', ccm5)
     // return scene // ??? nah
   }
   const addNew = () => sceneActions.addNew()
@@ -1947,7 +2023,7 @@ const ToolBar: ReactNode = (): JSX.Element => {
   const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
   return (
-    <AppBar id="toolBar" position="static">
+    <AppBar id="appBar" position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
 
@@ -3458,7 +3534,7 @@ const ReactThreeFiberView = (): JSX.Element => {
 
   const scene = sceneStore.useStore("scene")
   console.debug('ReactThreeFiberView scene', scene)
-  const title = scene.data?.title ? scene.data.title : "NOPE NOPE NOPE"
+  const title = scene.data?.title ? scene.data.title : "NOTHING YET SIR"
   // const { _id, _ts, name, data } = scene
   // console.debug('ReactThreeFiberView (scene.data)', data)
 
@@ -3587,7 +3663,8 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
               <Tab label="Beds" {...tabProps(7)} />
               <Tab label="Plants" {...tabProps(8)} />
               <Tab label="Planting Plans" {...tabProps(9)} />
-              <Tab label="Testing" {...tabProps(10)} />
+              <Tab label="Nouns" {...tabProps(10)} />
+              <Tab label="Testing" {...tabProps(11)} />
             </Tabs>
           </Box>
           <MDTabPanel value={tabInfoControl} index={0}>
@@ -3631,8 +3708,16 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
             <PlantingPlanInfoPanel />
           </MDTabPanel>
           <MDTabPanel value={tabInfoControl} index={10}>
+            <NounControlPanel />
+            <NounInfoPanel />
+          </MDTabPanel>
+          <MDTabPanel value={tabInfoControl} index={11}>
+            <hr />
+            <TestNounStore />
+            <hr />
+            <hr />
             <TestAC3Store />
-            {/* <hr /> */}
+            <hr />
             {/* <CharacterControlPanel /> */}
             {/* <CharacterInfoPanel /> */}
             {/* <hr /> */}

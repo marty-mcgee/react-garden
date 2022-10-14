@@ -1,5 +1,5 @@
-import { ReactNode } from "react"
-import Box from "@mui/material/Box"
+import { ReactNode } from 'react'
+import Box from '@mui/material/Box'
 
 interface TabPanelProps {
   children?: ReactNode
@@ -12,15 +12,15 @@ function TabPanel(props: TabPanelProps) {
 
   return (
     <Box
-      role="tabpanel"
+      role='tabpanel'
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
-      sx={{ p: 3 }}
+      sx={{ p: 3, overflow: 'scroll' }}
       {...other}
     >
       {value === index && (
-        <Box>
+        <Box sx={{ p: 3, overflow: 'scroll' }}>
           {children}
         </Box>
       )}
