@@ -35,7 +35,7 @@ console.debug('%c====================================', ccm5)
 // ==============================================================
 // Noun
 
-const noun = (pod = 'noun', name = 'NOUN 0', layerName = 'LAYER 0') => ({
+const noun = (nounType = 'noun', name = 'NOUN 0', layerName = 'LAYER 0') => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
   name: name,
@@ -49,7 +49,7 @@ const noun = (pod = 'noun', name = 'NOUN 0', layerName = 'LAYER 0') => ({
 })
 
 // ** Noun Store
-const nounStore = (pod = 'noun') => create({
+const nounStore = (nounType = 'noun') => create({
   _id: newUUID(),
   _ts: new Date().toISOString(),
   count: 0, // example counter
@@ -68,7 +68,7 @@ const nounStore = (pod = 'noun') => create({
 }) // nounStore
 
 // ** Noun Actions
-const nounActions = (pod = 'noun') => ({
+const nounActions = (nounType = 'noun') => ({
 
   increaseCount: (n = 1) => {
     return (state) => state + n
