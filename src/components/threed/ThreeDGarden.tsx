@@ -194,7 +194,7 @@ function ProjectInfoPanel() {
       <Typography>project._id: {project._id}</Typography>
       <Typography>project._ts: {project._ts}</Typography>
       <Typography>project.name: {project.name}</Typography>
-      <Typography>project.activeLayer.name: {project.activeLayer?.name}</Typography>
+      <Typography>project.layer.name: {project.layer?.name}</Typography>
       <Typography>project.data.title: {project.data?.title}</Typography>
     </Box>
   )
@@ -251,7 +251,7 @@ function PlanInfoPanel() {
       <Typography>plan._id: {plan._id}</Typography>
       <Typography>plan._ts: {plan._ts}</Typography>
       <Typography>plan.name: {plan.name}</Typography>
-      <Typography>plan.activeLayer.name: {plan.activeLayer?.name}</Typography>
+      <Typography>plan.layer.name: {plan.layer?.name}</Typography>
       <Typography>plan.data.title: {plan.data?.title}</Typography>
     </Box>
   )
@@ -311,7 +311,7 @@ function UIInfoPanel() {
       <Typography>ui._id: {ui._id}</Typography>
       <Typography>ui._ts: {ui._ts}</Typography>
       <Typography>ui.name: {ui.name}</Typography>
-      <Typography>ui.activeLayer.name: {ui.activeLayer?.name}</Typography>
+      <Typography>ui.layer.name: {ui.layer?.name}</Typography>
       <Typography>ui.data.title: {ui.data?.title}</Typography>
     </Box>
   )
@@ -368,7 +368,7 @@ const ThreeDInfoPanel = () => {
       <Typography>threed._id: {threed._id}</Typography>
       <Typography>threed._ts: {threed._ts}</Typography>
       <Typography>threed.name: {threed.name}</Typography>
-      <Typography>threed.activeLayer.name: {threed.activeLayer?.name}</Typography>
+      <Typography>threed.layer.name: {threed.layer?.name}</Typography>
       <Typography>threed.data.title: {threed.data?.title}</Typography>
     </Box>
   )
@@ -425,7 +425,7 @@ function FileInfoPanel() {
       <Typography>file._id: {file._id}</Typography>
       <Typography>file._ts: {file._ts}</Typography>
       <Typography>file.name: {file.name}</Typography>
-      <Typography>file.activeLayer.name: {file.activeLayer?.name}</Typography>
+      <Typography>file.layer.name: {file.layer?.name}</Typography>
       <Typography>file.data.title: {file.data?.title}</Typography>
     </Box>
   )
@@ -482,7 +482,7 @@ const SceneInfoPanel: ReactNode = (): JSX.Element => {
       <Typography>scene._id: {scene._id}</Typography>
       <Typography>scene._ts: {scene._ts}</Typography>
       <Typography>scene.name: {scene.name}</Typography>
-      <Typography>scene.activeLayer.name: {scene.activeLayer?.name}</Typography>
+      <Typography>scene.layer.name: {scene.layer?.name}</Typography>
       <Typography>scene.data.title: {scene.data?.title}</Typography>
     </Box>
   )
@@ -492,7 +492,11 @@ const SceneControlPanel: ReactNode = (): JSX.Element => {
 
   const increaseCount = () => sceneStore.update("sceneCount", sceneActions.increaseCount())
 
-  const load = () => sceneActions.load()
+  const load = () => {
+    const scene = sceneActions.load()
+    console.debug("%cSceneControlPanel: load {scene}", ccm3, scene)
+    // return scene // ??? nah
+  }
   const addNew = () => sceneActions.addNew()
   const saveToDisk = () => sceneActions.saveToDisk()
   const loadFromDisk = () => sceneActions.loadFromDisk()
@@ -541,7 +545,7 @@ const AllotmentInfoPanel: ReactNode = (): JSX.Element => {
       <Typography>allotment._id: {allotment._id}</Typography>
       <Typography>allotment._ts: {allotment._ts}</Typography>
       <Typography>allotment.name: {allotment.name}</Typography>
-      <Typography>allotment.activeLayer.name: {allotment.activeLayer?.name}</Typography>
+      <Typography>allotment.layer.name: {allotment.layer?.name}</Typography>
       <Typography>allotment.data.title: {allotment.data?.title}</Typography>
     </Box>
   )
@@ -598,7 +602,7 @@ const BedInfoPanel: ReactNode = (): JSX.Element => {
       <Typography>bed._id: {bed._id}</Typography>
       <Typography>bed._ts: {bed._ts}</Typography>
       <Typography>bed.name: {bed.name}</Typography>
-      <Typography>bed.activeLayer.name: {bed.activeLayer?.name}</Typography>
+      <Typography>bed.layer.name: {bed.layer?.name}</Typography>
       <Typography>bed.data.title: {bed.data?.title}</Typography>
     </Box>
   )
@@ -655,7 +659,7 @@ const PlantInfoPanel: ReactNode = (): JSX.Element => {
       <Typography>plant._id: {plant._id}</Typography>
       <Typography>plant._ts: {plant._ts}</Typography>
       <Typography>plant.name: {plant.name}</Typography>
-      <Typography>plant.activeLayer.name: {plant.activeLayer?.name}</Typography>
+      <Typography>plant.layer.name: {plant.layer?.name}</Typography>
       <Typography>plant.data.title: {plant.data?.title}</Typography>
     </Box>
   )
@@ -712,7 +716,7 @@ const PlantingPlanInfoPanel: ReactNode = (): JSX.Element => {
       <Typography>plantingPlan._id: {plantingPlan._id}</Typography>
       <Typography>plantingPlan._ts: {plantingPlan._ts}</Typography>
       <Typography>plantingPlan.name: {plantingPlan.name}</Typography>
-      <Typography>plantingPlan.activeLayer.name: {plantingPlan.activeLayer?.name}</Typography>
+      <Typography>plantingPlan.layer.name: {plantingPlan.layer?.name}</Typography>
       <Typography>plantingPlan.data.title: {plantingPlan.data?.title}</Typography>
     </Box>
   )
@@ -1632,8 +1636,8 @@ const ToolBar: ReactNode = (): JSX.Element => {
         "0" !== e.data.id && e.remove()
       })
 
-      project.activeLayer.name = "level0"
-      project.activeLayer.data = { id: "0", height: 0 }
+      project.layer.name = "level0"
+      project.layer.data = { id: "0", height: 0 }
 
     } catch (e) {
       console.log("resetPlan : 15 : " + e)
@@ -1698,7 +1702,7 @@ const ToolBar: ReactNode = (): JSX.Element => {
           ; (defaultCursor = "crosshair"),
             deselectAll(),
             recalcAllUnjoinedWallSegments(-1),
-            recalcAllWallSegmentsOnOtherLevels(-1, project.activeLayer.data.id),
+            recalcAllWallSegmentsOnOtherLevels(-1, project.layer.data.id),
             document.getElementById("pointerTool").classList.remove("activeTool"),
             document.getElementById("addWallTool").classList.add("activeTool"),
             document.getElementById("addFloorTool").classList.remove("activeTool"),
@@ -3452,7 +3456,12 @@ const ReactThreeFiberView = (): JSX.Element => {
 
   const word = `[MM] @ ${new Date().toISOString()}`
 
-  // console.debug("ReactThreeFiberView")
+  const scene = sceneStore.useStore("scene")
+  console.debug('ReactThreeFiberView scene', scene)
+  const title = scene.data?.title ? scene.data.title : "NOPE NOPE NOPE"
+  // const { _id, _ts, name, data } = scene
+  // console.debug('ReactThreeFiberView (scene.data)', data)
+
   // useEffect(() => {
   //   console.debug('ReactThreeFiberView onMount')
   //   return () => {
@@ -3461,10 +3470,13 @@ const ReactThreeFiberView = (): JSX.Element => {
   // }, [])
 
   return (
-    <Box id="rtf-canvas-container" style={{ width: "100%", minHeight: "20rem" }}>
+    <Box id="r3f-canvas-container" style={{ width: "100%", minHeight: "20rem" }}>
+      <Typography>Scene Title: {title}</Typography>
       <Canvas>
+        <ambientLight intensity={0.1} />
+        <directionalLight position={[0,0,5]} color="red" />
         <mesh>
-          <boxBufferGeometry />
+          <boxBufferGeometry args={[2,2,0]} />
           <meshBasicMaterial />
         </mesh>
       </Canvas>

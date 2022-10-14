@@ -115,12 +115,12 @@ export const TestAC3Store = () => {
 // ThreeD
 // aka 'Master File with Settings'
 
-const threed = (threedName = 'THREED 0', layerName = 'LAYER 0') => ({
+const threed = (name = 'THREED 0', layerName = 'LAYER 0') => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
-  name: threedName,
+  name: name,
   layers: [],
-  activeLayer: {
+  layer: {
     name: layerName,
     data: {}
   },
@@ -156,7 +156,7 @@ export const threedActions = {
   },
 
   removeAll: function () {
-    const removeItem = localStorage.removeItem('threed_threedHistory')
+    localStorage.removeItem('threed_threedHistory')
     threedStore.update('threeds', [])
     threedStore.update('threed', {})
     threedStore.update('threedCount', 0)
@@ -195,7 +195,7 @@ export const threedActions = {
         _ts: new Date().toISOString(),
         name: 'THREED 1',
         layers: [],
-        activeLayer: {
+        layer: {
           name: 'LAYER 0',
           data: {}
         }
@@ -218,10 +218,8 @@ export const threedActions = {
     // console.debug('%caddNew [threeds]', ccm3, threedStore.get("threeds").length)
 
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // loadFromDisk
-    // get().loadFromDisk()
     this.loadFromDisk()
 
     // console.debug('%caddNew', ccm1, get().threed)
@@ -229,7 +227,6 @@ export const threedActions = {
 
   save: function () {
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // saveToDB (coming soon !!!)
     // this.saveToDB()
@@ -379,12 +376,12 @@ export const threedActions = {
             _ts: new Date().toISOString(),
             name: 'THREED: ' + threedStore.get("threedDB").title,
             layers: [],
-            activeLayer: {
+            layer: {
               name: 'LAYER 0',
               data: {}
             },
             // wp custom fields
-            data: threedStore.get("threedDB")
+            data: threedStore.get("threedDB").data
           })
           console.debug('%cloadFromDB {threed} (after)', ccm1, threedStore.get("threed"))
 
@@ -421,8 +418,9 @@ export const threedActions = {
 const project = (name = 'PROJECT 0', layerName = 'LAYER 0') => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
+  name: name,
   layers: [],
-  activeLayer: {
+  layer: {
     name: layerName,
     data: {}
   },
@@ -458,7 +456,7 @@ export const projectActions = {
   },
 
   removeAll: function () {
-    const removeItem = localStorage.removeItem('threed_projectHistory')
+    localStorage.removeItem('threed_projectHistory')
     projectStore.update('projects', [])
     projectStore.update('project', {})
     projectStore.update('projectCount', 0)
@@ -498,7 +496,7 @@ export const projectActions = {
         _ts: new Date().toISOString(),
         name: 'PROJECT 1',
         layers: [],
-        activeLayer: {
+        layer: {
           name: 'LAYER 0',
           data: {}
         }
@@ -521,10 +519,8 @@ export const projectActions = {
     // console.debug('%caddNew [projects]', ccm3, projectStore.get("projects").length)
 
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // loadFromDisk
-    // get().loadFromDisk()
     this.loadFromDisk()
 
     // console.debug('%caddNew', ccm1, get().project)
@@ -532,7 +528,6 @@ export const projectActions = {
 
   save: function () {
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // saveToDB (coming soon !!!)
     // this.saveToDB()
@@ -681,12 +676,12 @@ export const projectActions = {
             _ts: new Date().toISOString(),
             name: 'PROJECT: ' + projectStore.get("projectDB").title,
             layers: [],
-            activeLayer: {
+            layer: {
               name: 'LAYER 0',
               data: {}
             },
             // wp custom fields
-            data: projectStore.get("projectDB")
+            data: projectStore.get("projectDB").data
           })
           console.debug('%cloadFromDB {project} (after)', ccm1, projectStore.get("project"))
 
@@ -743,8 +738,9 @@ export const projectActions = {
 const plan = (name = 'PLAN 0', layerName = 'LAYER 0') => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
+  name: name,
   layers: [],
-  activeLayer: {
+  layer: {
     name: layerName,
     data: {}
   },
@@ -831,7 +827,7 @@ export const planActions = {
   },
 
   removeAll: function () {
-    const removeItem = localStorage.removeItem('threed_planHistory')
+    localStorage.removeItem('threed_planHistory')
     planStore.update('plans', [])
     planStore.update('plan', {})
     planStore.update('planCount', 0)
@@ -871,7 +867,7 @@ export const planActions = {
         _ts: new Date().toISOString(),
         name: 'PLAN 1',
         layers: [],
-        activeLayer: {
+        layer: {
           name: 'LAYER 0',
           data: {}
         }
@@ -894,10 +890,8 @@ export const planActions = {
     // console.debug('%caddNew [plans]', ccm3, planStore.get("plans").length)
 
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // loadFromDisk
-    // get().loadFromDisk()
     this.loadFromDisk()
 
     // console.debug('%caddNew', ccm1, get().plan)
@@ -905,7 +899,6 @@ export const planActions = {
 
   save: function () {
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // saveToDB (coming soon !!!)
     // this.saveToDB()
@@ -1054,12 +1047,12 @@ export const planActions = {
             _ts: new Date().toISOString(),
             name: 'PLAN: ' + planStore.get("planDB").title,
             layers: [],
-            activeLayer: {
+            layer: {
               name: 'LAYER 0',
               data: {}
             },
             // wp custom fields
-            data: planStore.get("planDB")
+            data: planStore.get("planDB").data
           })
           console.debug('%cloadFromDB {plan} (after)', ccm1, planStore.get("plan"))
 
@@ -1116,8 +1109,9 @@ export const planActions = {
 const ui = (name = 'UI 0', layerName = 'LAYER 0') => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
+  name: name,
   layers: [],
-  activeLayer: {
+  layer: {
     name: 'LAYER 0',
     data: {}
   },
@@ -1291,7 +1285,7 @@ export const uiActions = {
   },
 
   removeAll: function () {
-    const removeItem = localStorage.removeItem('threed_uiHistory')
+    localStorage.removeItem('threed_uiHistory')
     uiStore.update('uis', [])
     uiStore.update('ui', {})
     uiStore.update('uiCount', 0)
@@ -1331,7 +1325,7 @@ export const uiActions = {
         _ts: new Date().toISOString(),
         name: 'UI 1',
         layers: [],
-        activeLayer: {
+        layer: {
           name: 'LAYER 0',
           data: {}
         }
@@ -1354,10 +1348,8 @@ export const uiActions = {
     // console.debug('%caddNew [uis]', ccm3, uiStore.get("uis").length)
 
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // loadFromDisk
-    // get().loadFromDisk()
     this.loadFromDisk()
 
     // console.debug('%caddNew', ccm1, get().ui)
@@ -1365,7 +1357,6 @@ export const uiActions = {
 
   save: function () {
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // saveToDB (coming soon !!!)
     // this.saveToDB()
@@ -1514,12 +1505,12 @@ export const uiActions = {
             _ts: new Date().toISOString(),
             name: 'UI: ' + uiStore.get("uiDB").title,
             layers: [],
-            activeLayer: {
+            layer: {
               name: 'LAYER 0',
               data: {}
             },
             // wp custom fields
-            data: uiStore.get("uiDB")
+            data: uiStore.get("uiDB").data
           })
           console.debug('%cloadFromDB {ui} (after)', ccm1, uiStore.get("ui"))
 
@@ -1576,8 +1567,9 @@ export const uiActions = {
 const file = (name = 'FILE 0', layerName = 'LAYER 0') => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
+  name: name,
   layers: [],
-  activeLayer: {
+  layer: {
     name: layerName,
     data: {}
   }
@@ -1611,7 +1603,7 @@ export const fileActions = {
   },
 
   removeAll: function () {
-    const removeItem = localStorage.removeItem('threed_fileHistory')
+    localStorage.removeItem('threed_fileHistory')
     fileStore.update('files', [])
     fileStore.update('file', {})
     fileStore.update('fileCount', 0)
@@ -1651,7 +1643,7 @@ export const fileActions = {
         _ts: new Date().toISOString(),
         name: 'FILE 1',
         layers: [],
-        activeLayer: {
+        layer: {
           name: 'LAYER 0',
           data: {}
         }
@@ -1674,10 +1666,8 @@ export const fileActions = {
     // console.debug('%caddNew [files]', ccm3, fileStore.get("files").length)
 
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // loadFromDisk
-    // get().loadFromDisk()
     this.loadFromDisk()
 
     // console.debug('%caddNew', ccm1, get().file)
@@ -1685,7 +1675,6 @@ export const fileActions = {
 
   save: function () {
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // saveToDB (coming soon !!!)
     // this.saveToDB()
@@ -1834,12 +1823,12 @@ export const fileActions = {
             _ts: new Date().toISOString(),
             name: 'FILE: ' + fileStore.get("fileDB").title,
             layers: [],
-            activeLayer: {
+            layer: {
               name: 'LAYER 0',
               data: {}
             },
             // wp custom fields
-            data: fileStore.get("fileDB")
+            data: fileStore.get("fileDB").data
           })
           console.debug('%cloadFromDB {file} (after)', ccm1, fileStore.get("file"))
 
@@ -1964,9 +1953,9 @@ export const modalActions = {
 const scene = (name = 'SCENE 0', layerName = 'LAYER 0') => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
-  name: sceneName,
+  name: name,
   layers: [],
-  activeLayer: {
+  layer: {
     name: layerName,
     data: {}
   },
@@ -2001,7 +1990,7 @@ export const sceneActions = {
   },
 
   removeAll: function () {
-    const removeItem = localStorage.removeItem('threed_sceneHistory')
+    localStorage.removeItem('threed_sceneHistory')
     sceneStore.update('scenes', [])
     sceneStore.update('scene', {})
     sceneStore.update('sceneCount', 0)
@@ -2018,7 +2007,11 @@ export const sceneActions = {
 
     // create a new one
     if (Object.keys(sceneStore.get("scene")).length === 0) {
-      sceneStore.update("scene", scene())
+      try {
+        sceneStore.update("scene", scene())
+      } catch (err) {
+        console.error('ADD NEW scene() err', err, scene)
+      }
     }
     // save + update old one
     else {
@@ -2041,7 +2034,7 @@ export const sceneActions = {
         _ts: new Date().toISOString(),
         name: 'SCENE 1',
         layers: [],
-        activeLayer: {
+        layer: {
           name: 'LAYER 0',
           data: {}
         }
@@ -2060,22 +2053,19 @@ export const sceneActions = {
     // sceneCount
     // sceneStore.update("sceneCount", sceneStore.get("sceneCount") + 1) // manual
     sceneStore.update("sceneCount", sceneStore.get("scenes").length) // automatic
-    // console.debug('%caddNew {sceneCount}', ccm3, sceneStore.get("sceneCount"))
+    console.debug('%caddNew {sceneCount}', ccm3, sceneStore.get("sceneCount"))
     // console.debug('%caddNew [scenes]', ccm3, sceneStore.get("scenes").length)
 
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // loadFromDisk
-    // get().loadFromDisk()
-    this.loadFromDisk()
+    // this.loadFromDisk()
 
-    // console.debug('%caddNew', ccm1, get().scene)
+    console.debug('%caddNew {scene} final', ccm1, sceneStore.get("scene"))
   },
 
   save: function () {
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // saveToDB (coming soon !!!)
     // this.saveToDB()
@@ -2109,9 +2099,9 @@ export const sceneActions = {
         console.debug('%cloadFromDisk [scenes] QUERY.PAYLOAD?', ccm3, payload)
 
         if (payload.length) {
-          console.debug('%cloadFromDisk [scenes]', ccm3, true) // payload
+          // console.debug('%cloadFromDisk [scenes]', ccm3, true, payload)
 
-          sceneStore.update("scenes", [...payload])
+          sceneStore.update("scenes", [...payload]) // payload should have .data{}
           console.debug('%cloadFromDisk [scenes] (after)', ccm3, sceneStore.get("scenes"))
 
           sceneStore.update("scene", sceneStore.get("scenes")[0])
@@ -2209,27 +2199,41 @@ export const sceneActions = {
             node
           ))
 
+          // map over payload
+          const scenes = payload.map((node) => {
+            try {
+              const newOne = scene()
+              newOne.data = node
+              return newOne
+            } catch (err) {
+              console.error('LOAD FROM DB scene() err', err, scene)
+            }
+          })
+          console.debug('LOAD FROM DB scenes', scenes)
+
           // set state from db
-          sceneStore.update("scenes", [...payload]) // nodes
-          console.debug('%cloadFromDB [scenes] (after)', ccm3, sceneStore.get("scenes"))
+          sceneStore.update("scenes", [...scenes]) // nodes
+          const theScenes = sceneStore.get("scenes")
+          console.debug('%cloadFromDB [scenes] (after)', ccm3, theScenes)
 
-          sceneStore.update("sceneDB", sceneStore.get("scenes")[0]) // node
-          console.debug('%cloadFromDB {sceneDB}', ccm1, sceneStore.get("sceneDB"))
+          sceneStore.update("sceneDB", theScenes[theScenes.length - 1]) // node (use last one)
+          const theSceneDB = sceneStore.get("sceneDB")
+          console.debug('%cloadFromDB {sceneDB}', ccm1, theSceneDB)
 
-          this.saveToDisk()
+          // this.saveToDisk()
 
           // sceneCurrent (overwrite -- mutate)
           sceneStore.update("scene", {
             _id: newUUID(),
             _ts: new Date().toISOString(),
-            name: 'SCENE: ' + sceneStore.get("sceneDB").title,
+            name: 'SCENE: ' + theSceneDB.data.title,
             layers: [],
-            activeLayer: {
+            layer: {
               name: 'LAYER 0',
               data: {}
             },
             // wp custom fields
-            data: sceneStore.get("sceneDB")
+            data: theSceneDB.data
           })
           console.debug('%cloadFromDB {scene} (after)', ccm1, sceneStore.get("scene"))
 
@@ -2261,11 +2265,11 @@ export const sceneActions = {
   load: function (id = null, r3f = null) {
     try {
 
-      scene = sceneStore.get("scene")
-      console.debug('%cload {scene}: this', ccm1, scene, this)
+      const scene = sceneStore.get("scene")
+      console.debug('%cload {scene}', ccm1, scene)
 
       if (scene) {
-        return true
+        return scene
       }
 
       return false
@@ -2283,12 +2287,12 @@ export const sceneActions = {
 // ==============================================================
 // Allotment
 
-const allotment = (allotmentName = 'ALLOTMENT 0', layerName = 'LAYER 0') => ({
+const allotment = (name = 'ALLOTMENT 0', layerName = 'LAYER 0') => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
-  name: allotmentName,
+  name: name,
   layers: [],
-  activeLayer: {
+  layer: {
     name: layerName,
     data: {}
   },
@@ -2326,7 +2330,7 @@ export const allotmentActions = {
   },
 
   removeAll: function () {
-    const removeItem = localStorage.removeItem('threed_allotmentHistory')
+    localStorage.removeItem('threed_allotmentHistory')
     allotmentStore.update('allotments', [])
     allotmentStore.update('allotment', {})
     allotmentStore.update('allotmentCount', 0)
@@ -2366,7 +2370,7 @@ export const allotmentActions = {
         _ts: new Date().toISOString(),
         name: 'ALLOTMENT 1',
         layers: [],
-        activeLayer: {
+        layer: {
           name: 'LAYER 0',
           data: {}
         }
@@ -2389,10 +2393,8 @@ export const allotmentActions = {
     // console.debug('%caddNew [allotments]', ccm3, allotmentStore.get("allotments").length)
 
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // loadFromDisk
-    // get().loadFromDisk()
     this.loadFromDisk()
 
     // console.debug('%caddNew', ccm1, get().allotment)
@@ -2400,7 +2402,6 @@ export const allotmentActions = {
 
   save: function () {
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // saveToDB (coming soon !!!)
     // this.saveToDB()
@@ -2548,12 +2549,12 @@ export const allotmentActions = {
             _ts: new Date().toISOString(),
             name: 'ALLOTMENT: ' + allotmentStore.get("allotmentDB").title,
             layers: [],
-            activeLayer: {
+            layer: {
               name: 'LAYER 0',
               data: {}
             },
             // wp custom fields
-            data: allotmentStore.get("allotmentDB")
+            data: allotmentStore.get("allotmentDB").data
           })
           console.debug('%cloadFromDB {allotment} (after)', ccm1, allotmentStore.get("allotment"))
 
@@ -2585,12 +2586,12 @@ export const allotmentActions = {
 // ==============================================================
 // Bed
 
-const bed = (bedName = 'BED 0', layerName = 'LAYER 0') => ({
+const bed = (name = 'BED 0', layerName = 'LAYER 0') => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
-  name: bedName,
+  name: name,
   layers: [],
-  activeLayer: {
+  layer: {
     name: layerName,
     data: {}
   },
@@ -2628,7 +2629,7 @@ export const bedActions = {
   },
 
   removeAll: function () {
-    const removeItem = localStorage.removeItem('threed_bedHistory')
+    localStorage.removeItem('threed_bedHistory')
     bedStore.update('beds', [])
     bedStore.update('bed', {})
     bedStore.update('bedCount', 0)
@@ -2668,7 +2669,7 @@ export const bedActions = {
         _ts: new Date().toISOString(),
         name: 'BED 1',
         layers: [],
-        activeLayer: {
+        layer: {
           name: 'LAYER 0',
           data: {}
         }
@@ -2691,10 +2692,8 @@ export const bedActions = {
     // console.debug('%caddNew [beds]', ccm3, bedStore.get("beds").length)
 
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // loadFromDisk
-    // get().loadFromDisk()
     this.loadFromDisk()
 
     // console.debug('%caddNew', ccm1, get().bed)
@@ -2702,7 +2701,6 @@ export const bedActions = {
 
   save: function () {
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // saveToDB (coming soon !!!)
     // this.saveToDB()
@@ -2850,12 +2848,12 @@ export const bedActions = {
             _ts: new Date().toISOString(),
             name: 'BED: ' + bedStore.get("bedDB").title,
             layers: [],
-            activeLayer: {
+            layer: {
               name: 'LAYER 0',
               data: {}
             },
             // wp custom fields
-            data: bedStore.get("bedDB")
+            data: bedStore.get("bedDB").data
           })
           console.debug('%cloadFromDB {bed} (after)', ccm1, bedStore.get("bed"))
 
@@ -2887,12 +2885,12 @@ export const bedActions = {
 // ==============================================================
 // Plant
 
-const plant = (plantName = 'PLANT 0', layerName = 'LAYER 0') => ({
+const plant = (name = 'PLANT 0', layerName = 'LAYER 0') => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
-  name: plantName,
+  name: name,
   layers: [],
-  activeLayer: {
+  layer: {
     name: layerName,
     data: {}
   },
@@ -2930,7 +2928,7 @@ export const plantActions = {
   },
 
   removeAll: function () {
-    const removeItem = localStorage.removeItem('threed_plantHistory')
+    localStorage.removeItem('threed_plantHistory')
     plantStore.update('plants', [])
     plantStore.update('plant', {})
     plantStore.update('plantCount', 0)
@@ -2970,7 +2968,7 @@ export const plantActions = {
         _ts: new Date().toISOString(),
         name: 'PLANT 1',
         layers: [],
-        activeLayer: {
+        layer: {
           name: 'LAYER 0',
           data: {}
         }
@@ -2993,10 +2991,8 @@ export const plantActions = {
     // console.debug('%caddNew [plants]', ccm3, plantStore.get("plants").length)
 
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // loadFromDisk
-    // get().loadFromDisk()
     this.loadFromDisk()
 
     // console.debug('%caddNew', ccm1, get().plant)
@@ -3004,7 +3000,6 @@ export const plantActions = {
 
   save: function () {
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // saveToDB (coming soon !!!)
     // this.saveToDB()
@@ -3152,12 +3147,12 @@ export const plantActions = {
             _ts: new Date().toISOString(),
             name: 'PLANT: ' + plantStore.get("plantDB").title,
             layers: [],
-            activeLayer: {
+            layer: {
               name: 'LAYER 0',
               data: {}
             },
             // wp custom fields
-            data: plantStore.get("plantDB")
+            data: plantStore.get("plantDB").data
           })
           console.debug('%cloadFromDB {plant} (after)', ccm1, plantStore.get("plant"))
 
@@ -3189,12 +3184,12 @@ export const plantActions = {
 // ==============================================================
 // PlantingPlan
 
-const plantingPlan = (plantingPlanName = 'PLANTINGPLAN 0', layerName = 'LAYER 0') => ({
+const plantingPlan = (name = 'PLANTINGPLAN 0', layerName = 'LAYER 0') => ({
   _id: newUUID(),
   _ts: new Date().toISOString(),
-  name: plantingPlanName,
+  name: name,
   layers: [],
-  activeLayer: {
+  layer: {
     name: layerName,
     data: {}
   },
@@ -3232,7 +3227,7 @@ export const plantingPlanActions = {
   },
 
   removeAll: function () {
-    const removeItem = localStorage.removeItem('threed_plantingPlanHistory')
+    localStorage.removeItem('threed_plantingPlanHistory')
     plantingPlanStore.update('plantingPlans', [])
     plantingPlanStore.update('plantingPlan', {})
     plantingPlanStore.update('plantingPlanCount', 0)
@@ -3272,7 +3267,7 @@ export const plantingPlanActions = {
         _ts: new Date().toISOString(),
         name: 'PLANTINGPLAN 1',
         layers: [],
-        activeLayer: {
+        layer: {
           name: 'LAYER 0',
           data: {}
         }
@@ -3295,10 +3290,8 @@ export const plantingPlanActions = {
     // console.debug('%caddNewingPlan [plantingPlans]', ccm3, plantingPlanStore.get("plantingPlans").length)
 
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // loadFromDisk
-    // get().loadFromDisk()
     this.loadFromDisk()
 
     // console.debug('%caddNewingPlan', ccm1, get().plantingPlan)
@@ -3306,7 +3299,6 @@ export const plantingPlanActions = {
 
   save: function () {
     // saveToDisk
-    // get().saveToDisk()
     this.saveToDisk()
     // saveToDB (coming soon !!!)
     // this.saveToDB()
@@ -3454,12 +3446,12 @@ export const plantingPlanActions = {
             _ts: new Date().toISOString(),
             name: 'PLANTINGPLAN: ' + plantingPlanStore.get("plantingPlanDB").title,
             layers: [],
-            activeLayer: {
+            layer: {
               name: 'LAYER 0',
               data: {}
             },
             // wp custom fields
-            data: plantingPlanStore.get("plantingPlanDB")
+            data: plantingPlanStore.get("plantingPlanDB").data
           })
           console.debug('%cloadFromDB {plantingPlan} (after)', ccm1, plantingPlanStore.get("plantingPlan"))
 
