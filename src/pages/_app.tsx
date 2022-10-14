@@ -131,10 +131,10 @@ const App = (props: any) => {
             <title>{`${themeConfig.templateName}: Admin Dashboard`}</title>
             <meta
               name='description'
-              content={`${themeConfig.templateName} – React Three Fiber with MUI v5 on NextJS - Admin Dashboard`}
+              content={`${themeConfig.templateName} app using React Three Fiber (ThreeJS) with MUI v5 on NextJS + GraphQL`}
             />
-            <meta name='keywords' content='Architecture, Planning, 3D Plan, Home Ideas, Floor Plan, Garden Planning, 3D Design Ideas, Building Plan' />
-            <meta name='author' content='Marty McGee' />
+            <meta name='keywords' content='Architecture, Planning, 3D Plans, Home Ideas, Floor Plans, Garden Planning, 3D Design, Building Plans, Lanscaping Design, Landscaping, Design, 3D Design App, React 3D, ThreeD Garden' />
+            <meta name='author' content='Marty McGee, Company Juice' />
             <meta name='viewport' content='initial-scale=1, width=device-width' />
             {/* <meta name='viewport' content='initial-scale=1, viewport-fit=cover' /> */}
 
@@ -148,9 +148,9 @@ const App = (props: any) => {
             <meta property='og:type' content='website' />
             <meta property='og:description' content='Design your home and garden plans in 2D + 3D' />
             <meta property='og:url' content='https://threedgarden.com' />
-            <meta property='og:image' content='https://threedgarden.com/api/thumb3dview' />
-            <meta property='og:image:width' content='600' />
-            <meta property='og:image:height' content='337' />
+            <meta property='og:image' content='https://threedgarden.com/favicon/android-chrome-512x512.png' />
+            <meta property='og:image:width' content='512' />
+            <meta property='og:image:height' content='512' />
 
             <link rel='shortcut icon' href={favicon.src} />
             <link rel='icon' type='image/png' sizes='32x32' href='/favicon/favicon-32x32.png' />
