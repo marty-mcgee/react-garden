@@ -3565,7 +3565,7 @@ const ReactThreeFiberView = (): JSX.Element => {
   const _id = sceneStore.get('_id')
   console.debug('%cReactThreeFiberView {sceneStore._id}', ccm1, _id)
   const _ts = sceneStore.get('_ts')
-  console.debug('%cReactThreeFiberView {sceneStore._id}', ccm1, _ts)
+  console.debug('%cReactThreeFiberView {sceneStore._ts}', ccm1, _ts)
   const scene = sceneStore.useStore("one")
   console.debug('%cReactThreeFiberView {scene}', ccm1, scene)
   const data = scene.data

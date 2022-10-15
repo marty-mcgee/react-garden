@@ -53,7 +53,7 @@ function noun(nounType = 'noun') {
 // ** Noun Store -- Constructor Function
 function nounStore(nounType = 'noun') {
 
-  console.debug('nounStore: nounType', nounType)
+  // console.debug('nounStore: nounType', nounType)
 
   const storeName = nounType.toLowerCase() + 'Store'
 
@@ -80,7 +80,7 @@ function nounStore(nounType = 'noun') {
 // ** Noun Actions -- Constructor Function
 function nounActions(nounType = 'noun', nounStore = nounStore) {
 
-  console.debug('nounActions: nounType', nounType)
+  // console.debug('nounActions: nounType', nounType)
 
   const storeName = nounType.toLowerCase() + 'Store'
   const localStorageItem = 'threed_' + nounType + 'History'
@@ -401,11 +401,12 @@ function nounActions(nounType = 'noun', nounStore = nounStore) {
 // const threedActions = nounActions('threed')
 // const fileStore = nounStore('file')
 // const fileActions = nounActions('file')
-const sceneStore = new nounStore('scene')
-// console.debug('%cnouns {sceneStore}', ccm1, sceneStore)
-// console.debug('%cnouns {sceneStore} _id', ccm1, sceneStore.get('_id'))
+const sceneStore = new nounStore('scene').sceneStore
+// console.debug('%cnouns (sceneStore}', ccm1, sceneStore)
+console.debug('%cnouns {sceneStore} keys', ccm1, Object.keys(sceneStore))
 const sceneActions = new nounActions('scene', sceneStore)
 // console.debug('%cnouns {sceneActions}', ccm1, sceneActions)
+console.debug('%cnouns {sceneActions} keys', ccm1, Object.keys(sceneActions))
 // const allotmentStore = nounStore('allotment')
 // const allotmentActions = nounActions('allotment')
 // const bedStore = nounStore('bed')
