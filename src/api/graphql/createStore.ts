@@ -1,6 +1,11 @@
 // ** "apollo-reactive-store": "0.0.4"
 import { makeVar, ReactiveVar, useReactiveVar } from '@apollo/client'
 
+// [MM] COLORFUL CONSOLE MESSAGES (ccm)
+import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5, ccm6 } from '~/@core/utils/console-colors'
+// console.debug('%cSUCCESS!!', ccm1)
+// console.debug('%cWHOOPSIES', ccm2)
+
 type State<T> = Record<string | symbol, T>
 type Store<T> = Record<string | symbol, ReactiveVar<T>>
 
@@ -41,14 +46,28 @@ export default function create<Value>(
 
   // DEBUGGING
   if (options.debug) {
-    // console.log(`store`, store)
-    // console.log(`initialState`, initialState)
-    // console.log(`initialState._type`, initialState._type)
+
+    // console.debug(`store`, store)
+    // console.debug(`initialState`, initialState)
+    // console.debug(`initialState._type`, initialState._type)
     if (initialState._type === 'scene') {
-      // console.log(`store.keys`, Object.keys(store))
-      const fields = Object.keys(store).map((key: string) => {
-        return { [key]: store[key]() }
+
+      // returns Object {fields}
+      const fields: Object | any = {} // starts blank
+      const keys: string[] = Object.keys(store)
+      // console.debug('keys', keys)
+      keys.forEach((key: string, index: number) => {
+        fields[key] = store[key]()
+        // console.debug(`${index}: ${key}: ${store[key]()} = ${fields[key]}`)
       })
+
+      // returns Array of Objects {fields}[]
+      // const fields = Object.keys(store).map((key: string) => {
+      //   return { [key]: store[key]() }
+      // })
+
+      // not working here, for reference only
+      // returns Array of Objects {fields}[]
       // const fields = Object.keys(store).reduce((sum, key) => {
       //   return {
       //     ...sum,
@@ -59,18 +78,15 @@ export default function create<Value>(
       //     },
       //   }
       // })
-      console.log(`${initialState._type} fields`, fields)
-      // const reactiveVar = store._type
-      // if (!reactiveVar) {
-      //   throw new Error(`store._type is invalid`)
-      // }
-      // console.log(`store._type`, reactiveVar())
+
+      console.debug(`${initialState._type}Store current state {fields}`, fields)
+      console.debug('%c====================================', ccm5)
     }
   }
 
   const debug = (key: string, value: Updater<Value>): void => {
     if (options.debug) {
-      console.log(`store update: key ${key} with value: ${value}`)
+      console.debug(`store update: key ${key} with value: ${value}`)
     }
   }
 

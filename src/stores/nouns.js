@@ -2,6 +2,7 @@
 import { ApolloClient, InMemoryCache, useApolloClient, useQuery, gql } from '@apollo/client'
 import create from '~/api/graphql/createStore'
 // ** GraphQL Queries + Mutations (here, locally-specific data needs)
+import GetNouns from '~/api/graphql/scripts/getNouns.gql'
 import GetProjects from '~/api/graphql/scripts/getProjects.gql'
 import GetPlans from '~/api/graphql/scripts/getPlans.gql'
 import GetUIs from '~/api/graphql/scripts/getUIs.gql'
@@ -81,9 +82,9 @@ function nounStore(nounType = 'noun') {
 function nounActions(nounType = 'noun', nounStore = nounStore) {
 
   // console.debug('nounActions: nounType', nounType)
-
-  const storeName = nounType.toLowerCase() + 'Store'
-  const localStorageItem = 'threed_' + nounType + 'History'
+  const _type = nounType.toLowerCase()
+  const storeName = _type + 'Store'
+  const localStorageItem = 'threed_' + _type + 'History'
 
   // return ({
 
@@ -99,20 +100,20 @@ function nounActions(nounType = 'noun', nounStore = nounStore) {
     nounStore().update('allDB', [])
     nounStore().update('oneDB', {})
     nounStore().update('countDB', 0)
-    console.debug(`%cremoveAll [${nounType}]`, ccm2, true)
+    console.debug(`%cremoveAll [${_type}]`, ccm2, true)
   }
 
   // add a new current 'this' noun
   this.addNew = function () {
 
-    console.debug(`%caddNew [${nounType}] (before)`, ccm1, nounStore().get('all'))
+    console.debug(`%caddNew [${_type}] (before)`, ccm1, nounStore().get('all'))
 
     // create a new one
     if (Object.keys(nounStore().get('one')).length === 0) {
       try {
-        nounStore().update('one', new noun(nounType))
+        nounStore().update('one', new noun(_type))
       } catch (err) {
-        console.error(`%caddNew {${nounType}} err`, err)
+        console.error(`%caddNew {${_type}} err`, err)
       }
     }
     // save + update old one
@@ -122,7 +123,7 @@ function nounActions(nounType = 'noun', nounStore = nounStore) {
         nounStore().get('one'),
         ...nounStore().get('all')
       ])
-      console.debug(`%caddNew [${nounType}] (during)`, ccm1, nounStore().get('all'))
+      console.debug(`%caddNew [${_type}] (during)`, ccm1, nounStore().get('all'))
 
       // count
       // nounStore().update('count', nounStore().get('count') + 1) // manual
@@ -142,7 +143,7 @@ function nounActions(nounType = 'noun', nounStore = nounStore) {
         }
       })
     }
-    console.debug(`%caddNew {${nounType}} (added)`, ccm1, nounStore().get('one'))
+    console.debug(`%caddNew {${_type}} (added)`, ccm1, nounStore().get('one'))
 
     // save the new one and the old ones
     // nounHistory (save recently mutated)
@@ -150,20 +151,20 @@ function nounActions(nounType = 'noun', nounStore = nounStore) {
       nounStore().get('one'),
       ...nounStore().get('all')
     ])
-    console.debug(`%caddNew [${nounType}] (after)`, ccm1, nounStore().get('all'))
+    console.debug(`%caddNew [${_type}] (after)`, ccm1, nounStore().get('all'))
 
     // count
     // nounStore().update('count', nounStore().get('count') + 1) // manual
     nounStore().update('count', nounStore().get('all').length) // automatic
     console.debug('%caddNew {count}', ccm3, nounStore().get('count'))
-    // console.debug(`%caddNew {${nounType}}`, ccm3, nounStore().get('all').length)
+    // console.debug(`%caddNew {${_type}}`, ccm3, nounStore().get('all').length)
 
     // saveToDisk
     this.saveToDisk()
     // loadFromDisk
     // this.loadFromDisk()
 
-    console.debug(`%caddNew [${nounType}] (final)`, ccm1, nounStore().get('one'))
+    console.debug(`%caddNew [${_type}] (final)`, ccm1, nounStore().get('one'))
   }
 
   this.save = function () {
