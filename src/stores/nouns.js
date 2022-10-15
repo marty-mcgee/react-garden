@@ -79,7 +79,7 @@ function nounStore(nounType = 'noun') {
 } // nounStore
 
 // ** Noun Actions -- Constructor Function
-function nounActions(nounType = 'noun', nounStore = nounStore) {
+function nounActions(nounType = 'noun') {
 
   // console.debug('nounActions: nounType', nounType)
   const _type = nounType.toLowerCase()
@@ -394,28 +394,42 @@ function nounActions(nounType = 'noun', nounStore = nounStore) {
 
 // const modalStore = nounStore('modal')
 // const modalActions = nounActions('modal')
+
 // const projectStore = nounStore('project')
 // const projectActions = nounActions('project')
+
 // const planStore = nounStore('plan')
 // const planActions = nounActions('plan')
+
 // const threedStore = nounStore('threed')
 // const threedActions = nounActions('threed')
+
 // const fileStore = nounStore('file')
 // const fileActions = nounActions('file')
+
 const sceneStore = new nounStore('scene').sceneStore
 // console.debug('%cnouns (sceneStore}', ccm1, sceneStore)
 console.debug('%cnouns {sceneStore} keys', ccm1, Object.keys(sceneStore))
 const sceneActions = new nounActions('scene', sceneStore)
 // console.debug('%cnouns {sceneActions}', ccm1, sceneActions)
 console.debug('%cnouns {sceneActions} keys', ccm1, Object.keys(sceneActions))
-// const allotmentStore = nounStore('allotment')
-// const allotmentActions = nounActions('allotment')
+
+const allotmentStore = new nounStore('allotment').allotmentStore
+// console.debug('%cnouns (allotmentStore}', ccm1, allotmentStore)
+console.debug('%cnouns {allotmentStore} keys', ccm1, Object.keys(allotmentStore))
+const allotmentActions = new nounActions('allotment', allotmentStore)
+// console.debug('%cnouns {allotmentActions}', ccm1, allotmentActions)
+console.debug('%cnouns {allotmentActions} keys', ccm1, Object.keys(allotmentActions))
+
 // const bedStore = nounStore('bed')
 // const bedActions = nounActions('bed')
+
 // const plantStore = nounStore('plant')
 // const plantActions = nounActions('plant')
+
 // const plantingPlanStore = nounStore('plantingPlan')
 // const plantingPlanActions = nounActions('plantingPlan')
+
 // const bearStore = nounStore('bear')
 // const bearActions = nounActions('bear')
 
