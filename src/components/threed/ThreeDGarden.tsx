@@ -170,7 +170,7 @@ const {
   planStore, planActions,
   threedStore, threedActions,
   fileStore, fileActions,
-  sceneStore, sceneActions,
+  // sceneStore, sceneActions,
   allotmentStore, allotmentActions,
   bedStore, bedActions,
   plantStore, plantActions,
@@ -179,7 +179,18 @@ const {
 } = useStore
 
 const {
-  nounStore, nounActions
+  nounStore, nounActions,
+  // modalStore, modalActions,
+  // projectStore, projectActions,
+  // planStore, planActions,
+  // threedStore, threedActions,
+  // fileStore, fileActions,
+  sceneStore, sceneActions,
+  // allotmentStore, allotmentActions,
+  // bedStore, bedActions,
+  // plantStore, plantActions,
+  // plantingPlanStore, plantingPlanActions,
+  // bearStore, bearActions,
 } = useNounStore
 
 // ==========================================================
@@ -560,11 +571,11 @@ function FileControlPanel() {
 
 const SceneInfoPanel: ReactNode = (): JSX.Element => {
 
-  const sceneCount = sceneStore.useStore("sceneCount")
-  const scenes = sceneStore.useStore("scenes")
-  const scene = sceneStore.useStore("scene")
-  const scenesDB = sceneStore.useStore("scenesDB")
-  const sceneDB = sceneStore.useStore("sceneDB")
+  const sceneCount = sceneStore.useStore("count")
+  const scenes = sceneStore.useStore("all")
+  const scene = sceneStore.useStore("one")
+  const scenesDB = sceneStore.useStore("allDB")
+  const sceneDB = sceneStore.useStore("oneDB")
 
   return (
     <Box>
@@ -3549,13 +3560,21 @@ const ReactThreeFiberView = (): JSX.Element => {
 
   const word = `[MM] @ ${new Date().toISOString()}`
 
-  const scene = sceneStore.useStore("scene")
-  // console.debug('%cReactThreeFiberView {scene}', ccm1, scene)
+  const _type = sceneStore.get('_type')
+  console.debug('%cReactThreeFiberView {sceneStore._type}', ccm1, _type)
+  const _id = sceneStore.get('_id')
+  console.debug('%cReactThreeFiberView {sceneStore._id}', ccm1, _id)
+  const _ts = sceneStore.get('_ts')
+  console.debug('%cReactThreeFiberView {sceneStore._id}', ccm1, _ts)
+  const scene = sceneStore.useStore("one")
+  console.debug('%cReactThreeFiberView {scene}', ccm1, scene)
+  const data = scene.data
+  console.debug('%cReactThreeFiberView {sceneStore.one.data}', ccm1, data)
 
   // const title = scene.data?.title ? scene.data.title : "NOTHING YET SIR"
   // destructure store object
-  const { _id, _ts, name, data } = scene
-  console.debug('%cReactThreeFiberView {scene}', ccm1, scene, _id, _ts, name, data)
+  // const { _id, _ts, name, data } = scene
+  // console.debug('%cReactThreeFiberView {scene}', ccm1, scene, _id, _ts, name, data)
   const title = data?.title ? data.title : "NOTHING YET SIR"
 
   // useEffect(() => {

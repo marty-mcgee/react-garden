@@ -17,6 +17,7 @@ type TypePolicies = {
 type Updater<Value> = (state: Value) => Value | Value
 
 export interface StoreApi<Value> {
+  // getStore<T>(key: string | symbol): Value
   get<T>(key: string | symbol): Value
   update<StateSlice>(key: string | symbol, value: Updater<Value>): Value
   useStore<T>(key: string | symbol): Value
@@ -26,7 +27,7 @@ export interface StoreApi<Value> {
 
 export default function create<Value>(
   initialState: State<Value>,
-  options = { debug: false }
+  options = { debug: true }
 ): StoreApi<Value> {
   const createStore = () => {
     return Object.keys(initialState).reduce<Store<Value>>((sum, key) => {
@@ -38,6 +39,35 @@ export default function create<Value>(
   }
   let store = createStore()
 
+  // DEBUGGING
+  if (options.debug) {
+    // console.log(`store`, store)
+    // console.log(`initialState`, initialState)
+    // console.log(`initialState._type`, initialState._type)
+    if (initialState._type === 'scene') {
+      // console.log(`store.keys`, Object.keys(store))
+      const fields = Object.keys(store).map((key: string) => {
+        return { [key]: store[key]() }
+      })
+      // const fields = Object.keys(store).reduce((sum, key) => {
+      //   return {
+      //     ...sum,
+      //     [key]: {
+      //       read() {
+      //         return store[key]()
+      //       },
+      //     },
+      //   }
+      // })
+      console.log(`${initialState._type} fields`, fields)
+      // const reactiveVar = store._type
+      // if (!reactiveVar) {
+      //   throw new Error(`store._type is invalid`)
+      // }
+      // console.log(`store._type`, reactiveVar())
+    }
+  }
+
   const debug = (key: string, value: Updater<Value>): void => {
     if (options.debug) {
       console.log(`store update: key ${key} with value: ${value}`)
@@ -45,6 +75,16 @@ export default function create<Value>(
   }
 
   return {
+    // getStore(key: string) {
+    //   const reactiveVar = key
+    //   console.log(`store getStore: key ${key}`)
+
+    //   if (!reactiveVar) {
+    //     throw new Error(`store getStore: key "${key}" is invalid`)
+    //   }
+
+    //   return reactiveVar(key)
+    // },
     get(key: string) {
       const reactiveVar = store[key]
 
