@@ -38,9 +38,9 @@ console.debug('%c====================================', ccm5)
 
 // ** Noun Object -- Constructor Function
 function noun(nounType = 'noun') {
-  this._type = nounType
   this._id = newUUID()
   this._ts = new Date().toISOString()
+  this._type = nounType
   this.name = nounType.toUpperCase() + ' 0'
   this.layers = []
   this.layer = {
