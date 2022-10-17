@@ -79,8 +79,8 @@ export default function create<Value>(
       //   }
       // })
 
-      console.debug(`${initialState._type}Store current state {fields}`, fields)
-      console.debug('%c====================================', ccm5)
+      // console.debug(`${initialState._type}Store current state {fields}`, fields)
+      // console.debug('%c====================================', ccm5)
     }
   }
 
