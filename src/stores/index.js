@@ -23,24 +23,23 @@ import { v4 as newUUID } from 'uuid'
 
 // [MM] COLORFUL CONSOLE MESSAGES (ccm)
 import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5, ccm6 } from '~/@core/utils/console-colors'
-// console.debug('%cSUCCESS!!', ccm1)
-// console.debug('%cWHOOPSIES', ccm2)
+// console.debug(`%cSUCCESS!!`, ccm1)
+// console.debug(`%cWHOOPSIES`, ccm2)
 
 // ==========================================================
 // IMPORTS COMPLETE
-console.debug('%cThreeDGarden<FC,R3F>: {stores}', ccm4)
-console.debug('%c====================================', ccm5)
+console.debug(`%cThreeDGarden<FC,R3F>: {stores}`, ccm4)
+console.debug(`%c====================================`, ccm5)
 
 // ==============================================================
 // ==============================================================
 // ==============================================================
-// Noun
-
 // ** Noun Object -- Constructor Function
+
 function noun(nounType = 'noun') {
   this._id = newUUID()
   this._ts = new Date().toISOString()
-  this._type = nounType
+  this._type = nounType.toLowerCase()
   this.name = nounType.toUpperCase() + ' 0'
   this.layers = []
   this.layer = {
@@ -53,9 +52,8 @@ function noun(nounType = 'noun') {
 
 // ==============================================================
 // ** Noun Store -- Constructor Function
-function nounStore(nounType) {
 
-  // console.debug('nounStore: nounType', nounType)
+function nounStore(nounType) {
 
   const _type = nounType.toLowerCase()
   const storeName = _type + 'Store'
@@ -82,9 +80,11 @@ function nounStore(nounType) {
 
 // ==============================================================
 // ** Noun Actions -- Constructor Function
+
 function nounActions(nounType, store) {
 
   const _type = nounType.toLowerCase()
+  const _plural = _type + 's'
   const localStorageItem = 'threed_' + _type + 'History'
 
   this.increaseCount = (n = 1) => {
@@ -127,8 +127,8 @@ function nounActions(nounType, store) {
       // count
       // store.update('count', store.get('count') + 1) // manual
       store.update('count', store.get('all').length) // automatic
-      // console.debug('%caddNew {count}', ccm3, store.get('count'))
-      // console.debug('%caddNew [all]', ccm3, store.get('all').length)
+      // console.debug(`%caddNew {count}`, ccm3, store.get('count'))
+      // console.debug(`%caddNew [${_type}]`, ccm3, store.get('all').length)
 
       // nounCurrent (overwrite -- mutate)
       store.update('one', {
@@ -155,7 +155,7 @@ function nounActions(nounType, store) {
     // count
     // store.update('count', store.get('count') + 1) // manual
     store.update('count', store.get('all').length) // automatic
-    console.debug('%caddNew {count}', ccm3, store.get('count'))
+    console.debug(`%caddNew {count}`, ccm3, store.get('count'))
     // console.debug(`%caddNew {${_type}}`, ccm3, store.get('all').length)
 
     // saveToDisk
@@ -183,10 +183,10 @@ function nounActions(nounType, store) {
           payload: store.get('all')
         })
       )
-      console.debug('%csaveToDisk [all]', ccm1, store.get('all'))
+      console.debug(`%csaveToDisk [${_type}]`, ccm1, store.get('all'))
       return true
     } catch (err) {
-      console.debug('%csaveToDisk [all] err', ccm2, err)
+      console.debug(`%csaveToDisk [${_type}] err`, ccm2, err)
       return false
     }
   }
@@ -196,33 +196,33 @@ function nounActions(nounType, store) {
     try {
       const query = JSON.parse(localStorage.getItem('threed_nounHistory'))
       if (query) {
-        console.debug('%cloadFromDisk [all] QUERY?', ccm3, query)
+        console.debug(`%cloadFromDisk [${_type}] QUERY?`, ccm3, query)
         const { payload } = query
-        console.debug('%cloadFromDisk [all] QUERY.PAYLOAD?', ccm3, payload)
+        console.debug(`%cloadFromDisk [${_type}] QUERY.PAYLOAD?`, ccm3, payload)
 
         if (payload.length) {
-          // console.debug('%cloadFromDisk [all]', ccm3, true, payload)
+          // console.debug(`%cloadFromDisk [${_type}]`, ccm3, true, payload)
 
           store.update('all', [...payload]) // payload should have .data{}
-          console.debug('%cloadFromDisk [all] (after)', ccm3, store.get('all'))
+          console.debug(`%cloadFromDisk [${_type}s] (after)`, ccm3, store.get('all'))
 
           store.update('one', store.get('all')[0])
-          console.debug('%cloadFromDisk {noun} (after)', ccm3, store.get('one'))
+          console.debug(`%cloadFromDisk {${_type}} (after)`, ccm3, store.get('one'))
 
           return true
         }
 
         else {
-          console.debug('%cloadFromDisk [all] EMPTY QUERY.PAYLOAD?', ccm3, query)
+          console.debug(`%cloadFromDisk [${_type}] EMPTY QUERY.PAYLOAD?`, ccm3, query)
         }
       }
       else {
-        console.debug('%cloadFromDisk [all] NOTHING TO LOAD', ccm3, query)
+        console.debug(`%cloadFromDisk [${_type}] NOTHING TO LOAD`, ccm3, query)
       }
       return false
 
     } catch (err) {
-      console.debug('%cloadFromDisk [all] err', ccm2, err)
+      console.debug(`%cloadFromDisk [${_type}] err`, ccm2, err)
       return false
     }
   }
@@ -231,13 +231,13 @@ function nounActions(nounType, store) {
   this.saveToDB = async function (client) {
     try {
       // const _this = this
-      // console.debug('%csaveToDB this', ccm0, this)
+      // console.debug(`%csaveToDB this`, ccm0, this)
 
-      console.debug('%csaveToDB [all]', ccm2, false)
+      console.debug(`%csaveToDB [${_type}]`, ccm2, false)
       return false
 
     } catch (err) {
-      console.debug('%csaveToDB [all]: err', ccm3, err)
+      console.debug(`%csaveToDB [${_type}]: err`, ccm3, err)
       return false
     }
   }
@@ -246,9 +246,34 @@ function nounActions(nounType, store) {
   this.loadFromDB = async function (client) {
     try {
       // const _this = this
-      // console.debug('%cloadFromDB this', ccm0, this)
+      // console.debug(`%cloadFromDB this`, ccm0, this)
 
-      const NOUNS = GetNouns // .gql
+      // .gql
+      let QUERY = GetNouns
+      switch (_type) {
+        case 'noun': QUERY = GetNouns
+          break
+        case 'project': QUERY = GetProjects
+          break
+        case 'plan': QUERY = GetPlans
+          break
+        case 'threed': QUERY = GetThreeDs
+          break
+        case 'file': QUERY = GetFiles
+          break
+        case 'scene': QUERY = GetScenes
+          break
+        case 'allotment': QUERY = GetAllotments
+          break
+        case 'bed': QUERY = GetBeds
+          break
+        case 'plant': QUERY = GetPlants
+          break
+        case 'plantingPlan': QUERY = GetPlantingPlans
+          break
+        case 'bear': QUERY = GetBears
+          break
+      }
 
       const parameters = {
         first: 10,
@@ -264,11 +289,11 @@ function nounActions(nounType, store) {
       //   fetchMore,
       //   refetch,
       //   networkStatus
-      // } = useQuery(NOUNS, { parameters }, { client })
+      // } = useQuery(QUERY, { parameters }, { client })
       // console.debug('DATA RETURNED', data, loading, error)
 
       const query = await client.query({
-        query: NOUNS,
+        query: QUERY,
         variables: { parameters }
       })
       // console.debug('QUERY RETURNED', query)
@@ -280,17 +305,19 @@ function nounActions(nounType, store) {
       }
 
       if (error) {
-        console.debug('%cloadFromDB [all]: DATA RETURNED with error', error)
+        console.debug(`%cloadFromDB [${_type}]: DATA RETURNED with error`, error)
         return false // <div>{JSON.stringify(error)}</div>
       }
 
       if (data) {
-        console.debug('%cloadFromDB [all]: DATA RETURNED', ccm0, data, loading, error)
+        console.debug(`%cloadFromDB [${_type}]: DATA RETURNED`, ccm0, data, loading, error)
+        console.debug(`%cloadFromDB data[${_type}]`, ccm0, data[_type])
 
-        if (data.all?.edges?.length) {
+        if (data[_plural]?.edges?.length) {
 
-          // const payload = data.all.edges
-          const payload = data.all.edges.map(({ node }) => ( // nounId, id, uri, slug, title
+          // const payload = data[_plural].edges
+          const payload = data[_plural].edges.map(({ node }) => (
+            // nounId, id, uri, slug, title
             // <div key={node.nounId}>
             //   wp nounId: {node.nounId}<br />
             //   gql id: {node.id}<br />
@@ -303,26 +330,22 @@ function nounActions(nounType, store) {
 
           // map over payload
           const all = payload.map((node) => {
-            try {
-              const newOne = new noun(nounType)
-              newOne.data = node
-              return newOne
-            } catch (err) {
-              console.error('LOAD FROM DB new noun(nounType) err', err)
-            }
+            const newOne = new noun(_type)
+            newOne.data = node
+            return newOne
           })
-          console.debug('LOAD FROM DB all', all)
+          console.debug(`%cloadFromDB [${_type}]`, ccm3, all)
 
           // set state from db
           store.update('all', [...all]) // nodes
           const theNouns = store.get('all')
-          console.debug('%cloadFromDB [all] (after)', ccm3, theNouns)
+          console.debug(`%cloadFromDB [${_type}] (after)`, ccm3, theNouns)
 
           store.update('oneDB', theNouns[theNouns.length - 1]) // node (use last one)
           const theNounDB = store.get('oneDB')
-          console.debug('%cloadFromDB {oneDB}', ccm1, theNounDB)
+          console.debug(`%cloadFromDB [${_type}] {oneDB}`, ccm1, theNounDB)
 
-          // save to disk ???
+          // save to disk here ??? no
           // this.saveToDisk()
 
           // nounCurrent (overwrite -- mutate)
@@ -338,11 +361,11 @@ function nounActions(nounType, store) {
             // wp custom fields
             data: theNounDB.data
           })
-          console.debug('%cloadFromDB {noun} (after)', ccm1, store.get('one'))
+          console.debug(`%cloadFromDB [${_type}] {one} (after)`, ccm1, store.get('one'))
 
           store.update('countDB', store.get('all').length)
-          console.debug('%cloadFromDB countDB', ccm1, store.get('countDB'))
-          console.debug('%c====================================', ccm5)
+          console.debug(`%cloadFromDB countDB`, ccm1, store.get('countDB'))
+          console.debug(`%c====================================`, ccm5)
 
           // save to disk
           this.saveToDisk()
@@ -351,16 +374,16 @@ function nounActions(nounType, store) {
         }
 
         else {
-          console.debug('%cloadFromDB [all]: NO data.all.edges', ccm3, data)
+          console.debug(`%cloadFromDB [${_type}]: NO data[${_plural}].edges`, ccm3, data)
           return false
         }
       }
 
-      console.debug('%cloadFromDB [all]: OTHER ERROR', ccm3, data)
+      console.debug(`%cloadFromDB [${_type}]: OTHER ERROR`, ccm3, data)
       return false
 
     } catch (err) {
-      console.debug('%cloadFromDB [all]: err', ccm3, err)
+      console.debug(`%cloadFromDB [${_type}]: err`, ccm3, err)
       return false
     }
   }
@@ -370,7 +393,7 @@ function nounActions(nounType, store) {
     try {
 
       const noun = store.get('one')
-      console.debug('%cload {noun}', ccm1, noun)
+      console.debug(`%cload {noun}`, ccm1, noun)
 
       if (noun) {
         return noun
@@ -379,7 +402,7 @@ function nounActions(nounType, store) {
       return false
 
     } catch (err) {
-      console.debug('%cload {noun}: err', ccm3, err)
+      console.debug(`%cload {noun}: err`, ccm3, err)
       return false
     }
   }
@@ -484,5 +507,4 @@ const useStore = {
   modalStore, modalActions,
 }
 
-// export { useStore }
 export default useStore

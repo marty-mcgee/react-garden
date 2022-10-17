@@ -98,7 +98,7 @@ import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5, ccm6 } from '~/@core/utils/console-
 // ==========================================================
 // IMPORTS COMPLETE
 console.debug('%cThreeDGarden<FC,R3F>: {.tsx}', ccm4)
-console.debug('%c====================================', ccm5)
+console.debug(`%c====================================`, ccm5)
 
 // ==========================================================
 // STYLES
@@ -231,7 +231,7 @@ const NounControlPanel: ReactNode = (nounType = 'noun'): JSX.Element => {
   const load = () => {
     const noun = nounActions().load()
     console.debug("%cNounControlPanel: load {noun}", ccm3, noun)
-    console.debug('%c====================================', ccm5)
+    console.debug(`%c====================================`, ccm5)
     // return noun // ??? nah
     return true
   }
@@ -584,7 +584,7 @@ const SceneControlPanel: ReactNode = (): JSX.Element => {
   const load = () => {
     const scene = sceneActions.load()
     console.debug("%cSceneControlPanel: load {scene}", ccm3, scene)
-    console.debug('%c====================================', ccm5)
+    console.debug(`%c====================================`, ccm5)
     // return scene // ??? nah
   }
   const addNew = () => sceneActions.addNew()
@@ -3552,7 +3552,7 @@ const ReactThreeFiberView = (): JSX.Element => {
   const scene = sceneStore.useStore("one")
   const data = scene.data
   const name = scene.name
-  const title = data.title ? data.title : "NOTHING YET SIR"
+  const title = data?.title ? data.title : "NOTHING YET SIR"
   console.debug('%cReactThreeFiberView {scene} fields', ccm1, scene, _id, _ts, name, data)
 
   // useEffect(() => {
@@ -3562,7 +3562,7 @@ const ReactThreeFiberView = (): JSX.Element => {
   //   }
   // }, [])
 
-  console.debug('%c====================================', ccm5)
+  console.debug(`%c====================================`, ccm5)
   return (
     <Box id="r3f-canvas-container" style={{ width: "100%", minHeight: "20rem" }}>
       <Typography>Scene Title: {title}</Typography>
@@ -3617,7 +3617,7 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
   // Component onMount hook
   useEffect(() => {
     console.debug("%cThreeDGarden<FC,R3F>: onMount", ccm4, word)
-    console.debug('%c====================================', ccm5)
+    console.debug(`%c====================================`, ccm5)
 
     // begin here ?? yes
     // bootManager()...
