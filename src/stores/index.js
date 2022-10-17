@@ -90,6 +90,14 @@ function nounActions(_type, store) {
     return (state) => state + n
   }
 
+  this.decreaseCount = (n = 1) => {
+    return (state) => state - n
+  }
+
+  this.getState = function () {
+    return store.getState()
+  }
+
   this.removeAll = function () {
     localStorage.removeItem(localStorageItem)
     store.update('all', [])
@@ -387,7 +395,7 @@ function nounActions(_type, store) {
   }
 
   // load 'this' noun into React Three Fiber view
-  this.load = function (id = null, r3f = null) {
+  this.loadToWorkspace = function (id = null, r3f = null) {
     try {
 
       const noun = store.get('one')
@@ -490,7 +498,6 @@ const bearActions = new nounActions('bear', bearStore)
 // EXPORT STORES AS GROUP OBJECT 'useNounStore' (as a HOOK ??)
 
 const useStore = {
-  nounStore, nounActions,
   projectStore, projectActions,
   planStore, planActions,
   threedStore, threedActions,

@@ -35,7 +35,7 @@ import MuiAppBar from '@mui/material/AppBar'
 import MuiToolbar from '@mui/material/Toolbar'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
+import MuiButton from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
@@ -160,12 +160,17 @@ const Tabs = styled(MuiTabs)(({ theme }) => ({
   overflow: `scroll !important`,
 }))
 
+const Button = styled(MuiButton)(({ theme }) => ({
+  marginRight: `0.25rem !important`,
+  padding: `0.5rem 0.5rem !important`,
+  minWidth: `1.8rem !important`,
+}))
+
 // ==========================================================
 // FUNCTIONAL STORES
 // ==========================================================
 
 const {
-  nounStore, nounActions,
   projectStore, projectActions,
   planStore, planActions,
   threedStore, threedActions,
@@ -183,83 +188,6 @@ const {
 // ==========================================================
 // FUNCTIONAL NOUNS
 // ==========================================================
-
-// ==========================================================
-// Noun
-
-const NounInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
-
-  const nounCount = nounStore().useStore("count")
-  const nounCountDB = nounStore().useStore("countDB")
-  const nouns = nounStore().useStore("all")
-  const noun = nounStore().useStore("one")
-  const nounsDB = nounStore().useStore("allDB")
-  const nounDB = nounStore().useStore("oneDB")
-
-  return (
-    <Box>
-      <Typography variant="h6">_type: {JSON.stringify(_type)}</Typography>
-      <hr />
-      <Typography>count: {nounCount}</Typography>
-      <Typography>countDB: {nounCountDB}</Typography>
-      <hr />
-      <Typography>all.length: {nouns.length}</Typography>
-      <Typography>one._id: {noun._id}</Typography>
-      <Typography>one._ts: {noun._ts}</Typography>
-      <Typography>one.name: {noun.name}</Typography>
-      <Typography>one.layer.name: {noun.layer?.name}</Typography>
-      <Typography>one.data.title: {noun.data?.title}</Typography>
-      <hr />
-      <Typography>allDB.length: {nounsDB.length}</Typography>
-      <Typography>oneDB._id: {nounDB._id}</Typography>
-      <Typography>oneDB._ts: {nounDB._ts}</Typography>
-      <Typography>oneDB.name: {nounDB.name}</Typography>
-      <Typography>oneDB.layer.name: {nounDB.layer?.name}</Typography>
-      <Typography>oneDB.data.title: {nounDB.data?.title}</Typography>
-      <hr />
-    </Box>
-  )
-}
-
-const NounControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
-
-  const increaseCount = () => nounStore().update("count", nounActions().increaseCount())
-
-  const load = () => {
-    const noun = nounActions().load()
-    console.debug("%cNounControlPanel: load {noun}", ccm3, noun)
-    console.debug(`%c====================================`, ccm5)
-    // return noun // ??? nah
-    return true
-  }
-  const addNew = () => nounActions().addNew()
-  const saveToDisk = () => nounActions().saveToDisk()
-  const loadFromDisk = () => nounActions().loadFromDisk()
-  const loadFromDB = (client) => nounActions().loadFromDB(client)
-  const saveToDB = (client) => nounActions().saveToDB(client)
-  const removeAll = () => nounActions().removeAll()
-
-  return (
-    <Box>
-      <Button onClick={addNew}>add new</Button>
-      <Button onClick={saveToDisk}>save to disk</Button>
-      <Button onClick={loadFromDisk}>load from disk</Button>
-      <ApolloConsumer>
-        {
-          client => (
-            <>
-              <Button onClick={() => saveToDB(client)}>save to db</Button>
-              <Button onClick={() => loadFromDB(client)}>load from db</Button>
-            </>
-          )
-        }
-      </ApolloConsumer>
-      <Button onClick={removeAll}>remove all</Button>
-      <Button onClick={load}>load</Button>
-      <Button onClick={increaseCount}>+</Button>
-    </Box>
-  )
-}
 
 // ==========================================================
 // Project
@@ -592,12 +520,14 @@ const SceneInfoPanel: ReactNode = (_type: string = 'scene'): JSX.Element => {
 const SceneControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const increaseCount = () => sceneStore.update("count", sceneActions.increaseCount())
+  const decreaseCount = () => sceneStore.update("count", sceneActions.decreaseCount())
 
-  const load = () => {
-    const scene = sceneActions.load()
-    console.debug("%cSceneControlPanel: load {scene}", ccm3, scene)
+  const loadToWorkspace = () => {
+    const scene = sceneActions.loadToWorkspace()
+    console.debug("%cSceneControlPanel: loadToWorkspace {scene}", ccm3, scene)
     console.debug(`%c====================================`, ccm5)
-    // return scene // ??? nah
+    // return scene // ???
+    return true
   }
   const addNew = () => sceneActions.addNew()
   const saveToDisk = () => sceneActions.saveToDisk()
@@ -605,6 +535,7 @@ const SceneControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
   const loadFromDB = (client) => sceneActions.loadFromDB(client)
   const saveToDB = (client) => sceneActions.saveToDB(client)
   const removeAll = () => sceneActions.removeAll()
+  const getState = () => sceneActions.getState()
 
   return (
     <Box>
@@ -612,18 +543,18 @@ const SceneControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
       <Button onClick={saveToDisk}>save to disk</Button>
       <Button onClick={loadFromDisk}>load from disk</Button>
       <ApolloConsumer>
-        {
-          client => (
-            <>
-              <Button onClick={() => saveToDB(client)}>save to db</Button>
-              <Button onClick={() => loadFromDB(client)}>load from db</Button>
-            </>
-          )
-        }
+        {client => (
+          <>
+            <Button onClick={() => saveToDB(client)}>save to db</Button>
+            <Button onClick={() => loadFromDB(client)}>load from db</Button>
+          </>
+        )}
       </ApolloConsumer>
       <Button onClick={removeAll}>remove all</Button>
-      <Button onClick={load}>load</Button>
+      <Button onClick={getState}>state</Button>
+      <Button onClick={loadToWorkspace}>load</Button>
       <Button onClick={increaseCount}>+</Button>
+      <Button onClick={decreaseCount}>-</Button>
     </Box>
   )
 }
@@ -3694,8 +3625,7 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
               <Tab label="Beds" {...tabProps(7)} />
               <Tab label="Plants" {...tabProps(8)} />
               <Tab label="Planting Plans" {...tabProps(9)} />
-              <Tab label="Nouns" {...tabProps(10)} />
-              <Tab label="Testing" {...tabProps(11)} />
+              <Tab label="Testing" {...tabProps(10)} />
             </Tabs>
           </Box>
           <MDTabPanel value={tabInfoControl} index={0}>
@@ -3739,10 +3669,6 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
             <PlantingPlanInfoPanel />
           </MDTabPanel>
           <MDTabPanel value={tabInfoControl} index={10}>
-            <NounControlPanel />
-            <NounInfoPanel />
-          </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={11}>
             Testing Panel
             {/* <CharacterControlPanel /> */}
             {/* <CharacterInfoPanel /> */}

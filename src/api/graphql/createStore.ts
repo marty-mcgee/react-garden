@@ -22,7 +22,7 @@ type TypePolicies = {
 type Updater<Value> = (state: Value) => Value | Value
 
 export interface StoreApi<Value> {
-  // getStore<T>(key: string | symbol): Value
+  getState<T>(store: string | symbol): Object
   get<T>(key: string | symbol): Value
   update<StateSlice>(key: string | symbol, value: Updater<Value>): Value
   useStore<T>(key: string | symbol): Value
@@ -86,26 +86,33 @@ export default function create<Value>(
 
   const debug = (key: string, value: Updater<Value>): void => {
     if (options.debug) {
-      console.debug(`store update: key ${key} with value: ${value}`)
+      console.debug(`store update(key) "${key}" with value: ${JSON.stringify(value)}`)
     }
   }
 
   return {
-    // getStore(key: string) {
-    //   const reactiveVar = key
-    //   console.log(`store getStore: key ${key}`)
+    getState(): Object {
+      // returns Object {fields}
+      const fields: Object | any = {} // starts blank
+      const keys: string[] = Object.keys(store)
+      // console.debug('keys', keys)
+      keys.forEach((key: string, index: number) => {
+        fields[key] = store[key]()
+        // console.debug(`${index}: ${key}: ${store[key]()} = ${fields[key]}`)
+      })
 
-    //   if (!reactiveVar) {
-    //     throw new Error(`store getStore: key "${key}" is invalid`)
-    //   }
+      if (!fields) {
+        throw new Error(`store getState(): "${JSON.stringify(store)}" is invalid`, store)
+      }
 
-    //   return reactiveVar(key)
-    // },
+      console.debug(`store getState(): {fields}`, fields)
+      return fields
+    },
     get(key: string) {
       const reactiveVar = store[key]
 
       if (!reactiveVar) {
-        throw new Error(`store get: key "${key}" is invalid`)
+        throw new Error(`store get(key) "${key}" is invalid`)
       }
 
       return reactiveVar()
@@ -114,7 +121,7 @@ export default function create<Value>(
       const reactiveVar = store[key]
 
       if (!reactiveVar) {
-        throw new Error(`store update: key "${key}" is invalid`)
+        throw new Error(`store update(key) "${key}" is invalid`)
       }
 
       debug(key, value)
