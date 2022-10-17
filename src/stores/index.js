@@ -53,7 +53,7 @@ function noun(nounType = 'noun') {
 
 // ==============================================================
 // ** Noun Store -- Constructor Function
-function nounStore(nounType = 'noun') {
+function nounStore(nounType) {
 
   // console.debug('nounStore: nounType', nounType)
 
@@ -82,14 +82,10 @@ function nounStore(nounType = 'noun') {
 
 // ==============================================================
 // ** Noun Actions -- Constructor Function
-function nounActions(nounType = 'noun', store = nounStore) {
+function nounActions(nounType, store) {
 
-  // console.debug('nounActions: nounType', nounType)
   const _type = nounType.toLowerCase()
-  const storeName = _type + 'Store'
   const localStorageItem = 'threed_' + _type + 'History'
-
-  // return ({
 
   this.increaseCount = (n = 1) => {
     return (state) => state + n
@@ -388,13 +384,12 @@ function nounActions(nounType = 'noun', store = nounStore) {
     }
   }
 
-  // })
 } // nounActions
 
 // ==============================================================
 // ==============================================================
 // ==============================================================
-// Modal (custom, not a noun)
+// Modal (custom noun, not a standard noun)
 
 const modal = {}
 
