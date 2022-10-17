@@ -54,25 +54,24 @@ function noun(nounType = 'noun') {
 // ==============================================================
 // ** Noun Store -- Constructor Function
 
-function nounStore(nounType) {
+function nounStore(_type) {
 
-  const _type = nounType.toLowerCase()
   const storeName = _type + 'Store'
 
   this[storeName] = create({
     _id: newUUID(),
     _ts: new Date().toISOString(),
     _type: _type,
-    count: 0, // example counter
-    all: [], // working all
-    one: new noun(_type), // {}, // the current working noun, aka 'this one noun'
+    count: 0, // example counter (for fun/learning)
+    all: [], // all of this nouns historical + current records (all scenes, all projects)
+    one: new noun(_type), // {}, // the current workspace noun, aka 'this one noun'
 
     // track current noun + noun history
     // current: ^this one noun,
     history: [], // from local storage
 
     // track payload from db
-    countDB: 0, // example counter
+    countDB: 0, // example counter (for fun/learning)
     allDB: [], // from db (mysql wordpress via graphql)
     oneDB: {}, // pre-this noun, ready to be mapped to 'this' noun
   })
@@ -82,9 +81,8 @@ function nounStore(nounType) {
 // ==============================================================
 // ** Noun Actions -- Constructor Function
 
-function nounActions(nounType, store) {
+function nounActions(_type, store) {
 
-  const _type = nounType.toLowerCase()
   const _plural = _type + 's'
   const localStorageItem = 'threed_' + _type + 'History'
 
@@ -131,7 +129,7 @@ function nounActions(nounType, store) {
       // console.debug(`%caddNew {count}`, ccm3, store.get('count'))
       // console.debug(`%caddNew [${_type}]`, ccm3, store.get('all').length)
 
-      // nounCurrent (overwrite -- mutate)
+      // nounCurrent (overwrite this one -- mutate)
       store.update('one', {
         _id: newUUID(),
         _ts: new Date().toISOString(),
@@ -145,15 +143,14 @@ function nounActions(nounType, store) {
     }
     console.debug(`%caddNew {${_type}} (added)`, ccm1, store.get('one'))
 
-    // save the new one and the old ones
-    // nounHistory (save recently mutated)
+    // nounHistory (save recently mutated new one and all old ones)
     store.update('all', [
       store.get('one'),
       ...store.get('all')
     ])
     console.debug(`%caddNew [${_type}] (after)`, ccm1, store.get('all'))
 
-    // count
+    // count (for fun/learning)
     // store.update('count', store.get('count') + 1) // manual
     store.update('count', store.get('all').length) // automatic
     console.debug(`%caddNew {count}`, ccm3, store.get('count'))

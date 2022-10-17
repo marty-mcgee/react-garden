@@ -102,6 +102,21 @@ console.debug('%cThreeDGarden<FC,R3F>: {.tsx}', ccm4)
 console.debug(`%c====================================`, ccm5)
 
 // ==========================================================
+// TS INTERFACES + TYPES
+// ==========================================================
+// none yet, but soon
+
+type HEYHEYHEY = {
+  heyheyhey: string
+  yoyoyo: string
+}
+
+interface YOYOYO {
+  heyheyhey: string
+  yoyoyo: string
+}
+
+// ==========================================================
 // STYLES
 
 const stylesModal = {
@@ -146,21 +161,6 @@ const Tabs = styled(MuiTabs)(({ theme }) => ({
 }))
 
 // ==========================================================
-// TS INTERFACES + TYPES
-// ==========================================================
-// none yet, but soon
-
-type HEYHEYHEY = {
-  heyheyhey: string
-  yoyoyo: string
-}
-
-interface YOYOYO {
-  heyheyhey: string
-  yoyoyo: string
-}
-
-// ==========================================================
 // FUNCTIONAL STORES
 // ==========================================================
 
@@ -187,10 +187,7 @@ const {
 // ==========================================================
 // Noun
 
-const NounInfoPanel: ReactNode = (nounType = { _type: 'noun' }): JSX.Element => {
-
-  const thisType = nounType
-  console.debug('%cthisType', ccm3, thisType)
+const NounInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const nounCount = nounStore().useStore("count")
   const nounCountDB = nounStore().useStore("countDB")
@@ -201,9 +198,8 @@ const NounInfoPanel: ReactNode = (nounType = { _type: 'noun' }): JSX.Element => 
 
   return (
     <Box>
-      <Typography variant="h6">thisType: {JSON.stringify(thisType)}</Typography>
+      <Typography variant="h6">_type: {JSON.stringify(_type)}</Typography>
       <hr />
-      <Typography>{nounCount} nouns around here ...</Typography>
       <Typography>count: {nounCount}</Typography>
       <Typography>countDB: {nounCountDB}</Typography>
       <hr />
@@ -225,7 +221,7 @@ const NounInfoPanel: ReactNode = (nounType = { _type: 'noun' }): JSX.Element => 
   )
 }
 
-const NounControlPanel: ReactNode = (nounType = 'noun'): JSX.Element => {
+const NounControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const increaseCount = () => nounStore().update("count", nounActions().increaseCount())
 
@@ -260,7 +256,7 @@ const NounControlPanel: ReactNode = (nounType = 'noun'): JSX.Element => {
       </ApolloConsumer>
       <Button onClick={removeAll}>remove all</Button>
       <Button onClick={load}>load</Button>
-      {/* <Button onClick={increaseCount}>+</Button> */}
+      <Button onClick={increaseCount}>+</Button>
     </Box>
   )
 }
@@ -268,7 +264,7 @@ const NounControlPanel: ReactNode = (nounType = 'noun'): JSX.Element => {
 // ==========================================================
 // Project
 
-function ProjectInfoPanel() {
+const ProjectInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const projectCount = projectStore.useStore("count")
   const projects = projectStore.useStore("all")
@@ -290,7 +286,7 @@ function ProjectInfoPanel() {
   )
 }
 
-function ProjectControlPanel() {
+const ProjectControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const increaseCount = () => projectStore.update("count", projectActions.increaseCount())
 
@@ -325,7 +321,7 @@ function ProjectControlPanel() {
 // ==========================================================
 // Plan
 
-function PlanInfoPanel() {
+const PlanInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const planCount = planStore.useStore("count")
   const plans = planStore.useStore("all")
@@ -347,7 +343,7 @@ function PlanInfoPanel() {
   )
 }
 
-function PlanControlPanel() {
+const PlanControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const increaseCount = () => planStore.update("count", planActions.increaseCount())
 
@@ -385,7 +381,7 @@ function PlanControlPanel() {
 // ==========================================================
 // UI
 
-function UIInfoPanel() {
+const UIInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const uiCount = uiStore.useStore("count")
   const uis = uiStore.useStore("all")
@@ -407,7 +403,7 @@ function UIInfoPanel() {
   )
 }
 
-function UIControlPanel() {
+const UIControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const increaseCount = () => uiStore.update("count", uiActions.increaseCount())
 
@@ -440,9 +436,12 @@ function UIControlPanel() {
 }
 
 // ==========================================================
+// Workspace
+
+// ==========================================================
 // ThreeD
 
-const ThreeDInfoPanel = () => {
+const ThreeDInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const threedCount = threedStore.useStore("count")
   const threeds = threedStore.useStore("all")
@@ -464,7 +463,7 @@ const ThreeDInfoPanel = () => {
   )
 }
 
-const ThreeDControlPanel = () => {
+const ThreeDControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const increaseCount = () => threedStore.update("count", threedActions.increaseCount())
 
@@ -556,9 +555,10 @@ function FileControlPanel() {
 // ==========================================================
 // Scene
 
-const SceneInfoPanel: ReactNode = (): JSX.Element => {
+const SceneInfoPanel: ReactNode = (_type: string = 'scene'): JSX.Element => {
 
   const sceneCount = sceneStore.useStore("count")
+  const sceneCountDB = sceneStore.useStore("countDB")
   const scenes = sceneStore.useStore("all")
   const scene = sceneStore.useStore("one")
   const scenesDB = sceneStore.useStore("allDB")
@@ -566,21 +566,32 @@ const SceneInfoPanel: ReactNode = (): JSX.Element => {
 
   return (
     <Box>
-      {/* <Typography>{sceneCount} scenes around here ...</Typography> */}
-      <Typography>scenes: {scenes.length}</Typography>
-      <Typography>scenesDB: {scenesDB.length}</Typography>
-      <Typography>scene._id: {scene._id}</Typography>
-      <Typography>scene._ts: {scene._ts}</Typography>
-      <Typography>scene.name: {scene.name}</Typography>
-      <Typography>scene.layer.name: {scene.layer?.name}</Typography>
-      <Typography>scene.data.title: {scene.data?.title}</Typography>
+      <Typography variant="h6">_type: {JSON.stringify(_type)}</Typography>
+      <hr />
+      <Typography>count: {sceneCount}</Typography>
+      <Typography>countDB: {sceneCountDB}</Typography>
+      <hr />
+      <Typography>all.length: {scenes.length}</Typography>
+      <Typography>one._id: {scene._id}</Typography>
+      <Typography>one._ts: {scene._ts}</Typography>
+      <Typography>one.name: {scene.name}</Typography>
+      <Typography>one.layer.name: {scene.layer?.name}</Typography>
+      <Typography>one.data.title: {scene.data?.title}</Typography>
+      <hr />
+      <Typography>allDB.length: {scenesDB.length}</Typography>
+      <Typography>oneDB._id: {sceneDB._id}</Typography>
+      <Typography>oneDB._ts: {sceneDB._ts}</Typography>
+      <Typography>oneDB.name: {sceneDB.name}</Typography>
+      <Typography>oneDB.layer.name: {sceneDB.layer?.name}</Typography>
+      <Typography>oneDB.data.title: {sceneDB.data?.title}</Typography>
+      <hr />
     </Box>
   )
 }
 
-const SceneControlPanel: ReactNode = (): JSX.Element => {
+const SceneControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
-  const increaseCount = () => sceneStore.update("sceneCount", sceneActions.increaseCount())
+  const increaseCount = () => sceneStore.update("count", sceneActions.increaseCount())
 
   const load = () => {
     const scene = sceneActions.load()
@@ -612,7 +623,7 @@ const SceneControlPanel: ReactNode = (): JSX.Element => {
       </ApolloConsumer>
       <Button onClick={removeAll}>remove all</Button>
       <Button onClick={load}>load</Button>
-      {/* <Button onClick={increaseCount}>+</Button> */}
+      <Button onClick={increaseCount}>+</Button>
     </Box>
   )
 }
@@ -620,7 +631,7 @@ const SceneControlPanel: ReactNode = (): JSX.Element => {
 // ==========================================================
 // Allotment
 
-const AllotmentInfoPanel: ReactNode = (): JSX.Element => {
+const AllotmentInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const allotmentCount = allotmentStore.useStore("count")
   const allotments = allotmentStore.useStore("all")
@@ -642,7 +653,7 @@ const AllotmentInfoPanel: ReactNode = (): JSX.Element => {
   )
 }
 
-const AllotmentControlPanel: ReactNode = (): JSX.Element => {
+const AllotmentControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const increaseCount = () => allotmentStore.update("count", allotmentActions.increaseCount())
 
@@ -677,7 +688,7 @@ const AllotmentControlPanel: ReactNode = (): JSX.Element => {
 // ==========================================================
 // Bed
 
-const BedInfoPanel: ReactNode = (): JSX.Element => {
+const BedInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const bedCount = bedStore.useStore("count")
   const beds = bedStore.useStore("all")
@@ -699,7 +710,7 @@ const BedInfoPanel: ReactNode = (): JSX.Element => {
   )
 }
 
-const BedControlPanel: ReactNode = (): JSX.Element => {
+const BedControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const increaseCount = () => bedStore.update("count", bedActions.increaseCount())
 
@@ -734,7 +745,7 @@ const BedControlPanel: ReactNode = (): JSX.Element => {
 // ==========================================================
 // Plant
 
-const PlantInfoPanel: ReactNode = (): JSX.Element => {
+const PlantInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const plantCount = plantStore.useStore("count")
   const plants = plantStore.useStore("all")
@@ -756,7 +767,7 @@ const PlantInfoPanel: ReactNode = (): JSX.Element => {
   )
 }
 
-const PlantControlPanel: ReactNode = (): JSX.Element => {
+const PlantControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const increaseCount = () => plantStore.update("count", plantActions.increaseCount())
 
@@ -791,7 +802,7 @@ const PlantControlPanel: ReactNode = (): JSX.Element => {
 // ==========================================================
 // PlantingPlan
 
-const PlantingPlanInfoPanel: ReactNode = (): JSX.Element => {
+const PlantingPlanInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const plantingPlanCount = plantingPlanStore.useStore("count")
   const plantingPlans = plantingPlanStore.useStore("all")
@@ -813,7 +824,7 @@ const PlantingPlanInfoPanel: ReactNode = (): JSX.Element => {
   )
 }
 
-const PlantingPlanControlPanel: ReactNode = (): JSX.Element => {
+const PlantingPlanControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
   const increaseCount = () => plantingPlanStore.update("count", plantingPlanActions.increaseCount())
 
@@ -3566,7 +3577,7 @@ const ReactThreeFiberView = (): JSX.Element => {
   console.debug(`%c====================================`, ccm5)
   return (
     <Box id="r3f-canvas-container" style={{ width: "100%", minHeight: "20rem" }}>
-      <Typography>Scene Title: {title}</Typography>
+      <Typography>{_type} Title: {title}</Typography>
       <Canvas>
         <ambientLight intensity={0.1} />
         <directionalLight position={[0,0,5]} color="red" />
