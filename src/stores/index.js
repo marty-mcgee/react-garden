@@ -480,7 +480,7 @@ const useStore = {
   plantStore, plantActions,
   plantingPlanStore, plantingPlanActions,
   bearStore, bearActions,
-  // non-nouns
+  // custom
   modalStore, modalActions,
 }
 
