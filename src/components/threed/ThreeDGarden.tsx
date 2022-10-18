@@ -3571,8 +3571,9 @@ const ReactThreeFiberView: ReactNode = (store): JSX.Element => {
   const word = `[MM] @ ${new Date().toISOString()}`
 
   console.debug('%cReactThreeFiberView {store}', ccm1, store)
-  return <div>testing...</div>
-  throw new Error(`testing... "${word}"`)
+  return <div>r3f: testing...</div>
+  throw new Error(`r3f: testing... "${word}"`)
+
   // const nounStore = store // has added .store
   const nounStore = store.store
   console.debug('%cReactThreeFiberView {nounStore}', ccm1, nounStore)
