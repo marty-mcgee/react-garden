@@ -3489,30 +3489,34 @@ const ReactThreeFiberView = (): JSX.Element => {
 
   const word = `[MM] @ ${new Date().toISOString()}`
 
-  const store_type = sceneStore.get('_type')
-  const store_id = sceneStore.get('_id')
-  const store_ts = sceneStore.get('_ts')
+  const loadScene = () => {
+    const store_type = sceneStore.get('_type')
+    const store_id = sceneStore.get('_id')
+    const store_ts = sceneStore.get('_ts')
 
-  const scene = sceneStore.useStore("one")
-  const _type = scene._type
-  const _id = scene._id
-  const _ts = scene._ts
-  const data = scene.data
-  const name = scene.name
-  const title = data?.title ? data.title : "NOTHING YET SIR"
-  console.debug('%cReactThreeFiberView {scene}', ccm1, scene)
+    const noun = sceneStore.useStore("one")
+    const noun_type = scene._type
+    const noun_id = scene._id
+    const noun_ts = scene._ts
+    const noun_data = scene.data
+    const noun_name = scene.name
+    const noun_title = data?.title ? data.title : "NOTHING YET SIR"
+    console.debug('%cReactThreeFiberView {scene}', ccm1, scene)
 
-  // useEffect(() => {
-  //   console.debug('ReactThreeFiberView onMount')
-  //   return () => {
-  //     console.debug('ReactThreeFiberView onUnmount')
-  //   }
-  // }, [])
+    // useEffect(() => {
+    //   console.debug('ReactThreeFiberView onMount')
+    //   return () => {
+    //     console.debug('ReactThreeFiberView onUnmount')
+    //   }
+    // }, [])
 
-  console.debug(`%c====================================`, ccm5)
+    console.debug(`%c====================================`, ccm5)
+    return true
+  }
+
   return (
     <Box id="r3f-canvas-container" style={{ width: "100%", minHeight: "20rem" }}>
-      <Typography>{_type} Title: {title}</Typography>
+      <Typography>{noun_type.toCamelCase()} Title: {noun_title}</Typography>
       <Canvas>
         <ambientLight intensity={0.1} />
         <directionalLight position={[0,0,5]} color="red" />
