@@ -1,6 +1,10 @@
+// ==========================================================
+// RESOURCES
+
 // ** Apollo Client 3 -- Cache Store Imports
 import { ApolloClient, InMemoryCache, useApolloClient, useQuery, gql } from '@apollo/client'
 import create from '~/api/graphql/createStore'
+
 // ** GraphQL Queries + Mutations (here, locally-specific data needs)
 import GetNouns from '~/api/graphql/scripts/getNouns.gql'
 import GetProjects from '~/api/graphql/scripts/getProjects.gql'
@@ -14,9 +18,6 @@ import GetBeds from '~/api/graphql/scripts/getBeds.gql'
 import GetPlants from '~/api/graphql/scripts/getPlants.gql'
 import GetPlantingPlans from '~/api/graphql/scripts/getPlantingPlans.gql'
 import GetProducts from '~/api/graphql/scripts/getProducts.gql'
-
-// ** React Imports (should not need in this script -- framework agnostic)
-// import React, { FunctionComponent, useState, useEffect, useRef, useMemo } from 'react'
 
 // ** UUID Imports
 import { v4 as newUUID } from 'uuid'
