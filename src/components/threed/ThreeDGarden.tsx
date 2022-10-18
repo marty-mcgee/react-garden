@@ -3494,7 +3494,7 @@ const ReactThreeFiberView = (): JSX.Element => {
   const store_ts = sceneStore.get('_ts')
 
   const scene = sceneStore.useStore("one")
-  const _type = _type
+  const _type = scene._type
   const _id = scene._id
   const _ts = scene._ts
   const data = scene.data
