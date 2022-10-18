@@ -55,7 +55,7 @@ function noun(nounType = 'noun') {
 // ==============================================================
 // ** Noun Store -- Constructor Function
 
-function nounStore(_type) {
+export function nounStore(_type) {
   // const store = _type + 'Store'
   // // nounStore has a set of .actions (js functions)
   // const actions = _type + 'Actions'
@@ -472,7 +472,7 @@ const modalActions = {
 // ==============================================================
 // ** Construct Noun Stores
 
-const useNounStore = new nounStore('noun')
+export const useNounStore = new nounStore('noun') // hook
 const projectStore = new nounStore('project')
 const workspaceStore = new nounStore('workspace')
 const planStore = new nounStore('plan')
@@ -491,11 +491,9 @@ const modalStoreNew = new nounStore('modal')
 // ==============================================================
 // ==============================================================
 // ==============================================================
-// EXPORT STORES AS GROUP OBJECT 'useNounStore' (as a HOOK ??)
+// EXPORT STORES AS GROUP OBJECT ('useNounStore' as a HOOK ??? )
 
-const useStore = {
-  nounStore,
-  useNounStore,
+const groupStore = {
   projectStore,
   workspaceStore,
   planStore,
@@ -512,4 +510,4 @@ const useStore = {
   modalStoreNew,
 }
 
-export default useStore
+export default groupStore

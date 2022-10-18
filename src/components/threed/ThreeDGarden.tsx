@@ -23,7 +23,7 @@ import {
 // state management (instead of React.useState, Redux, Zustand)
 import { ApolloConsumer, useQuery, gql } from '@apollo/client'
 // import { TestAC3Store } from '~/stores/old'
-import useStore from '~/stores'
+import groupStore, { nounStore, useNounStore } from '~/stores'
 
 // ** Next Imports
 import Image from 'next/future/image'
@@ -171,8 +171,6 @@ const Button = styled(MuiButton)(({ theme }) => ({
 // ==========================================================
 
 const {
-  nounStore,
-  useNounStore,
   projectStore,
   workspaceStore,
   planStore,
@@ -187,7 +185,7 @@ const {
   modalStore,
   modalActions,
   modalStoreNew,
-} = useStore
+} = groupStore
 
 // ==========================================================
 // FUNCTIONAL NOUNS
