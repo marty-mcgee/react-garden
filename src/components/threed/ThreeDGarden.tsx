@@ -103,7 +103,7 @@ console.debug(`%c====================================`, ccm5)
 
 // ==========================================================
 // TS INTERFACES + TYPES
-// ==========================================================
+// =====================================================sceneStore=====
 // none yet, but soon
 
 type HEYHEYHEY = {
@@ -171,18 +171,22 @@ const Button = styled(MuiButton)(({ theme }) => ({
 // ==========================================================
 
 const {
-  projectStore, projectActions,
-  planStore, planActions,
-  threedStore, threedActions,
-  fileStore, fileActions,
-  sceneStore, sceneActions,
-  allotmentStore, allotmentActions,
-  bedStore, bedActions,
-  plantStore, plantActions,
-  plantingPlanStore, plantingPlanActions,
-  bearStore, bearActions,
-  // custom
-  modalStore, modalActions,
+  nounStore,
+  useNounStore,
+  projectStore,
+  workspaceStore,
+  planStore,
+  threedStore,
+  fileStore,
+  sceneStore,
+  allotmentStore,
+  bedStore,
+  plantStore,
+  plantingPlanStore,
+  bearStore,
+  modalStore,
+  modalActions,
+  modalStoreNew,
 } = useStore
 
 // ==========================================================
@@ -190,15 +194,95 @@ const {
 // ==========================================================
 
 // ==========================================================
+// Noun (Prototype React JSX)
+
+const NounInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+
+  const nounStore = useNounStore
+  const nounCount = nounStore.store.useStore("count")
+  const nounCountDB = nounStore.store.useStore("countDB")
+  const nouns = nounStore.store.useStore("all")
+  const noun = nounStore.store.useStore("one")
+  const nounsDB = nounStore.store.useStore("allDB")
+  const nounDB = nounStore.store.useStore("oneDB")
+
+  return (
+    <Box>
+      <Typography variant="h6">_type: {JSON.stringify(_type)}</Typography>
+      <hr />
+      <Typography>count: {nounCount}</Typography>
+      <Typography>countDB: {nounCountDB}</Typography>
+      <hr />
+      <Typography>all.length: {nouns.length}</Typography>
+      <Typography>one._id: {noun._id}</Typography>
+      <Typography>one._ts: {noun._ts}</Typography>
+      <Typography>one.name: {noun.name}</Typography>
+      <Typography>one.layer.name: {noun.layer?.name}</Typography>
+      <Typography>one.data.title: {noun.data?.title}</Typography>
+      <hr />
+      <Typography>allDB.length: {nounsDB.length}</Typography>
+      <Typography>oneDB._id: {nounDB._id}</Typography>
+      <Typography>oneDB._ts: {nounDB._ts}</Typography>
+      <Typography>oneDB.name: {nounDB.name}</Typography>
+      <Typography>oneDB.layer.name: {nounDB.layer?.name}</Typography>
+      <Typography>oneDB.data.title: {nounDB.data?.title}</Typography>
+      <hr />
+    </Box>
+  )
+}
+
+const NounControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+
+  const increaseCount = () => nounStore.store.update("count", nounStore.actions.increaseCount())
+  const decreaseCount = () => nounStore.store.update("count", nounStore.actions.decreaseCount())
+
+  const loadToWorkspace = () => {
+    const noun = nounStore.actions.loadToWorkspace()
+    console.debug("%cControlPanel: loadToWorkspace {noun}", ccm3, noun)
+    console.debug(`%c====================================`, ccm5)
+    // return noun // ???
+    return true
+  }
+  const addNew = () => nounStore.actions.addNew()
+  const saveToDisk = () => nounStore.actions.saveToDisk()
+  const loadFromDisk = () => nounStore.actions.loadFromDisk()
+  const loadFromDB = (client) => nounStore.actions.loadFromDB(client)
+  const saveToDB = (client) => nounStore.actions.saveToDB(client)
+  const removeAll = () => nounStore.actions.removeAll()
+  const getState = () => nounStore.actions.getState()
+
+  return (
+    <Box>
+      <Button onClick={addNew}>add new</Button>
+      <Button onClick={saveToDisk}>save to disk</Button>
+      <Button onClick={loadFromDisk}>load from disk</Button>
+      <ApolloConsumer>
+        {client => (
+          <>
+            <Button onClick={() => saveToDB(client)}>save to db</Button>
+            <Button onClick={() => loadFromDB(client)}>load from db</Button>
+          </>
+        )}
+      </ApolloConsumer>
+      <Button onClick={removeAll}>remove all</Button>
+      <Button onClick={getState}>state</Button>
+      <Button onClick={loadToWorkspace}>load</Button>
+      <Button onClick={increaseCount}>+</Button>
+      <Button onClick={decreaseCount}>-</Button>
+    </Box>
+  )
+}
+
+// ==========================================================
 // Project
 
 const ProjectInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
-  const projectCount = projectStore.useStore("count")
-  const projects = projectStore.useStore("all")
-  const project = projectStore.useStore("one")
-  const projectsDB = projectStore.useStore("allDB")
-  const projectDB = projectStore.useStore("oneDB")
+  const projectCount = projectStore.store.useStore("count")
+  const projects = projectStore.store.useStore("all")
+  const project = projectStore.store.useStore("one")
+  const projectsDB = projectStore.store.useStore("allDB")
+  const projectDB = projectStore.store.useStore("oneDB")
 
   return (
     <Box>
@@ -216,14 +300,71 @@ const ProjectInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
 const ProjectControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
-  const increaseCount = () => projectStore.update("count", projectActions.increaseCount())
+  const increaseCount = () => projectStore.update("count", projectStore.actions.increaseCount())
 
-  const addNew = () => projectActions.addNew()
-  const saveToDisk = () => projectActions.saveToDisk()
-  const loadFromDisk = () => projectActions.loadFromDisk()
-  const loadFromDB = (client) => projectActions.loadFromDB(client)
-  const saveToDB = (client) => projectActions.saveToDB(client)
-  const removeAll = () => projectActions.removeAll()
+  const addNew = () => projectStore.actions.addNew()
+  const saveToDisk = () => projectStore.actions.saveToDisk()
+  const loadFromDisk = () => projectStore.actions.loadFromDisk()
+  const loadFromDB = (client) => projectStore.actions.loadFromDB(client)
+  const saveToDB = (client) => projectStore.actions.saveToDB(client)
+  const removeAll = () => projectStore.actions.removeAll()
+
+  return (
+    <Box>
+      <Button onClick={addNew}>add new</Button>
+      <Button onClick={saveToDisk}>save to disk</Button>
+      <Button onClick={loadFromDisk}>load from disk</Button>
+      <ApolloConsumer>
+        {
+          client => (
+            <>
+              <Button onClick={() => saveToDB(client)}>save to db</Button>
+              <Button onClick={() => loadFromDB(client)}>load from db</Button>
+            </>
+          )
+        }
+      </ApolloConsumer>
+      <Button onClick={removeAll}>remove all</Button>
+      {/* <Button onClick={increaseCount}>+</Button> */}
+    </Box>
+  )
+}
+
+// ==========================================================
+// Workspace
+
+const WorkspaceInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+
+  const workspaceCount = workspaceStore.store.useStore("count")
+  const workspaces = workspaceStore.store.useStore("all")
+  const workspace = workspaceStore.store.useStore("one")
+  const workspacesDB = workspaceStore.store.useStore("allDB")
+  const workspaceDB = workspaceStore.store.useStore("oneDB")
+
+  return (
+    <Box>
+      {/* <Typography>{workspaceCount} workspaces around here ...</Typography> */}
+      <Typography>workspaces: {workspaces.length}</Typography>
+      <Typography>workspacesDB: {workspacesDB.length}</Typography>
+      <Typography>workspace._id: {workspace._id}</Typography>
+      <Typography>workspace._ts: {workspace._ts}</Typography>
+      <Typography>workspace.name: {workspace.name}</Typography>
+      <Typography>workspace.layer.name: {workspace.layer?.name}</Typography>
+      <Typography>workspace.data.title: {workspace.data?.title}</Typography>
+    </Box>
+  )
+}
+
+const WorkspaceControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+
+  const increaseCount = () => workspaceStore.update("count", workspaceStore.actions.increaseCount())
+
+  const addNew = () => workspaceStore.actions.addNew()
+  const saveToDisk = () => workspaceStore.actions.saveToDisk()
+  const loadFromDisk = () => workspaceStore.actions.loadFromDisk()
+  const loadFromDB = (client) => workspaceStore.actions.loadFromDB(client)
+  const saveToDB = (client) => workspaceStore.actions.saveToDB(client)
+  const removeAll = () => workspaceStore.actions.removeAll()
 
   return (
     <Box>
@@ -251,11 +392,11 @@ const ProjectControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => 
 
 const PlanInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
-  const planCount = planStore.useStore("count")
-  const plans = planStore.useStore("all")
-  const plan = planStore.useStore("one")
-  const plansDB = planStore.useStore("allDB")
-  const planDB = planStore.useStore("oneDB")
+  const planCount = planStore.store.useStore("count")
+  const plans = planStore.store.useStore("all")
+  const plan = planStore.store.useStore("one")
+  const plansDB = planStore.store.useStore("allDB")
+  const planDB = planStore.store.useStore("oneDB")
 
   return (
     <Box>
@@ -273,74 +414,14 @@ const PlanInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
 const PlanControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
-  const increaseCount = () => planStore.update("count", planActions.increaseCount())
+  const increaseCount = () => planStore.update("count", planStore.actions.increaseCount())
 
-  const addNew = () => planActions.addNew()
-  const saveToDisk = () => planActions.saveToDisk()
-  const loadFromDisk = () => planActions.loadFromDisk()
-  const loadFromDB = (client) => planActions.loadFromDB(client)
-  const saveToDB = (client) => planActions.saveToDB(client)
-  const removeAll = () => planActions.removeAll()
-
-  return (
-    <Box>
-      <Button onClick={addNew}>add new</Button>
-      <Button onClick={saveToDisk}>save to disk</Button>
-      <Button onClick={loadFromDisk}>load from disk</Button>
-      <ApolloConsumer>
-        {
-          client => (
-            <>
-              <Button onClick={() => saveToDB(client)}>save to db</Button>
-              <Button onClick={() => loadFromDB(client)}>load from db</Button>
-            </>
-          )
-        }
-      </ApolloConsumer>
-      <Button onClick={removeAll}>remove all</Button>
-      {/* <Button onClick={increaseCount}>+</Button> */}
-    </Box>
-  )
-}
-
-// ==========================================================
-// Simulation
-
-// ==========================================================
-// UI
-
-const UIInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
-
-  const uiCount = uiStore.useStore("count")
-  const uis = uiStore.useStore("all")
-  const ui = uiStore.useStore("one")
-  const uisDB = uiStore.useStore("allDB")
-  const uiDB = uiStore.useStore("oneDB")
-
-  return (
-    <Box>
-      {/* <Typography>{uiCount} uis around here ...</Typography> */}
-      <Typography>uis: {uis.length}</Typography>
-      <Typography>uisDB: {uisDB.length}</Typography>
-      <Typography>ui._id: {ui._id}</Typography>
-      <Typography>ui._ts: {ui._ts}</Typography>
-      <Typography>ui.name: {ui.name}</Typography>
-      <Typography>ui.layer.name: {ui.layer?.name}</Typography>
-      <Typography>ui.data.title: {ui.data?.title}</Typography>
-    </Box>
-  )
-}
-
-const UIControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
-
-  const increaseCount = () => uiStore.update("count", uiActions.increaseCount())
-
-  const addNew = () => uiActions.addNew()
-  const saveToDisk = () => uiActions.saveToDisk()
-  const loadFromDisk = () => uiActions.loadFromDisk()
-  const loadFromDB = (client) => uiActions.loadFromDB(client)
-  const saveToDB = (client) => uiActions.saveToDB(client)
-  const removeAll = () => uiActions.removeAll()
+  const addNew = () => planStore.actions.addNew()
+  const saveToDisk = () => planStore.actions.saveToDisk()
+  const loadFromDisk = () => planStore.actions.loadFromDisk()
+  const loadFromDB = (client) => planStore.actions.loadFromDB(client)
+  const saveToDB = (client) => planStore.actions.saveToDB(client)
+  const removeAll = () => planStore.actions.removeAll()
 
   return (
     <Box>
@@ -362,20 +443,17 @@ const UIControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
     </Box>
   )
 }
-
-// ==========================================================
-// Workspace
 
 // ==========================================================
 // ThreeD
 
 const ThreeDInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
-  const threedCount = threedStore.useStore("count")
-  const threeds = threedStore.useStore("all")
-  const threed = threedStore.useStore("one")
-  const threedsDB = threedStore.useStore("allDB")
-  const threedDB = threedStore.useStore("oneDB")
+  const threedCount = threedStore.store.useStore("count")
+  const threeds = threedStore.store.useStore("all")
+  const threed = threedStore.store.useStore("one")
+  const threedsDB = threedStore.store.useStore("allDB")
+  const threedDB = threedStore.store.useStore("oneDB")
 
   return (
     <Box>
@@ -393,14 +471,14 @@ const ThreeDInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
 const ThreeDControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
-  const increaseCount = () => threedStore.update("count", threedActions.increaseCount())
+  const increaseCount = () => threedStore.update("count", threedStore.actions.increaseCount())
 
-  const addNew = () => threedActions.addNew()
-  const saveToDisk = () => threedActions.saveToDisk()
-  const loadFromDisk = () => threedActions.loadFromDisk()
-  const loadFromDB = (client) => threedActions.loadFromDB(client)
-  const saveToDB = (client) => threedActions.saveToDB(client)
-  const removeAll = () => threedActions.removeAll()
+  const addNew = () => threedStore.actions.addNew()
+  const saveToDisk = () => threedStore.actions.saveToDisk()
+  const loadFromDisk = () => threedStore.actions.loadFromDisk()
+  const loadFromDB = (client) => threedStore.actions.loadFromDB(client)
+  const saveToDB = (client) => threedStore.actions.saveToDB(client)
+  const removeAll = () => threedStore.actions.removeAll()
 
   return (
     <Box>
@@ -428,11 +506,11 @@ const ThreeDControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
 function FileInfoPanel() {
 
-  const fileCount = fileStore.useStore("count")
-  const files = fileStore.useStore("all")
-  const file = fileStore.useStore("one")
-  const filesDB = fileStore.useStore("allDB")
-  const fileDB = fileStore.useStore("oneDB")
+  const fileCount = fileStore.store.useStore("count")
+  const files = fileStore.store.useStore("all")
+  const file = fileStore.store.useStore("one")
+  const filesDB = fileStore.store.useStore("allDB")
+  const fileDB = fileStore.store.useStore("oneDB")
 
   return (
     <Box>
@@ -450,14 +528,14 @@ function FileInfoPanel() {
 
 function FileControlPanel() {
 
-  const increaseCount = () => fileStore.update("count", fileActions.increaseCount())
+  const increaseCount = () => fileStore.update("count", fileStore.actions.increaseCount())
 
-  const addNew = () => fileActions.addNew()
-  const saveToDisk = () => fileActions.saveToDisk()
-  const loadFromDisk = () => fileActions.loadFromDisk()
-  const loadFromDB = (client) => fileActions.loadFromDB(client)
-  const saveToDB = (client) => fileActions.saveToDB(client)
-  const removeAll = () => fileActions.removeAll()
+  const addNew = () => fileStore.actions.addNew()
+  const saveToDisk = () => fileStore.actions.saveToDisk()
+  const loadFromDisk = () => fileStore.actions.loadFromDisk()
+  const loadFromDB = (client) => fileStore.actions.loadFromDB(client)
+  const saveToDB = (client) => fileStore.actions.saveToDB(client)
+  const removeAll = () => fileStore.actions.removeAll()
 
   return (
     <Box>
@@ -481,16 +559,19 @@ function FileControlPanel() {
 }
 
 // ==========================================================
+// Simulation
+
+// ==========================================================
 // Scene
 
 const SceneInfoPanel: ReactNode = (_type: string = 'scene'): JSX.Element => {
 
-  const sceneCount = sceneStore.useStore("count")
-  const sceneCountDB = sceneStore.useStore("countDB")
-  const scenes = sceneStore.useStore("all")
-  const scene = sceneStore.useStore("one")
-  const scenesDB = sceneStore.useStore("allDB")
-  const sceneDB = sceneStore.useStore("oneDB")
+  const sceneCount = sceneStore.store.useStore("count")
+  const sceneCountDB = sceneStore.store.useStore("countDB")
+  const scenes = sceneStore.store.useStore("all")
+  const scene = sceneStore.store.useStore("one")
+  const scenesDB = sceneStore.store.useStore("allDB")
+  const sceneDB = sceneStore.store.useStore("oneDB")
 
   return (
     <Box>
@@ -519,23 +600,23 @@ const SceneInfoPanel: ReactNode = (_type: string = 'scene'): JSX.Element => {
 
 const SceneControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
-  const increaseCount = () => sceneStore.update("count", sceneActions.increaseCount())
-  const decreaseCount = () => sceneStore.update("count", sceneActions.decreaseCount())
+  const increaseCount = () => sceneStore.store.update("count", sceneStore.actions.increaseCount())
+  const decreaseCount = () => sceneStore.store.update("count", sceneStore.actions.decreaseCount())
 
   const loadToWorkspace = () => {
-    const scene = sceneActions.loadToWorkspace()
+    const scene = sceneStore.actions.loadToWorkspace()
     console.debug("%cSceneControlPanel: loadToWorkspace {scene}", ccm3, scene)
     console.debug(`%c====================================`, ccm5)
     // return scene // ???
     return true
   }
-  const addNew = () => sceneActions.addNew()
-  const saveToDisk = () => sceneActions.saveToDisk()
-  const loadFromDisk = () => sceneActions.loadFromDisk()
-  const loadFromDB = (client) => sceneActions.loadFromDB(client)
-  const saveToDB = (client) => sceneActions.saveToDB(client)
-  const removeAll = () => sceneActions.removeAll()
-  const getState = () => sceneActions.getState()
+  const addNew = () => sceneStore.actions.addNew()
+  const saveToDisk = () => sceneStore.actions.saveToDisk()
+  const loadFromDisk = () => sceneStore.actions.loadFromDisk()
+  const loadFromDB = (client) => sceneStore.actions.loadFromDB(client)
+  const saveToDB = (client) => sceneStore.actions.saveToDB(client)
+  const removeAll = () => sceneStore.actions.removeAll()
+  const getState = () => sceneStore.actions.getState()
 
   return (
     <Box>
@@ -564,11 +645,11 @@ const SceneControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
 const AllotmentInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
-  const allotmentCount = allotmentStore.useStore("count")
-  const allotments = allotmentStore.useStore("all")
-  const allotment = allotmentStore.useStore("one")
-  const allotmentsDB = allotmentStore.useStore("allDB")
-  const allotmentDB = allotmentStore.useStore("oneDB")
+  const allotmentCount = allotmentStore.store.useStore("count")
+  const allotments = allotmentStore.store.useStore("all")
+  const allotment = allotmentStore.store.useStore("one")
+  const allotmentsDB = allotmentStore.store.useStore("allDB")
+  const allotmentDB = allotmentStore.store.useStore("oneDB")
 
   return (
     <Box>
@@ -586,14 +667,14 @@ const AllotmentInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
 const AllotmentControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
-  const increaseCount = () => allotmentStore.update("count", allotmentActions.increaseCount())
+  const increaseCount = () => allotmentStore.update("count", allotmentStore.actions.increaseCount())
 
-  const addNew = () => allotmentActions.addNew()
-  const saveToDisk = () => allotmentActions.saveToDisk()
-  const loadFromDisk = () => allotmentActions.loadFromDisk()
-  const loadFromDB = (client) => allotmentActions.loadFromDB(client)
-  const saveToDB = (client) => allotmentActions.saveToDB(client)
-  const removeAll = () => allotmentActions.removeAll()
+  const addNew = () => allotmentStore.actions.addNew()
+  const saveToDisk = () => allotmentStore.actions.saveToDisk()
+  const loadFromDisk = () => allotmentStore.actions.loadFromDisk()
+  const loadFromDB = (client) => allotmentStore.actions.loadFromDB(client)
+  const saveToDB = (client) => allotmentStore.actions.saveToDB(client)
+  const removeAll = () => allotmentStore.actions.removeAll()
 
   return (
     <Box>
@@ -621,11 +702,11 @@ const AllotmentControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element =
 
 const BedInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
-  const bedCount = bedStore.useStore("count")
-  const beds = bedStore.useStore("all")
-  const bed = bedStore.useStore("one")
-  const bedsDB = bedStore.useStore("allDB")
-  const bedDB = bedStore.useStore("oneDB")
+  const bedCount = bedStore.store.useStore("count")
+  const beds = bedStore.store.useStore("all")
+  const bed = bedStore.store.useStore("one")
+  const bedsDB = bedStore.store.useStore("allDB")
+  const bedDB = bedStore.store.useStore("oneDB")
 
   return (
     <Box>
@@ -643,14 +724,14 @@ const BedInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
 const BedControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
-  const increaseCount = () => bedStore.update("count", bedActions.increaseCount())
+  const increaseCount = () => bedStore.update("count", bedStore.actions.increaseCount())
 
-  const addNew = () => bedActions.addNew()
-  const saveToDisk = () => bedActions.saveToDisk()
-  const loadFromDisk = () => bedActions.loadFromDisk()
-  const loadFromDB = (client) => bedActions.loadFromDB(client)
-  const saveToDB = (client) => bedActions.saveToDB(client)
-  const removeAll = () => bedActions.removeAll()
+  const addNew = () => bedStore.actions.addNew()
+  const saveToDisk = () => bedStore.actions.saveToDisk()
+  const loadFromDisk = () => bedStore.actions.loadFromDisk()
+  const loadFromDB = (client) => bedStore.actions.loadFromDB(client)
+  const saveToDB = (client) => bedStore.actions.saveToDB(client)
+  const removeAll = () => bedStore.actions.removeAll()
 
   return (
     <Box>
@@ -678,11 +759,11 @@ const BedControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
 const PlantInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
-  const plantCount = plantStore.useStore("count")
-  const plants = plantStore.useStore("all")
-  const plant = plantStore.useStore("one")
-  const plantsDB = plantStore.useStore("allDB")
-  const plantDB = plantStore.useStore("oneDB")
+  const plantCount = plantStore.store.useStore("count")
+  const plants = plantStore.store.useStore("all")
+  const plant = plantStore.store.useStore("one")
+  const plantsDB = plantStore.store.useStore("allDB")
+  const plantDB = plantStore.store.useStore("oneDB")
 
   return (
     <Box>
@@ -700,14 +781,14 @@ const PlantInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
 const PlantControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
-  const increaseCount = () => plantStore.update("count", plantActions.increaseCount())
+  const increaseCount = () => plantStore.update("count", plantStore.actions.increaseCount())
 
-  const addNew = () => plantActions.addNew()
-  const saveToDisk = () => plantActions.saveToDisk()
-  const loadFromDisk = () => plantActions.loadFromDisk()
-  const loadFromDB = (client) => plantActions.loadFromDB(client)
-  const saveToDB = (client) => plantActions.saveToDB(client)
-  const removeAll = () => plantActions.removeAll()
+  const addNew = () => plantStore.actions.addNew()
+  const saveToDisk = () => plantStore.actions.saveToDisk()
+  const loadFromDisk = () => plantStore.actions.loadFromDisk()
+  const loadFromDB = (client) => plantStore.actions.loadFromDB(client)
+  const saveToDB = (client) => plantStore.actions.saveToDB(client)
+  const removeAll = () => plantStore.actions.removeAll()
 
   return (
     <Box>
@@ -735,11 +816,11 @@ const PlantControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
 const PlantingPlanInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
-  const plantingPlanCount = plantingPlanStore.useStore("count")
-  const plantingPlans = plantingPlanStore.useStore("all")
-  const plantingPlan = plantingPlanStore.useStore("one")
-  const plantingPlansDB = plantingPlanStore.useStore("allDB")
-  const plantingPlanDB = plantingPlanStore.useStore("oneDB")
+  const plantingPlanCount = plantingPlanStore.store.useStore("count")
+  const plantingPlans = plantingPlanStore.store.useStore("all")
+  const plantingPlan = plantingPlanStore.store.useStore("one")
+  const plantingPlansDB = plantingPlanStore.store.useStore("allDB")
+  const plantingPlanDB = plantingPlanStore.store.useStore("oneDB")
 
   return (
     <Box>
@@ -757,14 +838,14 @@ const PlantingPlanInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element =
 
 const PlantingPlanControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
-  const increaseCount = () => plantingPlanStore.update("count", plantingPlanActions.increaseCount())
+  const increaseCount = () => plantingPlanStore.update("count", plantingPlanStore.actions.increaseCount())
 
-  const addNew = () => plantingPlanActions.addNew()
-  const saveToDisk = () => plantingPlanActions.saveToDisk()
-  const loadFromDisk = () => plantingPlanActions.loadFromDisk()
-  const loadFromDB = (client) => plantingPlanActions.loadFromDB(client)
-  const saveToDB = (client) => plantingPlanActions.saveToDB(client)
-  const removeAll = () => plantingPlanActions.removeAll()
+  const addNew = () => plantingPlanStore.actions.addNew()
+  const saveToDisk = () => plantingPlanStore.actions.saveToDisk()
+  const loadFromDisk = () => plantingPlanStore.actions.loadFromDisk()
+  const loadFromDB = (client) => plantingPlanStore.actions.loadFromDB(client)
+  const saveToDB = (client) => plantingPlanStore.actions.saveToDB(client)
+  const removeAll = () => plantingPlanStore.actions.removeAll()
 
   return (
     <Box>
@@ -834,10 +915,10 @@ const ModalAbout: ReactNode = (): JSX.Element => {
         // open={isOpenModalAbout} // react state
         // open={useModalStore.getState().isOpenModalAbout} // zustand
         // open={modalStore.use.isOpenModalAbout} // zustood
-        open={modalStore.useStore("isOpenModalAbout")} // apollo reactive store
+        open={modalStore.store.useStore("isOpenModalAbout")} // apollo reactive store
         // onClose={handleCloseModalAbout} // react state
         // onClose={useModalStore.getState().handleCloseModalAbout()} // zustand
-        onClose={(e) => modalActions.handleCloseModalAbout(e)} // apollo reactive store
+        onClose={(e) => modalStore.actions.handleCloseModalAbout(e)} // apollo reactive store
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={stylesModal}
@@ -1053,7 +1134,7 @@ const ModalAbout: ReactNode = (): JSX.Element => {
 
           <Box className={stylesGarden.modalFooter}>
             🌱 a part of the <a href="https://threed.ai">threed.ai</a> code family
-            <Button size="small" onClick={() => modalActions.handleCloseModalAbout()}>
+            <Button size="small" onClick={() => modalStore.actions.handleCloseModalAbout()}>
               [X]
             </Button>
           </Box>
@@ -1086,10 +1167,10 @@ const ModalModel3d: ReactNode = (): JSX.Element => {
         // open={isOpenModalModel3d} // react state
         // open={useModalStore.getState().isOpenModalModel3d} // zustand
         // open={modalStore.use.isOpenModalModel3d} // zustood
-        open={modalStore.useStore("isOpenModalModel3d")} // apollo reactive store
+        open={modalStore.store.useStore("isOpenModalModel3d")} // apollo reactive store
         // onClose={handleCloseModalModel3d} // react state
         // onClose={useModalStore.getState().handleCloseModalModel3d()} // zustand
-        onClose={(e) => modalActions.handleCloseModalModel3d(e)} // apollo reactive store
+        onClose={(e) => modalStore.actions.handleCloseModalModel3d(e)} // apollo reactive store
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={stylesModal}
@@ -1137,7 +1218,7 @@ const ModalModel3d: ReactNode = (): JSX.Element => {
 
           <Box className={stylesGarden.modalFooter}>
             🌱 a part of the <a href="https://threed.ai">threed.ai</a> code family
-            <Button size="small" onClick={() => modalActions.handleCloseModalModel3d()}>
+            <Button size="small" onClick={() => modalStore.actions.handleCloseModalModel3d()}>
               [X]
             </Button>
           </Box>
@@ -1170,10 +1251,10 @@ const ModalLoading: ReactNode = (): JSX.Element => {
         // open={isOpenModalLoading} // react state
         // open={useModalStore.getState().isOpenModalLoading} // zustand
         // open={modalStore.use.isOpenModalLoading} // zustood
-        open={modalStore.useStore("isOpenModalLoading")} // apollo reactive store
+        open={modalStore.store.useStore("isOpenModalLoading")} // apollo reactive store
         // onClose={handleCloseModalLoading} // react state
         // onClose={useModalStore.getState().handleCloseModalLoading()} // zustand
-        onClose={(e) => modalActions.handleCloseModalLoading(e)} // apollo reactive store
+        onClose={(e) => modalStore.actions.handleCloseModalLoading(e)} // apollo reactive store
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={stylesModal}
@@ -1197,7 +1278,7 @@ const ModalLoading: ReactNode = (): JSX.Element => {
 
           <Box className={stylesGarden.modalFooter}>
             🌱 a part of the <a href="https://threed.ai">threed.ai</a> code family
-            <Button size="small" onClick={() => modalActions.handleCloseModalLoading()}>
+            <Button size="small" onClick={() => modalStore.actions.handleCloseModalLoading()}>
               [X]
             </Button>
           </Box>
@@ -1230,10 +1311,10 @@ const ModalShare: ReactNode = (): JSX.Element => {
         // open={isOpenModalShare} // react state
         // open={useModalStore.getState().isOpenModalShare} // zustand
         // open={modalStore.use.isOpenModalShare} // zustood
-        open={modalStore.useStore("isOpenModalShare")} // apollo reactive store
+        open={modalStore.store.useStore("isOpenModalShare")} // apollo reactive store
         // onClose={handleCloseModalShare} // react state
         // onClose={useModalStore.getState().handleCloseModalShare()} // zustand
-        onClose={(e) => modalActions.handleCloseModalShare(e)} // apollo reactive store
+        onClose={(e) => modalStore.actions.handleCloseModalShare(e)} // apollo reactive store
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={stylesModal}
@@ -1342,7 +1423,7 @@ const ModalShare: ReactNode = (): JSX.Element => {
 
           <Box className={stylesGarden.modalFooter}>
             🌱 a part of the <a href="https://threed.ai">threed.ai</a> code family
-            <Button size="small" onClick={() => modalActions.handleCloseModalShare()}>
+            <Button size="small" onClick={() => modalStore.actions.handleCloseModalShare()}>
               [X]
             </Button>
           </Box>
@@ -2009,7 +2090,7 @@ const ToolBar: ReactNode = (): JSX.Element => {
               onClose={handleCloseActionsMenu}
             >
               <MenuItem key="New ThreeD" onClick={handleCloseActionsMenu}>
-                <Typography onClick={() => threedActions.getState().addNew()}>New ThreeD</Typography>
+                <Typography onClick={() => threedStore.actions.getState().addNew()}>New ThreeD</Typography>
               </MenuItem>
               <MenuItem key="New Project" onClick={handleCloseActionsMenu}>
                 <Typography onClick={() => useProjectStore.getState().addProject()}>New Project</Typography>
@@ -2127,16 +2208,16 @@ const ToolBar: ReactNode = (): JSX.Element => {
               onClose={handleCloseViewsMenu}
             >
               <MenuItem key="Modal: About" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalActions.handleOpenModalAbout(e)}>Modal: About</Typography>
+                <Typography onClick={(e) => modalStore.actions.handleOpenModalAbout(e)}>Modal: About</Typography>
               </MenuItem>
               <MenuItem key="Modal: Model3d" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalActions.handleOpenModalModel3d(e)}>Modal: Model3d</Typography>
+                <Typography onClick={(e) => modalStore.actions.handleOpenModalModel3d(e)}>Modal: Model3d</Typography>
               </MenuItem>
               <MenuItem key="Modal: Loading" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalActions.handleOpenModalLoading(e)}>Modal: Loading</Typography>
+                <Typography onClick={(e) => modalStore.actions.handleOpenModalLoading(e)}>Modal: Loading</Typography>
               </MenuItem>
               <MenuItem key="Modal: Share" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalActions.handleOpenModalShare(e)}>Modal: Share</Typography>
+                <Typography onClick={(e) => modalStore.actions.handleOpenModalShare(e)}>Modal: Share</Typography>
               </MenuItem>
               <MenuItem key="Dialog: Share" onClick={handleCloseViewsMenu}>
                 <Typography onClick={doOpenShareDialog}>Dialog: Share</Typography>
@@ -3485,45 +3566,51 @@ const TheBottom: ReactNode = (): JSX.Element => {
   )
 }
 
-const ReactThreeFiberView = (): JSX.Element => {
+const ReactThreeFiberView: ReactNode = (store): JSX.Element => {
 
   const word = `[MM] @ ${new Date().toISOString()}`
 
+  console.debug('%cReactThreeFiberView {store}', ccm1, store)
+  return <div>testing...</div>
+  throw new Error(`testing... "${word}"`)
+  // const nounStore = store // has added .store
+  const nounStore = store.store
+  console.debug('%cReactThreeFiberView {nounStore}', ccm1, nounStore)
+  const store_type = nounStore.store.get('_type')
+  const store_id = nounStore.store.get('_id')
+  const store_ts = nounStore.store.get('_ts')
 
-    const store_type = sceneStore.get('_type')
-    const store_id = sceneStore.get('_id')
-    const store_ts = sceneStore.get('_ts')
+  const noun = nounStore.store.useStore('one')
+  const noun_title = noun.data?.title ? noun.data.title : 'NOTHING YET SIR'
+  const noun_x = 2
+  const noun_y = 2
+  const noun_z = 0
+  console.debug('%cReactThreeFiberView {noun}', ccm1, noun)
 
-    const noun = sceneStore.useStore("one")
-    const noun_type = scene._type
-    const noun_id = scene._id
-    const noun_ts = scene._ts
-    const noun_data = scene.data
-    const noun_name = scene.name
-    const noun_title = data?.title ? data.title : "NOTHING YET SIR"
-    console.debug('%cReactThreeFiberView {scene}', ccm1, scene)
-
-    // useEffect(() => {
-    //   console.debug('ReactThreeFiberView onMount')
-    //   return () => {
-    //     console.debug('ReactThreeFiberView onUnmount')
-    //   }
-    // }, [])
-
-    console.debug(`%c====================================`, ccm5)
-
-  const loadScene = () => {
+  const loadScene = (_id = noun._id) => {
+    nounStore.loadToWorkspace(_id, 'r3fCanvas')
     return true
   }
 
+  useEffect(() => {
+    // console.debug('ReactThreeFiberView onMount')
+    console.debug(`%c====================================`, ccm5)
+    return () => {
+      // console.debug('ReactThreeFiberView onUnmount')
+      console.debug(`%c====================================`, ccm4)
+    }
+  }, [])
+
+  // console.debug(`%c====================================`, ccm5)
   return (
     <Box id="r3f-canvas-container" style={{ width: "100%", minHeight: "20rem" }}>
-      <Typography>{noun_type.toCamelCase()} Title: {noun_title}</Typography>
+      <Typography>{noun._type} title: {noun_title}</Typography>
+      <Button onClick={loadScene}>load scene</Button>
       <Canvas>
         <ambientLight intensity={0.1} />
-        <directionalLight position={[0,0,5]} color="red" />
+        <directionalLight position={[0, 0, 5]} color="red" />
         <mesh>
-          <boxBufferGeometry args={[2,2,0]} />
+          <boxBufferGeometry args={[noun_x, noun_y, noun_z]} />
           <meshBasicMaterial />
         </mesh>
       </Canvas>
@@ -3586,20 +3673,20 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
     // DO THIS STUFF WHEN ASKED BY AN EVENT/REQUEST
 
     // ** PROJECT HISTORY
-    // projectActions.loadFromDisk()
-    // projectActions.loadFromDB()
+    // projectStore.actions.loadFromDisk()
+    // projectStore.actions.loadFromDB()
 
     // ** PLAN HISTORY
-    // planActions.loadFromDisk()
-    // planActions.loadFromDB()
+    // planStore.actions.loadFromDisk()
+    // planStore.actions.loadFromDB()
 
     // ** THREED HISTORY
-    // threedActions.loadFromDisk()
-    // threedActions.loadFromDB()
+    // threedStore.actions.loadFromDisk()
+    // threedStore.actions.loadFromDB()
 
     // ** SCENE HISTORY
-    // sceneActions.loadFromDisk()
-    // sceneActions.loadFromDB()
+    // sceneStore.actions.loadFromDisk()
+    // sceneStore.actions.loadFromDB()
 
     return () => {
       // console.debug('ThreeDGarden onUnmount', word)
@@ -3621,64 +3708,69 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
         <div id="storeControlPanel" style={{ padding: "1rem" }}>
 
           {/* React Three Fiber - View */}
-          <ReactThreeFiberView />
+          <ReactThreeFiberView store={sceneStore} />
 
           <Box sx={{ borderTop: 1, borderBottom: 1, borderColor: 'divider' }}>
             <Tabs value={tabInfoControl} onChange={handleChangeTabInfoControl} aria-label="Info Control Panel">
-              <Tab label="Projects" {...tabProps(0)} />
-              <Tab label="Plans" {...tabProps(1)} />
-              <Tab label="UIs" {...tabProps(2)} />
-              <Tab label="ThreeDs" {...tabProps(3)} />
-              <Tab label="Files" {...tabProps(4)} />
-              <Tab label="Scenes" {...tabProps(5)} />
-              <Tab label="Allotments" {...tabProps(6)} />
-              <Tab label="Beds" {...tabProps(7)} />
-              <Tab label="Plants" {...tabProps(8)} />
-              <Tab label="Planting Plans" {...tabProps(9)} />
-              <Tab label="Testing" {...tabProps(10)} />
+              <Tab label="Nouns" {...tabProps(0)} />
+              <Tab label="Projects" {...tabProps(1)} />
+              <Tab label="Workspaces" {...tabProps(2)} />
+              <Tab label="Plans" {...tabProps(3)} />
+              <Tab label="ThreeDs" {...tabProps(4)} />
+              <Tab label="Files" {...tabProps(5)} />
+              <Tab label="Scenes" {...tabProps(6)} />
+              <Tab label="Allotments" {...tabProps(7)} />
+              <Tab label="Beds" {...tabProps(8)} />
+              <Tab label="Plants" {...tabProps(9)} />
+              <Tab label="Planting Plans" {...tabProps(10)} />
+              <Tab label="Testing" {...tabProps(11)} />
             </Tabs>
           </Box>
           <MDTabPanel value={tabInfoControl} index={0}>
+            <NounControlPanel />
+            <NounInfoPanel />
+          </MDTabPanel>
+          <MDTabPanel value={tabInfoControl} index={1}>
             <ProjectControlPanel />
             <ProjectInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={1}>
+          <MDTabPanel value={tabInfoControl} index={2}>
+            <WorkspaceControlPanel />
+            <WorkspaceInfoPanel />
+          </MDTabPanel>
+          <MDTabPanel value={tabInfoControl} index={3}>
             <PlanControlPanel />
             <PlanInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={2}>
-            <UIControlPanel />
-            <UIInfoPanel />
-          </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={3}>
+          <MDTabPanel value={tabInfoControl} index={4}>
             <ThreeDControlPanel />
             <ThreeDInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={4}>
+          <MDTabPanel value={tabInfoControl} index={5}>
             <FileControlPanel />
             <FileInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={5}>
+          <MDTabPanel value={tabInfoControl} index={6}>
             <SceneControlPanel />
             <SceneInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={6}>
+          <MDTabPanel value={tabInfoControl} index={7}>
             <AllotmentControlPanel />
             <AllotmentInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={7}>
+          <MDTabPanel value={tabInfoControl} index={8}>
             <BedControlPanel />
             <BedInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={8}>
+          <MDTabPanel value={tabInfoControl} index={9}>
             <PlantControlPanel />
             <PlantInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={9}>
+          <MDTabPanel value={tabInfoControl} index={10}>
             <PlantingPlanControlPanel />
             <PlantingPlanInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={10}>
+          <MDTabPanel value={tabInfoControl} index={11}>
             Testing Panel
             {/* <CharacterControlPanel /> */}
             {/* <CharacterInfoPanel /> */}
@@ -3707,6 +3799,7 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
         {/* <PropertiesView /> */}
         {/* <PlanView /> */}
         {/* <TheBottom /> */}
+
       </div>
     </div >
   )
