@@ -3489,14 +3489,18 @@ const ReactThreeFiberView = (): JSX.Element => {
 
   const word = `[MM] @ ${new Date().toISOString()}`
 
-  const _type = sceneStore.get('_type')
-  const _id = sceneStore.get('_id')
-  const _ts = sceneStore.get('_ts')
+  const store_type = sceneStore.get('_type')
+  const store_id = sceneStore.get('_id')
+  const store_ts = sceneStore.get('_ts')
+
   const scene = sceneStore.useStore("one")
+  const _type = _type
+  const _id = scene._id
+  const _ts = scene._ts
   const data = scene.data
   const name = scene.name
   const title = data?.title ? data.title : "NOTHING YET SIR"
-  console.debug('%cReactThreeFiberView {scene} fields', ccm1, scene, _id, _ts, name, data)
+  console.debug('%cReactThreeFiberView {scene}', ccm1, scene)
 
   // useEffect(() => {
   //   console.debug('ReactThreeFiberView onMount')
