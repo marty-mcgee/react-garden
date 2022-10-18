@@ -915,10 +915,10 @@ const ModalAbout: ReactNode = (): JSX.Element => {
         // open={isOpenModalAbout} // react state
         // open={useModalStore.getState().isOpenModalAbout} // zustand
         // open={modalStore.use.isOpenModalAbout} // zustood
-        open={modalStore.store.useStore("isOpenModalAbout")} // apollo reactive store
+        open={modalStore.useStore("isOpenModalAbout")} // apollo reactive store
         // onClose={handleCloseModalAbout} // react state
         // onClose={useModalStore.getState().handleCloseModalAbout()} // zustand
-        onClose={(e) => modalStore.actions.handleCloseModalAbout(e)} // apollo reactive store
+        onClose={(e) => modalActions.handleCloseModalAbout(e)} // apollo reactive store
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={stylesModal}
@@ -1134,7 +1134,7 @@ const ModalAbout: ReactNode = (): JSX.Element => {
 
           <Box className={stylesGarden.modalFooter}>
             🌱 a part of the <a href="https://threed.ai">threed.ai</a> code family
-            <Button size="small" onClick={() => modalStore.actions.handleCloseModalAbout()}>
+            <Button size="small" onClick={() => modalActions.handleCloseModalAbout()}>
               [X]
             </Button>
           </Box>
@@ -1167,10 +1167,10 @@ const ModalModel3d: ReactNode = (): JSX.Element => {
         // open={isOpenModalModel3d} // react state
         // open={useModalStore.getState().isOpenModalModel3d} // zustand
         // open={modalStore.use.isOpenModalModel3d} // zustood
-        open={modalStore.store.useStore("isOpenModalModel3d")} // apollo reactive store
+        open={modalStore.useStore("isOpenModalModel3d")} // apollo reactive store
         // onClose={handleCloseModalModel3d} // react state
         // onClose={useModalStore.getState().handleCloseModalModel3d()} // zustand
-        onClose={(e) => modalStore.actions.handleCloseModalModel3d(e)} // apollo reactive store
+        onClose={(e) => modalActions.handleCloseModalModel3d(e)} // apollo reactive store
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={stylesModal}
@@ -1218,7 +1218,7 @@ const ModalModel3d: ReactNode = (): JSX.Element => {
 
           <Box className={stylesGarden.modalFooter}>
             🌱 a part of the <a href="https://threed.ai">threed.ai</a> code family
-            <Button size="small" onClick={() => modalStore.actions.handleCloseModalModel3d()}>
+            <Button size="small" onClick={() => modalActions.handleCloseModalModel3d()}>
               [X]
             </Button>
           </Box>
@@ -1251,10 +1251,10 @@ const ModalLoading: ReactNode = (): JSX.Element => {
         // open={isOpenModalLoading} // react state
         // open={useModalStore.getState().isOpenModalLoading} // zustand
         // open={modalStore.use.isOpenModalLoading} // zustood
-        open={modalStore.store.useStore("isOpenModalLoading")} // apollo reactive store
+        open={modalStore.useStore("isOpenModalLoading")} // apollo reactive store
         // onClose={handleCloseModalLoading} // react state
         // onClose={useModalStore.getState().handleCloseModalLoading()} // zustand
-        onClose={(e) => modalStore.actions.handleCloseModalLoading(e)} // apollo reactive store
+        onClose={(e) => modalActions.handleCloseModalLoading(e)} // apollo reactive store
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={stylesModal}
@@ -1278,7 +1278,7 @@ const ModalLoading: ReactNode = (): JSX.Element => {
 
           <Box className={stylesGarden.modalFooter}>
             🌱 a part of the <a href="https://threed.ai">threed.ai</a> code family
-            <Button size="small" onClick={() => modalStore.actions.handleCloseModalLoading()}>
+            <Button size="small" onClick={() => modalActions.handleCloseModalLoading()}>
               [X]
             </Button>
           </Box>
@@ -1311,10 +1311,10 @@ const ModalShare: ReactNode = (): JSX.Element => {
         // open={isOpenModalShare} // react state
         // open={useModalStore.getState().isOpenModalShare} // zustand
         // open={modalStore.use.isOpenModalShare} // zustood
-        open={modalStore.store.useStore("isOpenModalShare")} // apollo reactive store
+        open={modalStore.useStore("isOpenModalShare")} // apollo reactive store
         // onClose={handleCloseModalShare} // react state
         // onClose={useModalStore.getState().handleCloseModalShare()} // zustand
-        onClose={(e) => modalStore.actions.handleCloseModalShare(e)} // apollo reactive store
+        onClose={(e) => modalActions.handleCloseModalShare(e)} // apollo reactive store
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={stylesModal}
@@ -1423,7 +1423,7 @@ const ModalShare: ReactNode = (): JSX.Element => {
 
           <Box className={stylesGarden.modalFooter}>
             🌱 a part of the <a href="https://threed.ai">threed.ai</a> code family
-            <Button size="small" onClick={() => modalStore.actions.handleCloseModalShare()}>
+            <Button size="small" onClick={() => modalActions.handleCloseModalShare()}>
               [X]
             </Button>
           </Box>
@@ -2208,16 +2208,16 @@ const ToolBar: ReactNode = (): JSX.Element => {
               onClose={handleCloseViewsMenu}
             >
               <MenuItem key="Modal: About" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalStore.actions.handleOpenModalAbout(e)}>Modal: About</Typography>
+                <Typography onClick={(e) => modalActions.handleOpenModalAbout(e)}>Modal: About</Typography>
               </MenuItem>
               <MenuItem key="Modal: Model3d" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalStore.actions.handleOpenModalModel3d(e)}>Modal: Model3d</Typography>
+                <Typography onClick={(e) => modalActions.handleOpenModalModel3d(e)}>Modal: Model3d</Typography>
               </MenuItem>
               <MenuItem key="Modal: Loading" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalStore.actions.handleOpenModalLoading(e)}>Modal: Loading</Typography>
+                <Typography onClick={(e) => modalActions.handleOpenModalLoading(e)}>Modal: Loading</Typography>
               </MenuItem>
               <MenuItem key="Modal: Share" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalStore.actions.handleOpenModalShare(e)}>Modal: Share</Typography>
+                <Typography onClick={(e) => modalActions.handleOpenModalShare(e)}>Modal: Share</Typography>
               </MenuItem>
               <MenuItem key="Dialog: Share" onClick={handleCloseViewsMenu}>
                 <Typography onClick={doOpenShareDialog}>Dialog: Share</Typography>
