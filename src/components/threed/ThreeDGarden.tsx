@@ -3489,7 +3489,7 @@ const ReactThreeFiberView = (): JSX.Element => {
 
   const word = `[MM] @ ${new Date().toISOString()}`
 
-  const loadScene = () => {
+
     const store_type = sceneStore.get('_type')
     const store_id = sceneStore.get('_id')
     const store_ts = sceneStore.get('_ts')
@@ -3511,6 +3511,8 @@ const ReactThreeFiberView = (): JSX.Element => {
     // }, [])
 
     console.debug(`%c====================================`, ccm5)
+
+  const loadScene = () => {
     return true
   }
 
