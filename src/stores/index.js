@@ -29,7 +29,7 @@ import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5, ccm6 } from '~/@core/utils/console-
 
 // ==========================================================
 // IMPORTS COMPLETE
-console.debug(`%c====================================`, ccm5)
+// console.debug(`%c====================================`, ccm5)
 console.debug(`%cThreeDGarden<FC,R3F>: {stores}`, ccm4)
 console.debug(`%c====================================`, ccm5)
 
