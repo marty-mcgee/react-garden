@@ -473,6 +473,7 @@ const modalActions = {
 // ** Construct Noun Stores
 
 export const useNounStore = new nounStore('noun') // hook
+// nouns
 const projectStore = new nounStore('project')
 const workspaceStore = new nounStore('workspace')
 const planStore = new nounStore('plan')
