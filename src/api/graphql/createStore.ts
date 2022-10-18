@@ -86,7 +86,7 @@ export default function create<Value>(
 
   const debug = (key: string, value: Updater<Value>): void => {
     if (options.debug) {
-      console.debug(`store update(key) "${key}" with value: ${JSON.stringify(value)}`)
+      // console.debug(`store update(key) "${key}" with value: ${JSON.stringify(value)}`)
     }
   }
 
