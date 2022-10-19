@@ -37,6 +37,7 @@ console.debug(`%c====================================`, ccm5)
 // ==============================================================
 // ==============================================================
 // ** Noun Object -- Constructor Function
+// -- returns new noun
 
 function noun(_type = 'noun') {
   // object params
@@ -55,7 +56,10 @@ function noun(_type = 'noun') {
 }
 
 // ==============================================================
+// ==============================================================
+// ==============================================================
 // ** Noun Store -- Constructor Function
+// -- returns new nounStore
 
 function nounStore(_type = 'noun') {
   // store params
@@ -63,8 +67,10 @@ function nounStore(_type = 'noun') {
   this._plural = _type + 's'
   this._storageItem = 'threed_' + _type + 'History'
 
-  // ** Noun Store .store -- Object
-  // // nounStore has an object .store (ac3 reactive vars)
+  // ==============================================================
+  // ** Noun Store .store
+  // -- returns Object of Functions (ac3 reactive vars)
+
   this.store = create({
     _id: newUUID(),
     _ts: new Date().toISOString(),
@@ -83,7 +89,10 @@ function nounStore(_type = 'noun') {
     oneDB: {}, // pre-this noun, ready to be mapped to 'this' noun
   })
 
-  // ** Noun Store .actions -- Object of Functions
+  // ==============================================================
+  // ** Noun Store .actions
+  // -- returns Object of Functions
+
   this.actions = {
     isVisible: () => {
       return (state) => state
@@ -101,7 +110,7 @@ function nounStore(_type = 'noun') {
       return (state) => state - n
     },
 
-    // redundant
+    // redundant (but useful ???)
     getState: () => {
       return this.store.getState()
     },
@@ -187,9 +196,9 @@ function nounStore(_type = 'noun') {
     saveToDisk: () => {
       try {
         localStorage.setItem(
-          'threed_nounHistory',
+          this._storageItem,
           JSON.stringify({
-            subject: 'all',
+            subject: this._plural,
             payload: this.store.get('all'),
           })
         )
@@ -204,7 +213,7 @@ function nounStore(_type = 'noun') {
     // get data from browser local storage
     loadFromDisk: () => {
       try {
-        const query = JSON.parse(localStorage.getItem('threed_nounHistory'))
+        const query = JSON.parse(localStorage.getItem(this._storageItem))
         if (query) {
           console.debug(`%cloadFromDisk [${this._type}] QUERY?`, ccm3, query)
           const { payload } = query
@@ -428,12 +437,8 @@ function nounStore(_type = 'noun') {
 // ==============================================================
 // ==============================================================
 // ==============================================================
-// Modal (custom noun, not a standard noun)
-
-// ==============================================================
-// ==============================================================
-// ==============================================================
-// ** Noun Modal -- Constructor Function
+// ** Modal Object -- Constructor Function
+// -- returns new modal
 
 function modal(_type = 'modal') {
   // object params
@@ -451,26 +456,56 @@ function modal(_type = 'modal') {
   }
 }
 
-// ** Modal Store
+// ==============================================================
+// ** Modal Store -- Constructor Function
+// -- returns new modalStore
+
 function modalStore(_type = 'modal') {
   // store params
+  this._type = _type.toLowerCase()
   this._plural = _type + 's'
   this._storageItem = 'threed_' + _type + 'History'
+
+  // ==============================================================
+  // ** Modal Store .store
 
   this.store = create({
     isVisible: false,
   })
 
-  // ** Modal Actions
+  // ==============================================================
+  // ** Modal Store .actions
+
   this.actions = {
     toggleIsVisible: (e = null) => {
       this.store.update('isVisible', !this.store.get('isVisible'))
+      localStorage.setItem(
+        this._storageItem,
+        JSON.stringify({
+          subject: isVisible,
+          payload: this.store.get('isVisible'),
+        })
+      )
     },
     handleOpen: (e = null) => {
       this.store.update('isVisible', true)
+      localStorage.setItem(
+        this._storageItem,
+        JSON.stringify({
+          subject: isVisible,
+          payload: true,
+        })
+      )
     },
     handleClose: (e = null) => {
       this.store.update('isVisible', false)
+      localStorage.setItem(
+        this._storageItem,
+        JSON.stringify({
+          subject: isVisible,
+          payload: false,
+        })
+      )
     },
   } // modalActions
 } // modalStore
