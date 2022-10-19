@@ -426,48 +426,50 @@ export function nounStore(_type) {
 const modal = {}
 
 // ** Modal Store
-const modalStore = create({
-  isOpenModalAbout: false,
-  isOpenModalModel3d: false,
-  isOpenModalLoading: false,
-  isOpenModalShare: false,
-}) // modalStore
+function modalStore() {
+  this.store = create({
+    isOpenModalAbout: false,
+    isOpenModalModel3d: false,
+    isOpenModalLoading: false,
+    isOpenModalShare: false,
+  })
 
-// ** Modal Actions
-const modalActions = {
-  handleOpenModalAbout: (e = null) => {
-    modalStore.update('isOpenModalAbout', true)
-    // console.debug("isOpenModalAbout", modalStore.get("isOpenModalAbout"), e)
-  },
-  handleCloseModalAbout: (e = null) => {
-    modalStore.update('isOpenModalAbout', false)
-    // console.debug("isOpenModalAbout", modalStore.get("isOpenModalAbout"), e)
-  },
-  handleOpenModalModel3d: (e = null) => {
-    modalStore.update('isOpenModalModel3d', true)
-    // console.debug("isOpenModalModel3d", modalStore.get("isOpenModalModel3d"), e)
-  },
-  handleCloseModalModel3d: (e = null) => {
-    modalStore.update('isOpenModalModel3d', false)
-    // console.debug("isOpenModalModel3d", modalStore.get("isOpenModalModel3d"), e)
-  },
-  handleOpenModalLoading: (e = null) => {
-    modalStore.update('isOpenModalLoading', true)
-    // console.debug("isOpenModalLoading", modalStore.get("isOpenModalLoading"), e)
-  },
-  handleCloseModalLoading: (e = null) => {
-    modalStore.update('isOpenModalLoading', false)
-    // console.debug("isOpenModalLoading", modalStore.get("isOpenModalLoading"), e)
-  },
-  handleOpenModalShare: (e = null) => {
-    modalStore.update('isOpenModalShare', true)
-    // console.debug("isOpenModalShare", modalStore.get("isOpenModalShare"), e)
-  },
-  handleCloseModalShare: (e = null) => {
-    modalStore.update('isOpenModalShare', false)
-    // console.debug("isOpenModalShare", modalStore.get("isOpenModalShare"), e)
-  },
-} // modalActions
+  // ** Modal Actions
+  this.actions = {
+    handleOpenModalAbout: (e = null) => {
+      modalStore.update('isOpenModalAbout', true)
+      // console.debug("isOpenModalAbout", modalStore.get("isOpenModalAbout"), e)
+    },
+    handleCloseModalAbout: (e = null) => {
+      modalStore.update('isOpenModalAbout', false)
+      // console.debug("isOpenModalAbout", modalStore.get("isOpenModalAbout"), e)
+    },
+    handleOpenModalModel3d: (e = null) => {
+      modalStore.update('isOpenModalModel3d', true)
+      // console.debug("isOpenModalModel3d", modalStore.get("isOpenModalModel3d"), e)
+    },
+    handleCloseModalModel3d: (e = null) => {
+      modalStore.update('isOpenModalModel3d', false)
+      // console.debug("isOpenModalModel3d", modalStore.get("isOpenModalModel3d"), e)
+    },
+    handleOpenModalLoading: (e = null) => {
+      modalStore.update('isOpenModalLoading', true)
+      // console.debug("isOpenModalLoading", modalStore.get("isOpenModalLoading"), e)
+    },
+    handleCloseModalLoading: (e = null) => {
+      modalStore.update('isOpenModalLoading', false)
+      // console.debug("isOpenModalLoading", modalStore.get("isOpenModalLoading"), e)
+    },
+    handleOpenModalShare: (e = null) => {
+      modalStore.update('isOpenModalShare', true)
+      // console.debug("isOpenModalShare", modalStore.get("isOpenModalShare"), e)
+    },
+    handleCloseModalShare: (e = null) => {
+      modalStore.update('isOpenModalShare', false)
+      // console.debug("isOpenModalShare", modalStore.get("isOpenModalShare"), e)
+    },
+  } // modalActions
+} // modalStore
 
 // ==============================================================
 // ==============================================================
@@ -488,9 +490,10 @@ const stores = {
   plantingPlanStore: new nounStore('plantingPlan'),
   bearStore: new nounStore('bear'),
   // modalStore: new nounStore('modal'),
-  modalStore,
   // modalActions: modalStore.actions,
-  modalActions,
+  // modalStore,
+  // modalActions,
+  modalStore: new modalStore(),
   modalStoreNew: new nounStore('modal'),
 }
 

@@ -184,95 +184,15 @@ const {
   plantingPlanStore,
   bearStore,
   modalStore,
-  modalActions,
   // modalStoreNew,
 } = stores
+console.debug('%cstores', ccm2, stores)
 // console.debug('%csceneStore', ccm2, sceneStore)
 // console.debug(`%c====================================`, ccm5)
 
 // ==========================================================
 // FUNCTIONAL NOUNS
 // ==========================================================
-
-// ==========================================================
-// Noun (Prototype React JSX)
-/*
-const NounInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
-
-  const nounCount = nounStore.store.useStore("count")
-  const nounCountDB = nounStore.store.useStore("countDB")
-  const nouns = nounStore.store.useStore("all")
-  const noun = nounStore.store.useStore("one")
-  const nounsDB = nounStore.store.useStore("allDB")
-  const nounDB = nounStore.store.useStore("oneDB")
-
-  return (
-    <Box>
-      <Typography variant="h6">_type: {JSON.stringify(_type)}</Typography>
-      <hr />
-      <Typography>count: {nounCount}</Typography>
-      <Typography>countDB: {nounCountDB}</Typography>
-      <hr />
-      <Typography>all.length: {nouns.length}</Typography>
-      <Typography>one._id: {noun._id}</Typography>
-      <Typography>one._ts: {noun._ts}</Typography>
-      <Typography>one.name: {noun.name}</Typography>
-      <Typography>one.layer.name: {noun.layer?.name}</Typography>
-      <Typography>one.data.title: {noun.data?.title}</Typography>
-      <hr />
-      <Typography>allDB.length: {nounsDB.length}</Typography>
-      <Typography>oneDB._id: {nounDB._id}</Typography>
-      <Typography>oneDB._ts: {nounDB._ts}</Typography>
-      <Typography>oneDB.name: {nounDB.name}</Typography>
-      <Typography>oneDB.layer.name: {nounDB.layer?.name}</Typography>
-      <Typography>oneDB.data.title: {nounDB.data?.title}</Typography>
-      <hr />
-    </Box>
-  )
-}
-
-const NounControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
-
-  const increaseCount = () => nounStore.store.update("count", nounStore.actions.increaseCount())
-  const decreaseCount = () => nounStore.store.update("count", nounStore.actions.decreaseCount())
-
-  const loadToWorkspace = () => {
-    const noun = nounStore.actions.loadToWorkspace()
-    console.debug("%cControlPanel: loadToWorkspace {noun}", ccm3, noun)
-    console.debug(`%c====================================`, ccm5)
-    // return noun // ???
-    return true
-  }
-  const addNew = () => nounStore.actions.addNew()
-  const saveToDisk = () => nounStore.actions.saveToDisk()
-  const loadFromDisk = () => nounStore.actions.loadFromDisk()
-  const loadFromDB = (client) => nounStore.actions.loadFromDB(client)
-  const saveToDB = (client) => nounStore.actions.saveToDB(client)
-  const removeAll = () => nounStore.actions.removeAll()
-  const getState = () => nounStore.actions.getState()
-
-  return (
-    <Box>
-      <Button onClick={addNew}>add new</Button>
-      <Button onClick={saveToDisk}>save to disk</Button>
-      <Button onClick={loadFromDisk}>load from disk</Button>
-      <ApolloConsumer>
-        {client => (
-          <>
-            <Button onClick={() => saveToDB(client)}>save to db</Button>
-            <Button onClick={() => loadFromDB(client)}>load from db</Button>
-          </>
-        )}
-      </ApolloConsumer>
-      <Button onClick={removeAll}>remove all</Button>
-      <Button onClick={getState}>state</Button>
-      <Button onClick={loadToWorkspace}>load</Button>
-      <Button onClick={increaseCount}>+</Button>
-      <Button onClick={decreaseCount}>-</Button>
-    </Box>
-  )
-}
-*/
 
 // ==========================================================
 // Project
@@ -916,10 +836,10 @@ const ModalAbout: ReactNode = (): JSX.Element => {
         // open={isOpenModalAbout} // react state
         // open={useModalStore.getState().isOpenModalAbout} // zustand
         // open={modalStore.use.isOpenModalAbout} // zustood
-        open={modalStore.useStore("isOpenModalAbout")} // apollo reactive store
+        open={modalStore.store.useStore("isOpenModalAbout")} // apollo reactive store
         // onClose={handleCloseModalAbout} // react state
         // onClose={useModalStore.getState().handleCloseModalAbout()} // zustand
-        onClose={(e) => modalActions.handleCloseModalAbout(e)} // apollo reactive store
+        onClose={(e) => modalStore.actions.handleCloseModalAbout(e)} // apollo reactive store
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={stylesModal}
@@ -1168,10 +1088,10 @@ const ModalModel3d: ReactNode = (): JSX.Element => {
         // open={isOpenModalModel3d} // react state
         // open={useModalStore.getState().isOpenModalModel3d} // zustand
         // open={modalStore.use.isOpenModalModel3d} // zustood
-        open={modalStore.useStore("isOpenModalModel3d")} // apollo reactive store
+        open={modalStore.store.useStore("isOpenModalModel3d")} // apollo reactive store
         // onClose={handleCloseModalModel3d} // react state
         // onClose={useModalStore.getState().handleCloseModalModel3d()} // zustand
-        onClose={(e) => modalActions.handleCloseModalModel3d(e)} // apollo reactive store
+        onClose={(e) => modalStore.actions.handleCloseModalModel3d(e)} // apollo reactive store
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={stylesModal}
@@ -1252,10 +1172,10 @@ const ModalLoading: ReactNode = (): JSX.Element => {
         // open={isOpenModalLoading} // react state
         // open={useModalStore.getState().isOpenModalLoading} // zustand
         // open={modalStore.use.isOpenModalLoading} // zustood
-        open={modalStore.useStore("isOpenModalLoading")} // apollo reactive store
+        open={modalStore.store.useStore("isOpenModalLoading")} // apollo reactive store
         // onClose={handleCloseModalLoading} // react state
         // onClose={useModalStore.getState().handleCloseModalLoading()} // zustand
-        onClose={(e) => modalActions.handleCloseModalLoading(e)} // apollo reactive store
+        onClose={(e) => modalStore.actions.handleCloseModalLoading(e)} // apollo reactive store
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={stylesModal}
@@ -1312,10 +1232,10 @@ const ModalShare: ReactNode = (): JSX.Element => {
         // open={isOpenModalShare} // react state
         // open={useModalStore.getState().isOpenModalShare} // zustand
         // open={modalStore.use.isOpenModalShare} // zustood
-        open={modalStore.useStore("isOpenModalShare")} // apollo reactive store
+        open={modalStore.store.useStore("isOpenModalShare")} // apollo reactive store
         // onClose={handleCloseModalShare} // react state
         // onClose={useModalStore.getState().handleCloseModalShare()} // zustand
-        onClose={(e) => modalActions.handleCloseModalShare(e)} // apollo reactive store
+        onClose={(e) => modalStore.actions.handleCloseModalShare(e)} // apollo reactive store
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={stylesModal}
@@ -3680,6 +3600,10 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
     // projectStore.actions.loadFromDisk()
     // projectStore.actions.loadFromDB()
 
+    // ** WORKSPACE HISTORY
+    // workspaceStore.actions.loadFromDisk()
+    // workspaceStore.actions.loadFromDB()
+
     // ** PLAN HISTORY
     // planStore.actions.loadFromDisk()
     // planStore.actions.loadFromDB()
@@ -3771,9 +3695,6 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
           </MDTabPanel>
           <MDTabPanel value={tabInfoControl} index={10}>
             Testing Panel
-            {/* <NounControlPanel /> */}
-            {/* <NounInfoPanel /> */}
-            {/* <hr /> */}
             {/* <CharacterControlPanel /> */}
             {/* <CharacterInfoPanel /> */}
             {/* <hr /> */}
