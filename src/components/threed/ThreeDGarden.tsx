@@ -197,7 +197,7 @@ console.debug('%cstores', ccm2, stores)
 // ==========================================================
 // Project
 
-const ProjectInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+const ProjectInfoPanel: ReactNode = (_type: string = 'project'): JSX.Element => {
 
   const projectCount = projectStore.store.useStore("count")
   const projects = projectStore.store.useStore("all")
@@ -219,7 +219,7 @@ const ProjectInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
   )
 }
 
-const ProjectControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+const ProjectControlPanel: ReactNode = (_type: string = 'project'): JSX.Element => {
 
   const increaseCount = () => projectStore.update("count", projectStore.actions.increaseCount())
 
@@ -254,7 +254,7 @@ const ProjectControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => 
 // ==========================================================
 // Workspace
 
-const WorkspaceInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+const WorkspaceInfoPanel: ReactNode = (_type: string = 'workspace'): JSX.Element => {
 
   const workspaceCount = workspaceStore.store.useStore("count")
   const workspaces = workspaceStore.store.useStore("all")
@@ -276,7 +276,7 @@ const WorkspaceInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
   )
 }
 
-const WorkspaceControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+const WorkspaceControlPanel: ReactNode = (_type: string = 'workspace'): JSX.Element => {
 
   const increaseCount = () => workspaceStore.update("count", workspaceStore.actions.increaseCount())
 
@@ -311,7 +311,7 @@ const WorkspaceControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element =
 // ==========================================================
 // Plan
 
-const PlanInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+const PlanInfoPanel: ReactNode = (_type: string = 'plan'): JSX.Element => {
 
   const planCount = planStore.store.useStore("count")
   const plans = planStore.store.useStore("all")
@@ -333,7 +333,7 @@ const PlanInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
   )
 }
 
-const PlanControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+const PlanControlPanel: ReactNode = (_type: string = 'plan'): JSX.Element => {
 
   const increaseCount = () => planStore.update("count", planStore.actions.increaseCount())
 
@@ -368,7 +368,7 @@ const PlanControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 // ==========================================================
 // ThreeD
 
-const ThreeDInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+const ThreeDInfoPanel: ReactNode = (_type: string = 'threed'): JSX.Element => {
 
   const threedCount = threedStore.store.useStore("count")
   const threeds = threedStore.store.useStore("all")
@@ -390,7 +390,7 @@ const ThreeDInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
   )
 }
 
-const ThreeDControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+const ThreeDControlPanel: ReactNode = (_type: string = 'threed'): JSX.Element => {
 
   const increaseCount = () => threedStore.update("count", threedStore.actions.increaseCount())
 
@@ -425,7 +425,7 @@ const ThreeDControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 // ==========================================================
 // File
 
-function FileInfoPanel() {
+const FileInfoPanel: ReactNode = (_type: string = 'file'): JSX.Element => {
 
   const fileCount = fileStore.store.useStore("count")
   const files = fileStore.store.useStore("all")
@@ -447,7 +447,7 @@ function FileInfoPanel() {
   )
 }
 
-function FileControlPanel() {
+const FileControlPanel: ReactNode = (_type: string = 'file'): JSX.Element => {
 
   const increaseCount = () => fileStore.update("count", fileStore.actions.increaseCount())
 
@@ -519,7 +519,7 @@ const SceneInfoPanel: ReactNode = (_type: string = 'scene'): JSX.Element => {
   )
 }
 
-const SceneControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+const SceneControlPanel: ReactNode = (_type: string = 'scene'): JSX.Element => {
 
   const increaseCount = () => sceneStore.store.update("count", sceneStore.actions.increaseCount())
   const decreaseCount = () => sceneStore.store.update("count", sceneStore.actions.decreaseCount())
@@ -564,7 +564,7 @@ const SceneControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 // ==========================================================
 // Allotment
 
-const AllotmentInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+const AllotmentInfoPanel: ReactNode = (_type: string = 'allotment'): JSX.Element => {
 
   const allotmentCount = allotmentStore.store.useStore("count")
   const allotments = allotmentStore.store.useStore("all")
@@ -586,7 +586,7 @@ const AllotmentInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
   )
 }
 
-const AllotmentControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+const AllotmentControlPanel: ReactNode = (_type: string = 'allotment'): JSX.Element => {
 
   const increaseCount = () => allotmentStore.update("count", allotmentStore.actions.increaseCount())
 
@@ -621,7 +621,7 @@ const AllotmentControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element =
 // ==========================================================
 // Bed
 
-const BedInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+const BedInfoPanel: ReactNode = (_type: string = 'bed'): JSX.Element => {
 
   const bedCount = bedStore.store.useStore("count")
   const beds = bedStore.store.useStore("all")
@@ -643,7 +643,7 @@ const BedInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
   )
 }
 
-const BedControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+const BedControlPanel: ReactNode = (_type: string = 'bed'): JSX.Element => {
 
   const increaseCount = () => bedStore.update("count", bedStore.actions.increaseCount())
 
@@ -678,7 +678,7 @@ const BedControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 // ==========================================================
 // Plant
 
-const PlantInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+const PlantInfoPanel: ReactNode = (_type: string = 'plant'): JSX.Element => {
 
   const plantCount = plantStore.store.useStore("count")
   const plants = plantStore.store.useStore("all")
@@ -700,7 +700,7 @@ const PlantInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
   )
 }
 
-const PlantControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+const PlantControlPanel: ReactNode = (_type: string = 'plant'): JSX.Element => {
 
   const increaseCount = () => plantStore.update("count", plantStore.actions.increaseCount())
 
@@ -735,7 +735,7 @@ const PlantControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 // ==========================================================
 // PlantingPlan
 
-const PlantingPlanInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+const PlantingPlanInfoPanel: ReactNode = (_type: string = 'planting_plan'): JSX.Element => {
 
   const plantingPlanCount = plantingPlanStore.store.useStore("count")
   const plantingPlans = plantingPlanStore.store.useStore("all")
@@ -757,7 +757,7 @@ const PlantingPlanInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element =
   )
 }
 
-const PlantingPlanControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
+const PlantingPlanControlPanel: ReactNode = (_type: string = 'planting_plan'): JSX.Element => {
 
   const increaseCount = () => plantingPlanStore.update("count", plantingPlanStore.actions.increaseCount())
 
@@ -1055,7 +1055,7 @@ const ModalAbout: ReactNode = (): JSX.Element => {
 
           <Box className={stylesGarden.modalFooter}>
             🌱 a part of the <a href="https://threed.ai">threed.ai</a> code family
-            <Button size="small" onClick={() => modalActions.handleCloseModalAbout()}>
+            <Button size="small" onClick={() => modalStore.actions.handleCloseModalAbout()}>
               [X]
             </Button>
           </Box>
@@ -1139,7 +1139,7 @@ const ModalModel3d: ReactNode = (): JSX.Element => {
 
           <Box className={stylesGarden.modalFooter}>
             🌱 a part of the <a href="https://threed.ai">threed.ai</a> code family
-            <Button size="small" onClick={() => modalActions.handleCloseModalModel3d()}>
+            <Button size="small" onClick={() => modalStore.actions.handleCloseModalModel3d()}>
               [X]
             </Button>
           </Box>
@@ -1199,7 +1199,7 @@ const ModalLoading: ReactNode = (): JSX.Element => {
 
           <Box className={stylesGarden.modalFooter}>
             🌱 a part of the <a href="https://threed.ai">threed.ai</a> code family
-            <Button size="small" onClick={() => modalActions.handleCloseModalLoading()}>
+            <Button size="small" onClick={() => modalStore.actions.handleCloseModalLoading()}>
               [X]
             </Button>
           </Box>
@@ -1344,7 +1344,7 @@ const ModalShare: ReactNode = (): JSX.Element => {
 
           <Box className={stylesGarden.modalFooter}>
             🌱 a part of the <a href="https://threed.ai">threed.ai</a> code family
-            <Button size="small" onClick={() => modalActions.handleCloseModalShare()}>
+            <Button size="small" onClick={() => modalStore.actions.handleCloseModalShare()}>
               [X]
             </Button>
           </Box>
@@ -2129,16 +2129,16 @@ const ToolBar: ReactNode = (): JSX.Element => {
               onClose={handleCloseViewsMenu}
             >
               <MenuItem key="Modal: About" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalActions.handleOpenModalAbout(e)}>Modal: About</Typography>
+                <Typography onClick={(e) => modalStore.actions.handleOpenModalAbout(e)}>Modal: About</Typography>
               </MenuItem>
               <MenuItem key="Modal: Model3d" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalActions.handleOpenModalModel3d(e)}>Modal: Model3d</Typography>
+                <Typography onClick={(e) => modalStore.actions.handleOpenModalModel3d(e)}>Modal: Model3d</Typography>
               </MenuItem>
               <MenuItem key="Modal: Loading" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalActions.handleOpenModalLoading(e)}>Modal: Loading</Typography>
+                <Typography onClick={(e) => modalStore.actions.handleOpenModalLoading(e)}>Modal: Loading</Typography>
               </MenuItem>
               <MenuItem key="Modal: Share" onClick={handleCloseViewsMenu}>
-                <Typography onClick={(e) => modalActions.handleOpenModalShare(e)}>Modal: Share</Typography>
+                <Typography onClick={(e) => modalStore.actions.handleOpenModalShare(e)}>Modal: Share</Typography>
               </MenuItem>
               <MenuItem key="Dialog: Share" onClick={handleCloseViewsMenu}>
                 <Typography onClick={doOpenShareDialog}>Dialog: Share</Typography>
