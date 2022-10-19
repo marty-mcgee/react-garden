@@ -38,29 +38,29 @@ console.debug(`%c====================================`, ccm5)
 // ==============================================================
 // ** Noun Object -- Constructor Function
 
-function noun(nounType = 'noun') {
+function noun(_type = 'noun') {
+  // object params
   this._id = newUUID()
   this._ts = new Date().toISOString()
-  this._type = nounType.toLowerCase()
-  this.name = nounType.toUpperCase() + ' 0'
-  this.layers = []
-  this.layer = {
-    name: 'LAYER 0',
-    data: {},
-  }
+  this._type = _type.toLowerCase()
+  this._name = _type.toUpperCase() + ' 0'
   // wp custom fields
   this.data = {} // nounStore().get('oneDB')
+  // layers/levels (optional)
+  this.layers = []
+  this.layer = {
+    _name: 'LAYER 0',
+    data: {},
+  }
 }
 
 // ==============================================================
 // ** Noun Store -- Constructor Function
 
-export function nounStore(_type) {
-  // const store = _type + 'Store'
-  // // nounStore has a set of .actions (js functions)
-  // const actions = _type + 'Actions'
-  const _plural = _type + 's'
-  const localStorageItem = 'threed_' + _type + 'History'
+function nounStore(_type = 'noun') {
+  // store params
+  this._plural = _type + 's'
+  this._storageItem = 'threed_' + _type + 'History'
 
   // ** Noun Store .store -- Object
   // // nounStore has an object .store (ac3 reactive vars)
@@ -105,7 +105,7 @@ export function nounStore(_type) {
     },
 
     removeAll() {
-      localStorage.removeItem(localStorageItem)
+      localStorage.removeItem(this._storageItem)
       this.store.update('all', [])
       this.store.update('one', {})
       this.store.update('count', 0)
@@ -327,9 +327,9 @@ export function nounStore(_type) {
           console.debug(`%cloadFromDB [${_type}]: DATA RETURNED`, ccm0, data, loading, error)
           console.debug(`%cloadFromDB data[${_type}]`, ccm0, data[_type])
 
-          if (data[_plural]?.edges?.length) {
-            // const payload = data[_plural].edges
-            const payload = data[_plural].edges.map(
+          if (data[this._plural]?.edges?.length) {
+            // const payload = data[this._plural].edges
+            const payload = data[this._plural].edges.map(
               ({ node }) =>
                 // nounId, id, uri, slug, title
                 // <div key={node.nounId}>
@@ -386,7 +386,7 @@ export function nounStore(_type) {
 
             return true
           } else {
-            console.debug(`%cloadFromDB [${_type}]: NO data[${_plural}].edges`, ccm3, data)
+            console.debug(`%cloadFromDB [${_type}]: NO data[${this._plural}].edges`, ccm3, data)
             return false
           }
         }
@@ -423,50 +423,48 @@ export function nounStore(_type) {
 // ==============================================================
 // Modal (custom noun, not a standard noun)
 
-const modal = {}
+// ==============================================================
+// ==============================================================
+// ==============================================================
+// ** Noun Modal -- Constructor Function
+
+function modal(_type = 'modal') {
+  // object params
+  this._id = newUUID()
+  this._ts = new Date().toISOString()
+  this._type = _type.toLowerCase()
+  this._name = _type.toUpperCase() + ' 0'
+  // this.layers = []
+  // this.layer = {
+  //   _name: 'LAYER 0',
+  //   data: {},
+  // }
+  // wp custom fields
+  this.data = {} // nounStore().get('oneDB')
+}
 
 // ** Modal Store
-function modalStore() {
+function modalStore(_type = 'modal') {
+  // store params
+  this._plural = _type + 's'
+  this._storageItem = 'threed_' + _type + 'History'
+
   this.store = create({
-    isOpenModalAbout: false,
-    isOpenModalModel3d: false,
-    isOpenModalLoading: false,
-    isOpenModalShare: false,
+    isVisible: false,
   })
 
   // ** Modal Actions
   this.actions = {
-    handleOpenModalAbout: (e = null) => {
-      this.store.update('isOpenModalAbout', true)
-      // console.debug("isOpenModalAbout", this.store.get("isOpenModalAbout"), e)
+    toggleIsVisible: (e = null) => {
+      this.store.update('isVisible', !this.store.get('isVisible'))
     },
-    handleCloseModalAbout: (e = null) => {
-      this.store.update('isOpenModalAbout', false)
-      // console.debug("isOpenModalAbout", this.store.get("isOpenModalAbout"), e)
+    handleOpen: (e = null) => {
+      this.store.update('isVisible', true)
+      // console.debug("isVisible", this.store.get("isVisible"), e)
     },
-    handleOpenModalModel3d: (e = null) => {
-      this.store.update('isOpenModalModel3d', true)
-      // console.debug("isOpenModalModel3d", this.store.get("isOpenModalModel3d"), e)
-    },
-    handleCloseModalModel3d: (e = null) => {
-      this.store.update('isOpenModalModel3d', false)
-      // console.debug("isOpenModalModel3d", this.store.get("isOpenModalModel3d"), e)
-    },
-    handleOpenModalLoading: (e = null) => {
-      this.store.update('isOpenModalLoading', true)
-      // console.debug("isOpenModalLoading", this.store.get("isOpenModalLoading"), e)
-    },
-    handleCloseModalLoading: (e = null) => {
-      this.store.update('isOpenModalLoading', false)
-      // console.debug("isOpenModalLoading", this.store.get("isOpenModalLoading"), e)
-    },
-    handleOpenModalShare: (e = null) => {
-      this.store.update('isOpenModalShare', true)
-      // console.debug("isOpenModalShare", this.store.get("isOpenModalShare"), e)
-    },
-    handleCloseModalShare: (e = null) => {
-      this.store.update('isOpenModalShare', false)
-      // console.debug("isOpenModalShare", this.store.get("isOpenModalShare"), e)
+    handleClose: (e = null) => {
+      this.store.update('isVisible', false)
+      // console.debug("isVisible", this.store.get("isVisible"), e)
     },
   } // modalActions
 } // modalStore
@@ -490,12 +488,13 @@ const stores = {
   plantStore: new nounStore('plant'),
   plantingPlanStore: new nounStore('plantingPlan'),
   bearStore: new nounStore('bear'),
-  // modalStore: new nounStore('modal'),
-  // modalActions: modalStore.actions,
-  // modalStore,
-  // modalActions,
-  modalStore: new modalStore(),
-  modalStoreNew: new nounStore('modal'),
+  modalStore,
+  // modalStore: new modalStore(),
+  modalAboutStore: new modalStore('modalAbout'),
+  modalModel3dStore: new modalStore('modalModel3d'),
+  modalLoadingStore: new modalStore('modalLoading'),
+  modalShareStore: new modalStore('modalShare'),
+  modalStoreNoun: new nounStore('modal'),
 }
 
 export default stores

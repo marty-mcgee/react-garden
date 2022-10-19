@@ -184,7 +184,11 @@ const {
   plantingPlanStore,
   bearStore,
   modalStore,
-  // modalStoreNew,
+  modalAboutStore,
+  modalModel3dStore,
+  modalLoadingStore,
+  modalShareStore,
+  modalStoreNoun,
 } = stores
 console.debug('%cstores', ccm2, stores)
 // console.debug('%csceneStore', ccm2, sceneStore)
@@ -212,8 +216,8 @@ const ProjectInfoPanel: ReactNode = (_type: string = 'project'): JSX.Element => 
       <Typography>projectsDB: {projectsDB.length}</Typography>
       <Typography>project._id: {project._id}</Typography>
       <Typography>project._ts: {project._ts}</Typography>
-      <Typography>project.name: {project.name}</Typography>
-      <Typography>project.layer.name: {project.layer?.name}</Typography>
+      <Typography>project._name: {project._name}</Typography>
+      <Typography>project.layer._name: {project.layer?._name}</Typography>
       <Typography>project.data.title: {project.data?.title}</Typography>
     </Box>
   )
@@ -269,8 +273,8 @@ const WorkspaceInfoPanel: ReactNode = (_type: string = 'workspace'): JSX.Element
       <Typography>workspacesDB: {workspacesDB.length}</Typography>
       <Typography>workspace._id: {workspace._id}</Typography>
       <Typography>workspace._ts: {workspace._ts}</Typography>
-      <Typography>workspace.name: {workspace.name}</Typography>
-      <Typography>workspace.layer.name: {workspace.layer?.name}</Typography>
+      <Typography>workspace._name: {workspace._name}</Typography>
+      <Typography>workspace.layer._name: {workspace.layer?._name}</Typography>
       <Typography>workspace.data.title: {workspace.data?.title}</Typography>
     </Box>
   )
@@ -326,8 +330,8 @@ const PlanInfoPanel: ReactNode = (_type: string = 'plan'): JSX.Element => {
       <Typography>plansDB: {plansDB.length}</Typography>
       <Typography>plan._id: {plan._id}</Typography>
       <Typography>plan._ts: {plan._ts}</Typography>
-      <Typography>plan.name: {plan.name}</Typography>
-      <Typography>plan.layer.name: {plan.layer?.name}</Typography>
+      <Typography>plan._name: {plan._name}</Typography>
+      <Typography>plan.layer._name: {plan.layer?._name}</Typography>
       <Typography>plan.data.title: {plan.data?.title}</Typography>
     </Box>
   )
@@ -383,8 +387,8 @@ const ThreeDInfoPanel: ReactNode = (_type: string = 'threed'): JSX.Element => {
       <Typography>threedsDB: {threedsDB.length}</Typography>
       <Typography>threed._id: {threed._id}</Typography>
       <Typography>threed._ts: {threed._ts}</Typography>
-      <Typography>threed.name: {threed.name}</Typography>
-      <Typography>threed.layer.name: {threed.layer?.name}</Typography>
+      <Typography>threed._name: {threed._name}</Typography>
+      <Typography>threed.layer._name: {threed.layer?._name}</Typography>
       <Typography>threed.data.title: {threed.data?.title}</Typography>
     </Box>
   )
@@ -440,8 +444,8 @@ const FileInfoPanel: ReactNode = (_type: string = 'file'): JSX.Element => {
       <Typography>filesDB: {filesDB.length}</Typography>
       <Typography>file._id: {file._id}</Typography>
       <Typography>file._ts: {file._ts}</Typography>
-      <Typography>file.name: {file.name}</Typography>
-      <Typography>file.layer.name: {file.layer?.name}</Typography>
+      <Typography>file._name: {file._name}</Typography>
+      <Typography>file.layer._name: {file.layer?._name}</Typography>
       <Typography>file.data.title: {file.data?.title}</Typography>
     </Box>
   )
@@ -504,15 +508,15 @@ const SceneInfoPanel: ReactNode = (_type: string = 'scene'): JSX.Element => {
       <Typography>all.length: {scenes.length}</Typography>
       <Typography>one._id: {scene._id}</Typography>
       <Typography>one._ts: {scene._ts}</Typography>
-      <Typography>one.name: {scene.name}</Typography>
-      <Typography>one.layer.name: {scene.layer?.name}</Typography>
+      <Typography>one._name: {scene._name}</Typography>
+      <Typography>one.layer._name: {scene.layer?._name}</Typography>
       <Typography>one.data.title: {scene.data?.title}</Typography>
       <hr />
       <Typography>allDB.length: {scenesDB.length}</Typography>
       <Typography>oneDB._id: {sceneDB._id}</Typography>
       <Typography>oneDB._ts: {sceneDB._ts}</Typography>
-      <Typography>oneDB.name: {sceneDB.name}</Typography>
-      <Typography>oneDB.layer.name: {sceneDB.layer?.name}</Typography>
+      <Typography>oneDB._name: {sceneDB._name}</Typography>
+      <Typography>oneDB.layer._name: {sceneDB.layer?._name}</Typography>
       <Typography>oneDB.data.title: {sceneDB.data?.title}</Typography>
       <hr />
     </Box>
@@ -579,8 +583,8 @@ const AllotmentInfoPanel: ReactNode = (_type: string = 'allotment'): JSX.Element
       <Typography>allotmentsDB: {allotmentsDB.length}</Typography>
       <Typography>allotment._id: {allotment._id}</Typography>
       <Typography>allotment._ts: {allotment._ts}</Typography>
-      <Typography>allotment.name: {allotment.name}</Typography>
-      <Typography>allotment.layer.name: {allotment.layer?.name}</Typography>
+      <Typography>allotment._name: {allotment._name}</Typography>
+      <Typography>allotment.layer._name: {allotment.layer?._name}</Typography>
       <Typography>allotment.data.title: {allotment.data?.title}</Typography>
     </Box>
   )
@@ -636,8 +640,8 @@ const BedInfoPanel: ReactNode = (_type: string = 'bed'): JSX.Element => {
       <Typography>bedsDB: {bedsDB.length}</Typography>
       <Typography>bed._id: {bed._id}</Typography>
       <Typography>bed._ts: {bed._ts}</Typography>
-      <Typography>bed.name: {bed.name}</Typography>
-      <Typography>bed.layer.name: {bed.layer?.name}</Typography>
+      <Typography>bed._name: {bed._name}</Typography>
+      <Typography>bed.layer._name: {bed.layer?._name}</Typography>
       <Typography>bed.data.title: {bed.data?.title}</Typography>
     </Box>
   )
@@ -693,8 +697,8 @@ const PlantInfoPanel: ReactNode = (_type: string = 'plant'): JSX.Element => {
       <Typography>plantsDB: {plantsDB.length}</Typography>
       <Typography>plant._id: {plant._id}</Typography>
       <Typography>plant._ts: {plant._ts}</Typography>
-      <Typography>plant.name: {plant.name}</Typography>
-      <Typography>plant.layer.name: {plant.layer?.name}</Typography>
+      <Typography>plant._name: {plant._name}</Typography>
+      <Typography>plant.layer._name: {plant.layer?._name}</Typography>
       <Typography>plant.data.title: {plant.data?.title}</Typography>
     </Box>
   )
@@ -750,8 +754,8 @@ const PlantingPlanInfoPanel: ReactNode = (_type: string = 'planting_plan'): JSX.
       <Typography>plantingPlansDB: {plantingPlansDB.length}</Typography>
       <Typography>plantingPlan._id: {plantingPlan._id}</Typography>
       <Typography>plantingPlan._ts: {plantingPlan._ts}</Typography>
-      <Typography>plantingPlan.name: {plantingPlan.name}</Typography>
-      <Typography>plantingPlan.layer.name: {plantingPlan.layer?.name}</Typography>
+      <Typography>plantingPlan._name: {plantingPlan._name}</Typography>
+      <Typography>plantingPlan.layer._name: {plantingPlan.layer?._name}</Typography>
       <Typography>plantingPlan.data.title: {plantingPlan.data?.title}</Typography>
     </Box>
   )
@@ -809,19 +813,14 @@ function BearControlPanel() {
 
 // Modal: About
 const ModalAbout: ReactNode = (): JSX.Element => {
+  // console.debug("ModalAbout")
 
-  // react state (old)
-  // const [isOpenModalAbout, setIsOpenModalAbout] = useState(false)
-  // const handleOpenModalAbout = () => setIsOpenModalAbout(true)
-  // const handleCloseModalAbout = () => setIsOpenModalAbout(false)
-
-  // tabs
+  // tabs (use React State)
   const [tabModalAbout, setTabModalAbout] = useState(0)
   const handleChangeTabModalAbout = (event: SyntheticEvent, newValue: number) => {
     setTabModalAbout(newValue)
   }
 
-  // console.debug("ModalAbout")
   // useEffect(() => {
   //   console.debug("ModalAbout onMount")
   //   return () => {
@@ -833,15 +832,10 @@ const ModalAbout: ReactNode = (): JSX.Element => {
     <Box id="ModalAboutContainer">
       <Modal
         id="ModalAbout"
-        // open={isOpenModalAbout} // react state
-        // open={useModalStore.getState().isOpenModalAbout} // zustand
-        // open={modalStore.use.isOpenModalAbout} // zustood
-        open={modalStore.store.useStore("isOpenModalAbout")} // apollo reactive store
-        // onClose={handleCloseModalAbout} // react state
-        // onClose={useModalStore.getState().handleCloseModalAbout()} // zustand
-        onClose={(e) => modalStore.actions.handleCloseModalAbout(e)} // apollo reactive store
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        open={modalAboutStore.store.useStore("isVisible")}
+        onClose={(e) => modalAboutStore.actions.handleClose(e)}
+        aria-labelledby="modal-about-title"
+        aria-describedby="modal-about-description"
         sx={stylesModal}
       >
         <Box className={stylesGarden.modalContent}>
@@ -1067,13 +1061,8 @@ const ModalAbout: ReactNode = (): JSX.Element => {
 
 // Modal: Model3d
 const ModalModel3d: ReactNode = (): JSX.Element => {
-
-  // react state (old)
-  // const [isOpenModalModel3d, setIsOpenModalModel3d] = useState(false)
-  // const handleOpenModalModel3d = () => setIsOpenModalModel3d(true)
-  // const handleCloseModalModel3d = () => setIsOpenModalModel3d(false)
-
   // console.debug("ModalModel3d")
+
   // useEffect(() => {
   //   console.debug('ModalModel3d onMount')
   //   return () => {
@@ -1085,15 +1074,10 @@ const ModalModel3d: ReactNode = (): JSX.Element => {
     <Box id="ModalModel3dContainer">
       <Modal
         id="ModalModel3d"
-        // open={isOpenModalModel3d} // react state
-        // open={useModalStore.getState().isOpenModalModel3d} // zustand
-        // open={modalStore.use.isOpenModalModel3d} // zustood
-        open={modalStore.store.useStore("isOpenModalModel3d")} // apollo reactive store
-        // onClose={handleCloseModalModel3d} // react state
-        // onClose={useModalStore.getState().handleCloseModalModel3d()} // zustand
-        onClose={(e) => modalStore.actions.handleCloseModalModel3d(e)} // apollo reactive store
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        open={modalModel3dStore.store.useStore("isVisible")}
+        onClose={(e) => modalModel3dStore.actions.handleClose(e)}
+        aria-labelledby="modal-model3d-title"
+        aria-describedby="modal-model3d-description"
         sx={stylesModal}
       >
         <Box className={stylesGarden.modalContent}>
@@ -1151,13 +1135,8 @@ const ModalModel3d: ReactNode = (): JSX.Element => {
 
 // Modal: Loading
 const ModalLoading: ReactNode = (): JSX.Element => {
-
-  // react state (old)
-  // const [isOpenModalLoading, setIsOpenModalLoading] = useState(false)
-  // const handleOpenModalLoading = () => setIsOpenModalLoading(true)
-  // const handleCloseModalLoading = () => setIsOpenModalLoading(false)
-
   // console.debug("ModalLoading")
+
   // useEffect(() => {
   //   console.debug('ModalLoading onMount')
   //   return () => {
@@ -1169,15 +1148,10 @@ const ModalLoading: ReactNode = (): JSX.Element => {
     <Box id="ModalLoadingContainer">
       <Modal
         id="ModalLoading"
-        // open={isOpenModalLoading} // react state
-        // open={useModalStore.getState().isOpenModalLoading} // zustand
-        // open={modalStore.use.isOpenModalLoading} // zustood
-        open={modalStore.store.useStore("isOpenModalLoading")} // apollo reactive store
-        // onClose={handleCloseModalLoading} // react state
-        // onClose={useModalStore.getState().handleCloseModalLoading()} // zustand
-        onClose={(e) => modalStore.actions.handleCloseModalLoading(e)} // apollo reactive store
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        open={modalLoadingStore.store.useStore("isVisible")}
+        onClose={(e) => modalLoadingStore.actions.handleClose(e)}
+        aria-labelledby="modal-loading-title"
+        aria-describedby="modal-loading-description"
         sx={stylesModal}
       >
         <Box className={stylesGarden.modalContent}>
@@ -1211,13 +1185,8 @@ const ModalLoading: ReactNode = (): JSX.Element => {
 
 // Modal: Share
 const ModalShare: ReactNode = (): JSX.Element => {
-
-  // react state (old)
-  // const [isOpenModalShare, setIsOpenModalShare] = useState(false)
-  // const handleOpenModalShare = () => setIsOpenModalShare(true)
-  // const handleCloseModalShare = () => setIsOpenModalShare(false)
-
   // console.debug("ModalShare")
+
   // useEffect(() => {
   //   console.debug('ModalShare onMount')
   //   return () => {
@@ -1229,15 +1198,10 @@ const ModalShare: ReactNode = (): JSX.Element => {
     <Box id="ModalShareContainer">
       <Modal
         id="ModalShare"
-        // open={isOpenModalShare} // react state
-        // open={useModalStore.getState().isOpenModalShare} // zustand
-        // open={modalStore.use.isOpenModalShare} // zustood
-        open={modalStore.store.useStore("isOpenModalShare")} // apollo reactive store
-        // onClose={handleCloseModalShare} // react state
-        // onClose={useModalStore.getState().handleCloseModalShare()} // zustand
-        onClose={(e) => modalStore.actions.handleCloseModalShare(e)} // apollo reactive store
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        open={modalShareStore.store.useStore("isVisible")}
+        onClose={(e) => modalShareStore.actions.handleClose(e)}
+        aria-labelledby="modal-share-title"
+        aria-describedby="modal-share-description"
         sx={stylesModal}
       >
         <Box className={stylesGarden.modalContent}>
@@ -1525,7 +1489,7 @@ const ToolBar: ReactNode = (): JSX.Element => {
       Object.keys(clickableObjects).forEach(function (e) {
         let t = clickableObjects[e]
         "object" === typeof t &&
-          "groundLayer" !== t.name &&
+          "groundLayer" !== t._name &&
           (scene.remove(clickableObjects[e]), delete clickableObjects[e])
       })
     } catch (e) {
@@ -1671,7 +1635,7 @@ const ToolBar: ReactNode = (): JSX.Element => {
         "0" !== e.data.id && e.remove()
       })
 
-      project.layer.name = "level0"
+      project.layer._name = "level0"
       project.layer.data = { id: "0", height: 0 }
 
     } catch (e) {
@@ -1907,7 +1871,7 @@ const ToolBar: ReactNode = (): JSX.Element => {
       let t = document.querySelector(el)
       if (!document.fullscreenElement) {
         t.requestFullscreen().catch(err => {
-          alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`)
+          alert(`Error attempting to enable full-screen mode: ${err.message} (${err._name})`)
         })
       } else {
         document.exitFullscreen()
