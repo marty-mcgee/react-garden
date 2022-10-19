@@ -3467,15 +3467,18 @@ const ReactThreeFiberView: ReactNode = (): JSX.Element => {
   const store_type = store.store.get('_type')
 
   const noun = store.store.useStore('one')
+  const noun_id = noun._id
+  const noun_ts = noun._ts
+  const noun_type = noun._type
   const noun_title = noun.data?.title ? noun.data.title : 'NOTHING YET SIR'
   const noun_x = 2
   const noun_y = 2
   const noun_z = 0
   console.debug('%cReactThreeFiberView {noun}', ccm1, noun)
 
-  const loadNoun = (_type = 'scene', _id = noun._id) => {
+  const loadNoun = (noun_type, noun_id) => {
     // load this noun into r3f canvas
-    store.actions.loadToWorkspace(_id, 'r3fCanvas')
+    store.actions.loadToWorkspace(noun, noun_id, 'r3fCanvas')
     return <Box>true</Box> // true
   }
 
@@ -3491,10 +3494,10 @@ const ReactThreeFiberView: ReactNode = (): JSX.Element => {
   // console.debug(`%c====================================`, ccm5)
   return (
     <Box id="r3f-canvas-container" style={{ width: "100%", minHeight: "20rem" }}>
-      <Button onClick={loadNoun('world')}>load world</Button>
-      <Button onClick={loadNoun('scene')}>load scene</Button>
-      <Button onClick={loadNoun('character')}>load character</Button>
-      <Button onClick={loadNoun('farmbot')}>load farmbot</Button>
+      <Button onClick={() => loadNoun('world')}>load world</Button>
+      <Button onClick={() => loadNoun('scene')}>load scene</Button>
+      <Button onClick={() => loadNoun('character')}>load character</Button>
+      <Button onClick={() => loadNoun('farmbot')}>load farmbot</Button>
       <Typography>{noun._type} title: {noun_title}</Typography>
       <Canvas>
         <ambientLight intensity={0.1} />

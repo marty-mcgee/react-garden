@@ -400,9 +400,9 @@ function nounStore(_type = 'noun') {
     },
 
     // load 'this' noun into React Three Fiber view
-    loadToWorkspace(id = null, r3f = null) {
+    loadToWorkspace(noun, _id, _r3fCanvas) {
       try {
-        const noun = this.store.get('one')
+        // const noun = this.store.get('one')
         console.debug(`%cload {noun}`, ccm1, noun)
 
         if (noun) {
