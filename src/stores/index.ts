@@ -3,7 +3,7 @@
 
 // ** Apollo Client 3 -- Cache Store Imports
 import { ApolloClient, InMemoryCache, useApolloClient, useQuery, gql } from '@apollo/client'
-import create from '~/api/graphql/createStore'
+import create, { StoreApi } from '~/api/graphql/createStore'
 
 // ** GraphQL Queries + Mutations (here, locally-specific data needs)
 import GetNouns from '~/api/graphql/scripts/getNouns.gql'
@@ -63,23 +63,23 @@ interface INounStore {
   store: any
   // store.store
   nounStore: (_type?: string) => boolean
-  projectStore: any
-  workspaceStore: any
-  planStore: any
-  threedStore: any
-  fileStore: any
-  sceneStore: any
-  allotmentStore: any
-  bedStore: any
-  plantStore: any
-  plantingPlanStore: any
-  bearStore: any
+  projectStore: StoreApi<any>
+  workspaceStore: StoreApi<any>
+  planStore: StoreApi<any>
+  threedStore: StoreApi<any>
+  fileStore: StoreApi<any>
+  sceneStore: StoreApi<any>
+  allotmentStore: StoreApi<any>
+  bedStore: StoreApi<any>
+  plantStore: StoreApi<any>
+  plantingPlanStore: StoreApi<any>
+  bearStore: StoreApi<any>
   modalStore: (_type?: string) => void
-  modalAboutStore: any
-  modalModel3dStore: any
-  modalLoadingStore: any
-  modalShareStore: any
-  modalStoreNoun: any
+  modalAboutStore: StoreApi<any>
+  modalModel3dStore: StoreApi<any>
+  modalLoadingStore: StoreApi<any>
+  modalShareStore: StoreApi<any>
+  modalStoreNoun: StoreApi<any>
   // store.actions
   actions: any
 }
