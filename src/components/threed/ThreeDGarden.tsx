@@ -3452,23 +3452,21 @@ const TheBottom: ReactNode = (): JSX.Element => {
 }
 
 const ReactThreeFiberView: ReactNode = (): JSX.Element => {
-
+  // component params
   const word = `[MM] @ ${new Date().toISOString()}`
+
   const store = sceneStore
 
   console.debug('%cReactThreeFiberView {store}', ccm1, store)
   console.debug(`%c====================================`, ccm5)
-  return <div>r3f: testing... {word}</div>
-  throw new Error(`r3f: testing... "${word}"`)
+  // return <Box sx={{ p: 5, textAlign: 'center' }}>r3f: testing... {word}</Box>
+  // throw new Error(`r3f: testing... "${word}"`)
 
-  // const nounStore = store // has added .store
-  const nounStore = store.store
-  console.debug('%cReactThreeFiberView {nounStore}', ccm1, nounStore)
-  const store_type = nounStore.store.get('_type')
-  const store_id = nounStore.store.get('_id')
-  const store_ts = nounStore.store.get('_ts')
+  const store_id = store.store.get('_id')
+  const store_ts = store.store.get('_ts')
+  const store_type = store.store.get('_type')
 
-  const noun = nounStore.store.useStore('one')
+  const noun = store.store.useStore('one')
   const noun_title = noun.data?.title ? noun.data.title : 'NOTHING YET SIR'
   const noun_x = 2
   const noun_y = 2
