@@ -356,7 +356,7 @@ function nounStore(_type = 'noun') {
                 node
             )
 
-            // map over payload
+            // map over payload to set this.data{}
             const all = payload.map((node) => {
               const newOne = new noun(this._type)
               newOne.data = node
