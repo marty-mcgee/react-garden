@@ -68,10 +68,10 @@ function nounStore(_type = 'noun') {
   this.store = create({
     _id: newUUID(),
     _ts: new Date().toISOString(),
-    _type: _type.toLowerCase(),
+    _type: this._type,
     count: 0, // example counter (for fun/learning)
     all: [], // all of this nouns historical + current records (all scenes, all projects)
-    one: new noun(_type), // {}, // the current workspace noun, aka 'this one noun'
+    one: new noun(this._type), // {}, // the current workspace noun, aka 'this one noun'
 
     // track current noun + noun history
     // current: ^this one noun,
@@ -114,34 +114,34 @@ function nounStore(_type = 'noun') {
       this.store.update('allDB', [])
       this.store.update('oneDB', {})
       this.store.update('countDB', 0)
-      console.debug(`%cremoveAll [${_type}]`, ccm2, true)
+      console.debug(`%cremoveAll [${this._type}]`, ccm2, true)
     },
 
     // add a new current 'this' noun
     addNew: () => {
       // console.debug(`this`, this)
-      console.debug(`%caddNew [${_type}] (before)`, ccm1, this.store.get('all'))
+      console.debug(`%caddNew [${this._type}] (before)`, ccm1, this.store.get('all'))
       // throw new Error(`[MM] testing... this`)
 
       // create a new one
       if (Object.keys(this.store.get('one')).length === 0) {
         try {
-          this.store.update('one', new noun(_type))
+          this.store.update('one', new noun(this._type))
         } catch (err) {
-          console.error(`%caddNew {${_type}} err`, err)
+          console.error(`%caddNew {${this._type}} err`, err)
         }
       }
       // save + update old one
       else {
         // nounHistory (save existing before mutating, if not empty)
         this.store.update('all', [this.store.get('one'), ...this.store.get('all')])
-        console.debug(`%caddNew [${_type}] (during)`, ccm1, this.store.get('all'))
+        console.debug(`%caddNew [${this._type}] (during)`, ccm1, this.store.get('all'))
 
         // count
         // this.store.update('count', this.store.get('count') + 1) // manual
         this.store.update('count', this.store.get('all').length) // automatic
         // console.debug(`%caddNew {count}`, ccm3, this.store.get('count'))
-        // console.debug(`%caddNew [${_type}]`, ccm3, this.store.get('all').length)
+        // console.debug(`%caddNew [${this._type}]`, ccm3, this.store.get('all').length)
 
         // nounCurrent (overwrite this one -- mutate)
         this.store.update('one', {
@@ -156,24 +156,24 @@ function nounStore(_type = 'noun') {
           },
         })
       }
-      console.debug(`%caddNew {${_type}} (added)`, ccm1, this.store.get('one'))
+      console.debug(`%caddNew {${this._type}} (added)`, ccm1, this.store.get('one'))
 
       // nounHistory (save recently mutated new one and all old ones)
       this.store.update('all', [this.store.get('one'), ...this.store.get('all')])
-      console.debug(`%caddNew [${_type}] (after)`, ccm1, this.store.get('all'))
+      console.debug(`%caddNew [${this._type}] (after)`, ccm1, this.store.get('all'))
 
       // count (for fun/learning)
       // this.store.update('count', this.store.get('count') + 1) // manual
       this.store.update('count', this.store.get('all').length) // automatic
       console.debug(`%caddNew {count}`, ccm3, this.store.get('count'))
-      // console.debug(`%caddNew {${_type}}`, ccm3, this.store.get('all').length)
+      // console.debug(`%caddNew {${this._type}}`, ccm3, this.store.get('all').length)
 
       // saveToDisk
       this.actions.saveToDisk()
       // loadFromDisk
       // this.actions.loadFromDisk()
 
-      console.debug(`%caddNew [${_type}] (final)`, ccm1, this.store.get('one'))
+      console.debug(`%caddNew [${this._type}] (final)`, ccm1, this.store.get('one'))
     },
 
     save: () => {
@@ -193,10 +193,10 @@ function nounStore(_type = 'noun') {
             payload: this.store.get('all'),
           })
         )
-        console.debug(`%csaveToDisk [${_type}]`, ccm1, this.store.get('all'))
+        console.debug(`%csaveToDisk [${this._type}]`, ccm1, this.store.get('all'))
         return true
       } catch (err) {
-        console.debug(`%csaveToDisk [${_type}] err`, ccm2, err)
+        console.debug(`%csaveToDisk [${this._type}] err`, ccm2, err)
         return false
       }
     },
@@ -206,29 +206,29 @@ function nounStore(_type = 'noun') {
       try {
         const query = JSON.parse(localStorage.getItem('threed_nounHistory'))
         if (query) {
-          console.debug(`%cloadFromDisk [${_type}] QUERY?`, ccm3, query)
+          console.debug(`%cloadFromDisk [${this._type}] QUERY?`, ccm3, query)
           const { payload } = query
-          console.debug(`%cloadFromDisk [${_type}] QUERY.PAYLOAD?`, ccm3, payload)
+          console.debug(`%cloadFromDisk [${this._type}] QUERY.PAYLOAD?`, ccm3, payload)
 
           if (payload.length) {
-            // console.debug(`%cloadFromDisk [${_type}]`, ccm3, true, payload)
+            // console.debug(`%cloadFromDisk [${this._type}]`, ccm3, true, payload)
 
             this.store.update('all', [...payload]) // payload should have .data{}
-            console.debug(`%cloadFromDisk [${_type}s] (after)`, ccm3, this.store.get('all'))
+            console.debug(`%cloadFromDisk [${this._type}s] (after)`, ccm3, this.store.get('all'))
 
             this.store.update('one', this.store.get('all')[0])
-            console.debug(`%cloadFromDisk {${_type}} (after)`, ccm3, this.store.get('one'))
+            console.debug(`%cloadFromDisk {${this._type}} (after)`, ccm3, this.store.get('one'))
 
             return true
           } else {
-            console.debug(`%cloadFromDisk [${_type}] EMPTY QUERY.PAYLOAD?`, ccm3, query)
+            console.debug(`%cloadFromDisk [${this._type}] EMPTY QUERY.PAYLOAD?`, ccm3, query)
           }
         } else {
-          console.debug(`%cloadFromDisk [${_type}] NOTHING TO LOAD`, ccm3, query)
+          console.debug(`%cloadFromDisk [${this._type}] NOTHING TO LOAD`, ccm3, query)
         }
         return false
       } catch (err) {
-        console.debug(`%cloadFromDisk [${_type}] err`, ccm2, err)
+        console.debug(`%cloadFromDisk [${this._type}] err`, ccm2, err)
         return false
       }
     },
@@ -236,12 +236,12 @@ function nounStore(_type = 'noun') {
     // save data to db via graphql mutation
     saveToDB: async (client) => {
       try {
-        console.debug(`%csaveToDB [${_type}] client`, ccm2, client)
+        console.debug(`%csaveToDB [${this._type}] client`, ccm2, client)
 
-        console.debug(`%csaveToDB [${_type}]`, ccm2, false)
+        console.debug(`%csaveToDB [${this._type}]`, ccm2, false)
         return false
       } catch (err) {
-        console.debug(`%csaveToDB [${_type}]: err`, ccm3, err)
+        console.debug(`%csaveToDB [${this._type}]: err`, ccm3, err)
         return false
       }
     },
@@ -254,7 +254,7 @@ function nounStore(_type = 'noun') {
 
         // .gql
         let QUERY = GetNouns
-        switch (_type) {
+        switch (this._type) {
           // case 'noun':
           //   QUERY = GetNouns
           //   break
@@ -324,13 +324,13 @@ function nounStore(_type = 'noun') {
         }
 
         if (error) {
-          console.debug(`%cloadFromDB [${_type}]: DATA RETURNED with error`, error)
+          console.debug(`%cloadFromDB [${this._type}]: DATA RETURNED with error`, error)
           return false // <div>{JSON.stringify(error)}</div>
         }
 
         if (data) {
-          console.debug(`%cloadFromDB [${_type}]: DATA RETURNED`, ccm0, data, loading, error)
-          console.debug(`%cloadFromDB data[${_type}]`, ccm0, data[_type])
+          console.debug(`%cloadFromDB [${this._type}]: DATA RETURNED`, ccm0, data, loading, error)
+          console.debug(`%cloadFromDB data[${this._type}]`, ccm0, data[_type])
 
           if (data[this._plural]?.edges?.length) {
             // const payload = data[this._plural].edges
@@ -349,20 +349,20 @@ function nounStore(_type = 'noun') {
 
             // map over payload
             const all = payload.map((node) => {
-              const newOne = new noun(_type)
+              const newOne = new noun(this._type)
               newOne.data = node
               return newOne
             })
-            console.debug(`%cloadFromDB [${_type}]`, ccm3, all)
+            console.debug(`%cloadFromDB [${this._type}]`, ccm3, all)
 
             // set state from db
             this.store.update('all', [...all]) // nodes
             const theNouns = this.store.get('all')
-            console.debug(`%cloadFromDB [${_type}] (after)`, ccm3, theNouns)
+            console.debug(`%cloadFromDB [${this._type}] (after)`, ccm3, theNouns)
 
             this.store.update('oneDB', theNouns[theNouns.length - 1]) // node (use last one)
             const theNounDB = this.store.get('oneDB')
-            console.debug(`%cloadFromDB [${_type}] {oneDB}`, ccm1, theNounDB)
+            console.debug(`%cloadFromDB [${this._type}] {oneDB}`, ccm1, theNounDB)
 
             // save to disk here ??? no
             // this.saveToDisk()
@@ -381,7 +381,7 @@ function nounStore(_type = 'noun') {
               // wp custom fields
               data: theNounDB.data,
             })
-            console.debug(`%cloadFromDB [${_type}] {one} (after)`, ccm1, this.store.get('one'))
+            console.debug(`%cloadFromDB [${this._type}] {one} (after)`, ccm1, this.store.get('one'))
 
             this.store.update('countDB', this.store.get('all').length)
             console.debug(`%cloadFromDB countDB`, ccm1, this.store.get('countDB'))
@@ -392,15 +392,15 @@ function nounStore(_type = 'noun') {
 
             return true
           } else {
-            console.debug(`%cloadFromDB [${_type}]: NO data[${this._plural}].edges`, ccm3, data)
+            console.debug(`%cloadFromDB [${this._type}]: NO data[${this._plural}].edges`, ccm3, data)
             return false
           }
         }
 
-        console.debug(`%cloadFromDB [${_type}]: OTHER ERROR`, ccm3, data)
+        console.debug(`%cloadFromDB [${this._type}]: OTHER ERROR`, ccm3, data)
         return false
       } catch (err) {
-        console.debug(`%cloadFromDB [${_type}]: err`, ccm3, err)
+        console.debug(`%cloadFromDB [${this._type}]: err`, ccm3, err)
         return false
       }
     },
