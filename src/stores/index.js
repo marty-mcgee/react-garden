@@ -59,6 +59,7 @@ function noun(_type = 'noun') {
 
 function nounStore(_type = 'noun') {
   // store params
+  this._type = _type.toLowerCase()
   this._plural = _type + 's'
   this._storageItem = 'threed_' + _type + 'History'
 
@@ -82,29 +83,30 @@ function nounStore(_type = 'noun') {
     oneDB: {}, // pre-this noun, ready to be mapped to 'this' noun
   })
 
-  // ** Noun Store Actions -- Constructor Function
+  // ** Noun Store .actions -- Object of Functions
   this.actions = {
-    isVisible() {
+    isVisible: () => {
       return (state) => state
     },
 
-    toggleIsVisible() {
+    toggleIsVisible: () => {
       return (state) => !state
     },
 
-    increaseCount(n = 1) {
+    increaseCount: (n = 1) => {
       return (state) => state + n
     },
 
-    decreaseCount(n = 1) {
+    decreaseCount: (n = 1) => {
       return (state) => state - n
     },
 
-    getState() {
+    // redundant
+    getState: () => {
       return this.store.getState()
     },
 
-    removeAll() {
+    removeAll: () => {
       localStorage.removeItem(this._storageItem)
       this.store.update('all', [])
       this.store.update('one', {})
@@ -116,8 +118,10 @@ function nounStore(_type = 'noun') {
     },
 
     // add a new current 'this' noun
-    addNew() {
+    addNew: () => {
+      // console.debug(`this`, this)
       console.debug(`%caddNew [${_type}] (before)`, ccm1, this.store.get('all'))
+      // throw new Error(`[MM] testing... this`)
 
       // create a new one
       if (Object.keys(this.store.get('one')).length === 0) {
@@ -143,10 +147,11 @@ function nounStore(_type = 'noun') {
         this.store.update('one', {
           _id: newUUID(),
           _ts: new Date().toISOString(),
-          name: 'NOUN 1',
+          _type: _type.toLowerCase(),
+          _name: _type.toUpperCase() + ' 1',
           layers: [],
           layer: {
-            name: 'LAYER 0',
+            _name: 'LAYER 0',
             data: {},
           },
         })
@@ -164,22 +169,22 @@ function nounStore(_type = 'noun') {
       // console.debug(`%caddNew {${_type}}`, ccm3, this.store.get('all').length)
 
       // saveToDisk
-      this.saveToDisk()
+      this.actions.saveToDisk()
       // loadFromDisk
-      // this.loadFromDisk()
+      // this.actions.loadFromDisk()
 
       console.debug(`%caddNew [${_type}] (final)`, ccm1, this.store.get('one'))
     },
 
-    save() {
+    save: () => {
       // saveToDisk
-      this.saveToDisk()
+      this.actions.saveToDisk()
       // saveToDB (coming soon !!!)
-      // this.saveToDB()
+      // this.actions.saveToDB()
     },
 
     // save data to browser local storage
-    saveToDisk() {
+    saveToDisk: () => {
       try {
         localStorage.setItem(
           'threed_nounHistory',
@@ -197,7 +202,7 @@ function nounStore(_type = 'noun') {
     },
 
     // get data from browser local storage
-    loadFromDisk() {
+    loadFromDisk: () => {
       try {
         const query = JSON.parse(localStorage.getItem('threed_nounHistory'))
         if (query) {
@@ -229,7 +234,7 @@ function nounStore(_type = 'noun') {
     },
 
     // save data to db via graphql mutation
-    async saveToDB(client) {
+    saveToDB: async (client) => {
       try {
         console.debug(`%csaveToDB [${_type}] client`, ccm2, client)
 
@@ -242,7 +247,7 @@ function nounStore(_type = 'noun') {
     },
 
     // get data from db via graphql query
-    async loadFromDB(client) {
+    loadFromDB: async (client) => {
       try {
         // const _this = this
         // console.debug(`%cloadFromDB this`, ccm0, this)
@@ -366,10 +371,11 @@ function nounStore(_type = 'noun') {
             this.store.update('one', {
               _id: newUUID(),
               _ts: new Date().toISOString(),
-              name: 'NOUN: ' + theNounDB.data.title,
+              _type: _type.toLowerCase(),
+              _name: _type.toUpperCase() + ': ' + theNounDB.data.title,
               layers: [],
               layer: {
-                name: 'LAYER 0',
+                _name: 'LAYER 0',
                 data: {},
               },
               // wp custom fields
@@ -400,13 +406,14 @@ function nounStore(_type = 'noun') {
     },
 
     // load 'this' noun into React Three Fiber view
-    loadToWorkspace(noun, _id, _r3fCanvas) {
+    loadToWorkspace: (noun, _type, _id, _r3fCanvas) => {
       try {
-        // const noun = this.store.get('one')
+        const nounAlt = this.store.get('one')
         console.debug(`%cload {noun}`, ccm1, noun)
+        console.debug(`%cload {nounAlt}`, ccm1, nounAlt)
 
         if (noun) {
-          return noun
+          return <div>...noun as r3f component...</div>
         }
 
         return false

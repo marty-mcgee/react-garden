@@ -3479,7 +3479,7 @@ const ReactThreeFiberView: ReactNode = (): JSX.Element => {
 
   const loadNoun = (noun_type, noun_id) => {
     // load this noun into r3f canvas
-    store.actions.loadToWorkspace(noun, noun_id, 'r3fCanvas')
+    store.actions.loadToWorkspace(noun, noun_type, noun_id, 'r3fCanvas')
     return <Box>true</Box> // true
   }
 

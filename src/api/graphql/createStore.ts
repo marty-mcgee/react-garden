@@ -131,7 +131,7 @@ export default function create<Value>(initialState: State<Value>, options = { de
       const reactiveVar = store[key]
 
       if (!reactiveVar) {
-        throw new Error(`useStore: key "${key} is invalid`)
+        throw new Error(`useStore: key "${key}" is invalid`)
       }
 
       return useReactiveVar(reactiveVar)
