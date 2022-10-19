@@ -190,7 +190,8 @@ const {
   modalShareStore,
   modalStoreNoun,
 } = stores
-console.debug('%cstores available', ccm2, stores)
+console.debug('%cstores available', ccm3, stores)
+console.debug(`%c====================================`, ccm5)
 // console.debug('%csceneStore', ccm2, sceneStore)
 // console.debug(`%c====================================`, ccm5)
 
@@ -3493,13 +3494,13 @@ const ReactThreeFiberView: ReactNode = (): JSX.Element => {
 
   // console.debug(`%c====================================`, ccm5)
   return (
-    <Box id="r3f-canvas-container" style={{ width: "100%", minHeight: "20rem" }}>
+    <Box id="r3fCanvasContainer" sx={{ width: "100%", minHeight: "20rem" }}>
       <Button onClick={() => loadNoun('world')}>load world</Button>
       <Button onClick={() => loadNoun('scene')}>load scene</Button>
       <Button onClick={() => loadNoun('character')}>load character</Button>
       <Button onClick={() => loadNoun('farmbot')}>load farmbot</Button>
       <Typography>{noun._type} title: {noun_title}</Typography>
-      <Canvas>
+      <Canvas id="r3fCanvas">
         <ambientLight intensity={0.1} />
         <directionalLight position={[0, 0, 5]} color="red" />
         <mesh>
