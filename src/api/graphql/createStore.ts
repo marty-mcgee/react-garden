@@ -30,10 +30,7 @@ export interface StoreApi<Value> {
   reset(): void
 }
 
-export default function create<Value>(
-  initialState: State<Value>,
-  options = { debug: true }
-): StoreApi<Value> {
+export default function create<Value>(initialState: State<Value>, options = { debug: false }): StoreApi<Value> {
   const createStore = () => {
     return Object.keys(initialState).reduce<Store<Value>>((sum, key) => {
       return {
@@ -46,12 +43,10 @@ export default function create<Value>(
 
   // DEBUGGING
   if (options.debug) {
-
     // console.debug(`store`, store)
     // console.debug(`initialState`, initialState)
     // console.debug(`initialState._type`, initialState._type)
     if (initialState._type === 'scene') {
-
       // returns Object {fields}
       const fields: Object | any = {} // starts blank
       const keys: string[] = Object.keys(store)
@@ -86,7 +81,7 @@ export default function create<Value>(
 
   const debug = (key: string, value: Updater<Value>): void => {
     if (options.debug) {
-      // console.debug(`store update(key) "${key}" with value: ${JSON.stringify(value)}`)
+      console.debug(`store update(key) "${key}" with value: ${JSON.stringify(value)}`)
     }
   }
 
@@ -133,10 +128,10 @@ export default function create<Value>(
       }
     },
     useStore(key: string) {
-      const reactiveVar = store[key];
+      const reactiveVar = store[key]
 
       if (!reactiveVar) {
-        throw new Error(`useStore: key "${key} is invalid`);
+        throw new Error(`useStore: key "${key} is invalid`)
       }
 
       return useReactiveVar(reactiveVar)

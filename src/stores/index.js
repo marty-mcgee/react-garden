@@ -6,7 +6,7 @@ import { ApolloClient, InMemoryCache, useApolloClient, useQuery, gql } from '@ap
 import create from '~/api/graphql/createStore'
 
 // ** GraphQL Queries + Mutations (here, locally-specific data needs)
-import GetNouns from '~/api/graphql/scripts/getNouns.gql'
+// import GetNouns from '~/api/graphql/scripts/getNouns.gql'
 import GetProjects from '~/api/graphql/scripts/getProjects.gql'
 import GetPlans from '~/api/graphql/scripts/getPlans.gql'
 import GetWorkspaces from '~/api/graphql/scripts/getWorkspaces.gql'
@@ -59,8 +59,10 @@ export function nounStore(_type) {
   // const store = _type + 'Store'
   // // nounStore has a set of .actions (js functions)
   // const actions = _type + 'Actions'
+  const _plural = _type + 's'
+  const localStorageItem = 'threed_' + _type + 'History'
 
-  // ** Noun Store .store -- Constructor Function
+  // ** Noun Store .store -- Object
   // // nounStore has an object .store (ac3 reactive vars)
   this.store = create({
     _id: newUUID(),
@@ -81,31 +83,28 @@ export function nounStore(_type) {
   })
 
   // ** Noun Store Actions -- Constructor Function
-  this.actions = (_type, store) => {
-    const _plural = _type + 's'
-    const localStorageItem = 'threed_' + _type + 'History'
-
-    this.isVisible = () => {
+  this.actions = {
+    isVisible() {
       return (state) => state
-    }
+    },
 
-    this.toggleIsVisible = () => {
+    toggleIsVisible() {
       return (state) => !state
-    }
+    },
 
-    this.increaseCount = (n = 1) => {
+    increaseCount(n = 1) {
       return (state) => state + n
-    }
+    },
 
-    this.decreaseCount = (n = 1) => {
+    decreaseCount(n = 1) {
       return (state) => state - n
-    }
+    },
 
-    this.getState = function () {
+    getState() {
       return this.store.getState()
-    }
+    },
 
-    this.removeAll = function () {
+    removeAll() {
       localStorage.removeItem(localStorageItem)
       this.store.update('all', [])
       this.store.update('one', {})
@@ -114,10 +113,10 @@ export function nounStore(_type) {
       this.store.update('oneDB', {})
       this.store.update('countDB', 0)
       console.debug(`%cremoveAll [${_type}]`, ccm2, true)
-    }
+    },
 
     // add a new current 'this' noun
-    this.addNew = function () {
+    addNew() {
       console.debug(`%caddNew [${_type}] (before)`, ccm1, this.store.get('all'))
 
       // create a new one
@@ -170,17 +169,17 @@ export function nounStore(_type) {
       // this.loadFromDisk()
 
       console.debug(`%caddNew [${_type}] (final)`, ccm1, this.store.get('one'))
-    }
+    },
 
-    this.save = function () {
+    save() {
       // saveToDisk
       this.saveToDisk()
       // saveToDB (coming soon !!!)
       // this.saveToDB()
-    }
+    },
 
     // save data to browser local storage
-    this.saveToDisk = function () {
+    saveToDisk() {
       try {
         localStorage.setItem(
           'threed_nounHistory',
@@ -195,10 +194,10 @@ export function nounStore(_type) {
         console.debug(`%csaveToDisk [${_type}] err`, ccm2, err)
         return false
       }
-    }
+    },
 
     // get data from browser local storage
-    this.loadFromDisk = function () {
+    loadFromDisk() {
       try {
         const query = JSON.parse(localStorage.getItem('threed_nounHistory'))
         if (query) {
@@ -227,13 +226,12 @@ export function nounStore(_type) {
         console.debug(`%cloadFromDisk [${_type}] err`, ccm2, err)
         return false
       }
-    }
+    },
 
     // save data to db via graphql mutation
-    this.saveToDB = async function (client) {
+    async saveToDB(client) {
       try {
-        // const _this = this
-        // console.debug(`%csaveToDB this`, ccm0, this)
+        console.debug(`%csaveToDB [${_type}] client`, ccm2, client)
 
         console.debug(`%csaveToDB [${_type}]`, ccm2, false)
         return false
@@ -241,10 +239,10 @@ export function nounStore(_type) {
         console.debug(`%csaveToDB [${_type}]: err`, ccm3, err)
         return false
       }
-    }
+    },
 
     // get data from db via graphql query
-    this.loadFromDB = async function (client) {
+    async loadFromDB(client) {
       try {
         // const _this = this
         // console.debug(`%cloadFromDB this`, ccm0, this)
@@ -252,11 +250,14 @@ export function nounStore(_type) {
         // .gql
         let QUERY = GetNouns
         switch (_type) {
-          case 'noun':
-            QUERY = GetNouns
-            break
+          // case 'noun':
+          //   QUERY = GetNouns
+          //   break
           case 'project':
             QUERY = GetProjects
+            break
+          case 'workspace':
+            QUERY = GetWorkspaces
             break
           case 'plan':
             QUERY = GetPlans
@@ -309,6 +310,7 @@ export function nounStore(_type) {
           variables: { parameters },
         })
         // console.debug('QUERY RETURNED', query)
+
         const { data, loading, error } = query
         // console.debug('DATA RETURNED', data, loading, error)
 
@@ -395,10 +397,10 @@ export function nounStore(_type) {
         console.debug(`%cloadFromDB [${_type}]: err`, ccm3, err)
         return false
       }
-    }
+    },
 
     // load 'this' noun into React Three Fiber view
-    this.loadToWorkspace = function (id = null, r3f = null) {
+    loadToWorkspace(id = null, r3f = null) {
       try {
         const noun = this.store.get('one')
         console.debug(`%cload {noun}`, ccm1, noun)
@@ -412,7 +414,7 @@ export function nounStore(_type) {
         console.debug(`%cload {noun}: err`, ccm3, err)
         return false
       }
-    }
+    },
   } // nounActions
 } // nounStore
 
@@ -470,45 +472,26 @@ const modalActions = {
 // ==============================================================
 // ==============================================================
 // ==============================================================
-// ** Construct Noun Stores
+// ** Construct Noun Stores + Export as Group of Stores
 
-export const useNounStore = new nounStore('noun') // hook
-// nouns
-const projectStore = new nounStore('project')
-const workspaceStore = new nounStore('workspace')
-const planStore = new nounStore('plan')
-const threedStore = new nounStore('threed')
-const fileStore = new nounStore('file')
-const sceneStore = new nounStore('scene')
-const allotmentStore = new nounStore('allotment')
-const bedStore = new nounStore('bed')
-const plantStore = new nounStore('plant')
-const plantingPlanStore = new nounStore('plantingPlan')
-const bearStore = new nounStore('bear')
-// const modalStore = new nounStore('modal')
-// const modalActions = modalStore.actions
-const modalStoreNew = new nounStore('modal')
-
-// ==============================================================
-// ==============================================================
-// ==============================================================
-// EXPORT STORES AS GROUP OBJECT ('useNounStore' as a HOOK ??? )
-
-const groupStore = {
-  projectStore,
-  workspaceStore,
-  planStore,
-  threedStore,
-  fileStore,
-  sceneStore,
-  allotmentStore,
-  bedStore,
-  plantStore,
-  plantingPlanStore,
-  bearStore,
+const stores = {
+  // nounStore: new nounStore('noun'),
+  projectStore: new nounStore('project'),
+  workspaceStore: new nounStore('workspace'),
+  planStore: new nounStore('plan'),
+  threedStore: new nounStore('threed'),
+  fileStore: new nounStore('file'),
+  sceneStore: new nounStore('scene'),
+  allotmentStore: new nounStore('allotment'),
+  bedStore: new nounStore('bed'),
+  plantStore: new nounStore('plant'),
+  plantingPlanStore: new nounStore('plantingPlan'),
+  bearStore: new nounStore('bear'),
+  // modalStore: new nounStore('modal'),
   modalStore,
+  // modalActions: modalStore.actions,
   modalActions,
-  modalStoreNew,
+  modalStoreNew: new nounStore('modal'),
 }
 
-export default groupStore
+export default stores

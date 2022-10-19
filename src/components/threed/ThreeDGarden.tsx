@@ -23,7 +23,7 @@ import {
 // state management (instead of React.useState, Redux, Zustand)
 import { ApolloConsumer, useQuery, gql } from '@apollo/client'
 // import { TestAC3Store } from '~/stores/old'
-import groupStore, { nounStore, useNounStore } from '~/stores'
+import stores from '~/stores'
 
 // ** Next Imports
 import Image from 'next/future/image'
@@ -171,6 +171,7 @@ const Button = styled(MuiButton)(({ theme }) => ({
 // ==========================================================
 
 const {
+  // nounStore,
   projectStore,
   workspaceStore,
   planStore,
@@ -184,8 +185,10 @@ const {
   bearStore,
   modalStore,
   modalActions,
-  modalStoreNew,
-} = groupStore
+  // modalStoreNew,
+} = stores
+// console.debug('%csceneStore', ccm2, sceneStore)
+// console.debug(`%c====================================`, ccm5)
 
 // ==========================================================
 // FUNCTIONAL NOUNS
@@ -193,10 +196,9 @@ const {
 
 // ==========================================================
 // Noun (Prototype React JSX)
-
+/*
 const NounInfoPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
 
-  const nounStore = useNounStore
   const nounCount = nounStore.store.useStore("count")
   const nounCountDB = nounStore.store.useStore("countDB")
   const nouns = nounStore.store.useStore("all")
@@ -270,6 +272,7 @@ const NounControlPanel: ReactNode = (_type: string = 'noun'): JSX.Element => {
     </Box>
   )
 }
+*/
 
 // ==========================================================
 // Project
@@ -3564,11 +3567,13 @@ const TheBottom: ReactNode = (): JSX.Element => {
   )
 }
 
-const ReactThreeFiberView: ReactNode = (store): JSX.Element => {
+const ReactThreeFiberView: ReactNode = (): JSX.Element => {
 
   const word = `[MM] @ ${new Date().toISOString()}`
+  const store = sceneStore
 
   console.debug('%cReactThreeFiberView {store}', ccm1, store)
+  console.debug(`%c====================================`, ccm5)
   return <div>r3f: testing... {word}</div>
   throw new Error(`r3f: testing... "${word}"`)
 
@@ -3707,70 +3712,68 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
         <div id="storeControlPanel" style={{ padding: "1rem" }}>
 
           {/* React Three Fiber - View */}
-          <ReactThreeFiberView store={sceneStore} />
+          <ReactThreeFiberView />
 
           <Box sx={{ borderTop: 1, borderBottom: 1, borderColor: 'divider' }}>
             <Tabs value={tabInfoControl} onChange={handleChangeTabInfoControl} aria-label="Info Control Panel">
-              <Tab label="Nouns" {...tabProps(0)} />
-              <Tab label="Projects" {...tabProps(1)} />
-              <Tab label="Workspaces" {...tabProps(2)} />
-              <Tab label="Plans" {...tabProps(3)} />
-              <Tab label="ThreeDs" {...tabProps(4)} />
-              <Tab label="Files" {...tabProps(5)} />
-              <Tab label="Scenes" {...tabProps(6)} />
-              <Tab label="Allotments" {...tabProps(7)} />
-              <Tab label="Beds" {...tabProps(8)} />
-              <Tab label="Plants" {...tabProps(9)} />
-              <Tab label="Planting Plans" {...tabProps(10)} />
-              <Tab label="Testing" {...tabProps(11)} />
+              <Tab label="Projects" {...tabProps(0)} />
+              <Tab label="Workspaces" {...tabProps(1)} />
+              <Tab label="Plans" {...tabProps(2)} />
+              <Tab label="ThreeDs" {...tabProps(3)} />
+              <Tab label="Files" {...tabProps(4)} />
+              <Tab label="Scenes" {...tabProps(5)} />
+              <Tab label="Allotments" {...tabProps(6)} />
+              <Tab label="Beds" {...tabProps(7)} />
+              <Tab label="Plants" {...tabProps(8)} />
+              <Tab label="Planting Plans" {...tabProps(9)} />
+              <Tab label="Testing" {...tabProps(10)} />
             </Tabs>
           </Box>
           <MDTabPanel value={tabInfoControl} index={0}>
-            <NounControlPanel />
-            <NounInfoPanel />
-          </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={1}>
             <ProjectControlPanel />
             <ProjectInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={2}>
+          <MDTabPanel value={tabInfoControl} index={1}>
             <WorkspaceControlPanel />
             <WorkspaceInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={3}>
+          <MDTabPanel value={tabInfoControl} index={2}>
             <PlanControlPanel />
             <PlanInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={4}>
+          <MDTabPanel value={tabInfoControl} index={3}>
             <ThreeDControlPanel />
             <ThreeDInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={5}>
+          <MDTabPanel value={tabInfoControl} index={4}>
             <FileControlPanel />
             <FileInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={6}>
+          <MDTabPanel value={tabInfoControl} index={5}>
             <SceneControlPanel />
             <SceneInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={7}>
+          <MDTabPanel value={tabInfoControl} index={6}>
             <AllotmentControlPanel />
             <AllotmentInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={8}>
+          <MDTabPanel value={tabInfoControl} index={7}>
             <BedControlPanel />
             <BedInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={9}>
+          <MDTabPanel value={tabInfoControl} index={8}>
             <PlantControlPanel />
             <PlantInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={10}>
+          <MDTabPanel value={tabInfoControl} index={9}>
             <PlantingPlanControlPanel />
             <PlantingPlanInfoPanel />
           </MDTabPanel>
-          <MDTabPanel value={tabInfoControl} index={11}>
+          <MDTabPanel value={tabInfoControl} index={10}>
             Testing Panel
+            {/* <NounControlPanel /> */}
+            {/* <NounInfoPanel /> */}
+            {/* <hr /> */}
             {/* <CharacterControlPanel /> */}
             {/* <CharacterInfoPanel /> */}
             {/* <hr /> */}
