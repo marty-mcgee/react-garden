@@ -171,7 +171,7 @@ const Button = styled(MuiButton)(({ theme }) => ({
 // ==========================================================
 
 const {
-  // nounStore,
+  nounStore,
   projectStore,
   workspaceStore,
   planStore,

@@ -477,6 +477,7 @@ function modalStore() {
 // ** Construct Noun Stores + Export as Group of Stores
 
 const stores = {
+  nounStore,
   // nounStore: new nounStore('noun'),
   projectStore: new nounStore('project'),
   workspaceStore: new nounStore('workspace'),
