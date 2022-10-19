@@ -190,8 +190,8 @@ const {
   modalShareStore,
   modalStoreNoun,
 } = stores
-console.debug('%cstores available', ccm3, stores)
-console.debug(`%c====================================`, ccm5)
+// console.debug('%cstores available', ccm3, stores)
+// console.debug(`%c====================================`, ccm5)
 // console.debug('%csceneStore', ccm2, sceneStore)
 // console.debug(`%c====================================`, ccm5)
 
