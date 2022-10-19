@@ -6,7 +6,7 @@ import { ApolloClient, InMemoryCache, useApolloClient, useQuery, gql } from '@ap
 import create from '~/api/graphql/createStore'
 
 // ** GraphQL Queries + Mutations (here, locally-specific data needs)
-// import GetNouns from '~/api/graphql/scripts/getNouns.gql'
+import GetNouns from '~/api/graphql/scripts/getNouns.gql'
 import GetProjects from '~/api/graphql/scripts/getProjects.gql'
 import GetPlans from '~/api/graphql/scripts/getPlans.gql'
 import GetWorkspaces from '~/api/graphql/scripts/getWorkspaces.gql'
@@ -259,14 +259,14 @@ function nounStore(_type = 'noun') {
     loadFromDB: async (client) => {
       try {
         // const _this = this
-        // console.debug(`%cloadFromDB this`, ccm0, this)
+        console.debug(`%cloadFromDB this`, ccm0, this)
 
         // .gql
         let QUERY = GetNouns
         switch (this._type) {
-          // case 'noun':
-          //   QUERY = GetNouns
-          //   break
+          case 'noun':
+            QUERY = GetNouns
+            break
           case 'project':
             QUERY = GetProjects
             break
@@ -309,6 +309,7 @@ function nounStore(_type = 'noun') {
           before: null,
         }
 
+        // using query hook
         // const {
         //   data,
         //   loading,
@@ -317,29 +318,30 @@ function nounStore(_type = 'noun') {
         //   refetch,
         //   networkStatus
         // } = useQuery(QUERY, { parameters }, { client })
-        // console.debug('DATA RETURNED', data, loading, error)
+        // console.debug(`%cloadFromDB [${this._type}]: DATA RETURNED`, data, loading, error)
 
+        // using query directly
         const query = await client.query({
           query: QUERY,
           variables: { parameters },
         })
-        // console.debug('QUERY RETURNED', query)
+        // console.debug(`%cloadFromDB [${this._type}]: QUERY RETURNED`, query)
 
         const { data, loading, error } = query
-        // console.debug('DATA RETURNED', data, loading, error)
+        // console.debug(`%cloadFromDB [${this._type}]: DATA RETURNED`, data, loading, error)
 
         if (loading) {
-          return false
+          console.debug(`%cloadFromDB [${this._type}]: DATA LOADING`, loading)
+          // return <div>loading...</div>
         }
 
         if (error) {
           console.debug(`%cloadFromDB [${this._type}]: DATA RETURNED with error`, error)
-          return false // <div>{JSON.stringify(error)}</div>
+          return <div>{JSON.stringify(error.message)}</div>
         }
 
         if (data) {
           console.debug(`%cloadFromDB [${this._type}]: DATA RETURNED`, ccm0, data, loading, error)
-          console.debug(`%cloadFromDB data[${this._type}]`, ccm0, data[_type])
 
           if (data[this._plural]?.edges?.length) {
             // const payload = data[this._plural].edges
@@ -358,37 +360,38 @@ function nounStore(_type = 'noun') {
 
             // map over payload to set this.data{}
             const all = payload.map((node) => {
-              const newOne = new noun(this._type)
-              newOne.data = node
-              return newOne
+              const one = new noun(this._type)
+              one.data = node
+              return one
             })
             console.debug(`%cloadFromDB [${this._type}]`, ccm3, all)
 
             // set state from db
             this.store.update('all', [...all]) // nodes
-            const theNouns = this.store.get('all')
-            console.debug(`%cloadFromDB [${this._type}] (after)`, ccm3, theNouns)
+            const nouns = this.store.get('all')
+            console.debug(`%cloadFromDB [${this._type}] (after)`, ccm3, nouns)
 
-            this.store.update('oneDB', theNouns[theNouns.length - 1]) // node (use last one)
-            const theNounDB = this.store.get('oneDB')
-            console.debug(`%cloadFromDB [${this._type}] {oneDB}`, ccm1, theNounDB)
+            this.store.update('oneDB', nouns[nouns.length - 1]) // node (use last one)
+            const nounDB = this.store.get('oneDB')
+            console.debug(`%cloadFromDB [${this._type}] {oneDB}`, ccm1, nounDB)
 
             // save to disk here ??? no
-            // this.saveToDisk()
+            // this.actions.saveToDisk()
 
             // nounCurrent (overwrite -- mutate)
             this.store.update('one', {
               _id: newUUID(),
               _ts: new Date().toISOString(),
               _type: _type.toLowerCase(),
-              _name: _type.toUpperCase() + ': ' + theNounDB.data.title,
+              _name: _type.toUpperCase() + ': ' + nounDB.data.title,
+              // wp custom fields
+              data: nounDB.data,
+              // layers/levels
               layers: [],
               layer: {
                 _name: 'LAYER 0',
                 data: {},
               },
-              // wp custom fields
-              data: theNounDB.data,
             })
             console.debug(`%cloadFromDB [${this._type}] {one} (after)`, ccm1, this.store.get('one'))
 
@@ -397,11 +400,11 @@ function nounStore(_type = 'noun') {
             console.debug(`%c====================================`, ccm5)
 
             // save to disk
-            this.saveToDisk()
+            this.actions.saveToDisk()
 
             return true
           } else {
-            console.debug(`%cloadFromDB [${this._type}]: NO data[${this._plural}].edges`, ccm3, data)
+            console.debug(`%cloadFromDB [${this._type}]: data.${this._plural}.edges.length = 0`, ccm3, data)
             return false
           }
         }
