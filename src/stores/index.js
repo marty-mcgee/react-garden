@@ -45,8 +45,8 @@ function noun(_type = 'noun') {
   this._type = _type.toLowerCase()
   this._name = _type.toUpperCase() + ' 0'
   // wp custom fields
-  this.data = {} // nounStore().get('oneDB')
-  // layers/levels (optional)
+  this.data = {}
+  // layers/levels
   this.layers = []
   this.layer = {
     _name: 'LAYER 0',
@@ -68,7 +68,7 @@ function nounStore(_type = 'noun') {
   this.store = create({
     _id: newUUID(),
     _ts: new Date().toISOString(),
-    _type: _type,
+    _type: _type.toLowerCase(),
     count: 0, // example counter (for fun/learning)
     all: [], // all of this nouns historical + current records (all scenes, all projects)
     one: new noun(_type), // {}, // the current workspace noun, aka 'this one noun'
@@ -441,13 +441,14 @@ function modal(_type = 'modal') {
   this._ts = new Date().toISOString()
   this._type = _type.toLowerCase()
   this._name = _type.toUpperCase() + ' 0'
-  // this.layers = []
-  // this.layer = {
-  //   _name: 'LAYER 0',
-  //   data: {},
-  // }
   // wp custom fields
-  this.data = {} // nounStore().get('oneDB')
+  this.data = {}
+  // layers/levels
+  this.layers = []
+  this.layer = {
+    _name: 'LAYER 0',
+    data: {},
+  }
 }
 
 // ** Modal Store
@@ -467,11 +468,9 @@ function modalStore(_type = 'modal') {
     },
     handleOpen: (e = null) => {
       this.store.update('isVisible', true)
-      // console.debug("isVisible", this.store.get("isVisible"), e)
     },
     handleClose: (e = null) => {
       this.store.update('isVisible', false)
-      // console.debug("isVisible", this.store.get("isVisible"), e)
     },
   } // modalActions
 } // modalStore
