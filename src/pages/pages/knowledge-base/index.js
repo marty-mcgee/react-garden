@@ -24,7 +24,7 @@ import KnowledgeBaseHeader from '~/views/pages/knowledge-base/KnowledgeBaseHeade
 
 // Styled Link component
 const StyledLink = styled('a')({
-  textDecoration: 'none'
+  textDecoration: 'none',
 })
 
 // Styled Box component
@@ -32,7 +32,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   paddingTop: theme.spacing(5),
-  backgroundColor: `rgba(${theme.palette.customColors.main}, 0.08)`
+  backgroundColor: `rgba(${theme.palette.customColors.main}, 0.08)`,
 }))
 
 const KnowledgeBase = ({ apiData }) => {
@@ -41,7 +41,7 @@ const KnowledgeBase = ({ apiData }) => {
   const [data, setData] = useState(null)
   useEffect(() => {
     if (searchTerm !== '') {
-      axios.get('/pages/knowledge-base', { params: { q: searchTerm } }).then(response => {
+      axios.get('/pages/knowledge-base', { params: { q: searchTerm } }).then((response) => {
         if (response.data && response.data.length) {
           setData(response.data)
         } else {
@@ -118,8 +118,8 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      apiData
-    }
+      apiData,
+    },
   }
 }
 

@@ -12,7 +12,9 @@ const BoxComponent = ({ route }) => {
   const [hovered, setHover] = useState(false)
 
   // Subscribe this component to the render-loop, rotate the mesh every frame
-  useFrame((state, delta) => (mesh.current ? (mesh.current.rotation.y = mesh.current.rotation.x += 0.01) : null))
+  useFrame((state, delta) => {
+    mesh.current ? (mesh.current.rotation.y = mesh.current.rotation.x += 0.01) : null
+  })
 
   // Return the view, these are regular Threejs elements expressed in JSX
   return (
@@ -22,7 +24,8 @@ const BoxComponent = ({ route }) => {
         onClick={() => router.push(route)}
         onPointerOver={() => setHover(true)}
         onPointerOut={() => setHover(false)}
-        scale={hovered ? 1.1 : 1}>
+        scale={hovered ? 1.1 : 1}
+      >
         <boxGeometry args={[3, 3, 3]} />
         <meshPhysicalMaterial color={route === '/' ? 'darkgreen' : 'orange'} />
       </mesh>

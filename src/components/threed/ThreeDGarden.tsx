@@ -79,7 +79,7 @@ import ToolIconAddText from '@mui/icons-material/TextFields'
 import { Canvas, useFrame } from '@react-three/fiber'
 
 // ** ThreeD R3F Imports
-// import PageBox from '~/components/threed/pages/example-page'
+// import BoxPage from '~/components/threed/pages/box-page'
 import BoxComponent from '~/components/threed/components/canvas/Box'
 
 // ** CSS Styles Imports
@@ -3538,7 +3538,7 @@ const ReactThreeFiberView: ReactNode = (): JSX.Element => {
           <meshBasicMaterial />
         </mesh>
         */}
-        {/* <PageBox _name='threed-example-box' args={[noun_x, noun_y, noun_z]} /> */}
+        {/* <BoxPage _name='threed-example-box' args={[noun_x, noun_y, noun_z]} /> */}
         <BoxComponent route='/' />
       </Canvas>
     </Box>

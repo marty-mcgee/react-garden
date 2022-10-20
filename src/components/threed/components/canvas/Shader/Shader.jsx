@@ -11,7 +11,7 @@ import fragment from 'raw-loader!glslify-loader!./glsl/shader.frag'
 const ColorShiftMaterial = shaderMaterial(
   {
     time: 0,
-    color: new THREE.Color(0.05, 0.0, 0.025),
+    color: new THREE.Color(0.07, 0.4, 0.0),
   },
   vertex,
   fragment
@@ -34,8 +34,7 @@ const Shader = (props) => {
       meshRef.current.rotation.x = meshRef.current.rotation.y += 0.01
     }
     if (meshRef.current.material) {
-      meshRef.current.material.uniforms.time.value +=
-        Math.sin(delta / 2) * Math.cos(delta / 2)
+      meshRef.current.material.uniforms.time.value += Math.sin(delta / 2) * Math.cos(delta / 2)
     }
   })
 
