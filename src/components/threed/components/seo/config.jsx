@@ -2,8 +2,7 @@ import Head from 'next/head'
 
 const titleDefault = 'ThreeD.AI'
 const url = 'https://threed.ai/'
-const description =
-  'The easiest and fastest way to create a 3D website using React Three Fiber and NextJS'
+const description = 'The easiest and fastest way to create a 3D website using React Three Fiber and NextJS'
 const author = 'Marty McGee'
 
 const Header = ({ title = titleDefault }) => {
@@ -25,9 +24,9 @@ const Header = ({ title = titleDefault }) => {
         <meta name='robots' content='index,follow' />
         <meta name='distribution' content='web' />
 
-        {/* 
+        {/*
           Facebook Open Graph Meta Tags
-          docs: https://developers.facebook.com/docs/sharing/opengraph 
+          docs: https://developers.facebook.com/docs/sharing/opengraph
         */}
         <meta name='og:title' content={title} />
         <meta name='og:type' content='site' />
@@ -39,41 +38,22 @@ const Header = ({ title = titleDefault }) => {
         {/* Favicons */}
         <link rel='shortcut icon' href='/favicon/favicon.ico' />
         <link rel='apple-touch-icon' href='/favicon/apple-touch-icon.png' />
-        <link
-          rel='apple-touch-icon'
-          sizes='16x16'
-          href='/favicon/favicon-16x16.png'
-        />
-        <link
-          rel='apple-touch-icon'
-          sizes='32x32'
-          href='/favicon/favicon-32x32.png'
-        />
-        <link
-          rel='apple-touch-icon'
-          sizes='180x180'
-          href='/favicon/apple-touch-icon.png'
-        />
-        <link
-          rel='mask-icon'
-          color='#000000'
-          href='/favicon/safari-pinned-tab.svg'
-        />
+        <link rel='apple-touch-icon' sizes='16x16' href='/favicon/favicon-16x16.png' />
+        <link rel='apple-touch-icon' sizes='32x32' href='/favicon/favicon-32x32.png' />
+        <link rel='apple-touch-icon' sizes='180x180' href='/favicon/apple-touch-icon.png' />
+        <link rel='mask-icon' color='#000000' href='/favicon/safari-pinned-tab.svg' />
         <link rel='apple-touch-startup-image' href='/favicon/apple-touch-icon.png' />
 
         {/* Manifest */}
-        <link rel='manifest' href='/favicon/site.webmanifest' />
+        <link rel='manifest' href='/manifest.json' />
 
         {/* Meta Tags for HTML pages on Mobile */}
         {/* <meta name="format-detection" content="telephone=yes"/>
         <meta name="HandheldFriendly" content="true"/>  */}
-        <meta
-          name='viewport'
-          content='width=device-width, minimum-scale=1, initial-scale=1.0'
-        />
+        <meta name='viewport' content='width=device-width, minimum-scale=1, initial-scale=1.0' />
         <meta name='theme-color' content='#222' />
 
-        {/* 
+        {/*
       Twitter Summary card
         documentation: https://dev.twitter.com/cards/getting-started
         Be sure validate your Twitter card markup on the documentation site. */}
