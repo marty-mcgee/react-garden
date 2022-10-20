@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unknown-property */
 import * as THREE from 'three'
 import { useFrame, extend } from '@react-three/fiber'
 import { useRef, useState } from 'react'
@@ -19,7 +18,6 @@ const ColorShiftMaterial = shaderMaterial(
 
 // This is the 🔑 that HMR will renew if this file is edited
 // It works for THREE.ShaderMaterial as well as for drei/shaderMaterial
-// @ts-ignore
 ColorShiftMaterial.key = THREE.MathUtils.generateUUID()
 
 extend({ ColorShiftMaterial })
