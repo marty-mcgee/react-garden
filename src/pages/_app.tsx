@@ -38,8 +38,8 @@ import WindowWrapper from '~/@core/components/window-wrapper'
 
 // ** Layout + Metadata Components
 import UserLayout from '~/layouts/UserLayout'
-import Header from '~/@core/components/seo/config'
-import Dom from '~/@core/layouts/Dom'
+import Header from '~/@core/components/head/head'
+import Dom from '~/@core/components/dom/dom'
 import Spinner from '~/@core/components/spinner'
 
 // ** Contexts

@@ -1,4 +1,4 @@
-import { setState } from '~/stores/store'
+import { setState } from '~/components/threed/stores/store'
 import { useEffect, useRef } from 'react'
 
 const Dom = ({ children }) => {

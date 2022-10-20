@@ -1,5 +1,5 @@
 // Step 5 - delete Instructions components
-import ExampleComponent from '~/components/threed/components/dom/Instructions'
+import ExampleComponent from '~/components/threed/pages/box-page'
 
 // R3F Shader (client side only) will now be 'dynamically' imported using Next, so it only loads on the client
 import dynamic from 'next/dynamic'

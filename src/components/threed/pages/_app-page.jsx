@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
-import { setState } from '~/stores/store'
-import Header from '~/components/seo/config'
-import Dom from '~/components/layout/dom'
+import { setState } from '~/components/threed/stores/store'
+import Header from '~/@core/components/head/head'
+import Dom from '~/@core/components/dom/dom'
 import '~/styles/index.css'
 
 // ==============================================================
