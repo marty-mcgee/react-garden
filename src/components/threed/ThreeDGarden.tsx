@@ -3472,8 +3472,8 @@ const ReactThreeFiberView: ReactNode = (): JSX.Element => {
   const noun_ts = noun._ts
   const noun_type = noun._type
   const noun_title = noun.data?.title ? noun.data.title : 'NOTHING YET SIR'
-  const noun_x = 2
-  const noun_y = 2
+  const noun_x = 4
+  const noun_y = 4
   const noun_z = 0
   console.debug('%cReactThreeFiberView {noun}', ccm1, noun)
 
