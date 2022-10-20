@@ -39,6 +39,7 @@ import WindowWrapper from '~/@core/components/window-wrapper'
 // ** Layout + Metadata Components
 import UserLayout from '~/layouts/UserLayout'
 import Header from '~/@core/components/seo/config'
+import Dom from '~/@core/layouts/Dom'
 import Spinner from '~/@core/components/spinner'
 
 // ** Contexts
@@ -146,7 +147,13 @@ const App = (props: any) => {
                           aclAbilities={aclAbilities}
                           guestGuard={guestGuard}
                         >
-                          {getLayout(<Component {...pageProps} />)}
+                          {
+                            getLayout(
+                              <Dom>
+                                <Component {...pageProps} />
+                              </Dom>
+                            )
+                          }
                         </AclGuard>
                       </Guard>
                     </WindowWrapper>

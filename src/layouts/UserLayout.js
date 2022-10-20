@@ -31,7 +31,7 @@ const UserLayout = ({ children }) => {
    *  to know more about what values can be passed to this hook.
    *  ! Do not change this value unless you know what you are doing. It can break the template.
    */
-  const hidden = useMediaQuery(theme => theme.breakpoints.down('lg'))
+  const hidden = useMediaQuery((theme) => theme.breakpoints.down('lg'))
 
   return (
     <Layout
@@ -40,35 +40,34 @@ const UserLayout = ({ children }) => {
       saveSettings={saveSettings}
       {...(settings.layout === 'horizontal'
         ? {
-          // ** Navigation Items
-          horizontalNavItems: HorizontalNavItems(),
+            // ** Navigation Items
+            horizontalNavItems: HorizontalNavItems(),
 
-          // Uncomment the below line when using server-side menu in horizontal layout and comment the above line
-          // horizontalNavItems: ServerSideHorizontalNavItems(),
-          // ** AppBar Content
-          horizontalAppBarContent: () => (
-            <HorizontalAppBarContent hidden={hidden} settings={settings} saveSettings={saveSettings} />
-          )
-        }
+            // Uncomment the below line when using server-side menu in horizontal layout and comment the above line
+            // horizontalNavItems: ServerSideHorizontalNavItems(),
+            // ** AppBar Content
+            horizontalAppBarContent: () => (
+              <HorizontalAppBarContent hidden={hidden} settings={settings} saveSettings={saveSettings} />
+            ),
+          }
         : {
-          // ** Navigation Items
-          verticalNavItems: VerticalNavItems(),
+            // ** Navigation Items
+            verticalNavItems: VerticalNavItems(),
 
-          // Uncomment the below line when using server-side menu in vertical layout and comment the above line
-          // verticalNavItems: ServerSideVerticalNavItems(),
-          // ** AppBar Content
-          verticalAppBarContent: props => (
-            <VerticalAppBarContent
-              hidden={hidden}
-              settings={settings}
-              saveSettings={saveSettings}
-              toggleNavVisibility={props.toggleNavVisibility}
-            />
-          )
-        })}
+            // Uncomment the below line when using server-side menu in vertical layout and comment the above line
+            // verticalNavItems: ServerSideVerticalNavItems(),
+            // ** AppBar Content
+            verticalAppBarContent: (props) => (
+              <VerticalAppBarContent
+                hidden={hidden}
+                settings={settings}
+                saveSettings={saveSettings}
+                toggleNavVisibility={props.toggleNavVisibility}
+              />
+            ),
+          })}
     >
       {children}
-
     </Layout>
   )
 }
