@@ -27,6 +27,7 @@ import stores from '~/stores'
 
 // ** Next Imports
 import Image from 'next/future/image'
+import dynamic from 'next/dynamic'
 
 // ** MUI Imports
 import { styled, useTheme } from '@mui/material/styles'
@@ -77,6 +78,10 @@ import ToolIconAddText from '@mui/icons-material/TextFields'
 // import TWEEN from '@tweenjs/tween.js'
 import { Canvas, useFrame } from '@react-three/fiber'
 
+// ** ThreeD R3F Imports
+// import PageBox from '~/components/threed/pages/example-page'
+import BoxComponent from '~/components/threed/components/canvas/Box'
+
 // ** CSS Styles Imports
 // import stylesDemo from '~/styles/demo/demo.module.css'
 import stylesGarden from '~/styles/threed/garden.module.css'
@@ -106,15 +111,31 @@ console.debug(`%c====================================`, ccm5)
 // =====================================================sceneStore=====
 // none yet, but soon
 
-type HEYHEYHEY = {
+type THeyHeyHey = {
   heyheyhey: string
   yoyoyo: string
 }
 
-interface YOYOYO {
+interface IYoYoYo {
   heyheyhey: string
   yoyoyo: string
 }
+
+interface IYoYoYos {
+  // array of interfaces
+  yoyoyos: Array<YOYOYO>
+}
+
+interface IHeyHeyHeys {
+  // array of types
+  heyheyheys: Array<HEYHEYHEY>
+}
+
+// ===
+// MM
+// const r3fBox = dynamic(() => import('~/components/threed/components/canvas/Box'), {
+//   ssr: false,
+// })
 
 // ==========================================================
 // STYLES
@@ -3477,6 +3498,12 @@ const ReactThreeFiberView: ReactNode = (): JSX.Element => {
   const noun_z = 0
   console.debug('%cReactThreeFiberView {noun}', ccm1, noun)
 
+
+  // const r3fBox = dynamic(() => import('~/components/threed/components/canvas/Box'), {
+  //   ssr: false,
+  // })
+
+
   const loadNoun = (noun_type, noun_id) => {
     // load this noun into r3f canvas
     store.actions.loadToWorkspace(noun, noun_type, noun_id, 'r3fCanvas')
@@ -3501,12 +3528,18 @@ const ReactThreeFiberView: ReactNode = (): JSX.Element => {
       <Button onClick={() => loadNoun('farmbot')}>load farmbot</Button>
       <Typography>{noun._type} title: {noun_title}</Typography>
       <Canvas id="r3fCanvas">
+        {/*
         <ambientLight intensity={0.1} />
         <directionalLight position={[0, 0, 5]} color="red" />
+        */}
+        {/*
         <mesh>
           <boxBufferGeometry args={[noun_x, noun_y, noun_z]} />
           <meshBasicMaterial />
         </mesh>
+        */}
+        {/* <PageBox _name='threed-example-box' args={[noun_x, noun_y, noun_z]} /> */}
+        <BoxComponent route='/' />
       </Canvas>
     </Box>
   )

@@ -1,7 +1,7 @@
-import Instructions from '~/components/dom/Instructions'
+import Instructions from '~/components/threed/components/dom/Instructions'
 import dynamic from 'next/dynamic'
 
-const Box = dynamic(() => import('~/components/canvas/Box'), {
+const Box = dynamic(() => import('~/components/threed/components/canvas/Box'), {
   ssr: false,
 })
 
