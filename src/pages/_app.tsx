@@ -27,15 +27,18 @@ import { client } from '~/api/graphql/client'
 // ** Third Party Import
 import { Toaster } from 'react-hot-toast'
 
+// @core
+
 // ** Component Imports
-import UserLayout from '~/layouts/UserLayout'
 import AclGuard from '~/@core/components/auth/AclGuard'
 import ThemeComponent from '~/@core/theme/ThemeComponent'
 import AuthGuard from '~/@core/components/auth/AuthGuard'
 import GuestGuard from '~/@core/components/auth/GuestGuard'
 import WindowWrapper from '~/@core/components/window-wrapper'
 
-// ** Component Imports
+// ** Layout + Metadata Components
+import UserLayout from '~/layouts/UserLayout'
+import Header from '~/@core/components/seo/config'
 import Spinner from '~/@core/components/spinner'
 
 // ** Contexts
@@ -127,38 +130,8 @@ const App = (props: any) => {
     <ApolloProvider client={client}>
       <ReduxProvider store={reduxStore}>
         <CacheProvider value={emotionCache}>
-          <Head>
-            <title>{`${themeConfig.templateName}: Admin Dashboard`}</title>
-            <meta
-              name='description'
-              content={`${themeConfig.templateName} app using React Three Fiber (ThreeJS) with MUI v5 on NextJS + GraphQL`}
-            />
-            <meta name='keywords' content='Architecture, Planning, 3D Plans, Home Ideas, Floor Plans, Garden Planning, 3D Design, Building Plans, Lanscaping Design, Landscaping, Design, 3D Design App, React 3D, ThreeD Garden' />
-            <meta name='author' content='Marty McGee, Company Juice' />
-            <meta name='viewport' content='initial-scale=1, width=device-width, viewport-fit=cover' />
-
-            <meta name='twitter:card' content='Design your home and garden plans in 2D and 3D' />
-            <meta name='twitter:site' content='@companyjuice' />
-            <meta name='twitter:creator' content='@martymcgee' />
-
-            <meta property='og:title' content='ThreeDGarden' />
-            <meta property='og:type' content='website' />
-            <meta property='og:description' content='Design your home and garden plans in 2D + 3D' />
-            <meta property='og:url' content='https://threedgarden.com' />
-            <meta property='og:image' content='https://threedgarden.com/favicon/android-chrome-512x512.png' />
-            <meta property='og:image:width' content='512' />
-            <meta property='og:image:height' content='512' />
-
-            {/* <link rel='manifest' href='/site.webmanifest' /> */}
-
-            <link rel='shortcut icon' href={favicon.src} />
-            <link rel='icon' type='image/png' sizes='32x32' href='/favicon/favicon-32x32.png' />
-            <link rel='icon' type='image/png' sizes='16x16' href='/favicon/favicon-16x16.png' />
-            <link rel='apple-touch-icon' sizes='76x76' href={appleIcon.src} />
-            {/* <link rel='apple-touch-icon' sizes='76x76' href='/favicon/apple-touch-icon.png' /> */}
-            <link rel='mask-icon' href='/favicon/safari-pinned-tab.svg' color='#5bbad5' />
-            <meta name='msapplication-TileColor' content='#da532c' />
-          </Head>
+          {/* <Header title={pageProps.title} /> */}
+          <Header title='HEY HEY HEY' />
           <AuthProvider>
             <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : { pageSettings: null })}>
               <SettingsConsumer>
