@@ -1,8 +1,8 @@
 // @ts-nocheck
-/** OR */
-/** @ ts-ignore */
-/** OR */
-/** @ ts-expect-error */
+/**
+ * OR @ ts-ignore
+ * OR @ ts-expect-error
+*/
 
 // ==============================================================
 // RESOURCES
