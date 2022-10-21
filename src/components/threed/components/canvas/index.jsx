@@ -1,7 +1,7 @@
+import { useEffect, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Preload } from '@react-three/drei'
-import useStore from '~/stores/store'
-import { useEffect, useRef } from 'react'
+import useStore from '~/components/threed/stores/store'
 
 const LControl = () => {
   const dom = useStore((state) => state.dom)
@@ -18,14 +18,17 @@ const LControl = () => {
       }
     }
   }, [dom, control])
+
   // @ts-ignore
   return <OrbitControls ref={control} domElement={dom.current} />
 }
+
 const LCanvas = ({ children }) => {
   const dom = useStore((state) => state.dom)
 
   return (
     <Canvas
+      // id="r3fCanvas001"
       mode='concurrent'
       style={{
         position: 'absolute',
@@ -33,12 +36,11 @@ const LCanvas = ({ children }) => {
       }}
       onCreated={(state) => state.events.connect(dom.current)}
     >
-      <LControl />
-      <Preload all />
+      {/* <LControl /> */}
+      {/* <Preload all /> */}
       {children}
     </Canvas>
   )
 }
 
 export default LCanvas
-

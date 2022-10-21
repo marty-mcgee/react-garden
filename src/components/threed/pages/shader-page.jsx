@@ -15,7 +15,7 @@ const Shader = dynamic(() => import('~/components/threed/components/canvas/Shade
 })
 
 // dom components goes here
-const Page = (props) => {
+const WholePage = (props) => {
   return (
     <>
       <ExampleComponent />
@@ -24,19 +24,26 @@ const Page = (props) => {
 }
 
 // 'r3fCanvas' <Canvas> components go here...
-// It will receive same props as Page component (from getStaticProps, etc.)
-Page.r3f = (props) => (
+// .r3f Fragment: It will receive same props as WholePage component (from getStaticProps, etc.)
+WholePage.r3f = (props) => (
   <>
     <Shader />
   </>
 )
 
-export default Page
+export default WholePage
 
 export async function getStaticProps() {
   return {
     props: {
-      title: 'Index',
+      title: 'Shader',
+      _name: '[MM]:[THREED] HEY HEY HEY 0',
+      _id: '1234567890',
+      _ts: 'new Date()',
+      _type: 'props_mmWholePageR3F',
+      data: {
+        title: '[MM] from future WP/GQL API endpoint noun _type "Shader"',
+      },
     },
   }
 }

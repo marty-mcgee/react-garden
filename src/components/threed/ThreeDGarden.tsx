@@ -79,7 +79,9 @@ import ToolIconAddText from '@mui/icons-material/TextFields'
 import { Canvas, useFrame } from '@react-three/fiber'
 
 // ** ThreeD R3F Imports
-// import BoxPage from '~/components/threed/pages/box-page'
+import AppPage from '~/components/threed/pages/_app-page'
+import BoxPage from '~/components/threed/pages/box-page'
+import LCanvas from '~/components/threed/components/canvas'
 import BoxComponent from '~/components/threed/components/canvas/Box'
 
 // ** CSS Styles Imports
@@ -3527,20 +3529,20 @@ const ReactThreeFiberView: ReactNode = (): JSX.Element => {
       <Button onClick={() => loadNoun('character')}>load character</Button>
       <Button onClick={() => loadNoun('farmbot')}>load farmbot</Button>
       <Typography>{noun._type} title: {noun_title}</Typography>
-      <Canvas id="r3fCanvas">
-        {/*
+      <LCanvas>
+      {/* <Canvas id="r3fCanvas"> */}
+        {/* Lights */}
         <ambientLight intensity={0.1} />
         <directionalLight position={[0, 0, 5]} color="red" />
-        */}
-        {/*
-        <mesh>
+        {/* Subjects */}
+        {/* <mesh>
           <boxBufferGeometry args={[noun_x, noun_y, noun_z]} />
           <meshBasicMaterial />
-        </mesh>
-        */}
-        {/* <BoxPage _name='threed-example-box' args={[noun_x, noun_y, noun_z]} /> */}
-        <BoxComponent route='/' />
-      </Canvas>
+        </mesh> */}
+        <BoxPage _name='threed-garden-box' args={[noun_x, noun_y, noun_z]} />
+        {/* <BoxComponent route='/' /> */}
+      {/* </Canvas> */}
+      </LCanvas>
     </Box>
   )
 }
@@ -3640,6 +3642,7 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
 
           {/* React Three Fiber - View */}
           <ReactThreeFiberView />
+          {/* <AppPage /> */}
 
           <Box sx={{ borderTop: 1, borderBottom: 1, borderColor: 'divider' }}>
             <Tabs value={tabInfoControl} onChange={handleChangeTabInfoControl} aria-label="Info Control Panel">
