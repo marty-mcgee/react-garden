@@ -1,5 +1,4 @@
 // ** Next Imports
-import Head from 'next/head'
 import { Router } from 'next/router'
 
 // ** Redux Store Imports
@@ -27,9 +26,7 @@ import { client } from '~/api/graphql/client'
 // ** Third Party Import
 import { Toaster } from 'react-hot-toast'
 
-// @core
-
-// ** Component Imports
+// ** @core Components
 import AclGuard from '~/@core/components/auth/AclGuard'
 import ThemeComponent from '~/@core/theme/ThemeComponent'
 import AuthGuard from '~/@core/components/auth/AuthGuard'
@@ -38,8 +35,8 @@ import WindowWrapper from '~/@core/components/window-wrapper'
 
 // ** Layout + Metadata Components
 import UserLayout from '~/layouts/UserLayout'
-import Header from '~/@core/components/head/head'
-import Dom from '~/@core/components/dom/dom'
+import Header from '~/@core/components/head'
+import Dom from '~/@core/components/dom'
 import Spinner from '~/@core/components/spinner'
 
 // ** Contexts
@@ -49,36 +46,12 @@ import { SettingsConsumer, SettingsProvider } from '~/@core/context/settingsCont
 // ** Styled Components
 import ReactHotToast from '~/@core/styles/libs/react-hot-toast'
 
-// ** Utils Imports
+// ** Utils
 import { createEmotionCache } from '~/@core/utils/create-emotion-cache'
 
-// ** Global css styles
+// ** CSS Styles
 // import stylesGlobal from '~/styles/globals.module.css'
-
-// @fullcalendar styles
-// import stylesFCCommon from '~/styles/@fullcalendar/common/main.module.css'
-// import stylesFCDayGrid from '~/styles/@fullcalendar/daygrid/main.module.css'
-// import stylesFCTimeGrid from '~/styles/@fullcalendar/timegrid/main.module.css'
-
-// DEMO
-// import '~/assets/demo/css/style.css'
 // import stylesDemo from '~/styles/demo/demo.module.css'
-
-// ** Prismjs Styles
-// import 'prismjs'
-// import 'prismjs/themes/prism-tomorrow.css'
-// import 'prismjs/components/prism-jsx'
-// import 'prismjs/components/prism-tsx'
-
-// ** React Perfect Scrollbar Style
-// import 'react-perfect-scrollbar/dist/css/styles.css'
-
-// images
-import favicon from '~/assets/images/logos/favicon.png'
-import appleIcon from '~/assets/images/logos/apple-icon.png'
-// import brandLight from '~/assets/images/logos/logo-threedgarden.png'
-// import brandDark from '~/assets/images/logos/logo-threedgarden-alt.png'
-// import brandText from '~/assets/images/logos/logo-threedgarden-text.png'
 
 // ============================================================
 // WORKAROUND -- for ToastPosition bug
@@ -131,8 +104,7 @@ const App = (props: any) => {
     <ApolloProvider client={client}>
       <ReduxProvider store={reduxStore}>
         <CacheProvider value={emotionCache}>
-          {/* <Header title={pageProps.title} /> */}
-          <Header title='HEY HEY HEY' />
+          <Header />{/* <Header title={pageProps.title} /> */}
           <AuthProvider>
             <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : { pageSettings: null })}>
               <SettingsConsumer>
