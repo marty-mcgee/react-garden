@@ -1,3 +1,6 @@
+// ** Next Imports
+import dynamic from 'next/dynamic'
+
 // ** React Imports
 import { useContext } from 'react'
 
@@ -12,7 +15,10 @@ import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 
 // ** ThreeDGarden Imports
-import ThreeDGarden from '~/components/threed/ThreeDGarden'
+// import ThreeDGarden from '~/components/threed/ThreeDGarden'
+const ThreeDGarden = dynamic(() => import('~/components/threed/ThreeDGarden'), {
+  ssr: false,
+})
 
 const ParticipatePage = () => {
 

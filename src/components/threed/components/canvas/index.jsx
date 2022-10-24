@@ -19,7 +19,6 @@ const LControl = () => {
     }
   }, [dom, control])
 
-  // @ts-ignore
   return <OrbitControls ref={control} domElement={dom.current} />
 }
 
@@ -28,15 +27,20 @@ const LCanvas = ({ children }) => {
 
   return (
     <Canvas
-      // id="r3fCanvas001"
+      // id='r3fCanvas001'
+      // ref='r3fCanvas[n]'
+      className='r3fCanvas'
       mode='concurrent'
       style={{
-        position: 'absolute',
-        top: 0,
+        // position: 'absolute',
+        // top: 0,
+        width: '100%',
+        minHeight: '20rem',
       }}
       onCreated={(state) => state.events.connect(dom.current)}
     >
       {/* <LControl /> */}
+      {/* <OrbitControls /> */}
       {/* <Preload all /> */}
       {children}
     </Canvas>

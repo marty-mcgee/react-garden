@@ -77,8 +77,9 @@ import ToolIconAddText from '@mui/icons-material/TextFields'
 // import { TWEEN } from 'three/examples/jsm/libs/tween.module.min'
 // import TWEEN from '@tweenjs/tween.js'
 import { Canvas, useFrame } from '@react-three/fiber'
+import { OrbitControls, Preload } from '@react-three/drei'
 
-// ** ThreeD R3F Imports
+// ** ThreeD R3F Imports // use dynamic() ??
 import AppPage from '~/components/threed/pages/_app-page'
 import BoxPage from '~/components/threed/pages/box-page'
 import LCanvas from '~/components/threed/components/canvas'
@@ -110,7 +111,7 @@ console.debug(`%c====================================`, ccm5)
 
 // ==========================================================
 // TS INTERFACES + TYPES
-// =====================================================sceneStore=====
+// ==========================================================
 // none yet, but soon
 
 type THeyHeyHey = {
@@ -133,11 +134,29 @@ interface IHeyHeyHeys {
   heyheyheys: Array<HEYHEYHEY>
 }
 
-// ===
-// MM
+// ==========================================================
+// [MM] Dynamic Component Loading (for client-only rendering)
+// R3F Components will now be 'dynamically' imported using Next...
+// Dynamic import is used to prevent a payload when the website
+// starts that will include threejs, r3f, etc.
+// WARNING ! errors might get obfuscated by using dynamic import.
+// If something goes wrong go back to a static import to show the error.
+// https://github.com/pmndrs/react-three-next/issues/49
+// import BoxPage from '~/components/threed/pages/box-page'
+// const BoxPage = dynamic(() => import('~/components/threed/pages/box-page'), {
+//   ssr: true,
+// })
+// // import LCanvas from '~/components/threed/components/canvas'
+// const LCanvas = dynamic(() => import('~/components/threed/components/canvas'), {
+//   ssr: true,
+// })
 // const r3fBox = dynamic(() => import('~/components/threed/components/canvas/Box'), {
 //   ssr: false,
 // })
+// const LCanvas = dynamic(() => import('~/components/threed/components/canvas'), {
+//   ssr: true,
+// })
+
 
 // ==========================================================
 // STYLES
@@ -3529,11 +3548,12 @@ const ReactThreeFiberView: ReactNode = (): JSX.Element => {
       <Button onClick={() => loadNoun('character')}>load character</Button>
       <Button onClick={() => loadNoun('farmbot')}>load farmbot</Button>
       <Typography>{noun._type} title: {noun_title}</Typography>
-      <LCanvas>
-      {/* <Canvas id="r3fCanvas"> */}
+      {/* <LCanvas> */}
+      <Canvas id="r3fCanvas">
+        <OrbitControls />
         {/* Lights */}
-        <ambientLight intensity={0.1} />
-        <directionalLight position={[0, 0, 5]} color="red" />
+        {/* <ambientLight intensity={10} /> */}
+        {/* <directionalLight position={[10, 0, 10]} color='#FFFFFF' /> */}
         {/* Subjects */}
         {/* <mesh>
           <boxBufferGeometry args={[noun_x, noun_y, noun_z]} />
@@ -3541,8 +3561,8 @@ const ReactThreeFiberView: ReactNode = (): JSX.Element => {
         </mesh> */}
         <BoxPage _name='threed-garden-box' args={[noun_x, noun_y, noun_z]} />
         {/* <BoxComponent route='/' /> */}
-      {/* </Canvas> */}
-      </LCanvas>
+      </Canvas>
+      {/* </LCanvas> */}
     </Box>
   )
 }
