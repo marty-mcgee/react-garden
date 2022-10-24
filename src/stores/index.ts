@@ -566,27 +566,46 @@ function modalStore(this: any, _type = 'modal') {
 // ==============================================================
 // ** Construct Noun Stores + Export as Group of Stores
 
+export { nounStore }
+// export const nounStore = new (nounStore as any)('noun')
+export const projectStore = new (nounStore as any)('project')
+export const workspaceStore = new (nounStore as any)('workspace')
+export const planStore = new (nounStore as any)('plan')
+export const threedStore = new (nounStore as any)('threed')
+export const fileStore = new (nounStore as any)('file')
+export const sceneStore = new (nounStore as any)('scene')
+export const allotmentStore = new (nounStore as any)('allotment')
+export const bedStore = new (nounStore as any)('bed')
+export const plantStore = new (nounStore as any)('plant')
+export const plantingPlanStore = new (nounStore as any)('plantingPlan')
+export const bearStore = new (nounStore as any)('bear')
+export { modalStore }
+// export const modalStore = new (modalStore as any)()
+export const modalAboutStore = new (modalStore as any)('modalAbout')
+export const modalModel3dStore = new (modalStore as any)('modalModel3d')
+export const modalLoadingStore = new (modalStore as any)('modalLoading')
+export const modalShareStore = new (modalStore as any)('modalShare')
+export const modalStoreNoun = new (nounStore as any)('modal')
+
 const stores = {
   nounStore,
-  // nounStore: new (nounStore as any)('noun'),
-  projectStore: new (nounStore as any)('project'),
-  workspaceStore: new (nounStore as any)('workspace'),
-  planStore: new (nounStore as any)('plan'),
-  threedStore: new (nounStore as any)('threed'),
-  fileStore: new (nounStore as any)('file'),
-  sceneStore: new (nounStore as any)('scene'),
-  allotmentStore: new (nounStore as any)('allotment'),
-  bedStore: new (nounStore as any)('bed'),
-  plantStore: new (nounStore as any)('plant'),
-  plantingPlanStore: new (nounStore as any)('plantingPlan'),
-  bearStore: new (nounStore as any)('bear'),
+  projectStore,
+  workspaceStore,
+  planStore,
+  threedStore,
+  fileStore,
+  sceneStore,
+  allotmentStore,
+  bedStore,
+  plantStore,
+  plantingPlanStore,
+  bearStore,
   modalStore,
-  // modalStore: new (modalStore as any)(),
-  modalAboutStore: new (modalStore as any)('modalAbout'),
-  modalModel3dStore: new (modalStore as any)('modalModel3d'),
-  modalLoadingStore: new (modalStore as any)('modalLoading'),
-  modalShareStore: new (modalStore as any)('modalShare'),
-  modalStoreNoun: new (nounStore as any)('modal'),
+  modalAboutStore,
+  modalModel3dStore,
+  modalLoadingStore,
+  modalShareStore,
+  modalStoreNoun,
 }
 
 export default stores

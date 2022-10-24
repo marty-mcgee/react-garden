@@ -1,7 +1,9 @@
+import { useRouter } from 'next/router'
+import useStore from '~/components/threed/stores/store'
+
+import { useRef, useState } from 'react'
 import * as THREE from 'three'
 import { useFrame, extend } from '@react-three/fiber'
-import { useRef, useState } from 'react'
-import useStore from '~/stores/store'
 import { shaderMaterial } from '@react-three/drei'
 
 import vertex from 'raw-loader!glslify-loader!./glsl/shader.vert'
@@ -25,7 +27,7 @@ extend({ ColorShiftMaterial })
 const Shader = (props) => {
   const meshRef = useRef(null)
   const [hovered, setHover] = useState(false)
-  const router = useStore((state) => state.router)
+  const router = useRouter() // useStore((s) => s.router)
 
   useFrame((state, delta) => {
     if (meshRef.current) {
@@ -41,13 +43,13 @@ const Shader = (props) => {
       ref={meshRef}
       scale={hovered ? 1.1 : 1}
       onClick={() => {
-        router.push(`/box`)
+        router.push(`/`)
       }}
       onPointerOver={(e) => setHover(true)}
       onPointerOut={(e) => setHover(false)}
       {...props}
     >
-      <boxGeometry args={[1, 1, 1]} />
+      <boxGeometry args={[3, 3, 3]} />
       {/* @ts-ignore */}
       <colorShiftMaterial key={ColorShiftMaterial.key} time={3} />
     </mesh>

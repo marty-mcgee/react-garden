@@ -1,8 +1,17 @@
+// ** Next Imports
+import { useRouter } from 'next/router'
+
+// ** React Imports
 import { useEffect, useRef } from 'react'
+
+// ** R3F Imports
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Preload } from '@react-three/drei'
+
+// ** Store Imports
 import useStore from '~/components/threed/stores/store'
 
+// ** Controls
 const LControl = () => {
   const dom = useStore((state) => state.dom)
   const control = useRef(null)
@@ -22,8 +31,14 @@ const LControl = () => {
   return <OrbitControls ref={control} domElement={dom.current} />
 }
 
+// ** Canvas "Layout"
 const LCanvas = ({ children }) => {
+
+  // get dom from store
   const dom = useStore((state) => state.dom)
+
+  // use router from next
+  const router = useRouter()
 
   return (
     <Canvas
@@ -36,12 +51,15 @@ const LCanvas = ({ children }) => {
         // top: 0,
         width: '100%',
         minHeight: '20rem',
+        height: '100%',
+        border: '1px solid orange',
       }}
       onCreated={(state) => state.events.connect(dom.current)}
+      camera={{ position: [0, -10, 80], fov: 5 }}
+      dpr={[1, 2]}
     >
-      {/* <LControl /> */}
-      {/* <OrbitControls /> */}
-      {/* <Preload all /> */}
+      <LControl />
+      <Preload all />
       {children}
     </Canvas>
   )
