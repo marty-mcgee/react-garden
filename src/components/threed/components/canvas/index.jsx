@@ -33,9 +33,11 @@ const LControl = () => {
 
 // ** Canvas "Layout"
 const LCanvas = ({ children }) => {
-
   // get dom from store
   const dom = useStore((state) => state.dom)
+
+  // This reference will give us direct access to the THREE.Mesh object
+  const r3fCanvasRef = useRef(null)
 
   // use router from next
   const router = useRouter()
@@ -43,7 +45,7 @@ const LCanvas = ({ children }) => {
   return (
     <Canvas
       // id='r3fCanvas001'
-      // ref='r3fCanvas[n]'
+      ref={r3fCanvasRef}
       className='r3fCanvas'
       mode='concurrent'
       style={{
@@ -52,7 +54,7 @@ const LCanvas = ({ children }) => {
         width: '100%',
         minHeight: '20rem',
         height: '100%',
-        border: '1px solid orange',
+        border: '0px solid orange',
       }}
       onCreated={(state) => state.events.connect(dom.current)}
       camera={{ position: [0, -10, 80], fov: 5 }}

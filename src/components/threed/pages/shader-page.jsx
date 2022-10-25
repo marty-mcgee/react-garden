@@ -1,5 +1,6 @@
 // Step 5 - delete Instructions components
-import ExampleComponent from '~/components/threed/pages/box-page'
+import ExampleComponent1 from '~/components/threed/pages/box-page'
+import ExampleComponent2 from '~/components/threed/components/canvas/Box'
 
 // R3F Shader (client side only) will now be 'dynamically' imported using Next, so it only loads on the client
 import dynamic from 'next/dynamic'
@@ -10,7 +11,7 @@ import dynamic from 'next/dynamic'
 // WARNING ! errors might get obfuscated by using dynamic import.
 // If something goes wrong go back to a static import to show the error.
 // https://github.com/pmndrs/react-three-next/issues/49
-const Shader = dynamic(() => import('~/components/threed/components/canvas/Shader/Shader'), {
+const Shader = dynamic(() => import('~/components/threed/components/canvas/Shader'), {
   ssr: false,
 })
 
@@ -18,7 +19,9 @@ const Shader = dynamic(() => import('~/components/threed/components/canvas/Shade
 const WholePage = (props) => {
   return (
     <>
-      <ExampleComponent />
+      {/* <ExampleComponent1 /> */}
+      {/* <ExampleComponent2 /> */}
+      <Shader />
     </>
   )
 }

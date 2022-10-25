@@ -23,6 +23,7 @@
 public/objects
 public/demo
 public/demo/objects
+public/media/products
 
 # logs
 npm-debug.log*

@@ -13,7 +13,7 @@ import {
   // useRef,
   useState,
   // useCallback,
-  ReactNode,
+  // ReactNode,
   FunctionComponent,
   MouseEventHandler,
   SyntheticEvent
@@ -43,7 +43,7 @@ import MenuItem from '@mui/material/MenuItem'
 // import MenuList from '@mui/material/MenuList'
 // import MenuIcon from '@mui/icons-material/Menu'
 import Grid from '@mui/material/Grid'
-import Modal from '@mui/material/Modal'
+// import Modal from '@mui/material/Modal'
 import MuiTabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Tooltip from '@mui/material/Tooltip'
@@ -86,17 +86,18 @@ import Dom from '~/@core/components/dom'
 import { Canvas, useFrame } from '@react-three/fiber'
 // import { OrbitControls, Preload } from '@react-three/drei'
 import LCanvas from '~/components/threed/components/canvas'
-import AppPage from '~/components/threed/pages/_app-page'
-import BoxPage from '~/components/threed/pages/box-page'
+// import AppPage from '~/components/threed/pages/_app-page'
+// import BoxPage from '~/components/threed/pages/box-page'
 import BoxComponent from '~/components/threed/components/canvas/Box'
-import ShaderPage from '~/components/threed/pages/shader-page'
+// import ShaderPage from '~/components/threed/pages/shader-page'
 import ShaderComponent from '~/components/threed/components/canvas/Shader'
 
 // ** Modal Imports
-import ModalAbout from '~/components/threed/components/modals/ModalAbout'
-import ModalModel3d from '~/components/threed/components/modals/ModalModel3d'
-import ModalLoading from '~/components/threed/components/modals/ModalLoading'
-import ModalShare from '~/components/threed/components/modals/ModalShare'
+// import ModalAbout from '~/components/threed/components/modals/ModalAbout'
+// import ModalModel3d from '~/components/threed/components/modals/ModalModel3d'
+// import ModalLoading from '~/components/threed/components/modals/ModalLoading'
+// import ModalShare from '~/components/threed/components/modals/ModalShare'
+import modals from '~/components/threed/components/modals'
 
 // ** CSS Styles Imports
 // import stylesDemo from '~/styles/demo/demo.module.css'
@@ -257,7 +258,7 @@ const {
 // ==========================================================
 // Project
 
-const ProjectInfoPanel: ReactNode = (_type: string = 'project'): JSX.Element => {
+const ProjectInfoPanel: FunctionComponent = (_type: string = 'project'): JSX.Element => {
 
   const projectCount = projectStore.store.useStore("count")
   const projects = projectStore.store.useStore("all")
@@ -279,7 +280,7 @@ const ProjectInfoPanel: ReactNode = (_type: string = 'project'): JSX.Element => 
   )
 }
 
-const ProjectControlPanel: ReactNode = (_type: string = 'project'): JSX.Element => {
+const ProjectControlPanel: FunctionComponent = (_type: string = 'project'): JSX.Element => {
 
   const increaseCount = () => projectStore.update("count", projectStore.actions.increaseCount())
 
@@ -314,7 +315,7 @@ const ProjectControlPanel: ReactNode = (_type: string = 'project'): JSX.Element 
 // ==========================================================
 // Workspace
 
-const WorkspaceInfoPanel: ReactNode = (_type: string = 'workspace'): JSX.Element => {
+const WorkspaceInfoPanel: FunctionComponent = (_type: string = 'workspace'): JSX.Element => {
 
   const workspaceCount = workspaceStore.store.useStore("count")
   const workspaces = workspaceStore.store.useStore("all")
@@ -336,7 +337,7 @@ const WorkspaceInfoPanel: ReactNode = (_type: string = 'workspace'): JSX.Element
   )
 }
 
-const WorkspaceControlPanel: ReactNode = (_type: string = 'workspace'): JSX.Element => {
+const WorkspaceControlPanel: FunctionComponent = (_type: string = 'workspace'): JSX.Element => {
 
   const increaseCount = () => workspaceStore.update("count", workspaceStore.actions.increaseCount())
 
@@ -371,7 +372,7 @@ const WorkspaceControlPanel: ReactNode = (_type: string = 'workspace'): JSX.Elem
 // ==========================================================
 // Plan
 
-const PlanInfoPanel: ReactNode = (_type: string = 'plan'): JSX.Element => {
+const PlanInfoPanel: FunctionComponent = (_type: string = 'plan'): JSX.Element => {
 
   const planCount = planStore.store.useStore("count")
   const plans = planStore.store.useStore("all")
@@ -393,7 +394,7 @@ const PlanInfoPanel: ReactNode = (_type: string = 'plan'): JSX.Element => {
   )
 }
 
-const PlanControlPanel: ReactNode = (_type: string = 'plan'): JSX.Element => {
+const PlanControlPanel: FunctionComponent = (_type: string = 'plan'): JSX.Element => {
 
   const increaseCount = () => planStore.update("count", planStore.actions.increaseCount())
 
@@ -428,7 +429,7 @@ const PlanControlPanel: ReactNode = (_type: string = 'plan'): JSX.Element => {
 // ==========================================================
 // ThreeD
 
-const ThreeDInfoPanel: ReactNode = (_type: string = 'threed'): JSX.Element => {
+const ThreeDInfoPanel: FunctionComponent = (_type: string = 'threed'): JSX.Element => {
 
   const threedCount = threedStore.store.useStore("count")
   const threeds = threedStore.store.useStore("all")
@@ -450,7 +451,7 @@ const ThreeDInfoPanel: ReactNode = (_type: string = 'threed'): JSX.Element => {
   )
 }
 
-const ThreeDControlPanel: ReactNode = (_type: string = 'threed'): JSX.Element => {
+const ThreeDControlPanel: FunctionComponent = (_type: string = 'threed'): JSX.Element => {
 
   const increaseCount = () => threedStore.update("count", threedStore.actions.increaseCount())
 
@@ -485,7 +486,7 @@ const ThreeDControlPanel: ReactNode = (_type: string = 'threed'): JSX.Element =>
 // ==========================================================
 // File
 
-const FileInfoPanel: ReactNode = (_type: string = 'file'): JSX.Element => {
+const FileInfoPanel: FunctionComponent = (_type: string = 'file'): JSX.Element => {
 
   const fileCount = fileStore.store.useStore("count")
   const files = fileStore.store.useStore("all")
@@ -507,7 +508,7 @@ const FileInfoPanel: ReactNode = (_type: string = 'file'): JSX.Element => {
   )
 }
 
-const FileControlPanel: ReactNode = (_type: string = 'file'): JSX.Element => {
+const FileControlPanel: FunctionComponent = (_type: string = 'file'): JSX.Element => {
 
   const increaseCount = () => fileStore.update("count", fileStore.actions.increaseCount())
 
@@ -545,7 +546,7 @@ const FileControlPanel: ReactNode = (_type: string = 'file'): JSX.Element => {
 // ==========================================================
 // Scene
 
-const SceneInfoPanel: ReactNode = (_type: string = 'scene'): JSX.Element => {
+const SceneInfoPanel: FunctionComponent = (_type: string = 'scene'): JSX.Element => {
 
   const sceneCount = sceneStore.store.useStore("count")
   const sceneCountDB = sceneStore.store.useStore("countDB")
@@ -579,7 +580,7 @@ const SceneInfoPanel: ReactNode = (_type: string = 'scene'): JSX.Element => {
   )
 }
 
-const SceneControlPanel: ReactNode = (_type: string = 'scene'): JSX.Element => {
+const SceneControlPanel: FunctionComponent = (_type: string = 'scene'): JSX.Element => {
 
   const increaseCount = () => sceneStore.store.update("count", sceneStore.actions.increaseCount())
   const decreaseCount = () => sceneStore.store.update("count", sceneStore.actions.decreaseCount())
@@ -624,7 +625,7 @@ const SceneControlPanel: ReactNode = (_type: string = 'scene'): JSX.Element => {
 // ==========================================================
 // Allotment
 
-const AllotmentInfoPanel: ReactNode = (_type: string = 'allotment'): JSX.Element => {
+const AllotmentInfoPanel: FunctionComponent = (_type: string = 'allotment'): JSX.Element => {
 
   const allotmentCount = allotmentStore.store.useStore("count")
   const allotments = allotmentStore.store.useStore("all")
@@ -646,7 +647,7 @@ const AllotmentInfoPanel: ReactNode = (_type: string = 'allotment'): JSX.Element
   )
 }
 
-const AllotmentControlPanel: ReactNode = (_type: string = 'allotment'): JSX.Element => {
+const AllotmentControlPanel: FunctionComponent = (_type: string = 'allotment'): JSX.Element => {
 
   const increaseCount = () => allotmentStore.update("count", allotmentStore.actions.increaseCount())
 
@@ -681,7 +682,7 @@ const AllotmentControlPanel: ReactNode = (_type: string = 'allotment'): JSX.Elem
 // ==========================================================
 // Bed
 
-const BedInfoPanel: ReactNode = (_type: string = 'bed'): JSX.Element => {
+const BedInfoPanel: FunctionComponent = (_type: string = 'bed'): JSX.Element => {
 
   const bedCount = bedStore.store.useStore("count")
   const beds = bedStore.store.useStore("all")
@@ -703,7 +704,7 @@ const BedInfoPanel: ReactNode = (_type: string = 'bed'): JSX.Element => {
   )
 }
 
-const BedControlPanel: ReactNode = (_type: string = 'bed'): JSX.Element => {
+const BedControlPanel: FunctionComponent = (_type: string = 'bed'): JSX.Element => {
 
   const increaseCount = () => bedStore.update("count", bedStore.actions.increaseCount())
 
@@ -738,7 +739,7 @@ const BedControlPanel: ReactNode = (_type: string = 'bed'): JSX.Element => {
 // ==========================================================
 // Plant
 
-const PlantInfoPanel: ReactNode = (_type: string = 'plant'): JSX.Element => {
+const PlantInfoPanel: FunctionComponent = (_type: string = 'plant'): JSX.Element => {
 
   const plantCount = plantStore.store.useStore("count")
   const plants = plantStore.store.useStore("all")
@@ -760,7 +761,7 @@ const PlantInfoPanel: ReactNode = (_type: string = 'plant'): JSX.Element => {
   )
 }
 
-const PlantControlPanel: ReactNode = (_type: string = 'plant'): JSX.Element => {
+const PlantControlPanel: FunctionComponent = (_type: string = 'plant'): JSX.Element => {
 
   const increaseCount = () => plantStore.update("count", plantStore.actions.increaseCount())
 
@@ -795,7 +796,7 @@ const PlantControlPanel: ReactNode = (_type: string = 'plant'): JSX.Element => {
 // ==========================================================
 // PlantingPlan
 
-const PlantingPlanInfoPanel: ReactNode = (_type: string = 'planting_plan'): JSX.Element => {
+const PlantingPlanInfoPanel: FunctionComponent = (_type: string = 'planting_plan'): JSX.Element => {
 
   const plantingPlanCount = plantingPlanStore.store.useStore("count")
   const plantingPlans = plantingPlanStore.store.useStore("all")
@@ -817,7 +818,7 @@ const PlantingPlanInfoPanel: ReactNode = (_type: string = 'planting_plan'): JSX.
   )
 }
 
-const PlantingPlanControlPanel: ReactNode = (_type: string = 'planting_plan'): JSX.Element => {
+const PlantingPlanControlPanel: FunctionComponent = (_type: string = 'planting_plan'): JSX.Element => {
 
   const increaseCount = () => plantingPlanStore.update("count", plantingPlanStore.actions.increaseCount())
 
@@ -867,7 +868,11 @@ function BearControlPanel() {
 // ==========================================================
 // COMPONENTS
 
-const ToolBar: ReactNode = (): JSX.Element => {
+// ** Modal Windows
+const { ModalAbout, ModalLoading, ModalModel3d, ModalShare, } = modals
+
+// ** Main ToolBar
+const ToolBar: FunctionComponent = (): JSX.Element => {
 
   const word = `[MM] @ ${new Date().toISOString()}`
   // console.debug("ToolBar", word)
@@ -1860,7 +1865,8 @@ const ToolBar: ReactNode = (): JSX.Element => {
   )
 }
 
-const CatalogView: ReactNode = (): JSX.Element => {
+// ** Different Views
+const CatalogView: FunctionComponent = (): JSX.Element => {
   // console.debug("CatalogView")
   useEffect(() => {
     console.debug('CatalogView onMount')
@@ -1878,7 +1884,7 @@ const CatalogView: ReactNode = (): JSX.Element => {
   )
 }
 
-const PropertiesView: ReactNode = (): JSX.Element => {
+const PropertiesView: FunctionComponent = (): JSX.Element => {
   // console.debug("PropertiesView")
   useEffect(() => {
     console.debug('PropertiesView onMount')
@@ -2872,7 +2878,7 @@ const PropertiesView: ReactNode = (): JSX.Element => {
   )
 }
 
-const PlanView: ReactNode = (): JSX.Element => {
+const PlanView: FunctionComponent = (): JSX.Element => {
   // console.debug("PlanView")
   useEffect(() => {
     console.debug('PlanView onMount')
@@ -2916,7 +2922,7 @@ const PlanView: ReactNode = (): JSX.Element => {
   )
 }
 
-const TheBottom: ReactNode = (): JSX.Element => {
+const TheBottom: FunctionComponent = (): JSX.Element => {
 
   const word = `[MM] @ ${new Date().toISOString()}`
 
@@ -3003,7 +3009,10 @@ const TheBottom: ReactNode = (): JSX.Element => {
   )
 }
 
-const ReactThreeFiberView: ReactNode = (): JSX.Element => {
+// ==========================================================
+
+// ** R3F Main Component
+const ReactThreeFiberView: FunctionComponent = (): JSX.Element => {
   // component params
   const word = `[MM] @ ${new Date().toISOString()}`
 
@@ -3051,43 +3060,53 @@ const ReactThreeFiberView: ReactNode = (): JSX.Element => {
 
   // console.debug(`%c====================================`, ccm5)
   return (
-    <>
+    <Container id="r3fCanvasContainer">
         <Button onClick={() => loadNoun('world')}>load world</Button>
         <Button onClick={() => loadNoun('scene')}>load scene</Button>
         <Button onClick={() => loadNoun('character')}>load character</Button>
         <Button onClick={() => loadNoun('farmbot')}>load farmbot</Button>
         <Typography>{noun._type} title: {noun_title}</Typography>
-        <Box id="r3fCanvasContainer" sx={{ border: '1px solid darkgreen' }}>
-          <Dom>
-            <LCanvas className='r3fCanvas'>
-              {/* Lights */}
-              {/* <ambientLight intensity={10} /> */}
-              {/* <directionalLight position={[10, 0, 10]} color='#FFFFFF' /> */}
-              {/* Subjects */}
-              {/* <mesh> */}
-              {/* <boxBufferGeometry args={[noun_x, noun_y, noun_z]} /> */}
-              {/* <meshBasicMaterial /> */}
-              {/* </mesh> */}
-              {/* <BoxPage _name='threed-garden-box1' args={[noun_x, noun_y, noun_z]} /> */}
-              <ShaderComponent route='/' />
-            </LCanvas>
-          </Dom>
-        </Box>
-        <Box sx={{ border: '1px solid darkgreen' }}>
-          <Dom>
-            <LCanvas className='r3fCanvas'>
-              <axesHelper args={[100]} />
-              <gridHelper args={[100, 10]} />
-              {/* <BoxPage _name='threed-garden-box2' args={[noun_x, noun_y, noun_z]} /> */}
-              <BoxComponent route='/participate/gql-testing' />
-            </LCanvas>
-          </Dom>
-        </Box>
-    </>
+        <Dom>
+          <Box sx={{ border: '1px solid darkgreen' }}>
+              <LCanvas className='r3fCanvas'>
+                {/* Lights */}
+                {/* <ambientLight intensity={10} /> */}
+                {/* <directionalLight position={[10, 0, 10]} color='#FFFFFF' /> */}
+                {/* Subjects */}
+                {/* <mesh> */}
+                {/* <boxBufferGeometry args={[noun_x, noun_y, noun_z]} /> */}
+                {/* <meshBasicMaterial /> */}
+                {/* </mesh> */}
+                <axesHelper args={[100]} />
+                <gridHelper args={[100, 10]} />
+                <BoxComponent
+                  name='threed-garden-box-1'
+                  args={
+                    [noun_x, noun_y, noun_z]
+                  }
+                  route='/participate/gql-testing'
+                />
+              </LCanvas>
+          </Box>
+          <Box sx={{ border: '1px solid darkgreen' }}>
+              <LCanvas className='r3fCanvas'>
+                <axesHelper args={[100]} />
+                <gridHelper args={[100, 10]} />
+                <ShaderComponent
+                  name='threed-garden-shader-1'
+                  args={
+                    [noun_x, noun_y, noun_z]
+                  }
+                  route='/apps/calendar'
+                />
+              </LCanvas>
+          </Box>
+        </Dom>
+    </Container>
   )
 }
 
-const MyComponent: ReactNode = (): JSX.Element => {
+const MyComponent: FunctionComponent = (): JSX.Element => {
 
   const word = `[MM] @ ${new Date().toISOString()}`
 

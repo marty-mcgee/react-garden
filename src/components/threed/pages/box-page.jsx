@@ -1,12 +1,12 @@
 // ==============================================================
 // RESOURCES
 
-import BoxComponent from '~/components/threed/components/canvas/Box/Box'
+import BoxComponent from '~/components/threed/components/canvas/Box'
 // import Instructions from '~/components/threed/pages/Instructions'
 
 import dynamic from 'next/dynamic'
 
-const Box = dynamic(() => import('~/components/threed/components/canvas/Box/Box'), {
+const Box = dynamic(() => import('~/components/threed/components/canvas/Box'), {
   ssr: false,
 })
 
