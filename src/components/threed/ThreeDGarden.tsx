@@ -136,30 +136,6 @@ interface IHeyHeyHeys {
 }
 
 // ==========================================================
-// [MM] Dynamic Component Loading (for client-only rendering)
-// R3F Components will now be 'dynamically' imported using Next...
-// Dynamic import is used to prevent a payload when the website
-// starts that will include threejs, r3f, etc.
-// WARNING ! errors might get obfuscated by using dynamic import.
-// If something goes wrong go back to a static import to show the error.
-// https://github.com/pmndrs/react-three-next/issues/49
-// import BoxPage from '~/components/threed/pages/box-page'
-// const BoxPage = dynamic(() => import('~/components/threed/pages/box-page'), {
-//   ssr: true,
-// })
-// // import LCanvas from '~/components/threed/components/canvas'
-// const LCanvas = dynamic(() => import('~/components/threed/components/canvas'), {
-//   ssr: true,
-// })
-// const r3fBox = dynamic(() => import('~/components/threed/components/canvas/Box'), {
-//   ssr: false,
-// })
-// const LCanvas = dynamic(() => import('~/components/threed/components/canvas'), {
-//   ssr: true,
-// })
-
-
-// ==========================================================
 // STYLES
 
 const stylesModal = {
