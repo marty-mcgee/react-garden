@@ -94,6 +94,7 @@
     "scheduler": "^0.19.0",
     "three": "^0.145.0",
     "uuid": "^8.3.2",
+    "valtio": "^1.7.4",
     "web-vitals": "^2.1.4",
     "webgl-detector": "^1.1.11"
   },
@@ -224,7 +225,6 @@
     "stylis": "^4.1.1",
     "stylis-plugin-rtl": "github:marty-mcgee/stylis-plugin-rtl#main",
     "tailwindcss": "^3.1.8",
-    "threed-garden": "^0.11.6",
     "wordpress-plugin": "^0.1.8-alpha",
     "yup": "0.32.11",
     "zustand": "^4.1.1"
@@ -235,6 +235,7 @@
     "three",
     "threed",
     "threed.design",
+    "threed-garden",
     "threedgarden",
     "threed.ai",
     "functional components",
