@@ -101,7 +101,7 @@ import modals from '~/components/threed/components/modals'
 
 // ** CSS Styles Imports
 // import stylesDemo from '~/styles/demo/demo.module.css'
-import stylesGarden from '~/styles/threed/garden.module.css'
+import stylesGarden from '~/components/threed/styles/garden.module.css'
 
 // ** no no no, never again (deprecated)
 // import * as $ from 'jquery'

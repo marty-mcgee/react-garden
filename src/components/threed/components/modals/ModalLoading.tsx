@@ -23,7 +23,7 @@ import Image from 'next/future/image'
 import { modalLoadingStore } from '~/stores'
 
 // ** CSS Styles Imports
-import stylesGarden from '~/styles/threed/garden.module.css'
+import stylesGarden from '~/components/threed/styles/garden.module.css'
 
 // ==========================================================
 // STYLES
