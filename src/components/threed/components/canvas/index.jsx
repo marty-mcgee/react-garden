@@ -80,10 +80,11 @@ export default function VCanvas({ models, children }) {
   }
   return (
     <Canvas
-      camera={{ position: [-20, 10, 100], fov: 60 }}
+      camera={{ position: [-10, 10, 100], fov: 50 }}
       dpr={[1, 2]}
       style={{
-        height: 480,
+        height: '480px',
+        width: '100%',
       }}
     >
       <axesHelper args={[100]} />
@@ -101,9 +102,12 @@ export default function VCanvas({ models, children }) {
       <Suspense fallback={null}>
         <group position={[0, 10, 0]}>
           <Model
-            name='Roundcube001'
-            position={[0, 0, 0]}
-            rotation={[1.570796, 0, 0]} // 1.570796 radians = 90 degrees
+            name='Rocket003'
+            position={[0, -10, 0]}
+            // 1.570796 radians = 90 degrees
+            rotation={[1.570796, 0, 0]}
+            // rotation={[0, 0, 0]}
+            // scale={0.01}
           />
         </group>
         {/* <group position={[0, 10, 0]}>
