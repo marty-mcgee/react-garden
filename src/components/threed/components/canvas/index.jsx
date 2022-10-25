@@ -72,11 +72,19 @@ function Controls() {
   )
 }
 
-export default function VCanvas({ children }) {
+export default function VCanvas({ models, children }) {
+  // inject models inside Suspense groups
+  console.debug('models', models)
+  if (models?.length) {
+    console.debug('models.length', models.length)
+  }
   return (
     <Canvas
-      camera={{ position: [0, -10, 80], fov: 50 }}
+      camera={{ position: [-20, 10, 100], fov: 60 }}
       dpr={[1, 2]}
+      style={{
+        height: 480,
+      }}
     >
       <axesHelper args={[100]} />
       <gridHelper args={[100, 10]} />
