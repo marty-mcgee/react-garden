@@ -41,7 +41,7 @@ const ParticipatePage = () => {
           </CardContent>
         </Card>
       </Grid>
-      {ability?.can('read', 'analytics') ? (
+      {ability?.can('read', 'analytics') && (
         <Grid item md={6} xs={12}>
           <Card>
             <CardHeader title='Restricted Content' />
@@ -51,7 +51,7 @@ const ParticipatePage = () => {
             </CardContent>
           </Card>
         </Grid>
-      ) : null}
+      )}
     </Grid>
   )
 }

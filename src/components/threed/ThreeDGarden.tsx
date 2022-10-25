@@ -27,7 +27,7 @@ import stores from '~/stores'
 
 // ** Next Imports
 import Image from 'next/future/image'
-import dynamic from 'next/dynamic'
+// import dynamic from 'next/dynamic'
 
 // ** MUI Imports
 import { styled, useTheme } from '@mui/material/styles'
@@ -77,26 +77,13 @@ import ToolIconAddText from '@mui/icons-material/TextFields'
 // import { TWEEN } from 'three/examples/jsm/libs/tween.module.min'
 // import TWEEN from '@tweenjs/tween.js'
 
-// ** Metadata Component
-import Header from '~/@core/components/head'
-// ** Wrapper Component
-import Dom from '~/@core/components/dom'
-
 // ** ThreeD R3F Imports // use dynamic() ??
-import { Canvas, useFrame } from '@react-three/fiber'
-// import { OrbitControls, Preload } from '@react-three/drei'
-import LCanvas from '~/components/threed/components/canvas'
-// import AppPage from '~/components/threed/pages/_app-page'
-// import BoxPage from '~/components/threed/pages/box-page'
-import BoxComponent from '~/components/threed/components/canvas/Box'
-// import ShaderPage from '~/components/threed/pages/shader-page'
-import ShaderComponent from '~/components/threed/components/canvas/Shader'
+// import { Canvas } from '@react-three/fiber'
+import VCanvas from '~/components/threed/components/canvas'
+// import BoxComponent from '~/components/threed/components/canvas/Box'
+// import ShaderComponent from '~/components/threed/components/canvas/Shader'
 
 // ** Modal Imports
-// import ModalAbout from '~/components/threed/components/modals/ModalAbout'
-// import ModalModel3d from '~/components/threed/components/modals/ModalModel3d'
-// import ModalLoading from '~/components/threed/components/modals/ModalLoading'
-// import ModalShare from '~/components/threed/components/modals/ModalShare'
 import modals from '~/components/threed/components/modals'
 
 // ** CSS Styles Imports
@@ -2936,14 +2923,14 @@ const TheBottom: FunctionComponent = (): JSX.Element => {
 
   return (
     <Box>
-      <Canvas
+      <canvas
         id="rulerLeft"
         width="30"
         height="500"
         onMouseDown="addVerticalGuide();"
         onMouseUp="removeVerticalGuide()"
       />
-      <Canvas
+      <canvas
         id="rulerBottom"
         width="1024"
         height="20"
@@ -3037,12 +3024,6 @@ const ReactThreeFiberView: FunctionComponent = (): JSX.Element => {
   const noun_z = 0
   console.debug('%cReactThreeFiberView {noun}', ccm1, noun)
 
-
-  // const r3fBox = dynamic(() => import('~/components/threed/components/canvas/Box'), {
-  //   ssr: false,
-  // })
-
-
   const loadNoun = (noun_type, noun_id) => {
     // load this noun into r3f canvas
     store.actions.loadToWorkspace(noun, noun_type, noun_id, 'r3fCanvas')
@@ -3066,42 +3047,12 @@ const ReactThreeFiberView: FunctionComponent = (): JSX.Element => {
         <Button onClick={() => loadNoun('character')}>load character</Button>
         <Button onClick={() => loadNoun('farmbot')}>load farmbot</Button>
         <Typography>{noun._type} title: {noun_title}</Typography>
-        <Dom>
-          <Box sx={{ border: '1px solid darkgreen' }}>
-              <LCanvas className='r3fCanvas'>
-                {/* Lights */}
-                {/* <ambientLight intensity={10} /> */}
-                {/* <directionalLight position={[10, 0, 10]} color='#FFFFFF' /> */}
-                {/* Subjects */}
-                {/* <mesh> */}
-                {/* <boxBufferGeometry args={[noun_x, noun_y, noun_z]} /> */}
-                {/* <meshBasicMaterial /> */}
-                {/* </mesh> */}
-                <axesHelper args={[100]} />
-                <gridHelper args={[100, 10]} />
-                <BoxComponent
-                  name='threed-garden-box-1'
-                  args={
-                    [noun_x, noun_y, noun_z]
-                  }
-                  route='/participate/gql-testing'
-                />
-              </LCanvas>
-          </Box>
-          <Box sx={{ border: '1px solid darkgreen' }}>
-              <LCanvas className='r3fCanvas'>
-                <axesHelper args={[100]} />
-                <gridHelper args={[100, 10]} />
-                <ShaderComponent
-                  name='threed-garden-shader-1'
-                  args={
-                    [noun_x, noun_y, noun_z]
-                  }
-                  route='/apps/calendar'
-                />
-              </LCanvas>
-          </Box>
-        </Dom>
+        <Box sx={{ border: '1px solid darkgreen' }}>
+          <VCanvas />
+        </Box>
+        <Box sx={{ border: '1px solid darkgreen' }}>
+          <VCanvas />
+        </Box>
     </Container>
   )
 }

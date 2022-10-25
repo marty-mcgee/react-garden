@@ -1,15 +1,9 @@
 // ** Next Imports
-import { Router, useRouter } from 'next/router'
-
-// ** React Imports
-import { useEffect } from 'react'
+import { Router } from 'next/router'
 
 // ** Redux Store Imports
 import { Provider as ReduxProvider } from 'react-redux'
 import { store as reduxStore } from '~/store' // redux
-
-// ** Zustand Store Imports
-import { setState } from '~/components/threed/stores/store' // zustand
 
 // ** Loader Import
 import NProgress from 'nprogress'
@@ -42,7 +36,6 @@ import WindowWrapper from '~/@core/components/window-wrapper'
 // ** Layout + Metadata Components
 import UserLayout from '~/layouts/UserLayout'
 import Header from '~/@core/components/head'
-// import Dom from '~/@core/components/dom'
 import Spinner from '~/@core/components/spinner'
 
 // ** Contexts
@@ -105,14 +98,6 @@ const App = (props: any) => {
   const authGuard = Component.authGuard ?? true
   const guestGuard = Component.guestGuard ?? false
   const aclAbilities = Component.acl ?? defaultACLObj
-
-  // [MM] testing if useful
-  // Q: why would I want/need to set router to state?
-  // Q: isn't that the whole point of useRouter? yes.
-  // const router = useRouter()
-  // useEffect(() => {
-  //   setState({ router })
-  // }, [router])
 
   return (
     <ApolloProvider client={client}>
