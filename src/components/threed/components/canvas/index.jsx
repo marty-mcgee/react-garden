@@ -56,22 +56,49 @@ function Controls() {
   return (
     <>
       {/* As of drei@7.13 transform-controls can refer to the target by children, or the object prop */}
-      {snap.current && <TransformControls object={scene.getObjectByName(snap.current)} mode={modes[snap.mode]} />}
+      {snap.current && (
+        <TransformControls
+          object={scene.getObjectByName(snap.current)}
+          mode={modes[snap.mode]}
+        />
+      )}
       {/* makeDefault makes the controls known to r3f, now transform-controls can auto-disable them when active */}
-      <OrbitControls makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 1.75} />
+      <OrbitControls
+        makeDefault
+        minPolarAngle={0}
+        maxPolarAngle={Math.PI / 1.75}
+      />
     </>
   )
 }
 
 export default function VCanvas({ children }) {
   return (
-    <Canvas camera={{ position: [0, -10, 80], fov: 50 }} dpr={[1, 2]}>
+    <Canvas
+      camera={{ position: [0, -10, 80], fov: 50 }}
+      dpr={[1, 2]}
+    >
       <axesHelper args={[100]} />
       <gridHelper args={[100, 10]} />
-      <pointLight position={[100, 100, 100]} intensity={0.8} />
-      <hemisphereLight color='#ffffff' groundColor='#b9b9b9' position={[-7, 25, 13]} intensity={0.85} />
+      <pointLight
+        position={[100, 100, 100]}
+        intensity={0.8}
+      />
+      <hemisphereLight
+        color='#ffffff'
+        groundColor='#b9b9b9'
+        position={[-7, 25, 13]}
+        intensity={0.85}
+      />
       <Suspense fallback={null}>
         <group position={[0, 10, 0]}>
+          <Model
+            name='Roundcube001'
+            position={[0, 0, 0]}
+            rotation={[1.570796, 0, 0]} // 1.570796 radians = 90 degrees
+          />
+        </group>
+        {/* <group position={[0, 10, 0]}>
           <Model name='Curly' position={[1, -11, -20]} rotation={[2, 0, -0]} />
           <Model name='DNA' position={[20, 0, -17]} rotation={[1, 1, -2]} />
           <Model name='Headphones' position={[20, 2, 4]} rotation={[1, 0, -1]} />
@@ -90,7 +117,7 @@ export default function VCanvas({ children }) {
             blur={1}
             far={50}
           />
-        </group>
+        </group> */}
       </Suspense>
       <Controls />
       {/* <Preload all /> */}

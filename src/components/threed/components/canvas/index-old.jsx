@@ -27,7 +27,12 @@ const LControl = () => {
     }
   }, [dom, control])
 
-  return <OrbitControls ref={control} domElement={dom.current} />
+  return (
+    <OrbitControls
+      ref={control}
+      domElement={dom.current}
+    />
+  )
 }
 
 // ** Canvas "Layout"

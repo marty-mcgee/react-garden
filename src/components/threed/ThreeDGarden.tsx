@@ -3017,7 +3017,7 @@ const ReactThreeFiberView: FunctionComponent = (): JSX.Element => {
 
   // console.debug(`%c====================================`, ccm5)
   return (
-    <Grid container spacing={0} sx={{ border: '1px solid orange' }}>
+    <Grid container spacing={0} sx={{ border: '0px solid orange' }}>
       <Box>
         <Button onClick={() => loadNoun('world')}>load world</Button>
         <Button onClick={() => loadNoun('scene')}>load scene</Button>

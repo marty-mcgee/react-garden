@@ -56,7 +56,10 @@ const Shader = (props) => {
         scale={shaderHovered ? 1.1 : 1}
       >
         <boxGeometry args={[3, 3, 3]} />
-        <colorShiftMaterial key={ColorShiftMaterial.key} time={3} />
+        <colorShiftMaterial
+          key={ColorShiftMaterial.key}
+          time={3}
+        />
       </mesh>
       <directionalLight position={[5, 5, 5]} />
       <ambientLight />
