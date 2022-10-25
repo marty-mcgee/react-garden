@@ -30,18 +30,18 @@ const Shader = (props) => {
   const router = useRouter()
 
   // This reference will give us direct access to the THREE.Mesh object
-  const shaderMeshRef = useRef(null)
+  const meshRef = useRef(null)
 
   // Set up state for the shaderHovered and active state
   const [shaderHovered, setShaderHovered] = useState(false)
 
   // Subscribe this component to the render-loop, rotate the mesh every frame
   useFrame((state, delta) => {
-    if (shaderMeshRef.current) {
-      shaderMeshRef.current.rotation.x = shaderMeshRef.current.rotation.y -= 0.01
+    if (meshRef.current) {
+      meshRef.current.rotation.x = meshRef.current.rotation.y -= 0.01
     }
-    if (shaderMeshRef.current.material) {
-      shaderMeshRef.current.material.uniforms.time.value += Math.sin(delta / 2) * Math.cos(delta / 2)
+    if (meshRef.current.material) {
+      meshRef.current.material.uniforms.time.value += Math.sin(delta / 2) * Math.cos(delta / 2)
     }
   })
 
@@ -49,7 +49,7 @@ const Shader = (props) => {
   return (
     <>
       <mesh
-        ref={shaderMeshRef}
+        ref={meshRef}
         onClick={() => router.push(route)}
         onPointerOver={(e) => setShaderHovered(true)}
         onPointerOut={(e) => setShaderHovered(false)}

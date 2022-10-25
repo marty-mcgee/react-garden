@@ -10,21 +10,21 @@ const BoxComponent = (props) => {
   const router = useRouter()
 
   // This reference will give us direct access to the THREE.Mesh object
-  const boxMeshRef = useRef(null)
+  const meshRef = useRef(null)
 
   // Set up state for the boxHovered and active state
   const [boxHovered, setBoxHovered] = useState(false)
 
   // Subscribe this component to the render-loop, rotate the mesh every frame
   useFrame((state, delta) => {
-    boxMeshRef.current ? (boxMeshRef.current.rotation.y = boxMeshRef.current.rotation.x += 0.01) : null
+    meshRef.current ? (meshRef.current.rotation.y = meshRef.current.rotation.x += 0.01) : null
   })
 
   // Return the view, these are regular Threejs elements expressed in JSX
   return (
     <>
       <mesh
-        ref={boxMeshRef}
+        ref={meshRef}
         onClick={() => router.push(route)}
         onPointerOver={() => setBoxHovered(true)}
         onPointerOut={() => setBoxHovered(false)}

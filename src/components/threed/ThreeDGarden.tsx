@@ -3035,25 +3035,35 @@ const ReactThreeFiberView: FunctionComponent = (): JSX.Element => {
     console.debug(`%c====================================`, ccm5)
     return () => {
       // console.debug('ReactThreeFiberView onUnmount')
-      console.debug(`%c====================================`, ccm4)
+      console.debug(`%c====================================`, ccm5)
     }
   }, [])
 
   // console.debug(`%c====================================`, ccm5)
   return (
-    <Container id="r3fCanvasContainer">
+    <Grid container spacing={0} sx={{ border: '1px solid orange' }}>
+      <Box>
         <Button onClick={() => loadNoun('world')}>load world</Button>
         <Button onClick={() => loadNoun('scene')}>load scene</Button>
         <Button onClick={() => loadNoun('character')}>load character</Button>
         <Button onClick={() => loadNoun('farmbot')}>load farmbot</Button>
         <Typography>{noun._type} title: {noun_title}</Typography>
-        <Box sx={{ border: '1px solid darkgreen' }}>
+      </Box>
+      <Grid container spacing={0}>
+        <Grid item md={12} xs={12} sx={{ border: '1px solid darkgreen' }}>
           <VCanvas />
-        </Box>
-        <Box sx={{ border: '1px solid darkgreen' }}>
+        </Grid>
+        {/* <Grid item md={6} xs={12} sx={{ border: '1px solid darkgreen' }}>
           <VCanvas />
-        </Box>
-    </Container>
+        </Grid> */}
+        {/* <Grid item md={6} xs={12} sx={{ border: '1px solid darkgreen' }}>
+          <VCanvas />
+        </Grid> */}
+        {/* <Grid item md={6} xs={12} sx={{ border: '1px solid darkgreen' }}>
+          <VCanvas />
+        </Grid> */}
+      </Grid>
+    </Grid>
   )
 }
 

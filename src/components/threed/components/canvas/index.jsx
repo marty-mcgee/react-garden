@@ -1,7 +1,7 @@
+import { proxy, useSnapshot } from 'valtio'
 import { Suspense, useState } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
-import { OrbitControls, TransformControls, ContactShadows, useGLTF, useCursor } from '@react-three/drei'
-import { proxy, useSnapshot } from 'valtio'
+import { OrbitControls, TransformControls, ContactShadows, useGLTF, useCursor, Preload } from '@react-three/drei'
 
 // import AppPage from '~/components/threed/pages/_app-page'
 // import BoxPage from '~/components/threed/pages/box-page'
@@ -16,12 +16,15 @@ const state = proxy({ current: null, mode: 0 })
 function Model({ name, ...props }) {
   // Ties this component to the state model
   const snap = useSnapshot(state)
+
   // Fetching the GLTF, nodes is a collection of all the meshes
   // It's cached/memoized, it only gets loaded and parsed once
   const { nodes } = useGLTF('/objects/compressed.glb')
+
   // Feed hover state into useCursor, which sets document.body.style.cursor to pointer|auto
   const [hovered, setHovered] = useState(false)
   useCursor(hovered)
+
   return (
     <mesh
       // Click sets the mesh as the new target
@@ -49,6 +52,7 @@ function Controls() {
   // Get notified on changes to state
   const snap = useSnapshot(state)
   const scene = useThree((state) => state.scene)
+
   return (
     <>
       {/* As of drei@7.13 transform-controls can refer to the target by children, or the object prop */}
@@ -89,6 +93,7 @@ export default function VCanvas({ children }) {
         </group>
       </Suspense>
       <Controls />
+      {/* <Preload all /> */}
       {children}
     </Canvas>
   )
