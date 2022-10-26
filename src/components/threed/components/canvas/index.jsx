@@ -20,6 +20,7 @@ function Model({ name, ...props }) {
   // Fetching the GLTF, nodes is a collection of all the meshes
   // It's cached/memoized, it only gets loaded and parsed once
   const { nodes } = useGLTF('/objects/compressed.glb')
+  console.debug('gltf nodes', nodes)
 
   // Feed hover state into useCursor, which sets document.body.style.cursor to pointer|auto
   const [hovered, setHovered] = useState(false)
@@ -74,10 +75,13 @@ function Controls() {
 
 export default function VCanvas({ models, children }) {
   // inject models inside Suspense groups
-  console.debug('models', models)
-  if (models?.length) {
-    console.debug('models.length', models.length)
+  if (models) {
+    console.debug('models', models)
+    if (models.length) {
+      console.debug('models.length', models.length)
+    }
   }
+
   return (
     <Canvas
       camera={{ position: [-10, 10, 100], fov: 50 }}
