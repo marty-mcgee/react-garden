@@ -64,17 +64,21 @@ import ToolIconAddRoof from '@mui/icons-material/Roofing'
 import ToolIconAddRuler from '@mui/icons-material/Straighten'
 import ToolIconAddText from '@mui/icons-material/TextFields'
 
-// ** Paper Imports (deprecated)
+// ** Paper Imports (DEPRECATED)
 // import paper from 'paper'
 
-// ** Three JS Imports
+// ** Three JS Imports (not here, use R3F)
 // import * as THREE from 'three'
 // import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js'
+// (-- use React Three Fiber R3F hooks: useFBX, useOBJ, etc --)
 // import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 // import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 // import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
+// (-- use React Three Fiber R3F hooks: useSky, useTWEEN, TWEEN, etc --)
 // import { Sky } from 'three/examples/jsm/objects/Sky.js'
+// use tween (DEPRECATED) ??
 // import { TWEEN } from 'three/examples/jsm/libs/tween.module.min'
+// use tween at all ??
 // import TWEEN from '@tweenjs/tween.js'
 
 // ** ThreeD R3F Imports // use dynamic() ??
@@ -90,7 +94,7 @@ import modals from '~/components/threed/components/modals'
 // import stylesDemo from '~/styles/demo/demo.module.css'
 import stylesGarden from '~/components/threed/styles/garden.module.css'
 
-// ** no no no, never again (deprecated)
+// ** no no no, never again (DEPRECATED)
 // import * as $ from 'jquery'
 
 // ** UUID
