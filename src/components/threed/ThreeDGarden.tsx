@@ -64,22 +64,22 @@ import ToolIconAddRoof from '@mui/icons-material/Roofing'
 import ToolIconAddRuler from '@mui/icons-material/Straighten'
 import ToolIconAddText from '@mui/icons-material/TextFields'
 
-// ** Paper Imports (DEPRECATED)
-// import paper from 'paper'
-
 // ** Three JS Imports (not here, use R3F)
 // import * as THREE from 'three'
-// import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js'
+// ** Three JS Controls
+import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js'
+// ** Three JS Loaders
 // (-- use React Three Fiber R3F hooks: useFBX, useOBJ, etc --)
 // import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 // import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 // import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
-// (-- use React Three Fiber R3F hooks: useSky, useTWEEN, TWEEN, etc --)
-// import { Sky } from 'three/examples/jsm/objects/Sky.js'
+// ** Three JS Objects
+import { Sky } from 'three/examples/jsm/objects/Sky.js'
+// ** Three JS Libraries
 // use tween (DEPRECATED) ??
 // import { TWEEN } from 'three/examples/jsm/libs/tween.module.min'
 // use tween at all ??
-// import TWEEN from '@tweenjs/tween.js'
+import TWEEN from '@tweenjs/tween.js'
 
 // ** ThreeD R3F Imports
 // import { Canvas } from '@react-three/fiber'
@@ -94,16 +94,19 @@ import modals from '~/components/threed/components/modals'
 // import stylesDemo from '~/styles/demo/demo.module.css'
 import stylesGarden from '~/components/threed/styles/garden.module.css'
 
-// ** no no no, never again (DEPRECATED)
+// ** Paper Imports (DEPRECATED -- requires jQuery)
+// import paper from 'paper'
+
+// ** jQuery Imports (DEPRECATED -- no no no, never again)
 // import * as $ from 'jquery'
 
-// ** UUID
+// ** UUID (DEPRECATED -- use THREE math util UUID generator)
 // import { v4 as newUUID } from 'uuid'
 
-// ** DELETE OBJECT KEYS: RESET OBJECT TO {}
+// ** HELPFUL UTIL: DELETE OBJECT KEYS: RESET OBJECT TO {}
 import clearObject from '~/@core/utils/clear-object'
 
-// ** COLORFUL CONSOLE MESSAGES (ccm)
+// ** HELPFUL UTIL: COLORFUL CONSOLE MESSAGES (ccm)
 import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5, ccm6 } from '~/@core/utils/console-colors'
 // console.debug('%cSUCCESS!!', ccm1)
 // console.debug('%cWHOOPSIES', ccm2)
