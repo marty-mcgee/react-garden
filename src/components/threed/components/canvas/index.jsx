@@ -13,40 +13,94 @@ import ShaderComponent from '~/components/threed/components/canvas/Shader'
 const modes = ['translate', 'rotate', 'scale']
 const state = proxy({ current: null, mode: 0 })
 
-function Model({ name, ...props }) {
+// set a default file to load for Model
+const fileDefault = '/objects/compressed.glb'
+
+// ** ThreeD Model -||-
+function Model({ name, file, ...props }) {
+  //
   // Ties this component to the state model
   const snap = useSnapshot(state)
 
-  // Fetching the GLTF, nodes is a collection of all the meshes
-  // It's cached/memoized, it only gets loaded and parsed once
-  const { nodes } = useGLTF('/objects/compressed.glb')
-  console.debug('gltf nodes', nodes)
+  // this model
+  const model = {
+    name: name,
+    file: file,
+    // file type
+    isGLTF: false,
+    isFBX: false,
+    isOBJ: false,
+    isPNG: false,
+    // file nodes
+    nodes: {},
+    isReady: false,
+  }
+
+  // fetch the file (GLTF, FBX, OBJ, etc)
+  // nodes[] is an array of all the meshes
+  // file is cached/memoized; it only gets loaded and parsed once
+  // const file = '/objects/compressed-v002.glb'
+  if (model.isGLTF) {
+    const thisFile = model.file ? model.file : fileDefault
+    const { nodes } = useGLTF(thisFile)
+    if (nodes.length) {
+      model.nodes = nodes
+      model.isReady = true
+    }
+    console.debug('nodes: gltf', nodes)
+  }
 
   // Feed hover state into useCursor, which sets document.body.style.cursor to pointer|auto
   const [hovered, setHovered] = useState(false)
   useCursor(hovered)
 
-  return (
-    <mesh
-      // Click sets the mesh as the new target
-      onClick={(e) => (e.stopPropagation(), (state.current = name))}
-      // If a click happened but this mesh wasn't hit we null out the target,
-      // This works because missed pointers fire before the actual hits
-      onPointerMissed={(e) => e.type === 'click' && (state.current = null)}
-      // Right click cycles through the transform modes
-      onContextMenu={(e) =>
-        snap.current === name && (e.stopPropagation(), (state.mode = (snap.mode + 1) % modes.length))
-      }
-      onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
-      onPointerOut={(e) => setHovered(false)}
-      name={name}
-      geometry={nodes[name].geometry}
-      material={nodes[name].material}
-      material-color={snap.current === name ? '#ff6080' : '#FFFFFF'}
-      {...props}
-      dispose={null}
-    />
-  )
+  if (model.isReady && model.isGLTF) {
+    return (
+      <mesh
+        // Click sets the mesh as the new target
+        onClick={(e) => (e.stopPropagation(), (state.current = name))}
+        // If a click happened but this mesh wasn't hit we null out the target,
+        // This works because missed pointers fire before the actual hits
+        onPointerMissed={(e) => e.type === 'click' && (state.current = null)}
+        // Right click cycles through the transform modes
+        onContextMenu={(e) =>
+          snap.current === name && (e.stopPropagation(), (state.mode = (snap.mode + 1) % modes.length))
+        }
+        onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
+        onPointerOut={(e) => setHovered(false)}
+        name={model.name}
+        geometry={model.nodes[model.name].geometry}
+        material={model.nodes[model.name].material}
+        material-color={snap.current === name ? '#ff7070' : '#FFFFFF'}
+        {...props}
+        dispose={null}
+      />
+    )
+  }
+  // default return 'error sphere' mesh object, but with original model.name and props
+  else {
+    return (
+      <mesh
+        // Click sets the mesh as the new target
+        onClick={(e) => (e.stopPropagation(), (state.current = name))}
+        // If a click happened but this mesh wasn't hit we null out the target,
+        // This works because missed pointers fire before the actual hits
+        onPointerMissed={(e) => e.type === 'click' && (state.current = null)}
+        // Right click cycles through the transform modes
+        onContextMenu={(e) =>
+          snap.current === name && (e.stopPropagation(), (state.mode = (snap.mode + 1) % modes.length))
+        }
+        onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
+        onPointerOut={(e) => setHovered(false)}
+        name={model.name}
+        {...props}
+        dispose={null}
+      >
+        <sphereGeometry args={[4, 96]} />
+        <meshPhysicalMaterial color={model.isGLTF === true ? 'red' : 'darkred'} />
+      </mesh>
+    )
+  }
 }
 
 function Controls() {
@@ -106,6 +160,7 @@ export default function VCanvas({ models, children }) {
       <Suspense fallback={null}>
         <group position={[0, 10, 0]}>
           <Model
+            file='/objects/compressed-v002.glb'
             name='Rocket003'
             position={[0, -10, 0]}
             // 1.570796 radians = 90 degrees
