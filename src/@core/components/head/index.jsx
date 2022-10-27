@@ -2,7 +2,7 @@ import Head from 'next/head'
 // import meta from './meta.json'
 
 const meta = {
-  title: 'ThreeDGarden.com on ThreeD.AI',
+  title: 'ThreeD Garden on threed.ai',
   url: 'https://threedgarden.com',
   favicon: 'https://threedgarden.com/favicon/favicon.png',
   author: 'Marty McGee <mcgee.marty@gmail.com> (https://github.com/marty-mcgee)',
