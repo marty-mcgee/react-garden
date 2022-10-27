@@ -81,7 +81,7 @@ import ToolIconAddText from '@mui/icons-material/TextFields'
 // use tween at all ??
 // import TWEEN from '@tweenjs/tween.js'
 
-// ** ThreeD R3F Imports // use dynamic() ??
+// ** ThreeD R3F Imports
 // import { Canvas } from '@react-three/fiber'
 import VCanvas from '~/components/threed/components/canvas'
 // import BoxComponent from '~/components/threed/components/canvas/Box'
