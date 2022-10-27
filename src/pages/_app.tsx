@@ -51,6 +51,7 @@ import { createEmotionCache } from '~/@core/utils/create-emotion-cache'
 // ** CSS Styles
 // import stylesGlobal from '~/styles/globals.module.css'
 // import stylesDemo from '~/styles/demo/demo.module.css'
+import '~/components/threed/styles/index.css'
 
 // ============================================================
 // WORKAROUND -- for ToastPosition bug

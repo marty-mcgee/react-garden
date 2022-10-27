@@ -26,11 +26,11 @@ bot
 
 console.debug("bot", bot)
 
-const FarmBot = (): JSX.Element => {
+const FarmbotComponent = (): JSX.Element => {
   const word = "HEY HEY HEY"
   return (
-    <div>FarmBot: {word}</div>
+    <div>Farmbot: {word}</div>
   )
 }
 
-export default FarmBot
+export default FarmbotComponent

@@ -1,10 +1,5 @@
 {
-  "liveServer.settings.host": "localhost",
-  "liveServer.settings.root": "/public/demo",
-  "liveServer.settings.multiRootWorkspaceName": "/public/demo",
-
   "git.enableSmartCommit": true,
-
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,
@@ -25,12 +20,11 @@
     "**/yarn-error.log": true,
     "packages\\eth-hooks/lib": true
   },
-
   "search.exclude": {
     "**/package-lock.json": true,
     "**/pnpm-lock.yaml": true,
     "**/yarn-error.log": true,
-    "**/yarn.lock": true,
+    "**/yarn.lock": true
   },
   "prettier.semi": false
 }

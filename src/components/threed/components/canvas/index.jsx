@@ -42,7 +42,7 @@ function Model({ name, ...props }) {
       name={name}
       geometry={nodes[name].geometry}
       material={nodes[name].material}
-      material-color={snap.current === name ? '#ff6080' : 'white'}
+      material-color={snap.current === name ? '#ff6080' : '#FFFFFF'}
       {...props}
       dispose={null}
     />

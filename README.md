@@ -19,7 +19,7 @@ React + TypeScript + ThreeJS app using Material UI v5 on NextJS v12, Apollo Clie
 
 ====
 
-## FUNCTIONAL NOUNS
+## FUNCTIONAL NOUNS 🌱 🤖 🍅
 
 - Noun | as root JS Object | interface INoun | wp_type threed_noun
 
@@ -30,12 +30,18 @@ React + TypeScript + ThreeJS app using Material UI v5 on NextJS v12, Apollo Clie
 - Project | as JS Object | interface IProject | wp_type threed_project
 - Workspace | as JS Object | interface IWorkspace | wp_type threed_workspace
 - Plan | as JS Object | interface IPlan | wp_type threed_plan
+
+---
+
 - Edit | Actions | Relationships | interface IEdit | wp_type threed_edit
 - View | as JS Object | Settings | interface IView | wp_type threed_view
 
 ---
 
 - Participant | as JS Object | interface IParticipant | wp_type threed_participant
+- Character | as JS Object | interface ICharacter | wp_type threed_character
+
+---
 
 - Simulation | as JS Object | interface ISimulation | wp_type threed_simulation
 - Game | extends Simulation | interface IGame | wp_type threed_game
@@ -44,10 +50,6 @@ React + TypeScript + ThreeJS app using Material UI v5 on NextJS v12, Apollo Clie
 ---
 
 - World | as JS Object | interface IWorld | wp_type threed_world
-- Character | as JS Object | interface ICharacter | wp_type threed_character
-- Bear | extends Character | interface IBear | wp_type threed_bear
-- Gardener | extends Character | interface IGardener | wp_type threed_gardener
-- Chicken | extends Character | interface IChicken | wp_type threed_chicken
 - Scene | extends THREE.Scene | interface IScene | wp_type threed_scene
 - Structure | extends THREE.Object3D | interface IStructure | wp_type threed_structure
 - Farm | extends THREE.Group | interface IFarm | wp_type threed_farm
@@ -62,6 +64,12 @@ React + TypeScript + ThreeJS app using Material UI v5 on NextJS v12, Apollo Clie
 - SoilPlan | Actions | Relationships | interface ISoilPlan | wp_type threed_soil_plan
 - PlantingPlan | Actions | Relationships | interface IPlantingPlan | wp_type threed_planting_plan
 - BuildingPlan | Actions | Relationships | interface IBuildingPlan | wp_type threed_building_plan
+
+---
+
+- Bear | extends Character | interface IBear | wp_type threed_bear
+- Chicken | extends Character | interface IChicken | wp_type threed_chicken
+- Gardener | extends Character | interface IGardener | wp_type threed_gardener
 
 ---
 

@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
 import FarmbotSVG from '~/assets/images/farmbot-demo.svg'
-import FarmbotDemoSVG from '~/components/farmbot/FarmbotSVG'
+import FarmbotDemoSVG from '~/components/farmbot/FarmbotDemoSVG'
 
 // import Demo from "~/components/threed/Demo"
 const DynamicCSRDemo = dynamic(() => import('~/components/threed/Demo'), {
