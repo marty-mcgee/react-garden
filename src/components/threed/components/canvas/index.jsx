@@ -1,13 +1,33 @@
+// ==============================================================
+// ** RESOURCES
+
 import { proxy, useSnapshot } from 'valtio'
 import { Suspense, useState } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
-import { OrbitControls, TransformControls, ContactShadows, useGLTF, useCursor, Preload } from '@react-three/drei'
+import {
+  OrbitControls,
+  TransformControls,
+  // Preload,
+  // ContactShadows,
+  useCursor,
+  useGLTF,
+  useFBX,
+  useOBJ,
+} from '@react-three/drei'
 
 // import AppPage from '~/components/threed/pages/_app-page'
 // import BoxPage from '~/components/threed/pages/box-page'
 import BoxComponent from '~/components/threed/components/canvas/Box'
 // import ShaderPage from '~/components/threed/pages/shader-page'
 import ShaderComponent from '~/components/threed/components/canvas/Shader'
+
+// ** COLORFUL CONSOLE MESSAGES (ccm)
+import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5, ccm6 } from '~/@core/utils/console-colors'
+// console.debug('%cSUCCESS!!', ccm1)
+// console.debug('%cWHOOPSIES', ccm2)
+
+// ==============================================================
+// ** VARIABLES
 
 // Reactive state model (using valtio)
 const modes = ['translate', 'rotate', 'scale']
@@ -22,89 +42,179 @@ function Model({ name, file, ...props }) {
   // Ties this component to the state model
   const snap = useSnapshot(state)
 
-  // this model
+  // this model = threed_threed.model -||-
   const model = {
     name: name,
-    file: file,
-    // file type
+    file: file ? file : fileDefault,
+    // file type?
     isGLTF: false,
     isFBX: false,
     isOBJ: false,
+    isIMAGE: false,
     isPNG: false,
+    isJPG: false,
     // file nodes
     nodes: {},
     isReady: false,
   }
+
+  // if (model.file CONTAINS '*.gl{b,tf}')
+  // const fileExt = model.file.split('.').pop()
+  // console.debug('fileExt', fileExt)
+  // const testExt = /\.(fbx|glb|gltf|obj|gif|jpe?g|tiff?|png|webp|bmp)$/i.test(model.file)
+  // console.debug('testExt', testExt)
+  model.isGLTF = /\.(glb|gltf)$/i.test(model.file)
+  model.isFBX = /\.(fbx)$/i.test(model.file)
+  model.isOBJ = /\.(obj|mtl)$/i.test(model.file)
+  model.isIMAGE = /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(model.file)
 
   // fetch the file (GLTF, FBX, OBJ, etc)
   // nodes[] is an array of all the meshes
   // file is cached/memoized; it only gets loaded and parsed once
   // const file = '/objects/compressed-v002.glb'
   if (model.isGLTF) {
-    const thisFile = model.file ? model.file : fileDefault
-    const { nodes } = useGLTF(thisFile)
+    const { nodes } = useGLTF(model.file)
     if (nodes.length) {
       model.nodes = nodes
       model.isReady = true
     }
-    console.debug('nodes: gltf', nodes)
+    console.debug('%cdraw nodes: gltf', ccm1, nodes)
+    console.debug(`%c====================================`, ccm5)
+  }
+  if (model.isFBX) {
+    const { nodes } = useFBX(model.file)
+    if (nodes.length) {
+      model.nodes = nodes
+      model.isReady = true
+    }
+    console.debug('%cdraw nodes: fbx', ccm2, nodes)
+    console.debug(`%c====================================`, ccm5)
+  }
+  if (model.isOBJ) {
+    const { nodes } = useOBJ(model.file)
+    if (nodes.length) {
+      model.nodes = nodes
+      model.isReady = true
+    }
+    console.debug('%cdraw nodes: obj', ccm3, nodes)
+    console.debug(`%c====================================`, ccm5)
   }
 
   // Feed hover state into useCursor, which sets document.body.style.cursor to pointer|auto
   const [hovered, setHovered] = useState(false)
   useCursor(hovered)
 
-  if (model.isReady && model.isGLTF) {
-    return (
-      <mesh
-        // Click sets the mesh as the new target
-        onClick={(e) => (e.stopPropagation(), (state.current = name))}
-        // If a click happened but this mesh wasn't hit we null out the target,
-        // This works because missed pointers fire before the actual hits
-        onPointerMissed={(e) => e.type === 'click' && (state.current = null)}
-        // Right click cycles through the transform modes
-        onContextMenu={(e) =>
-          snap.current === name && (e.stopPropagation(), (state.mode = (snap.mode + 1) % modes.length))
-        }
-        onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
-        onPointerOut={(e) => setHovered(false)}
-        name={model.name}
-        geometry={model.nodes[model.name].geometry}
-        material={model.nodes[model.name].material}
-        material-color={snap.current === name ? '#ff7070' : '#FFFFFF'}
-        {...props}
-        dispose={null}
+  // ==============================================================
+  // ** RETURN JSX
+
+  if (model.isReady) {
+    // return GLTF node
+    if (model.isGLTF) {
+      return (
+        <mesh
+          name={model.name}
+          // Click sets the mesh as the new target
+          onClick={(e) => (e.stopPropagation(), (state.current = name))}
+          // If a click happened but this mesh wasn't hit we null out the target,
+          // This works because missed pointers fire before the actual hits
+          onPointerMissed={(e) => e.type === 'click' && (state.current = null)}
+          // Right click cycles through the transform modes
+          onContextMenu={(e) =>
+            snap.current === name && (e.stopPropagation(), (state.mode = (snap.mode + 1) % modes.length))
+          }
+          onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
+          onPointerOut={(e) => setHovered(false)}
+          geometry={model.nodes[model.name].geometry}
+          material={model.nodes[model.name].material}
+          material-color={snap.current === name ? '#ff7070' : '#FFFFFF'}
+          {...props}
+          dispose={null}
+        />
+      )
+    }
+    // return FBX node
+    else if (model.isFBX) {
+      return (
+        <mesh
+          name={model.name}
+          // Click sets the mesh as the new target
+          onClick={(e) => (e.stopPropagation(), (state.current = name))}
+          // If a click happened but this mesh wasn't hit we null out the target,
+          // This works because missed pointers fire before the actual hits
+          onPointerMissed={(e) => e.type === 'click' && (state.current = null)}
+          // Right click cycles through the transform modes
+          onContextMenu={(e) =>
+            snap.current === name && (e.stopPropagation(), (state.mode = (snap.mode + 1) % modes.length))
+          }
+          onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
+          onPointerOut={(e) => setHovered(false)}
+          {...props}
+          dispose={null}
+        >
+          <boxGeometry args={[4, 4, 4, 96]} />
+          <meshPhysicalMaterial
+            color={model.isGLTF ? 'darkGreen' : model.isOBJ ? 'darkOrange' : model.isFBX ? 'darkBlue' : 'darkred'}
+          />
+        </mesh>
+      )
+    }
+    // return OBJ node
+    else if (model.isOBJ) {
+      return (
+        <mesh
+          name={model.name}
+          // Click sets the mesh as the new target
+          onClick={(e) => (e.stopPropagation(), (state.current = name))}
+          // If a click happened but this mesh wasn't hit we null out the target,
+          // This works because missed pointers fire before the actual hits
+          onPointerMissed={(e) => e.type === 'click' && (state.current = null)}
+          // Right click cycles through the transform modes
+          onContextMenu={(e) =>
+            snap.current === name && (e.stopPropagation(), (state.mode = (snap.mode + 1) % modes.length))
+          }
+          onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
+          onPointerOut={(e) => setHovered(false)}
+          {...props}
+          dispose={null}
+        >
+          <cylinderGeometry args={[4, 4, 4, 96]} />
+          <meshPhysicalMaterial
+            color={model.isGLTF ? 'darkGreen' : model.isOBJ ? 'darkOrange' : model.isFBX ? 'darkBlue' : 'darkred'}
+          />
+        </mesh>
+      )
+    }
+  }
+  // default return 'error sphere' mesh object, with original model.name and props
+  // else {
+  return (
+    <mesh
+      name={model.name}
+      // Click sets the mesh as the new target
+      onClick={(e) => (e.stopPropagation(), (state.current = name))}
+      // If a click happened but this mesh wasn't hit we null out the target,
+      // This works because missed pointers fire before the actual hits
+      onPointerMissed={(e) => e.type === 'click' && (state.current = null)}
+      // Right click cycles through the transform modes
+      onContextMenu={(e) =>
+        snap.current === name && (e.stopPropagation(), (state.mode = (snap.mode + 1) % modes.length))
+      }
+      onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
+      onPointerOut={(e) => setHovered(false)}
+      {...props}
+      dispose={null}
+    >
+      <sphereGeometry args={[4, 96]} />
+      <meshPhysicalMaterial
+        color={model.isGLTF ? 'darkGreen' : model.isOBJ ? 'darkOrange' : model.isFBX ? 'darkBlue' : 'darkred'}
       />
-    )
-  }
-  // default return 'error sphere' mesh object, but with original model.name and props
-  else {
-    return (
-      <mesh
-        // Click sets the mesh as the new target
-        onClick={(e) => (e.stopPropagation(), (state.current = name))}
-        // If a click happened but this mesh wasn't hit we null out the target,
-        // This works because missed pointers fire before the actual hits
-        onPointerMissed={(e) => e.type === 'click' && (state.current = null)}
-        // Right click cycles through the transform modes
-        onContextMenu={(e) =>
-          snap.current === name && (e.stopPropagation(), (state.mode = (snap.mode + 1) % modes.length))
-        }
-        onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
-        onPointerOut={(e) => setHovered(false)}
-        name={model.name}
-        {...props}
-        dispose={null}
-      >
-        <sphereGeometry args={[4, 96]} />
-        <meshPhysicalMaterial color={model.isGLTF === true ? 'red' : 'darkred'} />
-      </mesh>
-    )
-  }
+    </mesh>
+  )
+  // }
 }
 
 function Controls() {
-  // Get notified on changes to state
+  // Get 'snap' notified on changes to state + scene
   const snap = useSnapshot(state)
   const scene = useThree((state) => state.scene)
 
