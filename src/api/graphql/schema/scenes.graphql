@@ -4,8 +4,5 @@ type Scene {
 }
 
 type Query {
-  getScenes: [Scene]
-    @rest(
-      endpoint:"https://threed.design.local/pods/v1/scenes"
-    )
+  getScenes: [Scene] @rest(endpoint: "https://threed.design/pods/v1/scenes")
 }
