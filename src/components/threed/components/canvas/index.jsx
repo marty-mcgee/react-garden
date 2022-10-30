@@ -33,8 +33,9 @@ import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5, ccm6 } from '~/@core/utils/console-
 // ** VARIABLES
 
 // Reactive state model (using valtio)
-const modes = ['translate', 'rotate', 'scale']
 const state = proxy({ current: null, mode: 0 })
+
+const modes = ['translate', 'rotate', 'scale']
 
 // Controls
 function Controls() {

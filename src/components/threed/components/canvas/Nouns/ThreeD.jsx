@@ -22,6 +22,8 @@ import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5, ccm6 } from '~/@core/utils/console-
 // set a default file to load for Model
 const fileDefault = '/objects/compressed.glb'
 
+const modes = ['translate', 'rotate', 'scale']
+
 // ==============================================================
 // ** COMPONENTS
 
