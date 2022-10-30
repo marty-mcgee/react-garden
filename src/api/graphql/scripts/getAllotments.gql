@@ -71,7 +71,9 @@ query GetAllotments($first: Int, $last: Int, $after: String, $before: String) {
     }
   }
   # beds {
-  #   nodes
+  #   edges {
+  #     node
+  #   }
   # }
   # plants {
   #   nodes
