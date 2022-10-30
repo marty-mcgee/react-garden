@@ -69,21 +69,19 @@ import ToolIconAddText from '@mui/icons-material/TextFields'
 // ** Three JS Controls
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js'
 // ** Three JS Loaders
-// (-- use React Three Fiber R3F hooks: useFBX, useOBJ, etc --)
+// -- use React Three Fiber R3F hooks: useFBX, useOBJ, etc --
 // import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 // import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 // import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
 // ** Three JS Objects
 import { Sky } from 'three/examples/jsm/objects/Sky.js'
 // ** Three JS Libraries
-// use tween (DEPRECATED) ??
 // import { TWEEN } from 'three/examples/jsm/libs/tween.module.min'
-// use tween at all ??
-import TWEEN from '@tweenjs/tween.js'
+import TWEEN from '@tweenjs/tween.js' // use tween at all ??
 
 // ** ThreeD R3F Imports
 // import { Canvas } from '@react-three/fiber'
-import VCanvas from '~/components/threed/components/canvas'
+import ThreeDCanvas from '~/components/threed/components/canvas'
 // import BoxComponent from '~/components/threed/components/canvas/Box'
 // import ShaderComponent from '~/components/threed/components/canvas/Shader'
 
@@ -2986,30 +2984,22 @@ const ReactThreeFiberView: FunctionComponent = (): JSX.Element => {
   // component params
   const word = `[MM] @ ${new Date().toISOString()}`
 
-  const store = sceneStore
+  // IMPORTANT: WHICH STORE ??
+  // in this case: sceneStore SCENE! THE SCENE !! FOR R3F boogie !!
+  const store = sceneStore // <-- HEY HEY HEY [MM]
 
   console.debug('%cReactThreeFiberView {store}', ccm1, store)
   console.debug(`%c====================================`, ccm5)
   // return <Box sx={{ p: 5, textAlign: 'center' }}>r3f: testing... {word}</Box>
   // throw new Error(`r3f: testing... "${word}"`)
 
-  const store_id = store.store.get('_id')
-  const store_ts = store.store.get('_ts')
-  const store_type = store.store.get('_type')
-
   const noun = store.store.useStore('one')
-  const noun_id = noun._id
-  const noun_ts = noun._ts
-  const noun_type = noun._type
   const noun_title = noun.data?.title ? noun.data.title : 'NOTHING YET SIR'
-  const noun_x = 4 // HEY
-  const noun_y = 4 // HEY
-  const noun_z = 0 // HEY
   console.debug('%cReactThreeFiberView {noun}', ccm1, noun)
 
-  const loadNoun = (noun_type, noun_id) => {
+  const loadNoun = (noun) => {
     // load this noun into r3f canvas
-    store.actions.loadToWorkspace(noun, noun_type, noun_id, 'r3fCanvas')
+    store.actions.loadToWorkspace(noun, 'r3fCanvas')
     return <Box>true</Box> // true
   }
 
@@ -3024,29 +3014,45 @@ const ReactThreeFiberView: FunctionComponent = (): JSX.Element => {
 
   // console.debug(`%c====================================`, ccm5)
   return (
-    <Grid container spacing={0} sx={{ border: '0px solid orange' }}>
-      <Grid item md={5} xs={12}>
+    <Grid container id='ReactThreeFiberView'
+      spacing={0} sx={{ border: '0px solid orange' }}
+    >
+      <Grid item id='metadata'
+        md={5} xs={12}
+      >
         <Typography>{noun._type} title: {noun_title}</Typography>
       </Grid>
-      <Grid item md={7} xs={12}
-        style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '-8px' }}>
+      <Grid item id='actions[loadNoun()]'
+        md={7} xs={12}
+        style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '-8px' }}
+      >
         <Button onClick={() => loadNoun('world')}>load world</Button>
         <Button onClick={() => loadNoun('scene')}>load scene</Button>
         <Button onClick={() => loadNoun('character')}>load character</Button>
         <Button onClick={() => loadNoun('farmbot')}>load farmbot</Button>
       </Grid>
-      <Grid container spacing={0}>
-        <Grid item md={12} xs={12} sx={{ border: '1px solid darkgreen' }}>
-          <VCanvas />
+      <Grid container id='cameras[{camera}]'
+        spacing={0}
+      >
+        <Grid item id='camera[0]'
+          md={12} xs={12} sx={{ border: '1px solid darkgreen' }}
+        >
+          <ThreeDCanvas />
         </Grid>
-        {/* <Grid item md={6} xs={12} sx={{ border: '1px solid darkgreen' }}>
-          <VCanvas />
+        {/* <Grid item id='camera[1]'
+          md={6} xs={12} sx={{ border: '1px solid darkgreen' }}
+        >
+          <ThreeDCanvas />
         </Grid> */}
-        {/* <Grid item md={6} xs={12} sx={{ border: '1px solid darkgreen' }}>
-          <VCanvas />
+        {/* <Grid item id='camera[2]'
+          md={6} xs={12} sx={{ border: '1px solid darkgreen' }}
+        >
+          <ThreeDCanvas />
         </Grid> */}
-        {/* <Grid item md={6} xs={12} sx={{ border: '1px solid darkgreen' }}>
-          <VCanvas />
+        {/* <Grid item id='camera[3]'
+          md={6} xs={12} sx={{ border: '1px solid darkgreen' }}
+        >
+          <ThreeDCanvas />
         </Grid> */}
       </Grid>
     </Grid>
@@ -3207,6 +3213,7 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
           </MDTabPanel>
           <MDTabPanel value={tabInfoControl} index={10}>
             Testing Panel
+            0
             {/* <CharacterControlPanel /> */}
             {/* <CharacterInfoPanel /> */}
             {/* <hr /> */}
