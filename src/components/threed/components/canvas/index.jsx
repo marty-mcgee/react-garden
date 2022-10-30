@@ -26,8 +26,6 @@ import ThreeD from '~/components/threed/components/canvas/Nouns/ThreeD'
 
 // ** COLORFUL CONSOLE MESSAGES (ccm)
 import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5, ccm6 } from '~/@core/utils/console-colors'
-// console.debug('%cSUCCESS!!', ccm1)
-// console.debug('%cWHOOPSIES', ccm2)
 
 // ==============================================================
 // ** VARIABLES

@@ -3,8 +3,6 @@ import { makeVar, ReactiveVar, useReactiveVar } from '@apollo/client'
 
 // [MM] COLORFUL CONSOLE MESSAGES (ccm)
 import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5, ccm6 } from '~/@core/utils/console-colors'
-// console.debug('%cSUCCESS!!', ccm1)
-// console.debug('%cWHOOPSIES', ccm2)
 
 type State<T> = Record<string | symbol, T>
 type Store<T> = Record<string | symbol, ReactiveVar<T>>

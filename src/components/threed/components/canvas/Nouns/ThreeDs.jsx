@@ -1,4 +1,4 @@
-import ThreeD from '~/components/threed/components/canvas/Noun/threed'
+import ThreeD from '~/components/threed/components/canvas/Nouns/ThreeD'
 
 const ThreeDs = () => {
   // hey hey hey

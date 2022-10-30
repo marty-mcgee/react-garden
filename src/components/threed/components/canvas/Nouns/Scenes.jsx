@@ -1,4 +1,4 @@
-import Scene from '~/components/threed/components/canvas/Noun/scene'
+import Scene from '~/components/threed/components/canvas/Nouns/Scene'
 
 const Scenes = () => {
   // hey hey hey

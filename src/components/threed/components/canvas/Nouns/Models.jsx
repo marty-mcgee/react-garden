@@ -1,4 +1,4 @@
-import Model from '~/components/threed/components/canvas/Noun/model'
+import Model from '~/components/threed/components/canvas/Nouns/Model'
 
 const Models = ({ ...props }) => {
   // hey hey hey
