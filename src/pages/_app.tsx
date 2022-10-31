@@ -75,8 +75,7 @@ import '~/components/threed/styles/index.css'
 import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5, ccm6 } from '~/@core/utils/console-colors'
 
 // ==============================================================
-// IMPORTS COMPLETE !!!
-// console.debug(`%c====================================`, ccm5)
+// IMPORTS COMPLETE
 console.debug('%cThreeDGarden<FC,R3F>: {_app.tsx}', ccm4)
 console.debug(`%c====================================`, ccm5)
 
