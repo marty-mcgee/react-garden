@@ -1,5 +1,23 @@
+// ==============================================================
+// RESOURCES
+
 // ** Next Imports
-import { Router } from 'next/router'
+import { Router, useRouter, withRouter, NextRouter } from 'next/router'
+// ** Next Types
+import type { NextPage, NextComponentType } from "next"
+import type { AppProps } from "next/app"
+
+// ** React Imports
+import {
+  FunctionComponent,
+  ReactElement,
+  ReactNode,
+  // JSXElementConstructor,
+  // Key,
+  useState,
+  useEffect,
+  useMemo,
+} from "react"
 
 // ** Redux Store Imports
 import { Provider as ReduxProvider } from 'react-redux'
@@ -8,8 +26,8 @@ import { store as reduxStore } from '~/store' // redux
 // ** Loader Import
 import NProgress from 'nprogress'
 
-// ** Emotion Imports
-import { CacheProvider } from '@emotion/react'
+// ** Emotion Imports (CSS Caching, used by theme: mui)
+import { CacheProvider, EmotionCache } from '@emotion/react'
 
 // ** Config Imports
 import '~/configs/i18n'
@@ -53,18 +71,70 @@ import { createEmotionCache } from '~/@core/utils/create-emotion-cache'
 // import stylesDemo from '~/styles/demo/demo.module.css'
 import '~/components/threed/styles/index.css'
 
-// ============================================================
+// ==============================================================
+// IMPORTS COMPLETE !!!
+
+// ==============================================================
+// TYPES + INTERFACES (TYPESCRIPT)
+// NOTES: ^throws error if using .babelrc
+// "Syntax error: Unexpected reserved word 'interface'."
+
+interface WithRouterProps {
+  router: NextRouter
+}
+interface MyComponentProps extends WithRouterProps {
+  heyheyhey: string
+}
+
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode,
+  setConfig: any,
+  authGuard: boolean,
+  guestGuard: boolean,
+  acl: 'manage' | 'all' | 'acl-page' |'read' | 'create' | 'update' | 'delete' // any // aclAbilities
+}
+
+type AppPropsWithLayoutEmotion = AppProps & {
+  Component: NextPageWithLayout,
+  emotionCache?: EmotionCache,
+  router: NextRouter
+}
+// OR INTERFACE ??? no, because we are extending a TYPE, not an INTERFACE
+// interface IAppPropsWithLayoutEmotion extends AppProps {
+//   Component: NextPageWithLayout,
+//   emotionCache?: EmotionCache,
+//   router: NextRouter
+// }
+
+type MartyComponent = AppPropsWithLayoutEmotion & {
+  setConfig: any,
+  authGuard: boolean,
+  guestGuard: boolean,
+  acl: any // aclAbilities
+}
+// OR INTERFACE ??? no, because we are extending a TYPE, not an INTERFACE
+// interface MartyComponent extends NextComponentType {
+//   setConfig: any,
+//   authGuard: boolean,
+//   guestGuard: boolean,
+//   acl: any // aclAbilities
+// }
+
 // WORKAROUND -- for ToastPosition bug
 // from: node_modules\react-hot-toast\dist\core\types.d.ts
 // export declare
 type ToastPosition = 'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'
 
-// ============================================================
+// ==============================================================
+// ==============================================================
+
+// ==============================================================
 // ** Emotion Cache for client
 const clientSideEmotionCache = createEmotionCache()
 
-// ============================================================
-// ** Pace Loader
+// ==============================================================
+// ** Progress Loader "Pace"
+
 if (themeConfig.routingLoader) {
   Router.events.on('routeChangeStart', () => {
     NProgress.start()
@@ -77,7 +147,9 @@ if (themeConfig.routingLoader) {
   })
 }
 
-// ============================================================
+// ==============================================================
+// ** Security Guard
+
 const Guard = ({ children, authGuard, guestGuard }: any) => {
   if (guestGuard) {
     return <GuestGuard fallback={<Spinner />}>{children}</GuestGuard>
@@ -88,9 +160,16 @@ const Guard = ({ children, authGuard, guestGuard }: any) => {
   }
 }
 
-// ============================================================
+// ==============================================================
+// MAIN APP
+
+// ==============================================================
 // ** Construct App using Function Component (Functional Noun)
-const App = (props: any) => {
+
+// const App = (props: any) => {
+const App: FunctionComponent<AppPropsWithLayoutEmotion> = (props: AppPropsWithLayoutEmotion) => {
+  //
+  // destructure props for vars
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
 
   // Variables
