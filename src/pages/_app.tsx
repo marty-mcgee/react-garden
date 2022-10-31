@@ -71,8 +71,14 @@ import { createEmotionCache } from '~/@core/utils/create-emotion-cache'
 // import stylesDemo from '~/styles/demo/demo.module.css'
 import '~/components/threed/styles/index.css'
 
+// ** HELPFUL UTIL: COLORFUL CONSOLE MESSAGES (ccm)
+import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5, ccm6 } from '~/@core/utils/console-colors'
+
 // ==============================================================
 // IMPORTS COMPLETE !!!
+// console.debug(`%c====================================`, ccm5)
+console.debug('%cThreeDGarden<FC,R3F>: {_app.tsx}', ccm4)
+console.debug(`%c====================================`, ccm5)
 
 // ==============================================================
 // TYPES + INTERFACES (TYPESCRIPT)
