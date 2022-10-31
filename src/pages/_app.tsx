@@ -81,7 +81,7 @@ console.debug(`%c====================================`, ccm5)
 
 // ==============================================================
 // TYPES + INTERFACES (TYPESCRIPT)
-// NOTES: ^throws error if using .babelrc
+// note: interface throws error if using .babelrc
 // "Syntax error: Unexpected reserved word 'interface'."
 
 interface WithRouterProps {
