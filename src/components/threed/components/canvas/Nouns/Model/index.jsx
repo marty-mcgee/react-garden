@@ -30,8 +30,9 @@ function Model({ ...props }) {
   const model = {
     state: state, // for funzees
     name: name,
-    file: file ? file : fileDefault,
+    file: file ? file : '',
     // file type?
+    type: 'threed', // fbx | gltf | obj | threed
     // 3D
     isObject3D: false,
     isGLTF: false,
@@ -57,8 +58,9 @@ function Model({ ...props }) {
   }
 
   // ** decide file type from file extension (and other qualifiers)
-  // const fileExt = model.file.split('.').pop()
+  const fileExt = model.file.split('.').pop()
   // console.debug('fileExt', fileExt)
+  model.type = fileExt
   // const testExt = /\.(glb|gltf|fbx|obj|mtl|gif|jpe?g|tiff?|png|webp|bmp)$/i.test(model.file)
   // console.debug('testExt', testExt)
   model.isObject3D = /\.(glb|gltf|fbx|obj)$/i.test(model.file)
@@ -79,24 +81,48 @@ function Model({ ...props }) {
     console.debug('%cmodel.isSupported: true', ccm1)
     console.debug(`%c====================================`, ccm5)
     if (model.isObject3D) {
+      // FBX
+      if (model.isFBX) {
+        const nodes = useFBX(model.file)
+        console.debug('%cnodes: fbx', ccm4, nodes)
+        console.debug(`%c====================================`, ccm5)
+        if (nodes) {
+          model.nodes = nodes
+          model.isReady = true
+          // console.debug('RETURN ONLY NODE AS NODES: true')
+        }
+      }
+      // OBJ
+      else if (model.isOBJ) {
+        const nodes = useOBJ(model.file)
+        console.debug('%cnodes: obj', ccm4, nodes)
+        console.debug(`%c====================================`, ccm5)
+        if (nodes) {
+          model.nodes = nodes
+          model.isReady = true
+          // console.debug('RETURN ONLY NODE AS NODES: true')
+        }
+      }
       // GLTF
-      if (model.isGLTF) {
+      else if (model.isGLTF) {
         // nodes[] is an array of all the meshes
         // file is cached/memoized; it only gets loaded and parsed once
         // const file = '/objects/compressed-v002.glb'
         const { nodes } = useGLTF(model.file)
+        console.debug('%cnodes: gltf', ccm4, nodes)
+        console.debug(`%c====================================`, ccm5)
         if (nodes) {
           // FILTER (LOOP OVER) NODES {Object.keys}
           // to get the single node you are asking for
           if (model.doReturnAll) {
             model.nodes = nodes
-            console.debug('RETURN ALL NODES: true')
+            // console.debug('RETURN ALL NODES: true')
           }
           // OR RETURN ALL NODES, OR QUERY A LIST OF NODES you want...
           else {
             // for one node key requested...
             model.nodes[model.name] = nodes[model.name]
-            console.debug('RETURN ONE NODE: true', model.nodes[model.name])
+            // console.debug('RETURN ONE NODE: true', model.nodes[model.name])
 
             // OR...
             // console.debug('OR: ')
@@ -105,29 +131,8 @@ function Model({ ...props }) {
             // Object.keys(nodes).forEach((value, index, array) => {
             //   console.debug('RETURN EACH NODE by KEY: ', index, value)
             // })
-
-            model.isReady = true
           }
-        }
-      }
-      // FBX
-      else if (model.isFBX) {
-        const { nodes } = useFBX(model.file)
-        if (nodes) {
-          model.nodes = nodes
-          // model.isReady = true // not yet
-          console.debug('%cdraw([nodes]): fbx', ccm4, nodes)
-          console.debug(`%c====================================`, ccm5)
-        }
-      }
-      // OBJ
-      else if (model.isOBJ) {
-        const { nodes } = useOBJ(model.file)
-        if (nodes) {
-          model.nodes = nodes
-          // model.isReady = true // not yet
-          console.debug('%cdraw([nodes]): obj', ccm4, nodes)
-          console.debug(`%c====================================`, ccm5)
+          model.isReady = true
         }
       }
     }
@@ -149,6 +154,8 @@ function Model({ ...props }) {
   // ** RETURN JSX
 
   if (model.isReady) {
+    // console.debug(`%cdraw([nodes]): ${model.type}`, ccm4, model.nodes)
+    // console.debug(`%c====================================`, ccm5)
     // return GLTF node
     if (model.isGLTF) {
       const model_name = model.nodes[model.name].name

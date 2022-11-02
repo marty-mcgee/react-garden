@@ -2,18 +2,11 @@
 // ** RESOURCES
 
 import { proxy, useSnapshot } from 'valtio'
+
 import { Suspense, useState } from 'react'
+
 import { Canvas, useThree } from '@react-three/fiber'
-import {
-  OrbitControls,
-  TransformControls,
-  // Preload,
-  // ContactShadows,
-  useCursor,
-  useGLTF,
-  useFBX,
-  useOBJ,
-} from '@react-three/drei'
+import { OrbitControls, TransformControls, Preload } from '@react-three/drei'
 
 // import AppPage from '~/components/threed/pages/_app-page'
 // import BoxPage from '~/components/threed/pages/box-page'
@@ -33,6 +26,7 @@ import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5, ccm6 } from '~/@core/utils/console-
 // Reactive state model (using valtio)
 const state = proxy({ current: null, mode: 0 })
 
+// Model interactive "modes" using TransformControls
 const modes = ['translate', 'rotate', 'scale']
 
 // Controls
@@ -91,10 +85,16 @@ export default function VCanvas({ models, children }) {
         intensity={0.85}
       />
       <Suspense fallback={null}>
-        <ThreeD state={state} />
+        {/* [MM] HEY HEY HEY */}
+        <ThreeD
+          state={state}
+          threedId={1}
+          threed={{}}
+        />
+        {/* [MM] HEY HEY HEY */}
       </Suspense>
       <Controls />
-      {/* <Preload all /> */}
+      <Preload all />
       {children}
     </Canvas>
   )

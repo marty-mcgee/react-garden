@@ -23,7 +23,7 @@ import {
 // state management (instead of React.useState, Redux, Zustand)
 import { ApolloConsumer, useQuery, gql } from '@apollo/client'
 // import { TestAC3Store } from '~/stores/old'
-import stores from '~/stores'
+import stores from '~/stores/apollo'
 
 // ** Next Imports
 import Image from 'next/future/image'

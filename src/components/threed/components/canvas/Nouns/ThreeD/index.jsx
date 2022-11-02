@@ -17,10 +17,20 @@ import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5, ccm6 } from '~/@core/utils/console-
 // ==============================================================
 // ** VARIABLES
 
-// set a default file to load for Model
-const fileDefault = '/objects/compressed.glb'
+// Model interactive "modes" using TransformControls
+// const modes = ['translate', 'rotate', 'scale']
 
-const modes = ['translate', 'rotate', 'scale']
+// fbx | obj | gltf
+const fileTypeDefault = 'fbx'
+
+// set a default file to load for Model (for testing)
+// const fileUrlDefault = '/objects/compressed.glb' // '/objects/compressed-v002.glb'
+
+const fileUrlDefault =
+  'https://threedpublic.s3.us-west-2.amazonaws.com/assets/threeds/synty/polygon/farm/FBX/SM_Prop_Bed_01.fbx'
+
+// Table | Rocket003 | Headphones | DNA | Curly | Notebook | Roundcube001 | VR_Headset | Zeppelin
+const nodeNameDefault = 'Headphones'
 
 // ==============================================================
 // ** COMPONENTS
@@ -42,17 +52,17 @@ function ThreeD({ state, threedId, threed, ...props }) {
     // { data: 'gql/rest wp endpoint {threed_file}' }
     files: [
       {
-        file_name: 'File-Testing-GLTF-compressed-v002.GLB',
-        file_url: '/objects/compressed-v002.glb',
+        file_name: 'SM_Prop_Bed_01.fbx',
+        file_url: fileUrlDefault,
+        file_type: fileTypeDefault,
         // file_ext: 'glb',
-        file_type: 'gltf',
         // file_loader: 'gltf',
       },
     ],
     // { data: 'gql/rest wp endpoint {threed_threed}' }
     nodes: [
       {
-        node_name: 'Rocket003',
+        node_name: nodeNameDefault,
         node_position: [0, -10, 0],
         node_rotation: [1.570796, 0, 0], // 1.570796 radians = 90 degrees
         node_scale: 1, // 0.01,
