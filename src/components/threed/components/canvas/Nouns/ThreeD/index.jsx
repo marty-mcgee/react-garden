@@ -36,6 +36,7 @@ const defaults = {
   fileNameDefault: 'NounTitleFromAPI.ext',
 
   // node settings
+
   // Table | Rocket003 | Headphones | DNA | Curly | Notebook | Roundcube001 | VR_Headset | Zeppelin
   nodeNameDefault: 'Demo Farm: McGee Ranch',
 
@@ -118,17 +119,17 @@ function ThreeD({ ...props }) {
       </group>
       {/*
       <group position={[0, 10, 0]}>
-          <Model name='Curly' position={[1, -11, -20]} rotation={[2, 0, -0]} />
-          <Model name='DNA' position={[20, 0, -17]} rotation={[1, 1, -2]} />
-          <Model name='Headphones' position={[20, 2, 4]} rotation={[1, 0, -1]} />
-          <Model name='Notebook' position={[-21, -15, -13]} rotation={[2, 0, 1]} />
-          <Model name='Rocket003' position={[18, 15, -25]} rotation={[1, 1, 0]} />
-          <Model name='Roundcube001' position={[-25, -4, 5]} rotation={[1, 0, 0]} scale={0.5} />
-          <Model name='Table' position={[1, -4, -28]} rotation={[1, 0, -1]} scale={0.5} />
-          <Model name='VR_Headset' position={[7, -15, 28]} rotation={[1, 0, -1]} scale={5} />
-          <Model name='Zeppelin' position={[-20, 10, 10]} rotation={[3, -1, 3]} scale={0.005} />
-        </group>
-        */}
+        <Model name='Curly' position={[1, -11, -20]} rotation={[2, 0, -0]} />
+        <Model name='DNA' position={[20, 0, -17]} rotation={[1, 1, -2]} />
+        <Model name='Headphones' position={[20, 2, 4]} rotation={[1, 0, -1]} />
+        <Model name='Notebook' position={[-21, -15, -13]} rotation={[2, 0, 1]} />
+        <Model name='Rocket003' position={[18, 15, -25]} rotation={[1, 1, 0]} />
+        <Model name='Roundcube001' position={[-25, -4, 5]} rotation={[1, 0, 0]} scale={0.5} />
+        <Model name='Table' position={[1, -4, -28]} rotation={[1, 0, -1]} scale={0.5} />
+        <Model name='VR_Headset' position={[7, -15, 28]} rotation={[1, 0, -1]} scale={5} />
+        <Model name='Zeppelin' position={[-20, 10, 10]} rotation={[3, -1, 3]} scale={0.005} />
+      </group>
+      */}
     </>
   )
 }
