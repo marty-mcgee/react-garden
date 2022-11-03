@@ -3154,7 +3154,11 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
           {/* <AppPage /> */}
 
           <Box sx={{ borderTop: 1, borderBottom: 1, borderColor: 'divider' }}>
-            <Tabs value={tabInfoControl} onChange={handleChangeTabInfoControl} aria-label="Info Control Panel">
+            <Tabs
+              value={tabInfoControl}
+              onChange={handleChangeTabInfoControl}
+              aria-label="Info Control Panel"
+            >
               <Tab label="Projects" {...tabProps(0)} />
               <Tab label="Workspaces" {...tabProps(1)} />
               <Tab label="Plans" {...tabProps(2)} />
@@ -3210,7 +3214,6 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
           </MDTabPanel>
           <MDTabPanel value={tabInfoControl} index={10}>
             Testing Panel
-            0
             {/* <CharacterControlPanel /> */}
             {/* <CharacterInfoPanel /> */}
             {/* <hr /> */}

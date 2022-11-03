@@ -141,7 +141,7 @@ function Model({ ...props }) {
     console.debug('%cmodel.isSupported: false', ccm2)
     console.debug(`%c====================================`, ccm5)
   }
-  // console.debug('%cmodel', ccm1, model)
+  console.debug('%cmodel', ccm1, model)
   console.debug(`%c====================================`, ccm5)
 
   // ==============================================================
@@ -185,7 +185,34 @@ function Model({ ...props }) {
     }
     // return FBX node
     else if (model.isFBX) {
-      return <mesh></mesh>
+      const model_name = model.name ? model.name : 'no name'
+      const model_geometry = model.nodes.geometry
+      const model_material = model.nodes.material
+      return (
+        <primitive
+          object={model.nodes}
+          scale={0.05}
+        />
+        // <mesh
+        //   name={model_name}
+        //   // Click sets the mesh as the new target
+        //   onClick={(e) => (e.stopPropagation(), (state.current = model_name))}
+        //   // If a click happened but this mesh wasn't hit we null out the target,
+        //   // This works because missed pointers fire before the actual hits
+        //   onPointerMissed={(e) => e.type === 'click' && (state.current = null)}
+        //   // Right click cycles through the transform modes
+        //   onContextMenu={(e) =>
+        //     snap.current === model_name && (e.stopPropagation(), (state.mode = (snap.mode + 1) % modes.length))
+        //   }
+        //   onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
+        //   onPointerOut={(e) => setHovered(false)}
+        //   geometry={model_geometry}
+        //   material={model_material}
+        //   material-color={snap.current === model_name ? '#ff7070' : '#ababab'}
+        //   {...props}
+        //   dispose={null}
+        // />
+      )
     }
     // return OBJ node
     else if (model.isOBJ) {
@@ -213,7 +240,7 @@ function Model({ ...props }) {
     >
       <sphereGeometry args={[4, 96]} />
       <meshPhysicalMaterial
-        color={model.isGLTF ? 'darkGreen' : model.isOBJ ? 'darkOrange' : model.isFBX ? 'darkBlue' : 'darkred'}
+        color={model.isGLTF ? 'darkRed' : model.isOBJ ? 'darkOrange' : model.isFBX ? 'darkGreen' : 'darkPink'}
       />
     </mesh>
   )

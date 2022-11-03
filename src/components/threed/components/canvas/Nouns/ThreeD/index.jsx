@@ -27,7 +27,8 @@ const fileTypeDefault = 'fbx'
 // const fileUrlDefault = '/objects/compressed.glb' // '/objects/compressed-v002.glb'
 
 const fileUrlDefault =
-  'https://threedpublic.s3.us-west-2.amazonaws.com/assets/threeds/synty/polygon/farm/FBX/SM_Prop_Bed_01.fbx'
+  'https://threedpublic.s3.us-west-2.amazonaws.com/assets/threeds/synty/polygon/farm/Characters/SK_Chr_Farmer_Male_01.fbx'
+// https://threedpublic.s3.us-west-2.amazonaws.com/assets/threeds/synty/polygon/farm/FBX/SM_Prop_Bed_01.fbx'
 
 // Table | Rocket003 | Headphones | DNA | Curly | Notebook | Roundcube001 | VR_Headset | Zeppelin
 const nodeNameDefault = 'Headphones'

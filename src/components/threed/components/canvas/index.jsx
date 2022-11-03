@@ -86,6 +86,7 @@ export default function VCanvas({ models, children }) {
       />
       <Suspense fallback={null}>
         {/* [MM] HEY HEY HEY */}
+        {/* NEED TO SEND A THREED_SCENE TO A CANVAS, BUT THIS IS FINE FOR NOW */}
         <ThreeD
           state={state}
           threedId={1}
