@@ -17,7 +17,7 @@ function Model({ ...props }) {
   // {...props} OR (props, {}) ???
   //
   // deconstruct arguments from props
-  const { state, name, file, doReturnOne, doReturnEach, doReturnAll } = props
+  const { state, threed, name, file, doReturnOne, doReturnEach, doReturnAll } = props
   const modes = ['translate', 'rotate', 'scale']
 
   // Ties this component to the state model
@@ -53,6 +53,10 @@ function Model({ ...props }) {
     doReturnOne: doReturnOne ? true : false,
     doReturnAll: doReturnAll ? true : false,
     doReturnEach: doReturnEach ? true : false,
+    // attributes
+    group_position: threed.group.position,
+    group_rotation: threed.group.rotation,
+    group_scale: threed.group.scale,
     // is Ready to go?
     isReady: false,
   }
@@ -191,7 +195,9 @@ function Model({ ...props }) {
       return (
         <primitive
           object={model.nodes}
-          scale={0.05}
+          position={model.group_position}
+          rotation={model.group_rotation}
+          scale={model.group_scale}
         />
         // <mesh
         //   name={model_name}
