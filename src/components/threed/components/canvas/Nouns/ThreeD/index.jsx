@@ -37,7 +37,7 @@ const defaults = {
 
   // node settings
   // Table | Rocket003 | Headphones | DNA | Curly | Notebook | Roundcube001 | VR_Headset | Zeppelin
-  nodeNameDefault: 'Headphones',
+  nodeNameDefault: 'Demo Farm: McGee Ranch',
 
   // rotation: 1.570796 radians = 90 degrees
   nodeRotationDefault: [1.570796, 0, 0], // [1.570796, 0, 0],
