@@ -3237,7 +3237,7 @@ const ThreeDGarden: FunctionComponent = (): JSX.Element => {
         <ModalLoading />
         <ModalShare />
 
-        {/* <CatalogView /> */}0
+        {/* <CatalogView /> */}
         {/* <PropertiesView /> */}
         {/* <PlanView /> */}
         {/* <TheBottom /> */}

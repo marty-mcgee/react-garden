@@ -6,7 +6,7 @@ import { proxy, useSnapshot } from 'valtio'
 import { Suspense, useState } from 'react'
 
 import { Canvas, useThree } from '@react-three/fiber'
-import { OrbitControls, TransformControls, Preload } from '@react-three/drei'
+import { OrbitControls, TransformControls, Preload, Environment, Html, useProgress } from '@react-three/drei'
 
 // import AppPage from '~/components/threed/pages/_app-page'
 // import BoxPage from '~/components/threed/pages/box-page'
@@ -28,6 +28,11 @@ const state = proxy({ current: null, mode: 0 })
 
 // Model interactive "modes" using TransformControls
 const modes = ['translate', 'rotate', 'scale']
+
+function Loader() {
+  const { progress } = useProgress()
+  return <Html center>{Math.round(progress)} % loaded</Html>
+}
 
 // Controls
 function Controls() {
@@ -72,19 +77,21 @@ export default function VCanvas({ models, children }) {
         width: '100%',
       }}
     >
-      <axesHelper args={[100]} />
-      <gridHelper args={[100, 10]} />
-      <pointLight
-        position={[100, 100, 100]}
-        intensity={0.8}
-      />
-      <hemisphereLight
-        color='#ffffff'
-        groundColor='#b9b9b9'
-        position={[-7, 25, 13]}
-        intensity={0.85}
-      />
-      <Suspense fallback={null}>
+      <Controls />
+      <Preload all />
+      <Suspense fallback={<Loader />}>
+        <axesHelper args={[100]} />
+        <gridHelper args={[100, 10]} />
+        <pointLight
+          position={[100, 100, 100]}
+          intensity={0.8}
+        />
+        <hemisphereLight
+          color='#ffffff'
+          groundColor='#b9b9b9'
+          position={[-7, 25, 13]}
+          intensity={0.85}
+        />
         {/* [MM] HEY HEY HEY */}
         {/* NEED TO SEND A THREED_SCENE TO A CANVAS, BUT THIS IS FINE FOR NOW */}
         <ThreeD
@@ -93,10 +100,12 @@ export default function VCanvas({ models, children }) {
           threed={{}}
         />
         {/* [MM] HEY HEY HEY */}
+        {children}
+        <Environment
+          preset='forest'
+          background
+        />
       </Suspense>
-      <Controls />
-      <Preload all />
-      {children}
     </Canvas>
   )
 }
