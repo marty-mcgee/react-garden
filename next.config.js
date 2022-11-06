@@ -8,10 +8,13 @@ if (!process.env.NEXT_PUBLIC_WP_GRAPHQL_API_URL) {
   `)
 }
 
-// const path = require('path')
+const path = require('path')
+
+// import { resolve } from 'path'
+// const __dirname = path.resolve()
 
 const withTM = require('next-transpile-modules')([
-  // "@babel/preset-react",
+  // '@babel/preset-react',
   '@fullcalendar/common',
   '@fullcalendar/daygrid',
   '@fullcalendar/interaction',
@@ -25,15 +28,27 @@ const withTM = require('next-transpile-modules')([
  * @type {import("next").NextConfig}
  */
 const nextConfig = {
+  //
   reactStrictMode: false, // true causes components to load TWICE in dev only, not prod
 
   trailingSlash: true,
 
   experimental: {
-    esmExternals: false, // helps with 3rd party modules trying to call non-module js
+    esmExternals: true, // helps with 3rd party modules trying to call non-module js
+    externalDir: true,
+    swcFileReading: true,
     images: {
       allowFutureImage: true, // for better img support, and use of layout='raw'
     },
+  },
+
+  // https://github.com/vercel/next.js/issues/36221
+  // swcMinify: true,
+
+  productionBrowserSourceMaps: true,
+
+  compiler: {
+    emotion: true,
   },
 
   // [MM] ONLY USE THE NEXT /PAGES THAT YU WAN>
@@ -74,11 +89,17 @@ const nextConfig = {
 
   // ** WEBPACK 5
   webpack: (config, options) => {
-    // eslint-disable-next-line no-param-reassign
-    // config.resolve.alias = {
-    //   ...config.resolve.alias,
-    //   apexcharts: path.resolve(__dirname, './node_modules/apexcharts-clevision')
-    // }
+    //
+    // aliases
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      apexcharts: path.resolve(__dirname, './node_modules/apexcharts-clevision'),
+      'eth-hooks': path.resolve(__dirname, './node_modules/eth-hooks'),
+      'eth-components': path.resolve(__dirname, './node_modules/eth-components'),
+      'react-css-theme-switcher': path.resolve(__dirname, './node_modules/react-css-theme-switcher'),
+      react: path.resolve(__dirname, './node_modules/react'),
+      'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
+    }
 
     // doesn't work, but the thought is there
     // config.plugin('@typescript-eslint')

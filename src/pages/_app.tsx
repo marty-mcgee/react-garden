@@ -78,22 +78,22 @@ import { ccm0, ccm1, ccm2, ccm3, ccm4, ccm5, ccm6 } from '~/@core/utils/console-
 
 // ==============================================================
 // SCAFFOLD-ETH-TS IMPORTS
-import '~~/styles/tailwind.css';
-import '~~/styles/globals.css';
+import '~~/styles/tailwind.css'
+import '~~/styles/globals.css'
 
-import createCache from '@emotion/cache';
-// import { CacheProvider } from '@emotion/react';
-import { EthComponentsSettingsContext, IEthComponentsSettings } from 'eth-components/models';
-import { EthersAppContext } from 'eth-hooks/context';
-// import { NextComponentType } from 'next';
-import { AppContext, AppInitialProps, AppProps } from 'next/app';
-// import React, { FC, ReactNode, Suspense, useState } from 'react';
-import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
-import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
+import createCache from '@emotion/cache'
+// import { CacheProvider } from '@emotion/react'
+import { EthComponentsSettingsContext, IEthComponentsSettings } from 'eth-components/models'
+import { EthersAppContext } from 'eth-hooks/context'
+// import { NextComponentType } from 'next'
+import { AppContext, AppInitialProps } from 'next/app'
+// import React, { FC, ReactNode, Suspense, useState } from 'react'
+import { ThemeSwitcherProvider } from 'react-css-theme-switcher'
+import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
 
-import { ErrorBoundary, ErrorFallback } from '~common/components';
-import { BLOCKNATIVE_DAPPID } from '~~/config/nextjsApp.config';
-import { appGetInitialProps } from '~~/functions/nextjs/appGetInitialProps';
+import { ErrorBoundary, ErrorFallback } from '~common/components'
+import { BLOCKNATIVE_DAPPID } from '~~/config/nextjsApp.config'
+import { appGetInitialProps } from '~~/functions/nextjs/appGetInitialProps'
 
 // ==============================================================
 // IMPORTS COMPLETE
@@ -193,7 +193,7 @@ const Guard = ({ children, authGuard, guestGuard }: any) => {
 // ==============================================================
 // SCAFFOLD-ETH-TS APP "EthApp"
 
-const cache = createCache({ key: 'next' });
+const cache = createCache({ key: 'next' })
 
 /**
  * 🌱
@@ -204,23 +204,23 @@ const cache = createCache({ key: 'next' });
  * You don't need to change this file!!
  */
 
-console.log('init app...');
+console.log('init app...')
 
 // load saved theme
-const savedTheme = 'light';
+const savedTheme = 'light'
 
 // setup themes for theme switcher
 const themes = {
   dark: './ant-dark-theme.css',
   light: './ant-light-theme.css',
-};
+}
 
 // create eth components context for options and API keys
 const ethComponentsSettings: IEthComponentsSettings = {
   apiKeys: {
     BlocknativeDappId: BLOCKNATIVE_DAPPID,
   },
-};
+}
 
 const ProviderWrapper: FC<{ children?: ReactNode }> = (props) => {
   return (
@@ -233,19 +233,22 @@ const ProviderWrapper: FC<{ children?: ReactNode }> = (props) => {
         </ErrorBoundary>
       </EthersAppContext>
     </EthComponentsSettingsContext.Provider>
-  );
-};
+  )
+}
 /**
  * ### Summary
- * The main app component is {@see MainPage} `components/routes/main/MaingPage.tsx`
+ * The main app component is {@see MainPage} `src/components/main/MaingPage.tsx`
  * This component sets up all the providers, Suspense and Error handling
  * @returns
  */
  const EthApp: NextComponentType<AppContext, AppInitialProps, AppProps> = ({ Component, ...props }) => {
-  console.log('loading app...');
-  const [queryClient] = useState(() => new QueryClient());
+  console.log('loading app...')
+  const [queryClient] = useState(() => new QueryClient())
+
+  const { pageProps } = props
+
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  const dehydradedState = props.pageProps.dehydratedState as unknown;
+  const dehydradedState = pageProps.dehydratedState as unknown
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
@@ -261,11 +264,11 @@ const ProviderWrapper: FC<{ children?: ReactNode }> = (props) => {
         </QueryClientProvider>
       </CacheProvider>
     </ErrorBoundary>
-  );
-};
+  )
+}
 
-MyApp.getInitialProps = appGetInitialProps;
-export const getInitialProps = appGetInitialProps;
+EthApp.getInitialProps = appGetInitialProps
+export const getInitialProps = appGetInitialProps
 
 // ==============================================================
 // ** Construct App using Function Component (Functional Noun)
@@ -306,7 +309,7 @@ const App: FunctionComponent<AppPropsWithLayoutEmotion> = (props: AppPropsWithLa
                             getLayout(
                               <>
                                 <Component {...pageProps} />
-                                <EthApp />
+                                <EthApp {...props} />
                               </>
                             )
                           }
