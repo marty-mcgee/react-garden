@@ -9,7 +9,7 @@ import MDBox from "~/components/mui/MDBox"
 import MDTypography from "~/components/mui/MDTypography"
 
 // BubbleChart configurations
-import configs from "~/components/elements/Charts/BubbleChart/configs"
+import configs from "~/components/elements/Charts/BubbleChart/config"
 
 // ThreeD Garden Base Styles
 import colors from "~/themes/theme-light/base/colors"

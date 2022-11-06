@@ -9,7 +9,7 @@ import MDBox from "~/components/mui/MDBox"
 import MDTypography from "~/components/mui/MDTypography"
 
 // RadarChart configurations
-import configs from "~/components/elements/Charts/RadarChart/configs"
+import configs from "~/components/elements/Charts/RadarChart/config"
 
 // ThreeD Garden Base Styles
 import colors from "~/themes/theme-light/base/colors"

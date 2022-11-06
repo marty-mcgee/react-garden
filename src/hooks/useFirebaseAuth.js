@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import Firebase from '~/configs/firebase'
+import Firebase from '~/config/firebase'
 
-const formatAuthUser = user => {
+const formatAuthUser = (user) => {
   return {
     uid: user.uid,
-    email: user.email
+    email: user.email,
   }
 }
 
@@ -12,7 +12,7 @@ const useFirebaseAuth = () => {
   const [authUser, setAuthUser] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  const authStateChanged = async authState => {
+  const authStateChanged = async (authState) => {
     if (!authState) {
       setAuthUser(null)
       setLoading(false)
@@ -46,7 +46,7 @@ const useFirebaseAuth = () => {
     signOut,
     authUser,
     signInWithEmailAndPassword,
-    createUserWithEmailAndPassword
+    createUserWithEmailAndPassword,
   }
 }
 

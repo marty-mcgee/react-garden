@@ -35,7 +35,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm, Controller } from 'react-hook-form'
 
 // ** Configs
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 // ** Layout Import
 import BlankLayout from '~/@core/layouts/BlankLayout'
@@ -51,7 +51,7 @@ const defaultValues = {
   email: '',
   username: '',
   password: '',
-  terms: false
+  terms: false,
 }
 
 // ** Styled Components
@@ -59,15 +59,15 @@ const RegisterIllustrationWrapper = styled(Box)(({ theme }) => ({
   padding: theme.spacing(20),
   paddingRight: '0 !important',
   [theme.breakpoints.down('lg')]: {
-    padding: theme.spacing(10)
-  }
+    padding: theme.spacing(10),
+  },
 }))
 
 const RegisterIllustration = styled('img')(({ theme }) => ({
   maxWidth: '46rem',
   [theme.breakpoints.down('lg')]: {
-    maxWidth: '35rem'
-  }
+    maxWidth: '35rem',
+  },
 }))
 
 const TreeIllustration = styled('img')(({ theme }) => ({
@@ -75,35 +75,35 @@ const TreeIllustration = styled('img')(({ theme }) => ({
   left: '1.875rem',
   position: 'absolute',
   [theme.breakpoints.down('lg')]: {
-    left: 0
-  }
+    left: 0,
+  },
 }))
 
 const RightWrapper = styled(Box)(({ theme }) => ({
   width: '100%',
   [theme.breakpoints.up('md')]: {
-    maxWidth: 450
-  }
+    maxWidth: 450,
+  },
 }))
 
 const BoxWrapper = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down('xl')]: {
-    width: '100%'
+    width: '100%',
   },
   [theme.breakpoints.down('md')]: {
-    maxWidth: 400
-  }
+    maxWidth: 400,
+  },
 }))
 
 const TypographyStyled = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   marginBottom: theme.spacing(1.5),
-  [theme.breakpoints.down('md')]: { mt: theme.spacing(8) }
+  [theme.breakpoints.down('md')]: { mt: theme.spacing(8) },
 }))
 
 const LinkStyled = styled('a')(({ theme }) => ({
   textDecoration: 'none',
-  color: theme.palette.primary.main
+  color: theme.palette.primary.main,
 }))
 
 const Register = () => {
@@ -123,33 +123,33 @@ const Register = () => {
     password: yup.string().min(5).required(),
     username: yup.string().min(3).required(),
     email: yup.string().email().required(),
-    terms: yup.bool().oneOf([true], 'You must accept the privacy policy & terms')
+    terms: yup.bool().oneOf([true], 'You must accept the privacy policy & terms'),
   })
 
   const {
     control,
     setError,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm({
     defaultValues,
     mode: 'onBlur',
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema),
   })
 
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     const { email, username, password } = data
-    register({ email, username, password }, err => {
+    register({ email, username, password }, (err) => {
       if (err.email) {
         setError('email', {
           type: 'manual',
-          message: err.email
+          message: err.email,
         })
       }
       if (err.username) {
         setError('username', {
           type: 'manual',
-          message: err.username
+          message: err.username,
         })
       }
     })
@@ -166,7 +166,14 @@ const Register = () => {
               src={`/images/pages/${imageSource}-${theme.palette.mode}.png`}
             />
           </RegisterIllustrationWrapper>
-          <FooterIllustrationsV2 image={<TreeIllustration alt='tree' src='/images/pages/tree-2.png' />} />
+          <FooterIllustrationsV2
+            image={
+              <TreeIllustration
+                alt='tree'
+                src='/images/pages/tree-2.png'
+              />
+            }
+          />
         </Box>
       ) : null}
       <RightWrapper sx={skin === 'bordered' && !hidden ? { borderLeft: `1px solid ${theme.palette.divider}` } : {}}>
@@ -177,7 +184,7 @@ const Register = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: 'background.paper'
+            backgroundColor: 'background.paper',
           }}
         >
           <BoxWrapper>
@@ -188,7 +195,7 @@ const Register = () => {
                 display: 'flex',
                 position: 'absolute',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
               }}
             >
               <svg
@@ -199,9 +206,20 @@ const Register = () => {
                 xmlns='http://www.w3.org/2000/svg'
                 xmlnsXlink='http://www.w3.org/1999/xlink'
               >
-                <g stroke='none' strokeWidth='1' fill='none' fillRule='evenodd'>
-                  <g id='Artboard' transform='translate(-95.000000, -51.000000)'>
-                    <g id='logo' transform='translate(95.000000, 50.000000)'>
+                <g
+                  stroke='none'
+                  strokeWidth='1'
+                  fill='none'
+                  fillRule='evenodd'
+                >
+                  <g
+                    id='Artboard'
+                    transform='translate(-95.000000, -51.000000)'
+                  >
+                    <g
+                      id='logo'
+                      transform='translate(95.000000, 50.000000)'
+                    >
                       <path
                         id='Combined-Shape'
                         fill={theme.palette.primary.main}
@@ -257,7 +275,7 @@ const Register = () => {
                   lineHeight: 1,
                   fontWeight: 600,
                   textTransform: 'uppercase',
-                  fontSize: '1.5rem !important'
+                  fontSize: '1.5rem !important',
                 }}
               >
                 {themeConfig.templateName}
@@ -267,8 +285,15 @@ const Register = () => {
               <TypographyStyled variant='h5'>Adventure starts here 🚀</TypographyStyled>
               <Typography variant='body2'>Make your app management easy and fun!</Typography>
             </Box>
-            <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
-              <FormControl fullWidth sx={{ mb: 4 }}>
+            <form
+              noValidate
+              autoComplete='off'
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <FormControl
+                fullWidth
+                sx={{ mb: 4 }}
+              >
                 <Controller
                   name='username'
                   control={control}
@@ -289,7 +314,10 @@ const Register = () => {
                   <FormHelperText sx={{ color: 'error.main' }}>{errors.username.message}</FormHelperText>
                 )}
               </FormControl>
-              <FormControl fullWidth sx={{ mb: 4 }}>
+              <FormControl
+                fullWidth
+                sx={{ mb: 4 }}
+              >
                 <Controller
                   name='email'
                   control={control}
@@ -308,7 +336,10 @@ const Register = () => {
                 {errors.email && <FormHelperText sx={{ color: 'error.main' }}>{errors.email.message}</FormHelperText>}
               </FormControl>
               <FormControl fullWidth>
-                <InputLabel htmlFor='auth-login-v2-password' error={Boolean(errors.password)}>
+                <InputLabel
+                  htmlFor='auth-login-v2-password'
+                  error={Boolean(errors.password)}
+                >
                   Password
                 </InputLabel>
                 <Controller
@@ -328,7 +359,7 @@ const Register = () => {
                         <InputAdornment position='end'>
                           <IconButton
                             edge='end'
-                            onMouseDown={e => e.preventDefault()}
+                            onMouseDown={(e) => e.preventDefault()}
                             onClick={() => setShowPassword(!showPassword)}
                           >
                             {showPassword ? <EyeOutline /> : <EyeOffOutline />}
@@ -343,7 +374,10 @@ const Register = () => {
                 )}
               </FormControl>
 
-              <FormControl sx={{ mt: 1.5, mb: 4 }} error={Boolean(errors.terms)}>
+              <FormControl
+                sx={{ mt: 1.5, mb: 4 }}
+                error={Boolean(errors.terms)}
+              >
                 <Controller
                   name='terms'
                   control={control}
@@ -353,7 +387,7 @@ const Register = () => {
                       <FormControlLabel
                         sx={{
                           ...(errors.terms ? { color: 'error.main' } : null),
-                          '& .MuiFormControlLabel-label': { fontSize: '0.875rem' }
+                          '& .MuiFormControlLabel-label': { fontSize: '0.875rem' },
                         }}
                         control={
                           <Checkbox
@@ -371,8 +405,11 @@ const Register = () => {
                             >
                               I agree to{' '}
                             </Typography>
-                            <Link href='/' passHref>
-                              <LinkStyled onClick={e => e.preventDefault()}>privacy policy & terms</LinkStyled>
+                            <Link
+                              href='/'
+                              passHref
+                            >
+                              <LinkStyled onClick={(e) => e.preventDefault()}>privacy policy & terms</LinkStyled>
                             </Link>
                           </>
                         }
@@ -384,40 +421,76 @@ const Register = () => {
                   <FormHelperText sx={{ mt: 0, color: 'error.main' }}>{errors.terms.message}</FormHelperText>
                 )}
               </FormControl>
-              <Button fullWidth size='large' type='submit' variant='contained' sx={{ mb: 7 }}>
+              <Button
+                fullWidth
+                size='large'
+                type='submit'
+                variant='contained'
+                sx={{ mb: 7 }}
+              >
                 Sign up
               </Button>
               <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-                <Typography variant='body2' sx={{ mr: 2 }}>
+                <Typography
+                  variant='body2'
+                  sx={{ mr: 2 }}
+                >
                   Already have an account?
                 </Typography>
                 <Typography variant='body2'>
-                  <Link href='/login' passHref>
+                  <Link
+                    href='/login'
+                    passHref
+                  >
                     <LinkStyled>Sign in instead</LinkStyled>
                   </Link>
                 </Typography>
               </Box>
               <Divider sx={{ my: 5 }}>or</Divider>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Link href='/' passHref>
-                  <IconButton component='a' onClick={e => e.preventDefault()}>
+                <Link
+                  href='/'
+                  passHref
+                >
+                  <IconButton
+                    component='a'
+                    onClick={(e) => e.preventDefault()}
+                  >
                     <Facebook sx={{ color: '#497ce2' }} />
                   </IconButton>
                 </Link>
-                <Link href='/' passHref>
-                  <IconButton component='a' onClick={e => e.preventDefault()}>
+                <Link
+                  href='/'
+                  passHref
+                >
+                  <IconButton
+                    component='a'
+                    onClick={(e) => e.preventDefault()}
+                  >
                     <Twitter sx={{ color: '#1da1f2' }} />
                   </IconButton>
                 </Link>
-                <Link href='/' passHref>
-                  <IconButton component='a' onClick={e => e.preventDefault()}>
+                <Link
+                  href='/'
+                  passHref
+                >
+                  <IconButton
+                    component='a'
+                    onClick={(e) => e.preventDefault()}
+                  >
                     <Github
-                      sx={{ color: theme => (theme.palette.mode === 'light' ? '#272727' : theme.palette.grey[300]) }}
+                      sx={{ color: (theme) => (theme.palette.mode === 'light' ? '#272727' : theme.palette.grey[300]) }}
                     />
                   </IconButton>
                 </Link>
-                <Link href='/' passHref>
-                  <IconButton component='a' onClick={e => e.preventDefault()}>
+                <Link
+                  href='/'
+                  passHref
+                >
+                  <IconButton
+                    component='a'
+                    onClick={(e) => e.preventDefault()}
+                  >
                     <Google sx={{ color: '#db4437' }} />
                   </IconButton>
                 </Link>
@@ -429,7 +502,7 @@ const Register = () => {
     </Box>
   )
 }
-Register.getLayout = page => <BlankLayout>{page}</BlankLayout>
+Register.getLayout = (page) => <BlankLayout>{page}</BlankLayout>
 Register.guestGuard = true
 
 export default Register

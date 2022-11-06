@@ -8,7 +8,7 @@ import { styled, useTheme } from '@mui/material/styles'
 
 // ** Third Party Components
 import PerfectScrollbar from 'react-perfect-scrollbar'
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 // ** Component Imports
 import Drawer from './Drawer'
@@ -28,11 +28,11 @@ const StyledBoxForShadow = styled(Box)(({ theme }) => ({
   width: 'calc(100% + 15px)',
   height: theme.mixins.toolbar.minHeight,
   '&.d-block': {
-    display: 'block'
-  }
+    display: 'block',
+  },
 }))
 
-const Navigation = props => {
+const Navigation = (props) => {
   // ** Props
   const {
     hidden,
@@ -40,7 +40,7 @@ const Navigation = props => {
     settings,
     afterVerticalNavMenuContent,
     beforeVerticalNavMenuContent,
-    verticalNavMenuContent: userVerticalNavMenuContent
+    verticalNavMenuContent: userVerticalNavMenuContent,
   } = props
 
   // ** States
@@ -58,7 +58,7 @@ const Navigation = props => {
   const { afterVerticalNavMenuContentPosition, beforeVerticalNavMenuContentPosition } = themeConfig
 
   // ** Fixes Navigation InfiniteScroll
-  const handleInfiniteScroll = ref => {
+  const handleInfiniteScroll = (ref) => {
     if (ref) {
       // @ts-ignore
       ref._getBoundingClientRect = ref.getBoundingClientRect
@@ -72,7 +72,7 @@ const Navigation = props => {
   }
 
   // ** Scroll Menu
-  const scrollMenu = container => {
+  const scrollMenu = (container) => {
     if (beforeVerticalNavMenuContentPosition === 'static' || !beforeVerticalNavMenuContent) {
       container = hidden ? container.target : container
       if (shadowRef && container.scrollTop > 0) {
@@ -124,20 +124,23 @@ const Navigation = props => {
         ? beforeVerticalNavMenuContent(props)
         : null}
       {(beforeVerticalNavMenuContentPosition === 'static' || !beforeVerticalNavMenuContent) && (
-        <StyledBoxForShadow ref={shadowRef} sx={{ background: shadowBgColor() }} />
+        <StyledBoxForShadow
+          ref={shadowRef}
+          sx={{ background: shadowBgColor() }}
+        />
       )}
       <Box sx={{ position: 'relative', overflow: 'hidden' }}>
         <ScrollWrapper
           // containerRef={ref => handleInfiniteScroll(ref)}
           {...(hidden
             ? {
-              onScroll: container => scrollMenu(container),
-              sx: { height: '100%', overflowY: 'auto', overflowX: 'hidden' }
-            }
+                onScroll: (container) => scrollMenu(container),
+                sx: { height: '100%', overflowY: 'auto', overflowX: 'hidden' },
+              }
             : {
-              options: { wheelPropagation: false },
-              onScrollY: container => scrollMenu(container)
-            })}
+                options: { wheelPropagation: false },
+                onScrollY: (container) => scrollMenu(container),
+              })}
         >
           {beforeVerticalNavMenuContent && beforeVerticalNavMenuContentPosition === 'static'
             ? beforeVerticalNavMenuContent(props)
@@ -151,7 +154,7 @@ const Navigation = props => {
                 pt: 0,
                 transition: 'padding .25s ease',
                 '& > :first-of-type': { mt: '0' },
-                pr: !navCollapsed || (navCollapsed && navHover) ? 4.5 : 1.25
+                pr: !navCollapsed || (navCollapsed && navHover) ? 4.5 : 1.25,
               }}
             >
               <VerticalNavItems

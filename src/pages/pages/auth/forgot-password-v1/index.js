@@ -14,7 +14,7 @@ import MuiCard from '@mui/material/Card'
 import ChevronLeft from 'mdi-material-ui/ChevronLeft'
 
 // ** Configs
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 // ** Layout Import
 import BlankLayout from '~/@core/layouts/BlankLayout'
@@ -24,7 +24,7 @@ import FooterIllustrationsV1 from '~/views/pages/auth/FooterIllustrationsV1'
 
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
-  [theme.breakpoints.up('sm')]: { width: '28rem' }
+  [theme.breakpoints.up('sm')]: { width: '28rem' },
 }))
 
 const LinkStyled = styled('a')(({ theme }) => ({
@@ -33,21 +33,21 @@ const LinkStyled = styled('a')(({ theme }) => ({
   alignItems: 'center',
   textDecoration: 'none',
   justifyContent: 'center',
-  color: theme.palette.primary.main
+  color: theme.palette.primary.main,
 }))
 
 const ForgotPasswordV1 = () => {
   // ** Hook
   const theme = useTheme()
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault()
   }
 
   return (
     <Box className='content-center'>
       <Card sx={{ zIndex: 1 }}>
-        <CardContent sx={{ p: theme => `${theme.spacing(12, 9, 7)} !important` }}>
+        <CardContent sx={{ p: (theme) => `${theme.spacing(12, 9, 7)} !important` }}>
           <Box sx={{ mb: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <svg
               width={35}
@@ -57,9 +57,20 @@ const ForgotPasswordV1 = () => {
               xmlns='http://www.w3.org/2000/svg'
               xmlnsXlink='http://www.w3.org/1999/xlink'
             >
-              <g stroke='none' strokeWidth='1' fill='none' fillRule='evenodd'>
-                <g id='Artboard' transform='translate(-95.000000, -51.000000)'>
-                  <g id='logo' transform='translate(95.000000, 50.000000)'>
+              <g
+                stroke='none'
+                strokeWidth='1'
+                fill='none'
+                fillRule='evenodd'
+              >
+                <g
+                  id='Artboard'
+                  transform='translate(-95.000000, -51.000000)'
+                >
+                  <g
+                    id='logo'
+                    transform='translate(95.000000, 50.000000)'
+                  >
                     <path
                       id='Combined-Shape'
                       fill={theme.palette.primary.main}
@@ -115,27 +126,51 @@ const ForgotPasswordV1 = () => {
                 lineHeight: 1,
                 fontWeight: 600,
                 textTransform: 'uppercase',
-                fontSize: '1.5rem !important'
+                fontSize: '1.5rem !important',
               }}
             >
               {themeConfig.templateName}
             </Typography>
           </Box>
           <Box sx={{ mb: 6 }}>
-            <Typography variant='h5' sx={{ fontWeight: 600, mb: 1.5 }}>
+            <Typography
+              variant='h5'
+              sx={{ fontWeight: 600, mb: 1.5 }}
+            >
               Forgot Password? 🔒
             </Typography>
             <Typography variant='body2'>
               Enter your email and we&prime;ll send you instructions to reset your password
             </Typography>
           </Box>
-          <form noValidate autoComplete='off' onSubmit={handleSubmit}>
-            <TextField autoFocus type='email' label='Email' sx={{ display: 'flex', mb: 4 }} />
-            <Button fullWidth size='large' type='submit' variant='contained' sx={{ mb: 5.25 }}>
+          <form
+            noValidate
+            autoComplete='off'
+            onSubmit={handleSubmit}
+          >
+            <TextField
+              autoFocus
+              type='email'
+              label='Email'
+              sx={{ display: 'flex', mb: 4 }}
+            />
+            <Button
+              fullWidth
+              size='large'
+              type='submit'
+              variant='contained'
+              sx={{ mb: 5.25 }}
+            >
               Send reset link
             </Button>
-            <Typography variant='body2' sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Link passHref href='/pages/auth/login-v1'>
+            <Typography
+              variant='body2'
+              sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+              <Link
+                passHref
+                href='/pages/auth/login-v1'
+              >
                 <LinkStyled>
                   <ChevronLeft />
                   <span>Back to login</span>
@@ -149,6 +184,6 @@ const ForgotPasswordV1 = () => {
     </Box>
   )
 }
-ForgotPasswordV1.getLayout = page => <BlankLayout>{page}</BlankLayout>
+ForgotPasswordV1.getLayout = (page) => <BlankLayout>{page}</BlankLayout>
 
 export default ForgotPasswordV1

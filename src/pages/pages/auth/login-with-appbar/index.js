@@ -29,7 +29,7 @@ import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 
 // ** Configs
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 // ** Layout Import
 import BlankLayoutWithAppBar from '~/@core/layouts/BlankLayoutWithAppBar'
@@ -45,57 +45,57 @@ const LoginIllustrationWrapper = styled(Box)(({ theme }) => ({
   padding: theme.spacing(20),
   paddingRight: '0 !important',
   [theme.breakpoints.down('lg')]: {
-    padding: theme.spacing(10)
-  }
+    padding: theme.spacing(10),
+  },
 }))
 
 const LoginIllustration = styled('img')(({ theme }) => ({
   maxWidth: '48rem',
   [theme.breakpoints.down('lg')]: {
-    maxWidth: '35rem'
-  }
+    maxWidth: '35rem',
+  },
 }))
 
 const RightWrapper = styled(Box)(({ theme }) => ({
   width: '100%',
   [theme.breakpoints.up('md')]: {
-    maxWidth: 450
-  }
+    maxWidth: 450,
+  },
 }))
 
 const BoxWrapper = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down('xl')]: {
-    width: '100%'
+    width: '100%',
   },
   [theme.breakpoints.down('md')]: {
-    maxWidth: 400
-  }
+    maxWidth: 400,
+  },
 }))
 
 const TypographyStyled = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   marginBottom: theme.spacing(1.5),
-  [theme.breakpoints.down('md')]: { mt: theme.spacing(8) }
+  [theme.breakpoints.down('md')]: { mt: theme.spacing(8) },
 }))
 
 const LinkStyled = styled('a')(({ theme }) => ({
   fontSize: '0.875rem',
   textDecoration: 'none',
-  color: theme.palette.primary.main
+  color: theme.palette.primary.main,
 }))
 
 const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
   '& .MuiFormControlLabel-label': {
     fontSize: '0.875rem',
-    color: theme.palette.text.secondary
-  }
+    color: theme.palette.text.secondary,
+  },
 }))
 
 const LoginWithAppBar = () => {
   // ** States
   const [values, setValues] = useState({
     password: '',
-    showPassword: false
+    showPassword: false,
   })
 
   // ** Hook
@@ -105,11 +105,11 @@ const LoginWithAppBar = () => {
   // ** Vars
   const hidden = useMediaQuery(theme.breakpoints.down('md'))
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault()
   }
 
-  const handleChange = prop => event => {
+  const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value })
   }
 
@@ -117,7 +117,7 @@ const LoginWithAppBar = () => {
     setValues({ ...values, showPassword: !values.showPassword })
   }
 
-  const handleMouseDownPassword = event => {
+  const handleMouseDownPassword = (event) => {
     event.preventDefault()
   }
 
@@ -144,7 +144,7 @@ const LoginWithAppBar = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: 'background.paper'
+            backgroundColor: 'background.paper',
           }}
         >
           <BoxWrapper>
@@ -152,8 +152,17 @@ const LoginWithAppBar = () => {
               <TypographyStyled variant='h5'>Welcome to {themeConfig.templateName}! 👋🏻</TypographyStyled>
               <Typography variant='body2'>Please sign-in to your account and start the adventure</Typography>
             </Box>
-            <form noValidate autoComplete='off' onSubmit={handleSubmit}>
-              <TextField autoFocus id='email' label='Email' sx={{ display: 'flex', mb: 4 }} />
+            <form
+              noValidate
+              autoComplete='off'
+              onSubmit={handleSubmit}
+            >
+              <TextField
+                autoFocus
+                id='email'
+                label='Email'
+                sx={{ display: 'flex', mb: 4 }}
+              />
               <FormControl fullWidth>
                 <InputLabel htmlFor='auth-login-v2-password'>Password</InputLabel>
                 <OutlinedInput
@@ -179,45 +188,87 @@ const LoginWithAppBar = () => {
               <Box
                 sx={{ mb: 4, display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-between' }}
               >
-                <FormControlLabel control={<Checkbox />} label='Remember Me' />
-                <Link passHref href='/pages/auth/forgot-password-v2'>
+                <FormControlLabel
+                  control={<Checkbox />}
+                  label='Remember Me'
+                />
+                <Link
+                  passHref
+                  href='/pages/auth/forgot-password-v2'
+                >
                   <LinkStyled>Forgot Password?</LinkStyled>
                 </Link>
               </Box>
-              <Button fullWidth size='large' type='submit' variant='contained' sx={{ mb: 7 }}>
+              <Button
+                fullWidth
+                size='large'
+                type='submit'
+                variant='contained'
+                sx={{ mb: 7 }}
+              >
                 Login
               </Button>
               <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-                <Typography variant='body2' sx={{ mr: 2 }}>
+                <Typography
+                  variant='body2'
+                  sx={{ mr: 2 }}
+                >
                   New on our platform?
                 </Typography>
                 <Typography variant='body2'>
-                  <Link passHref href='/pages/auth/register-v2'>
+                  <Link
+                    passHref
+                    href='/pages/auth/register-v2'
+                  >
                     <LinkStyled>Create an account</LinkStyled>
                   </Link>
                 </Typography>
               </Box>
               <Divider sx={{ my: 5 }}>or</Divider>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Link href='/' passHref>
-                  <IconButton component='a' onClick={e => e.preventDefault()}>
+                <Link
+                  href='/'
+                  passHref
+                >
+                  <IconButton
+                    component='a'
+                    onClick={(e) => e.preventDefault()}
+                  >
                     <Facebook sx={{ color: '#497ce2' }} />
                   </IconButton>
                 </Link>
-                <Link href='/' passHref>
-                  <IconButton component='a' onClick={e => e.preventDefault()}>
+                <Link
+                  href='/'
+                  passHref
+                >
+                  <IconButton
+                    component='a'
+                    onClick={(e) => e.preventDefault()}
+                  >
                     <Twitter sx={{ color: '#1da1f2' }} />
                   </IconButton>
                 </Link>
-                <Link href='/' passHref>
-                  <IconButton component='a' onClick={e => e.preventDefault()}>
+                <Link
+                  href='/'
+                  passHref
+                >
+                  <IconButton
+                    component='a'
+                    onClick={(e) => e.preventDefault()}
+                  >
                     <Github
-                      sx={{ color: theme => (theme.palette.mode === 'light' ? '#272727' : theme.palette.grey[300]) }}
+                      sx={{ color: (theme) => (theme.palette.mode === 'light' ? '#272727' : theme.palette.grey[300]) }}
                     />
                   </IconButton>
                 </Link>
-                <Link href='/' passHref>
-                  <IconButton component='a' onClick={e => e.preventDefault()}>
+                <Link
+                  href='/'
+                  passHref
+                >
+                  <IconButton
+                    component='a'
+                    onClick={(e) => e.preventDefault()}
+                  >
                     <Google sx={{ color: '#db4437' }} />
                   </IconButton>
                 </Link>
@@ -229,6 +280,6 @@ const LoginWithAppBar = () => {
     </Box>
   )
 }
-LoginWithAppBar.getLayout = page => <BlankLayoutWithAppBar>{page}</BlankLayoutWithAppBar>
+LoginWithAppBar.getLayout = (page) => <BlankLayoutWithAppBar>{page}</BlankLayoutWithAppBar>
 
 export default LoginWithAppBar

@@ -22,7 +22,7 @@ import ChevronLeft from 'mdi-material-ui/ChevronLeft'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 
 // ** Configs
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 // ** Layout Import
 import BlankLayout from '~/@core/layouts/BlankLayout'
@@ -38,15 +38,15 @@ const ResetPasswordIllustrationWrapper = styled(Box)(({ theme }) => ({
   padding: theme.spacing(20),
   paddingRight: '0 !important',
   [theme.breakpoints.down('lg')]: {
-    padding: theme.spacing(10)
-  }
+    padding: theme.spacing(10),
+  },
 }))
 
 const ResetPasswordIllustration = styled('img')(({ theme }) => ({
   maxWidth: '48rem',
   [theme.breakpoints.down('lg')]: {
-    maxWidth: '35rem'
-  }
+    maxWidth: '35rem',
+  },
 }))
 
 const TreeIllustration = styled('img')(({ theme }) => ({
@@ -55,30 +55,30 @@ const TreeIllustration = styled('img')(({ theme }) => ({
   position: 'absolute',
   [theme.breakpoints.down('lg')]: {
     left: 0,
-    bottom: 0
-  }
+    bottom: 0,
+  },
 }))
 
 const RightWrapper = styled(Box)(({ theme }) => ({
   width: '100%',
   [theme.breakpoints.up('md')]: {
-    maxWidth: 450
-  }
+    maxWidth: 450,
+  },
 }))
 
 const BoxWrapper = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down('xl')]: {
-    width: '100%'
+    width: '100%',
   },
   [theme.breakpoints.down('md')]: {
-    maxWidth: 400
-  }
+    maxWidth: 400,
+  },
 }))
 
 const TypographyStyled = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   marginBottom: theme.spacing(1.5),
-  [theme.breakpoints.down('md')]: { mt: theme.spacing(8) }
+  [theme.breakpoints.down('md')]: { mt: theme.spacing(8) },
 }))
 
 const LinkStyled = styled('a')(({ theme }) => ({
@@ -87,7 +87,7 @@ const LinkStyled = styled('a')(({ theme }) => ({
   alignItems: 'center',
   textDecoration: 'none',
   justifyContent: 'center',
-  color: theme.palette.primary.main
+  color: theme.palette.primary.main,
 }))
 
 const ResetPasswordV2 = () => {
@@ -96,7 +96,7 @@ const ResetPasswordV2 = () => {
     newPassword: '',
     showNewPassword: false,
     confirmNewPassword: '',
-    showConfirmNewPassword: false
+    showConfirmNewPassword: false,
   })
 
   // ** Hooks
@@ -107,12 +107,12 @@ const ResetPasswordV2 = () => {
   const { skin } = settings
   const hidden = useMediaQuery(theme.breakpoints.down('md'))
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault()
   }
 
   // Handle New Password
-  const handleNewPasswordChange = prop => event => {
+  const handleNewPasswordChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value })
   }
 
@@ -120,12 +120,12 @@ const ResetPasswordV2 = () => {
     setValues({ ...values, showNewPassword: !values.showNewPassword })
   }
 
-  const handleMouseDownNewPassword = event => {
+  const handleMouseDownNewPassword = (event) => {
     event.preventDefault()
   }
 
   // Handle Confirm New Password
-  const handleConfirmNewPasswordChange = prop => event => {
+  const handleConfirmNewPasswordChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value })
   }
 
@@ -133,7 +133,7 @@ const ResetPasswordV2 = () => {
     setValues({ ...values, showConfirmNewPassword: !values.showConfirmNewPassword })
   }
 
-  const handleMouseDownConfirmNewPassword = event => {
+  const handleMouseDownConfirmNewPassword = (event) => {
     event.preventDefault()
   }
 
@@ -150,7 +150,14 @@ const ResetPasswordV2 = () => {
               src={`/images/pages/${imageSource}-${theme.palette.mode}.png`}
             />
           </ResetPasswordIllustrationWrapper>
-          <FooterIllustrationsV2 image={<TreeIllustration alt='tree' src='/images/pages/tree-3.png' />} />
+          <FooterIllustrationsV2
+            image={
+              <TreeIllustration
+                alt='tree'
+                src='/images/pages/tree-3.png'
+              />
+            }
+          />
         </Box>
       ) : null}
       <RightWrapper sx={skin === 'bordered' && !hidden ? { borderLeft: `1px solid ${theme.palette.divider}` } : {}}>
@@ -161,7 +168,7 @@ const ResetPasswordV2 = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: 'background.paper'
+            backgroundColor: 'background.paper',
           }}
         >
           <BoxWrapper>
@@ -172,7 +179,7 @@ const ResetPasswordV2 = () => {
                 display: 'flex',
                 position: 'absolute',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
               }}
             >
               <svg
@@ -183,9 +190,20 @@ const ResetPasswordV2 = () => {
                 xmlns='http://www.w3.org/2000/svg'
                 xmlnsXlink='http://www.w3.org/1999/xlink'
               >
-                <g stroke='none' strokeWidth='1' fill='none' fillRule='evenodd'>
-                  <g id='Artboard' transform='translate(-95.000000, -51.000000)'>
-                    <g id='logo' transform='translate(95.000000, 50.000000)'>
+                <g
+                  stroke='none'
+                  strokeWidth='1'
+                  fill='none'
+                  fillRule='evenodd'
+                >
+                  <g
+                    id='Artboard'
+                    transform='translate(-95.000000, -51.000000)'
+                  >
+                    <g
+                      id='logo'
+                      transform='translate(95.000000, 50.000000)'
+                    >
                       <path
                         id='Combined-Shape'
                         fill={theme.palette.primary.main}
@@ -241,7 +259,7 @@ const ResetPasswordV2 = () => {
                   lineHeight: 1,
                   fontWeight: 600,
                   textTransform: 'uppercase',
-                  fontSize: '1.5rem !important'
+                  fontSize: '1.5rem !important',
                 }}
               >
                 {themeConfig.templateName}
@@ -253,7 +271,11 @@ const ResetPasswordV2 = () => {
                 Your new password must be different from previously used passwords
               </Typography>
             </Box>
-            <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+            <form
+              noValidate
+              autoComplete='off'
+              onSubmit={handleSubmit}
+            >
               <FormControl sx={{ display: 'flex', mb: 4 }}>
                 <InputLabel htmlFor='auth-reset-password-v2-new-password'>New Password</InputLabel>
                 <OutlinedInput
@@ -299,11 +321,23 @@ const ResetPasswordV2 = () => {
                   }
                 />
               </FormControl>
-              <Button fullWidth size='large' type='submit' variant='contained' sx={{ mb: 5.25 }}>
+              <Button
+                fullWidth
+                size='large'
+                type='submit'
+                variant='contained'
+                sx={{ mb: 5.25 }}
+              >
                 Set New Password
               </Button>
-              <Typography variant='body2' sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Link passHref href='/pages/auth/login-v2'>
+              <Typography
+                variant='body2'
+                sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              >
+                <Link
+                  passHref
+                  href='/pages/auth/login-v2'
+                >
                   <LinkStyled>
                     <ChevronLeft />
                     <span>Back to login</span>
@@ -317,6 +351,6 @@ const ResetPasswordV2 = () => {
     </Box>
   )
 }
-ResetPasswordV2.getLayout = page => <BlankLayout>{page}</BlankLayout>
+ResetPasswordV2.getLayout = (page) => <BlankLayout>{page}</BlankLayout>
 
 export default ResetPasswordV2

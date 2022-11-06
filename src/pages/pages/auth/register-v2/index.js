@@ -29,7 +29,7 @@ import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 
 // ** Configs
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 // ** Layout Import
 import BlankLayout from '~/@core/layouts/BlankLayout'
@@ -45,15 +45,15 @@ const RegisterIllustrationWrapper = styled(Box)(({ theme }) => ({
   padding: theme.spacing(20),
   paddingRight: '0 !important',
   [theme.breakpoints.down('lg')]: {
-    padding: theme.spacing(10)
-  }
+    padding: theme.spacing(10),
+  },
 }))
 
 const RegisterIllustration = styled('img')(({ theme }) => ({
   maxWidth: '46rem',
   [theme.breakpoints.down('lg')]: {
-    maxWidth: '35rem'
-  }
+    maxWidth: '35rem',
+  },
 }))
 
 const TreeIllustration = styled('img')(({ theme }) => ({
@@ -61,36 +61,36 @@ const TreeIllustration = styled('img')(({ theme }) => ({
   left: '1.875rem',
   position: 'absolute',
   [theme.breakpoints.down('lg')]: {
-    left: 0
-  }
+    left: 0,
+  },
 }))
 
 const RightWrapper = styled(Box)(({ theme }) => ({
   width: '100%',
   [theme.breakpoints.up('md')]: {
-    maxWidth: 450
-  }
+    maxWidth: 450,
+  },
 }))
 
 const BoxWrapper = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down('xl')]: {
-    width: '100%'
+    width: '100%',
   },
   [theme.breakpoints.down('md')]: {
-    maxWidth: 400
-  }
+    maxWidth: 400,
+  },
 }))
 
 const TypographyStyled = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   marginBottom: theme.spacing(1.5),
-  [theme.breakpoints.down('md')]: { mt: theme.spacing(8) }
+  [theme.breakpoints.down('md')]: { mt: theme.spacing(8) },
 }))
 
 const LinkStyled = styled('a')(({ theme }) => ({
   fontSize: '0.875rem',
   textDecoration: 'none',
-  color: theme.palette.primary.main
+  color: theme.palette.primary.main,
 }))
 
 const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
@@ -98,15 +98,15 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
   marginBottom: theme.spacing(4),
   '& .MuiFormControlLabel-label': {
     fontSize: '0.875rem',
-    color: theme.palette.text.secondary
-  }
+    color: theme.palette.text.secondary,
+  },
 }))
 
 const RegisterV2 = () => {
   // ** States
   const [values, setValues] = useState({
     password: '',
-    showPassword: false
+    showPassword: false,
   })
 
   // ** Hooks
@@ -117,11 +117,11 @@ const RegisterV2 = () => {
   const { skin } = settings
   const hidden = useMediaQuery(theme.breakpoints.down('md'))
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault()
   }
 
-  const handleChange = prop => event => {
+  const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value })
   }
 
@@ -129,7 +129,7 @@ const RegisterV2 = () => {
     setValues({ ...values, showPassword: !values.showPassword })
   }
 
-  const handleMouseDownPassword = event => {
+  const handleMouseDownPassword = (event) => {
     event.preventDefault()
   }
   const imageSource = skin === 'bordered' ? 'auth-v2-register-illustration-bordered' : 'auth-v2-register-illustration'
@@ -144,7 +144,14 @@ const RegisterV2 = () => {
               src={`/images/pages/${imageSource}-${theme.palette.mode}.png`}
             />
           </RegisterIllustrationWrapper>
-          <FooterIllustrationsV2 image={<TreeIllustration alt='tree' src='/images/pages/tree-2.png' />} />
+          <FooterIllustrationsV2
+            image={
+              <TreeIllustration
+                alt='tree'
+                src='/images/pages/tree-2.png'
+              />
+            }
+          />
         </Box>
       ) : null}
       <RightWrapper sx={skin === 'bordered' && !hidden ? { borderLeft: `1px solid ${theme.palette.divider}` } : {}}>
@@ -155,7 +162,7 @@ const RegisterV2 = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: 'background.paper'
+            backgroundColor: 'background.paper',
           }}
         >
           <BoxWrapper>
@@ -166,7 +173,7 @@ const RegisterV2 = () => {
                 display: 'flex',
                 position: 'absolute',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
               }}
             >
               <svg
@@ -177,9 +184,20 @@ const RegisterV2 = () => {
                 xmlns='http://www.w3.org/2000/svg'
                 xmlnsXlink='http://www.w3.org/1999/xlink'
               >
-                <g stroke='none' strokeWidth='1' fill='none' fillRule='evenodd'>
-                  <g id='Artboard' transform='translate(-95.000000, -51.000000)'>
-                    <g id='logo' transform='translate(95.000000, 50.000000)'>
+                <g
+                  stroke='none'
+                  strokeWidth='1'
+                  fill='none'
+                  fillRule='evenodd'
+                >
+                  <g
+                    id='Artboard'
+                    transform='translate(-95.000000, -51.000000)'
+                  >
+                    <g
+                      id='logo'
+                      transform='translate(95.000000, 50.000000)'
+                    >
                       <path
                         id='Combined-Shape'
                         fill={theme.palette.primary.main}
@@ -235,7 +253,7 @@ const RegisterV2 = () => {
                   lineHeight: 1,
                   fontWeight: 600,
                   textTransform: 'uppercase',
-                  fontSize: '1.5rem !important'
+                  fontSize: '1.5rem !important',
                 }}
               >
                 {themeConfig.templateName}
@@ -245,9 +263,22 @@ const RegisterV2 = () => {
               <TypographyStyled variant='h5'>Adventure starts here 🚀</TypographyStyled>
               <Typography variant='body2'>Make your app management easy and fun!</Typography>
             </Box>
-            <form noValidate autoComplete='off' onSubmit={handleSubmit}>
-              <TextField autoFocus id='username' label='Username' sx={{ display: 'flex', mb: 4 }} />
-              <TextField type='email' label='Email' sx={{ display: 'flex', mb: 4 }} />
+            <form
+              noValidate
+              autoComplete='off'
+              onSubmit={handleSubmit}
+            >
+              <TextField
+                autoFocus
+                id='username'
+                label='Username'
+                sx={{ display: 'flex', mb: 4 }}
+              />
+              <TextField
+                type='email'
+                label='Email'
+                sx={{ display: 'flex', mb: 4 }}
+              />
               <FormControl fullWidth>
                 <InputLabel htmlFor='auth-register-v2-password'>Password</InputLabel>
                 <OutlinedInput
@@ -275,46 +306,85 @@ const RegisterV2 = () => {
                 label={
                   <>
                     <span>I agree to </span>
-                    <Link href='/' passHref>
-                      <LinkStyled onClick={e => e.preventDefault()}>privacy policy & terms</LinkStyled>
+                    <Link
+                      href='/'
+                      passHref
+                    >
+                      <LinkStyled onClick={(e) => e.preventDefault()}>privacy policy & terms</LinkStyled>
                     </Link>
                   </>
                 }
               />
-              <Button fullWidth size='large' type='submit' variant='contained' sx={{ mb: 7 }}>
+              <Button
+                fullWidth
+                size='large'
+                type='submit'
+                variant='contained'
+                sx={{ mb: 7 }}
+              >
                 Sign up
               </Button>
               <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-                <Typography variant='body2' sx={{ mr: 2 }}>
+                <Typography
+                  variant='body2'
+                  sx={{ mr: 2 }}
+                >
                   Already have an account?
                 </Typography>
                 <Typography variant='body2'>
-                  <Link passHref href='/pages/auth/login-v2'>
+                  <Link
+                    passHref
+                    href='/pages/auth/login-v2'
+                  >
                     <LinkStyled>Sign in instead</LinkStyled>
                   </Link>
                 </Typography>
               </Box>
               <Divider sx={{ my: 5 }}>or</Divider>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Link href='/' passHref>
-                  <IconButton component='a' onClick={e => e.preventDefault()}>
+                <Link
+                  href='/'
+                  passHref
+                >
+                  <IconButton
+                    component='a'
+                    onClick={(e) => e.preventDefault()}
+                  >
                     <Facebook sx={{ color: '#497ce2' }} />
                   </IconButton>
                 </Link>
-                <Link href='/' passHref>
-                  <IconButton component='a' onClick={e => e.preventDefault()}>
+                <Link
+                  href='/'
+                  passHref
+                >
+                  <IconButton
+                    component='a'
+                    onClick={(e) => e.preventDefault()}
+                  >
                     <Twitter sx={{ color: '#1da1f2' }} />
                   </IconButton>
                 </Link>
-                <Link href='/' passHref>
-                  <IconButton component='a' onClick={e => e.preventDefault()}>
+                <Link
+                  href='/'
+                  passHref
+                >
+                  <IconButton
+                    component='a'
+                    onClick={(e) => e.preventDefault()}
+                  >
                     <Github
-                      sx={{ color: theme => (theme.palette.mode === 'light' ? '#272727' : theme.palette.grey[300]) }}
+                      sx={{ color: (theme) => (theme.palette.mode === 'light' ? '#272727' : theme.palette.grey[300]) }}
                     />
                   </IconButton>
                 </Link>
-                <Link href='/' passHref>
-                  <IconButton component='a' onClick={e => e.preventDefault()}>
+                <Link
+                  href='/'
+                  passHref
+                >
+                  <IconButton
+                    component='a'
+                    onClick={(e) => e.preventDefault()}
+                  >
                     <Google sx={{ color: '#db4437' }} />
                   </IconButton>
                 </Link>
@@ -326,6 +396,6 @@ const RegisterV2 = () => {
     </Box>
   )
 }
-RegisterV2.getLayout = page => <BlankLayout>{page}</BlankLayout>
+RegisterV2.getLayout = (page) => <BlankLayout>{page}</BlankLayout>
 
 export default RegisterV2

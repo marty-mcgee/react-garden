@@ -14,14 +14,14 @@ import CircleOutline from 'mdi-material-ui/Menu'
 import RecordCircleOutline from 'mdi-material-ui/MenuOpen'
 
 // ** Configs
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 // images
-import favicon from "~/assets/images/logos/favicon.png"
-import appleIcon from "~/assets/images/logos/apple-icon.png"
-import brandLight from "~/assets/images/logos/logo-threedgarden.png"
-import brandDark from "~/assets/images/logos/logo-threedgarden-alt.png"
-import brandText from "~/assets/images/logos/logo-threedgarden-text.png"
+import favicon from '~/assets/images/logos/favicon.png'
+import appleIcon from '~/assets/images/logos/apple-icon.png'
+import brandLight from '~/assets/images/logos/logo-threedgarden.png'
+import brandDark from '~/assets/images/logos/logo-threedgarden-alt.png'
+import brandText from '~/assets/images/logos/logo-threedgarden-text.png'
 
 // ** Styled Components
 const MenuHeaderWrapper = styled(Box)(({ theme }) => ({
@@ -30,7 +30,7 @@ const MenuHeaderWrapper = styled(Box)(({ theme }) => ({
   justifyContent: 'space-between',
   paddingRight: theme.spacing(4.5),
   transition: 'padding .25s ease-in-out',
-  minHeight: theme.mixins.toolbar.minHeight
+  minHeight: theme.mixins.toolbar.minHeight,
 }))
 
 const HeaderTitle = styled(Typography)(({ theme }) => ({
@@ -38,16 +38,16 @@ const HeaderTitle = styled(Typography)(({ theme }) => ({
   lineHeight: 'normal',
   textTransform: 'uppercase',
   color: theme.palette.text.primary,
-  transition: 'opacity .25s ease-in-out, margin .25s ease-in-out'
+  transition: 'opacity .25s ease-in-out, margin .25s ease-in-out',
 }))
 
 const StyledLink = styled('a')({
   display: 'flex',
   alignItems: 'center',
-  textDecoration: 'none'
+  textDecoration: 'none',
 })
 
-const VerticalNavHeader = props => {
+const VerticalNavHeader = (props) => {
   // ** Props
   const {
     hidden,
@@ -59,7 +59,7 @@ const VerticalNavHeader = props => {
     navigationBorderWidth,
     menuLockedIcon: userMenuLockedIcon,
     menuUnlockedIcon: userMenuUnlockedIcon,
-    verticalNavMenuBranding: userVerticalNavMenuBranding
+    verticalNavMenuBranding: userVerticalNavMenuBranding,
   } = props
 
   // ** Hooks & Vars
@@ -88,7 +88,7 @@ const VerticalNavHeader = props => {
           fontSize: '1.25rem',
           pointerEvents: 'none',
           ...menuCollapsedStyles,
-          transition: 'opacity .25s ease-in-out'
+          transition: 'opacity .25s ease-in-out',
         }}
       />
     )
@@ -101,17 +101,23 @@ const VerticalNavHeader = props => {
           fontSize: '1.25rem',
           pointerEvents: 'none',
           ...menuCollapsedStyles,
-          transition: 'opacity .25s ease-in-out'
+          transition: 'opacity .25s ease-in-out',
         }}
       />
     )
 
   return (
-    <MenuHeaderWrapper className='nav-header' sx={{ pl: menuHeaderPaddingLeft() }}>
+    <MenuHeaderWrapper
+      className='nav-header'
+      sx={{ pl: menuHeaderPaddingLeft() }}
+    >
       {userVerticalNavMenuBranding ? (
         userVerticalNavMenuBranding(props)
       ) : (
-        <Link href='/' passHref>
+        <Link
+          href='/'
+          passHref
+        >
           <StyledLink>
             <Image
               src={brandDark.src}
@@ -120,7 +126,10 @@ const VerticalNavHeader = props => {
               height={48}
               layout='raw'
             />
-            <HeaderTitle variant='h6' sx={{ ...menuCollapsedStyles, ...(navCollapsed && !navHover ? {} : { ml: 3 }) }}>
+            <HeaderTitle
+              variant='h6'
+              sx={{ ...menuCollapsedStyles, ...(navCollapsed && !navHover ? {} : { ml: 3 }) }}
+            >
               {themeConfig.templateName}
             </HeaderTitle>
           </StyledLink>

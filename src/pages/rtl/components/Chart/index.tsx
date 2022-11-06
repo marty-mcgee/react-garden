@@ -13,7 +13,7 @@ import MDTypography from "~/components/mui/MDTypography"
 import gradientChartLine from "~/themes/theme-light/functions/gradientChartLine"
 
 // Chart configurations
-import configs from "~/pages/widgets/components/Chart/configs"
+import configs from "~/pages/widgets/components/Chart/config"
 
 // ThreeD Garden Base Styles
 import colors from "~/themes/theme-light/base/colors"

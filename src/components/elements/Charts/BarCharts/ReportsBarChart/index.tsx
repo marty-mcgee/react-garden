@@ -10,7 +10,7 @@ import MDBox from "~/components/mui/MDBox"
 import MDTypography from "~/components/mui/MDTypography"
 
 // ReportsBarChart configurations
-import configs from "~/components/elements/Charts/BarCharts/ReportsBarChart/configs"
+import configs from "~/components/elements/Charts/BarCharts/ReportsBarChart/config"
 
 // react-chartjs-2 components
 import { Bar } from "react-chartjs-2"

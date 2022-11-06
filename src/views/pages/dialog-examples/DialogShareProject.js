@@ -32,13 +32,18 @@ import FileDocumentOutline from 'mdi-material-ui/FileDocumentOutline'
 import AccountMultipleOutline from 'mdi-material-ui/AccountMultipleOutline'
 
 // ** Configs Imports
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 // ** Hooks Imports
 import { useSettings } from '~/@core/hooks/useSettings'
 
 const Transition = forwardRef(function Transition(props, ref) {
-  return <Fade ref={ref} {...props} />
+  return (
+    <Fade
+      ref={ref}
+      {...props}
+    />
+  )
 })
 
 const data = [
@@ -46,77 +51,77 @@ const data = [
     avatar: '1.png',
     value: 'Can Edit',
     name: 'Lester Palmer',
-    email: 'pe@vogeiz.net'
+    email: 'pe@vogeiz.net',
   },
   {
     avatar: '2.png',
     value: 'owner',
     name: 'Mittie Blair',
-    email: 'peromak@zukedohik.gov'
+    email: 'peromak@zukedohik.gov',
   },
   {
     avatar: '3.png',
     value: 'Can Comment',
     name: 'Marvin Wheeler',
-    email: 'rumet@jujpejah.net'
+    email: 'rumet@jujpejah.net',
   },
   {
     avatar: '4.png',
     value: 'Can View',
     name: 'Nannie Ford',
-    email: 'negza@nuv.io'
+    email: 'negza@nuv.io',
   },
   {
     avatar: '5.png',
     value: 'Can Edit',
     name: 'Julian Murphy',
-    email: 'lunebame@umdomgu.net'
+    email: 'lunebame@umdomgu.net',
   },
   {
     avatar: '6.png',
     value: 'Can View',
     name: 'Sophie Gilbert',
-    email: 'ha@sugit.gov'
+    email: 'ha@sugit.gov',
   },
   {
     avatar: '7.png',
     value: 'Can Comment',
     name: 'Chris Watkins',
-    email: 'zokap@mak.org'
+    email: 'zokap@mak.org',
   },
   {
     avatar: '8.png',
     value: 'Can Edit',
     name: 'Adelaide Nichols',
-    email: 'ujinomu@jigo.com'
-  }
+    email: 'ujinomu@jigo.com',
+  },
 ]
 
 const options = [
   {
     avatar: '1.png',
-    name: 'Chandler Bing'
+    name: 'Chandler Bing',
   },
   {
     avatar: '2.png',
-    name: 'Rachel Green'
+    name: 'Rachel Green',
   },
   {
     avatar: '3.png',
-    name: 'Joey Tribbiani'
+    name: 'Joey Tribbiani',
   },
   {
     avatar: '4.png',
-    name: 'Pheobe Buffay'
+    name: 'Pheobe Buffay',
   },
   {
     avatar: '5.png',
-    name: 'Ross Geller'
+    name: 'Ross Geller',
   },
   {
     avatar: '8.png',
-    name: 'Monica Geller'
-  }
+    name: 'Monica Geller',
+  },
 ]
 
 const DialogShareProject = () => {
@@ -126,12 +131,12 @@ const DialogShareProject = () => {
 
   // ** Hooks
   const { settings } = useSettings()
-  const hidden = useMediaQuery(theme => theme.breakpoints.down('sm'))
+  const hidden = useMediaQuery((theme) => theme.breakpoints.down('sm'))
 
   // ** Var
   const { direction } = settings
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
 
@@ -143,13 +148,19 @@ const DialogShareProject = () => {
     <Card>
       <CardContent sx={{ textAlign: 'center' }}>
         <FileDocumentOutline sx={{ mb: 2, fontSize: '2rem' }} />
-        <Typography variant='h6' sx={{ mb: 4 }}>
+        <Typography
+          variant='h6'
+          sx={{ mb: 4 }}
+        >
           Share Project
         </Typography>
         <Typography sx={{ mb: 3 }}>
           Elegant Share Project options modal popup example, easy to use in any page.
         </Typography>
-        <Button variant='contained' onClick={() => setShow(true)}>
+        <Button
+          variant='contained'
+          onClick={() => setShow(true)}
+        >
           Show
         </Button>
       </CardContent>
@@ -171,7 +182,10 @@ const DialogShareProject = () => {
             <Close />
           </IconButton>
           <Box sx={{ mb: 4, textAlign: 'center' }}>
-            <Typography variant='h5' sx={{ mb: 3 }}>
+            <Typography
+              variant='h5'
+              sx={{ mb: 3 }}
+            >
               Share Project
             </Typography>
             <Typography variant='body2'>Share project with a team members</Typography>
@@ -188,26 +202,49 @@ const DialogShareProject = () => {
             id='add-members'
             options={options}
             ListboxComponent={List}
-            getOptionLabel={option => option.name}
-            renderInput={params => <TextField {...params} size='small' placeholder='Add project members...' />}
+            getOptionLabel={(option) => option.name}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                size='small'
+                placeholder='Add project members...'
+              />
+            )}
             renderOption={(props, option) => (
               <ListItem {...props}>
                 <ListItemAvatar>
-                  <Avatar src={`/images/avatars/${option.avatar}`} alt={option.name} sx={{ height: 28, width: 28 }} />
+                  <Avatar
+                    src={`/images/avatars/${option.avatar}`}
+                    alt={option.name}
+                    sx={{ height: 28, width: 28 }}
+                  />
                 </ListItemAvatar>
                 <ListItemText primary={option.name} />
               </ListItem>
             )}
           />
           <Typography variant='h6'>{`${data.length} Members`}</Typography>
-          <List dense sx={{ mb: 3 }}>
-            {data.map(member => {
+          <List
+            dense
+            sx={{ mb: 3 }}
+          >
+            {data.map((member) => {
               return (
-                <ListItem key={member.name} sx={{ px: 0, py: 2, display: 'flex', flexWrap: 'wrap' }}>
+                <ListItem
+                  key={member.name}
+                  sx={{ px: 0, py: 2, display: 'flex', flexWrap: 'wrap' }}
+                >
                   <ListItemAvatar>
-                    <Avatar src={`/images/avatars/${member.avatar}`} alt={member.name} />
+                    <Avatar
+                      src={`/images/avatars/${member.avatar}`}
+                      alt={member.name}
+                    />
                   </ListItemAvatar>
-                  <ListItemText sx={{ m: 0 }} primary={member.name} secondary={member.email} />
+                  <ListItemText
+                    sx={{ m: 0 }}
+                    primary={member.name}
+                    secondary={member.email}
+                  />
                   <ListItemSecondaryAction sx={{ right: 0 }}>
                     {hidden ? (
                       <IconButton
@@ -245,7 +282,10 @@ const DialogShareProject = () => {
               </Typography>
             </Box>
             <Button>
-              <LinkVariant sx={{ mr: 2 }} fontSize='small' />
+              <LinkVariant
+                sx={{ mr: 2 }}
+                fontSize='small'
+              />
               Copy Project Link
             </Button>
           </Box>
@@ -258,16 +298,32 @@ const DialogShareProject = () => {
             anchorOrigin={{ vertical: 'bottom', horizontal: direction === 'ltr' ? 'right' : 'left' }}
             transformOrigin={{ vertical: 'top', horizontal: direction === 'ltr' ? 'right' : 'left' }}
           >
-            <MenuItem value='owner' sx={{ fontSize: '0.875rem' }} onClick={handleClose}>
+            <MenuItem
+              value='owner'
+              sx={{ fontSize: '0.875rem' }}
+              onClick={handleClose}
+            >
               Owner
             </MenuItem>
-            <MenuItem value='Can Edit' sx={{ fontSize: '0.875rem' }} onClick={handleClose}>
+            <MenuItem
+              value='Can Edit'
+              sx={{ fontSize: '0.875rem' }}
+              onClick={handleClose}
+            >
               Can Edit
             </MenuItem>
-            <MenuItem value='Can Comment' sx={{ fontSize: '0.875rem' }} onClick={handleClose}>
+            <MenuItem
+              value='Can Comment'
+              sx={{ fontSize: '0.875rem' }}
+              onClick={handleClose}
+            >
               Can Comment
             </MenuItem>
-            <MenuItem value='Can View' sx={{ fontSize: '0.875rem' }} onClick={handleClose}>
+            <MenuItem
+              value='Can View'
+              sx={{ fontSize: '0.875rem' }}
+              onClick={handleClose}
+            >
               Can View
             </MenuItem>
           </Menu>

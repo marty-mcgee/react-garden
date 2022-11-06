@@ -23,7 +23,7 @@ import ChevronLeft from 'mdi-material-ui/ChevronLeft'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 
 // ** Configs
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 // ** Layout Import
 import BlankLayout from '~/@core/layouts/BlankLayout'
@@ -33,7 +33,7 @@ import FooterIllustrationsV1 from '~/views/pages/auth/FooterIllustrationsV1'
 
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
-  [theme.breakpoints.up('sm')]: { width: '28rem' }
+  [theme.breakpoints.up('sm')]: { width: '28rem' },
 }))
 
 const LinkStyled = styled('a')(({ theme }) => ({
@@ -41,7 +41,7 @@ const LinkStyled = styled('a')(({ theme }) => ({
   alignItems: 'center',
   textDecoration: 'none',
   justifyContent: 'center',
-  color: theme.palette.primary.main
+  color: theme.palette.primary.main,
 }))
 
 const ResetPasswordV1 = () => {
@@ -50,18 +50,18 @@ const ResetPasswordV1 = () => {
     newPassword: '',
     showNewPassword: false,
     confirmNewPassword: '',
-    showConfirmNewPassword: false
+    showConfirmNewPassword: false,
   })
 
   // ** Hook
   const theme = useTheme()
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault()
   }
 
   // Handle New Password
-  const handleNewPasswordChange = prop => event => {
+  const handleNewPasswordChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value })
   }
 
@@ -69,12 +69,12 @@ const ResetPasswordV1 = () => {
     setValues({ ...values, showNewPassword: !values.showNewPassword })
   }
 
-  const handleMouseDownNewPassword = event => {
+  const handleMouseDownNewPassword = (event) => {
     event.preventDefault()
   }
 
   // Handle Confirm New Password
-  const handleConfirmNewPasswordChange = prop => event => {
+  const handleConfirmNewPasswordChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value })
   }
 
@@ -82,14 +82,14 @@ const ResetPasswordV1 = () => {
     setValues({ ...values, showConfirmNewPassword: !values.showConfirmNewPassword })
   }
 
-  const handleMouseDownConfirmNewPassword = event => {
+  const handleMouseDownConfirmNewPassword = (event) => {
     event.preventDefault()
   }
 
   return (
     <Box className='content-center'>
       <Card sx={{ zIndex: 1 }}>
-        <CardContent sx={{ p: theme => `${theme.spacing(12, 9, 7)} !important` }}>
+        <CardContent sx={{ p: (theme) => `${theme.spacing(12, 9, 7)} !important` }}>
           <Box sx={{ mb: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <svg
               width={35}
@@ -99,9 +99,20 @@ const ResetPasswordV1 = () => {
               xmlns='http://www.w3.org/2000/svg'
               xmlnsXlink='http://www.w3.org/1999/xlink'
             >
-              <g stroke='none' strokeWidth='1' fill='none' fillRule='evenodd'>
-                <g id='Artboard' transform='translate(-95.000000, -51.000000)'>
-                  <g id='logo' transform='translate(95.000000, 50.000000)'>
+              <g
+                stroke='none'
+                strokeWidth='1'
+                fill='none'
+                fillRule='evenodd'
+              >
+                <g
+                  id='Artboard'
+                  transform='translate(-95.000000, -51.000000)'
+                >
+                  <g
+                    id='logo'
+                    transform='translate(95.000000, 50.000000)'
+                  >
                     <path
                       id='Combined-Shape'
                       fill={theme.palette.primary.main}
@@ -157,19 +168,26 @@ const ResetPasswordV1 = () => {
                 lineHeight: 1,
                 fontWeight: 600,
                 textTransform: 'uppercase',
-                fontSize: '1.5rem !important'
+                fontSize: '1.5rem !important',
               }}
             >
               {themeConfig.templateName}
             </Typography>
           </Box>
           <Box sx={{ mb: 6 }}>
-            <Typography variant='h5' sx={{ fontWeight: 600, mb: 1.5 }}>
+            <Typography
+              variant='h5'
+              sx={{ fontWeight: 600, mb: 1.5 }}
+            >
               Reset Password 🔒
             </Typography>
             <Typography variant='body2'>Your new password must be different from previously used passwords</Typography>
           </Box>
-          <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+          <form
+            noValidate
+            autoComplete='off'
+            onSubmit={handleSubmit}
+          >
             <FormControl sx={{ display: 'flex', mb: 4 }}>
               <InputLabel htmlFor='auth-reset-password-new-password'>New Password</InputLabel>
               <OutlinedInput
@@ -215,11 +233,23 @@ const ResetPasswordV1 = () => {
                 }
               />
             </FormControl>
-            <Button fullWidth size='large' type='submit' variant='contained' sx={{ mb: 5.25 }}>
+            <Button
+              fullWidth
+              size='large'
+              type='submit'
+              variant='contained'
+              sx={{ mb: 5.25 }}
+            >
               Set New Password
             </Button>
-            <Typography variant='body2' sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Link passHref href='/pages/auth/login-v1'>
+            <Typography
+              variant='body2'
+              sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+              <Link
+                passHref
+                href='/pages/auth/login-v1'
+              >
                 <LinkStyled>
                   <ChevronLeft />
                   <span>Back to login</span>
@@ -233,6 +263,6 @@ const ResetPasswordV1 = () => {
     </Box>
   )
 }
-ResetPasswordV1.getLayout = page => <BlankLayout>{page}</BlankLayout>
+ResetPasswordV1.getLayout = (page) => <BlankLayout>{page}</BlankLayout>
 
 export default ResetPasswordV1

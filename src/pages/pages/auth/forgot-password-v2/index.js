@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography'
 import ChevronLeft from 'mdi-material-ui/ChevronLeft'
 
 // ** Configs
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 // ** Layout Import
 import BlankLayout from '~/@core/layouts/BlankLayout'
@@ -29,37 +29,37 @@ const ForgotPasswordIllustrationWrapper = styled(Box)(({ theme }) => ({
   padding: theme.spacing(20),
   paddingRight: '0 !important',
   [theme.breakpoints.down('lg')]: {
-    padding: theme.spacing(10)
-  }
+    padding: theme.spacing(10),
+  },
 }))
 
 const ForgotPasswordIllustration = styled('img')(({ theme }) => ({
   maxWidth: '53.125rem',
   [theme.breakpoints.down('lg')]: {
-    maxWidth: '35rem'
-  }
+    maxWidth: '35rem',
+  },
 }))
 
 const RightWrapper = styled(Box)(({ theme }) => ({
   width: '100%',
   [theme.breakpoints.up('md')]: {
-    maxWidth: 450
-  }
+    maxWidth: 450,
+  },
 }))
 
 const BoxWrapper = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down('xl')]: {
-    width: '100%'
+    width: '100%',
   },
   [theme.breakpoints.down('md')]: {
-    maxWidth: 400
-  }
+    maxWidth: 400,
+  },
 }))
 
 const TypographyStyled = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   marginBottom: theme.spacing(1.5),
-  [theme.breakpoints.down('md')]: { mt: theme.spacing(8) }
+  [theme.breakpoints.down('md')]: { mt: theme.spacing(8) },
 }))
 
 const LinkStyled = styled('a')(({ theme }) => ({
@@ -68,7 +68,7 @@ const LinkStyled = styled('a')(({ theme }) => ({
   alignItems: 'center',
   textDecoration: 'none',
   justifyContent: 'center',
-  color: theme.palette.primary.main
+  color: theme.palette.primary.main,
 }))
 
 const ForgotPasswordV2 = () => {
@@ -80,7 +80,7 @@ const ForgotPasswordV2 = () => {
   const { skin } = settings
   const hidden = useMediaQuery(theme.breakpoints.down('md'))
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault()
   }
 
@@ -108,7 +108,7 @@ const ForgotPasswordV2 = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: 'background.paper'
+            backgroundColor: 'background.paper',
           }}
         >
           <BoxWrapper>
@@ -119,7 +119,7 @@ const ForgotPasswordV2 = () => {
                 display: 'flex',
                 position: 'absolute',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
               }}
             >
               <svg
@@ -130,9 +130,20 @@ const ForgotPasswordV2 = () => {
                 xmlns='http://www.w3.org/2000/svg'
                 xmlnsXlink='http://www.w3.org/1999/xlink'
               >
-                <g stroke='none' strokeWidth='1' fill='none' fillRule='evenodd'>
-                  <g id='Artboard' transform='translate(-95.000000, -51.000000)'>
-                    <g id='logo' transform='translate(95.000000, 50.000000)'>
+                <g
+                  stroke='none'
+                  strokeWidth='1'
+                  fill='none'
+                  fillRule='evenodd'
+                >
+                  <g
+                    id='Artboard'
+                    transform='translate(-95.000000, -51.000000)'
+                  >
+                    <g
+                      id='logo'
+                      transform='translate(95.000000, 50.000000)'
+                    >
                       <path
                         id='Combined-Shape'
                         fill={theme.palette.primary.main}
@@ -188,7 +199,7 @@ const ForgotPasswordV2 = () => {
                   lineHeight: 1,
                   fontWeight: 600,
                   textTransform: 'uppercase',
-                  fontSize: '1.5rem !important'
+                  fontSize: '1.5rem !important',
                 }}
               >
                 {themeConfig.templateName}
@@ -200,13 +211,34 @@ const ForgotPasswordV2 = () => {
                 Enter your email and we&prime;ll send you instructions to reset your password
               </Typography>
             </Box>
-            <form noValidate autoComplete='off' onSubmit={handleSubmit}>
-              <TextField autoFocus type='email' label='Email' sx={{ display: 'flex', mb: 4 }} />
-              <Button fullWidth size='large' type='submit' variant='contained' sx={{ mb: 5.25 }}>
+            <form
+              noValidate
+              autoComplete='off'
+              onSubmit={handleSubmit}
+            >
+              <TextField
+                autoFocus
+                type='email'
+                label='Email'
+                sx={{ display: 'flex', mb: 4 }}
+              />
+              <Button
+                fullWidth
+                size='large'
+                type='submit'
+                variant='contained'
+                sx={{ mb: 5.25 }}
+              >
                 Send reset link
               </Button>
-              <Typography variant='body2' sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Link passHref href='/pages/auth/login-v2'>
+              <Typography
+                variant='body2'
+                sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              >
+                <Link
+                  passHref
+                  href='/pages/auth/login-v2'
+                >
                   <LinkStyled>
                     <ChevronLeft />
                     <span>Back to login</span>
@@ -220,6 +252,6 @@ const ForgotPasswordV2 = () => {
     </Box>
   )
 }
-ForgotPasswordV2.getLayout = page => <BlankLayout>{page}</BlankLayout>
+ForgotPasswordV2.getLayout = (page) => <BlankLayout>{page}</BlankLayout>
 
 export default ForgotPasswordV2

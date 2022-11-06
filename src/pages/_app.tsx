@@ -32,9 +32,9 @@ import NProgress from 'nprogress'
 import { CacheProvider, EmotionCache } from '@emotion/react'
 
 // ** Config Imports
-import '~/configs/i18n'
-import { defaultACLObj } from '~/configs/acl'
-import themeConfig from '~/configs/themeConfig'
+import '~/config/i18n'
+import { defaultACLObj } from '~/config/acl'
+import themeConfig from '~/config/themeConfig'
 
 // ** Fake-DB Import
 import '~/@fake-db'

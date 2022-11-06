@@ -2,7 +2,7 @@
 import { createContext, useState, useEffect } from 'react'
 
 // ** ThemeConfig Import
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 const initialSettings = {
   themeColor: 'threed',
@@ -18,7 +18,7 @@ const initialSettings = {
   toastPosition: themeConfig.toastPosition,
   verticalNavToggleType: themeConfig.verticalNavToggleType,
   skin: themeConfig.layout === 'horizontal' && themeConfig.skin === 'semi-dark' ? 'default' : themeConfig.skin,
-  appBar: themeConfig.layout === 'horizontal' && themeConfig.appBar === 'hidden' ? 'fixed' : themeConfig.appBar
+  appBar: themeConfig.layout === 'horizontal' && themeConfig.appBar === 'hidden' ? 'fixed' : themeConfig.appBar,
 }
 
 const staticSettings = {
@@ -27,7 +27,7 @@ const staticSettings = {
   layout: initialSettings.layout,
   navHidden: initialSettings.navHidden,
   lastLayout: initialSettings.lastLayout,
-  toastPosition: initialSettings.toastPosition
+  toastPosition: initialSettings.toastPosition,
 }
 
 const restoreSettings = () => {
@@ -47,7 +47,7 @@ const restoreSettings = () => {
 }
 
 // set settings in localStorage
-const storeSettings = settings => {
+const storeSettings = (settings) => {
   const initSettings = { ...settings }
   delete initSettings.appBar
   delete initSettings.footer
@@ -61,14 +61,14 @@ const storeSettings = settings => {
 // ** Create Context
 export const SettingsContext = createContext({
   saveSettings: () => null,
-  settings: initialSettings
+  settings: initialSettings,
 })
 
 export const SettingsProvider = ({ children, pageSettings }) => {
   // ** State
   const [settings, setSettings] = useState({ ...initialSettings })
 
-  const saveSettings = updatedSettings => {
+  const saveSettings = (updatedSettings) => {
     storeSettings(updatedSettings)
     setSettings(updatedSettings)
   }

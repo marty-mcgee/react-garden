@@ -9,7 +9,7 @@ import MDBox from "~/components/mui/MDBox"
 import MDTypography from "~/components/mui/MDTypography"
 
 // DefaultDoughnutChart configurations
-import configs from "~/components/elements/Charts/DoughnutCharts/DefaultDoughnutChart/configs"
+import configs from "~/components/elements/Charts/DoughnutCharts/DefaultDoughnutChart/config"
 
 // react-chartjs-2 components
 import { Doughnut } from "react-chartjs-2"

@@ -30,7 +30,7 @@ import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 
 // ** Configs
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 // ** Layout Import
 import BlankLayout from '~/@core/layouts/BlankLayout'
@@ -40,33 +40,33 @@ import FooterIllustrationsV1 from '~/views/pages/auth/FooterIllustrationsV1'
 
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
-  [theme.breakpoints.up('sm')]: { width: '28rem' }
+  [theme.breakpoints.up('sm')]: { width: '28rem' },
 }))
 
 const LinkStyled = styled('a')(({ theme }) => ({
   fontSize: '0.875rem',
   textDecoration: 'none',
-  color: theme.palette.primary.main
+  color: theme.palette.primary.main,
 }))
 
 const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
   '& .MuiFormControlLabel-label': {
     fontSize: '0.875rem',
-    color: theme.palette.text.secondary
-  }
+    color: theme.palette.text.secondary,
+  },
 }))
 
 const LoginV1 = () => {
   // ** State
   const [values, setValues] = useState({
     password: '',
-    showPassword: false
+    showPassword: false,
   })
 
   // ** Hook
   const theme = useTheme()
 
-  const handleChange = prop => event => {
+  const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value })
   }
 
@@ -74,14 +74,14 @@ const LoginV1 = () => {
     setValues({ ...values, showPassword: !values.showPassword })
   }
 
-  const handleMouseDownPassword = event => {
+  const handleMouseDownPassword = (event) => {
     event.preventDefault()
   }
 
   return (
     <Box className='content-center'>
       <Card sx={{ zIndex: 1 }}>
-        <CardContent sx={{ p: theme => `${theme.spacing(12, 9, 7)} !important` }}>
+        <CardContent sx={{ p: (theme) => `${theme.spacing(12, 9, 7)} !important` }}>
           <Box sx={{ mb: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <svg
               width={35}
@@ -91,9 +91,20 @@ const LoginV1 = () => {
               xmlns='http://www.w3.org/2000/svg'
               xmlnsXlink='http://www.w3.org/1999/xlink'
             >
-              <g stroke='none' strokeWidth='1' fill='none' fillRule='evenodd'>
-                <g id='Artboard' transform='translate(-95.000000, -51.000000)'>
-                  <g id='logo' transform='translate(95.000000, 50.000000)'>
+              <g
+                stroke='none'
+                strokeWidth='1'
+                fill='none'
+                fillRule='evenodd'
+              >
+                <g
+                  id='Artboard'
+                  transform='translate(-95.000000, -51.000000)'
+                >
+                  <g
+                    id='logo'
+                    transform='translate(95.000000, 50.000000)'
+                  >
                     <path
                       id='Combined-Shape'
                       fill={theme.palette.primary.main}
@@ -149,20 +160,33 @@ const LoginV1 = () => {
                 lineHeight: 1,
                 fontWeight: 600,
                 textTransform: 'uppercase',
-                fontSize: '1.5rem !important'
+                fontSize: '1.5rem !important',
               }}
             >
               {themeConfig.templateName}
             </Typography>
           </Box>
           <Box sx={{ mb: 6 }}>
-            <Typography variant='h5' sx={{ fontWeight: 600, mb: 1.5 }}>
+            <Typography
+              variant='h5'
+              sx={{ fontWeight: 600, mb: 1.5 }}
+            >
               Welcome to {themeConfig.templateName}! 👋🏻
             </Typography>
             <Typography variant='body2'>Please sign-in to your account and start the adventure</Typography>
           </Box>
-          <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
-            <TextField autoFocus fullWidth id='email' label='Email' sx={{ mb: 4 }} />
+          <form
+            noValidate
+            autoComplete='off'
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <TextField
+              autoFocus
+              fullWidth
+              id='email'
+              label='Email'
+              sx={{ mb: 4 }}
+            />
             <FormControl fullWidth>
               <InputLabel htmlFor='auth-login-password'>Password</InputLabel>
               <OutlinedInput
@@ -188,45 +212,87 @@ const LoginV1 = () => {
             <Box
               sx={{ mb: 4, display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-between' }}
             >
-              <FormControlLabel control={<Checkbox />} label='Remember Me' />
-              <Link passHref href='/pages/auth/forgot-password-v1'>
+              <FormControlLabel
+                control={<Checkbox />}
+                label='Remember Me'
+              />
+              <Link
+                passHref
+                href='/pages/auth/forgot-password-v1'
+              >
                 <LinkStyled>Forgot Password?</LinkStyled>
               </Link>
             </Box>
-            <Button fullWidth size='large' type='submit' variant='contained' sx={{ mb: 7 }}>
+            <Button
+              fullWidth
+              size='large'
+              type='submit'
+              variant='contained'
+              sx={{ mb: 7 }}
+            >
               Login
             </Button>
             <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-              <Typography variant='body2' sx={{ mr: 2 }}>
+              <Typography
+                variant='body2'
+                sx={{ mr: 2 }}
+              >
                 New on our platform?
               </Typography>
               <Typography variant='body2'>
-                <Link passHref href='/pages/auth/register-v1'>
+                <Link
+                  passHref
+                  href='/pages/auth/register-v1'
+                >
                   <LinkStyled>Create an account</LinkStyled>
                 </Link>
               </Typography>
             </Box>
             <Divider sx={{ my: 5 }}>or</Divider>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Link href='/' passHref>
-                <IconButton component='a' onClick={e => e.preventDefault()}>
+              <Link
+                href='/'
+                passHref
+              >
+                <IconButton
+                  component='a'
+                  onClick={(e) => e.preventDefault()}
+                >
                   <Facebook sx={{ color: '#497ce2' }} />
                 </IconButton>
               </Link>
-              <Link href='/' passHref>
-                <IconButton component='a' onClick={e => e.preventDefault()}>
+              <Link
+                href='/'
+                passHref
+              >
+                <IconButton
+                  component='a'
+                  onClick={(e) => e.preventDefault()}
+                >
                   <Twitter sx={{ color: '#1da1f2' }} />
                 </IconButton>
               </Link>
-              <Link href='/' passHref>
-                <IconButton component='a' onClick={e => e.preventDefault()}>
+              <Link
+                href='/'
+                passHref
+              >
+                <IconButton
+                  component='a'
+                  onClick={(e) => e.preventDefault()}
+                >
                   <Github
-                    sx={{ color: theme => (theme.palette.mode === 'light' ? '#272727' : theme.palette.grey[300]) }}
+                    sx={{ color: (theme) => (theme.palette.mode === 'light' ? '#272727' : theme.palette.grey[300]) }}
                   />
                 </IconButton>
               </Link>
-              <Link href='/' passHref>
-                <IconButton component='a' onClick={e => e.preventDefault()}>
+              <Link
+                href='/'
+                passHref
+              >
+                <IconButton
+                  component='a'
+                  onClick={(e) => e.preventDefault()}
+                >
                   <Google sx={{ color: '#db4437' }} />
                 </IconButton>
               </Link>
@@ -238,6 +304,6 @@ const LoginV1 = () => {
     </Box>
   )
 }
-LoginV1.getLayout = page => <BlankLayout>{page}</BlankLayout>
+LoginV1.getLayout = (page) => <BlankLayout>{page}</BlankLayout>
 
 export default LoginV1

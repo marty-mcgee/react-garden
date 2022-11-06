@@ -9,7 +9,7 @@ import MDBox from "~/components/mui/MDBox"
 import MDTypography from "~/components/mui/MDTypography"
 
 // PolarChart configurations
-import configs from "~/components/elements/Charts/PolarChart/configs"
+import configs from "~/components/elements/Charts/PolarChart/config"
 
 // react-chartjs-2 components
 import { PolarArea } from "react-chartjs-2"

@@ -42,7 +42,7 @@ import useBgColor from '~/@core/hooks/useBgColor'
 import { useSettings } from '~/@core/hooks/useSettings'
 
 // ** Configs
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 // ** Layout Import
 import BlankLayout from '~/@core/layouts/BlankLayout'

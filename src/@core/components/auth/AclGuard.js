@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import { AbilityContext } from '~/layouts/components/acl/Can'
 
 // ** Config Import
-import { buildAbilityFor } from '~/configs/acl'
+import { buildAbilityFor } from '~/config/acl'
 
 // ** Component Import
 import NotAuthorized from '~/pages/401'
@@ -17,7 +17,7 @@ import BlankLayout from '~/@core/layouts/BlankLayout'
 // ** Hooks
 import { useAuth } from '~/hooks/useAuth'
 
-const AclGuard = props => {
+const AclGuard = (props) => {
   // ** Props
   const { aclAbilities, children, guestGuard } = props
   const [ability, setAbility] = useState(undefined)

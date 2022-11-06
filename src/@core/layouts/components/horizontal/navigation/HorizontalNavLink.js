@@ -18,7 +18,7 @@ import MuiListItem from '@mui/material/ListItem'
 import clsx from 'clsx'
 
 // ** Theme Config Import
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 // ** Custom Components Imports
 import UserIcon from '~/layouts/components/UserIcon'
@@ -34,17 +34,17 @@ const ListItem = styled(MuiListItem)(({ theme }) => ({
   color: theme.palette.text.primary,
   paddingBottom: theme.spacing(2.25),
   '&:hover': {
-    backgroundColor: theme.palette.action.hover
+    backgroundColor: theme.palette.action.hover,
   },
   '&.active, &.active:hover': {
-    backgroundColor: hexToRGBA(theme.palette.primary.main, 0.08)
+    backgroundColor: hexToRGBA(theme.palette.primary.main, 0.08),
   },
   '&.active .MuiTypography-root, &.active .MuiListItemIcon-root': {
-    color: theme.palette.primary.main
-  }
+    color: theme.palette.primary.main,
+  },
 }))
 
-const HorizontalNavLink = props => {
+const HorizontalNavLink = (props) => {
   // ** Props
   const { item, settings, hasParent } = props
 
@@ -73,13 +73,16 @@ const HorizontalNavLink = props => {
   return (
     <CanViewNavLink navLink={item}>
       <Wrapper {...(!hasParent ? { component: 'div', sx: { py: settings.skin === 'bordered' ? 2.625 : 2.75 } } : {})}>
-        <Link href={`${item.path}`} passHref>
+        <Link
+          href={`${item.path}`}
+          passHref
+        >
           <ListItem
             component={'a'}
             disabled={item.disabled}
             className={clsx({ active: isNavLinkActive() })}
             target={item.openInNewTab ? '_blank' : undefined}
-            onClick={e => {
+            onClick={(e) => {
               if (item.path === undefined) {
                 e.preventDefault()
                 e.stopPropagation()
@@ -89,18 +92,18 @@ const HorizontalNavLink = props => {
               ...(item.disabled ? { pointerEvents: 'none' } : { cursor: 'pointer' }),
               ...(!hasParent
                 ? {
-                  px: 5.5,
-                  borderRadius: 3.5,
-                  '&.active, &.active:hover': {
-                    boxShadow: 3,
-                    backgroundImage: theme =>
-                      `linear-gradient(98deg, ${theme.palette.customColors.primaryGradient}, ${theme.palette.primary.main} 94%)`,
-                    '& .MuiTypography-root, & .MuiListItemIcon-root': {
-                      color: 'common.white'
-                    }
+                    px: 5.5,
+                    borderRadius: 3.5,
+                    '&.active, &.active:hover': {
+                      boxShadow: 3,
+                      backgroundImage: (theme) =>
+                        `linear-gradient(98deg, ${theme.palette.customColors.primaryGradient}, ${theme.palette.primary.main} 94%)`,
+                      '& .MuiTypography-root, & .MuiListItemIcon-root': {
+                        color: 'common.white',
+                      },
+                    },
                   }
-                }
-                : { px: 5 })
+                : { px: 5 }),
             }}
           >
             <Box sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -108,7 +111,7 @@ const HorizontalNavLink = props => {
                 sx={{
                   display: 'flex',
                   alignItems: 'center',
-                  ...(menuTextTruncate && { overflow: 'hidden' })
+                  ...(menuTextTruncate && { overflow: 'hidden' }),
                 }}
               >
                 <ListItemIcon sx={{ color: 'text.primary', mr: !hasParent ? 2 : 3 }}>
@@ -130,7 +133,7 @@ const HorizontalNavLink = props => {
                     ml: 1.6,
                     height: 20,
                     fontWeight: 500,
-                    '& .MuiChip-label': { px: 1.5, textTransform: 'capitalize' }
+                    '& .MuiChip-label': { px: 1.5, textTransform: 'capitalize' },
                   }}
                 />
               ) : null}

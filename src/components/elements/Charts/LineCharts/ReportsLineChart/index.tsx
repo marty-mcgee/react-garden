@@ -10,7 +10,7 @@ import MDBox from "~/components/mui/MDBox"
 import MDTypography from "~/components/mui/MDTypography"
 
 // ReportsLineChart configurations
-import configs from "~/components/elements/Charts/LineCharts/ReportsLineChart/configs"
+import configs from "~/components/elements/Charts/LineCharts/ReportsLineChart/config"
 
 // react-chartjs-2 components
 import { Line } from "react-chartjs-2"

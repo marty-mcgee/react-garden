@@ -5,7 +5,7 @@ import GlobalStyles from '@mui/material/GlobalStyles'
 import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles'
 
 // ** Theme Config
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 // ** Direction component for LTR or RTL
 import Direction from '~/layouts/components/Direction'
@@ -21,7 +21,7 @@ import UserThemeOptions from '~/layouts/UserThemeOptions'
 // ** Global Styles
 import GlobalStyling from './globalStyles'
 
-const ThemeComponent = props => {
+const ThemeComponent = (props) => {
   // ** Props
   const { settings, children } = props
 
@@ -36,12 +36,12 @@ const ThemeComponent = props => {
     deepmerge({ ...overrides(theme, settings) }, UserThemeOptions()?.components)
 
   // ** Deep Merge Typography of core and user
-  const mergeTypography = theme => deepmerge(typography(theme), UserThemeOptions()?.typography)
+  const mergeTypography = (theme) => deepmerge(typography(theme), UserThemeOptions()?.typography)
 
   // ** Continue theme creation and pass merged component overrides to CreateTheme function
   theme = createTheme(theme, {
     components: { ...mergeComponentOverrides(theme, settings) },
-    typography: { ...mergeTypography(theme) }
+    typography: { ...mergeTypography(theme) },
   })
 
   // ** Set responsive font sizes to true

@@ -8,13 +8,13 @@ import Typography from '@mui/material/Typography'
 import { styled, useTheme } from '@mui/material/styles'
 
 // ** Configs
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 const StyledLink = styled('a')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   textDecoration: 'none',
-  marginRight: theme.spacing(8)
+  marginRight: theme.spacing(8),
 }))
 
 const BlankLayoutAppBar = () => {
@@ -22,15 +22,22 @@ const BlankLayoutAppBar = () => {
   const theme = useTheme()
 
   return (
-    <AppBar elevation={3} color='default' position='sticky'>
+    <AppBar
+      elevation={3}
+      color='default'
+      position='sticky'
+    >
       <Toolbar
         sx={{
           justifyContent: 'space-between',
-          p: theme => `${theme.spacing(0, 6)} !important`,
-          minHeight: `${theme.mixins.toolbar.minHeight}px !important`
+          p: (theme) => `${theme.spacing(0, 6)} !important`,
+          minHeight: `${theme.mixins.toolbar.minHeight}px !important`,
         }}
       >
-        <Link href='/' passHref>
+        <Link
+          href='/'
+          passHref
+        >
           <StyledLink>
             <svg
               width={30}
@@ -40,9 +47,20 @@ const BlankLayoutAppBar = () => {
               xmlns='http://www.w3.org/2000/svg'
               xmlnsXlink='http://www.w3.org/1999/xlink'
             >
-              <g stroke='none' strokeWidth='1' fill='none' fillRule='evenodd'>
-                <g id='Artboard' transform='translate(-95.000000, -51.000000)'>
-                  <g id='logo' transform='translate(95.000000, 50.000000)'>
+              <g
+                stroke='none'
+                strokeWidth='1'
+                fill='none'
+                fillRule='evenodd'
+              >
+                <g
+                  id='Artboard'
+                  transform='translate(-95.000000, -51.000000)'
+                >
+                  <g
+                    id='logo'
+                    transform='translate(95.000000, 50.000000)'
+                  >
                     <path
                       id='Combined-Shape'
                       fill={theme.palette.primary.main}
@@ -97,7 +115,7 @@ const BlankLayoutAppBar = () => {
                 ml: 3,
                 fontWeight: 600,
                 lineHeight: 'normal',
-                textTransform: 'uppercase'
+                textTransform: 'uppercase',
               }}
             >
               {themeConfig.templateName}

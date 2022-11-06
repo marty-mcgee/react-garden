@@ -10,7 +10,7 @@ import Box from '@mui/material/Box'
 import ArrowUp from 'mdi-material-ui/ArrowUp'
 
 // ** Theme Config Import
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 // ** Components
 import AppBar from './components/vertical/appBar'
@@ -24,7 +24,7 @@ import DatePickerWrapper from '~/@core/styles/libs/react-datepicker'
 
 const VerticalLayoutWrapper = styled('div')({
   height: '100%',
-  display: 'flex'
+  display: 'flex',
 })
 
 const MainContentWrapper = styled(Box)({
@@ -32,7 +32,7 @@ const MainContentWrapper = styled(Box)({
   minWidth: 0,
   display: 'flex',
   minHeight: '100vh',
-  flexDirection: 'column'
+  flexDirection: 'column',
 })
 
 const ContentWrapper = styled('main')(({ theme }) => ({
@@ -42,11 +42,11 @@ const ContentWrapper = styled('main')(({ theme }) => ({
   transition: 'padding .25s ease-in-out',
   [theme.breakpoints.down('sm')]: {
     paddingLeft: theme.spacing(4),
-    paddingRight: theme.spacing(4)
-  }
+    paddingRight: theme.spacing(4),
+  },
 }))
 
-const VerticalLayout = props => {
+const VerticalLayout = (props) => {
   // ** Props
   const { hidden, settings, children, scrollToTop } = props
 
@@ -68,8 +68,8 @@ const VerticalLayout = props => {
     <>
       <VerticalLayoutWrapper className='layout-wrapper'>
         {navHidden &&
-          themeConfig.layout === 'vertical' &&
-          !(navHidden && settings.lastLayout === 'horizontal') ? null : (
+        themeConfig.layout === 'vertical' &&
+        !(navHidden && settings.lastLayout === 'horizontal') ? null : (
           <Navigation
             navWidth={navWidth}
             navHover={navHover}
@@ -83,7 +83,10 @@ const VerticalLayout = props => {
           />
         )}
         <MainContentWrapper className='layout-content-wrapper'>
-          <AppBar toggleNavVisibility={toggleNavVisibility} {...props} />
+          <AppBar
+            toggleNavVisibility={toggleNavVisibility}
+            {...props}
+          />
 
           <ContentWrapper
             className='layout-page-content'
@@ -91,8 +94,8 @@ const VerticalLayout = props => {
               ...(contentWidth === 'boxed' && {
                 mx: 'auto',
                 '@media (min-width:1440px)': { maxWidth: 1440 },
-                '@media (min-width:1200px)': { maxWidth: '100%' }
-              })
+                '@media (min-width:1200px)': { maxWidth: '100%' },
+              }),
             }}
           >
             {children}
@@ -112,7 +115,11 @@ const VerticalLayout = props => {
         scrollToTop(props)
       ) : (
         <ScrollToTop className='mui-fixed'>
-          <Fab color='primary' size='small' aria-label='scroll back to top'>
+          <Fab
+            color='primary'
+            size='small'
+            aria-label='scroll back to top'
+          >
             <ArrowUp />
           </Fab>
         </ScrollToTop>

@@ -22,7 +22,7 @@ import ChevronLeft from 'mdi-material-ui/ChevronLeft'
 import ChevronRight from 'mdi-material-ui/ChevronRight'
 
 // ** Configs Import
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 // ** Utils
 import { hasActiveChild, removeChildren } from '~/@core/layouts/utils'
@@ -38,20 +38,20 @@ const MenuItemTextWrapper = styled(Box)(() => ({
   display: 'flex',
   justifyContent: 'space-between',
   transition: 'opacity .25s ease-in-out',
-  ...(themeConfig.menuTextTruncate && { overflow: 'hidden' })
+  ...(themeConfig.menuTextTruncate && { overflow: 'hidden' }),
 }))
 
 const MenuGroupToggleRightIcon = styled(ChevronRight)(({ theme }) => ({
   color: theme.palette.text.primary,
-  transition: 'transform .25s ease-in-out'
+  transition: 'transform .25s ease-in-out',
 }))
 
 const MenuGroupToggleLeftIcon = styled(ChevronLeft)(({ theme }) => ({
   color: theme.palette.text.primary,
-  transition: 'transform .25s ease-in-out'
+  transition: 'transform .25s ease-in-out',
 }))
 
-const VerticalNavGroup = props => {
+const VerticalNavGroup = (props) => {
   // ** Props
   const {
     item,
@@ -65,7 +65,7 @@ const VerticalNavGroup = props => {
     collapsedNavWidth,
     currentActiveGroup,
     setCurrentActiveGroup,
-    navigationBorderWidth
+    navigationBorderWidth,
   } = props
 
   // ** Hooks & Vars
@@ -102,7 +102,7 @@ const VerticalNavGroup = props => {
       openGroup = []
 
       // ** push Current Active Group To Open Group array
-      if (currentActiveGroup.every(elem => groupActive.includes(elem))) {
+      if (currentActiveGroup.every((elem) => groupActive.includes(elem))) {
         openGroup.push(...currentActiveGroup)
       }
 
@@ -162,15 +162,15 @@ const VerticalNavGroup = props => {
   const conditionalColor = () => {
     if (skin === 'semi-dark' && theme.palette.mode === 'light') {
       return {
-        color: `rgba(${theme.palette.customColors.dark}, 0.68) !important`
+        color: `rgba(${theme.palette.customColors.dark}, 0.68) !important`,
       }
     } else if (skin === 'semi-dark' && theme.palette.mode === 'dark') {
       return {
-        color: `rgba(${theme.palette.customColors.light}, 0.68) !important`
+        color: `rgba(${theme.palette.customColors.light}, 0.68) !important`,
       }
     } else {
       return {
-        color: `${theme.palette.text.secondary} !important`
+        color: `${theme.palette.text.secondary} !important`,
       }
     }
   }
@@ -180,36 +180,36 @@ const VerticalNavGroup = props => {
       return {
         color: `rgba(${theme.palette.customColors.dark}, 0.87)`,
         '&:hover': {
-          backgroundColor: `rgba(${theme.palette.customColors.dark}, 0.04)`
+          backgroundColor: `rgba(${theme.palette.customColors.dark}, 0.04)`,
         },
         '&.Mui-selected': {
           backgroundColor: `rgba(${theme.palette.customColors.dark}, 0.08)`,
           '&:hover': {
-            backgroundColor: `rgba(${theme.palette.customColors.dark}, 0.12)`
-          }
-        }
+            backgroundColor: `rgba(${theme.palette.customColors.dark}, 0.12)`,
+          },
+        },
       }
     } else if (skin === 'semi-dark' && theme.palette.mode === 'dark') {
       return {
         color: `rgba(${theme.palette.customColors.light}, 0.87)`,
         '&:hover': {
-          backgroundColor: `rgba(${theme.palette.customColors.light}, 0.04)`
+          backgroundColor: `rgba(${theme.palette.customColors.light}, 0.04)`,
         },
         '&.Mui-selected': {
           backgroundColor: `rgba(${theme.palette.customColors.light}, 0.08)`,
           '&:hover': {
-            backgroundColor: `rgba(${theme.palette.customColors.light}, 0.12)`
-          }
-        }
+            backgroundColor: `rgba(${theme.palette.customColors.light}, 0.12)`,
+          },
+        },
       }
     } else {
       return {
         '&.Mui-selected': {
           backgroundColor: theme.palette.action.hover,
           '&:hover': {
-            backgroundColor: theme.palette.action.hover
-          }
-        }
+            backgroundColor: theme.palette.action.hover,
+          },
+        },
       }
     }
   }
@@ -225,7 +225,7 @@ const VerticalNavGroup = props => {
         >
           <ListItemButton
             className={clsx({
-              'Mui-selected': groupActive.includes(item.title) || currentActiveGroup.includes(item.title)
+              'Mui-selected': groupActive.includes(item.title) || currentActiveGroup.includes(item.title),
             })}
             sx={{
               py: 2.25,
@@ -235,7 +235,7 @@ const VerticalNavGroup = props => {
               borderBottomRightRadius: 100,
               transition: 'padding-left .25s ease-in-out',
               pl: navCollapsed && !navHover ? (collapsedNavWidth - navigationBorderWidth - 24) / 8 : 5.5,
-              pr: navCollapsed && !navHover ? ((collapsedNavWidth - navigationBorderWidth - 24) / 2 - 5) / 4 : 3.5
+              pr: navCollapsed && !navHover ? ((collapsedNavWidth - navigationBorderWidth - 24) / 2 - 5) / 4 : 3.5,
             }}
           >
             {isSubToSub ? null : (
@@ -245,7 +245,7 @@ const VerticalNavGroup = props => {
                   transition: 'margin .25s ease-in-out',
                   ...(parent && navCollapsed && !navHover ? {} : { mr: 2.5 }),
                   ...(navCollapsed && !navHover ? { mr: 0 } : {}),
-                  ...(parent && item.children ? { ml: 1.25, mr: 3.75 } : {})
+                  ...(parent && item.children ? { ml: 1.25, mr: 3.75 } : {}),
                 }}
               >
                 <UserIcon
@@ -258,12 +258,15 @@ const VerticalNavGroup = props => {
             <MenuItemTextWrapper sx={{ ...menuGroupCollapsedStyles, ...(isSubToSub ? { ml: 9 } : {}) }}>
               <Typography
                 {...((themeConfig.menuTextTruncate || (!themeConfig.menuTextTruncate && navCollapsed && !navHover)) && {
-                  noWrap: true
+                  noWrap: true,
                 })}
               >
                 <Translations text={item.title} />
               </Typography>
-              <Box className='menu-item-meta' sx={{ ml: 0.8, display: 'flex', alignItems: 'center' }}>
+              <Box
+                className='menu-item-meta'
+                sx={{ ml: 0.8, display: 'flex', alignItems: 'center' }}
+              >
                 {item.badgeContent ? (
                   <Chip
                     label={item.badgeContent}
@@ -272,7 +275,7 @@ const VerticalNavGroup = props => {
                       mr: 0.8,
                       height: 20,
                       fontWeight: 500,
-                      '& .MuiChip-label': { px: 1.5, textTransform: 'capitalize' }
+                      '& .MuiChip-label': { px: 1.5, textTransform: 'capitalize' },
                     }}
                   />
                 ) : null}
@@ -280,14 +283,14 @@ const VerticalNavGroup = props => {
                   <MenuGroupToggleRightIcon
                     sx={{
                       ...conditionalColor(),
-                      ...(groupActive.includes(item.title) ? { transform: 'rotate(90deg)' } : {})
+                      ...(groupActive.includes(item.title) ? { transform: 'rotate(90deg)' } : {}),
                     }}
                   />
                 ) : (
                   <MenuGroupToggleLeftIcon
                     sx={{
                       ...conditionalColor(),
-                      ...(groupActive.includes(item.title) ? { transform: 'rotate(-90deg)' } : {})
+                      ...(groupActive.includes(item.title) ? { transform: 'rotate(-90deg)' } : {}),
                     }}
                   />
                 )}
@@ -296,13 +299,13 @@ const VerticalNavGroup = props => {
           </ListItemButton>
           <Collapse
             component='ul'
-            onClick={e => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
             in={groupActive.includes(item.title)}
             sx={{
               pl: 0,
               width: '100%',
               ...menuGroupCollapsedStyles,
-              transition: 'all .25s ease-in-out'
+              transition: 'all .25s ease-in-out',
             }}
           >
             <VerticalNavItems

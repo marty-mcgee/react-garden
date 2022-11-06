@@ -9,7 +9,7 @@ import MuiToolbar from '@mui/material/Toolbar'
 import ArrowUp from 'mdi-material-ui/ArrowUp'
 
 // ** Theme Config Import
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 // ** Components
 import Customizer from '~/@core/components/customizer'
@@ -28,7 +28,7 @@ const HorizontalLayoutWrapper = styled('div')({
   display: 'flex',
   minHeight: '100vh',
   flexDirection: 'column',
-  ...(themeConfig.horizontalMenuAnimation && { overflow: 'clip' })
+  ...(themeConfig.horizontalMenuAnimation && { overflow: 'clip' }),
 })
 
 const Toolbar = styled(MuiToolbar)(({ theme }) => ({
@@ -36,12 +36,12 @@ const Toolbar = styled(MuiToolbar)(({ theme }) => ({
   padding: `${theme.spacing(0, 6)} !important`,
   [theme.breakpoints.down('sm')]: {
     paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(4)
+    paddingRight: theme.spacing(4),
   },
   [theme.breakpoints.down('xs')]: {
     paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2)
-  }
+    paddingRight: theme.spacing(2),
+  },
 }))
 
 const ContentWrapper = styled('main')(({ theme }) => ({
@@ -51,11 +51,11 @@ const ContentWrapper = styled('main')(({ theme }) => ({
   transition: 'padding .25s ease-in-out',
   [theme.breakpoints.down('sm')]: {
     paddingLeft: theme.spacing(4),
-    paddingRight: theme.spacing(4)
-  }
+    paddingRight: theme.spacing(4),
+  },
 }))
 
-const HorizontalLayout = props => {
+const HorizontalLayout = (props) => {
   // ** Props
   const {
     hidden,
@@ -63,7 +63,7 @@ const HorizontalLayout = props => {
     settings,
     scrollToTop,
     saveSettings,
-    horizontalNavMenuContent: userHorizontalNavMenuContent
+    horizontalNavMenuContent: userHorizontalNavMenuContent,
   } = props
 
   // ** Vars
@@ -81,22 +81,22 @@ const HorizontalLayout = props => {
           color: 'text.primary',
           justifyContent: 'center',
           ...(appBar === 'static' && { zIndex: 13 }),
-          backgroundColor: theme => theme.palette.background.paper,
-          ...(skin === 'bordered' && { borderBottom: theme => `1px solid ${theme.palette.divider}` }),
+          backgroundColor: (theme) => theme.palette.background.paper,
+          ...(skin === 'bordered' && { borderBottom: (theme) => `1px solid ${theme.palette.divider}` }),
           transition: 'border-bottom 0.2s ease-in-out, backdrop-filter .25s ease-in-out, box-shadow .25s ease-in-out',
           ...(appBar === 'fixed'
             ? appBarBlur && {
-              backdropFilter: 'blur(8px)',
-              backgroundColor: theme => hexToRGBA(theme.palette.background.paper, 0.85)
-            }
-            : {})
+                backdropFilter: 'blur(8px)',
+                backgroundColor: (theme) => hexToRGBA(theme.palette.background.paper, 0.85),
+              }
+            : {}),
         }}
       >
         <Box
           className='layout-navbar'
           sx={{
             width: '100%',
-            ...(navHidden ? {} : { borderBottom: theme => `1px solid ${theme.palette.divider}` })
+            ...(navHidden ? {} : { borderBottom: (theme) => `1px solid ${theme.palette.divider}` }),
           }}
         >
           <Toolbar
@@ -104,21 +104,29 @@ const HorizontalLayout = props => {
             sx={{
               mx: 'auto',
               ...(contentWidth === 'boxed' && { '@media (min-width:1440px)': { maxWidth: 1440 } }),
-              minHeight: theme => `${theme.mixins.toolbar.minHeight - 1}px !important`
+              minHeight: (theme) => `${theme.mixins.toolbar.minHeight - 1}px !important`,
             }}
           >
-            <AppBarContent {...props} hidden={hidden} settings={settings} saveSettings={saveSettings} />
+            <AppBarContent
+              {...props}
+              hidden={hidden}
+              settings={settings}
+              saveSettings={saveSettings}
+            />
           </Toolbar>
         </Box>
 
         {navHidden ? null : (
-          <Box className='layout-horizontal-nav' sx={{ width: '100%' }}>
+          <Box
+            className='layout-horizontal-nav'
+            sx={{ width: '100%' }}
+          >
             <Toolbar
               className='horizontal-nav-content-container'
               sx={{
                 mx: 'auto',
                 ...(contentWidth === 'boxed' && { '@media (min-width:1440px)': { maxWidth: 1440 } }),
-                minHeight: theme => `${theme.mixins.toolbar.minHeight - (skin === 'bordered' ? 1 : 0)}px !important`
+                minHeight: (theme) => `${theme.mixins.toolbar.minHeight - (skin === 'bordered' ? 1 : 0)}px !important`,
               }}
             >
               {(userHorizontalNavMenuContent && userHorizontalNavMenuContent(props)) || <Navigation {...props} />}
@@ -133,8 +141,8 @@ const HorizontalLayout = props => {
           ...(contentWidth === 'boxed' && {
             mx: 'auto',
             '@media (min-width:1440px)': { maxWidth: 1440 },
-            '@media (min-width:1200px)': { maxWidth: '100%' }
-          })
+            '@media (min-width:1200px)': { maxWidth: '100%' },
+          }),
         }}
       >
         {children}
@@ -152,7 +160,11 @@ const HorizontalLayout = props => {
         scrollToTop(props)
       ) : (
         <ScrollToTop className='mui-fixed'>
-          <Fab color='primary' size='small' aria-label='scroll back to top'>
+          <Fab
+            color='primary'
+            size='small'
+            aria-label='scroll back to top'
+          >
             <ArrowUp />
           </Fab>
         </ScrollToTop>

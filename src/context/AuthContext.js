@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 
 // ** Config
-import authConfig from '~/configs/auth'
+import authConfig from '~/config/auth'
 
 // ** Defaults
 const defaultProvider = {
@@ -20,7 +20,7 @@ const defaultProvider = {
   login: () => Promise.resolve(),
   logout: () => Promise.resolve(),
   setIsInitialized: () => Boolean,
-  register: () => Promise.resolve()
+  register: () => Promise.resolve(),
 }
 const AuthContext = createContext(defaultProvider)
 
@@ -41,10 +41,10 @@ const AuthProvider = ({ children }) => {
         await axios
           .get(authConfig.meEndpoint, {
             headers: {
-              Authorization: storedToken
-            }
+              Authorization: storedToken,
+            },
           })
-          .then(async response => {
+          .then(async (response) => {
             setLoading(false)
             setUser({ ...response.data.userData })
           })
@@ -65,17 +65,17 @@ const AuthProvider = ({ children }) => {
   const handleLogin = (params, errorCallback) => {
     axios
       .post(authConfig.loginEndpoint, params)
-      .then(async res => {
+      .then(async (res) => {
         window.localStorage.setItem(authConfig.storageTokenKeyName, res.data.accessToken)
       })
       .then(() => {
         axios
           .get(authConfig.meEndpoint, {
             headers: {
-              Authorization: window.localStorage.getItem(authConfig.storageTokenKeyName)
-            }
+              Authorization: window.localStorage.getItem(authConfig.storageTokenKeyName),
+            },
           })
-          .then(async response => {
+          .then(async (response) => {
             const returnUrl = router.query.returnUrl
             setUser({ ...response.data.userData })
             await window.localStorage.setItem('userData', JSON.stringify(response.data.userData))
@@ -83,7 +83,7 @@ const AuthProvider = ({ children }) => {
             router.replace(redirectURL)
           })
       })
-      .catch(err => {
+      .catch((err) => {
         if (errorCallback) errorCallback(err)
       })
   }
@@ -99,14 +99,14 @@ const AuthProvider = ({ children }) => {
   const handleRegister = (params, errorCallback) => {
     axios
       .post(authConfig.registerEndpoint, params)
-      .then(res => {
+      .then((res) => {
         if (res.data.error) {
           if (errorCallback) errorCallback(res.data.error)
         } else {
           handleLogin({ email: params.email, password: params.password })
         }
       })
-      .catch(err => (errorCallback ? errorCallback(err) : null))
+      .catch((err) => (errorCallback ? errorCallback(err) : null))
   }
 
   const values = {
@@ -118,7 +118,7 @@ const AuthProvider = ({ children }) => {
     setIsInitialized,
     login: handleLogin,
     logout: handleLogout,
-    register: handleRegister
+    register: handleRegister,
   }
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>

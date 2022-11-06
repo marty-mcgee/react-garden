@@ -21,15 +21,15 @@ import TableCell from '@mui/material/TableCell'
 import axios from 'axios'
 
 // ** Configs
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 const CalcWrapper = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   '&:not(:last-of-type)': {
-    marginBottom: theme.spacing(2)
-  }
+    marginBottom: theme.spacing(2),
+  },
 }))
 
 const MUITableCell = styled(TableCell)(({ theme }) => ({
@@ -37,7 +37,7 @@ const MUITableCell = styled(TableCell)(({ theme }) => ({
   paddingLeft: '0 !important',
   paddingRight: '0 !important',
   paddingTop: `${theme.spacing(1)} !important`,
-  paddingBottom: `${theme.spacing(1)} !important`
+  paddingBottom: `${theme.spacing(1)} !important`,
 }))
 
 const InvoicePrint = ({ id }) => {
@@ -55,7 +55,7 @@ const InvoicePrint = ({ id }) => {
   useEffect(() => {
     axios
       .get('/apps/invoice/single-invoice', { params: { id } })
-      .then(res => {
+      .then((res) => {
         setData(res.data)
         setError(false)
       })
@@ -70,7 +70,11 @@ const InvoicePrint = ({ id }) => {
     return (
       <Box sx={{ p: 12, pb: 6 }}>
         <Grid container>
-          <Grid item xs={8} sx={{ mb: { sm: 0, xs: 4 } }}>
+          <Grid
+            item
+            xs={8}
+            sx={{ mb: { sm: 0, xs: 4 } }}
+          >
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <Box sx={{ mb: 6, display: 'flex', alignItems: 'center' }}>
                 <svg
@@ -81,9 +85,20 @@ const InvoicePrint = ({ id }) => {
                   xmlns='http://www.w3.org/2000/svg'
                   xmlnsXlink='http://www.w3.org/1999/xlink'
                 >
-                  <g stroke='none' strokeWidth='1' fill='none' fillRule='evenodd'>
-                    <g id='Artboard' transform='translate(-95.000000, -51.000000)'>
-                      <g id='logo' transform='translate(95.000000, 50.000000)'>
+                  <g
+                    stroke='none'
+                    strokeWidth='1'
+                    fill='none'
+                    fillRule='evenodd'
+                  >
+                    <g
+                      id='Artboard'
+                      transform='translate(-95.000000, -51.000000)'
+                    >
+                      <g
+                        id='logo'
+                        transform='translate(95.000000, 50.000000)'
+                      >
                         <path
                           id='Combined-Shape'
                           fill={theme.palette.primary.main}
@@ -140,34 +155,58 @@ const InvoicePrint = ({ id }) => {
                 </Typography>
               </Box>
               <Box>
-                <Typography variant='body2' sx={{ mb: 1 }}>
+                <Typography
+                  variant='body2'
+                  sx={{ mb: 1 }}
+                >
                   Office 149, 450 South Brand Brooklyn
                 </Typography>
-                <Typography variant='body2' sx={{ mb: 1 }}>
+                <Typography
+                  variant='body2'
+                  sx={{ mb: 1 }}
+                >
                   San Diego County, CA 91905, USA
                 </Typography>
                 <Typography variant='body2'>+1 (123) 456 7891, +44 (876) 543 2198</Typography>
               </Box>
             </Box>
           </Grid>
-          <Grid item xs={4}>
+          <Grid
+            item
+            xs={4}
+          >
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: { sm: 'flex-end', xs: 'flex-start' } }}>
-              <Typography variant='h6' sx={{ mb: 2 }}>
+              <Typography
+                variant='h6'
+                sx={{ mb: 2 }}
+              >
                 {`Invoice #${invoice.id}`}
               </Typography>
               <Box sx={{ mb: 2, display: 'flex' }}>
-                <Typography variant='body2' sx={{ mr: 3 }}>
+                <Typography
+                  variant='body2'
+                  sx={{ mr: 3 }}
+                >
                   Date Issued:
                 </Typography>
-                <Typography variant='body2' sx={{ fontWeight: 600 }}>
+                <Typography
+                  variant='body2'
+                  sx={{ fontWeight: 600 }}
+                >
                   {invoice.issuedDate}
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex' }}>
-                <Typography variant='body2' sx={{ mr: 3 }}>
+                <Typography
+                  variant='body2'
+                  sx={{ mr: 3 }}
+                >
                   Date Due:
                 </Typography>
-                <Typography variant='body2' sx={{ fontWeight: 600 }}>
+                <Typography
+                  variant='body2'
+                  sx={{ fontWeight: 600 }}
+                >
                   {invoice.dueDate}
                 </Typography>
               </Box>
@@ -178,28 +217,58 @@ const InvoicePrint = ({ id }) => {
         <Divider sx={{ my: 6 }} />
 
         <Grid container>
-          <Grid item xs={7} md={8} sx={{ mb: { lg: 0, xs: 4 } }}>
-            <Typography variant='body2' sx={{ mb: 3.5, fontWeight: 600 }}>
+          <Grid
+            item
+            xs={7}
+            md={8}
+            sx={{ mb: { lg: 0, xs: 4 } }}
+          >
+            <Typography
+              variant='body2'
+              sx={{ mb: 3.5, fontWeight: 600 }}
+            >
               Invoice To:
             </Typography>
-            <Typography variant='body2' sx={{ mb: 2 }}>
+            <Typography
+              variant='body2'
+              sx={{ mb: 2 }}
+            >
               {invoice.name}
             </Typography>
-            <Typography variant='body2' sx={{ mb: 2 }}>
+            <Typography
+              variant='body2'
+              sx={{ mb: 2 }}
+            >
               {invoice.company}
             </Typography>
-            <Typography variant='body2' sx={{ mb: 2 }}>
+            <Typography
+              variant='body2'
+              sx={{ mb: 2 }}
+            >
               {invoice.address}
             </Typography>
-            <Typography variant='body2' sx={{ mb: 2 }}>
+            <Typography
+              variant='body2'
+              sx={{ mb: 2 }}
+            >
               {invoice.contact}
             </Typography>
-            <Typography variant='body2' sx={{ mb: 2 }}>
+            <Typography
+              variant='body2'
+              sx={{ mb: 2 }}
+            >
               {invoice.companyEmail}
             </Typography>
           </Grid>
-          <Grid item xs={5} md={4}>
-            <Typography variant='body2' sx={{ mb: 3.5, fontWeight: 600 }}>
+          <Grid
+            item
+            xs={5}
+            md={4}
+          >
+            <Typography
+              variant='body2'
+              sx={{ mb: 3.5, fontWeight: 600 }}
+            >
               Bill To:
             </Typography>
             <Table>
@@ -274,9 +343,17 @@ const InvoicePrint = ({ id }) => {
         </Table>
 
         <Grid container>
-          <Grid item xs={8} sm={7} lg={9}>
+          <Grid
+            item
+            xs={8}
+            sm={7}
+            lg={9}
+          >
             <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
-              <Typography variant='body2' sx={{ mr: 2, fontWeight: 600 }}>
+              <Typography
+                variant='body2'
+                sx={{ mr: 2, fontWeight: 600 }}
+              >
                 Salesperson:
               </Typography>
               <Typography variant='body2'>Tommy Shelby</Typography>
@@ -284,29 +361,46 @@ const InvoicePrint = ({ id }) => {
 
             <Typography variant='body2'>Thanks for your business</Typography>
           </Grid>
-          <Grid item xs={4} sm={5} lg={3}>
+          <Grid
+            item
+            xs={4}
+            sm={5}
+            lg={3}
+          >
             <CalcWrapper>
               <Typography variant='body2'>Subtotal:</Typography>
-              <Typography variant='body2' sx={{ fontWeight: 600 }}>
+              <Typography
+                variant='body2'
+                sx={{ fontWeight: 600 }}
+              >
                 $1800
               </Typography>
             </CalcWrapper>
             <CalcWrapper>
               <Typography variant='body2'>Discount:</Typography>
-              <Typography variant='body2' sx={{ fontWeight: 600 }}>
+              <Typography
+                variant='body2'
+                sx={{ fontWeight: 600 }}
+              >
                 $28
               </Typography>
             </CalcWrapper>
             <CalcWrapper>
               <Typography variant='body2'>Tax:</Typography>
-              <Typography variant='body2' sx={{ fontWeight: 600 }}>
+              <Typography
+                variant='body2'
+                sx={{ fontWeight: 600 }}
+              >
                 21%
               </Typography>
             </CalcWrapper>
             <Divider />
             <CalcWrapper>
               <Typography variant='body2'>Total:</Typography>
-              <Typography variant='body2' sx={{ fontWeight: 600 }}>
+              <Typography
+                variant='body2'
+                sx={{ fontWeight: 600 }}
+              >
                 $1690
               </Typography>
             </CalcWrapper>
@@ -323,8 +417,14 @@ const InvoicePrint = ({ id }) => {
   } else if (error) {
     return (
       <Box sx={{ p: 5 }}>
-        <Grid container spacing={6}>
-          <Grid item xs={12}>
+        <Grid
+          container
+          spacing={6}
+        >
+          <Grid
+            item
+            xs={12}
+          >
             <Alert severity='error'>
               Invoice with the id: {id} does not exist. Please check the list of invoices:{' '}
               <Link href='/apps/invoice/list'>Invoice List</Link>

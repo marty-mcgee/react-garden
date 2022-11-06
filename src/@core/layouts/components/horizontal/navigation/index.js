@@ -2,14 +2,14 @@
 import Box from '@mui/material/Box'
 
 // ** Config Import
-import themeConfig from '~/configs/themeConfig'
+import themeConfig from '~/config/themeConfig'
 
 // ** Utils
 // import { hexToRGBA } from '~/@core/utils/hex-to-rgba'
 // ** Menu Components
 import HorizontalNavItems from './HorizontalNavItems'
 
-const Navigation = props => {
+const Navigation = (props) => {
   return (
     <Box
       className='menu-content'
@@ -20,8 +20,8 @@ const Navigation = props => {
         alignItems: 'center',
         '& > *': {
           '&:not(:last-child)': { mr: 2 },
-          ...(themeConfig.menuTextTruncate && { maxWidth: 220 })
-        }
+          ...(themeConfig.menuTextTruncate && { maxWidth: 220 }),
+        },
       }}
     >
       <HorizontalNavItems {...props} />
