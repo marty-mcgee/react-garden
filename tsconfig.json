@@ -26,9 +26,9 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"], // preferable (nuxt + npm)
-      "@/*": ["src/*"],
-      "-||-*": ["assets/*"] // threed
-      // "~/components/*": ["components/*"] // example
+      "~~/*": ["./src/*"],
+      "~common/*": ["../common/src/*"],
+      "-||-*": ["assets/*"] // threeds
     }
   },
   "exclude": ["node_modules"], // does this even work ??
