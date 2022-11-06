@@ -5,28 +5,44 @@ module.exports = {
     es6: true,
     browser: true,
   },
+
   extends: [
-    // 'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    'airbnb',
-    'prettier',
-    'next' // or 'plugin:@next/next/recommended'
+    '../common/.eslintrc.js',
+    // 'plugin:@typescript-eslint/recommended', // common
+    // 'plugin:react/recommended', // common
+    // 'airbnb', // needed ?
+    // 'prettier', // needed ?
+    'next', // or 'plugin:@next/next/recommended'
   ],
+
   // parser: '@babel/eslint-parser',
   parser: '@typescript-eslint/parser',
   parserOptions: {
     requireConfigFile: false, // no babel config needed
     project: './tsconfig.json',
-    tsconfigRootDir: __dirname,
-    ecmaVersion: 11,
-    sourceType: 'module',
+    tsconfigRootDir: '.',
+    ecmaVersion: 2020, // Allows for the parsing of modern ECMAScript features
+    sourceType: 'module', // Allows for the use of imports,
     ecmaFeatures: {
-      jsx: true,
+      jsx: true, // Allows for the parsing of JSX,
       modules: true,
       experimentalObjectRestSpread: true,
     },
+    projectFolderIgnoreList: [
+      'node_modules/*',
+      'node_modules',
+      'dist',
+      'build',
+      '.yarn',
+      'build-utils',
+      'docs',
+      './src/generated/*',
+      'generated/*',
+    ],
   },
-  ignorePatterns: ['*.js', '*.jsx', 'src/_testing', 'ThreeDGarden.tsx', 'ThreeDGarden1.tsx'], // ignoring here works ??
+
+  // ignorePatterns: ['*.js', '*.jsx', 'src/_testing', 'ThreeDGarden.tsx', 'ThreeDGarden1.tsx'], // ignoring here works ??
+
   // overrides: [
   //   {
   //     files: ['*.ts', '*.tsx'], // Your TypeScript files extension
@@ -50,6 +66,7 @@ module.exports = {
       typescript: {},
     },
   },
+
   plugins: [
     // '@typescript-eslint',
     'react',
@@ -57,8 +74,8 @@ module.exports = {
     // 'plugin:@next/next/recommended',
     // '@next/next',
   ],
-  rules: {
 
+  rules: {
     'arrow-body-style': 'off',
     // ['error', 'as-needed', { requireReturnForObjectLiteral: true }], // 'as-needed' is default | 'always'
 
@@ -183,10 +200,10 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-promise-executor-return': 'off',
     'import/prefer-default-export': 'off',
-    'radix': 'off',
+    radix: 'off',
     'import/no-unresolved': 'off',
     'react/jsx-no-useless-fragment': 'off',
-    'camelcase': 'off',
+    camelcase: 'off',
     'react/self-closing-comp': 'off',
     'no-useless-return': 'off',
     'prefer-template': 'off',
@@ -204,7 +221,7 @@ module.exports = {
     'no-use-before-define': 'off',
     'no-plusplus': 'off',
     'one-var': 'off',
-    'yoda': 'off',
+    yoda: 'off',
     'prefer-rest-params': 'off',
     'no-var': 'off',
     'no-void': 'off',
@@ -234,7 +251,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-inferrable-types': 'off',
 
-    'eqeqeq': 'off',
+    eqeqeq: 'off',
     'no-self-compare': 'off',
     'import/order': 'off',
     'no-extend-native': 'off',
@@ -266,7 +283,6 @@ module.exports = {
     'no-case-declarations': 'off',
     'no-fallthrough': 'off',
 
-    // 'rule': 'off',
-
+    // 'rulename': 'off',
   },
 }
