@@ -307,10 +307,9 @@ const App: FunctionComponent<AppPropsWithLayoutEmotion> = (props: AppPropsWithLa
                         >
                           {
                             getLayout(
-                              <>
+                              <EthApp {...props}>
                                 <Component {...pageProps} />
-                                <EthApp {...props} />
-                              </>
+                              </EthApp>
                             )
                           }
                         </AclGuard>
