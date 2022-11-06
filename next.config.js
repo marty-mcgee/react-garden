@@ -1,31 +1,30 @@
 // ==============================================================
 // ** NEXT JS BUILD CONFIGURATION FILE
 
-if (!process.env.WP_GRAPHQL_API_URL) {
+if (!process.env.NEXT_PUBLIC_WP_GRAPHQL_API_URL) {
   throw new Error(`
-    Please provide a valid WordPress instance URL.
-    Add to your environment variables WP_GRAPHQL_API_URL.
+    Please provide a valid WordPress instance URL for ThreeD API.
+    Add to your environment variables NEXT_PUBLIC_WP_GRAPHQL_API_URL.
   `)
 }
 
 // const path = require('path')
 
-const withTM = require("next-transpile-modules")([
+const withTM = require('next-transpile-modules')([
   // "@babel/preset-react",
-  "@fullcalendar/common",
-  "@fullcalendar/daygrid",
-  "@fullcalendar/interaction",
-  "@fullcalendar/react",
-  "@fullcalendar/timegrid",
-  "react-github-btn",
-  "three"
+  '@fullcalendar/common',
+  '@fullcalendar/daygrid',
+  '@fullcalendar/interaction',
+  '@fullcalendar/react',
+  '@fullcalendar/timegrid',
+  'react-github-btn',
+  'three',
 ])
 
 /**
  * @type {import("next").NextConfig}
  */
 const nextConfig = {
-
   reactStrictMode: false, // true causes components to load TWICE in dev only, not prod
 
   trailingSlash: true,
@@ -33,8 +32,8 @@ const nextConfig = {
   experimental: {
     esmExternals: false, // helps with 3rd party modules trying to call non-module js
     images: {
-      allowFutureImage: true // for better img support, and use of layout='raw'
-    }
+      allowFutureImage: true, // for better img support, and use of layout='raw'
+    },
   },
 
   // [MM] ONLY USE THE NEXT /PAGES THAT YU WAN>
@@ -44,12 +43,12 @@ const nextConfig = {
   // ** IMAGES
   images: {
     domains: [
-      process.env.WP_GRAPHQL_API_URL.match(/(?!(w+)\.)\w*(?:\w+\.)+\w+/)[0], // Valid WP Image domain.
-      "0.gravatar.com",
-      "1.gravatar.com",
-      "2.gravatar.com",
-      "secure.gravatar.com",
-      "images.cdndomain.com"
+      process.env.NEXT_PUBLIC_WP_GRAPHQL_API_URL.match(/(?!(w+)\.)\w*(?:\w+\.)+\w+/)[0], // Valid WP Image domain.
+      '0.gravatar.com',
+      '1.gravatar.com',
+      '2.gravatar.com',
+      'secure.gravatar.com',
+      'images.cdndomain.com',
     ],
     // loader: 'default',
     // // path: 'https://somedomain.com/mydirectory/',
@@ -75,7 +74,6 @@ const nextConfig = {
 
   // ** WEBPACK 5
   webpack: (config, options) => {
-
     // eslint-disable-next-line no-param-reassign
     // config.resolve.alias = {
     //   ...config.resolve.alias,
@@ -114,13 +112,13 @@ const nextConfig = {
       exclude: /node_modules/,
       use: [
         {
-          loader: 'graphql-tag/loader'
-        }
-      ]
+          loader: 'graphql-tag/loader',
+        },
+      ],
     })
 
     return config
-  }
+  },
 
   // NOT NEEDED HERE: instead, use .env.local to safely load env variables as needed (NEXT_PUBLIC_)
   // env: {
@@ -128,7 +126,6 @@ const nextConfig = {
   // },
 
   // cssModules: true, // doesn't work in Next 12+ because "already included"
-
 } // end nextConfig
 
 module.exports = withTM(nextConfig)

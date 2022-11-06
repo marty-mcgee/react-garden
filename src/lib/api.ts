@@ -4,10 +4,10 @@
 /** OR */
 /** @ ts-expect-error */
 
-const API_URL = process.env.WP_GRAPHQL_API_URL
+const API_URL = process.env.NEXT_PUBLIC_WP_GRAPHQL_API_URL
 
-async function fetchAPI(query = "", { variables }: Record<string, any> = {}) {
-  const headers = { "Content-Type": "application/json" }
+async function fetchAPI(query = '', { variables }: Record<string, any> = {}) {
+  const headers = { 'Content-Type': 'application/json' }
 
   if (process.env.WORDPRESS_AUTH_REFRESH_TOKEN) {
     headers.Authorization = `Bearer ${process.env.WORDPRESS_AUTH_REFRESH_TOKEN}`
@@ -16,7 +16,7 @@ async function fetchAPI(query = "", { variables }: Record<string, any> = {}) {
   // WPGraphQL Plugin must be enabled
   const res = await fetch(API_URL, {
     headers,
-    method: "POST",
+    method: 'POST',
     body: JSON.stringify({
       query,
       variables,
@@ -26,12 +26,12 @@ async function fetchAPI(query = "", { variables }: Record<string, any> = {}) {
   const json = await res.json()
   if (json.errors) {
     console.error(json.errors)
-    throw new Error("Failed to fetch API")
+    throw new Error('Failed to fetch API')
   }
   return json.data
 }
 
-export async function getPreviewPost(id, idType = "DATABASE_ID") {
+export async function getPreviewPost(id, idType = 'DATABASE_ID') {
   const data = await fetchAPI(
     `
     query PreviewPost($id: ID!, $idType: PostIdType!) {
@@ -109,11 +109,9 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
   const postPreview = preview && previewData?.post
   // The slug may be the id of an unpublished post
   const isId = Number.isInteger(Number(slug))
-  const isSamePost = isId
-    ? Number(slug) === postPreview.id
-    : slug === postPreview.slug
-  const isDraft = isSamePost && postPreview?.status === "draft"
-  const isRevision = isSamePost && postPreview?.status === "publish"
+  const isSamePost = isId ? Number(slug) === postPreview.id : slug === postPreview.slug
+  const isDraft = isSamePost && postPreview?.status === 'draft'
+  const isRevision = isSamePost && postPreview?.status === 'publish'
   const data = await fetchAPI(
     `
     fragment AuthorFields on User {
@@ -159,9 +157,9 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
         ...PostFields
         content
         ${
-    // Only some of the fields of a revision are considered as there are some inconsistencies
-    isRevision
-      ? `
+          // Only some of the fields of a revision are considered as there are some inconsistencies
+          isRevision
+            ? `
         revisions(first: 1, where: { orderby: { field: MODIFIED, order: DESC } }) {
           edges {
             node {
@@ -177,8 +175,8 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
           }
         }
         `
-      : ""
-    }
+            : ''
+        }
       }
       posts(first: 3, where: { orderby: { field: DATE, order: DESC } }) {
         edges {
@@ -192,7 +190,7 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
     {
       variables: {
         id: isDraft ? postPreview.id : slug,
-        idType: isDraft ? "DATABASE_ID" : "SLUG",
+        idType: isDraft ? 'DATABASE_ID' : 'SLUG',
       },
     }
   )
