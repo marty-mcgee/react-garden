@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "typeRoots": ["node_modules/@types", "src/types"],
-    "target": "es5",
+    "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext", "es2015.iterable"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -16,22 +15,31 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-    // "jsxImportSource": "@emotion/react",
+    "jsxImportSource": "@emotion/react",
     "noImplicitAny": true,
     "noImplicitThis": true,
     "strictNullChecks": false,
     "downlevelIteration": true,
     "incremental": true,
-    // "baseUrl": "src",
+    "rootDirs": [".", "../common/src"],
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"], // preferable (nuxt + npm)
       "~~/*": ["./src/*"],
       "~common/*": ["../common/src/*"],
       "-||-*": ["assets/*"] // threeds
-    }
+    },
+    "typeRoots": ["node_modules/@types", "src/types"]
   },
-  "exclude": ["node_modules"], // does this even work ??
-  // "include": ["src"],
-  "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx"]
+  // "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx"]
+  "include": ["src", "../common/src"],
+  "exclude": [
+    "node_modules",
+    "**/node_modules",
+    ".husky",
+    "**/*.css",
+    "tailwind.config.js",
+    "**/.yalc/**/*",
+    ".yalc/**/*"
+  ]
 }
