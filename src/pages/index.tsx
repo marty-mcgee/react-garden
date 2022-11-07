@@ -23,7 +23,8 @@ import { TPageProps } from '~~/models/TAppProps'
 const getHomeRoute = (role: any) => {
   // if (role === 'client') return '/acl'
   // else return '/participate'
-  return '/participate'
+  // return '/participate'
+  return '/'
 }
 
 // Page
@@ -41,23 +42,23 @@ const Page: NextPage<TPageProps> = (props) => {
       router.replace(homeRoute)
     }
     else {
-      console.debug("user NOT AUTHORIZED")
+      console.debug('user NOT AUTHORIZED')
     }
   }, [])
 
   return (
     <>
-      <Spinner />
+      {/* <Spinner /> */}
 
-      <Typography component="h1" variant="h5" gutterBottom>
-        ThreeD Garden for FarmBot + ThreeJS
+      <Typography component='h1' variant='h5' gutterBottom>
+        ThreeD Garden for FarmBot + Three
       </Typography>
-      <Typography component="h2" variant="h6" gutterBottom>
-        FarmBot + ThreeJS using React Three Fiber, MUI v5, Next.js and TypeScript
+      <Typography component='h2' variant='h6' gutterBottom>
+        FarmBot + Three.js using React Three Fiber, MUI v5, NextJS + TypeScript
       </Typography>
 
       {/* SCAFFOLD-ETH-TYPESCRIPT */}
-      <MainPage pageName="main" {...props}></MainPage>
+      <MainPage pageName='main' {...props}></MainPage>
     </>
   )
 }

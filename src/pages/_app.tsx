@@ -196,24 +196,19 @@ const Guard = ({ children, authGuard, guestGuard }: any) => {
 const cache = createCache({ key: 'next' })
 
 /**
- * 🌱
  * 🌱 See ./MainPage.tsx for main app component!
- * 🌱
  *
- * This file loads the app async.  It sets up context, error boundaries, styles etc.
- * You don't need to change this file!!
+ * This file loads the app async.  It sets up context, error boundaries, styles, etc.
  */
-
-console.log('init app...')
-
-// load saved theme
-const savedTheme = 'light'
+console.debug('init eth app...')
 
 // setup themes for theme switcher
 const themes = {
-  dark: './ant-dark-theme.css',
-  light: './ant-light-theme.css',
+  dark: '', // './styles/ant-dark-theme.css',
+  light: '', // './styles/ant-light-theme.css',
 }
+// load saved theme
+const savedTheme = 'light'
 
 // create eth components context for options and API keys
 const ethComponentsSettings: IEthComponentsSettings = {
@@ -242,7 +237,7 @@ const ProviderWrapper: FC<{ children?: ReactNode }> = (props) => {
  * @returns
  */
  const EthApp: NextComponentType<AppContext, AppInitialProps, AppProps> = ({ Component, ...props }) => {
-  console.log('loading app...')
+  console.debug('loading eth app...')
   const [queryClient] = useState(() => new QueryClient())
 
   const { pageProps } = props
